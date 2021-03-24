@@ -1,13 +1,20 @@
 package application;
 
-import logic.MapGenerator;
-import logic.Util;
+import javafx.application.Application;
+import javafx.stage.Stage;
+import scene.GameScene;
 
-public class Main {
-	public static void main(String args[]) {
-		MapGenerator mapGenerator = new MapGenerator();
-		mapGenerator.generateMap();
-		mapGenerator.printMap();
-		System.out.println(mapGenerator.getRoomList());
+public class Main extends Application {
+
+	@Override
+	public void start(Stage primaryStage) throws Exception {
+		primaryStage.setTitle("Pixoul");
+		primaryStage.setScene((new GameScene()).getScene());
+		primaryStage.show();
 	}
+
+	public static void main(String[] args) {
+		launch(args);
+	}
+
 }
