@@ -7,7 +7,7 @@ import javafx.util.Pair;
 import utils.GameConfig;
 import utils.Util;
 
-public class MapGenerator {
+public class GameMap {
 	private static final int MAX_ROOM = 10;
 	private static final int MAX_PATH = 20;
 	private static final int MAX_LENGTH = 15;
@@ -18,12 +18,15 @@ public class MapGenerator {
 	private static final int STRAIGHT = 1;
 	private static final int TURN_LEFT = 2;
 	private static final int TURN_RIGHT = 3;
-	private int gameMap[][];
+	private int map[][];
+	private Cell gameMap[][];
 	private ArrayList<Pair<Integer, Integer>> roomList;
-	
-	public MapGenerator() {
-		gameMap = new int[GameConfig.MAP_SIZE + 10][GameConfig.MAP_SIZE + 10];
+
+	public GameMap() {
+		map = new int[GameConfig.MAP_SIZE + 10][GameConfig.MAP_SIZE + 10];
+		gameMap = new Cell[GameConfig.MAP_SIZE + 10][GameConfig.MAP_SIZE + 10];
 		roomList = new ArrayList<Pair<Integer, Integer>>();
+		generateMap();
 	}
 
 	class State {
@@ -97,20 +100,20 @@ public class MapGenerator {
 		public int getType() {
 			if (x <= 0 || y <= 0 || x >= GameConfig.MAP_SIZE || y >= GameConfig.MAP_SIZE)
 				return -1000;
-			return gameMap[x][y];
+			return map[x][y];
 		}
 
 		public void setType(int type) {
-			gameMap[x][y] = type;
+			map[x][y] = type;
 		}
 	}
 
 	public void printMap() {
 		for (int i = 0; i <= GameConfig.MAP_SIZE; i++) {
 			for (int j = 0; j <= GameConfig.MAP_SIZE; j++) {
-				if (gameMap[i][j] == Cell.PATH)
+				if (gameMap[i][j].getType() == Cell.PATH)
 					System.out.print(" ");
-				else if (gameMap[i][j] == Cell.WALL)
+				else if (gameMap[i][j].getType() == Cell.WALL)
 					System.out.print("#");
 				else {
 					System.out.print(".");
@@ -123,11 +126,12 @@ public class MapGenerator {
 	private boolean makeRoom(int x, int y, int no) {
 
 		// check if room is valid or not
-		if (x - GameConfig.ROOM_SIZE <= 0 || x + GameConfig.ROOM_SIZE >= GameConfig.MAP_SIZE || y - GameConfig.ROOM_SIZE <= 0 || y + GameConfig.ROOM_SIZE >= GameConfig.MAP_SIZE)
+		if (x - GameConfig.ROOM_SIZE <= 0 || x + GameConfig.ROOM_SIZE >= GameConfig.MAP_SIZE
+				|| y - GameConfig.ROOM_SIZE <= 0 || y + GameConfig.ROOM_SIZE >= GameConfig.MAP_SIZE)
 			return false;
 		for (int i = x - GameConfig.ROOM_SIZE; i <= x + GameConfig.ROOM_SIZE; i++) {
 			for (int j = y - GameConfig.ROOM_SIZE; j <= y + GameConfig.ROOM_SIZE; j++) {
-				if (gameMap[i][j] != 0)
+				if (map[i][j] != 0)
 					return false;
 			}
 		}
@@ -135,16 +139,17 @@ public class MapGenerator {
 		// make room
 		for (int i = x - GameConfig.ROOM_SIZE; i <= x + GameConfig.ROOM_SIZE; i++) {
 			for (int j = y - GameConfig.ROOM_SIZE; j <= y + GameConfig.ROOM_SIZE; j++) {
-				if (j != y - GameConfig.ROOM_SIZE && j != y + GameConfig.ROOM_SIZE && i != x - GameConfig.ROOM_SIZE && i != x + GameConfig.ROOM_SIZE)
-					gameMap[i][j] = ROOM;
+				if (j != y - GameConfig.ROOM_SIZE && j != y + GameConfig.ROOM_SIZE
+						&& i != x - GameConfig.ROOM_SIZE && i != x + GameConfig.ROOM_SIZE)
+					map[i][j] = ROOM;
 				if (j != y - GameConfig.ROOM_SIZE && j != y + GameConfig.ROOM_SIZE) {
-					gameMap[x - GameConfig.ROOM_SIZE][j] = no;
-					gameMap[x + GameConfig.ROOM_SIZE][j] = no;
+					map[x - GameConfig.ROOM_SIZE][j] = no;
+					map[x + GameConfig.ROOM_SIZE][j] = no;
 				}
 			}
 			if (i != x - GameConfig.ROOM_SIZE && i != x + GameConfig.ROOM_SIZE) {
-				gameMap[i][y - GameConfig.ROOM_SIZE] = no;
-				gameMap[i][y + GameConfig.ROOM_SIZE] = no;
+				map[i][y - GameConfig.ROOM_SIZE] = no;
+				map[i][y + GameConfig.ROOM_SIZE] = no;
 			}
 		}
 		return true;
@@ -178,16 +183,15 @@ public class MapGenerator {
 		return false;
 	}
 
-	private void format() {
+	private void makeMap() {
 
-		int newMap[][] = new int[GameConfig.MAP_SIZE + 10][GameConfig.MAP_SIZE + 10];
 		for (int i = 0; i <= GameConfig.MAP_SIZE; i++) {
 			for (int j = 0; j <= GameConfig.MAP_SIZE; j++) {
-				newMap[i][j] = Cell.VOID;
-				if (gameMap[i][j] == ROOM)
-					newMap[i][j] = Cell.PATH;
-				if (gameMap[i][j] == PATH)
-					newMap[i][j] = Cell.PATH;
+				gameMap[i][j] = new Cell(Cell.VOID);
+				if (map[i][j] == ROOM)
+					gameMap[i][j].setType(Cell.PATH);
+				if (map[i][j] == PATH)
+					gameMap[i][j].setType(Cell.PATH);
 			}
 		}
 
@@ -198,15 +202,14 @@ public class MapGenerator {
 					for (int l = j - 1; l <= j + 1; l++) {
 						if (k < 0 || l < 0 || k > GameConfig.MAP_SIZE || l > GameConfig.MAP_SIZE)
 							continue;
-						if (newMap[k][l] == Cell.PATH)
+						if (gameMap[k][l].getType() == Cell.PATH)
 							pathCount += 1;
 					}
 				}
-				if (pathCount > 0 && newMap[i][j] != Cell.PATH)
-					newMap[i][j] = Cell.WALL;
+				if (pathCount > 0 && gameMap[i][j].getType() != Cell.PATH)
+					gameMap[i][j].setType(Cell.WALL);
 			}
 		}
-		this.gameMap = newMap;
 	}
 
 	public void generateMap() {
@@ -223,7 +226,7 @@ public class MapGenerator {
 		while (pathCnt <= MAX_PATH) {
 			int x = Util.random(0, GameConfig.MAP_SIZE);
 			int y = Util.random(0, GameConfig.MAP_SIZE);
-			while (gameMap[x][y] < 1) {
+			while (map[x][y] < 1) {
 				x = Util.random(0, GameConfig.MAP_SIZE);
 				y = Util.random(0, GameConfig.MAP_SIZE);
 			}
@@ -237,11 +240,13 @@ public class MapGenerator {
 				state.setType(tmp);
 			}
 		}
-		format();
+		makeMap();
 	}
 
-	public int[][] getMap() {
-		return gameMap;
+	public Cell get(int i, int j) {
+		if (i < 0 || i > GameConfig.MAP_SIZE || j < 0 || j > GameConfig.MAP_SIZE)
+			return new Cell();
+		return gameMap[i][j];
 	}
 
 	public ArrayList<Pair<Integer, Integer>> getRoomList() {

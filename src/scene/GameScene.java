@@ -15,26 +15,21 @@ import javafx.scene.paint.Color;
 import javafx.util.Pair;
 import logic.Cell;
 import logic.Direction;
-import logic.MapGenerator;
+import logic.GameMap;
 import utils.DrawUtil;
 
 public class GameScene {
 	private int playerPositionX = 30;
 	private int playerPositionY = 30;
 	final private int SPRITE_SIZE = 45;
-	private static MapGenerator mapGenerator;
-	private int[][] gameMap;
+	private static GameMap gameMap;
 	private Scene scene;
 	private int direction = Direction.Down;
-	
+
 	public GameScene() {
-		mapGenerator = new MapGenerator();
-		mapGenerator.generateMap();
-
-		gameMap = mapGenerator.getMap();
-		mapGenerator.printMap();
-
-		System.out.println(mapGenerator.getRoomList());
+		gameMap = new GameMap();
+		gameMap.printMap();
+		gameMap.get(30, 30).setEntity(1);
 
 		StackPane root = new StackPane();
 		scene = new Scene(root, GameConfig.SCREEN_WIDTH, GameConfig.SCREEN_HEIGHT);
@@ -43,7 +38,7 @@ public class GameScene {
 
 		GraphicsContext gc = canvas.getGraphicsContext2D();
 
-		ArrayList<Pair<Integer, Integer>> roomList = mapGenerator.getRoomList();
+		ArrayList<Pair<Integer, Integer>> roomList = gameMap.getRoomList();
 
 		Collections.shuffle(roomList);
 		setPlayerPositionX(roomList.get(0).getKey());
@@ -63,11 +58,10 @@ public class GameScene {
 		int centerY = playerPositionY * SPRITE_SIZE + SPRITE_SIZE / 2;
 		int startX = centerX - GameConfig.SCREEN_HEIGHT / 2;
 		int startY = centerY - GameConfig.SCREEN_WIDTH / 2;
-		
+
 		for (int i = 0; i <= GameConfig.MAP_SIZE; i++) {
 			for (int j = 0; j <= GameConfig.MAP_SIZE; j++) {
-				if(gameMap[i][j] != Cell.VOID)
-					DrawUtil.drawSprite(gc, SPRITE_SIZE * i - startX, SPRITE_SIZE * j - startY, gameMap[i][j]);
+					DrawUtil.drawSprite(gc, SPRITE_SIZE * i - startX, SPRITE_SIZE * j - startY, gameMap.get(i, j).getType());
 				if (i == playerPositionX && j == playerPositionY)
 					DrawUtil.drawCharacter(gc, SPRITE_SIZE * i - startX, SPRITE_SIZE * j - startY, direction);
 			}
@@ -80,20 +74,28 @@ public class GameScene {
 			boolean isDraw = true;
 			switch (keycode) {
 			case A:
+				gameMap.get(playerPositionX, playerPositionY).setEntity(0);
 				playerPositionY--;
 				direction = Direction.Left;
+				gameMap.get(playerPositionX, playerPositionY).setEntity(1);
 				break;
 			case D:
+				gameMap.get(playerPositionX, playerPositionY).setEntity(0);
 				playerPositionY++;
 				direction = Direction.Right;
+				gameMap.get(playerPositionX, playerPositionY).setEntity(1);
 				break;
 			case W:
+				gameMap.get(playerPositionX, playerPositionY).setEntity(0);
 				playerPositionX--;
 				direction = Direction.Up;
+				gameMap.get(playerPositionX, playerPositionY).setEntity(1);
 				break;
 			case S:
+				gameMap.get(playerPositionX, playerPositionY).setEntity(0);
 				playerPositionX++;
 				direction = Direction.Down;
+				gameMap.get(playerPositionX, playerPositionY).setEntity(1);
 				break;
 			case ESCAPE:
 				SceneController.setSceneToStage(LandingScene.getScene());
