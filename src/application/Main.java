@@ -17,7 +17,7 @@ public class Main extends Application {
 
 		Rectangle2D screenBound = Screen.getPrimary().getBounds();
 		
-		double rectangleSize = Math.min(screenBound.getMaxX() * 0.6, screenBound.getMaxY() * 0.6);
+		double rectangleSize = Math.min(screenBound.getMaxX() * GameConfig.SCREEN_SCALING, screenBound.getMaxY() * GameConfig.SCREEN_SCALING);
 		
 		GameConfig.setScreenWidth((int) rectangleSize);
 		GameConfig.setScreenHeight((int) rectangleSize);
