@@ -1,4 +1,4 @@
-package logic;
+package utils;
 
 import java.util.Arrays;
 import java.util.Collections;

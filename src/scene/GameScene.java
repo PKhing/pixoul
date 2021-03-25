@@ -10,6 +10,7 @@ import javafx.scene.layout.StackPane;
 import utils.GlobalConstant;
 import javafx.scene.paint.Color;
 import logic.Cell;
+import logic.Direction;
 import logic.MapGenerator;
 import utils.DrawUtil;
 
@@ -21,7 +22,7 @@ public class GameScene {
 	private static MapGenerator mapGenerator;
 	private int[][] gameMap;
 	private Scene scene;
-	private int direction = 0;
+	private int direction = Direction.Down;
 	public GameScene() {
 		mapGenerator = new MapGenerator();
 		mapGenerator.generateMap();
@@ -54,10 +55,8 @@ public class GameScene {
 		int startY = centerY - GlobalConstant.SCREEN_WIDTH / 2;
 		for (int i = 0; i < 50; i++) {
 			for (int j = 0; j < 50; j++) {
-				if (gameMap[i][j] == Cell.PATH)
-					DrawUtil.drawSprite(gc, SPRITE_SIZE * i - startX, SPRITE_SIZE * j - startY, 0);
-				if (gameMap[i][j] == Cell.WALL)
-					DrawUtil.drawSprite(gc, SPRITE_SIZE * i - startX, SPRITE_SIZE * j - startY, 1);
+				if(gameMap[i][j] != Cell.VOID)
+					DrawUtil.drawSprite(gc, SPRITE_SIZE * i - startX, SPRITE_SIZE * j - startY, gameMap[i][j]);
 				if (i == playerPositionX && j == playerPositionY)
 					DrawUtil.drawCharacter(gc, SPRITE_SIZE * i - startX, SPRITE_SIZE * j - startY, direction);
 			}
@@ -70,19 +69,19 @@ public class GameScene {
 			switch (keycode) {
 			case A:
 				playerPositionY--;
-				direction = 1;
+				direction = Direction.Left;
 				break;
 			case D:
 				playerPositionY++;
-				direction = 2;
+				direction = Direction.Right;
 				break;
 			case W:
 				playerPositionX--;
-				direction = 3;
+				direction = Direction.Up;
 				break;
 			case S:
 				playerPositionX++;
-				direction = 0;
+				direction = Direction.Down;
 				break;
 			case ESCAPE:
 				SceneController.setSceneToStage(new LandingScene().getScene());
