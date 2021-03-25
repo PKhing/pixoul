@@ -21,7 +21,7 @@ public class GameScene {
 	private static MapGenerator mapGenerator;
 	private int[][] gameMap;
 	private Scene scene;
-
+	private int direction = 0;
 	public GameScene() {
 		mapGenerator = new MapGenerator();
 		mapGenerator.generateMap();
@@ -59,7 +59,7 @@ public class GameScene {
 				if (gameMap[i][j] == Cell.WALL)
 					DrawUtil.drawSprite(gc, SPRITE_SIZE * i - startX, SPRITE_SIZE * j - startY, 1);
 				if (i == playerPositionX && j == playerPositionY)
-					DrawUtil.drawSprite(gc, SPRITE_SIZE * i - startX, SPRITE_SIZE * j - startY, 2);
+					DrawUtil.drawCharacter(gc, SPRITE_SIZE * i - startX, SPRITE_SIZE * j - startY, direction);
 			}
 		}
 	}
@@ -70,15 +70,19 @@ public class GameScene {
 			switch (keycode) {
 			case A:
 				playerPositionY--;
+				direction = 1;
 				break;
 			case D:
 				playerPositionY++;
+				direction = 2;
 				break;
 			case W:
 				playerPositionX--;
+				direction = 3;
 				break;
 			case S:
 				playerPositionX++;
+				direction = 0;
 				break;
 			case ESCAPE:
 				SceneController.setSceneToStage(new LandingScene().getScene());
