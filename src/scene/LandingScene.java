@@ -1,6 +1,8 @@
 package scene;
 
 import controller.SceneController;
+import javafx.animation.FadeTransition;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -10,7 +12,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import utils.GlobalConstant;
+import javafx.util.Duration;
+import utils.GameConfig;
 
 public class LandingScene {
 	private static Scene cachedScene = null;
@@ -32,13 +35,27 @@ public class LandingScene {
 		titleText.setFont(new Font("Consolas", 40));
 
 		grid.add(titleText, 0, 0, 3, 2);
-
+		
 		Button startBtn = new Button("Start");
+		
+		FadeTransition fading = new FadeTransition(Duration.seconds(1.0), grid);
+		fading.setFromValue(1.0);
+		fading.setToValue(0.0);
+
+		fading.setOnFinished(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent arg0) {
+				SceneController.setSceneToStage(new GameScene().getScene());
+				grid.setOpacity(1.0);
+			}
+		});
+		
 		startBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
 			@Override
 			public void handle(MouseEvent arg0) {
-				SceneController.setSceneToStage(new GameScene().getScene());
+				fading.play();
 			}
 
 		});
@@ -53,10 +70,10 @@ public class LandingScene {
 
 		});
 		
-		grid.add(startBtn, 0,3);
+		grid.add(startBtn, 0, 3);
 		grid.add(exitBtn, 1, 3);
 		
-		Scene scene = new Scene(grid, GlobalConstant.SCREEN_WIDTH, GlobalConstant.SCREEN_HEIGHT);
+		Scene scene = new Scene(grid, GameConfig.SCREEN_WIDTH, GameConfig.SCREEN_HEIGHT);
 		cachedScene = scene;
 		return scene;
 	}

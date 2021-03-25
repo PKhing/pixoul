@@ -1,9 +1,10 @@
 package logic;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import javafx.util.Pair;
-import utils.GlobalConstant;
+import utils.GameConfig;
 import utils.Util;
 
 public class MapGenerator {
@@ -19,9 +20,9 @@ public class MapGenerator {
 	private static final int TURN_RIGHT = 3;
 	private int gameMap[][];
 	private ArrayList<Pair<Integer, Integer>> roomList;
-
+	
 	public MapGenerator() {
-		gameMap = new int[GlobalConstant.MAP_SIZE + 10][GlobalConstant.MAP_SIZE + 10];
+		gameMap = new int[GameConfig.MAP_SIZE + 10][GameConfig.MAP_SIZE + 10];
 		roomList = new ArrayList<Pair<Integer, Integer>>();
 	}
 
@@ -39,7 +40,7 @@ public class MapGenerator {
 		}
 
 		public boolean isValid() {
-			if (x <= 0 || y <= 0 || x >= GlobalConstant.MAP_SIZE || y >= GlobalConstant.MAP_SIZE)
+			if (x <= 0 || y <= 0 || x >= GameConfig.MAP_SIZE || y >= GameConfig.MAP_SIZE)
 				return true;
 			if (isConnectTo(PROCESSING))
 				return false;
@@ -94,7 +95,7 @@ public class MapGenerator {
 		}
 
 		public int getType() {
-			if (x <= 0 || y <= 0 || x >= GlobalConstant.MAP_SIZE || y >= GlobalConstant.MAP_SIZE)
+			if (x <= 0 || y <= 0 || x >= GameConfig.MAP_SIZE || y >= GameConfig.MAP_SIZE)
 				return -1000;
 			return gameMap[x][y];
 		}
@@ -105,8 +106,8 @@ public class MapGenerator {
 	}
 
 	public void printMap() {
-		for (int i = 0; i <= GlobalConstant.MAP_SIZE; i++) {
-			for (int j = 0; j <= GlobalConstant.MAP_SIZE; j++) {
+		for (int i = 0; i <= GameConfig.MAP_SIZE; i++) {
+			for (int j = 0; j <= GameConfig.MAP_SIZE; j++) {
 				if (gameMap[i][j] == Cell.PATH)
 					System.out.print(" ");
 				else if (gameMap[i][j] == Cell.WALL)
@@ -122,28 +123,28 @@ public class MapGenerator {
 	private boolean makeRoom(int x, int y, int no) {
 
 		// check if room is valid or not
-		if (x - GlobalConstant.ROOM_SIZE <= 0 || x + GlobalConstant.ROOM_SIZE >= GlobalConstant.MAP_SIZE || y - GlobalConstant.ROOM_SIZE <= 0 || y + GlobalConstant.ROOM_SIZE >= GlobalConstant.MAP_SIZE)
+		if (x - GameConfig.ROOM_SIZE <= 0 || x + GameConfig.ROOM_SIZE >= GameConfig.MAP_SIZE || y - GameConfig.ROOM_SIZE <= 0 || y + GameConfig.ROOM_SIZE >= GameConfig.MAP_SIZE)
 			return false;
-		for (int i = x - GlobalConstant.ROOM_SIZE; i <= x + GlobalConstant.ROOM_SIZE; i++) {
-			for (int j = y - GlobalConstant.ROOM_SIZE; j <= y + GlobalConstant.ROOM_SIZE; j++) {
+		for (int i = x - GameConfig.ROOM_SIZE; i <= x + GameConfig.ROOM_SIZE; i++) {
+			for (int j = y - GameConfig.ROOM_SIZE; j <= y + GameConfig.ROOM_SIZE; j++) {
 				if (gameMap[i][j] != 0)
 					return false;
 			}
 		}
 
 		// make room
-		for (int i = x - GlobalConstant.ROOM_SIZE; i <= x + GlobalConstant.ROOM_SIZE; i++) {
-			for (int j = y - GlobalConstant.ROOM_SIZE; j <= y + GlobalConstant.ROOM_SIZE; j++) {
-				if (j != y - GlobalConstant.ROOM_SIZE && j != y + GlobalConstant.ROOM_SIZE && i != x - GlobalConstant.ROOM_SIZE && i != x + GlobalConstant.ROOM_SIZE)
+		for (int i = x - GameConfig.ROOM_SIZE; i <= x + GameConfig.ROOM_SIZE; i++) {
+			for (int j = y - GameConfig.ROOM_SIZE; j <= y + GameConfig.ROOM_SIZE; j++) {
+				if (j != y - GameConfig.ROOM_SIZE && j != y + GameConfig.ROOM_SIZE && i != x - GameConfig.ROOM_SIZE && i != x + GameConfig.ROOM_SIZE)
 					gameMap[i][j] = ROOM;
-				if (j != y - GlobalConstant.ROOM_SIZE && j != y + GlobalConstant.ROOM_SIZE) {
-					gameMap[x - GlobalConstant.ROOM_SIZE][j] = no;
-					gameMap[x + GlobalConstant.ROOM_SIZE][j] = no;
+				if (j != y - GameConfig.ROOM_SIZE && j != y + GameConfig.ROOM_SIZE) {
+					gameMap[x - GameConfig.ROOM_SIZE][j] = no;
+					gameMap[x + GameConfig.ROOM_SIZE][j] = no;
 				}
 			}
-			if (i != x - GlobalConstant.ROOM_SIZE && i != x + GlobalConstant.ROOM_SIZE) {
-				gameMap[i][y - GlobalConstant.ROOM_SIZE] = no;
-				gameMap[i][y + GlobalConstant.ROOM_SIZE] = no;
+			if (i != x - GameConfig.ROOM_SIZE && i != x + GameConfig.ROOM_SIZE) {
+				gameMap[i][y - GameConfig.ROOM_SIZE] = no;
+				gameMap[i][y + GameConfig.ROOM_SIZE] = no;
 			}
 		}
 		return true;
@@ -179,9 +180,9 @@ public class MapGenerator {
 
 	private void format() {
 
-		int newMap[][] = new int[GlobalConstant.MAP_SIZE + 10][GlobalConstant.MAP_SIZE + 10];
-		for (int i = 0; i <= GlobalConstant.MAP_SIZE; i++) {
-			for (int j = 0; j <= GlobalConstant.MAP_SIZE; j++) {
+		int newMap[][] = new int[GameConfig.MAP_SIZE + 10][GameConfig.MAP_SIZE + 10];
+		for (int i = 0; i <= GameConfig.MAP_SIZE; i++) {
+			for (int j = 0; j <= GameConfig.MAP_SIZE; j++) {
 				newMap[i][j] = Cell.VOID;
 				if (gameMap[i][j] == ROOM)
 					newMap[i][j] = Cell.PATH;
@@ -190,12 +191,12 @@ public class MapGenerator {
 			}
 		}
 
-		for (int i = 0; i <= GlobalConstant.MAP_SIZE; i++) {
-			for (int j = 0; j <= GlobalConstant.MAP_SIZE; j++) {
+		for (int i = 0; i <= GameConfig.MAP_SIZE; i++) {
+			for (int j = 0; j <= GameConfig.MAP_SIZE; j++) {
 				int pathCount = 0;
 				for (int k = i - 1; k <= i + 1; k++) {
 					for (int l = j - 1; l <= j + 1; l++) {
-						if (k < 0 || l < 0 || k > GlobalConstant.MAP_SIZE || l > GlobalConstant.MAP_SIZE)
+						if (k < 0 || l < 0 || k > GameConfig.MAP_SIZE || l > GameConfig.MAP_SIZE)
 							continue;
 						if (newMap[k][l] == Cell.PATH)
 							pathCount += 1;
@@ -211,8 +212,8 @@ public class MapGenerator {
 	public void generateMap() {
 		int roomCnt = 1;
 		while (roomCnt <= MAX_ROOM) {
-			int x = Util.random(0, GlobalConstant.MAP_SIZE);
-			int y = Util.random(0, GlobalConstant.MAP_SIZE);
+			int x = Util.random(0, GameConfig.MAP_SIZE);
+			int y = Util.random(0, GameConfig.MAP_SIZE);
 			if (makeRoom(x, y, roomCnt)) {
 				roomList.add(new Pair<>(x, y));
 				roomCnt++;
@@ -220,11 +221,11 @@ public class MapGenerator {
 		}
 		int pathCnt = 1;
 		while (pathCnt <= MAX_PATH) {
-			int x = Util.random(0, GlobalConstant.MAP_SIZE);
-			int y = Util.random(0, GlobalConstant.MAP_SIZE);
+			int x = Util.random(0, GameConfig.MAP_SIZE);
+			int y = Util.random(0, GameConfig.MAP_SIZE);
 			while (gameMap[x][y] < 1) {
-				x = Util.random(0, GlobalConstant.MAP_SIZE);
-				y = Util.random(0, GlobalConstant.MAP_SIZE);
+				x = Util.random(0, GameConfig.MAP_SIZE);
+				y = Util.random(0, GameConfig.MAP_SIZE);
 			}
 			State state = new State(x, y, Util.random(0, 3));
 			int tmp = state.getType();

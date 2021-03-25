@@ -6,12 +6,9 @@ import java.util.List;
 import java.util.Random;
 
 public class Util {
-	private static Random rand;
+	private static Random rand = new Random();
 
 	public static int random(int st, int ed) {
-		if (rand == null) {
-			rand = new Random();
-		}
 		return st + rand.nextInt(ed - st + 1);
 	}
 
