@@ -1,9 +1,26 @@
 package utils;
 
 public class GameConfig {
-	public static final int SCREEN_WIDTH = 854;
-	public static final int SCREEN_HEIGHT = 400;
+	private static int screenWidth = 854;
+	private static int screenHeight = 400;
+
 	public static final int MAP_SIZE = 50;
-	public static final int ROOM_SIZE = 3;
+	public static final int ROOM_SIZE = 4;
 	public static final int SPRITE_SIZE = 45;
+
+	public static int getScreenWidth() {
+		return screenWidth;
+	}
+
+	public static void setScreenWidth(int screenWidth) {
+		GameConfig.screenWidth = screenWidth;
+	}
+
+	public static int getScreenHeight() {
+		return screenHeight;
+	}
+
+	public static void setScreenHeight(int screenHeight) {
+		GameConfig.screenHeight = screenHeight;
+	}
 }

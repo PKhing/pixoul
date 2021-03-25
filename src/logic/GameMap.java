@@ -9,7 +9,7 @@ import utils.Util;
 
 public class GameMap {
 	private static final int MAX_ROOM = 10;
-	private static final int MAX_PATH = 20;
+	private static final int MAX_PATH = 25;
 	private static final int MAX_LENGTH = 15;
 	private static final int MIN_LENGTH = 4;
 	private static final int PATH = -1;

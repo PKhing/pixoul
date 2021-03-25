@@ -31,9 +31,9 @@ public class GameScene {
 		gameMap.get(30, 30).setEntity(1);
 
 		StackPane root = new StackPane();
-		scene = new Scene(root, GameConfig.SCREEN_WIDTH, GameConfig.SCREEN_HEIGHT);
+		scene = new Scene(root, GameConfig.getScreenWidth(), GameConfig.getScreenHeight());
 
-		Canvas canvas = new Canvas(GameConfig.SCREEN_WIDTH, GameConfig.SCREEN_HEIGHT);
+		Canvas canvas = new Canvas(GameConfig.getScreenWidth(), GameConfig.getScreenHeight());
 
 		GraphicsContext gc = canvas.getGraphicsContext2D();
 
@@ -51,19 +51,23 @@ public class GameScene {
 
 	private void drawMap(GraphicsContext gc) {
 		gc.setFill(Color.rgb(255, 255, 255));
-		gc.fillRect(0, 0, GameConfig.SCREEN_WIDTH, GameConfig.SCREEN_HEIGHT);
+		gc.fillRect(0, 0, GameConfig.getScreenWidth(), GameConfig.getScreenHeight());
 
 		int centerX = playerPositionX * GameConfig.SPRITE_SIZE + GameConfig.SPRITE_SIZE / 2;
 		int centerY = playerPositionY * GameConfig.SPRITE_SIZE + GameConfig.SPRITE_SIZE / 2;
-		int startX = centerX - GameConfig.SCREEN_HEIGHT / 2;
-		int startY = centerY - GameConfig.SCREEN_WIDTH / 2;
-		int maxCellX = GameConfig.SCREEN_HEIGHT/GameConfig.SPRITE_SIZE;
-		int maxCellY = GameConfig.SCREEN_WIDTH/GameConfig.SPRITE_SIZE;
-		for (int i = Math.max(0, playerPositionX-maxCellX/2-1); i <= Math.min(GameConfig.MAP_SIZE, playerPositionX+maxCellX/2+1); i++) {
-			for (int j = Math.max(0, playerPositionY-maxCellY/2-1); j <= Math.min(GameConfig.MAP_SIZE, playerPositionY+maxCellY/2+1); j++) {
-					DrawUtil.drawSprite(gc, GameConfig.SPRITE_SIZE * i - startX, GameConfig.SPRITE_SIZE * j - startY, gameMap.get(i, j).getType());
+		int startX = centerX - GameConfig.getScreenHeight() / 2;
+		int startY = centerY - GameConfig.getScreenWidth() / 2;
+		int maxCellX = GameConfig.getScreenHeight() / GameConfig.SPRITE_SIZE;
+		int maxCellY = GameConfig.getScreenWidth() / GameConfig.SPRITE_SIZE;
+		for (int i = Math.max(0, playerPositionX - maxCellX / 2 - 1); i <= Math.min(GameConfig.MAP_SIZE,
+				playerPositionX + maxCellX / 2 + 1); i++) {
+			for (int j = Math.max(0, playerPositionY - maxCellY / 2 - 1); j <= Math.min(GameConfig.MAP_SIZE,
+					playerPositionY + maxCellY / 2 + 1); j++) {
+				DrawUtil.drawSprite(gc, GameConfig.SPRITE_SIZE * i - startX, GameConfig.SPRITE_SIZE * j - startY,
+						gameMap.get(i, j).getType());
 				if (i == playerPositionX && j == playerPositionY)
-					DrawUtil.drawCharacter(gc, GameConfig.SPRITE_SIZE * i - startX, GameConfig.SPRITE_SIZE * j - startY, direction);
+					DrawUtil.drawCharacter(gc, GameConfig.SPRITE_SIZE * i - startX, GameConfig.SPRITE_SIZE * j - startY,
+							direction);
 			}
 		}
 
