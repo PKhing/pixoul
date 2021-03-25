@@ -21,7 +21,6 @@ import utils.DrawUtil;
 public class GameScene {
 	private int playerPositionX = 30;
 	private int playerPositionY = 30;
-	final private int SPRITE_SIZE = 45;
 	private static GameMap gameMap;
 	private Scene scene;
 	private int direction = Direction.Down;
@@ -54,18 +53,20 @@ public class GameScene {
 		gc.setFill(Color.rgb(255, 255, 255));
 		gc.fillRect(0, 0, GameConfig.SCREEN_WIDTH, GameConfig.SCREEN_HEIGHT);
 
-		int centerX = playerPositionX * SPRITE_SIZE + SPRITE_SIZE / 2;
-		int centerY = playerPositionY * SPRITE_SIZE + SPRITE_SIZE / 2;
+		int centerX = playerPositionX * GameConfig.SPRITE_SIZE + GameConfig.SPRITE_SIZE / 2;
+		int centerY = playerPositionY * GameConfig.SPRITE_SIZE + GameConfig.SPRITE_SIZE / 2;
 		int startX = centerX - GameConfig.SCREEN_HEIGHT / 2;
 		int startY = centerY - GameConfig.SCREEN_WIDTH / 2;
-
-		for (int i = 0; i <= GameConfig.MAP_SIZE; i++) {
-			for (int j = 0; j <= GameConfig.MAP_SIZE; j++) {
-					DrawUtil.drawSprite(gc, SPRITE_SIZE * i - startX, SPRITE_SIZE * j - startY, gameMap.get(i, j).getType());
+		int maxCellX = GameConfig.SCREEN_HEIGHT/GameConfig.SPRITE_SIZE;
+		int maxCellY = GameConfig.SCREEN_WIDTH/GameConfig.SPRITE_SIZE;
+		for (int i = Math.max(0, playerPositionX-maxCellX/2-1); i <= Math.min(GameConfig.MAP_SIZE, playerPositionX+maxCellX/2+1); i++) {
+			for (int j = Math.max(0, playerPositionY-maxCellY/2-1); j <= Math.min(GameConfig.MAP_SIZE, playerPositionY+maxCellY/2+1); j++) {
+					DrawUtil.drawSprite(gc, GameConfig.SPRITE_SIZE * i - startX, GameConfig.SPRITE_SIZE * j - startY, gameMap.get(i, j).getType());
 				if (i == playerPositionX && j == playerPositionY)
-					DrawUtil.drawCharacter(gc, SPRITE_SIZE * i - startX, SPRITE_SIZE * j - startY, direction);
+					DrawUtil.drawCharacter(gc, GameConfig.SPRITE_SIZE * i - startX, GameConfig.SPRITE_SIZE * j - startY, direction);
 			}
 		}
+
 	}
 
 	private void addEventListener(Scene s, GraphicsContext gc) {
