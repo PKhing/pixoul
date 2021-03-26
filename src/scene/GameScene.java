@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import controller.SceneController;
+import entity.Player;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -19,16 +20,13 @@ import logic.GameMap;
 import utils.DrawUtil;
 
 public class GameScene {
-	private int playerPositionX = 30;
-	private int playerPositionY = 30;
-	private static GameMap gameMap;
+	private GameMap gameMap;
 	private Scene scene;
 	private int direction = Direction.Down;
-
+	Player player;
 	public GameScene() {
 		gameMap = new GameMap();
 		gameMap.printMap();
-		gameMap.get(30, 30).setEntity(1);
 
 		StackPane root = new StackPane();
 		scene = new Scene(root, GameConfig.getScreenWidth(), GameConfig.getScreenHeight());
@@ -40,8 +38,7 @@ public class GameScene {
 		ArrayList<Pair<Integer, Integer>> roomList = gameMap.getRoomList();
 
 		Collections.shuffle(roomList);
-		setPlayerPositionX(roomList.get(0).getKey());
-		setPlayerPositionY(roomList.get(0).getValue());
+		player = new Player(roomList.get(0).getKey(),roomList.get(0).getValue(),gameMap);
 
 		root.getChildren().add(canvas);
 		drawMap(gc);
@@ -53,20 +50,20 @@ public class GameScene {
 		gc.setFill(Color.rgb(255, 255, 255));
 		gc.fillRect(0, 0, GameConfig.getScreenWidth(), GameConfig.getScreenHeight());
 
-		int centerX = playerPositionX * GameConfig.SPRITE_SIZE + GameConfig.SPRITE_SIZE / 2;
-		int centerY = playerPositionY * GameConfig.SPRITE_SIZE + GameConfig.SPRITE_SIZE / 2;
-		int startX = centerX - GameConfig.getScreenHeight() / 2;
-		int startY = centerY - GameConfig.getScreenWidth() / 2;
-		int maxCellX = GameConfig.getScreenHeight() / GameConfig.SPRITE_SIZE;
-		int maxCellY = GameConfig.getScreenWidth() / GameConfig.SPRITE_SIZE;
-		for (int i = Math.max(0, playerPositionX - maxCellX / 2 - 1); i <= Math.min(GameConfig.MAP_SIZE,
-				playerPositionX + maxCellX / 2 + 1); i++) {
-			for (int j = Math.max(0, playerPositionY - maxCellY / 2 - 1); j <= Math.min(GameConfig.MAP_SIZE,
-					playerPositionY + maxCellY / 2 + 1); j++) {
-				DrawUtil.drawSprite(gc, GameConfig.SPRITE_SIZE * i - startX, GameConfig.SPRITE_SIZE * j - startY,
+		int centerY = player.getPosY() * GameConfig.SPRITE_SIZE + GameConfig.SPRITE_SIZE / 2;
+		int centerX = player.getPosX() * GameConfig.SPRITE_SIZE + GameConfig.SPRITE_SIZE / 2;
+		int startY = centerY - GameConfig.getScreenHeight() / 2;
+		int startX = centerX - GameConfig.getScreenWidth() / 2;
+		int maxCellY = GameConfig.getScreenHeight() / GameConfig.SPRITE_SIZE;
+		int maxCellX = GameConfig.getScreenWidth() / GameConfig.SPRITE_SIZE;
+		for (int i = Math.max(0, player.getPosY() - maxCellY / 2 - 1); i <= Math.min(GameConfig.MAP_SIZE,
+				player.getPosY() + maxCellY / 2 + 1); i++) {
+			for (int j = Math.max(0, player.getPosX() - maxCellX / 2 - 1); j <= Math.min(GameConfig.MAP_SIZE,
+					player.getPosX() + maxCellX / 2 + 1); j++) {
+				DrawUtil.drawSprite(gc, GameConfig.SPRITE_SIZE * i - startY, GameConfig.SPRITE_SIZE * j - startX,
 						gameMap.get(i, j).getType());
-				if (i == playerPositionX && j == playerPositionY)
-					DrawUtil.drawCharacter(gc, GameConfig.SPRITE_SIZE * i - startX, GameConfig.SPRITE_SIZE * j - startY,
+				if (gameMap.get(i, j).getEntity() instanceof Player)
+					DrawUtil.drawCharacter(gc, GameConfig.SPRITE_SIZE * i - startY, GameConfig.SPRITE_SIZE * j - startX,
 							direction);
 			}
 		}
@@ -79,28 +76,16 @@ public class GameScene {
 			boolean isDraw = true;
 			switch (keycode) {
 			case A:
-				gameMap.get(playerPositionX, playerPositionY).setEntity(0);
-				playerPositionY--;
-				direction = Direction.Left;
-				gameMap.get(playerPositionX, playerPositionY).setEntity(1);
+				player.move(gameMap, Direction.Left);
 				break;
 			case D:
-				gameMap.get(playerPositionX, playerPositionY).setEntity(0);
-				playerPositionY++;
-				direction = Direction.Right;
-				gameMap.get(playerPositionX, playerPositionY).setEntity(1);
+				player.move(gameMap, Direction.Right);
 				break;
 			case W:
-				gameMap.get(playerPositionX, playerPositionY).setEntity(0);
-				playerPositionX--;
-				direction = Direction.Up;
-				gameMap.get(playerPositionX, playerPositionY).setEntity(1);
+				player.move(gameMap, Direction.Up);
 				break;
 			case S:
-				gameMap.get(playerPositionX, playerPositionY).setEntity(0);
-				playerPositionX++;
-				direction = Direction.Down;
-				gameMap.get(playerPositionX, playerPositionY).setEntity(1);
+				player.move(gameMap, Direction.Down);
 				break;
 			case ESCAPE:
 				SceneController.setSceneToStage(LandingScene.getScene());
@@ -117,23 +102,15 @@ public class GameScene {
 		});
 	}
 
+	public GameMap getGameMap() {
+		return gameMap;
+	}
+
+	public void setGameMap(GameMap gameMap) {
+		this.gameMap = gameMap;
+	}
+
 	public Scene getScene() {
 		return scene;
-	}
-
-	public int getPlayerPositionX() {
-		return playerPositionX;
-	}
-
-	public void setPlayerPositionX(int playerPositionX) {
-		this.playerPositionX = playerPositionX;
-	}
-
-	public int getPlayerPositionY() {
-		return playerPositionY;
-	}
-
-	public void setPlayerPositionY(int playerPositionY) {
-		this.playerPositionY = playerPositionY;
 	}
 }

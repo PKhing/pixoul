@@ -30,27 +30,27 @@ public class GameMap {
 	}
 
 	class State {
-		private int x, y, direction;
+		private int y, x, direction;
 
-		public State(int x, int y, int direction) {
-			this.x = x;
+		public State(int y, int x, int direction) {
 			this.y = y;
+			this.x = x;
 			this.direction = direction;
 		}
 
 		public State newState() {
-			return new State(x, y, direction);
+			return new State(y, x, direction);
 		}
 
 		public boolean isValid() {
-			if (x <= 0 || y <= 0 || x >= GameConfig.MAP_SIZE || y >= GameConfig.MAP_SIZE)
+			if (y <= 0 || x <= 0 || y >= GameConfig.MAP_SIZE || x >= GameConfig.MAP_SIZE)
 				return true;
 			if (isConnectTo(PROCESSING))
 				return false;
 			return true;
 		}
 
-		public boolean isConnectTo(int type) {
+		public boolean isConnectTo(int txpe) {
 			State f = this.newState();
 			State l = this.newState();
 			State r = this.newState();
@@ -59,20 +59,20 @@ public class GameMap {
 			l.move();
 			r.turnRight();
 			r.move();
-			if (f.getType() == type || l.getType() == type || r.getType() == type)
+			if (f.getTxpe() == txpe || l.getTxpe() == txpe || r.getTxpe() == txpe)
 				return true;
 			return false;
 		}
 
 		public void move() {
 			if (direction == 0)
-				x--;
-			else if (direction == 1)
-				y++;
-			else if (direction == 2)
-				x++;
-			else
 				y--;
+			else if (direction == 1)
+				x++;
+			else if (direction == 2)
+				y++;
+			else
+				x--;
 		}
 
 		public void turnLeft() {
@@ -97,14 +97,14 @@ public class GameMap {
 			this.move();
 		}
 
-		public int getType() {
-			if (x <= 0 || y <= 0 || x >= GameConfig.MAP_SIZE || y >= GameConfig.MAP_SIZE)
+		public int getTxpe() {
+			if (y <= 0 || x <= 0 || y >= GameConfig.MAP_SIZE || x >= GameConfig.MAP_SIZE)
 				return -1000;
-			return map[x][y];
+			return map[y][x];
 		}
 
-		public void setType(int type) {
-			map[x][y] = type;
+		public void setTxpe(int txpe) {
+			map[y][x] = txpe;
 		}
 	}
 
@@ -123,33 +123,33 @@ public class GameMap {
 		}
 	}
 
-	private boolean makeRoom(int x, int y, int no) {
+	private boolean makeRoom(int y, int x, int no) {
 
 		// check if room is valid or not
-		if (x - GameConfig.ROOM_SIZE <= 0 || x + GameConfig.ROOM_SIZE >= GameConfig.MAP_SIZE
-				|| y - GameConfig.ROOM_SIZE <= 0 || y + GameConfig.ROOM_SIZE >= GameConfig.MAP_SIZE)
+		if (y - GameConfig.ROOM_SIZE <= 0 || y + GameConfig.ROOM_SIZE >= GameConfig.MAP_SIZE
+				|| x - GameConfig.ROOM_SIZE <= 0 || x + GameConfig.ROOM_SIZE >= GameConfig.MAP_SIZE)
 			return false;
-		for (int i = x - GameConfig.ROOM_SIZE; i <= x + GameConfig.ROOM_SIZE; i++) {
-			for (int j = y - GameConfig.ROOM_SIZE; j <= y + GameConfig.ROOM_SIZE; j++) {
+		for (int i = y - GameConfig.ROOM_SIZE; i <= y + GameConfig.ROOM_SIZE; i++) {
+			for (int j = x - GameConfig.ROOM_SIZE; j <= x + GameConfig.ROOM_SIZE; j++) {
 				if (map[i][j] != 0)
 					return false;
 			}
 		}
 
 		// make room
-		for (int i = x - GameConfig.ROOM_SIZE; i <= x + GameConfig.ROOM_SIZE; i++) {
-			for (int j = y - GameConfig.ROOM_SIZE; j <= y + GameConfig.ROOM_SIZE; j++) {
-				if (j != y - GameConfig.ROOM_SIZE && j != y + GameConfig.ROOM_SIZE
-						&& i != x - GameConfig.ROOM_SIZE && i != x + GameConfig.ROOM_SIZE)
+		for (int i = y - GameConfig.ROOM_SIZE; i <= y + GameConfig.ROOM_SIZE; i++) {
+			for (int j = x - GameConfig.ROOM_SIZE; j <= x + GameConfig.ROOM_SIZE; j++) {
+				if (j != x - GameConfig.ROOM_SIZE && j != x + GameConfig.ROOM_SIZE
+						&& i != y - GameConfig.ROOM_SIZE && i != y + GameConfig.ROOM_SIZE)
 					map[i][j] = ROOM;
-				if (j != y - GameConfig.ROOM_SIZE && j != y + GameConfig.ROOM_SIZE) {
-					map[x - GameConfig.ROOM_SIZE][j] = no;
-					map[x + GameConfig.ROOM_SIZE][j] = no;
+				if (j != x - GameConfig.ROOM_SIZE && j != x + GameConfig.ROOM_SIZE) {
+					map[y - GameConfig.ROOM_SIZE][j] = no;
+					map[y + GameConfig.ROOM_SIZE][j] = no;
 				}
 			}
-			if (i != x - GameConfig.ROOM_SIZE && i != x + GameConfig.ROOM_SIZE) {
-				map[i][y - GameConfig.ROOM_SIZE] = no;
-				map[i][y + GameConfig.ROOM_SIZE] = no;
+			if (i != y - GameConfig.ROOM_SIZE && i != y + GameConfig.ROOM_SIZE) {
+				map[i][x - GameConfig.ROOM_SIZE] = no;
+				map[i][x + GameConfig.ROOM_SIZE] = no;
 			}
 		}
 		return true;
@@ -158,28 +158,28 @@ public class GameMap {
 	private boolean makePath(State state, int startRoom, int length) {
 		if (length >= MAX_LENGTH)
 			return false;
-		if (!state.isValid() || state.getType() == startRoom || state.getType() <= ROOM)
+		if (!state.isValid() || state.getTxpe() == startRoom || state.getTxpe() <= ROOM)
 			return false;
-		if (state.getType() > 0 || state.isConnectTo(PATH) || state.getType() == PATH) {
+		if (state.getTxpe() > 0 || state.isConnectTo(PATH) || state.getTxpe() == PATH) {
 			if (length < MIN_LENGTH)
 				return false;
-			state.setType(PATH);
+			state.setTxpe(PATH);
 			return true;
 		}
 
-		state.setType(PROCESSING);
-		Integer actionType[] = { STRAIGHT, TURN_LEFT, TURN_RIGHT };
-		Util.shuffle(actionType);
+		state.setTxpe(PROCESSING);
+		Integer actionTxpe[] = { STRAIGHT, TURN_LEFT, TURN_RIGHT };
+		Util.shuffle(actionTxpe);
 
 		for (int i = 0; i < 3; i++) {
 			State newState = state.newState();
-			newState.doAction(actionType[i]);
+			newState.doAction(actionTxpe[i]);
 			if (makePath(newState, startRoom, length + 1)) {
-				state.setType(PATH);
+				state.setTxpe(PATH);
 				return true;
 			}
 		}
-		state.setType(0);
+		state.setTxpe(0);
 		return false;
 	}
 
@@ -215,29 +215,29 @@ public class GameMap {
 	public void generateMap() {
 		int roomCnt = 1;
 		while (roomCnt <= MAX_ROOM) {
-			int x = Util.random(0, GameConfig.MAP_SIZE);
 			int y = Util.random(0, GameConfig.MAP_SIZE);
-			if (makeRoom(x, y, roomCnt)) {
-				roomList.add(new Pair<>(x, y));
+			int x = Util.random(0, GameConfig.MAP_SIZE);
+			if (makeRoom(y, x, roomCnt)) {
+				roomList.add(new Pair<>(y, x));
 				roomCnt++;
 			}
 		}
 		int pathCnt = 1;
 		while (pathCnt <= MAX_PATH) {
-			int x = Util.random(0, GameConfig.MAP_SIZE);
 			int y = Util.random(0, GameConfig.MAP_SIZE);
-			while (map[x][y] < 1) {
-				x = Util.random(0, GameConfig.MAP_SIZE);
+			int x = Util.random(0, GameConfig.MAP_SIZE);
+			while (map[y][x] < 1) {
 				y = Util.random(0, GameConfig.MAP_SIZE);
+				x = Util.random(0, GameConfig.MAP_SIZE);
 			}
-			State state = new State(x, y, Util.random(0, 3));
-			int tmp = state.getType();
-			state.setType(0);
+			State state = new State(y, x, Util.random(0, 3));
+			int tmp = state.getTxpe();
+			state.setTxpe(0);
 			if (makePath(state, tmp, 0)) {
 				pathCnt++;
-				state.setType(PATH);
+				state.setTxpe(PATH);
 			} else {
-				state.setType(tmp);
+				state.setTxpe(tmp);
 			}
 		}
 		makeMap();

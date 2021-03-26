@@ -1,11 +1,13 @@
 package logic;
 
+import entity.base.Entity;
+
 public class Cell {
 	public static final int PATH = 0;
 	public static final int WALL = 1;
 	public static final int VOID = 2;
 	private int type;
-	private int entity; // change to entity type later
+	private Entity entity; 
 
 	public Cell() {
 		this(VOID);
@@ -13,7 +15,7 @@ public class Cell {
 
 	public Cell(int type) {
 		this.type = type;
-		this.entity = 0;
+		this.entity = null;
 	}
 
 	public int getType() {
@@ -24,11 +26,11 @@ public class Cell {
 		this.type = type;
 	}
 
-	public int getEntity() {
+	public Entity getEntity() {
 		return entity;
 	}
 
-	public void setEntity(int entity) {
+	public void setEntity(Entity entity) {
 		this.entity = entity;
 	}
 
