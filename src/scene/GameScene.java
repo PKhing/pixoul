@@ -22,7 +22,7 @@ import utils.DrawUtil;
 public class GameScene {
 	private GameMap gameMap;
 	private Scene scene;
-	private int direction = Direction.Down;
+	private int direction = Direction.DOWN;
 	Player player;
 	public GameScene() {
 		gameMap = new GameMap();
@@ -76,16 +76,16 @@ public class GameScene {
 			boolean isDraw = true;
 			switch (keycode) {
 			case A:
-				player.move(gameMap, Direction.Left);
+				player.move(gameMap, Direction.LEFT);
 				break;
 			case D:
-				player.move(gameMap, Direction.Right);
+				player.move(gameMap, Direction.RIGHT);
 				break;
 			case W:
-				player.move(gameMap, Direction.Up);
+				player.move(gameMap, Direction.UP);
 				break;
 			case S:
-				player.move(gameMap, Direction.Down);
+				player.move(gameMap, Direction.DOWN);
 				break;
 			case ESCAPE:
 				SceneController.setSceneToStage(LandingScene.getScene());

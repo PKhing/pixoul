@@ -21,10 +21,10 @@ public class Player extends Entity implements Moveable{
 	@Override
 	public void move(GameMap gameMap,int direction) {
 		gameMap.get(getPosY(),getPosX()).setEntity(null);
-		if(direction==Direction.Up)setPosY(getPosY()-getMoveSpeed());
-		if(direction==Direction.Down)setPosY(getPosY()+getMoveSpeed());
-		if(direction==Direction.Left)setPosX(getPosX()-getMoveSpeed());
-		if(direction==Direction.Right)setPosX(getPosX()+getMoveSpeed());
+		if(direction==Direction.UP)setPosY(getPosY()-getMoveSpeed());
+		if(direction==Direction.DOWN)setPosY(getPosY()+getMoveSpeed());
+		if(direction==Direction.LEFT)setPosX(getPosX()-getMoveSpeed());
+		if(direction==Direction.RIGHT)setPosX(getPosX()+getMoveSpeed());
 		gameMap.get(getPosY(),getPosX()).setEntity(this);
 	}
 	
