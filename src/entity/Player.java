@@ -2,6 +2,7 @@ package entity;
 
 import entity.base.Entity;
 import entity.base.Moveable;
+import logic.Cell;
 import logic.Direction;
 import logic.GameMap;
 
@@ -20,17 +21,23 @@ public class Player extends Entity implements Moveable {
 
 	@Override
 	public void move(GameMap gameMap, int direction) {
-		gameMap.get(getPosY(), getPosX()).setEntity(null);
+		int newPosY = getPosY();
+		int newPosX = getPosX();
 		if (direction == Direction.UP)
-			setPosY(getPosY() - getMoveSpeed());
+			newPosY = getPosY() - getMoveSpeed();
 		if (direction == Direction.DOWN)
-			setPosY(getPosY() + getMoveSpeed());
+			newPosY = getPosY() + getMoveSpeed();
 		if (direction == Direction.LEFT)
-			setPosX(getPosX() - getMoveSpeed());
+			newPosX = getPosX() - getMoveSpeed();
 		if (direction == Direction.RIGHT)
-			setPosX(getPosX() + getMoveSpeed());
+			newPosX = getPosX() + getMoveSpeed();
 		setDirection(direction);
-		gameMap.get(getPosY(), getPosX()).setEntity(this);
+		if(gameMap.get(newPosY, newPosX).getType()!=Cell.WALL) {
+			gameMap.get(getPosY(), getPosX()).setEntity(null);
+			gameMap.get(newPosY, newPosX).setEntity(this);
+			setPosY(newPosY);
+			setPosX(newPosX);
+		}
 	}
 
 }
