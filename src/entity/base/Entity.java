@@ -1,33 +1,32 @@
 package entity.base;
 
-import java.util.ArrayList;
-
 public abstract class Entity {
 	private int health;
-	
+
 	private int attack;
-	
+
 	private int defense;
-	
+
 	private int posX;
-	
+
 	private int posY;
-	
+
+	private int direction;
+
 	private double critRate;
-	
+
 	private double critPercent;
-	
+
 	private int moveSpeed;
-	
-	
-	
-	public Entity(int health, int attack, int defense, int posX, int posY, double critRate, double critPercent,
-			int moveSpeed) {
+
+	public Entity(int health, int attack, int defense, int posX, int posY, int direction, double critRate,
+			double critPercent, int moveSpeed) {
 		this.health = health;
 		this.attack = attack;
 		this.defense = defense;
 		this.posX = posX;
 		this.posY = posY;
+		this.direction = direction;
 		this.critRate = critRate;
 		this.critPercent = critPercent;
 		this.moveSpeed = moveSpeed;
@@ -98,5 +97,13 @@ public abstract class Entity {
 	public void setPosY(int posY) {
 		this.posY = posY;
 	}
-	
+
+	public int getDirection() {
+		return direction;
+	}
+
+	public void setDirection(int direction) {
+		this.direction = direction;
+	}
+
 }

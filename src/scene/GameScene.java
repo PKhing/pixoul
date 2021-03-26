@@ -22,7 +22,6 @@ import utils.DrawUtil;
 public class GameScene {
 	private GameMap gameMap;
 	private Scene scene;
-	private int direction = Direction.DOWN;
 	Player player;
 	public GameScene() {
 		gameMap = new GameMap();
@@ -64,7 +63,7 @@ public class GameScene {
 						gameMap.get(i, j).getType());
 				if (gameMap.get(i, j).getEntity() instanceof Player)
 					DrawUtil.drawCharacter(gc, GameConfig.SPRITE_SIZE * i - startY, GameConfig.SPRITE_SIZE * j - startX,
-							direction);
+							player.getDirection());
 			}
 		}
 
