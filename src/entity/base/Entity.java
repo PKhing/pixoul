@@ -2,29 +2,45 @@ package entity.base;
 
 import java.util.ArrayList;
 
-public abstract class EntityBase {
+public abstract class Entity {
 	private int health;
 	
 	private int attack;
 	
 	private int defense;
 	
+	private int posX;
+	
+	private int posY;
+	
 	private double critRate;
 	
 	private double critPercent;
 	
 	private int moveSpeed;
-
-	public EntityBase() {
-		
-	}
 	
+	
+	
+	public Entity(int health, int attack, int defense, int posX, int posY, double critRate, double critPercent,
+			int moveSpeed) {
+		this.health = health;
+		this.attack = attack;
+		this.defense = defense;
+		this.posX = posX;
+		this.posY = posY;
+		this.critRate = critRate;
+		this.critPercent = critPercent;
+		this.moveSpeed = moveSpeed;
+	}
+
+	public abstract void remove();
+
 	public int getHealth() {
 		return health;
 	}
 
 	public void setHealth(int health) {
-		this.health = Math.max(0, health);
+		this.health = health;
 	}
 
 	public int getAttack() {
@@ -32,7 +48,7 @@ public abstract class EntityBase {
 	}
 
 	public void setAttack(int attack) {
-		this.attack = Math.max(0, attack);
+		this.attack = attack;
 	}
 
 	public int getDefense() {
@@ -40,7 +56,7 @@ public abstract class EntityBase {
 	}
 
 	public void setDefense(int defense) {
-		this.defense = Math.max(0, defense);
+		this.defense = defense;
 	}
 
 	public double getCritRate() {
@@ -56,7 +72,7 @@ public abstract class EntityBase {
 	}
 
 	public void setMoveSpeed(int moveSpeed) {
-		this.moveSpeed = Math.max(1, moveSpeed);
+		this.moveSpeed = moveSpeed;
 	}
 
 	public double getCritPercent() {
@@ -64,6 +80,23 @@ public abstract class EntityBase {
 	}
 
 	public void setCritPercent(double critPercent) {
-		this.critPercent = Math.max(0, critPercent);
+		this.critPercent = critPercent;
 	}
+
+	public int getPosX() {
+		return posX;
+	}
+
+	public void setPosX(int posX) {
+		this.posX = posX;
+	}
+
+	public int getPosY() {
+		return posY;
+	}
+
+	public void setPosY(int posY) {
+		this.posY = posY;
+	}
+	
 }
