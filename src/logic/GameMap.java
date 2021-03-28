@@ -59,7 +59,7 @@ public class GameMap {
 			l.move();
 			r.turnRight();
 			r.move();
-			if (f.getTxpe() == txpe || l.getTxpe() == txpe || r.getTxpe() == txpe)
+			if (f.getType() == txpe || l.getType() == txpe || r.getType() == txpe)
 				return true;
 			return false;
 		}
@@ -97,7 +97,7 @@ public class GameMap {
 			this.move();
 		}
 
-		public int getTxpe() {
+		public int getType() {
 			if (y <= 0 || x <= 0 || y >= GameConfig.MAP_SIZE || x >= GameConfig.MAP_SIZE)
 				return -1000;
 			return map[y][x];
@@ -158,9 +158,9 @@ public class GameMap {
 	private boolean makePath(State state, int startRoom, int length) {
 		if (length >= MAX_LENGTH)
 			return false;
-		if (!state.isValid() || state.getTxpe() == startRoom || state.getTxpe() <= ROOM)
+		if (!state.isValid() || state.getType() == startRoom || state.getType() <= ROOM)
 			return false;
-		if (state.getTxpe() > 0 || state.isConnectTo(PATH) || state.getTxpe() == PATH) {
+		if (state.getType() > 0 || state.isConnectTo(PATH) || state.getType() == PATH) {
 			if (length < MIN_LENGTH)
 				return false;
 			state.setTxpe(PATH);
@@ -231,7 +231,7 @@ public class GameMap {
 				x = Util.random(0, GameConfig.MAP_SIZE);
 			}
 			State state = new State(y, x, Util.random(0, 3));
-			int tmp = state.getTxpe();
+			int tmp = state.getType();
 			state.setTxpe(0);
 			if (makePath(state, tmp, 0)) {
 				pathCnt++;
