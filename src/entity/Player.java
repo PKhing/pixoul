@@ -31,8 +31,12 @@ public class Player extends Entity implements Moveable {
 			newPosX = getPosX() - getMoveSpeed();
 		if (direction == Direction.RIGHT)
 			newPosX = getPosX() + getMoveSpeed();
+		
 		setDirection(direction);
-		if(gameMap.get(newPosY, newPosX).getType()!=Cell.WALL) {
+		
+		Cell newPosCell = gameMap.get(newPosY, newPosX);
+		
+		if (newPosCell.getType() != Cell.WALL && !(newPosCell.getEntity() instanceof Entity)) {
 			gameMap.get(getPosY(), getPosX()).setEntity(null);
 			gameMap.get(newPosY, newPosX).setEntity(this);
 			setPosY(newPosY);

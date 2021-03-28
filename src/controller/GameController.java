@@ -1,10 +1,34 @@
 package controller;
 
 import java.util.ArrayList;
-import entity.base.Entity;
+import logic.GameMap;
 
 public class GameController {
-	private ArrayList<Entity> entityList;
+	private ArrayList<GameMap> floorList;
 	private int level;
-	private int coin;
+
+	public int getLevel() {
+		return level;
+	}
+
+	public void setLevel(int level) {
+		this.level = level;
+	}
+
+	public ArrayList<GameMap> getFloorList() {
+		return floorList;
+	}
+
+	public void setFloorList(ArrayList<GameMap> floorList) {
+		this.floorList = floorList;
+	}
+	
+	public GameMap getFloor(int floor) {
+		return this.getFloorList().get(floor - 1);
+	}
+	
+	public void addFloor(GameMap newFloor) {
+		this.getFloorList().add(newFloor);
+	}
+
 }
