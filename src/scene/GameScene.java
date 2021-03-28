@@ -6,14 +6,19 @@ import java.util.Comparator;
 
 import controller.SceneController;
 import entity.Player;
+import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Button;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import utils.GameConfig;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.util.Pair;
 import logic.Cell;
 import logic.Direction;
@@ -23,8 +28,10 @@ import utils.DrawUtil;
 public class GameScene {
 	private GameMap gameMap;
 	private Scene scene;
-	Player player;
-
+	private Player player;
+	private VBox statPane;
+	private VBox messagePane;
+	private VBox effectPane;
 	public GameScene() {
 		gameMap = new GameMap();
 		gameMap.printMap();
@@ -33,9 +40,10 @@ public class GameScene {
 		scene = new Scene(root, GameConfig.getScreenWidth(), GameConfig.getScreenHeight());
 
 		Canvas canvas = new Canvas(GameConfig.getScreenWidth(), GameConfig.getScreenHeight());
-
+		
 		GraphicsContext gc = canvas.getGraphicsContext2D();
 
+		
 		ArrayList<Pair<Integer, Integer>> roomList = gameMap.getRoomList();
 
 		Collections.shuffle(roomList);
@@ -45,8 +53,83 @@ public class GameScene {
 		drawMap(gc);
 
 		addEventListener(scene, gc);
+		
+		//Overlay
+		AnchorPane overlay = new AnchorPane();
+		addStatPane(overlay);
+		addMessagePane(overlay);
+		addEffectPane(overlay);
+		root.getChildren().add(overlay);
+		
+		
+		// Inventory Button
+		Button inventory = new Button();
+		inventory.setText("Salty\ninventory");
+		AnchorPane.setBottomAnchor(inventory, 10.0);
+		AnchorPane.setRightAnchor(inventory, 10.0);
+		inventory.setPrefHeight(60.0);inventory.setPrefWidth(60.0);
+		overlay.getChildren().add(inventory);
+		
+		// Pause Button
+		Button pause = new Button();
+		pause.setText("||");
+		AnchorPane.setTopAnchor(pause, 10.0);
+		AnchorPane.setRightAnchor(pause, 10.0);
+		pause.setPrefHeight(30.0);pause.setPrefWidth(30.0);
+		overlay.getChildren().add(pause);
+		
+		
 	}
+	
+	private void addStatPane(AnchorPane overlay) {
 
+		statPane = new VBox();
+		AnchorPane.setTopAnchor(statPane, 0.0);
+	    AnchorPane.setLeftAnchor(statPane, 0.0);
+	    overlay.getChildren().add(statPane);
+	    statPane.setStyle("-fx-background-color:gray;-fx-padding:10");
+	    
+		Text hp = new Text("HP : 0/10");
+		statPane.getChildren().add(hp);
+		
+		Text attack = new Text("Attack : 0");
+		statPane.getChildren().add(attack);
+		
+		Text defense = new Text("Defense : 0");
+		statPane.getChildren().add(defense);
+	}
+	
+	private void addMessagePane(AnchorPane overlay) {
+
+		messagePane = new VBox();
+		AnchorPane.setBottomAnchor(messagePane, 0.0);
+	    AnchorPane.setLeftAnchor(messagePane, 0.0);
+	    overlay.getChildren().add(messagePane);
+	    messagePane.setPrefHeight(80.0);
+	    messagePane.setPrefWidth(200.0);
+	    messagePane.setStyle("-fx-background-color: rgba(0,0,0, 0.5);-fx-padding:7");
+	    
+		Text message = new Text("PKhing got salt from gacha");
+		message.setFill(Color.WHITE);
+		messagePane.getChildren().add(message);
+
+	}
+	
+	private void addEffectPane(AnchorPane overlay) {
+		
+		effectPane = new VBox();
+		AnchorPane.setTopAnchor(effectPane, 50.0);
+	    AnchorPane.setRightAnchor(effectPane, 0.0);
+	    overlay.getChildren().add(effectPane);
+	    effectPane.setStyle("-fx-background-color: rgba(0,0,0, 0.5);-fx-padding:7");
+	    
+	    
+		Text message = new Text("Salt effect : inf");
+		message.setFill(Color.WHITE);
+		effectPane.getChildren().add(message);
+
+	}
+	
 	private void drawMap(GraphicsContext gc) {
 		gc.setFill(Color.rgb(0, 0, 0));
 		gc.fillRect(0, 0, GameConfig.getScreenWidth(), GameConfig.getScreenHeight());
