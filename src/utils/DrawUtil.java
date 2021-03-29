@@ -12,20 +12,15 @@ import logic.Cell;
 import logic.Direction;
 
 public class DrawUtil {
+	private static PixelReader wallSprites = getImagePixelReader("sprites/wall.png");
+	private static PixelReader playerSprites = getImagePixelReader("sprites/player.png");
+	private static PixelReader backpackSprites = getImagePixelReader("sprites/backpack.png");
+	private static PixelReader pauseSprites = getImagePixelReader("sprites/pause.png");
+	private static PixelReader statPaneSprites = getImagePixelReader("sprites/statPane.png");
 
-	private static PixelReader wallSprites = new Image(ClassLoader.getSystemResource("sprites/wall.png").toString())
-			.getPixelReader();
-	private static PixelReader playerSprites = new Image(ClassLoader.getSystemResource("sprites/player.png").toString())
-			.getPixelReader();
-
-	private static PixelReader backpackSprites = new Image(
-			ClassLoader.getSystemResource("sprites/backpack.png").toString()).getPixelReader();
-
-	private static PixelReader pauseSprites = new Image(ClassLoader.getSystemResource("sprites/pause.png").toString())
-			.getPixelReader();
-
-	private static PixelReader statPaneSprites = new Image(
-			ClassLoader.getSystemResource("sprites/statPane.png").toString()).getPixelReader();
+	private static PixelReader getImagePixelReader(String filePath) {
+		return new Image(ClassLoader.getSystemResource(filePath).toString()).getPixelReader();
+	}
 
 	public static void drawStatPane(GraphicsContext gc) {
 		WritableImage img = new WritableImage(statPaneSprites, 0, 0, 75, 48);

@@ -17,7 +17,7 @@ public class Player extends Entity implements Moveable {
 	private Weapon equippedWeapon;
 	
 	public Player(int posY, int posX, GameMap gameMap) {
-		super(1, 1, 1, posX, posY, Direction.DOWN, 1, 1, 1);
+		super(1, 1, 10, 1, posX, posY, Direction.DOWN, 1, 1, 1);
 		gameMap.get(posY, posX).setEntity(this);
 		setPotionList(new ArrayList<>());
 		setEquippedArmor(null);

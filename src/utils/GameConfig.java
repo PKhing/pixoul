@@ -3,7 +3,7 @@ package utils;
 public class GameConfig {
 	private static int screenWidth = 854;
 	private static int screenHeight = 400;
-	private static int scale = 3;
+	private static int scale = 2;
 
 	public static final int SCREEN_RESPONSIVE = 816;
 	public static final boolean SCREEN_SCALABLE = true;

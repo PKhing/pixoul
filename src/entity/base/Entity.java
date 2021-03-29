@@ -5,6 +5,8 @@ public abstract class Entity {
 
 	private int attack;
 
+	private int maxHealth;
+	
 	private int defense;
 
 	private int posX;
@@ -19,7 +21,7 @@ public abstract class Entity {
 
 	private int moveSpeed;
 
-	public Entity(int health, int attack, int defense, int posX, int posY, int direction, double critRate,
+	public Entity(int health, int attack, int maxHealth,int defense, int posX, int posY, int direction, double critRate,
 			double critPercent, int moveSpeed) {
 		this.health = health;
 		this.attack = attack;
@@ -30,6 +32,7 @@ public abstract class Entity {
 		this.critRate = critRate;
 		this.critPercent = critPercent;
 		this.moveSpeed = moveSpeed;
+		this.maxHealth = maxHealth;
 	}
 
 	public abstract void remove();
@@ -104,6 +107,14 @@ public abstract class Entity {
 
 	public void setDirection(int direction) {
 		this.direction = direction;
+	}
+
+	public int getMaxHealth() {
+		return maxHealth;
+	}
+
+	public void setMaxHealth(int maxHealth) {
+		this.maxHealth = maxHealth;
 	}
 
 }
