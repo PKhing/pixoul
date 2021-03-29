@@ -10,6 +10,7 @@ import javafx.scene.text.Font;
 public class Util {
 	private static Random rand = new Random();
 	private static Font font;
+	private static Font lagreFont;
 
 	public static int random(int st, int ed) {
 		return st + rand.nextInt(ed - st + 1);
@@ -20,6 +21,12 @@ public class Util {
 			font = Font.loadFont(ClassLoader.getSystemResourceAsStream("font.ttf"), 12*GameConfig.getScale());
 		}
 		return font;
+	}
+	public static Font getLargeFont() {
+		if(lagreFont==null) {
+			lagreFont= Font.loadFont(ClassLoader.getSystemResource("font.ttf").toString(), 30*GameConfig.getScale());
+		}
+		return lagreFont;
 	}
 	public static void shuffle(Integer[] intArray) {
 		List<Integer> intList = Arrays.asList(intArray);

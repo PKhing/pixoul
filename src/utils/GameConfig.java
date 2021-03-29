@@ -5,7 +5,7 @@ public class GameConfig {
 	private static int screenHeight = 400;
 	private static int scale = 2;
 
-	public static final int SCREEN_RESPONSIVE = 816;
+	public static final int SCREEN_RESPONSIVE = 864;
 	public static final boolean SCREEN_SCALABLE = true;
 	public static final String GAME_TITLE = "Pixoul";
 	public static final String ICON_NAME = "icon.png";
@@ -14,6 +14,7 @@ public class GameConfig {
 	public static final int MAP_SIZE = 50;
 	public static final int ROOM_SIZE = 4;
 	public static final int SPRITE_SIZE = 32;
+	public static final int MAX_ITEM = 16;
 	
 	public static int getScreenWidth() {
 		return screenWidth;

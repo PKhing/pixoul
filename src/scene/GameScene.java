@@ -5,14 +5,19 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.Queue;
 
+import components.InventoryPane;
 import controller.SceneController;
 import entity.Player;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -33,6 +38,7 @@ public class GameScene {
 	private StackPane statPane;
 	private VBox messagePane;
 	private VBox effectPane;
+	private InventoryPane inventoryPane;
 	
 	public GameScene() {
 		gameMap = new GameMap();
@@ -70,7 +76,13 @@ public class GameScene {
 		Canvas backpack = new Canvas(32 * GameConfig.getScale(), 32 * GameConfig.getScale());
 		DrawUtil.drawBackpack(backpack.getGraphicsContext2D());
 		inventoryBtn.setGraphic(backpack);
+		inventoryBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent arg0) {
+				root.getChildren().add(inventoryPane);
+			}
 
+		});
 		AnchorPane.setBottomAnchor(inventoryBtn, 5.0 * GameConfig.getScale());
 		AnchorPane.setRightAnchor(inventoryBtn, 5.0 * GameConfig.getScale());
 
@@ -88,6 +100,11 @@ public class GameScene {
 		DrawUtil.drawPause(pause.getGraphicsContext2D());
 		pauseBtn.setGraphic(pause);
 		overlay.getChildren().add(pauseBtn);
+		
+		inventoryPane = new InventoryPane();
+		StackPane.setAlignment(new Group(inventoryPane), Pos.CENTER);
+		
+		
 	}
 
 	private void addStatPane(AnchorPane overlay) {
