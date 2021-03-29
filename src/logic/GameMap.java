@@ -139,8 +139,8 @@ public class GameMap {
 		// make room
 		for (int i = y - GameConfig.ROOM_SIZE; i <= y + GameConfig.ROOM_SIZE; i++) {
 			for (int j = x - GameConfig.ROOM_SIZE; j <= x + GameConfig.ROOM_SIZE; j++) {
-				if (j != x - GameConfig.ROOM_SIZE && j != x + GameConfig.ROOM_SIZE
-						&& i != y - GameConfig.ROOM_SIZE && i != y + GameConfig.ROOM_SIZE)
+				if (j != x - GameConfig.ROOM_SIZE && j != x + GameConfig.ROOM_SIZE && i != y - GameConfig.ROOM_SIZE
+						&& i != y + GameConfig.ROOM_SIZE)
 					map[i][j] = ROOM;
 				if (j != x - GameConfig.ROOM_SIZE && j != x + GameConfig.ROOM_SIZE) {
 					map[y - GameConfig.ROOM_SIZE][j] = no;
@@ -188,10 +188,9 @@ public class GameMap {
 		for (int i = 0; i <= GameConfig.MAP_SIZE; i++) {
 			for (int j = 0; j <= GameConfig.MAP_SIZE; j++) {
 				gameMap[i][j] = new Cell(Cell.VOID);
-				if (map[i][j] == ROOM)
+				if (map[i][j] == ROOM || map[i][j] == PATH) {
 					gameMap[i][j].setType(Cell.PATH);
-				if (map[i][j] == PATH)
-					gameMap[i][j].setType(Cell.PATH);
+				}
 			}
 		}
 
@@ -210,6 +209,7 @@ public class GameMap {
 					gameMap[i][j].setType(Cell.WALL);
 			}
 		}
+		
 	}
 
 	public void generateMap() {

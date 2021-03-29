@@ -44,7 +44,6 @@ public class GameScene {
 		scene = new Scene(root, GameConfig.getScreenWidth(), GameConfig.getScreenHeight());
 
 		Canvas canvas = new Canvas(GameConfig.getScreenWidth(), GameConfig.getScreenHeight());
-
 		GraphicsContext gc = canvas.getGraphicsContext2D();
 
 		ArrayList<Pair<Integer, Integer>> roomList = gameMap.getRoomList();
@@ -69,7 +68,7 @@ public class GameScene {
 		inventoryBtn.setText("Salty\ninventory");
 		inventoryBtn.setPrefHeight(60.0);
 		inventoryBtn.setPrefWidth(60.0);
-		
+
 		AnchorPane.setBottomAnchor(inventoryBtn, 10.0);
 		AnchorPane.setRightAnchor(inventoryBtn, 10.0);
 
@@ -153,10 +152,9 @@ public class GameScene {
 		int startIdxX = Math.max(0, player.getPosX() - maxCellX / 2 - 1);
 		int endIdxX = Math.min(GameConfig.MAP_SIZE, player.getPosX() + maxCellX / 2 + 1);
 
-		   
-		/* Uncomment when game is ready
-		 * ArrayList<Pair<Integer, Integer>> allVisibleField = new
-		 * ArrayList<Pair<Integer, Integer>>();
+		/*
+		 * Uncomment when game is ready ArrayList<Pair<Integer, Integer>>
+		 * allVisibleField = new ArrayList<Pair<Integer, Integer>>();
 		 * 
 		 * getAllVisibleField(allVisibleField, 3, player.getPosY(), player.getPosX());
 		 * 
@@ -175,8 +173,8 @@ public class GameScene {
 
 		for (int i = startIdxY; i <= endIdxY; i++) {
 			for (int j = startIdxX; j <= endIdxX; j++) {
-				DrawUtil.drawSprite(gc, GameConfig.SPRITE_SIZE * i - startY, GameConfig.SPRITE_SIZE * j - startX,
-						gameMap.get(i, j).getType());
+				DrawUtil.drawCell(gc, GameConfig.SPRITE_SIZE * i - startY, GameConfig.SPRITE_SIZE * j - startX,
+						gameMap.get(i, j));
 				if (gameMap.get(i, j).getEntity() instanceof Player)
 					DrawUtil.drawCharacter(gc, GameConfig.SPRITE_SIZE * i - startY, GameConfig.SPRITE_SIZE * j - startX,
 							player.getDirection());
