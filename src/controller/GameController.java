@@ -1,45 +1,39 @@
 package controller;
 
 import java.util.ArrayList;
-import logic.GameMap;
+
+import components.GameAudio;
+import javafx.scene.media.MediaPlayer;
+import scene.GameScene;
 
 public class GameController {
-	private ArrayList<GameMap> floorList;
-	private GameMap nowMap;
-	private int level;
-
-	public int getLevel() {
-		return level;
-	}
-
-	public void setLevel(int level) {
-		this.level = level;
-	}
-
-	public ArrayList<GameMap> getFloorList() {
-		return floorList;
-	}
-
-	public void setFloorList(ArrayList<GameMap> floorList) {
-		this.floorList = floorList;
-	}
+	private static ArrayList<GameScene> floorList = new ArrayList<>();
+	private static MediaPlayer bgmMedia = GameAudio.getGameSceneAudioLoop();
+	private static int level;
 	
-	public GameMap moveToFloor(int floor) {
-		return this.getFloor(floor);
-	}
-	
-	private GameMap getFloor(int floor) {
-		if(this.getFloorList().size() <= floor) {
-			this.addNewFloor();
+	private static GameScene getFloor(int floor) {
+		if(floorList.size() <= floor) {
+			addNewFloor();
 		}
-		return this.getFloorList().get(floor - 1);
+		return floorList.get(floor - 1);
 	}
 	
-	private void addNewFloor() {
-		this.getFloorList().add(new GameMap());
+	private static void addNewFloor() {
+		floorList.add(new GameScene());
 	}
 
-	public void reset() {
-		this.floorList.clear();
+	public static void reset() {
+		floorList.clear();
+		level = 1;
+	}
+	
+	public static void exit() {
+		bgmMedia.stop();
+	}
+	
+	public static void start() {
+		reset();
+		SceneController.setSceneToStage(getFloor(level).getScene());
+		bgmMedia.play();
 	}
 }

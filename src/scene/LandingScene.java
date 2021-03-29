@@ -1,5 +1,6 @@
 package scene;
 
+import controller.GameController;
 import controller.SceneController;
 import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
@@ -55,7 +56,7 @@ public class LandingScene {
 
 			@Override
 			public void handle(ActionEvent arg0) {
-				SceneController.setSceneToStage(new GameScene().getScene());
+				GameController.start();
 				grid.setOpacity(1.0);
 			}
 		});
