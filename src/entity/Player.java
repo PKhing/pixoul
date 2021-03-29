@@ -24,13 +24,13 @@ public class Player extends Entity implements Moveable {
 		int newPosY = getPosY();
 		int newPosX = getPosX();
 		if (direction == Direction.UP)
-			newPosY = getPosY() - getMoveSpeed();
+			newPosY -= getMoveSpeed();
 		if (direction == Direction.DOWN)
-			newPosY = getPosY() + getMoveSpeed();
+			newPosY += getMoveSpeed();
 		if (direction == Direction.LEFT)
-			newPosX = getPosX() - getMoveSpeed();
+			newPosX -= getMoveSpeed();
 		if (direction == Direction.RIGHT)
-			newPosX = getPosX() + getMoveSpeed();
+			newPosX += getMoveSpeed();
 		
 		setDirection(direction);
 		

@@ -22,9 +22,10 @@ public class Main extends Application {
 		GameConfig.setScreenWidth((int) rectangleSize);
 		GameConfig.setScreenHeight((int) rectangleSize);
 		
-		primaryStage.setTitle("Pixoul");
 		primaryStage.getIcons().add(new Image(iconPath));
-
+		primaryStage.setTitle(GameConfig.GAME_TITLE);
+		primaryStage.setResizable(GameConfig.SCREEN_SCALABLE);
+		
 		SceneController.setMainStage(primaryStage);
 		SceneController.setSceneToStage(LandingScene.getScene());
 

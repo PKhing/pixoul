@@ -3,7 +3,10 @@ package scene;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.LinkedList;
+import java.util.Queue;
 
+import components.InventoryButton;
 import controller.SceneController;
 import entity.Player;
 import javafx.geometry.Insets;
@@ -32,6 +35,7 @@ public class GameScene {
 	private VBox statPane;
 	private VBox messagePane;
 	private VBox effectPane;
+
 	public GameScene() {
 		gameMap = new GameMap();
 		gameMap.printMap();
@@ -40,10 +44,9 @@ public class GameScene {
 		scene = new Scene(root, GameConfig.getScreenWidth(), GameConfig.getScreenHeight());
 
 		Canvas canvas = new Canvas(GameConfig.getScreenWidth(), GameConfig.getScreenHeight());
-		
+
 		GraphicsContext gc = canvas.getGraphicsContext2D();
 
-		
 		ArrayList<Pair<Integer, Integer>> roomList = gameMap.getRoomList();
 
 		Collections.shuffle(roomList);
@@ -53,83 +56,84 @@ public class GameScene {
 		drawMap(gc);
 
 		addEventListener(scene, gc);
-		
-		//Overlay
+
+		// Overlay
 		AnchorPane overlay = new AnchorPane();
 		addStatPane(overlay);
 		addMessagePane(overlay);
 		addEffectPane(overlay);
 		root.getChildren().add(overlay);
-		
-		
+
 		// Inventory Button
-		Button inventory = new Button();
-		inventory.setText("Salty\ninventory");
-		AnchorPane.setBottomAnchor(inventory, 10.0);
-		AnchorPane.setRightAnchor(inventory, 10.0);
-		inventory.setPrefHeight(60.0);inventory.setPrefWidth(60.0);
-		overlay.getChildren().add(inventory);
+		Button inventoryBtn = new Button();
+		inventoryBtn.setText("Salty\ninventory");
+		inventoryBtn.setPrefHeight(60.0);
+		inventoryBtn.setPrefWidth(60.0);
 		
+		AnchorPane.setBottomAnchor(inventoryBtn, 10.0);
+		AnchorPane.setRightAnchor(inventoryBtn, 10.0);
+
+		overlay.getChildren().add(inventoryBtn);
+
 		// Pause Button
 		Button pause = new Button();
 		pause.setText("||");
 		AnchorPane.setTopAnchor(pause, 10.0);
 		AnchorPane.setRightAnchor(pause, 10.0);
-		pause.setPrefHeight(30.0);pause.setPrefWidth(30.0);
+		pause.setPrefHeight(30.0);
+		pause.setPrefWidth(30.0);
 		overlay.getChildren().add(pause);
-		
-		
+
 	}
-	
+
 	private void addStatPane(AnchorPane overlay) {
 
 		statPane = new VBox();
 		AnchorPane.setTopAnchor(statPane, 0.0);
-	    AnchorPane.setLeftAnchor(statPane, 0.0);
-	    overlay.getChildren().add(statPane);
-	    statPane.setStyle("-fx-background-color:gray;-fx-padding:10");
-	    
-		Text hp = new Text("HP : 0/10");
+		AnchorPane.setLeftAnchor(statPane, 0.0);
+		overlay.getChildren().add(statPane);
+		statPane.setStyle("-fx-background-color:gray;-fx-padding:10");
+
+		Text hp = new Text("HP : 0 / 10");
 		statPane.getChildren().add(hp);
-		
+
 		Text attack = new Text("Attack : 0");
 		statPane.getChildren().add(attack);
-		
+
 		Text defense = new Text("Defense : 0");
 		statPane.getChildren().add(defense);
 	}
-	
+
 	private void addMessagePane(AnchorPane overlay) {
 
 		messagePane = new VBox();
 		AnchorPane.setBottomAnchor(messagePane, 0.0);
-	    AnchorPane.setLeftAnchor(messagePane, 0.0);
-	    overlay.getChildren().add(messagePane);
-	    messagePane.setPrefHeight(80.0);
-	    messagePane.setPrefWidth(200.0);
-	    messagePane.setStyle("-fx-background-color: rgba(0,0,0, 0.5);-fx-padding:7");
-	    
+		AnchorPane.setLeftAnchor(messagePane, 0.0);
+		overlay.getChildren().add(messagePane);
+		messagePane.setPrefHeight(80.0);
+		messagePane.setPrefWidth(200.0);
+		messagePane.setStyle("-fx-background-color: rgba(0,0,0, 0.5);-fx-padding:7");
+
 		Text message = new Text("PKhing got salt from gacha");
 		message.setFill(Color.WHITE);
 		messagePane.getChildren().add(message);
 
 	}
-	
+
 	private void addEffectPane(AnchorPane overlay) {
-		
+
 		effectPane = new VBox();
 		AnchorPane.setTopAnchor(effectPane, 50.0);
-	    AnchorPane.setRightAnchor(effectPane, 0.0);
-	    overlay.getChildren().add(effectPane);
-	    effectPane.setStyle("-fx-background-color: rgba(0,0,0, 0.5);-fx-padding:7");
-	    
-	    
+		AnchorPane.setRightAnchor(effectPane, 0.0);
+		overlay.getChildren().add(effectPane);
+		effectPane.setStyle("-fx-background-color: rgba(0,0,0, 0.5);-fx-padding:7");
+
 		Text message = new Text("Salt effect : inf");
 		message.setFill(Color.WHITE);
 		effectPane.getChildren().add(message);
 
 	}
-	
+
 	private void drawMap(GraphicsContext gc) {
 		gc.setFill(Color.rgb(0, 0, 0));
 		gc.fillRect(0, 0, GameConfig.getScreenWidth(), GameConfig.getScreenHeight());
@@ -149,39 +153,25 @@ public class GameScene {
 		int startIdxX = Math.max(0, player.getPosX() - maxCellX / 2 - 1);
 		int endIdxX = Math.min(GameConfig.MAP_SIZE, player.getPosX() + maxCellX / 2 + 1);
 
+		   
 		/* Uncomment when game is ready
-		ArrayList<Pair<Integer, Integer>> allVisibleField = new ArrayList<Pair<Integer, Integer>>();
-
-		getAllVisibleField(allVisibleField, 3, 0, player.getPosY(), player.getPosX());
-
-		allVisibleField.sort(Comparator.comparing(Pair<Integer, Integer>::getKey).thenComparingInt(Pair::getValue));
-
-		int prevX = -1;
-		int prevY = -1;
-
-		for (Pair<Integer, Integer> pos : allVisibleField) {
-			int posX = pos.getValue();
-			int posY = pos.getKey();
-
-			if (posX == prevX && posY == prevY) {
-				continue;
-			}
-
-			if (prevY == -1) {
-				prevY = posY;
-			}
-
-			if (prevX == -1) {
-				prevX = posX;
-			}
-
-			DrawUtil.drawSprite(gc, GameConfig.SPRITE_SIZE * posY - startY, GameConfig.SPRITE_SIZE * posX - startX,
-					gameMap.get(posY, posX).getType());
-			if (gameMap.get(posY, posX).getEntity() instanceof Player)
-				DrawUtil.drawCharacter(gc, GameConfig.SPRITE_SIZE * posY - startY,
-						GameConfig.SPRITE_SIZE * posX - startX, player.getDirection());
-		}
-		*/
+		 * ArrayList<Pair<Integer, Integer>> allVisibleField = new
+		 * ArrayList<Pair<Integer, Integer>>();
+		 * 
+		 * getAllVisibleField(allVisibleField, 3, player.getPosY(), player.getPosX());
+		 * 
+		 * allVisibleField.sort(Comparator.comparing(Pair<Integer,
+		 * Integer>::getKey).thenComparingInt(Pair::getValue));
+		 * 
+		 * for (Pair<Integer, Integer> pos : allVisibleField) { int posX =
+		 * pos.getValue(); int posY = pos.getKey();
+		 * 
+		 * DrawUtil.drawSprite(gc, GameConfig.SPRITE_SIZE * posY - startY,
+		 * GameConfig.SPRITE_SIZE * posX - startX, gameMap.get(posY, posX).getType());
+		 * if (gameMap.get(posY, posX).getEntity() instanceof Player)
+		 * DrawUtil.drawCharacter(gc, GameConfig.SPRITE_SIZE * posY - startY,
+		 * GameConfig.SPRITE_SIZE * posX - startX, player.getDirection()); }
+		 */
 
 		for (int i = startIdxY; i <= endIdxY; i++) {
 			for (int j = startIdxX; j <= endIdxX; j++) {
@@ -196,32 +186,61 @@ public class GameScene {
 	}
 
 	@SuppressWarnings("unused")
-	private void getAllVisibleField(ArrayList<Pair<Integer, Integer>> allPos, int lineOfSight, int level, int posY,
-			int posX) {
-
-		if (lineOfSight < level) {
-			return;
-		}
-
-		if (gameMap.get(posY, posX).getType() == Cell.WALL) {
-			allPos.add(new Pair<Integer, Integer>(posY, posX));
-			return;
-		}
-
-		allPos.add(new Pair<Integer, Integer>(posY, posX));
+	private void getAllVisibleField(ArrayList<Pair<Integer, Integer>> allPos, int lineOfSight, int posY, int posX) {
+		Queue<Pair<Integer, Pair<Integer, Integer>>> queue = new LinkedList<>();
 
 		final int directionArr[][] = { { 0, 1 }, { 0, -1 }, { 1, 0 }, { -1, 0 }, { -1, -1 }, { 1, 1 }, { 1, -1 },
 				{ -1, 1 } };
+		final int directionSz = 8;
 
-		for (int i = 0; i < 8; i++) {
-			int newX = posX + directionArr[i][0];
-			int newY = posY + directionArr[i][1];
+		queue.add(new Pair<>(0, new Pair<>(posY, posX)));
+
+		while (queue.size() != 0) {
+			int level = queue.peek().getKey();
+			int nowY = queue.peek().getValue().getKey();
+			int nowX = queue.peek().getValue().getValue();
+
+			queue.remove();
+
+			if (level > lineOfSight) {
+				continue;
+			}
+
 			boolean found = false;
 
-			if (found)
-				continue;
+			for (Pair<Integer, Integer> each : allPos) {
+				if (each.getKey() == nowY && each.getValue() == nowX) {
+					found = true;
+					break;
+				}
+			}
 
-			getAllVisibleField(allPos, lineOfSight, level + 1, newY, newX);
+			if (found) {
+				continue;
+			}
+
+			allPos.add(new Pair<>(nowY, nowX));
+
+			if (gameMap.get(nowY, nowX).getType() == Cell.WALL) {
+				continue;
+			}
+
+			for (int i = 0; i < directionSz; i++) {
+				int newX = directionArr[i][0] + nowX;
+				int newY = directionArr[i][1] + nowY;
+				if (directionArr[i][0] == 0 || directionArr[i][1] == 0) {
+					queue.add(new Pair<>(level + 1, new Pair<>(newY, newX)));
+				} else {
+					int cellTypeY = gameMap.get(newY, nowX).getType();
+					int cellTypeX = gameMap.get(nowY, newX).getType();
+
+					if (cellTypeY == Cell.WALL && cellTypeX == Cell.WALL) {
+						continue;
+					} else {
+						queue.add(new Pair<>(level + 1, new Pair<>(newY, newX)));
+					}
+				}
+			}
 		}
 	}
 

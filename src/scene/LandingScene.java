@@ -32,13 +32,15 @@ public class LandingScene {
 		grid.setVgap(10);
 		grid.setHgap(10);
 
+		// Title Text
+		
 		Text titleText = new Text("Pixoul");
 		titleText.setFont(new Font("Consolas", 40));
 
 		grid.add(titleText, 0, 0, 3, 2);
 
-		Button startBtn = new Button("Start");
-
+		// Fading animation setup
+		
 		FadeTransition fading = new FadeTransition(Duration.seconds(1.0), grid);
 		fading.setFromValue(1.0);
 		fading.setToValue(0.0);
@@ -47,6 +49,8 @@ public class LandingScene {
 		grid.setCacheShape(true);
 		grid.setCacheHint(CacheHint.DEFAULT);
 		
+		// Start Button
+		Button startBtn = new Button("Start");
 		fading.setOnFinished(new EventHandler<ActionEvent>() {
 
 			@Override
@@ -55,7 +59,7 @@ public class LandingScene {
 				grid.setOpacity(1.0);
 			}
 		});
-
+		
 		startBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
 			@Override
@@ -65,6 +69,8 @@ public class LandingScene {
 
 		});
 
+		// Exit button
+		
 		Button exitBtn = new Button("Exit");
 		exitBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
 

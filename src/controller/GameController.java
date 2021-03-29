@@ -5,6 +5,7 @@ import logic.GameMap;
 
 public class GameController {
 	private ArrayList<GameMap> floorList;
+	private GameMap nowMap;
 	private int level;
 
 	public int getLevel() {
@@ -23,12 +24,22 @@ public class GameController {
 		this.floorList = floorList;
 	}
 	
-	public GameMap getFloor(int floor) {
+	public GameMap moveToFloor(int floor) {
+		return this.getFloor(floor);
+	}
+	
+	private GameMap getFloor(int floor) {
+		if(this.getFloorList().size() <= floor) {
+			this.addNewFloor();
+		}
 		return this.getFloorList().get(floor - 1);
 	}
 	
-	public void addFloor(GameMap newFloor) {
-		this.getFloorList().add(newFloor);
+	private void addNewFloor() {
+		this.getFloorList().add(new GameMap());
 	}
 
+	public void reset() {
+		this.floorList.clear();
+	}
 }

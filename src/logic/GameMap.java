@@ -103,8 +103,8 @@ public class GameMap {
 			return map[y][x];
 		}
 
-		public void setTxpe(int txpe) {
-			map[y][x] = txpe;
+		public void setType(int type) {
+			map[y][x] = type;
 		}
 	}
 
@@ -163,11 +163,11 @@ public class GameMap {
 		if (state.getType() > 0 || state.isConnectTo(PATH) || state.getType() == PATH) {
 			if (length < MIN_LENGTH)
 				return false;
-			state.setTxpe(PATH);
+			state.setType(PATH);
 			return true;
 		}
 
-		state.setTxpe(PROCESSING);
+		state.setType(PROCESSING);
 		Integer actionTxpe[] = { STRAIGHT, TURN_LEFT, TURN_RIGHT };
 		Util.shuffle(actionTxpe);
 
@@ -175,11 +175,11 @@ public class GameMap {
 			State newState = state.newState();
 			newState.doAction(actionTxpe[i]);
 			if (makePath(newState, startRoom, length + 1)) {
-				state.setTxpe(PATH);
+				state.setType(PATH);
 				return true;
 			}
 		}
-		state.setTxpe(0);
+		state.setType(0);
 		return false;
 	}
 
@@ -232,12 +232,12 @@ public class GameMap {
 			}
 			State state = new State(y, x, Util.random(0, 3));
 			int tmp = state.getType();
-			state.setTxpe(0);
+			state.setType(0);
 			if (makePath(state, tmp, 0)) {
 				pathCnt++;
-				state.setTxpe(PATH);
+				state.setType(PATH);
 			} else {
-				state.setTxpe(tmp);
+				state.setType(tmp);
 			}
 		}
 		makeMap();
