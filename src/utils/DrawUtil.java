@@ -24,15 +24,14 @@ public class DrawUtil {
 	private static PixelReader pauseSprites = new Image(ClassLoader.getSystemResource("sprites/pause.png").toString())
 			.getPixelReader();
 
+	private static PixelReader statPaneSprites = new Image(
+			ClassLoader.getSystemResource("sprites/statPane.png").toString()).getPixelReader();
 
-	private static PixelReader statPaneSprites = new Image(ClassLoader.getSystemResource("sprites/statPane.png").toString())
-			.getPixelReader();
-	
 	public static void drawStatPane(GraphicsContext gc) {
 		WritableImage img = new WritableImage(statPaneSprites, 0, 0, 75, 48);
 		gc.drawImage(scaleUp(img), 0, 0);
 	}
-	
+
 	public static void drawBackpack(GraphicsContext gc) {
 		WritableImage img = new WritableImage(backpackSprites, 0, 0, 32, 32);
 		gc.drawImage(scaleUp(img), 0, 0);
@@ -66,7 +65,7 @@ public class DrawUtil {
 		int width = (int) image.getWidth();
 		int height = (int) image.getHeight();
 
-		int z = 2;
+		int z = GameConfig.getScale();
 		IntBuffer src = IntBuffer.allocate(width * height);
 		WritablePixelFormat<IntBuffer> pf = PixelFormat.getIntArgbInstance();
 		image.getPixelReader().getPixels(0, 0, width, height, pf, src, width);

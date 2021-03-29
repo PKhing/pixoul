@@ -67,26 +67,26 @@ public class GameScene {
 		Button inventoryBtn = new Button();
 
 		inventoryBtn.setStyle("-fx-margin:0;-fx-padding:0");
-		inventoryBtn.setPrefHeight(60.0);
-		inventoryBtn.setPrefWidth(60.0);
-		Canvas backpack = new Canvas(64,64);
+		inventoryBtn.setPrefHeight(30.0 * GameConfig.getScale());
+		inventoryBtn.setPrefWidth(30.0 * GameConfig.getScale());
+		Canvas backpack = new Canvas(32 * GameConfig.getScale(), 32 * GameConfig.getScale());
 		DrawUtil.drawBackpack(backpack.getGraphicsContext2D());
 		inventoryBtn.setGraphic(backpack);
 
-		AnchorPane.setBottomAnchor(inventoryBtn, 10.0);
-		AnchorPane.setRightAnchor(inventoryBtn, 10.0);
+		AnchorPane.setBottomAnchor(inventoryBtn, 5.0 * GameConfig.getScale());
+		AnchorPane.setRightAnchor(inventoryBtn, 5.0 * GameConfig.getScale());
 
 		overlay.getChildren().add(inventoryBtn);
 
 		// Pause Button
 		Button pauseBtn = new Button();
 		pauseBtn.setStyle("-fx-margin:0;-fx-padding:0");
-		AnchorPane.setTopAnchor(pauseBtn, 10.0);
-		AnchorPane.setRightAnchor(pauseBtn, 10.0);
-		pauseBtn.setPrefHeight(30.0);
-		pauseBtn.setPrefWidth(30.0);
+		AnchorPane.setTopAnchor(pauseBtn, 5.0 * GameConfig.getScale());
+		AnchorPane.setRightAnchor(pauseBtn, 5.0 * GameConfig.getScale());
+		pauseBtn.setPrefHeight(15.0 * GameConfig.getScale());
+		pauseBtn.setPrefWidth(15.0 * GameConfig.getScale());
 
-		Canvas pause = new Canvas(32,32);
+		Canvas pause = new Canvas(16 * GameConfig.getScale(), 16 * GameConfig.getScale());
 		DrawUtil.drawPause(pause.getGraphicsContext2D());
 		pauseBtn.setGraphic(pause);
 		overlay.getChildren().add(pauseBtn);
@@ -96,17 +96,18 @@ public class GameScene {
 	private void addStatPane(AnchorPane overlay) {
 		statPane = new StackPane();
 
-		Canvas background = new Canvas(150,96);
+		Canvas background = new Canvas(75 * GameConfig.getScale(), 48 * GameConfig.getScale());
 		DrawUtil.drawStatPane(background.getGraphicsContext2D());
-
-		overlay.getChildren().add(statPane);
 		statPane.getChildren().add(background);
-		
+
+		AnchorPane.setTopAnchor(statPane, 0.0);
+		AnchorPane.setLeftAnchor(statPane, 0.0);
+		overlay.getChildren().add(statPane);
+
 		VBox statBox = new VBox();
 		statPane.getChildren().add(statBox);
-		AnchorPane.setTopAnchor(statBox, 0.0);
-		AnchorPane.setLeftAnchor(statBox, 0.0);
-		statBox.setStyle("-fx-padding:20 20 20 30;");
+		statBox.setPadding(new Insets(10*GameConfig.getScale(),10*GameConfig.getScale(),10*GameConfig.getScale(),15*GameConfig.getScale()));
+
 
 		Text hp = new Text("HP : 0 / 10");
 		hp.setFont(Util.getFont());
@@ -119,7 +120,7 @@ public class GameScene {
 		Text defense = new Text("Defense : 0");
 		defense.setFont(Util.getFont());
 		statBox.getChildren().add(defense);
-		
+
 	}
 
 	private void addMessagePane(AnchorPane overlay) {
@@ -128,8 +129,8 @@ public class GameScene {
 		AnchorPane.setBottomAnchor(messagePane, 0.0);
 		AnchorPane.setLeftAnchor(messagePane, 0.0);
 		overlay.getChildren().add(messagePane);
-		messagePane.setPrefHeight(80.0);
-		messagePane.setPrefWidth(200.0);
+		messagePane.setPrefHeight(40.0 * GameConfig.getScale());
+		messagePane.setPrefWidth(100.0 * GameConfig.getScale());
 		messagePane.setStyle("-fx-background-color: rgba(0,0,0, 0.5);-fx-padding:7");
 
 		Text message = new Text("PKhing got salt from gacha");
@@ -142,7 +143,7 @@ public class GameScene {
 	private void addEffectPane(AnchorPane overlay) {
 
 		effectPane = new VBox();
-		AnchorPane.setTopAnchor(effectPane, 50.0);
+		AnchorPane.setTopAnchor(effectPane, 25.0 * GameConfig.getScale());
 		AnchorPane.setRightAnchor(effectPane, 0.0);
 		overlay.getChildren().add(effectPane);
 		effectPane.setStyle("-fx-background-color: rgba(0,0,0, 0.5);-fx-padding:7");
@@ -158,14 +159,16 @@ public class GameScene {
 		gc.setFill(Color.rgb(0, 0, 0));
 		gc.fillRect(0, 0, GameConfig.getScreenWidth(), GameConfig.getScreenHeight());
 
-		int centerY = player.getPosY() * GameConfig.SPRITE_SIZE + GameConfig.SPRITE_SIZE / 2;
-		int centerX = player.getPosX() * GameConfig.SPRITE_SIZE + GameConfig.SPRITE_SIZE / 2;
+		int centerY = player.getPosY() * GameConfig.SPRITE_SIZE * GameConfig.getScale()
+				+ GameConfig.SPRITE_SIZE * GameConfig.getScale() / 2;
+		int centerX = player.getPosX() * GameConfig.SPRITE_SIZE * GameConfig.getScale()
+				+ GameConfig.SPRITE_SIZE * GameConfig.getScale() / 2;
 
 		int startY = centerY - GameConfig.getScreenHeight() / 2;
 		int startX = centerX - GameConfig.getScreenWidth() / 2;
 
-		int maxCellY = GameConfig.getScreenHeight() / GameConfig.SPRITE_SIZE;
-		int maxCellX = GameConfig.getScreenWidth() / GameConfig.SPRITE_SIZE;
+		int maxCellY = GameConfig.getScreenHeight() / (GameConfig.SPRITE_SIZE * GameConfig.getScale());
+		int maxCellX = GameConfig.getScreenWidth() / (GameConfig.SPRITE_SIZE * GameConfig.getScale());
 
 		int startIdxY = Math.max(0, player.getPosY() - maxCellY / 2 - 1);
 		int endIdxY = Math.min(GameConfig.MAP_SIZE, player.getPosY() + maxCellY / 2 + 1);
@@ -194,11 +197,11 @@ public class GameScene {
 
 		for (int i = startIdxY; i <= endIdxY; i++) {
 			for (int j = startIdxX; j <= endIdxX; j++) {
-				DrawUtil.drawCell(gc, GameConfig.SPRITE_SIZE * i - startY, GameConfig.SPRITE_SIZE * j - startX,
-						gameMap.get(i, j));
+				DrawUtil.drawCell(gc, GameConfig.SPRITE_SIZE * GameConfig.getScale() * i - startY,
+						GameConfig.SPRITE_SIZE * GameConfig.getScale() * j - startX, gameMap.get(i, j));
 				if (gameMap.get(i, j).getEntity() instanceof Player)
-					DrawUtil.drawCharacter(gc, GameConfig.SPRITE_SIZE * i - startY, GameConfig.SPRITE_SIZE * j - startX,
-							player.getDirection());
+					DrawUtil.drawCharacter(gc, GameConfig.SPRITE_SIZE * GameConfig.getScale() * i - startY,
+							GameConfig.SPRITE_SIZE * GameConfig.getScale() * j - startX, player.getDirection());
 			}
 		}
 

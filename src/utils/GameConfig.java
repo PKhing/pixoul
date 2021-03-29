@@ -3,6 +3,8 @@ package utils;
 public class GameConfig {
 	private static int screenWidth = 854;
 	private static int screenHeight = 400;
+	private static int scale = 2;
+
 
 	public static final boolean SCREEN_SCALABLE = true;
 	public static final String GAME_TITLE = "Pixoul";
@@ -10,8 +12,8 @@ public class GameConfig {
 
 	public static final int MAP_SIZE = 50;
 	public static final int ROOM_SIZE = 4;
-	public static final int SPRITE_SIZE = 64;
-
+	public static final int SPRITE_SIZE = 32;
+	
 	public static int getScreenWidth() {
 		return screenWidth;
 	}
@@ -26,5 +28,13 @@ public class GameConfig {
 
 	public static void setScreenHeight(int screenHeight) {
 		GameConfig.screenHeight = screenHeight;
+	}
+
+	public static int getScale() {
+		return scale;
+	}
+
+	public static void setScale(int scale) {
+		GameConfig.scale = scale;
 	}
 }

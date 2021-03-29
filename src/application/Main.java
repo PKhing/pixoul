@@ -16,16 +16,19 @@ public class Main extends Application {
 		String iconPath = ClassLoader.getSystemResource("icon.png").toString();
 
 		Rectangle2D screenBound = Screen.getPrimary().getBounds();
-		
-		double rectangleSize = Math.min(screenBound.getMaxX() * GameConfig.SCREEN_SCALING, screenBound.getMaxY() * GameConfig.SCREEN_SCALING);
-		
+
+		double rectangleSize = Math.min(screenBound.getMaxX() * GameConfig.SCREEN_SCALING,
+				screenBound.getMaxY() * GameConfig.SCREEN_SCALING);
+
 		GameConfig.setScreenWidth((int) rectangleSize);
 		GameConfig.setScreenHeight((int) rectangleSize);
-		
+		if (rectangleSize > 1000)
+			GameConfig.setScale(3);
+
 		primaryStage.getIcons().add(new Image(iconPath));
 		primaryStage.setTitle(GameConfig.GAME_TITLE);
 		primaryStage.setResizable(GameConfig.SCREEN_SCALABLE);
-		
+
 		SceneController.setMainStage(primaryStage);
 		SceneController.setSceneToStage(LandingScene.getScene());
 

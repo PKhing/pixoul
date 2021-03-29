@@ -17,7 +17,7 @@ public class Util {
 
 	public static Font getFont() {
 		if(font==null) {
-			font = Font.loadFont(ClassLoader.getSystemResource("font.ttf").toString(), 25);
+			font = Font.loadFont(ClassLoader.getSystemResource("font.ttf").toString(), 12*GameConfig.getScale());
 		}
 		return font;
 	}
