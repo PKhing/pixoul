@@ -13,7 +13,7 @@ public class Main extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		String iconPath = ClassLoader.getSystemResource("icon.png").toString();
+		String iconPath = ClassLoader.getSystemResource(GameConfig.ICON_NAME).toString();
 
 		Rectangle2D screenBound = Screen.getPrimary().getBounds();
 
@@ -22,7 +22,7 @@ public class Main extends Application {
 
 		GameConfig.setScreenWidth((int) rectangleSize);
 		GameConfig.setScreenHeight((int) rectangleSize);
-		if (rectangleSize > 1000)
+		if (rectangleSize > GameConfig.SCREEN_RESPONSIVE)
 			GameConfig.setScale(3);
 
 		primaryStage.getIcons().add(new Image(iconPath));

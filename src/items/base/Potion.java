@@ -10,7 +10,8 @@ public abstract class Potion extends Item {
 		setDuration(duration);
 	}
 	
-	public abstract void used(Player player);
+	public abstract void onUsed(Player player);
+	public abstract void onWearOff(Player player);
 
 	public int getDuration() {
 		return duration;

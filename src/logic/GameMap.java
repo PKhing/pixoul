@@ -1,8 +1,6 @@
 package logic;
 
 import java.util.ArrayList;
-import java.util.Random;
-
 import javafx.util.Pair;
 import utils.GameConfig;
 import utils.Util;

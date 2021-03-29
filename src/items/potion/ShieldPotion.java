@@ -11,15 +11,20 @@ public class ShieldPotion extends Potion {
 	}
 
 	@Override
-	public void used(Player player) {
+	public void onUsed(Player player) {
 		// TODO Auto-generated method stub
 		
 	}
-
+	
+	@Override
+	public void onWearOff(Player player) {
+		// TODO Auto-generated method stub
+		
+	}
+	
 	@Override
 	public int getSymbol() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
 }

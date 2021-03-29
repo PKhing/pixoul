@@ -1,7 +1,6 @@
 package scene;
 
 import controller.GameController;
-import controller.SceneController;
 import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -12,15 +11,20 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
+import utils.GameAudioUtils;
 import utils.GameConfig;
 
 public class LandingScene {
 	private static Scene cachedScene = null;
-
+	private static MediaPlayer bgm = GameAudioUtils.getLandingSceneAudio();
+	
 	public static Scene getScene() {
+		bgm.play();
+		
 		if (cachedScene != null) {
 			return cachedScene;
 		}
@@ -56,6 +60,8 @@ public class LandingScene {
 
 			@Override
 			public void handle(ActionEvent arg0) {
+				bgm.stop();
+				bgm.seek(Duration.ZERO);
 				GameController.start();
 				grid.setOpacity(1.0);
 			}
@@ -87,6 +93,7 @@ public class LandingScene {
 
 		Scene scene = new Scene(grid, GameConfig.getScreenWidth(), GameConfig.getScreenHeight());
 		cachedScene = scene;
+		
 		return scene;
 	}
 

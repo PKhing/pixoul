@@ -12,6 +12,9 @@ public abstract class Weapon extends Item {
 		setAtkSpeed(atkSpeed);
 	}
 
+	public abstract void onEquip(Player player);
+	public abstract void onDeequip(Player player);
+	
 	public int getAtk() {
 		return atk;
 	}
@@ -27,7 +30,4 @@ public abstract class Weapon extends Item {
 	public void setAtkSpeed(int atkSpeed) {
 		this.atkSpeed = atkSpeed;
 	}
-	
-	public abstract void onEquip(Player player);
-	public abstract void onDeequip(Player player);
 }

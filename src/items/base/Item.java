@@ -10,7 +10,7 @@ public abstract class Item {
 	}
 	
 	public abstract int getSymbol();
-
+	
 	public String getDescription() {
 		return description;
 	}

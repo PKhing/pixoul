@@ -2,14 +2,12 @@ package scene;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.Queue;
 
 import controller.SceneController;
 import entity.Player;
 import javafx.geometry.Insets;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -35,7 +33,7 @@ public class GameScene {
 	private StackPane statPane;
 	private VBox messagePane;
 	private VBox effectPane;
-
+	
 	public GameScene() {
 		gameMap = new GameMap();
 		gameMap.printMap();
@@ -90,7 +88,6 @@ public class GameScene {
 		DrawUtil.drawPause(pause.getGraphicsContext2D());
 		pauseBtn.setGraphic(pause);
 		overlay.getChildren().add(pauseBtn);
-
 	}
 
 	private void addStatPane(AnchorPane overlay) {
@@ -177,7 +174,8 @@ public class GameScene {
 		int endIdxX = Math.min(GameConfig.MAP_SIZE, player.getPosX() + maxCellX / 2 + 1);
 
 		/*
-		 * Uncomment when game is ready ArrayList<Pair<Integer, Integer>>
+		 * Uncomment when game is ready 
+		 * ArrayList<Pair<Integer, Integer>>
 		 * allVisibleField = new ArrayList<Pair<Integer, Integer>>();
 		 * 
 		 * getAllVisibleField(allVisibleField, 3, player.getPosY(), player.getPosX());
@@ -283,6 +281,8 @@ public class GameScene {
 			case S:
 				player.move(gameMap, Direction.DOWN);
 				break;
+			case SPACE:
+				break;
 			case ESCAPE:
 				SceneController.setSceneToStage(LandingScene.getScene());
 				isDraw = false;
@@ -309,4 +309,5 @@ public class GameScene {
 	public Scene getScene() {
 		return scene;
 	}
+	
 }

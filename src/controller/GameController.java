@@ -2,18 +2,19 @@ package controller;
 
 import java.util.ArrayList;
 
-import components.GameAudio;
+import exception.InvalidFloorException;
 import javafx.scene.media.MediaPlayer;
 import scene.GameScene;
+import utils.GameAudioUtils;
 
 public class GameController {
 	private static ArrayList<GameScene> floorList = new ArrayList<>();
-	private static MediaPlayer bgmMedia = GameAudio.getGameSceneAudioLoop();
+	private static MediaPlayer bgmMedia = GameAudioUtils.getGameSceneAudioLoop();
 	private static int level;
 	
-	private static GameScene getFloor(int floor) {
-		if(floorList.size() <= floor) {
-			addNewFloor();
+	private static GameScene getFloor(int floor) throws InvalidFloorException {
+		if(floorList.size() < floor) {
+			throw new InvalidFloorException();
 		}
 		return floorList.get(floor - 1);
 	}
@@ -33,7 +34,13 @@ public class GameController {
 	
 	public static void start() {
 		reset();
-		SceneController.setSceneToStage(getFloor(level).getScene());
+		try {
+			addNewFloor();
+			SceneController.setSceneToStage(getFloor(level).getScene());
+		} catch (InvalidFloorException e) {
+			e.printStackTrace();
+			return;
+		}
 		bgmMedia.play();
 	}
 }
