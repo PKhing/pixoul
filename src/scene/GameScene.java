@@ -6,7 +6,6 @@ import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.Queue;
 
-import components.InventoryButton;
 import controller.SceneController;
 import entity.Player;
 import javafx.geometry.Insets;
@@ -20,6 +19,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import utils.GameConfig;
+import utils.Util;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.util.Pair;
@@ -94,12 +94,15 @@ public class GameScene {
 		statPane.setStyle("-fx-background-color:gray;-fx-padding:10");
 
 		Text hp = new Text("HP : 0 / 10");
+		hp.setFont(Util.getFont());
 		statPane.getChildren().add(hp);
 
 		Text attack = new Text("Attack : 0");
+		attack.setFont(Util.getFont());
 		statPane.getChildren().add(attack);
 
 		Text defense = new Text("Defense : 0");
+		defense.setFont(Util.getFont());
 		statPane.getChildren().add(defense);
 	}
 
@@ -114,6 +117,7 @@ public class GameScene {
 		messagePane.setStyle("-fx-background-color: rgba(0,0,0, 0.5);-fx-padding:7");
 
 		Text message = new Text("PKhing got salt from gacha");
+		message.setFont(Util.getFont());
 		message.setFill(Color.WHITE);
 		messagePane.getChildren().add(message);
 
@@ -128,6 +132,7 @@ public class GameScene {
 		effectPane.setStyle("-fx-background-color: rgba(0,0,0, 0.5);-fx-padding:7");
 
 		Text message = new Text("Salt effect : inf");
+		message.setFont(Util.getFont());
 		message.setFill(Color.WHITE);
 		effectPane.getChildren().add(message);
 
