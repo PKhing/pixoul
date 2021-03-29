@@ -18,6 +18,31 @@ public class DrawUtil {
 	private static PixelReader playerSprites = new Image(ClassLoader.getSystemResource("sprites/player.png").toString())
 			.getPixelReader();
 
+	private static PixelReader backpackSprites = new Image(
+			ClassLoader.getSystemResource("sprites/backpack.png").toString()).getPixelReader();
+
+	private static PixelReader pauseSprites = new Image(ClassLoader.getSystemResource("sprites/pause.png").toString())
+			.getPixelReader();
+
+
+	private static PixelReader statPaneSprites = new Image(ClassLoader.getSystemResource("sprites/statPane.png").toString())
+			.getPixelReader();
+	
+	public static void drawStatPane(GraphicsContext gc) {
+		WritableImage img = new WritableImage(statPaneSprites, 0, 0, 75, 48);
+		gc.drawImage(scaleUp(img), 0, 0);
+	}
+	
+	public static void drawBackpack(GraphicsContext gc) {
+		WritableImage img = new WritableImage(backpackSprites, 0, 0, 32, 32);
+		gc.drawImage(scaleUp(img), 0, 0);
+	}
+
+	public static void drawPause(GraphicsContext gc) {
+		WritableImage img = new WritableImage(pauseSprites, 0, 0, 16, 16);
+		gc.drawImage(scaleUp(img), 0, 0);
+	}
+
 	public static void drawCell(GraphicsContext gc, int y, int x, Cell cell) {
 		if (cell.getType() != Cell.VOID) {
 			WritableImage img = new WritableImage(wallSprites, cell.getSymbol() * 32, 0, 32, 40);

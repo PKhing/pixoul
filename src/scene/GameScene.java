@@ -32,7 +32,7 @@ public class GameScene {
 	private GameMap gameMap;
 	private Scene scene;
 	private Player player;
-	private VBox statPane;
+	private StackPane statPane;
 	private VBox messagePane;
 	private VBox effectPane;
 
@@ -65,9 +65,13 @@ public class GameScene {
 
 		// Inventory Button
 		Button inventoryBtn = new Button();
-		inventoryBtn.setText("Salty\ninventory");
+
+		inventoryBtn.setStyle("-fx-margin:0;-fx-padding:0");
 		inventoryBtn.setPrefHeight(60.0);
 		inventoryBtn.setPrefWidth(60.0);
+		Canvas backpack = new Canvas(64,64);
+		DrawUtil.drawBackpack(backpack.getGraphicsContext2D());
+		inventoryBtn.setGraphic(backpack);
 
 		AnchorPane.setBottomAnchor(inventoryBtn, 10.0);
 		AnchorPane.setRightAnchor(inventoryBtn, 10.0);
@@ -75,35 +79,47 @@ public class GameScene {
 		overlay.getChildren().add(inventoryBtn);
 
 		// Pause Button
-		Button pause = new Button();
-		pause.setText("||");
-		AnchorPane.setTopAnchor(pause, 10.0);
-		AnchorPane.setRightAnchor(pause, 10.0);
-		pause.setPrefHeight(30.0);
-		pause.setPrefWidth(30.0);
-		overlay.getChildren().add(pause);
+		Button pauseBtn = new Button();
+		pauseBtn.setStyle("-fx-margin:0;-fx-padding:0");
+		AnchorPane.setTopAnchor(pauseBtn, 10.0);
+		AnchorPane.setRightAnchor(pauseBtn, 10.0);
+		pauseBtn.setPrefHeight(30.0);
+		pauseBtn.setPrefWidth(30.0);
+
+		Canvas pause = new Canvas(32,32);
+		DrawUtil.drawPause(pause.getGraphicsContext2D());
+		pauseBtn.setGraphic(pause);
+		overlay.getChildren().add(pauseBtn);
 
 	}
 
 	private void addStatPane(AnchorPane overlay) {
+		statPane = new StackPane();
 
-		statPane = new VBox();
-		AnchorPane.setTopAnchor(statPane, 0.0);
-		AnchorPane.setLeftAnchor(statPane, 0.0);
+		Canvas background = new Canvas(150,96);
+		DrawUtil.drawStatPane(background.getGraphicsContext2D());
+
 		overlay.getChildren().add(statPane);
-		statPane.setStyle("-fx-background-color:gray;-fx-padding:10");
+		statPane.getChildren().add(background);
+		
+		VBox statBox = new VBox();
+		statPane.getChildren().add(statBox);
+		AnchorPane.setTopAnchor(statBox, 0.0);
+		AnchorPane.setLeftAnchor(statBox, 0.0);
+		statBox.setStyle("-fx-padding:20 20 20 30;");
 
 		Text hp = new Text("HP : 0 / 10");
 		hp.setFont(Util.getFont());
-		statPane.getChildren().add(hp);
+		statBox.getChildren().add(hp);
 
 		Text attack = new Text("Attack : 0");
 		attack.setFont(Util.getFont());
-		statPane.getChildren().add(attack);
+		statBox.getChildren().add(attack);
 
 		Text defense = new Text("Defense : 0");
 		defense.setFont(Util.getFont());
-		statPane.getChildren().add(defense);
+		statBox.getChildren().add(defense);
+		
 	}
 
 	private void addMessagePane(AnchorPane overlay) {
