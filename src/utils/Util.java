@@ -36,4 +36,10 @@ public class Util {
 		intList.toArray(intArray);
 
 	}
+	
+	public static void shuffle(int[][] array) {
+		List<int[]> list = Arrays.asList(array);
+		Collections.shuffle(list);
+		list.toArray(array);
+	}
 }

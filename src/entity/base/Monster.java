@@ -1,6 +1,8 @@
 package entity.base;
 
+import java.util.Arrays;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 import controller.GameController;
@@ -8,6 +10,7 @@ import entity.Player;
 import javafx.util.Pair;
 import logic.Cell;
 import utils.GameConfig;
+import utils.Util;
 
 public abstract class Monster extends Entity {
 	@SuppressWarnings("unchecked")
@@ -40,8 +43,9 @@ public abstract class Monster extends Entity {
 
 	private Pair<Integer, Integer> bfs() {
 
-		final int move[][] = { { 0, 1 }, { 0, -1 }, { 1, 0 }, { -1, 0 } };
-
+		int move[][] = { { 0, 1 }, { 0, -1 }, { 1, 0 }, { -1, 0 } };
+		Util.shuffle(move);
+		
 		Queue<Pair<Integer, Pair<Integer, Integer>>> queue = new LinkedList<>();
 		queue.add(new Pair<>(0, new Pair<>(this.getPosY(), this.getPosX())));
 

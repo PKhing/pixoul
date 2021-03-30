@@ -20,8 +20,8 @@ public class Skeleton extends Monster implements Moveable, Attackable {
 
 	@Override
 	public void update() {
-		if (Math.abs(GameController.getPlayer().getPosX() - getPosX()) == 1
-				|| Math.abs(GameController.getPlayer().getPosY() - getPosY()) == 1) {
+		if (Math.abs(GameController.getPlayer().getPosX() - getPosX()) <= 1
+				&& Math.abs(GameController.getPlayer().getPosY() - getPosY()) <= 1) {
 			attack();
 		}
 		else {
@@ -29,16 +29,16 @@ public class Skeleton extends Monster implements Moveable, Attackable {
 			int newY = newPos.getKey();
 			int newX = newPos.getValue();
 			if(newY-this.getPosY()==1) {
-				this.move(Direction.RIGHT);
+				this.move(Direction.DOWN);
 			}
 			if(newY-this.getPosY()==-1) {
-				this.move(Direction.LEFT);
-			}
-			if(newX-this.getPosX()==-1) {
 				this.move(Direction.UP);
 			}
-			if(newY-this.getPosY()==-1) {
-				this.move(Direction.DOWN);
+			if(newX-this.getPosX()==-1) {
+				this.move(Direction.LEFT);
+			}
+			if(newX-this.getPosX()==1) {
+				this.move(Direction.RIGHT);
 			}
 		}
 	}
