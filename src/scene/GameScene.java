@@ -9,12 +9,12 @@ import components.EffectPane;
 import components.InventoryPane;
 import components.MessagePane;
 import components.StatusPane;
+import components.PauseBox;
+import controller.GameController;
 import controller.SceneController;
 import entity.Player;
-import items.base.Potion;
 import items.potion.HealingPotion;
 import javafx.event.EventHandler;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -25,11 +25,8 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import utils.GameConfig;
-import utils.Util;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
 import javafx.util.Pair;
 import logic.Cell;
 import logic.Direction;
@@ -44,6 +41,7 @@ public class GameScene {
 	private MessagePane messagePane;
 	private EffectPane effectPane;
 	private InventoryPane inventoryPane;
+	private PauseBox pauseBox;
 
 	public GameScene() {
 		gameMap = new GameMap();
@@ -59,7 +57,7 @@ public class GameScene {
 
 		Collections.shuffle(roomList);
 		player = new Player(roomList.get(0).getKey(), roomList.get(0).getValue(), gameMap);
-		player.usePotion(new HealingPotion("Salty Potion","With 100 years salt effect",10,100));
+		player.usePotion(new HealingPotion("Salty Potion", "With 100 years salt effect", 10, 100));
 
 		root.getChildren().add(canvas);
 		drawMap(gc);
@@ -78,7 +76,7 @@ public class GameScene {
 
 		// Inventory Button
 		Button inventoryBtn = new Button();
-		
+
 		inventoryBtn.setStyle("-fx-margin:0;-fx-padding:0");
 		inventoryBtn.setPrefHeight(30.0 * GameConfig.getScale());
 		inventoryBtn.setPrefWidth(30.0 * GameConfig.getScale());
@@ -105,33 +103,38 @@ public class GameScene {
 		pauseBtn.setPrefHeight(15.0 * GameConfig.getScale());
 		pauseBtn.setPrefWidth(15.0 * GameConfig.getScale());
 
+		pauseBtn.setOnMouseClicked((event) -> {
+			PauseBox newPause = new PauseBox();
+			root.getChildren().add(newPause);
+			newPause.requestFocus();
+		});
+
 		Canvas pause = new Canvas(16 * GameConfig.getScale(), 16 * GameConfig.getScale());
 		DrawUtil.drawPause(pause.getGraphicsContext2D());
 		pauseBtn.setGraphic(pause);
 		overlay.getChildren().add(pauseBtn);
 
 		inventoryPane = new InventoryPane();
+		pauseBox = new PauseBox();
+		
 		StackPane.setAlignment(new Group(inventoryPane), Pos.CENTER);
-		
-		
-	
-
+		StackPane.setAlignment(new Group(pauseBox), Pos.CENTER);
 	}
 
 	private void drawMap(GraphicsContext gc) {
 		gc.setFill(Color.rgb(0, 0, 0));
 		gc.fillRect(0, 0, GameConfig.getScreenWidth(), GameConfig.getScreenHeight());
 
-		int centerY = player.getPosY() * GameConfig.SPRITE_SIZE * GameConfig.getScale()
-				+ GameConfig.SPRITE_SIZE * GameConfig.getScale() / 2;
-		int centerX = player.getPosX() * GameConfig.SPRITE_SIZE * GameConfig.getScale()
-				+ GameConfig.SPRITE_SIZE * GameConfig.getScale() / 2;
+		int newSpriteSize = GameConfig.SPRITE_SIZE * GameConfig.getScale();
+
+		int centerY = player.getPosY() * newSpriteSize + GameConfig.SPRITE_SIZE * GameConfig.getScale() / 2;
+		int centerX = player.getPosX() * newSpriteSize + GameConfig.SPRITE_SIZE * GameConfig.getScale() / 2;
 
 		int startY = centerY - GameConfig.getScreenHeight() / 2;
 		int startX = centerX - GameConfig.getScreenWidth() / 2;
 
-		int maxCellY = GameConfig.getScreenHeight() / (GameConfig.SPRITE_SIZE * GameConfig.getScale());
-		int maxCellX = GameConfig.getScreenWidth() / (GameConfig.SPRITE_SIZE * GameConfig.getScale());
+		int maxCellY = GameConfig.getScreenHeight() / (newSpriteSize);
+		int maxCellX = GameConfig.getScreenWidth() / (newSpriteSize);
 
 		int startIdxY = Math.max(0, player.getPosY() - maxCellY / 2 - 1);
 		int endIdxY = Math.min(GameConfig.MAP_SIZE, player.getPosY() + maxCellY / 2 + 1);
@@ -139,32 +142,30 @@ public class GameScene {
 		int startIdxX = Math.max(0, player.getPosX() - maxCellX / 2 - 1);
 		int endIdxX = Math.min(GameConfig.MAP_SIZE, player.getPosX() + maxCellX / 2 + 1);
 
-		/*
-		 * Uncomment when game is ready ArrayList<Pair<Integer, Integer>>
-		 * allVisibleField = new ArrayList<Pair<Integer, Integer>>();
-		 * 
-		 * getAllVisibleField(allVisibleField, 3, player.getPosY(), player.getPosX());
-		 * 
-		 * allVisibleField.sort(Comparator.comparing(Pair<Integer,
-		 * Integer>::getKey).thenComparingInt(Pair::getValue));
-		 * 
-		 * for (Pair<Integer, Integer> pos : allVisibleField) { int posX =
-		 * pos.getValue(); int posY = pos.getKey();
-		 * 
-		 * DrawUtil.drawSprite(gc, GameConfig.SPRITE_SIZE * posY - startY,
-		 * GameConfig.SPRITE_SIZE * posX - startX, gameMap.get(posY, posX).getType());
-		 * if (gameMap.get(posY, posX).getEntity() instanceof Player)
-		 * DrawUtil.drawCharacter(gc, GameConfig.SPRITE_SIZE * posY - startY,
-		 * GameConfig.SPRITE_SIZE * posX - startX, player.getDirection()); }
-		 */
+//		Uncomment when game is ready 
+//		ArrayList<Pair<Integer, Integer>> allVisibleField = new ArrayList<Pair<Integer, Integer>>();
+//
+//		getAllVisibleField(allVisibleField, 3, player.getPosY(), player.getPosX());
+//
+//		allVisibleField.sort(Comparator.comparing(Pair<Integer, Integer>::getKey).thenComparingInt(Pair::getValue));
+//
+//		for (Pair<Integer, Integer> pos : allVisibleField) {
+//			int posX = pos.getValue();
+//			int posY = pos.getKey();
+//
+//			DrawUtil.drawCell(gc, newSpriteSize * posY - startY,
+//					newSpriteSize * posX - startX, gameMap.get(posY, posX));
+//			if (gameMap.get(posY, posX).getEntity() instanceof Player)
+//				DrawUtil.drawCharacter(gc, newSpriteSize * posY - startY,
+//						newSpriteSize * posX - startX, player.getDirection());
+//		}
 
 		for (int i = startIdxY; i <= endIdxY; i++) {
 			for (int j = startIdxX; j <= endIdxX; j++) {
-				DrawUtil.drawCell(gc, GameConfig.SPRITE_SIZE * GameConfig.getScale() * i - startY,
-						GameConfig.SPRITE_SIZE * GameConfig.getScale() * j - startX, gameMap.get(i, j));
+				DrawUtil.drawCell(gc, newSpriteSize * i - startY, newSpriteSize * j - startX, gameMap.get(i, j));
 				if (gameMap.get(i, j).getEntity() instanceof Player)
-					DrawUtil.drawCharacter(gc, GameConfig.SPRITE_SIZE * GameConfig.getScale() * i - startY,
-							GameConfig.SPRITE_SIZE * GameConfig.getScale() * j - startX, player.getDirection());
+					DrawUtil.drawCharacter(gc, newSpriteSize * i - startY, newSpriteSize * j - startX,
+							player.getDirection());
 			}
 		}
 
@@ -249,6 +250,7 @@ public class GameScene {
 			case SPACE:
 				break;
 			case ESCAPE:
+				GameController.exit();
 				SceneController.setSceneToStage(LandingScene.getScene());
 				isDraw = false;
 				break;

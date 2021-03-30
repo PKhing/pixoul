@@ -5,11 +5,12 @@ import java.util.ArrayList;
 import exception.InvalidFloorException;
 import javafx.scene.media.MediaPlayer;
 import scene.GameScene;
+import scene.LandingScene;
 import utils.GameAudioUtils;
 
 public class GameController {
 	private static ArrayList<GameScene> floorList = new ArrayList<>();
-	private static MediaPlayer bgmMedia = GameAudioUtils.getGameSceneAudioLoop();
+	private static MediaPlayer bgmMedia = GameAudioUtils.GameSceneBGM;
 	private static int level;
 
 	private static GameScene getFloor(int floor) throws InvalidFloorException {
@@ -65,6 +66,7 @@ public class GameController {
 
 	public static void exit() {
 		bgmMedia.stop();
+		SceneController.setSceneToStage(LandingScene.getScene());
 	}
 	
 	public static void gameover() {

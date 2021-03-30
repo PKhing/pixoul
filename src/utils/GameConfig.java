@@ -4,7 +4,8 @@ public class GameConfig {
 	private static int screenWidth = 854;
 	private static int screenHeight = 400;
 	private static int scale = 2;
-
+	private static double volume = 1.0;
+	
 	public static final int SCREEN_RESPONSIVE = 864;
 	public static final boolean SCREEN_SCALABLE = true;
 	public static final String GAME_TITLE = "Pixoul";
@@ -38,5 +39,13 @@ public class GameConfig {
 
 	public static void setScale(int scale) {
 		GameConfig.scale = scale;
+	}
+
+	public static double getVolume() {
+		return volume;
+	}
+
+	public static void setVolume(double volume) {
+		GameConfig.volume = volume;
 	}
 }

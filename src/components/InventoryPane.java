@@ -4,11 +4,8 @@ import java.util.ArrayList;
 
 import items.base.Item;
 import javafx.event.EventHandler;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.control.Button;
-import javafx.scene.image.Image;
 import javafx.scene.image.PixelReader;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
@@ -46,8 +43,7 @@ public class InventoryPane extends FlowPane {
 
 		Canvas canvas = new Canvas(40 * GameConfig.getScale(), 40 * GameConfig.getScale());
 		this.getChildren().add(canvas);
-		PixelReader headerSprite = new Image(ClassLoader.getSystemResource("sprites/inventory/item.png").toString())
-				.getPixelReader();
+		PixelReader headerSprite = DrawUtil.getImagePixelReader("sprites/inventory/item.png");
 		WritableImage img = new WritableImage(headerSprite, 0, 0, 40, 40);
 		canvas.getGraphicsContext2D().drawImage(DrawUtil.scaleUp(img), 0, 0);
 	}
@@ -60,8 +56,7 @@ public class InventoryPane extends FlowPane {
 		// Texture
 		Canvas canvas = new Canvas(160 * GameConfig.getScale(), 40 * GameConfig.getScale());
 		header.getChildren().add(canvas);
-		PixelReader headerSprite = new Image(ClassLoader.getSystemResource("sprites/inventory/header.png").toString())
-				.getPixelReader();
+		PixelReader headerSprite = DrawUtil.getImagePixelReader("sprites/inventory/header.png");
 		WritableImage img = new WritableImage(headerSprite, 0, 0, 160, 40);
 		canvas.getGraphicsContext2D().drawImage(DrawUtil.scaleUp(img), 0, 0);
 

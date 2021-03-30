@@ -7,13 +7,8 @@ import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 
 public class GameAudioUtils {
-	public static MediaPlayer getGameSceneAudioLoop() {
-		return getAudioLoop("bgm/BGMDungeon.mp3", 0.1);
-	}
-	
-	public static MediaPlayer getLandingSceneAudio() {
-		return getAudioLoop("bgm/BGMMainScene.mp3", 0.35);
-	}
+	public static MediaPlayer GameSceneBGM = getAudioLoop("bgm/BGMDungeon.mp3", GameConfig.getVolume());
+	public static MediaPlayer LandingSceneBGM = getAudioLoop("bgm/BGMMainScene.mp3", GameConfig.getVolume());
 	
 	private static MediaPlayer getAudioLoop(String filePath, double volumes) {
 		URL resource = ClassLoader.getSystemResource(filePath);
@@ -29,5 +24,10 @@ public class GameAudioUtils {
 
 		player.setVolume(volumes);
 		return player;
+	}
+	
+	public static void updateBGMVolume() {
+		GameSceneBGM.setVolume(GameConfig.getVolume());
+		LandingSceneBGM.setVolume(GameConfig.getVolume());
 	}
 }

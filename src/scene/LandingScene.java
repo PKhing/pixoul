@@ -1,5 +1,6 @@
 package scene;
 
+import components.OptionBox;
 import controller.GameController;
 import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
@@ -11,16 +12,20 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.shape.Box;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 import utils.GameAudioUtils;
 import utils.GameConfig;
+import utils.Util;
 
 public class LandingScene {
 	private static Scene cachedScene = null;
-	private static MediaPlayer bgm = GameAudioUtils.getLandingSceneAudio();
+	private static MediaPlayer bgm = GameAudioUtils.LandingSceneBGM;
 	
 	public static Scene getScene() {
 		bgm.play();
@@ -28,31 +33,30 @@ public class LandingScene {
 		if (cachedScene != null) {
 			return cachedScene;
 		}
+		
+		StackPane root = new StackPane();
+		VBox box = new VBox();
 
-		GridPane grid = new GridPane();
+		box.setAlignment(Pos.CENTER);
 
-		grid.setAlignment(Pos.CENTER);
-
-		grid.setPadding(new Insets(25, 25, 25, 25));
-		grid.setVgap(10);
-		grid.setHgap(10);
+		box.setPadding(new Insets(25, 25, 25, 25));
 
 		// Title Text
 		
 		Text titleText = new Text("Pixoul");
-		titleText.setFont(new Font("Consolas", 40));
+		titleText.setFont(Util.getLargeFont());
 
-		grid.add(titleText, 0, 0, 3, 2);
+		box.getChildren().add(titleText);
 
 		// Fading animation setup
 		
-		FadeTransition fading = new FadeTransition(Duration.seconds(1.0), grid);
+		FadeTransition fading = new FadeTransition(Duration.seconds(1.0), box);
 		fading.setFromValue(1.0);
 		fading.setToValue(0.0);
 
-		grid.setCache(true);
-		grid.setCacheShape(true);
-		grid.setCacheHint(CacheHint.DEFAULT);
+		box.setCache(true);
+		box.setCacheShape(true);
+		box.setCacheHint(CacheHint.DEFAULT);
 		
 		// Start Button
 		Button startBtn = new Button("Start");
@@ -63,7 +67,7 @@ public class LandingScene {
 				bgm.stop();
 				bgm.seek(Duration.ZERO);
 				GameController.start();
-				grid.setOpacity(1.0);
+				box.setOpacity(1.0);
 			}
 		});
 		
@@ -77,6 +81,17 @@ public class LandingScene {
 		});
 
 		// Exit button
+		Button optionBtn = new Button("Option");
+		optionBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent arg0) {
+				OptionBox optionBox = new OptionBox();
+				root.getChildren().add(optionBox);
+				optionBox.requestFocus();
+			};
+
+		});
 		
 		Button exitBtn = new Button("Exit");
 		exitBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -88,10 +103,13 @@ public class LandingScene {
 
 		});
 
-		grid.add(startBtn, 0, 3);
-		grid.add(exitBtn, 1, 3);
+		box.getChildren().add(startBtn);
+		box.getChildren().add(optionBtn);
+		box.getChildren().add(exitBtn);
 
-		Scene scene = new Scene(grid, GameConfig.getScreenWidth(), GameConfig.getScreenHeight());
+		root.getChildren().add(box);
+		
+		Scene scene = new Scene(root, GameConfig.getScreenWidth(), GameConfig.getScreenHeight());
 		cachedScene = scene;
 		
 		return scene;
