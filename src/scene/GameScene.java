@@ -8,6 +8,7 @@ import components.PausePane;
 import controller.GameController;
 import controller.SceneController;
 import entity.Player;
+import entity.base.Monster;
 import items.potion.HealingPotion;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -39,6 +40,7 @@ public class GameScene {
 		GameController.setGameMap(new GameMap());
 		GameController.getPlayer().setInitialPos(GameController.getRoomList().get(0).getKey(),
 				GameController.getRoomList().get(0).getValue());
+		
 		GameController.getPlayer().usePotion(new HealingPotion("Salty Potion", "With 100 years salt effect", 10, 100));
 
 		StackPane root = new StackPane();
