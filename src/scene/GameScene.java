@@ -6,6 +6,8 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 import components.InventoryPane;
+import components.MessagePane;
+import components.StatusPane;
 import controller.SceneController;
 import entity.Player;
 import javafx.event.EventHandler;
@@ -35,11 +37,11 @@ public class GameScene {
 	private GameMap gameMap;
 	private Scene scene;
 	private Player player;
-	private StackPane statPane;
-	private VBox messagePane;
+	private StackPane statusPane;
+	private MessagePane messagePane;
 	private VBox effectPane;
 	private InventoryPane inventoryPane;
-	
+
 	public GameScene() {
 		gameMap = new GameMap();
 		gameMap.printMap();
@@ -62,8 +64,10 @@ public class GameScene {
 
 		// Overlay
 		AnchorPane overlay = new AnchorPane();
-		addStatPane(overlay);
-		addMessagePane(overlay);
+		statusPane = new StatusPane();
+		overlay.getChildren().add(statusPane);
+		messagePane = new MessagePane();
+		overlay.getChildren().add(messagePane);
 		addEffectPane(overlay);
 		root.getChildren().add(overlay);
 
@@ -100,57 +104,9 @@ public class GameScene {
 		DrawUtil.drawPause(pause.getGraphicsContext2D());
 		pauseBtn.setGraphic(pause);
 		overlay.getChildren().add(pauseBtn);
-		
+
 		inventoryPane = new InventoryPane();
 		StackPane.setAlignment(new Group(inventoryPane), Pos.CENTER);
-		
-		
-	}
-
-	private void addStatPane(AnchorPane overlay) {
-		statPane = new StackPane();
-
-		Canvas background = new Canvas(75 * GameConfig.getScale(), 48 * GameConfig.getScale());
-		DrawUtil.drawStatPane(background.getGraphicsContext2D());
-		statPane.getChildren().add(background);
-
-		AnchorPane.setTopAnchor(statPane, 0.0);
-		AnchorPane.setLeftAnchor(statPane, 0.0);
-		overlay.getChildren().add(statPane);
-
-		VBox statBox = new VBox();
-		statPane.getChildren().add(statBox);
-		statBox.setPadding(new Insets(10*GameConfig.getScale(),10*GameConfig.getScale(),10*GameConfig.getScale(),15*GameConfig.getScale()));
-
-
-		Text hp = new Text("HP : 0 / 10");
-		hp.setFont(Util.getFont());
-		statBox.getChildren().add(hp);
-
-		Text attack = new Text("Attack : 0");
-		attack.setFont(Util.getFont());
-		statBox.getChildren().add(attack);
-
-		Text defense = new Text("Defense : 0");
-		defense.setFont(Util.getFont());
-		statBox.getChildren().add(defense);
-
-	}
-
-	private void addMessagePane(AnchorPane overlay) {
-
-		messagePane = new VBox();
-		AnchorPane.setBottomAnchor(messagePane, 0.0);
-		AnchorPane.setLeftAnchor(messagePane, 0.0);
-		overlay.getChildren().add(messagePane);
-		messagePane.setPrefHeight(40.0 * GameConfig.getScale());
-		messagePane.setPrefWidth(100.0 * GameConfig.getScale());
-		messagePane.setStyle("-fx-background-color: rgba(0,0,0, 0.5);-fx-padding:7");
-
-		Text message = new Text("PKhing got salt from gacha");
-		message.setFont(Util.getFont());
-		message.setFill(Color.WHITE);
-		messagePane.getChildren().add(message);
 
 	}
 
@@ -191,8 +147,7 @@ public class GameScene {
 		int endIdxX = Math.min(GameConfig.MAP_SIZE, player.getPosX() + maxCellX / 2 + 1);
 
 		/*
-		 * Uncomment when game is ready 
-		 * ArrayList<Pair<Integer, Integer>>
+		 * Uncomment when game is ready ArrayList<Pair<Integer, Integer>>
 		 * allVisibleField = new ArrayList<Pair<Integer, Integer>>();
 		 * 
 		 * getAllVisibleField(allVisibleField, 3, player.getPosY(), player.getPosX());
@@ -326,5 +281,5 @@ public class GameScene {
 	public Scene getScene() {
 		return scene;
 	}
-	
+
 }

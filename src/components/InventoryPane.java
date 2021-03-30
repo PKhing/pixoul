@@ -13,6 +13,7 @@ import javafx.scene.image.PixelReader;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -79,7 +80,7 @@ public class InventoryPane extends FlowPane {
 		exit.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent arg0) {
-				((StackPane)getParent()).getChildren().remove(InventoryPane.this);
+				((Pane)getParent()).getChildren().remove(InventoryPane.this);
 			}
 
 		});

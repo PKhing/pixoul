@@ -16,16 +16,12 @@ public class DrawUtil {
 	private static PixelReader playerSprites = getImagePixelReader("sprites/player.png");
 	private static PixelReader backpackSprites = getImagePixelReader("sprites/backpack.png");
 	private static PixelReader pauseSprites = getImagePixelReader("sprites/pause.png");
-	private static PixelReader statPaneSprites = getImagePixelReader("sprites/statPane.png");
 
-	private static PixelReader getImagePixelReader(String filePath) {
+	public static PixelReader getImagePixelReader(String filePath) {
 		return new Image(ClassLoader.getSystemResource(filePath).toString()).getPixelReader();
 	}
 
-	public static void drawStatPane(GraphicsContext gc) {
-		WritableImage img = new WritableImage(statPaneSprites, 0, 0, 75, 48);
-		gc.drawImage(scaleUp(img), 0, 0);
-	}
+
 
 	public static void drawBackpack(GraphicsContext gc) {
 		WritableImage img = new WritableImage(backpackSprites, 0, 0, 32, 32);
