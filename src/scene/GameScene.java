@@ -5,11 +5,14 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.Queue;
 
+import components.EffectPane;
 import components.InventoryPane;
 import components.MessagePane;
 import components.StatusPane;
 import controller.SceneController;
 import entity.Player;
+import items.base.Potion;
+import items.potion.HealingPotion;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -37,9 +40,9 @@ public class GameScene {
 	private GameMap gameMap;
 	private Scene scene;
 	private Player player;
-	private StackPane statusPane;
+	private StatusPane statusPane;
 	private MessagePane messagePane;
-	private VBox effectPane;
+	private EffectPane effectPane;
 	private InventoryPane inventoryPane;
 
 	public GameScene() {
@@ -56,6 +59,7 @@ public class GameScene {
 
 		Collections.shuffle(roomList);
 		player = new Player(roomList.get(0).getKey(), roomList.get(0).getValue(), gameMap);
+		player.usePotion(new HealingPotion("Salty Potion","With 100 years salt effect",10,100));
 
 		root.getChildren().add(canvas);
 		drawMap(gc);
@@ -68,12 +72,13 @@ public class GameScene {
 		overlay.getChildren().add(statusPane);
 		messagePane = new MessagePane();
 		overlay.getChildren().add(messagePane);
-		addEffectPane(overlay);
+		effectPane = new EffectPane(player.getPotionList());
+		overlay.getChildren().add(effectPane);
 		root.getChildren().add(overlay);
 
 		// Inventory Button
 		Button inventoryBtn = new Button();
-
+		
 		inventoryBtn.setStyle("-fx-margin:0;-fx-padding:0");
 		inventoryBtn.setPrefHeight(30.0 * GameConfig.getScale());
 		inventoryBtn.setPrefWidth(30.0 * GameConfig.getScale());
@@ -107,21 +112,9 @@ public class GameScene {
 
 		inventoryPane = new InventoryPane();
 		StackPane.setAlignment(new Group(inventoryPane), Pos.CENTER);
-
-	}
-
-	private void addEffectPane(AnchorPane overlay) {
-
-		effectPane = new VBox();
-		AnchorPane.setTopAnchor(effectPane, 25.0 * GameConfig.getScale());
-		AnchorPane.setRightAnchor(effectPane, 0.0);
-		overlay.getChildren().add(effectPane);
-		effectPane.setStyle("-fx-background-color: rgba(0,0,0, 0.5);-fx-padding:7");
-
-		Text message = new Text("Salt effect : inf");
-		message.setFont(Util.getFont());
-		message.setFill(Color.WHITE);
-		effectPane.getChildren().add(message);
+		
+		
+	
 
 	}
 
@@ -274,12 +267,12 @@ public class GameScene {
 		return gameMap;
 	}
 
-	public void setGameMap(GameMap gameMap) {
-		this.gameMap = gameMap;
-	}
-
 	public Scene getScene() {
 		return scene;
+	}
+
+	public Player getPlayer() {
+		return player;
 	}
 
 }

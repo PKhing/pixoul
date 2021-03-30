@@ -30,32 +30,32 @@ public class StatusPane extends StackPane{
 		statusBox.setPadding(new Insets(10*GameConfig.getScale(),10*GameConfig.getScale(),10*GameConfig.getScale(),15*GameConfig.getScale()));
 
 
-		hp = new Text("HP : 0 / 10");
+		hp = new Text("HP: 0 / 0");
 		hp.setFont(Util.getFont());
 		statusBox.getChildren().add(hp);
 
-		attack = new Text("Attack : 0");
+		attack = new Text("Attack: 0");
 		attack.setFont(Util.getFont());
 		statusBox.getChildren().add(attack);
 
-		defense = new Text("Defense : 0");
+		defense = new Text("Defense: 0");
 		defense.setFont(Util.getFont());
 		statusBox.getChildren().add(defense);
 	}
 	
-	public static void drawTexture(GraphicsContext gc) {
+	private void drawTexture(GraphicsContext gc) {
 		PixelReader texture = DrawUtil.getImagePixelReader("sprites/statusPane.png");
 		WritableImage img = new WritableImage(texture, 0, 0, 75, 48);
 		gc.drawImage(DrawUtil.scaleUp(img), 0, 0);
 	}
 	
-	public void setHP(Integer hp){
-		this.hp.setText(hp.toString());
+	public void setHP(Integer hp,Integer maxHP){
+		this.hp.setText("HP: "+hp.toString()+" / "+maxHP.toString());
 	}
 	public void setAttack(Integer attack){
-		this.attack.setText(attack.toString());
+		this.attack.setText("Attack: "+ attack.toString());
 	}
 	public void setDefense(Integer defense){
-		this.defense.setText(defense.toString());
+		this.defense.setText("Defense: "+ defense.toString());
 	}
 }
