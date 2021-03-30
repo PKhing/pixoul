@@ -8,15 +8,15 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import utils.Util;
 
-public class PauseBox extends VBox {
+public class PausePane extends VBox {
 	private static boolean isOpenPause = false;
-
-	public PauseBox() {
+	
+	public PausePane() {
 		super();
-
+		
 		this.setAlignment(Pos.CENTER);
 		this.setStyle("-fx-background-color: white");
-
+		
 		this.addTitle();
 		this.addResumeBtn();
 		this.addSettingBtn();
@@ -25,12 +25,12 @@ public class PauseBox extends VBox {
 
 	private void addTitle() {
 		Text titleText = new Text("Paused");
-
+		
 		titleText.setFont(Util.getLargeFont());
-
+		
 		this.getChildren().add(titleText);
 	}
-
+	
 	private void addResumeBtn() {
 		Button resumeBtn = new Button("Resume");
 
@@ -45,12 +45,12 @@ public class PauseBox extends VBox {
 		Button settingBtn = new Button("Setting");
 
 		settingBtn.setOnMouseClicked((event) -> {
-			((StackPane) this.getParent()).getChildren().add(new OptionBox());
+			((StackPane) this.getParent()).getChildren().add(new SettingPane());
 		});
 
 		this.getChildren().add(settingBtn);
 	}
-
+	
 	private void addExitBtn() {
 		Button exitBtn = new Button("Exit");
 
@@ -66,6 +66,6 @@ public class PauseBox extends VBox {
 	}
 
 	public static void setOpenPause(boolean isOpenPause) {
-		PauseBox.isOpenPause = isOpenPause;
+		PausePane.isOpenPause = isOpenPause;
 	}
 }

@@ -15,21 +15,21 @@ import utils.GameAudioUtils;
 import utils.GameConfig;
 import utils.Util;
 
-public class OptionBox extends VBox {
-	public OptionBox() {
+public class SettingPane extends VBox {
+	public SettingPane() {
 		super();
-
+		
 		this.setStyle("-fx-background-color: white");
 		this.setPadding(new Insets(20));
 
 		this.setAlignment(Pos.CENTER);
-
+		
 		this.addTitle();
 		this.addVolumeSlider();
 		this.addCloseText();
-
+		
 		this.setOnKeyPressed((event) -> {
-			if (event.getCode() == KeyCode.ESCAPE) {
+			if(event.getCode() == KeyCode.ESCAPE) {
 				((Pane) this.getParent()).getChildren().remove(this);
 			}
 		});
@@ -39,30 +39,30 @@ public class OptionBox extends VBox {
 		HBox closeBox = new HBox();
 		closeBox.setPadding(new Insets(20));
 		closeBox.setAlignment(Pos.CENTER);
-
+		
 		Text closeText = new Text("OK");
 		closeText.setFont(Util.getFont());
-
+		
 		closeText.setOnMouseClicked((event) -> {
 			try {
 				((Pane) this.getParent()).getChildren().remove(this);
-			} catch (UnsupportedOperationException e) {
+			} catch(UnsupportedOperationException e) {
 				e.printStackTrace();
 			}
 		});
-
+		
 		closeBox.getChildren().add(closeText);
-
+		
 		this.getChildren().add(closeBox);
 	}
-
+	
 	private void addTitle() {
 		Text optionTitle = new Text("Option");
-
+		
 		optionTitle.setFont(Util.getLargeFont());
 		this.getChildren().add(optionTitle);
 	}
-
+	
 	private void addVolumeSlider() {
 		HBox bgmVolumeBox = new HBox();
 		bgmVolumeBox.setPadding(new Insets(10));
@@ -71,7 +71,7 @@ public class OptionBox extends VBox {
 
 		Label volumeLabel = new Label("BGM Volume");
 		volumeLabel.setFont(Util.getFont());
-
+		
 		Slider volumeSlider = new Slider(0, 100, (int) (GameConfig.getVolume() * 100));
 		volumeSlider.valueProperty().addListener(new ChangeListener<Number>() {
 
@@ -80,9 +80,9 @@ public class OptionBox extends VBox {
 				GameConfig.setVolume((double) newValue / 100);
 				GameAudioUtils.updateBGMVolume();
 			}
-
+			
 		});
-
+		
 		bgmVolumeBox.getChildren().addAll(volumeLabel, volumeSlider);
 		this.getChildren().add(bgmVolumeBox);
 	}

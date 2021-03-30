@@ -1,6 +1,6 @@
 package scene;
 
-import components.OptionBox;
+import components.SettingPane;
 import controller.GameController;
 import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
@@ -83,9 +83,9 @@ public class LandingScene {
 
 			@Override
 			public void handle(MouseEvent arg0) {
-				OptionBox optionBox = new OptionBox();
-				root.getChildren().add(optionBox);
-				optionBox.requestFocus();
+				SettingPane settingPane = new SettingPane();
+				root.getChildren().add(settingPane);
+				settingPane.requestFocus();
 			};
 
 		});

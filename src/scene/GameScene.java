@@ -4,7 +4,7 @@ import components.EffectPane;
 import components.InventoryPane;
 import components.MessagePane;
 import components.StatusPane;
-import components.PauseBox;
+import components.PausePane;
 import controller.GameController;
 import controller.SceneController;
 import entity.Player;
@@ -32,7 +32,7 @@ public class GameScene {
 	private MessagePane messagePane;
 	private EffectPane effectPane;
 	private InventoryPane inventoryPane;
-	private PauseBox pauseBox;
+	private PausePane pausePane;
 
 	public GameScene() {
 
@@ -90,7 +90,7 @@ public class GameScene {
 		pauseBtn.setPrefWidth(15.0 * GameConfig.getScale());
 
 		pauseBtn.setOnMouseClicked((event) -> {
-			PauseBox newPause = new PauseBox();
+			PausePane newPause = new PausePane();
 			root.getChildren().add(newPause);
 			newPause.requestFocus();
 		});
@@ -101,10 +101,10 @@ public class GameScene {
 		overlay.getChildren().add(pauseBtn);
 
 		inventoryPane = new InventoryPane();
-		pauseBox = new PauseBox();
+		pausePane = new PausePane();
 
 		StackPane.setAlignment(new Group(inventoryPane), Pos.CENTER);
-		StackPane.setAlignment(new Group(pauseBox), Pos.CENTER);
+		StackPane.setAlignment(new Group(pausePane), Pos.CENTER);
 	}
 
 	private void drawMap(GraphicsContext gc) {
