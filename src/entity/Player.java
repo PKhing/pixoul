@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 import controller.GameController;
+import entity.base.Attackable;
 import entity.base.Entity;
 import entity.base.Moveable;
 import items.base.Armor;
@@ -15,7 +16,7 @@ import logic.Cell;
 import logic.Direction;
 import utils.GameConfig;
 
-public class Player extends Entity implements Moveable {
+public class Player extends Entity implements Moveable, Attackable {
 	private ArrayList<Potion> potionList;
 	private Armor equippedArmor;
 	private Weapon equippedWeapon;
@@ -63,6 +64,12 @@ public class Player extends Entity implements Moveable {
 		}
 	}
 
+	@Override
+	public boolean attack() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
 	public void equip(Weapon w) {
 		w.onEquip(this);
 	}
@@ -161,4 +168,6 @@ public class Player extends Entity implements Moveable {
 	public void setEquippedWeapon(Weapon equippedWeapon) {
 		this.equippedWeapon = equippedWeapon;
 	}
+
+	
 }

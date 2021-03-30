@@ -184,8 +184,7 @@ public class GameScene {
 			case SPACE:
 				break;
 			case ESCAPE:
-				GameController.exit();
-				SceneController.setSceneToStage(LandingScene.getScene());
+				GameController.exitToMainMenu();
 				isDraw = false;
 				break;
 			default:

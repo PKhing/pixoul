@@ -11,14 +11,16 @@ import utils.GameConfig;
 
 public abstract class Monster extends Entity {
 	@SuppressWarnings("unchecked")
-	private Pair<Integer, Integer>[][] parent = new Pair[GameConfig.MAP_SIZE + 1][GameConfig.MAP_SIZE+1];
-	private boolean visit[][] = new boolean[GameConfig.MAP_SIZE+1][GameConfig.MAP_SIZE+1];
+	private Pair<Integer, Integer>[][] parent = new Pair[GameConfig.MAP_SIZE + 1][GameConfig.MAP_SIZE + 1];
+	private boolean visit[][] = new boolean[GameConfig.MAP_SIZE + 1][GameConfig.MAP_SIZE + 1];
 
 	public Monster(int health, int attack, int maxHealth, int defense, int posY, int posX, int direction,
 			double critRate, double critPercent, int moveSpeed) {
 		super(health, attack, maxHealth, defense, posY, posX, direction, critRate, critPercent, moveSpeed);
 	}
 
+	public abstract void update();
+	
 	public Pair<Integer, Integer> getNextPos() {
 		for (int i = 0; i <= GameConfig.MAP_SIZE; i++) {
 			for (int j = 0; j <= GameConfig.MAP_SIZE; j++) {
@@ -27,9 +29,10 @@ public abstract class Monster extends Entity {
 			}
 		}
 		Pair<Integer, Integer> playerPos = bfs();
-		if(playerPos == null) return null;
+		if (playerPos == null)
+			return null;
 		Pair<Integer, Integer> newPos = playerPos;
-		while(!(new Pair<>(getPosY(),getPosX()).equals(parent[newPos.getKey()][newPos.getValue()]))) {
+		while (!(new Pair<>(getPosY(), getPosX()).equals(parent[newPos.getKey()][newPos.getValue()]))) {
 			newPos = parent[newPos.getKey()][newPos.getValue()];
 		}
 		return newPos;
@@ -47,7 +50,7 @@ public abstract class Monster extends Entity {
 			int length = queue.peek().getKey();
 			int y = queue.peek().getValue().getKey();
 			int x = queue.peek().getValue().getValue();
-			
+
 			queue.remove();
 
 			if (GameController.getGameMap().get(y, x).getType() != Cell.PATH

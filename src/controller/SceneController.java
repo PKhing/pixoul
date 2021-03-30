@@ -2,6 +2,7 @@ package controller;
 
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import scene.LandingScene;
 
 public class SceneController {
 	private static Stage mainStage;
@@ -20,5 +21,13 @@ public class SceneController {
 
 	public static void showStage() {
 		mainStage.show();
+	}
+	
+	public static void backToMainMenu() {
+		setSceneToStage(LandingScene.getScene());
+	}
+	
+	public static void exitGame() {
+		System.exit(0);
 	}
 }

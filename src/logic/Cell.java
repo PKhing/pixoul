@@ -1,6 +1,7 @@
 package logic;
 
 import entity.base.Entity;
+import items.base.Item;
 import utils.Util;
 
 public class Cell {
@@ -9,8 +10,10 @@ public class Cell {
 	public static final int VOID = 2;
 	private static final int TILE_SPRITE_TYPE = 6;
 	private int type;
-	private Entity entity;
 	private int symbol;
+	
+	private Entity entity;
+	private Item item;
 
 	public Cell() {
 		this(VOID);
@@ -19,6 +22,7 @@ public class Cell {
 	public Cell(int type) {
 		setType(type);
 		setEntity(null);
+		setItem(null);
 	}
 
 	public int getType() {
@@ -47,6 +51,14 @@ public class Cell {
 
 	public void setSymbol(int symbol) {
 		this.symbol = symbol;
+	}
+
+	public Item getItem() {
+		return item;
+	}
+
+	public void setItem(Item item) {
+		this.item = item;
 	}
 
 }

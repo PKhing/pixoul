@@ -14,10 +14,11 @@ public abstract class Potion extends Item {
 
 	public abstract void onWearOff(Player player);
 
-	public void update() {
-		if (getDuration() <= 0)
-			return;
+	public boolean update() {
 		setDuration(getDuration() - 1);
+		if (getDuration() <= 0)
+			return false;
+		return true;
 	}
 
 	public int getDuration() {

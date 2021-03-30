@@ -18,6 +18,7 @@ public class Skeleton extends Monster implements Moveable, Attackable {
 		// TODO Auto-generated constructor stub
 	}
 
+	@Override
 	public void update() {
 		if (Math.abs(GameController.getPlayer().getPosX() - getPosX()) == 1
 				|| Math.abs(GameController.getPlayer().getPosY() - getPosY()) == 1) {

@@ -1,6 +1,8 @@
 package logic;
 
 import java.util.ArrayList;
+
+import entity.base.Monster;
 import javafx.util.Pair;
 import utils.GameConfig;
 import utils.Util;
@@ -16,15 +18,19 @@ public class GameMap {
 	private static final int STRAIGHT = 1;
 	private static final int TURN_LEFT = 2;
 	private static final int TURN_RIGHT = 3;
+	
 	private int map[][];
 	private Cell gameMap[][];
 	private ArrayList<Pair<Integer, Integer>> roomList;
-
+	private ArrayList<Monster> monsterList;
+	
 	public GameMap() {
 		map = new int[GameConfig.MAP_SIZE + 10][GameConfig.MAP_SIZE + 10];
 		gameMap = new Cell[GameConfig.MAP_SIZE + 10][GameConfig.MAP_SIZE + 10];
+		monsterList = new ArrayList<Monster>();
 		roomList = new ArrayList<Pair<Integer, Integer>>();
 		generateMap();
+		
 	}
 
 	class State {
@@ -251,4 +257,7 @@ public class GameMap {
 		return roomList;
 	}
 
+	public ArrayList<Monster> getMonsterList() {
+		return monsterList;
+	}
 }

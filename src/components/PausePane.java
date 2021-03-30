@@ -1,6 +1,7 @@
 package components;
 
 import controller.GameController;
+import controller.SceneController;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
@@ -20,6 +21,7 @@ public class PausePane extends VBox {
 		this.addTitle();
 		this.addResumeBtn();
 		this.addSettingBtn();
+		this.addToMainMenuBtn();
 		this.addExitBtn();
 	}
 
@@ -51,11 +53,21 @@ public class PausePane extends VBox {
 		this.getChildren().add(settingBtn);
 	}
 	
+	private void addToMainMenuBtn() {
+		Button toMainMenuBtn = new Button("Back to main menu");
+
+		toMainMenuBtn.setOnMouseClicked((event) -> {
+			GameController.exitToMainMenu();
+		});
+
+		this.getChildren().add(toMainMenuBtn);
+	}
+	
 	private void addExitBtn() {
 		Button exitBtn = new Button("Exit");
 
 		exitBtn.setOnMouseClicked((event) -> {
-			GameController.exit();
+			SceneController.exitGame();
 		});
 
 		this.getChildren().add(exitBtn);
