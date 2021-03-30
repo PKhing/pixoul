@@ -7,8 +7,7 @@ import components.StatusPane;
 import components.PausePane;
 import controller.GameController;
 import controller.SceneController;
-import entity.Player;
-import entity.base.Monster;
+import entity.Skeleton;
 import items.potion.HealingPotion;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -40,6 +39,9 @@ public class GameScene {
 		GameController.setGameMap(new GameMap());
 		GameController.getPlayer().setInitialPos(GameController.getRoomList().get(0).getKey(),
 				GameController.getRoomList().get(0).getValue());
+		
+		Skeleton skeleton = new Skeleton(0, 0, 0, 0, GameController.getRoomList().get(0).getKey(),GameController.getRoomList().get(0).getValue()+1, 0, 0, 0, 0);
+		
 		
 		GameController.getPlayer().usePotion(new HealingPotion("Salty Potion", "With 100 years salt effect", 10, 100));
 
@@ -154,9 +156,9 @@ public class GameScene {
 			for (int j = startIdxX; j <= endIdxX; j++) {
 				DrawUtil.drawCell(gc, newSpriteSize * i - startY, newSpriteSize * j - startX,
 						GameController.getGameMap().get(i, j));
-				if (GameController.getGameMap().get(i, j).getEntity() instanceof Player)
-					DrawUtil.drawCharacter(gc, newSpriteSize * i - startY, newSpriteSize * j - startX,
-							GameController.getPlayer().getDirection());
+				if (GameController.getGameMap().get(i, j).getEntity()!=null)
+					DrawUtil.drawEntity(gc, newSpriteSize * i - startY, newSpriteSize * j - startX,
+							GameController.getGameMap().get(i, j).getEntity());
 			}
 		}
 

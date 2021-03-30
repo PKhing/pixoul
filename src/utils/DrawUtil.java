@@ -2,6 +2,9 @@ package utils;
 
 import java.nio.IntBuffer;
 
+import entity.Player;
+import entity.Skeleton;
+import entity.base.Entity;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.PixelFormat;
@@ -14,6 +17,7 @@ import logic.Direction;
 public class DrawUtil {
 	private static PixelReader wallSprites = getImagePixelReader("sprites/wall.png");
 	private static PixelReader playerSprites = getImagePixelReader("sprites/player.png");
+	private static PixelReader skeletonSprites = getImagePixelReader("sprites/skeleton.png");
 	private static PixelReader backpackSprites = getImagePixelReader("sprites/backpack.png");
 	private static PixelReader pauseSprites = getImagePixelReader("sprites/pause.png");
 
@@ -38,15 +42,17 @@ public class DrawUtil {
 		}
 	}
 
-	public static void drawCharacter(GraphicsContext gc, int y, int x, int index) {
+	public static void drawEntity(GraphicsContext gc, int y, int x, Entity entity) {
 		int direction = 0;
-		if (index == Direction.UP)
+		if (entity.getDirection() == Direction.UP)
 			direction = 3;
-		if (index == Direction.LEFT)
+		if (entity.getDirection() == Direction.LEFT)
 			direction = 1;
-		if (index == Direction.RIGHT)
+		if (entity.getDirection() == Direction.RIGHT)
 			direction = 2;
-		WritableImage img = new WritableImage(playerSprites, 1 * 32, direction * 32, 32, 32);
+		WritableImage img = null;
+		if(entity instanceof Player)img = new WritableImage(playerSprites, 1 * 32, direction * 32, 32, 32);
+		if(entity instanceof Skeleton)img = new WritableImage(skeletonSprites, 1 * 32, direction * 32, 32, 32);
 		gc.drawImage(scaleUp(img), x, y - 8);
 	}
 
