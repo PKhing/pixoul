@@ -5,6 +5,7 @@ import items.base.Potion;
 
 public class ShieldPotion extends Potion {
 	private int shield;
+
 	public ShieldPotion(String name, String description, int shield, int duration) {
 		super(name, description, duration);
 		// TODO Auto-generated constructor stub
@@ -16,15 +17,15 @@ public class ShieldPotion extends Potion {
 		player.setAttack(player.getDefense() + getShield());
 		player.getPotionList().add(this);
 	}
-	
+
 	@Override
 	public void onWearOff(Player player) {
 		// TODO Auto-generated method stub
 		player.setAttack(player.getDefense() - getShield());
 		player.getPotionList().remove(this);
-		
+
 	}
-	
+
 	@Override
 	public int getSymbol() {
 		// TODO Auto-generated method stub

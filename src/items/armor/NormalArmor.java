@@ -12,13 +12,13 @@ public class NormalArmor extends Armor {
 	@Override
 	public void onEquip() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void onDeequip() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override

@@ -65,7 +65,7 @@ public class InventoryPane extends FlowPane {
 		header.getChildren().add(text);
 		text.setFont(Util.getLargeFont());
 		text.setFill(Color.rgb(123, 126, 94));
-		
+
 		// Exit button
 		Text exit = new Text("x ");
 		StackPane.setAlignment(exit, Pos.TOP_RIGHT);
@@ -75,10 +75,10 @@ public class InventoryPane extends FlowPane {
 		exit.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent arg0) {
-				((Pane)getParent()).getChildren().remove(InventoryPane.this);
+				((Pane) getParent()).getChildren().remove(InventoryPane.this);
 			}
 
 		});
-		
+
 	}
 }

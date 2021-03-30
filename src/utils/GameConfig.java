@@ -4,8 +4,8 @@ public class GameConfig {
 	private static int screenWidth = 854;
 	private static int screenHeight = 400;
 	private static int scale = 2;
-	private static double volume = 1.0;
-	
+	private static double volume = 0.1;
+
 	public static final int SCREEN_RESPONSIVE = 864;
 	public static final boolean SCREEN_SCALABLE = true;
 	public static final String GAME_TITLE = "Pixoul";
@@ -15,8 +15,10 @@ public class GameConfig {
 	public static final int MAP_SIZE = 50;
 	public static final int ROOM_SIZE = 4;
 	public static final int SPRITE_SIZE = 32;
+
 	public static final int MAX_ITEM = 16;
-	
+	public static final int LINE_OF_SIGHT = 3;
+
 	public static int getScreenWidth() {
 		return screenWidth;
 	}

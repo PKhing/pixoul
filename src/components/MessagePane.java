@@ -7,9 +7,9 @@ import javafx.scene.text.Text;
 import utils.GameConfig;
 import utils.Util;
 
-public class MessagePane extends VBox{
+public class MessagePane extends VBox {
 	private final int MAX_MESSAGE = 4;
-	
+
 	public MessagePane() {
 		AnchorPane.setBottomAnchor(this, 0.0);
 		AnchorPane.setLeftAnchor(this, 0.0);
@@ -18,8 +18,9 @@ public class MessagePane extends VBox{
 		this.setStyle("-fx-background-color: rgba(0,0,0, 0.5);-fx-padding:7 7 7 14");
 
 	}
+
 	public void addMessage(String text) {
-		if(this.getChildren().size()>=MAX_MESSAGE) {
+		if (this.getChildren().size() >= MAX_MESSAGE) {
 			this.getChildren().remove(0);
 		}
 		Text message = new Text(text);

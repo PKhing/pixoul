@@ -7,10 +7,11 @@ public abstract class Armor extends Item {
 		super(name, description);
 		setDefense(defense);
 	}
-	
+
 	public abstract void onEquip();
+
 	public abstract void onDeequip();
-	
+
 	public int getDefense() {
 		return defense;
 	}
@@ -18,6 +19,5 @@ public abstract class Armor extends Item {
 	public void setDefense(int defense) {
 		this.defense = defense;
 	}
-	
-	
+
 }

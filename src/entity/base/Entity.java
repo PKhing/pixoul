@@ -6,7 +6,7 @@ public abstract class Entity {
 	private int attack;
 
 	private int maxHealth;
-	
+
 	private int defense;
 
 	private int posX;
@@ -21,8 +21,8 @@ public abstract class Entity {
 
 	private int moveSpeed;
 
-	public Entity(int health, int attack, int maxHealth,int defense, int posX, int posY, int direction, double critRate,
-			double critPercent, int moveSpeed) {
+	public Entity(int health, int attack, int maxHealth, int defense, int posX, int posY, int direction,
+			double critRate, double critPercent, int moveSpeed) {
 		this.health = health;
 		this.attack = attack;
 		this.defense = defense;

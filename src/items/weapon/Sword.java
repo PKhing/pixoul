@@ -23,7 +23,7 @@ public class Sword extends Weapon {
 		player.setAttack(player.getAttack() - getAtk());
 		player.setEquippedWeapon(null);
 	}
-	
+
 	@Override
 	public int getSymbol() {
 		// TODO Auto-generated method stub

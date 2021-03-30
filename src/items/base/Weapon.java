@@ -5,7 +5,7 @@ import entity.Player;
 public abstract class Weapon extends Item {
 	private int atk;
 	private int atkSpeed;
-	
+
 	public Weapon(String name, String description, int atk, int atkSpeed) {
 		super(name, description);
 		setAtk(atk);
@@ -13,8 +13,9 @@ public abstract class Weapon extends Item {
 	}
 
 	public abstract void onEquip(Player player);
+
 	public abstract void onDeequip(Player player);
-	
+
 	public int getAtk() {
 		return atk;
 	}

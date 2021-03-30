@@ -17,7 +17,7 @@ public class HealingPotion extends Potion implements IConsecutiveEffect {
 		// TODO Auto-generated method stub
 		player.getPotionList().add(this);
 	}
-	
+
 	@Override
 	public void effect(Player player) {
 		int newHealth = Math.min(player.getMaxHealth(), player.getHealth() + getValue());
@@ -43,5 +43,4 @@ public class HealingPotion extends Potion implements IConsecutiveEffect {
 		this.value = value;
 	}
 
-	
 }

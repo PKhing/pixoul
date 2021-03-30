@@ -207,7 +207,7 @@ public class GameMap {
 					gameMap[i][j].setType(Cell.WALL);
 			}
 		}
-		
+
 	}
 
 	public void generateMap() {

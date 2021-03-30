@@ -29,5 +29,5 @@ public class Spear extends Weapon {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-	
+
 }

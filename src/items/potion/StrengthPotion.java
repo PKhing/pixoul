@@ -5,6 +5,7 @@ import items.base.Potion;
 
 public class StrengthPotion extends Potion {
 	private int atk;
+
 	public StrengthPotion(String name, String description, int duration) {
 		super(name, description, duration);
 		// TODO Auto-generated constructor stub
@@ -16,7 +17,7 @@ public class StrengthPotion extends Potion {
 		player.setAttack(player.getAttack() + getAtk());
 		player.getPotionList().add(this);
 	}
-	
+
 	@Override
 	public void onWearOff(Player player) {
 		// TODO Auto-generated method stub

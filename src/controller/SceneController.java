@@ -7,12 +7,14 @@ public class SceneController {
 	private static Stage mainStage;
 
 	public static void setMainStage(Stage mainStage) {
-		if(mainStage == null) return;
+		if (mainStage == null)
+			return;
 		SceneController.mainStage = mainStage;
 	}
 
 	public static void setSceneToStage(Scene newScene) {
-		if(newScene == null) return;
+		if (newScene == null)
+			return;
 		mainStage.setScene(newScene);
 	}
 

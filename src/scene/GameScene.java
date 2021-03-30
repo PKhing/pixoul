@@ -1,10 +1,5 @@
 package scene;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.Queue;
-
 import components.EffectPane;
 import components.InventoryPane;
 import components.MessagePane;
@@ -27,16 +22,12 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import utils.GameConfig;
 import javafx.scene.paint.Color;
-import javafx.util.Pair;
-import logic.Cell;
 import logic.Direction;
 import logic.GameMap;
 import utils.DrawUtil;
 
 public class GameScene {
-	private GameMap gameMap;
 	private Scene scene;
-	private Player player;
 	private StatusPane statusPane;
 	private MessagePane messagePane;
 	private EffectPane effectPane;
@@ -44,24 +35,20 @@ public class GameScene {
 	private PauseBox pauseBox;
 
 	public GameScene() {
-		gameMap = new GameMap();
-		gameMap.printMap();
+
+		GameController.setGameMap(new GameMap());
+		GameController.getPlayer().setInitialPos(GameController.getRoomList().get(0).getKey(),
+				GameController.getRoomList().get(0).getValue());
+		GameController.getPlayer().usePotion(new HealingPotion("Salty Potion", "With 100 years salt effect", 10, 100));
 
 		StackPane root = new StackPane();
 		scene = new Scene(root, GameConfig.getScreenWidth(), GameConfig.getScreenHeight());
 
 		Canvas canvas = new Canvas(GameConfig.getScreenWidth(), GameConfig.getScreenHeight());
 		GraphicsContext gc = canvas.getGraphicsContext2D();
-
-		ArrayList<Pair<Integer, Integer>> roomList = gameMap.getRoomList();
-
-		Collections.shuffle(roomList);
-		player = new Player(roomList.get(0).getKey(), roomList.get(0).getValue(), gameMap);
-		player.usePotion(new HealingPotion("Salty Potion", "With 100 years salt effect", 10, 100));
-
 		root.getChildren().add(canvas);
-		drawMap(gc);
 
+		drawMap(gc);
 		addEventListener(scene, gc);
 
 		// Overlay
@@ -70,7 +57,7 @@ public class GameScene {
 		overlay.getChildren().add(statusPane);
 		messagePane = new MessagePane();
 		overlay.getChildren().add(messagePane);
-		effectPane = new EffectPane(player.getPotionList());
+		effectPane = new EffectPane();
 		overlay.getChildren().add(effectPane);
 		root.getChildren().add(overlay);
 
@@ -88,7 +75,6 @@ public class GameScene {
 			public void handle(MouseEvent arg0) {
 				root.getChildren().add(inventoryPane);
 			}
-
 		});
 		AnchorPane.setBottomAnchor(inventoryBtn, 5.0 * GameConfig.getScale());
 		AnchorPane.setRightAnchor(inventoryBtn, 5.0 * GameConfig.getScale());
@@ -116,7 +102,7 @@ public class GameScene {
 
 		inventoryPane = new InventoryPane();
 		pauseBox = new PauseBox();
-		
+
 		StackPane.setAlignment(new Group(inventoryPane), Pos.CENTER);
 		StackPane.setAlignment(new Group(pauseBox), Pos.CENTER);
 	}
@@ -127,8 +113,10 @@ public class GameScene {
 
 		int newSpriteSize = GameConfig.SPRITE_SIZE * GameConfig.getScale();
 
-		int centerY = player.getPosY() * newSpriteSize + GameConfig.SPRITE_SIZE * GameConfig.getScale() / 2;
-		int centerX = player.getPosX() * newSpriteSize + GameConfig.SPRITE_SIZE * GameConfig.getScale() / 2;
+		int centerY = GameController.getPlayer().getPosY() * newSpriteSize
+				+ GameConfig.SPRITE_SIZE * GameConfig.getScale() / 2;
+		int centerX = GameController.getPlayer().getPosX() * newSpriteSize
+				+ GameConfig.SPRITE_SIZE * GameConfig.getScale() / 2;
 
 		int startY = centerY - GameConfig.getScreenHeight() / 2;
 		int startX = centerX - GameConfig.getScreenWidth() / 2;
@@ -136,11 +124,11 @@ public class GameScene {
 		int maxCellY = GameConfig.getScreenHeight() / (newSpriteSize);
 		int maxCellX = GameConfig.getScreenWidth() / (newSpriteSize);
 
-		int startIdxY = Math.max(0, player.getPosY() - maxCellY / 2 - 1);
-		int endIdxY = Math.min(GameConfig.MAP_SIZE, player.getPosY() + maxCellY / 2 + 1);
+		int startIdxY = Math.max(0, GameController.getPlayer().getPosY() - maxCellY / 2 - 1);
+		int endIdxY = Math.min(GameConfig.MAP_SIZE, GameController.getPlayer().getPosY() + maxCellY / 2 + 1);
 
-		int startIdxX = Math.max(0, player.getPosX() - maxCellX / 2 - 1);
-		int endIdxX = Math.min(GameConfig.MAP_SIZE, player.getPosX() + maxCellX / 2 + 1);
+		int startIdxX = Math.max(0, GameController.getPlayer().getPosX() - maxCellX / 2 - 1);
+		int endIdxX = Math.min(GameConfig.MAP_SIZE, GameController.getPlayer().getPosX() + maxCellX / 2 + 1);
 
 //		Uncomment when game is ready 
 //		ArrayList<Pair<Integer, Integer>> allVisibleField = new ArrayList<Pair<Integer, Integer>>();
@@ -162,72 +150,14 @@ public class GameScene {
 
 		for (int i = startIdxY; i <= endIdxY; i++) {
 			for (int j = startIdxX; j <= endIdxX; j++) {
-				DrawUtil.drawCell(gc, newSpriteSize * i - startY, newSpriteSize * j - startX, gameMap.get(i, j));
-				if (gameMap.get(i, j).getEntity() instanceof Player)
+				DrawUtil.drawCell(gc, newSpriteSize * i - startY, newSpriteSize * j - startX,
+						GameController.getGameMap().get(i, j));
+				if (GameController.getGameMap().get(i, j).getEntity() instanceof Player)
 					DrawUtil.drawCharacter(gc, newSpriteSize * i - startY, newSpriteSize * j - startX,
-							player.getDirection());
+							GameController.getPlayer().getDirection());
 			}
 		}
 
-	}
-
-	@SuppressWarnings("unused")
-	private void getAllVisibleField(ArrayList<Pair<Integer, Integer>> allPos, int lineOfSight, int posY, int posX) {
-		Queue<Pair<Integer, Pair<Integer, Integer>>> queue = new LinkedList<>();
-
-		final int directionArr[][] = { { 0, 1 }, { 0, -1 }, { 1, 0 }, { -1, 0 }, { -1, -1 }, { 1, 1 }, { 1, -1 },
-				{ -1, 1 } };
-		final int directionSz = 8;
-
-		queue.add(new Pair<>(0, new Pair<>(posY, posX)));
-
-		while (queue.size() != 0) {
-			int level = queue.peek().getKey();
-			int nowY = queue.peek().getValue().getKey();
-			int nowX = queue.peek().getValue().getValue();
-
-			queue.remove();
-
-			if (level > lineOfSight) {
-				continue;
-			}
-
-			boolean found = false;
-
-			for (Pair<Integer, Integer> each : allPos) {
-				if (each.getKey() == nowY && each.getValue() == nowX) {
-					found = true;
-					break;
-				}
-			}
-
-			if (found) {
-				continue;
-			}
-
-			allPos.add(new Pair<>(nowY, nowX));
-
-			if (gameMap.get(nowY, nowX).getType() == Cell.WALL) {
-				continue;
-			}
-
-			for (int i = 0; i < directionSz; i++) {
-				int newX = directionArr[i][0] + nowX;
-				int newY = directionArr[i][1] + nowY;
-				if (directionArr[i][0] == 0 || directionArr[i][1] == 0) {
-					queue.add(new Pair<>(level + 1, new Pair<>(newY, newX)));
-				} else {
-					int cellTypeY = gameMap.get(newY, nowX).getType();
-					int cellTypeX = gameMap.get(nowY, newX).getType();
-
-					if (cellTypeY == Cell.WALL && cellTypeX == Cell.WALL) {
-						continue;
-					} else {
-						queue.add(new Pair<>(level + 1, new Pair<>(newY, newX)));
-					}
-				}
-			}
-		}
 	}
 
 	private void addEventListener(Scene s, GraphicsContext gc) {
@@ -236,16 +166,16 @@ public class GameScene {
 			boolean isDraw = true;
 			switch (keycode) {
 			case A:
-				player.move(gameMap, Direction.LEFT);
+				GameController.getPlayer().move(Direction.LEFT);
 				break;
 			case D:
-				player.move(gameMap, Direction.RIGHT);
+				GameController.getPlayer().move(Direction.RIGHT);
 				break;
 			case W:
-				player.move(gameMap, Direction.UP);
+				GameController.getPlayer().move(Direction.UP);
 				break;
 			case S:
-				player.move(gameMap, Direction.DOWN);
+				GameController.getPlayer().move(Direction.DOWN);
 				break;
 			case SPACE:
 				break;
@@ -265,16 +195,8 @@ public class GameScene {
 		});
 	}
 
-	public GameMap getGameMap() {
-		return gameMap;
-	}
-
 	public Scene getScene() {
 		return scene;
-	}
-
-	public Player getPlayer() {
-		return player;
 	}
 
 }

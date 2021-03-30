@@ -9,9 +9,9 @@ public class Cell {
 	public static final int VOID = 2;
 	private static final int TILE_SPRITE_TYPE = 6;
 	private int type;
-	private Entity entity; 
+	private Entity entity;
 	private int symbol;
-	
+
 	public Cell() {
 		this(VOID);
 	}
@@ -27,8 +27,10 @@ public class Cell {
 
 	public void setType(int type) {
 		this.type = type;
-		if(type == PATH)setSymbol(Util.random(0, TILE_SPRITE_TYPE - 1));
-		if(type == WALL)setSymbol(6);
+		if (type == PATH)
+			setSymbol(Util.random(0, TILE_SPRITE_TYPE - 1));
+		if (type == WALL)
+			setSymbol(6);
 	}
 
 	public Entity getEntity() {

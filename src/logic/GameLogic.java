@@ -14,5 +14,5 @@ public class GameLogic {
 	public static void setItemList(ArrayList<Item> itemList) {
 		GameLogic.itemList = itemList;
 	}
-	
+
 }

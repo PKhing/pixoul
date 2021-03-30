@@ -21,8 +21,6 @@ public class DrawUtil {
 		return new Image(ClassLoader.getSystemResource(filePath).toString()).getPixelReader();
 	}
 
-
-
 	public static void drawBackpack(GraphicsContext gc) {
 		WritableImage img = new WritableImage(backpackSprites, 0, 0, 32, 32);
 		gc.drawImage(scaleUp(img), 0, 0);
