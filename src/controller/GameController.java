@@ -116,6 +116,10 @@ public class GameController {
 	 * Health / Death -> Monster Turn -> Update Player Health / Death
 	 */
 
+	public static void gameUpdate(Pair<Integer, Integer> newPos) {
+		
+	}
+	
 	public static void potionUpdate() {
 		for (Potion each : player.getPotionList()) {
 			if (each instanceof IConsecutiveEffect) {

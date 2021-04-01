@@ -1,5 +1,6 @@
 package components;
 
+import controller.InterruptController;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
@@ -33,6 +34,8 @@ public class SettingPane extends VBox {
 				((Pane) this.getParent()).getChildren().remove(this);
 			}
 		});
+		
+		InterruptController.setSettingOpen(true);
 	}
 
 	private void addCloseText() {
@@ -46,6 +49,7 @@ public class SettingPane extends VBox {
 		closeText.setOnMouseClicked((event) -> {
 			try {
 				((Pane) this.getParent()).getChildren().remove(this);
+				InterruptController.setSettingOpen(false);
 			} catch(UnsupportedOperationException e) {
 				e.printStackTrace();
 			}

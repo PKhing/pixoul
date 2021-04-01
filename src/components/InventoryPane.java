@@ -2,12 +2,14 @@ package components;
 
 import java.util.ArrayList;
 
+import controller.InterruptController;
 import items.base.Item;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.PixelReader;
 import javafx.scene.image.WritableImage;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
@@ -35,6 +37,12 @@ public class InventoryPane extends FlowPane {
 			else
 				addItem(null);
 		}
+		this.setOnKeyPressed((event) -> {
+			if(event.getCode() == KeyCode.ESCAPE) {
+				removeInventoryPane();
+				InterruptController.setOpenFromInside(true);
+			}
+		});
 	}
 
 	private void addItem(Item item) {
@@ -72,13 +80,14 @@ public class InventoryPane extends FlowPane {
 		header.getChildren().add(exit);
 		exit.setFont(Util.getLargeFont());
 		exit.setFill(Color.rgb(123, 126, 94));
-		exit.setOnMouseClicked(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent arg0) {
-				((Pane) getParent()).getChildren().remove(InventoryPane.this);
-			}
-
+		exit.setOnMouseClicked((event) -> {
+			removeInventoryPane();
 		});
-
+	}
+	
+	private void removeInventoryPane() {
+		((Pane) getParent()).getChildren().remove(InventoryPane.this);
+		InterruptController.setInventoryOpen(false);
+		
 	}
 }

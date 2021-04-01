@@ -6,6 +6,7 @@ import components.MessagePane;
 import components.StatusPane;
 import components.PausePane;
 import controller.GameController;
+import controller.InterruptController;
 import controller.SceneController;
 import entity.Skeleton;
 import items.potion.HealingPotion;
@@ -39,10 +40,10 @@ public class GameScene {
 		GameController.setGameMap(new GameMap());
 		GameController.getPlayer().setInitialPos(GameController.getRoomList().get(0).getKey(),
 				GameController.getRoomList().get(0).getValue());
-		
-		Skeleton skeleton = new Skeleton(0, 0, 0, 0, GameController.getRoomList().get(0).getKey(),GameController.getRoomList().get(0).getValue()+1, 0, 0, 0, 0);
-		
-		
+
+		Skeleton skeleton = new Skeleton(0, 0, 0, 0, GameController.getRoomList().get(0).getKey(),
+				GameController.getRoomList().get(0).getValue() + 1, 0, 0, 0, 0);
+
 		GameController.getPlayer().usePotion(new HealingPotion("Salty Potion", "With 100 years salt effect", 10, 100));
 
 		StackPane root = new StackPane();
@@ -78,6 +79,9 @@ public class GameScene {
 			@Override
 			public void handle(MouseEvent arg0) {
 				root.getChildren().add(inventoryPane);
+				inventoryPane.requestFocus();
+//				InterruptController.setInventoryOpen(true);
+
 			}
 		});
 		AnchorPane.setBottomAnchor(inventoryBtn, 5.0 * GameConfig.getScale());
@@ -94,9 +98,9 @@ public class GameScene {
 		pauseBtn.setPrefWidth(15.0 * GameConfig.getScale());
 
 		pauseBtn.setOnMouseClicked((event) -> {
-			PausePane newPause = new PausePane();
-			root.getChildren().add(newPause);
-			newPause.requestFocus();
+			root.getChildren().add(pausePane);
+			pausePane.requestFocus();
+			InterruptController.setPauseOpen(true);
 		});
 
 		Canvas pause = new Canvas(16 * GameConfig.getScale(), 16 * GameConfig.getScale());
@@ -156,7 +160,7 @@ public class GameScene {
 			for (int j = startIdxX; j <= endIdxX; j++) {
 				DrawUtil.drawCell(gc, newSpriteSize * i - startY, newSpriteSize * j - startX,
 						GameController.getGameMap().get(i, j));
-				if (GameController.getGameMap().get(i, j).getEntity()!=null)
+				if (GameController.getGameMap().get(i, j).getEntity() != null)
 					DrawUtil.drawEntity(gc, newSpriteSize * i - startY, newSpriteSize * j - startX,
 							GameController.getGameMap().get(i, j).getEntity());
 			}
@@ -166,6 +170,11 @@ public class GameScene {
 
 	private void addEventListener(Scene s, GraphicsContext gc) {
 		s.setOnKeyPressed((event) -> {
+			System.out.println("Run Scene");
+			if (InterruptController.isInterruptPlayerInput()) {
+				return;
+			}
+
 			KeyCode keycode = event.getCode();
 			boolean isDraw = true;
 			switch (keycode) {
@@ -184,8 +193,12 @@ public class GameScene {
 			case SPACE:
 				break;
 			case ESCAPE:
-				GameController.exitToMainMenu();
-				isDraw = false;
+				if (InterruptController.isOpenFromInside()) {
+					InterruptController.setOpenFromInside(false);
+				} else {
+					GameController.exitToMainMenu();
+					isDraw = false;
+				}
 				break;
 			default:
 				System.out.println("Invalid key");

@@ -1,28 +1,38 @@
 package components;
 
 import controller.GameController;
+import controller.InterruptController;
 import controller.SceneController;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import utils.Util;
 
 public class PausePane extends VBox {
-	private static boolean isOpenPause = false;
-	
+	private static SettingPane settingPane = new SettingPane();
 	public PausePane() {
 		super();
 		
-		this.setAlignment(Pos.CENTER);
-		this.setStyle("-fx-background-color: white");
+		setAlignment(Pos.CENTER);
+		setStyle("-fx-background-color: white");
 		
-		this.addTitle();
-		this.addResumeBtn();
-		this.addSettingBtn();
-		this.addToMainMenuBtn();
-		this.addExitBtn();
+		addTitle();
+		addResumeBtn();
+		addSettingBtn();
+		addToMainMenuBtn();
+		addExitBtn();
+		
+		setOnKeyPressed((event) -> {
+			System.out.println("Run Pause");
+			if(event.getCode() == KeyCode.ESCAPE) {
+				removePausePane();
+				InterruptController.setOpenFromInside(true);
+			}
+		});
+		
 	}
 
 	private void addTitle() {
@@ -30,27 +40,29 @@ public class PausePane extends VBox {
 		
 		titleText.setFont(Util.getLargeFont());
 		
-		this.getChildren().add(titleText);
+		getChildren().add(titleText);
 	}
 	
 	private void addResumeBtn() {
 		Button resumeBtn = new Button("Resume");
 
 		resumeBtn.setOnMouseClicked((event) -> {
-			((StackPane) this.getParent()).getChildren().remove(this);
+			removePausePane();
 		});
 
-		this.getChildren().add(resumeBtn);
+		getChildren().add(resumeBtn);
 	}
 
 	private void addSettingBtn() {
 		Button settingBtn = new Button("Setting");
 
 		settingBtn.setOnMouseClicked((event) -> {
-			((StackPane) this.getParent()).getChildren().add(new SettingPane());
+			((StackPane) getParent()).getChildren().add(settingPane);
+			settingPane.requestFocus();
+			InterruptController.setSettingOpen(true);
 		});
 
-		this.getChildren().add(settingBtn);
+		getChildren().add(settingBtn);
 	}
 	
 	private void addToMainMenuBtn() {
@@ -58,9 +70,10 @@ public class PausePane extends VBox {
 
 		toMainMenuBtn.setOnMouseClicked((event) -> {
 			GameController.exitToMainMenu();
+			InterruptController.resetInterruptState();
 		});
 
-		this.getChildren().add(toMainMenuBtn);
+		getChildren().add(toMainMenuBtn);
 	}
 	
 	private void addExitBtn() {
@@ -70,14 +83,12 @@ public class PausePane extends VBox {
 			SceneController.exitGame();
 		});
 
-		this.getChildren().add(exitBtn);
+		getChildren().add(exitBtn);
 	}
-
-	public static boolean isOpenPause() {
-		return isOpenPause;
-	}
-
-	public static void setOpenPause(boolean isOpenPause) {
-		PausePane.isOpenPause = isOpenPause;
+	
+	private void removePausePane() {
+		((StackPane) getParent()).getChildren().remove(this);
+		InterruptController.setPauseOpen(false);
+		
 	}
 }
