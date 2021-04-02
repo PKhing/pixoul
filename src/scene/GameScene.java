@@ -9,6 +9,7 @@ import controller.GameController;
 import controller.InterruptController;
 import controller.SceneController;
 import entity.Skeleton;
+import entity.base.Monster;
 import items.potion.HealingPotion;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -40,7 +41,6 @@ public class GameScene {
 		GameController.setGameMap(new GameMap());
 		GameController.getPlayer().setInitialPos(GameController.getRoomList().get(0).getKey(),
 				GameController.getRoomList().get(0).getValue());
-
 		Skeleton skeleton = new Skeleton(0, 0, 0, 0, GameController.getRoomList().get(0).getKey(),
 				GameController.getRoomList().get(0).getValue() + 1, 0, 0, 0, 0);
 
@@ -53,8 +53,12 @@ public class GameScene {
 		GraphicsContext gc = canvas.getGraphicsContext2D();
 		root.getChildren().add(canvas);
 
-		drawMap(gc);
-		addEventListener(scene, gc);
+		
+		AnchorPane buttonPane = new AnchorPane();
+		drawMap(gc,buttonPane);
+		root.getChildren().add(buttonPane);
+		addEventListener(scene, gc,buttonPane);
+		
 
 		// Overlay
 		AnchorPane overlay = new AnchorPane();
@@ -64,6 +68,7 @@ public class GameScene {
 		overlay.getChildren().add(messagePane);
 		effectPane = new EffectPane();
 		overlay.getChildren().add(effectPane);
+		overlay.setPickOnBounds(false);
 		root.getChildren().add(overlay);
 
 		// Inventory Button
@@ -115,7 +120,8 @@ public class GameScene {
 		StackPane.setAlignment(new Group(pausePane), Pos.CENTER);
 	}
 
-	private void drawMap(GraphicsContext gc) {
+	private void drawMap(GraphicsContext gc,AnchorPane buttonPane) {
+		buttonPane.getChildren().clear();
 		gc.setFill(Color.rgb(0, 0, 0));
 		gc.fillRect(0, 0, GameConfig.getScreenWidth(), GameConfig.getScreenHeight());
 
@@ -163,12 +169,15 @@ public class GameScene {
 				if (GameController.getGameMap().get(i, j).getEntity() != null)
 					DrawUtil.drawEntity(gc, newSpriteSize * i - startY, newSpriteSize * j - startX,
 							GameController.getGameMap().get(i, j).getEntity());
+				if(GameController.getGameMap().get(i, j).getEntity() instanceof Monster)
+				DrawUtil.addEntityButton(buttonPane,newSpriteSize * i - startY, newSpriteSize * j - startX,
+						GameController.getGameMap().get(i, j).getEntity());
 			}
 		}
 
 	}
 
-	private void addEventListener(Scene s, GraphicsContext gc) {
+	private void addEventListener(Scene s, GraphicsContext gc,AnchorPane buttonPane) {
 		s.setOnKeyPressed((event) -> {
 			System.out.println("Run Scene");
 			if (InterruptController.isInterruptPlayerInput()) {
@@ -206,7 +215,7 @@ public class GameScene {
 				break;
 			}
 			if (isDraw) {
-				drawMap(gc);
+				drawMap(gc,buttonPane);
 			}
 		});
 	}

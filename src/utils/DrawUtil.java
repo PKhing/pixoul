@@ -2,15 +2,22 @@ package utils;
 
 import java.nio.IntBuffer;
 
+import controller.GameController;
+import controller.InterruptController;
 import entity.Player;
 import entity.Skeleton;
 import entity.base.Entity;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.PixelFormat;
 import javafx.scene.image.PixelReader;
 import javafx.scene.image.WritableImage;
 import javafx.scene.image.WritablePixelFormat;
+import javafx.scene.input.KeyCode;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 import logic.Cell;
 import logic.Direction;
 
@@ -84,6 +91,15 @@ public class DrawUtil {
 		bigImage.getPixelWriter().setPixels(0, 0, newWidth, newHeight, pf, dst, 0, newWidth);
 		return bigImage;
 
+	}
+	public static void addEntityButton(AnchorPane buttonPane, int y, int x, Entity entity) {
+		Canvas canvas = new Canvas(GameConfig.SPRITE_SIZE*GameConfig.getScale(),GameConfig.SPRITE_SIZE*GameConfig.getScale());
+		canvas.setOnMouseClicked((event) -> {
+			System.out.println("Attack");
+		});
+		AnchorPane.setTopAnchor(canvas, (double) (y-8));
+		AnchorPane.setLeftAnchor(canvas, (double) x);
+		buttonPane.getChildren().add(canvas);
 	}
 
 }
