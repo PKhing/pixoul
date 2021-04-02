@@ -2,13 +2,16 @@ package entity;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import controller.GameController;
 import entity.base.Attackable;
 import entity.base.Entity;
 import entity.base.Moveable;
 import items.base.Armor;
+import items.base.Item;
 import items.base.Potion;
 import items.base.Weapon;
 import javafx.util.Pair;
@@ -17,13 +20,13 @@ import logic.Direction;
 import utils.GameConfig;
 
 public class Player extends Entity implements Moveable, Attackable {
-	private ArrayList<Potion> potionList;
+	private List<Potion> potionList;
 	private Armor equippedArmor;
 	private Weapon equippedWeapon;
 
 	public Player() {
-		super(1, 1, 10, 1, 0, 0, Direction.DOWN, 1, 1, 1);
-		setPotionList(new ArrayList<>());
+		super(1, 10, 1, 0, 0, Direction.DOWN, 1, 1, 1);
+		setPotionList(new CopyOnWriteArrayList<>());
 		setEquippedArmor(null);
 		setEquippedWeapon(null);
 	}
@@ -40,7 +43,7 @@ public class Player extends Entity implements Moveable, Attackable {
 	}
 
 	@Override
-	public void move(int direction) {
+	public boolean move(int direction) {
 		int newPosY = getPosY();
 		int newPosX = getPosX();
 		if (direction == Direction.UP)
@@ -61,7 +64,10 @@ public class Player extends Entity implements Moveable, Attackable {
 			GameController.getGameMap().get(newPosY, newPosX).setEntity(this);
 			setPosY(newPosY);
 			setPosX(newPosX);
+			return true;
 		}
+		
+		return false;
 	}
 
 	@Override
@@ -70,16 +76,12 @@ public class Player extends Entity implements Moveable, Attackable {
 		return false;
 	}
 	
-	public void equip(Weapon w) {
-		w.onEquip(this);
+	public void equipItem(Item item) {
+		item.onEquip(this);
 	}
 
-	public void deEquip(Weapon w) {
-		w.onDeequip(this);
-	}
-
-	public void usePotion(Potion p) {
-		p.onUsed(this);
+	public void deEquipItem(Item item) {
+		item.onDeequip(this);
 	}
 
 	public ArrayList<Pair<Integer, Integer>> getAllVisibleField() {
@@ -145,11 +147,11 @@ public class Player extends Entity implements Moveable, Attackable {
 		return allPos;
 	}
 
-	public ArrayList<Potion> getPotionList() {
+	public List<Potion> getPotionList() {
 		return potionList;
 	}
 
-	public void setPotionList(ArrayList<Potion> potionList) {
+	public void setPotionList(List<Potion> potionList) {
 		this.potionList = potionList;
 	}
 

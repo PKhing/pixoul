@@ -13,7 +13,7 @@ public class HealingPotion extends Potion implements IConsecutiveEffect {
 	}
 
 	@Override
-	public void onUsed(Player player) {
+	public void onEquip(Player player) {
 		// TODO Auto-generated method stub
 		player.getPotionList().add(this);
 	}
@@ -25,7 +25,7 @@ public class HealingPotion extends Potion implements IConsecutiveEffect {
 	}
 
 	@Override
-	public void onWearOff(Player player) {
+	public void onDeequip(Player player) {
 		return;
 	}
 

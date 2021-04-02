@@ -7,9 +7,9 @@ import components.StatusPane;
 import components.PausePane;
 import controller.GameController;
 import controller.InterruptController;
-import controller.SceneController;
 import entity.Skeleton;
 import entity.base.Monster;
+import entity.base.DispatchAction;
 import items.potion.HealingPotion;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -24,7 +24,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import utils.GameConfig;
 import javafx.scene.paint.Color;
-import logic.Direction;
+import javafx.util.Pair;
 import logic.GameMap;
 import utils.DrawUtil;
 
@@ -39,12 +39,14 @@ public class GameScene {
 	public GameScene() {
 
 		GameController.setGameMap(new GameMap());
-		GameController.getPlayer().setInitialPos(GameController.getRoomList().get(0).getKey(),
-				GameController.getRoomList().get(0).getValue());
-		Skeleton skeleton = new Skeleton(0, 0, 0, 0, GameController.getRoomList().get(0).getKey(),
-				GameController.getRoomList().get(0).getValue() + 1, 0, 0, 0, 0);
+		Pair<Integer, Integer> firstRoomPos = GameController.getRoomList().get(0);
+		GameController.getPlayer().setInitialPos(firstRoomPos.getKey(), firstRoomPos.getValue());
 
-		GameController.getPlayer().usePotion(new HealingPotion("Salty Potion", "With 100 years salt effect", 10, 100));
+		Skeleton skeleton = new Skeleton(0, 0, 0, firstRoomPos.getKey(), firstRoomPos.getValue() + 1, 0, 0, 0, 1);
+
+		GameController.getGameMap().getMonsterList().add(skeleton);
+
+		GameController.getPlayer().equipItem(new HealingPotion("Salty Potion", "With 100 years salt effect", 10, 100));
 
 		StackPane root = new StackPane();
 		scene = new Scene(root, GameConfig.getScreenWidth(), GameConfig.getScreenHeight());
@@ -53,12 +55,10 @@ public class GameScene {
 		GraphicsContext gc = canvas.getGraphicsContext2D();
 		root.getChildren().add(canvas);
 
-		
 		AnchorPane buttonPane = new AnchorPane();
-		drawMap(gc,buttonPane);
+		drawMap(gc, buttonPane);
 		root.getChildren().add(buttonPane);
-		addEventListener(scene, gc,buttonPane);
-		
+		addEventListener(scene, gc, buttonPane);
 
 		// Overlay
 		AnchorPane overlay = new AnchorPane();
@@ -85,8 +85,7 @@ public class GameScene {
 			public void handle(MouseEvent arg0) {
 				root.getChildren().add(inventoryPane);
 				inventoryPane.requestFocus();
-//				InterruptController.setInventoryOpen(true);
-
+				InterruptController.setInventoryOpen(true);
 			}
 		});
 		AnchorPane.setBottomAnchor(inventoryBtn, 5.0 * GameConfig.getScale());
@@ -120,7 +119,7 @@ public class GameScene {
 		StackPane.setAlignment(new Group(pausePane), Pos.CENTER);
 	}
 
-	private void drawMap(GraphicsContext gc,AnchorPane buttonPane) {
+	private void drawMap(GraphicsContext gc, AnchorPane buttonPane) {
 		buttonPane.getChildren().clear();
 		gc.setFill(Color.rgb(0, 0, 0));
 		gc.fillRect(0, 0, GameConfig.getScreenWidth(), GameConfig.getScreenHeight());
@@ -169,37 +168,37 @@ public class GameScene {
 				if (GameController.getGameMap().get(i, j).getEntity() != null)
 					DrawUtil.drawEntity(gc, newSpriteSize * i - startY, newSpriteSize * j - startX,
 							GameController.getGameMap().get(i, j).getEntity());
-				if(GameController.getGameMap().get(i, j).getEntity() instanceof Monster)
-				DrawUtil.addEntityButton(buttonPane,newSpriteSize * i - startY, newSpriteSize * j - startX,
-						GameController.getGameMap().get(i, j).getEntity());
+				if (GameController.getGameMap().get(i, j).getEntity() instanceof Monster)
+					DrawUtil.addEntityButton(buttonPane, newSpriteSize * i - startY, newSpriteSize * j - startX,
+							GameController.getGameMap().get(i, j).getEntity());
 			}
 		}
 
 	}
 
-	private void addEventListener(Scene s, GraphicsContext gc,AnchorPane buttonPane) {
+	private void addEventListener(Scene s, GraphicsContext gc, AnchorPane buttonPane) {
 		s.setOnKeyPressed((event) -> {
-			System.out.println("Run Scene");
 			if (InterruptController.isInterruptPlayerInput()) {
 				return;
 			}
-
 			KeyCode keycode = event.getCode();
+
 			boolean isDraw = true;
 			switch (keycode) {
 			case A:
-				GameController.getPlayer().move(Direction.LEFT);
+				GameController.gameUpdate(DispatchAction.MOVE_LEFT);
 				break;
 			case D:
-				GameController.getPlayer().move(Direction.RIGHT);
+				GameController.gameUpdate(DispatchAction.MOVE_RIGHT);
 				break;
 			case W:
-				GameController.getPlayer().move(Direction.UP);
+				GameController.gameUpdate(DispatchAction.MOVE_UP);
 				break;
 			case S:
-				GameController.getPlayer().move(Direction.DOWN);
+				GameController.gameUpdate(DispatchAction.MOVE_DOWN);
 				break;
-			case SPACE:
+			case Q:
+				GameController.gameUpdate(DispatchAction.STAY_STILL);
 				break;
 			case ESCAPE:
 				if (InterruptController.isOpenFromInside()) {
@@ -215,7 +214,7 @@ public class GameScene {
 				break;
 			}
 			if (isDraw) {
-				drawMap(gc,buttonPane);
+				drawMap(gc, buttonPane);
 			}
 		});
 	}

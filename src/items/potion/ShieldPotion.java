@@ -12,14 +12,14 @@ public class ShieldPotion extends Potion {
 	}
 
 	@Override
-	public void onUsed(Player player) {
+	public void onEquip(Player player) {
 		// TODO Auto-generated method stub
 		player.setAttack(player.getDefense() + getShield());
 		player.getPotionList().add(this);
 	}
 
 	@Override
-	public void onWearOff(Player player) {
+	public void onDeequip(Player player) {
 		// TODO Auto-generated method stub
 		player.setAttack(player.getDefense() - getShield());
 		player.getPotionList().remove(this);

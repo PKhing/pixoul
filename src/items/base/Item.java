@@ -1,5 +1,7 @@
 package items.base;
 
+import entity.Player;
+
 public abstract class Item {
 	private String name;
 	private String description;
@@ -10,7 +12,9 @@ public abstract class Item {
 	}
 
 	public abstract int getSymbol();
-
+	public abstract void onEquip(Player player);
+	public abstract void onDeequip(Player player);
+	
 	public String getDescription() {
 		return description;
 	}

@@ -1,5 +1,7 @@
 package components;
 
+import controller.GameController;
+import entity.Player;
 import javafx.geometry.Insets;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -31,15 +33,17 @@ public class StatusPane extends StackPane {
 		statusBox.setPadding(new Insets(10 * GameConfig.getScale(), 10 * GameConfig.getScale(),
 				10 * GameConfig.getScale(), 15 * GameConfig.getScale()));
 
-		hp = new Text("HP: 0 / 0");
+		Player nowPlayer = GameController.getPlayer();
+		
+		hp = new Text("HP: " + nowPlayer.getHealth() + " / " + nowPlayer.getMaxHealth());
 		hp.setFont(Util.getFont());
 		statusBox.getChildren().add(hp);
 
-		attack = new Text("Attack: 0");
+		attack = new Text("Attack: " + nowPlayer.getAttack());
 		attack.setFont(Util.getFont());
 		statusBox.getChildren().add(attack);
 
-		defense = new Text("Defense: 0");
+		defense = new Text("Defense: " + nowPlayer.getDefense());
 		defense.setFont(Util.getFont());
 		statusBox.getChildren().add(defense);
 	}

@@ -1,5 +1,6 @@
 package items.armor;
 
+import entity.Player;
 import items.base.Armor;
 
 public class GoldenArmor extends Armor {
@@ -9,13 +10,13 @@ public class GoldenArmor extends Armor {
 	}
 
 	@Override
-	public void onEquip() {
+	public void onEquip(Player player) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void onDeequip() {
+	public void onDeequip(Player player) {
 		// TODO Auto-generated method stub
 		
 	}

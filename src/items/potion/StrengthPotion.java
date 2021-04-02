@@ -12,14 +12,14 @@ public class StrengthPotion extends Potion {
 	}
 
 	@Override
-	public void onUsed(Player player) {
+	public void onEquip(Player player) {
 		// TODO Auto-generated method stub
 		player.setAttack(player.getAttack() + getAtk());
 		player.getPotionList().add(this);
 	}
 
 	@Override
-	public void onWearOff(Player player) {
+	public void onDeequip(Player player) {
 		// TODO Auto-generated method stub
 		player.setAttack(player.getAttack() - getAtk());
 		player.getPotionList().remove(this);

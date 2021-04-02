@@ -8,9 +8,7 @@ public abstract class Armor extends Item {
 		setDefense(defense);
 	}
 
-	public abstract void onEquip();
-
-	public abstract void onDeequip();
+	
 
 	public int getDefense() {
 		return defense;

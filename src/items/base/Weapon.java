@@ -1,7 +1,5 @@
 package items.base;
 
-import entity.Player;
-
 public abstract class Weapon extends Item {
 	private int atk;
 	private int atkSpeed;
@@ -11,10 +9,6 @@ public abstract class Weapon extends Item {
 		setAtk(atk);
 		setAtkSpeed(atkSpeed);
 	}
-
-	public abstract void onEquip(Player player);
-
-	public abstract void onDeequip(Player player);
 
 	public int getAtk() {
 		return atk;

@@ -1,5 +1,5 @@
 package entity.base;
 
 public interface Moveable {
-	public abstract void move(int direction);
+	public abstract boolean move(int direction);
 }

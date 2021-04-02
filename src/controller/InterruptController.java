@@ -5,7 +5,7 @@ public class InterruptController {
 	private static boolean isInventoryOpen;
 	private static boolean isSettingOpen;
 	private static boolean isOpenFromInside;
-	
+
 	public static void resetInterruptState() {
 		isPauseOpen = false;
 		isInventoryOpen = false;

@@ -1,7 +1,5 @@
 package items.base;
 
-import entity.Player;
-
 public abstract class Potion extends Item {
 	private int duration;
 
@@ -9,10 +7,6 @@ public abstract class Potion extends Item {
 		super(name, description);
 		setDuration(duration);
 	}
-
-	public abstract void onUsed(Player player);
-
-	public abstract void onWearOff(Player player);
 
 	public boolean update() {
 		setDuration(getDuration() - 1);

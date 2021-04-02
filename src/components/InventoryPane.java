@@ -4,13 +4,11 @@ import java.util.ArrayList;
 
 import controller.InterruptController;
 import items.base.Item;
-import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.PixelReader;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -52,6 +50,11 @@ public class InventoryPane extends FlowPane {
 		Canvas canvas = new Canvas(40 * GameConfig.getScale(), 40 * GameConfig.getScale());
 		this.getChildren().add(canvas);
 		PixelReader headerSprite = DrawUtil.getImagePixelReader("sprites/inventory/item.png");
+		
+		canvas.setOnMouseClicked((event) -> {
+			System.out.println("Hello World");
+		});
+		
 		WritableImage img = new WritableImage(headerSprite, 0, 0, 40, 40);
 		canvas.getGraphicsContext2D().drawImage(DrawUtil.scaleUp(img), 0, 0);
 	}

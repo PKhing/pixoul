@@ -11,9 +11,9 @@ import logic.Direction;
 
 public class Skeleton extends Monster implements Moveable, Attackable {
 
-	public Skeleton(int health, int attack, int maxHealth, int defense, int posY, int posX, int direction,
-			double critRate, double critPercent, int moveSpeed) {
-		super(health, attack, maxHealth, defense, posY, posX, direction, critRate, critPercent, moveSpeed);
+	public Skeleton(int attack, int maxHealth, int defense, int posY, int posX, int direction, double critRate,
+			double critPercent, int moveSpeed) {
+		super(attack, maxHealth, defense, posY, posX, direction, critRate, critPercent, moveSpeed);
 		GameController.getGameMap().get(posY, posX).setEntity(this);
 		// TODO Auto-generated constructor stub
 	}
@@ -23,21 +23,23 @@ public class Skeleton extends Monster implements Moveable, Attackable {
 		if (Math.abs(GameController.getPlayer().getPosX() - getPosX()) <= 1
 				&& Math.abs(GameController.getPlayer().getPosY() - getPosY()) <= 1) {
 			attack();
-		}
-		else {
-			Pair<Integer,Integer> newPos = this.getNextPos();
+		} else {
+			Pair<Integer, Integer> newPos = this.getNextPos();
+			if (newPos == null) {
+				return;
+			}
 			int newY = newPos.getKey();
 			int newX = newPos.getValue();
-			if(newY-this.getPosY()==1) {
+			if (newY - this.getPosY() == 1) {
 				this.move(Direction.DOWN);
 			}
-			if(newY-this.getPosY()==-1) {
+			if (newY - this.getPosY() == -1) {
 				this.move(Direction.UP);
 			}
-			if(newX-this.getPosX()==-1) {
+			if (newX - this.getPosX() == -1) {
 				this.move(Direction.LEFT);
 			}
-			if(newX-this.getPosX()==1) {
+			if (newX - this.getPosX() == 1) {
 				this.move(Direction.RIGHT);
 			}
 		}
@@ -50,7 +52,7 @@ public class Skeleton extends Monster implements Moveable, Attackable {
 	}
 
 	@Override
-	public void move(int direction) {
+	public boolean move(int direction) {
 		int newPosY = getPosY();
 		int newPosX = getPosX();
 		if (direction == Direction.UP)
@@ -71,13 +73,16 @@ public class Skeleton extends Monster implements Moveable, Attackable {
 			GameController.getGameMap().get(newPosY, newPosX).setEntity(this);
 			setPosY(newPosY);
 			setPosX(newPosX);
+			return true;
 		}
+		
+		return false;
 	}
 
 	@Override
 	public void remove() {
 		GameController.getGameMap().get(this.getPosY(), this.getPosX()).setEntity(null);
-		
+
 	}
 
 }

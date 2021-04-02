@@ -3,19 +3,19 @@ package controller;
 import java.util.ArrayList;
 
 import entity.Player;
-import entity.base.Attackable;
+import entity.base.DispatchAction;
 import entity.base.Monster;
-import entity.base.Moveable;
 import exception.InvalidFloorException;
 import exception.NullMapException;
 import items.base.IConsecutiveEffect;
+import items.base.Item;
 import items.base.Potion;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Pair;
+import logic.Direction;
 import logic.GameMap;
 import scene.GameScene;
 import utils.GameAudioUtils;
-import utils.Util;
 
 public class GameController {
 	private static ArrayList<GameScene> floorList = new ArrayList<>();
@@ -112,12 +112,49 @@ public class GameController {
 	/*
 	 * Order of action
 	 * 
-	 * Update Potion -> Use Potion / Equip weapon, armor -> Player -> Update Monster
+	 * Update Potion -> Use Potion / Equip weapon, armor (If have) -> Player Move / Attack (If have) -> Update Monster
 	 * Health / Death -> Monster Turn -> Update Player Health / Death
 	 */
-
-	public static void gameUpdate(Pair<Integer, Integer> newPos) {
-		
+	public static void gameUpdate(DispatchAction action) {
+		potionUpdate();
+		boolean moveSuccess = true;;
+		switch(action) {
+		case MOVE_UP:
+			moveSuccess = getPlayer().move(Direction.UP);
+			break;
+		case MOVE_DOWN:
+			moveSuccess = getPlayer().move(Direction.DOWN);
+			break;
+		case MOVE_LEFT:
+			moveSuccess = getPlayer().move(Direction.LEFT);
+			break;
+		case MOVE_RIGHT:
+			moveSuccess = getPlayer().move(Direction.RIGHT);
+			break;
+		case STAY_STILL:
+			break;
+		default:
+			break;
+		}
+		if(moveSuccess) {
+			monsterUpdate();
+		}
+	}
+	
+	
+	public static void gameUpdate(DispatchAction action, Item item) {
+		potionUpdate();
+		switch(action) {
+		case USEITEM:
+			player.equipItem(item);
+			break;
+		case DEEQUIP:
+			player.deEquipItem(item);
+			break;
+		default:
+			break;
+		}
+		monsterUpdate();
 	}
 	
 	public static void potionUpdate() {
@@ -127,13 +164,13 @@ public class GameController {
 			}
 
 			if (!each.update()) {
-				each.onWearOff(player);
+				each.onDeequip(player);
 				player.getPotionList().remove(each);
 			}
 		}
 	}
 	
-	public static void monsterAction() {
+	public static void monsterUpdate() {
 		for(Monster each: gameMap.getMonsterList()) {
 			each.update();
 		}
