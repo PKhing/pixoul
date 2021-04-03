@@ -8,7 +8,6 @@ import components.PausePane;
 import controller.GameController;
 import controller.InterruptController;
 import entity.Skeleton;
-import entity.base.Monster;
 import entity.base.DispatchAction;
 import items.potion.HealingPotion;
 import javafx.event.EventHandler;
@@ -23,11 +22,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import utils.GameConfig;
-import javafx.scene.paint.Color;
 import javafx.util.Pair;
 import logic.Direction;
 import logic.GameLogic;
-import logic.GameMap;
 import utils.DrawUtil;
 
 public class GameScene {

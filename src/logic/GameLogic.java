@@ -7,7 +7,6 @@ import entity.Player;
 import entity.base.DispatchAction;
 import entity.base.Entity;
 import entity.base.Monster;
-import exception.InvalidFloorException;
 import items.base.IConsecutiveEffect;
 import items.base.Item;
 import items.base.Potion;

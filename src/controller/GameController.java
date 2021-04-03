@@ -9,6 +9,7 @@ import exception.NullMapException;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Pair;
 import logic.GameMap;
+import logic.MapGenerator;
 import scene.GameScene;
 import utils.GameAudioUtils;
 
@@ -27,7 +28,7 @@ public class GameController {
 	}
 
 	private static GameMap addNewFloor() {
-		GameMap newFloor = new GameMap();
+		GameMap newFloor = MapGenerator.generateMap();
 		floorList.add(newFloor);
 		return newFloor;
 	}
