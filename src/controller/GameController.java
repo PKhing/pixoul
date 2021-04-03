@@ -13,21 +13,21 @@ import scene.GameScene;
 import utils.GameAudioUtils;
 
 public class GameController {
-	private static ArrayList<GameScene> floorList = new ArrayList<>();
+	private static ArrayList<GameMap> floorList = new ArrayList<>();
+	private static GameMap gameMap;
 	private static MediaPlayer bgmMedia = GameAudioUtils.GameSceneBGM;
 	private static int level;
-	private static GameMap gameMap;
 	private static Player player = new Player();
 
-	public static GameScene getFloor(int floor) throws InvalidFloorException {
+	public static GameMap getFloor(int floor) throws InvalidFloorException {
 		if (floorList.size() < floor || floor <= 0) {
 			throw new InvalidFloorException();
 		}
 		return floorList.get(floor - 1);
 	}
 
-	private static GameScene addNewFloor() {
-		GameScene newFloor = new GameScene();
+	private static GameMap addNewFloor() {
+		GameMap newFloor = new GameMap();
 		floorList.add(newFloor);
 		return newFloor;
 	}
@@ -35,17 +35,17 @@ public class GameController {
 	public static boolean descending() {
 		level += 1;
 		try {
-			SceneController.setSceneToStage(getFloor(level).getScene());
+			setGameMap(getFloor(level));
 		} catch (InvalidFloorException e) {
-			GameScene newFloor = addNewFloor();
-			SceneController.setSceneToStage(newFloor.getScene());
+			GameMap newFloor = addNewFloor();
+			setGameMap(newFloor);
 		}
 		return true;
 	}
 
 	public static boolean ascending() {
 		try {
-			SceneController.setSceneToStage(getFloor(level - 1).getScene());
+			setGameMap(getFloor(level));
 		} catch (InvalidFloorException e) {
 			return false;
 		}
@@ -62,8 +62,9 @@ public class GameController {
 
 	public static void start() {
 		reset();
-		GameScene newFloor = addNewFloor();
-		SceneController.setSceneToStage(newFloor.getScene());
+		GameMap newFloor = addNewFloor();
+		setGameMap(newFloor);
+		SceneController.setSceneToStage(GameScene.getScene());
 		bgmMedia.play();
 	}
 

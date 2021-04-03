@@ -23,16 +23,16 @@ public class GameLogic {
 	public static void setItemList(ArrayList<Item> itemList) {
 		GameLogic.itemList = itemList;
 	}
-	
+
 	public static int calculateAttackValue(Entity from, Entity target) {
 		double fromAttack = from.getAttack();
 		double targetDefense = target.getDefense();
-		
+
 		int atkCal = (int) Math.max(1, (fromAttack / (fromAttack + targetDefense)) * fromAttack);
-		
+
 		return atkCal;
 	}
-	
+
 	public static void gameUpdate(DispatchAction action) {
 		boolean moveSuccess = true;
 		Player player = GameController.getPlayer();
@@ -110,13 +110,9 @@ public class GameLogic {
 		Player player = GameController.getPlayer();
 		monsterUpdate();
 		potionUpdate();
-		try {
-			GameScene gs = GameController.getFloor(GameController.getLevel());
-			gs.setHPText(player.getHealth(), player.getMaxHealth());
-			gs.setAttackText(player.getAttack());
-			gs.setDefenseText(player.getDefense());
-		} catch (InvalidFloorException e) {
-			System.out.println("Invalid floor");
-		}
+		GameScene.getStatusPane().setHP(player.getHealth(), player.getMaxHealth());
+		GameScene.getStatusPane().setAttack(player.getAttack());
+		GameScene.getStatusPane().setDefense(player.getDefense());
+		GameController.getGameMap().drawMap();
 	}
 }

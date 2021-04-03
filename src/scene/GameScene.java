@@ -31,16 +31,16 @@ import logic.GameMap;
 import utils.DrawUtil;
 
 public class GameScene {
-	private Scene scene;
-	private StatusPane statusPane;
-	private MessagePane messagePane;
-	private EffectPane effectPane;
-	private InventoryPane inventoryPane;
-	private PausePane pausePane;
+	private static Scene scene = null;
+	private static StatusPane statusPane;
+	private static MessagePane messagePane;
+	private static EffectPane effectPane;
+	private static InventoryPane inventoryPane;
+	private static PausePane pausePane;
+	private static AnchorPane buttonPane;
+	private static GraphicsContext gc;
 
-	public GameScene() {
-
-		GameController.setGameMap(new GameMap());
+	private static void initScene() {
 		Pair<Integer, Integer> firstRoomPos = GameController.getRoomList().get(0);
 		GameController.getPlayer().setInitialPos(firstRoomPos.getKey(), firstRoomPos.getValue());
 
@@ -55,11 +55,10 @@ public class GameScene {
 		scene = new Scene(root, GameConfig.getScreenWidth(), GameConfig.getScreenHeight());
 
 		Canvas canvas = new Canvas(GameConfig.getScreenWidth(), GameConfig.getScreenHeight());
-		GraphicsContext gc = canvas.getGraphicsContext2D();
+		gc = canvas.getGraphicsContext2D();
 		root.getChildren().add(canvas);
 
-		AnchorPane buttonPane = new AnchorPane();
-		drawMap(gc, buttonPane);
+		buttonPane = new AnchorPane();
 		root.getChildren().add(buttonPane);
 		addEventListener(scene, gc, buttonPane);
 
@@ -120,68 +119,11 @@ public class GameScene {
 
 		StackPane.setAlignment(new Group(inventoryPane), Pos.CENTER);
 		StackPane.setAlignment(new Group(pausePane), Pos.CENTER);
+
+		GameController.getGameMap().drawMap();
 	}
 
-	private void drawMap(GraphicsContext gc, AnchorPane buttonPane) {
-		buttonPane.getChildren().clear();
-		gc.setFill(Color.rgb(0, 0, 0));
-		gc.fillRect(0, 0, GameConfig.getScreenWidth(), GameConfig.getScreenHeight());
-
-		int newSpriteSize = GameConfig.SPRITE_SIZE * GameConfig.getScale();
-
-		int centerY = GameController.getPlayer().getPosY() * newSpriteSize
-				+ GameConfig.SPRITE_SIZE * GameConfig.getScale() / 2;
-		int centerX = GameController.getPlayer().getPosX() * newSpriteSize
-				+ GameConfig.SPRITE_SIZE * GameConfig.getScale() / 2;
-
-		int startY = centerY - GameConfig.getScreenHeight() / 2;
-		int startX = centerX - GameConfig.getScreenWidth() / 2;
-
-		int maxCellY = GameConfig.getScreenHeight() / (newSpriteSize);
-		int maxCellX = GameConfig.getScreenWidth() / (newSpriteSize);
-
-		int startIdxY = Math.max(0, GameController.getPlayer().getPosY() - maxCellY / 2 - 1);
-		int endIdxY = Math.min(GameConfig.MAP_SIZE, GameController.getPlayer().getPosY() + maxCellY / 2 + 1);
-
-		int startIdxX = Math.max(0, GameController.getPlayer().getPosX() - maxCellX / 2 - 1);
-		int endIdxX = Math.min(GameConfig.MAP_SIZE, GameController.getPlayer().getPosX() + maxCellX / 2 + 1);
-
-		// Uncomment when game is ready
-		// ArrayList<Pair<Integer, Integer>> allVisibleField = new
-		// ArrayList<Pair<Integer, Integer>>();
-		//
-		// getAllVisibleField(allVisibleField, 3, player.getPosY(), player.getPosX());
-		//
-		// allVisibleField.sort(Comparator.comparing(Pair<Integer,
-		// Integer>::getKey).thenComparingInt(Pair::getValue));
-		//
-		// for (Pair<Integer, Integer> pos : allVisibleField) {
-		// int posX = pos.getValue();
-		// int posY = pos.getKey();
-		//
-		// DrawUtil.drawCell(gc, newSpriteSize * posY - startY,
-		// newSpriteSize * posX - startX, gameMap.get(posY, posX));
-		// if (gameMap.get(posY, posX).getEntity() instanceof Player)
-		// DrawUtil.drawCharacter(gc, newSpriteSize * posY - startY,
-		// newSpriteSize * posX - startX, player.getDirection());
-		// }
-
-		for (int i = startIdxY; i <= endIdxY; i++) {
-			for (int j = startIdxX; j <= endIdxX; j++) {
-				DrawUtil.drawCell(gc, newSpriteSize * i - startY, newSpriteSize * j - startX,
-						GameController.getGameMap().get(i, j));
-				if (GameController.getGameMap().get(i, j).getEntity() != null)
-					DrawUtil.drawEntity(gc, newSpriteSize * i - startY, newSpriteSize * j - startX,
-							GameController.getGameMap().get(i, j).getEntity());
-				if (GameController.getGameMap().get(i, j).getEntity() instanceof Monster)
-					DrawUtil.addEntityButton(buttonPane, newSpriteSize * i - startY, newSpriteSize * j - startX,
-							GameController.getGameMap().get(i, j).getEntity());
-			}
-		}
-
-	}
-
-	private void addEventListener(Scene s, GraphicsContext gc, AnchorPane buttonPane) {
+	private static void addEventListener(Scene s, GraphicsContext gc, AnchorPane buttonPane) {
 		s.setOnKeyPressed((event) -> {
 			if (InterruptController.isInterruptPlayerInput()) {
 				return;
@@ -219,24 +161,58 @@ public class GameScene {
 				break;
 			}
 			if (isDraw) {
-				drawMap(gc, buttonPane);
+				GameController.getGameMap().drawMap();
 			}
 		});
 	}
 
-	public Scene getScene() {
+	public static Scene getScene() {
+		if (scene == null)
+			initScene();
 		return scene;
+
 	}
 
-	public void setHPText(int hp, int maxHP) {
-		this.statusPane.setHP(hp, maxHP);
+	public static StatusPane getStatusPane() {
+		if (statusPane == null)
+			initScene();
+		return statusPane;
 	}
 
-	public void setAttackText(int atk) {
-		this.statusPane.setAttack(atk);
+	public static MessagePane getMessagePane() {
+		if (messagePane == null)
+			initScene();
+		return messagePane;
 	}
 
-	public void setDefenseText(int def) {
-		this.statusPane.setDefense(def);
+	public static EffectPane getEffectPane() {
+		if (effectPane == null)
+			initScene();
+		return effectPane;
 	}
+
+	public static InventoryPane getInventoryPane() {
+		if (inventoryPane == null)
+			initScene();
+		return inventoryPane;
+	}
+
+	public static PausePane getPausePane() {
+		if (pausePane == null)
+			initScene();
+		return pausePane;
+	}
+
+	public static AnchorPane getButtonPane() {
+		if (buttonPane == null)
+			initScene();
+		return buttonPane;
+	}
+
+	public static GraphicsContext getGraphicsContext() {
+		if (gc == null)
+			initScene();
+		return gc;
+	}
+
 }

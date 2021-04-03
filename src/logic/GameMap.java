@@ -3,8 +3,14 @@ package logic;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import controller.GameController;
 import entity.base.Monster;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 import javafx.util.Pair;
+import scene.GameScene;
+import utils.DrawUtil;
 import utils.GameConfig;
 import utils.Util;
 
@@ -33,7 +39,68 @@ public class GameMap {
 		generateMap();
 		
 	}
+	
+	public void drawMap() {
+		GraphicsContext gc = GameScene.getGraphicsContext();
+		AnchorPane buttonPane = GameScene.getButtonPane();
+		buttonPane.getChildren().clear();
+		gc.setFill(Color.rgb(0, 0, 0));
+		gc.fillRect(0, 0, GameConfig.getScreenWidth(), GameConfig.getScreenHeight());
 
+		int newSpriteSize = GameConfig.SPRITE_SIZE * GameConfig.getScale();
+
+		int centerY = GameController.getPlayer().getPosY() * newSpriteSize
+				+ GameConfig.SPRITE_SIZE * GameConfig.getScale() / 2;
+		int centerX = GameController.getPlayer().getPosX() * newSpriteSize
+				+ GameConfig.SPRITE_SIZE * GameConfig.getScale() / 2;
+
+		int startY = centerY - GameConfig.getScreenHeight() / 2;
+		int startX = centerX - GameConfig.getScreenWidth() / 2;
+
+		int maxCellY = GameConfig.getScreenHeight() / (newSpriteSize);
+		int maxCellX = GameConfig.getScreenWidth() / (newSpriteSize);
+
+		int startIdxY = Math.max(0, GameController.getPlayer().getPosY() - maxCellY / 2 - 1);
+		int endIdxY = Math.min(GameConfig.MAP_SIZE, GameController.getPlayer().getPosY() + maxCellY / 2 + 1);
+
+		int startIdxX = Math.max(0, GameController.getPlayer().getPosX() - maxCellX / 2 - 1);
+		int endIdxX = Math.min(GameConfig.MAP_SIZE, GameController.getPlayer().getPosX() + maxCellX / 2 + 1);
+
+		// Uncomment when game is ready
+		// ArrayList<Pair<Integer, Integer>> allVisibleField = new
+		// ArrayList<Pair<Integer, Integer>>();
+		//
+		// getAllVisibleField(allVisibleField, 3, player.getPosY(), player.getPosX());
+		//
+		// allVisibleField.sort(Comparator.comparing(Pair<Integer,
+		// Integer>::getKey).thenComparingInt(Pair::getValue));
+		//
+		// for (Pair<Integer, Integer> pos : allVisibleField) {
+		// int posX = pos.getValue();
+		// int posY = pos.getKey();
+		//
+		// DrawUtil.drawCell(gc, newSpriteSize * posY - startY,
+		// newSpriteSize * posX - startX, gameMap.get(posY, posX));
+		// if (gameMap.get(posY, posX).getEntity() instanceof Player)
+		// DrawUtil.drawCharacter(gc, newSpriteSize * posY - startY,
+		// newSpriteSize * posX - startX, player.getDirection());
+		// }
+
+		for (int i = startIdxY; i <= endIdxY; i++) {
+			for (int j = startIdxX; j <= endIdxX; j++) {
+				DrawUtil.drawCell(newSpriteSize * i - startY, newSpriteSize * j - startX,
+						GameController.getGameMap().get(i, j));
+				if (GameController.getGameMap().get(i, j).getEntity() != null)
+					DrawUtil.drawEntity(newSpriteSize * i - startY, newSpriteSize * j - startX,
+							GameController.getGameMap().get(i, j).getEntity());
+				if (GameController.getGameMap().get(i, j).getEntity() instanceof Monster)
+					DrawUtil.addEntityButton(newSpriteSize * i - startY, newSpriteSize * j - startX,
+							GameController.getGameMap().get(i, j).getEntity());
+			}
+		}
+
+	}
+	
 	class State {
 		private int y, x, direction;
 

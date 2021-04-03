@@ -19,6 +19,7 @@ import javafx.scene.paint.Color;
 import logic.Cell;
 import logic.Direction;
 import logic.GameLogic;
+import scene.GameScene;
 
 public class DrawUtil {
 	private static PixelReader wallSprites = getImagePixelReader("sprites/wall.png");
@@ -36,19 +37,22 @@ public class DrawUtil {
 		gc.drawImage(scaleUp(img), 0, 0);
 	}
 
-	public static void drawPause(GraphicsContext gc) {
+	public static void drawPause(GraphicsContext gc) {		
 		WritableImage img = new WritableImage(pauseSprites, 0, 0, 16, 16);
 		gc.drawImage(scaleUp(img), 0, 0);
 	}
 
-	public static void drawCell(GraphicsContext gc, int y, int x, Cell cell) {
+	public static void drawCell(int y, int x, Cell cell) {
+		GraphicsContext gc = GameScene.getGraphicsContext();
 		if (cell.getType() != Cell.VOID) {
 			WritableImage img = new WritableImage(wallSprites, cell.getSymbol() * 32, 0, 32, 40);
 			gc.drawImage(scaleUp(img), x, y - 16);
 		}
 	}
 
-	public static void drawEntity(GraphicsContext gc, int y, int x, Entity entity) {
+	public static void drawEntity(int y, int x, Entity entity) {
+
+		GraphicsContext gc = GameScene.getGraphicsContext();
 		int direction = 0;
 		if (entity.getDirection() == Direction.UP)
 			direction = 3;
@@ -64,14 +68,15 @@ public class DrawUtil {
 		gc.drawImage(scaleUp(img), x, y - 8);
 
 		if (entity instanceof Monster)
-			drawHPBar(gc, y, x, (Monster)entity);
+			drawHPBar(y, x, (Monster) entity);
 	}
 
-	public static void drawHPBar(GraphicsContext gc, int y, int x, Monster monster) {
+	public static void drawHPBar(int y, int x, Monster monster) {
+		GraphicsContext gc = GameScene.getGraphicsContext();
 		gc.setFill(Color.BLACK);
-		gc.fillRect(x+7, y-8, 50, 4);
+		gc.fillRect(x + 7, y - 8, 50, 4);
 		gc.setFill(Color.RED);
-		gc.fillRect(x+7, y-8,  Math.ceil((double)monster.getHealth()/(double)monster.getMaxHealth()*50.0), 4);
+		gc.fillRect(x + 7, y - 8, Math.ceil((double) monster.getHealth() / (double) monster.getMaxHealth() * 50.0), 4);
 	}
 
 	public static WritableImage scaleUp(WritableImage image) {
@@ -104,7 +109,7 @@ public class DrawUtil {
 
 	}
 
-	public static void addEntityButton(AnchorPane buttonPane, int y, int x, Entity entity) {
+	public static void addEntityButton(int y, int x, Entity entity) {
 		Canvas canvas = new Canvas(GameConfig.SPRITE_SIZE * GameConfig.getScale(),
 				GameConfig.SPRITE_SIZE * GameConfig.getScale());
 		canvas.setOnMouseClicked((event) -> {
@@ -112,7 +117,7 @@ public class DrawUtil {
 		});
 		AnchorPane.setTopAnchor(canvas, (double) (y - 8));
 		AnchorPane.setLeftAnchor(canvas, (double) x);
-		buttonPane.getChildren().add(canvas);
+		GameScene.getButtonPane().getChildren().add(canvas);
 	}
 
 }
