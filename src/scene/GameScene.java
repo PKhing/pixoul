@@ -25,6 +25,8 @@ import javafx.scene.layout.StackPane;
 import utils.GameConfig;
 import javafx.scene.paint.Color;
 import javafx.util.Pair;
+import logic.Direction;
+import logic.GameLogic;
 import logic.GameMap;
 import utils.DrawUtil;
 
@@ -42,7 +44,7 @@ public class GameScene {
 		Pair<Integer, Integer> firstRoomPos = GameController.getRoomList().get(0);
 		GameController.getPlayer().setInitialPos(firstRoomPos.getKey(), firstRoomPos.getValue());
 
-		Skeleton skeleton = new Skeleton(0, 0, 0, firstRoomPos.getKey(), firstRoomPos.getValue() + 1, 0, 0, 0, 1);
+		Skeleton skeleton = new Skeleton(1, 1, 1, firstRoomPos.getKey(), firstRoomPos.getValue() + 1, Direction.DOWN, 0, 0, 1);
 
 		GameController.getGameMap().getMonsterList().add(skeleton);
 
@@ -186,19 +188,19 @@ public class GameScene {
 			boolean isDraw = true;
 			switch (keycode) {
 			case A:
-				GameController.gameUpdate(DispatchAction.MOVE_LEFT);
+				GameLogic.gameUpdate(DispatchAction.MOVE_LEFT);
 				break;
 			case D:
-				GameController.gameUpdate(DispatchAction.MOVE_RIGHT);
+				GameLogic.gameUpdate(DispatchAction.MOVE_RIGHT);
 				break;
 			case W:
-				GameController.gameUpdate(DispatchAction.MOVE_UP);
+				GameLogic.gameUpdate(DispatchAction.MOVE_UP);
 				break;
 			case S:
-				GameController.gameUpdate(DispatchAction.MOVE_DOWN);
+				GameLogic.gameUpdate(DispatchAction.MOVE_DOWN);
 				break;
 			case Q:
-				GameController.gameUpdate(DispatchAction.STAY_STILL);
+				GameLogic.gameUpdate(DispatchAction.STAY_STILL);
 				break;
 			case ESCAPE:
 				if (InterruptController.isOpenFromInside()) {
@@ -223,4 +225,15 @@ public class GameScene {
 		return scene;
 	}
 
+	public void setHPText(int hp, int maxHP) {
+		this.statusPane.setHP(hp, maxHP);
+	}
+	
+	public void setAttackText(int atk) {
+		this.statusPane.setAttack(atk);
+	}
+	
+	public void setDefenseText(int def) {
+		this.statusPane.setDefense(def);
+	}
 }

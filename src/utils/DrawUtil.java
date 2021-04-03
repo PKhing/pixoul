@@ -2,7 +2,6 @@ package utils;
 
 import java.nio.IntBuffer;
 
-import controller.GameController;
 import entity.Player;
 import entity.Skeleton;
 import entity.base.DispatchAction;
@@ -17,6 +16,7 @@ import javafx.scene.image.WritablePixelFormat;
 import javafx.scene.layout.AnchorPane;
 import logic.Cell;
 import logic.Direction;
+import logic.GameLogic;
 
 public class DrawUtil {
 	private static PixelReader wallSprites = getImagePixelReader("sprites/wall.png");
@@ -92,7 +92,7 @@ public class DrawUtil {
 	public static void addEntityButton(AnchorPane buttonPane, int y, int x, Entity entity) {
 		Canvas canvas = new Canvas(GameConfig.SPRITE_SIZE*GameConfig.getScale(),GameConfig.SPRITE_SIZE*GameConfig.getScale());
 		canvas.setOnMouseClicked((event) -> {
-			GameController.gameUpdate(DispatchAction.ATTACK, entity);
+			GameLogic.gameUpdate(DispatchAction.ATTACK, entity);
 		});
 		AnchorPane.setTopAnchor(canvas, (double) (y-8));
 		AnchorPane.setLeftAnchor(canvas, (double) x);

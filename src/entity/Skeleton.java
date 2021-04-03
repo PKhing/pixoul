@@ -8,6 +8,7 @@ import entity.base.Moveable;
 import javafx.util.Pair;
 import logic.Cell;
 import logic.Direction;
+import logic.GameLogic;
 
 public class Skeleton extends Monster implements Moveable, Attackable {
 
@@ -20,6 +21,10 @@ public class Skeleton extends Monster implements Moveable, Attackable {
 
 	@Override
 	public void update() {
+		if(getHealth() <= 0) {
+			remove();
+			return;
+		}
 		Player gamePlayer = GameController.getPlayer();
 		if (Math.abs(gamePlayer.getPosX() - getPosX()) <= 1
 				&& Math.abs(gamePlayer.getPosY() - getPosY()) <= 1) {
@@ -48,8 +53,9 @@ public class Skeleton extends Monster implements Moveable, Attackable {
 
 	@Override
 	public boolean attack(Entity target) {
-		System.out.println("Attack!");
-		return false;
+		int atkValue = GameLogic.calculateAttackValue(this, target);
+		target.setHealth(target.getHealth() - atkValue);
+		return true;
 	}
 
 	@Override
@@ -80,10 +86,5 @@ public class Skeleton extends Monster implements Moveable, Attackable {
 		return false;
 	}
 
-	@Override
-	public void remove() {
-		GameController.getGameMap().get(this.getPosY(), this.getPosX()).setEntity(null);
-
-	}
 
 }

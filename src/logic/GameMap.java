@@ -1,6 +1,7 @@
 package logic;
 
-import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import entity.base.Monster;
 import javafx.util.Pair;
@@ -21,14 +22,14 @@ public class GameMap {
 	
 	private int map[][];
 	private Cell gameMap[][];
-	private ArrayList<Pair<Integer, Integer>> roomList;
-	private ArrayList<Monster> monsterList;
+	private List<Pair<Integer, Integer>> roomList;
+	private List<Monster> monsterList;
 	
 	public GameMap() {
 		map = new int[GameConfig.MAP_SIZE + 10][GameConfig.MAP_SIZE + 10];
 		gameMap = new Cell[GameConfig.MAP_SIZE + 10][GameConfig.MAP_SIZE + 10];
-		monsterList = new ArrayList<Monster>();
-		roomList = new ArrayList<Pair<Integer, Integer>>();
+		monsterList = new CopyOnWriteArrayList<Monster>();
+		roomList = new CopyOnWriteArrayList<Pair<Integer, Integer>>();
 		generateMap();
 		
 	}
@@ -253,11 +254,11 @@ public class GameMap {
 		return gameMap[i][j];
 	}
 
-	public ArrayList<Pair<Integer, Integer>> getRoomList() {
+	public List<Pair<Integer, Integer>> getRoomList() {
 		return roomList;
 	}
 
-	public ArrayList<Monster> getMonsterList() {
+	public List<Monster> getMonsterList() {
 		return monsterList;
 	}
 }

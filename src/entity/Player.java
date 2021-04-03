@@ -17,6 +17,7 @@ import items.base.Weapon;
 import javafx.util.Pair;
 import logic.Cell;
 import logic.Direction;
+import logic.GameLogic;
 import utils.GameConfig;
 
 public class Player extends Entity implements Moveable, Attackable {
@@ -36,12 +37,7 @@ public class Player extends Entity implements Moveable, Attackable {
 		setPosX(posX);
 		setPosY(posY);
 	}
-
-	@Override
-	public void remove() {
-		GameController.getGameMap().get(this.getPosY(), this.getPosX()).setEntity(null);
-	}
-
+	
 	@Override
 	public boolean move(int direction) {
 		int newPosY = getPosY();
@@ -72,8 +68,9 @@ public class Player extends Entity implements Moveable, Attackable {
 
 	@Override
 	public boolean attack(Entity target) {
-		
-		return false;
+		int atkValue = GameLogic.calculateAttackValue(this, target);
+		target.setHealth(target.getHealth() - atkValue);
+		return true;
 	}
 	
 	public void equipItem(Item item) {
@@ -170,6 +167,4 @@ public class Player extends Entity implements Moveable, Attackable {
 	public void setEquippedWeapon(Weapon equippedWeapon) {
 		this.equippedWeapon = equippedWeapon;
 	}
-
-	
 }

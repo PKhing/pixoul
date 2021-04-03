@@ -1,5 +1,7 @@
 package entity.base;
 
+import controller.GameController;
+
 public abstract class Entity {
 	private int health;
 
@@ -35,7 +37,10 @@ public abstract class Entity {
 		this.maxHealth = maxHealth;
 	}
 
-	public abstract void remove();
+	public void remove() {
+		GameController.getGameMap().get(this.getPosY(), this.getPosX()).setEntity(null);
+		GameController.getGameMap().getMonsterList().remove(this);
+	}
 
 	public int getHealth() {
 		return health;
