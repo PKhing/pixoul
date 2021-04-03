@@ -27,7 +27,6 @@ public class StrengthPotion extends Potion {
 
 	@Override
 	public int getSymbol() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 

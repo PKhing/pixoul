@@ -45,7 +45,7 @@ public class GameScene {
 				0, 0, 1);
 		skeleton.setHealth(8);
 		GameController.getGameMap().getMonsterList().add(skeleton);
-
+		GameLogic.getItemList().add(new HealingPotion("Salty Potion", "With 100 years salt effect", 10, 100));
 		GameController.getPlayer().equipItem(new HealingPotion("Salty Potion", "With 100 years salt effect", 10, 100));
 
 		StackPane root = new StackPane();

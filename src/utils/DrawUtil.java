@@ -27,6 +27,7 @@ public class DrawUtil {
 	private static PixelReader skeletonSprites = getImagePixelReader("sprites/skeleton.png");
 	private static PixelReader backpackSprites = getImagePixelReader("sprites/backpack.png");
 	private static PixelReader pauseSprites = getImagePixelReader("sprites/pause.png");
+	private static PixelReader potionSprites = getImagePixelReader("sprites/potion.png");
 
 	public static PixelReader getImagePixelReader(String filePath) {
 		return new Image(ClassLoader.getSystemResource(filePath).toString()).getPixelReader();
@@ -42,6 +43,11 @@ public class DrawUtil {
 		gc.drawImage(scaleUp(img), 0, 0);
 	}
 
+	public static void drawPotion(GraphicsContext gc, int y,int x,int index) {		
+		WritableImage img = new WritableImage(potionSprites, index * 32, 0, 32, 32);
+		gc.drawImage(scaleUp(img), y, x);
+	}
+	
 	public static void drawCell(int y, int x, Cell cell) {
 		GraphicsContext gc = GameScene.getGraphicsContext();
 		if (cell.getType() != Cell.VOID) {

@@ -31,8 +31,7 @@ public class HealingPotion extends Potion implements IConsecutiveEffect {
 
 	@Override
 	public int getSymbol() {
-		// TODO Auto-generated method stub
-		return 0;
+		return 2;
 	}
 
 	public int getValue() {

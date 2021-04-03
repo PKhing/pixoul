@@ -28,8 +28,7 @@ public class ShieldPotion extends Potion {
 
 	@Override
 	public int getSymbol() {
-		// TODO Auto-generated method stub
-		return 0;
+		return 1;
 	}
 
 	public int getShield() {
