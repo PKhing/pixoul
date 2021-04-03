@@ -44,8 +44,9 @@ public class GameScene {
 		Pair<Integer, Integer> firstRoomPos = GameController.getRoomList().get(0);
 		GameController.getPlayer().setInitialPos(firstRoomPos.getKey(), firstRoomPos.getValue());
 
-		Skeleton skeleton = new Skeleton(1, 1, 1, firstRoomPos.getKey(), firstRoomPos.getValue() + 1, Direction.DOWN, 0, 0, 1);
-
+		Skeleton skeleton = new Skeleton(1, 10, 1, firstRoomPos.getKey(), firstRoomPos.getValue() + 1, Direction.DOWN,
+				0, 0, 1);
+		skeleton.setHealth(8);
 		GameController.getGameMap().getMonsterList().add(skeleton);
 
 		GameController.getPlayer().equipItem(new HealingPotion("Salty Potion", "With 100 years salt effect", 10, 100));
@@ -145,23 +146,25 @@ public class GameScene {
 		int startIdxX = Math.max(0, GameController.getPlayer().getPosX() - maxCellX / 2 - 1);
 		int endIdxX = Math.min(GameConfig.MAP_SIZE, GameController.getPlayer().getPosX() + maxCellX / 2 + 1);
 
-//		Uncomment when game is ready 
-//		ArrayList<Pair<Integer, Integer>> allVisibleField = new ArrayList<Pair<Integer, Integer>>();
-//
-//		getAllVisibleField(allVisibleField, 3, player.getPosY(), player.getPosX());
-//
-//		allVisibleField.sort(Comparator.comparing(Pair<Integer, Integer>::getKey).thenComparingInt(Pair::getValue));
-//
-//		for (Pair<Integer, Integer> pos : allVisibleField) {
-//			int posX = pos.getValue();
-//			int posY = pos.getKey();
-//
-//			DrawUtil.drawCell(gc, newSpriteSize * posY - startY,
-//					newSpriteSize * posX - startX, gameMap.get(posY, posX));
-//			if (gameMap.get(posY, posX).getEntity() instanceof Player)
-//				DrawUtil.drawCharacter(gc, newSpriteSize * posY - startY,
-//						newSpriteSize * posX - startX, player.getDirection());
-//		}
+		// Uncomment when game is ready
+		// ArrayList<Pair<Integer, Integer>> allVisibleField = new
+		// ArrayList<Pair<Integer, Integer>>();
+		//
+		// getAllVisibleField(allVisibleField, 3, player.getPosY(), player.getPosX());
+		//
+		// allVisibleField.sort(Comparator.comparing(Pair<Integer,
+		// Integer>::getKey).thenComparingInt(Pair::getValue));
+		//
+		// for (Pair<Integer, Integer> pos : allVisibleField) {
+		// int posX = pos.getValue();
+		// int posY = pos.getKey();
+		//
+		// DrawUtil.drawCell(gc, newSpriteSize * posY - startY,
+		// newSpriteSize * posX - startX, gameMap.get(posY, posX));
+		// if (gameMap.get(posY, posX).getEntity() instanceof Player)
+		// DrawUtil.drawCharacter(gc, newSpriteSize * posY - startY,
+		// newSpriteSize * posX - startX, player.getDirection());
+		// }
 
 		for (int i = startIdxY; i <= endIdxY; i++) {
 			for (int j = startIdxX; j <= endIdxX; j++) {
@@ -228,11 +231,11 @@ public class GameScene {
 	public void setHPText(int hp, int maxHP) {
 		this.statusPane.setHP(hp, maxHP);
 	}
-	
+
 	public void setAttackText(int atk) {
 		this.statusPane.setAttack(atk);
 	}
-	
+
 	public void setDefenseText(int def) {
 		this.statusPane.setDefense(def);
 	}

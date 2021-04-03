@@ -6,6 +6,7 @@ import entity.Player;
 import entity.Skeleton;
 import entity.base.DispatchAction;
 import entity.base.Entity;
+import entity.base.Monster;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -14,6 +15,7 @@ import javafx.scene.image.PixelReader;
 import javafx.scene.image.WritableImage;
 import javafx.scene.image.WritablePixelFormat;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 import logic.Cell;
 import logic.Direction;
 import logic.GameLogic;
@@ -55,9 +57,21 @@ public class DrawUtil {
 		if (entity.getDirection() == Direction.RIGHT)
 			direction = 2;
 		WritableImage img = null;
-		if(entity instanceof Player)img = new WritableImage(playerSprites, 1 * 32, direction * 32, 32, 32);
-		if(entity instanceof Skeleton)img = new WritableImage(skeletonSprites, 1 * 32, direction * 32, 32, 32);
+		if (entity instanceof Player)
+			img = new WritableImage(playerSprites, 1 * 32, direction * 32, 32, 32);
+		if (entity instanceof Skeleton)
+			img = new WritableImage(skeletonSprites, 1 * 32, direction * 32, 32, 32);
 		gc.drawImage(scaleUp(img), x, y - 8);
+
+		if (entity instanceof Monster)
+			drawHPBar(gc, y, x, (Monster)entity);
+	}
+
+	public static void drawHPBar(GraphicsContext gc, int y, int x, Monster monster) {
+		gc.setFill(Color.BLACK);
+		gc.fillRect(x+7, y-8, 50, 4);
+		gc.setFill(Color.RED);
+		gc.fillRect(x+7, y-8,  Math.ceil((double)monster.getHealth()/(double)monster.getMaxHealth()*50.0), 4);
 	}
 
 	public static WritableImage scaleUp(WritableImage image) {
@@ -89,12 +103,14 @@ public class DrawUtil {
 		return bigImage;
 
 	}
+
 	public static void addEntityButton(AnchorPane buttonPane, int y, int x, Entity entity) {
-		Canvas canvas = new Canvas(GameConfig.SPRITE_SIZE*GameConfig.getScale(),GameConfig.SPRITE_SIZE*GameConfig.getScale());
+		Canvas canvas = new Canvas(GameConfig.SPRITE_SIZE * GameConfig.getScale(),
+				GameConfig.SPRITE_SIZE * GameConfig.getScale());
 		canvas.setOnMouseClicked((event) -> {
 			GameLogic.gameUpdate(DispatchAction.ATTACK, entity);
 		});
-		AnchorPane.setTopAnchor(canvas, (double) (y-8));
+		AnchorPane.setTopAnchor(canvas, (double) (y - 8));
 		AnchorPane.setLeftAnchor(canvas, (double) x);
 		buttonPane.getChildren().add(canvas);
 	}
