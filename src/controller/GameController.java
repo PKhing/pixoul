@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import entity.Player;
 import entity.base.DispatchAction;
+import entity.base.Entity;
 import entity.base.Monster;
 import exception.InvalidFloorException;
 import exception.NullMapException;
@@ -116,8 +117,7 @@ public class GameController {
 	 * Health / Death -> Monster Turn -> Update Player Health / Death
 	 */
 	public static void gameUpdate(DispatchAction action) {
-		potionUpdate();
-		boolean moveSuccess = true;;
+		boolean moveSuccess = true;
 		switch(action) {
 		case MOVE_UP:
 			moveSuccess = getPlayer().move(Direction.UP);
@@ -133,17 +133,28 @@ public class GameController {
 			break;
 		case STAY_STILL:
 			break;
+		case ATTACK:
+			break;
 		default:
 			break;
 		}
 		if(moveSuccess) {
-			monsterUpdate();
+			postGameUpdate();
 		}
 	}
 	
+	public static void gameUpdate(DispatchAction action, Entity entity) {
+		int diffX = Math.abs(player.getPosX() - entity.getPosX());
+		int diffY = Math.abs(player.getPosY() - entity.getPosY());
+		
+		if(diffX <= 1 && diffY <= 1) {
+			System.out.println("Action attack");
+			player.attack(entity);
+			postGameUpdate();
+		}
+	}
 	
 	public static void gameUpdate(DispatchAction action, Item item) {
-		potionUpdate();
 		switch(action) {
 		case USEITEM:
 			player.equipItem(item);
@@ -154,7 +165,7 @@ public class GameController {
 		default:
 			break;
 		}
-		monsterUpdate();
+		postGameUpdate();
 	}
 	
 	public static void potionUpdate() {
@@ -174,5 +185,10 @@ public class GameController {
 		for(Monster each: gameMap.getMonsterList()) {
 			each.update();
 		}
+	}
+	
+	private static void postGameUpdate() {
+		monsterUpdate();
+		potionUpdate();
 	}
 }

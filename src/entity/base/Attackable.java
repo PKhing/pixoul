@@ -1,5 +1,5 @@
 package entity.base;
 
 public interface Attackable {
-	public abstract boolean attack();
+	public abstract boolean attack(Entity target);
 }

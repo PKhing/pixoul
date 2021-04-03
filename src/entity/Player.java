@@ -71,8 +71,8 @@ public class Player extends Entity implements Moveable, Attackable {
 	}
 
 	@Override
-	public boolean attack() {
-		// TODO Auto-generated method stub
+	public boolean attack(Entity target) {
+		
 		return false;
 	}
 	
