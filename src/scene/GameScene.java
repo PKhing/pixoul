@@ -1,6 +1,7 @@
 package scene;
 
 import components.EffectPane;
+import components.EquipmentPane;
 import components.InventoryPane;
 import components.MessagePane;
 import components.StatusPane;
@@ -35,6 +36,7 @@ public class GameScene {
 	private static InventoryPane inventoryPane;
 	private static PausePane pausePane;
 	private static AnchorPane buttonPane;
+	private static EquipmentPane equipmentPane;
 	private static GraphicsContext gc;
 
 	private static void initScene() {
@@ -83,6 +85,7 @@ public class GameScene {
 			@Override
 			public void handle(MouseEvent arg0) {
 				root.getChildren().add(inventoryPane);
+				overlay.getChildren().add(equipmentPane);
 				inventoryPane.requestFocus();
 				InterruptController.setInventoryOpen(true);
 			}
@@ -112,6 +115,7 @@ public class GameScene {
 		overlay.getChildren().add(pauseBtn);
 
 		inventoryPane = new InventoryPane();
+		equipmentPane = new EquipmentPane();
 		pausePane = new PausePane();
 
 		StackPane.setAlignment(new Group(inventoryPane), Pos.CENTER);
@@ -212,4 +216,7 @@ public class GameScene {
 		return gc;
 	}
 
+	public static EquipmentPane getEquipmentPane() {
+		return equipmentPane;
+	}
 }

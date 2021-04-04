@@ -15,6 +15,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import logic.GameLogic;
+import scene.GameScene;
 import utils.DrawUtil;
 import utils.GameConfig;
 import utils.Util;
@@ -37,7 +38,7 @@ public class InventoryPane extends FlowPane {
 		}
 		this.setOnKeyPressed((event) -> {
 			if(event.getCode() == KeyCode.ESCAPE) {
-				removeInventoryPane();
+				this.remove();
 				InterruptController.setOpenFromInside(true);
 			}
 		});
@@ -88,12 +89,13 @@ public class InventoryPane extends FlowPane {
 		exit.setFont(Util.getLargeFont());
 		exit.setFill(Color.rgb(123, 126, 94));
 		exit.setOnMouseClicked((event) -> {
-			removeInventoryPane();
+			this.remove();
 		});
 	}
 	
-	private void removeInventoryPane() {
+	public void remove() {
 		((Pane) getParent()).getChildren().remove(InventoryPane.this);
+		GameScene.getEquipmentPane().remove();
 		InterruptController.setInventoryOpen(false);
 		
 	}
