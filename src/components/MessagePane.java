@@ -6,7 +6,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import utils.FontUtil;
 import utils.GameConfig;
-import utils.RandomUtil;
 
 public class MessagePane extends VBox {
 	private final int MAX_MESSAGE = 4;

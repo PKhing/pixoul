@@ -75,7 +75,7 @@ public class GameLogic {
 		case USEITEM:
 			player.equipItem(item);
 			break;
-		case DEEQUIP:
+		case UNEQUIP:
 			player.unEquipItem(item);
 			break;
 		default:

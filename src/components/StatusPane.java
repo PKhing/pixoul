@@ -14,7 +14,6 @@ import javafx.scene.text.Text;
 import utils.DrawUtil;
 import utils.FontUtil;
 import utils.GameConfig;
-import utils.RandomUtil;
 
 public class StatusPane extends StackPane {
 	private Text hp, attack, defense;

@@ -5,8 +5,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-import javafx.scene.text.Font;
-
 public class RandomUtil {
 	private static Random rand = new Random();
 

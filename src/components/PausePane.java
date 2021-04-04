@@ -10,15 +10,22 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import utils.FontUtil;
-import utils.RandomUtil;
+import utils.GameConfig;
 
 public class PausePane extends VBox {
 	private static SettingPane settingPane = new SettingPane();
+	private final int heightBox = 200;
+	private final int widthBox = 180;
+	
 	public PausePane() {
 		super();
 		
 		setAlignment(Pos.CENTER);
 		setStyle("-fx-background-color: white");
+		setPrefHeight(heightBox * GameConfig.getScale());
+		setPrefWidth(widthBox * GameConfig.getScale());
+		setMaxHeight(heightBox * GameConfig.getScale());
+		setMaxWidth(widthBox * GameConfig.getScale());
 		
 		addTitle();
 		addResumeBtn();
@@ -27,7 +34,6 @@ public class PausePane extends VBox {
 		addExitBtn();
 		
 		setOnKeyPressed((event) -> {
-			System.out.println("Run Pause");
 			if(event.getCode() == KeyCode.ESCAPE) {
 				remove();
 				InterruptController.setOpenFromInside(true);

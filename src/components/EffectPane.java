@@ -6,13 +6,11 @@ import controller.GameController;
 import items.base.Potion;
 import javafx.geometry.Insets;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Background;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import utils.FontUtil;
 import utils.GameConfig;
-import utils.RandomUtil;
 
 public class EffectPane extends VBox {
 	public EffectPane() {

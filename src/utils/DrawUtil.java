@@ -38,7 +38,8 @@ public class DrawUtil {
 	private static PixelReader backpackSprites = getImagePixelReader("sprites/backpack.png");
 	private static PixelReader pauseSprites = getImagePixelReader("sprites/pause.png");
 	private static PixelReader itemSprites = getImagePixelReader("sprites/item.png");
-
+	private static Image attackMouseIcon = getAttackMouseIcon();
+	
 	private static Image getImage(String filePath) {
 		return new Image(ClassLoader.getSystemResource(filePath).toString());
 	}
@@ -156,7 +157,7 @@ public class DrawUtil {
 	public static void addCursorHover(Node node, boolean isEntity) {
 		node.setOnMouseEntered((event) -> {
 			if (isEntity) {
-				GameScene.getScene().setCursor(new ImageCursor(getImage("sprites/backpack.png")));
+				GameScene.getScene().setCursor(new ImageCursor(attackMouseIcon));
 			} else {
 				GameScene.getScene().setCursor(Cursor.HAND);
 			}
@@ -165,6 +166,10 @@ public class DrawUtil {
 		node.setOnMouseExited((event) -> {
 			GameScene.getScene().setCursor(null);
 		});
+	}
+	
+	private static Image getAttackMouseIcon() {	
+		return new WritableImage(itemSprites, 0, 0, 32, 32);
 	}
 
 }

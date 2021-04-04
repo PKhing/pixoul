@@ -19,7 +19,6 @@ import javafx.util.Duration;
 import utils.FontUtil;
 import utils.GameAudioUtils;
 import utils.GameConfig;
-import utils.RandomUtil;
 
 public class LandingScene {
 	private static Scene cachedScene = null;

@@ -15,9 +15,11 @@ import javafx.scene.text.Text;
 import utils.FontUtil;
 import utils.GameAudioUtils;
 import utils.GameConfig;
-import utils.RandomUtil;
 
 public class SettingPane extends VBox {
+	private final int heightBox = 200;
+	private final int widthBox = 200;
+
 	public SettingPane() {
 		super();
 		
@@ -25,8 +27,12 @@ public class SettingPane extends VBox {
 		this.setPadding(new Insets(20));
 
 		this.setAlignment(Pos.CENTER);
+		setPrefHeight(heightBox * GameConfig.getScale());
+		setPrefWidth(widthBox * GameConfig.getScale());
+		setMaxHeight(heightBox * GameConfig.getScale());
+		setMaxWidth(widthBox * GameConfig.getScale());
 		
-		this.addTitle();
+		addTitle();
 		this.addVolumeSlider();
 		this.addCloseText();
 		

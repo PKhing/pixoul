@@ -79,7 +79,7 @@ public class GameScene {
 		inventoryBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent arg0) {
-				if (InterruptController.isInventoryOpen())
+				if (InterruptController.isPauseOpen())
 					return;
 				root.getChildren().add(inventoryPane);
 				inventoryPane.requestFocus();

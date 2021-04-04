@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import controller.GameController;
 import controller.InterruptController;
 import items.base.Item;
-import items.base.Potion;
 import javafx.geometry.Pos;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.PixelReader;
@@ -23,7 +22,6 @@ import logic.GameLogic;
 import utils.DrawUtil;
 import utils.FontUtil;
 import utils.GameConfig;
-import utils.RandomUtil;
 
 public class InventoryPane extends AnchorPane {
 	private FlowPane itemPane;
