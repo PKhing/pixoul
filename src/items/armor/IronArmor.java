@@ -2,6 +2,7 @@ package items.armor;
 
 import entity.Player;
 import items.base.Armor;
+import logic.Sprites;
 
 public class IronArmor extends Armor {
 
@@ -23,8 +24,7 @@ public class IronArmor extends Armor {
 
 	@Override
 	public int getSymbol() {
-		// TODO Auto-generated method stub
-		return 0;
+		return Sprites.IRON_ARMOR;
 	}
 	
 	

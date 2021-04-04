@@ -24,12 +24,14 @@ import utils.GameConfig;
 import utils.RandomUtil;
 
 public class InventoryPane extends AnchorPane {
+	private FlowPane itemPane;
+	private VBox equipmentPane;
 	public InventoryPane() {
 		super();
 
 		
 		// itemPane
-		FlowPane itemPane = new FlowPane();
+		itemPane = new FlowPane();
 		AnchorPane.setLeftAnchor(itemPane, (double) (GameConfig.getScreenWidth() / 2 - 80 * GameConfig.getScale()));
 		AnchorPane.setTopAnchor(itemPane, (double) (GameConfig.getScreenHeight() / 2 - 100 * GameConfig.getScale()));
 		this.getChildren().add(itemPane);
@@ -37,14 +39,7 @@ public class InventoryPane extends AnchorPane {
 		itemPane.setPrefWidth(160 * GameConfig.getScale());
 		itemPane.setMaxHeight(200 * GameConfig.getScale());
 		itemPane.setMaxWidth(160 * GameConfig.getScale());
-		addHeader(itemPane);
-		ArrayList<Item> itemList = GameLogic.getItemList();
-		for (int i = 0; i < GameConfig.MAX_ITEM; i++) {
-			if (i < itemList.size())
-				addItem(itemPane,itemList.get(i));
-			else
-				addItem(itemPane,null);
-		}
+		
 		this.setOnKeyPressed((event) -> {
 			if (event.getCode() == KeyCode.ESCAPE) {
 				this.remove();
@@ -54,20 +49,37 @@ public class InventoryPane extends AnchorPane {
 		
 		
 		//EquipmentPane
-		VBox EquipmentPane = new VBox();
-		this.getChildren().add(EquipmentPane);
-		AnchorPane.setRightAnchor(EquipmentPane, (double) (GameConfig.getScreenWidth() / 2 - 130 * GameConfig.getScale()));
-		AnchorPane.setTopAnchor(EquipmentPane, (double) (GameConfig.getScreenHeight() / 2 - 60 * GameConfig.getScale()));
-		addEquipment(EquipmentPane,GameController.getPlayer().getEquippedWeapon());
-		addEquipment(EquipmentPane,GameController.getPlayer().getEquippedArmor());
+		equipmentPane = new VBox();
+		this.getChildren().add(equipmentPane);
+		AnchorPane.setRightAnchor(equipmentPane, (double) (GameConfig.getScreenWidth() / 2 - 130 * GameConfig.getScale()));
+		AnchorPane.setTopAnchor(equipmentPane, (double) (GameConfig.getScreenHeight() / 2 - 60 * GameConfig.getScale()));
+		
+		update();
+		
 	}
 
-	private void addEquipment(VBox EquipmentPane, Item item) {
+	public void update() {
+		itemPane.getChildren().clear();
+		equipmentPane.getChildren().clear();
+		
+		addHeader();
+		ArrayList<Item> itemList = GameLogic.getItemList();
+		for (int i = 0; i < GameConfig.MAX_ITEM; i++) {
+			if (i < itemList.size())
+				addItem(itemList.get(i));
+			else
+				addItem(null);
+		}
+		
+		addEquipment(GameController.getPlayer().getEquippedWeapon());
+		addEquipment(GameController.getPlayer().getEquippedArmor());
+	}
+	private void addEquipment(Item item) {
 
 		// TODO render item
 
 		Canvas canvas = new Canvas(40 * GameConfig.getScale(), 40 * GameConfig.getScale());
-		EquipmentPane.getChildren().add(canvas);
+		equipmentPane.getChildren().add(canvas);
 		PixelReader itemFrame = DrawUtil.getImagePixelReader("sprites/inventory/item.png");
 
 		canvas.setOnMouseClicked((event) -> {
@@ -79,7 +91,7 @@ public class InventoryPane extends AnchorPane {
 
 	}
 	
-	private void addItem(FlowPane itemPane,Item item) {
+	private void addItem(Item item) {
 
 		// TODO render item
 
@@ -95,13 +107,13 @@ public class InventoryPane extends AnchorPane {
 		canvas.getGraphicsContext2D().drawImage(DrawUtil.scaleUp(img), 0, 0);
 		
 		if (item != null) {
-			DrawUtil.drawPotion(canvas.getGraphicsContext2D(), 8, 8, item.getSymbol());
+			DrawUtil.drawItem(canvas.getGraphicsContext2D(), 8, 8, item);
 		}
 
 	}
 	
 
-	private void addHeader(FlowPane itemPane) {
+	private void addHeader() {
 
 		StackPane header = new StackPane();
 		itemPane.getChildren().add(header);

@@ -3,6 +3,7 @@ package items.potion;
 import entity.Player;
 import items.base.IConsecutiveEffect;
 import items.base.Potion;
+import logic.Sprites;
 
 public class HealingPotion extends Potion implements IConsecutiveEffect {
 	private int value;
@@ -40,7 +41,7 @@ public class HealingPotion extends Potion implements IConsecutiveEffect {
 
 	@Override
 	public int getSymbol() {
-		return 2;
+		return Sprites.HEALING_POTION;
 	}
 
 	public int getValue() {

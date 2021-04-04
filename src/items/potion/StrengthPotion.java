@@ -2,6 +2,7 @@ package items.potion;
 
 import entity.Player;
 import items.base.Potion;
+import logic.Sprites;
 
 public class StrengthPotion extends Potion {
 	private int attack;
@@ -33,7 +34,7 @@ public class StrengthPotion extends Potion {
 
 	@Override
 	public int getSymbol() {
-		return 0;
+		return Sprites.STRENGTH_POTION;
 	}
 
 	public int getAttack() {

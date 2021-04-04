@@ -2,6 +2,7 @@ package items.potion;
 
 import entity.Player;
 import items.base.Potion;
+import logic.Sprites;
 
 public class ShieldPotion extends Potion {
 	private int shield;
@@ -30,7 +31,7 @@ public class ShieldPotion extends Potion {
 
 	@Override
 	public int getSymbol() {
-		return 1;
+		return Sprites.SHIELD_POTION;
 	}
 
 	public int getShield() {

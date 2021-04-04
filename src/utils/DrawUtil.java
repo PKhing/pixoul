@@ -7,6 +7,12 @@ import entity.Skeleton;
 import entity.base.DispatchAction;
 import entity.base.Entity;
 import entity.base.Monster;
+import items.base.Armor;
+import items.base.Item;
+import items.base.Potion;
+import items.weapon.Knife;
+import items.weapon.Spear;
+import items.weapon.Sword;
 import javafx.scene.Cursor;
 import javafx.scene.ImageCursor;
 import javafx.scene.Node;
@@ -22,6 +28,7 @@ import javafx.scene.paint.Color;
 import logic.Cell;
 import logic.Direction;
 import logic.GameLogic;
+import logic.Sprites;
 import scene.GameScene;
 
 public class DrawUtil {
@@ -30,7 +37,7 @@ public class DrawUtil {
 	private static PixelReader skeletonSprites = getImagePixelReader("sprites/skeleton.png");
 	private static PixelReader backpackSprites = getImagePixelReader("sprites/backpack.png");
 	private static PixelReader pauseSprites = getImagePixelReader("sprites/pause.png");
-	private static PixelReader potionSprites = getImagePixelReader("sprites/potion.png");
+	private static PixelReader itemSprites = getImagePixelReader("sprites/item.png");
 
 	private static Image getImage(String filePath) {
 		return new Image(ClassLoader.getSystemResource(filePath).toString());
@@ -50,8 +57,20 @@ public class DrawUtil {
 		gc.drawImage(scaleUp(img), 0, 0);
 	}
 
-	public static void drawPotion(GraphicsContext gc, int y, int x, int index) {
-		WritableImage img = new WritableImage(potionSprites, index * 32, 0, 32, 32);
+	public static void drawItem(GraphicsContext gc, int y, int x, Item item) {
+		int index = 0;
+		if (item instanceof Sword)
+			index = Sprites.SWORD;
+		if (item instanceof Spear)
+			index = Sprites.SPEAR;
+		if (item instanceof Knife)
+			index = Sprites.KNIFE;
+		if (item instanceof Armor)
+			index = Sprites.ARMOR;
+		if (item instanceof Potion)
+			index = Sprites.POTION;
+
+		WritableImage img = new WritableImage(itemSprites, item.getSymbol() * 32, index * 32, 32, 32);
 		gc.drawImage(scaleUp(img), y, x);
 	}
 
@@ -136,8 +155,8 @@ public class DrawUtil {
 
 	public static void addCursorHover(Node node, boolean isEntity) {
 		node.setOnMouseEntered((event) -> {
-			if(isEntity) {
-				GameScene.getScene().setCursor(new ImageCursor(getImage("sprites/backpack.png")));	
+			if (isEntity) {
+				GameScene.getScene().setCursor(new ImageCursor(getImage("sprites/backpack.png")));
 			} else {
 				GameScene.getScene().setCursor(Cursor.HAND);
 			}
