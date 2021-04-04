@@ -5,11 +5,13 @@ import java.util.ArrayList;
 import controller.GameController;
 import controller.InterruptController;
 import items.base.Item;
+import items.base.Potion;
 import javafx.geometry.Pos;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.PixelReader;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
@@ -26,10 +28,10 @@ import utils.RandomUtil;
 public class InventoryPane extends AnchorPane {
 	private FlowPane itemPane;
 	private VBox equipmentPane;
+
 	public InventoryPane() {
 		super();
 
-		
 		// itemPane
 		itemPane = new FlowPane();
 		AnchorPane.setLeftAnchor(itemPane, (double) (GameConfig.getScreenWidth() / 2 - 80 * GameConfig.getScale()));
@@ -39,29 +41,30 @@ public class InventoryPane extends AnchorPane {
 		itemPane.setPrefWidth(160 * GameConfig.getScale());
 		itemPane.setMaxHeight(200 * GameConfig.getScale());
 		itemPane.setMaxWidth(160 * GameConfig.getScale());
-		
+
 		this.setOnKeyPressed((event) -> {
 			if (event.getCode() == KeyCode.ESCAPE) {
 				this.remove();
 				InterruptController.setOpenFromInside(true);
 			}
 		});
-		
-		
-		//EquipmentPane
+
+		// EquipmentPane
 		equipmentPane = new VBox();
 		this.getChildren().add(equipmentPane);
-		AnchorPane.setRightAnchor(equipmentPane, (double) (GameConfig.getScreenWidth() / 2 - 130 * GameConfig.getScale()));
-		AnchorPane.setTopAnchor(equipmentPane, (double) (GameConfig.getScreenHeight() / 2 - 60 * GameConfig.getScale()));
-		
+		AnchorPane.setRightAnchor(equipmentPane,
+				(double) (GameConfig.getScreenWidth() / 2 - 130 * GameConfig.getScale()));
+		AnchorPane.setTopAnchor(equipmentPane,
+				(double) (GameConfig.getScreenHeight() / 2 - 60 * GameConfig.getScale()));
+
 		update();
-		
+
 	}
 
 	public void update() {
 		itemPane.getChildren().clear();
 		equipmentPane.getChildren().clear();
-		
+
 		addHeader();
 		ArrayList<Item> itemList = GameLogic.getItemList();
 		for (int i = 0; i < GameConfig.MAX_ITEM; i++) {
@@ -70,48 +73,58 @@ public class InventoryPane extends AnchorPane {
 			else
 				addItem(null);
 		}
-		
+
 		addEquipment(GameController.getPlayer().getEquippedWeapon());
 		addEquipment(GameController.getPlayer().getEquippedArmor());
 	}
-	private void addEquipment(Item item) {
 
-		// TODO render item
+	private void addEquipment(Item item) {
 
 		Canvas canvas = new Canvas(40 * GameConfig.getScale(), 40 * GameConfig.getScale());
 		equipmentPane.getChildren().add(canvas);
 		PixelReader itemFrame = DrawUtil.getImagePixelReader("sprites/inventory/item.png");
 
-		canvas.setOnMouseClicked((event) -> {
-			System.out.println("Unequip");
-		});
-
 		WritableImage img = new WritableImage(itemFrame, 0, 0, 40, 40);
 		canvas.getGraphicsContext2D().drawImage(DrawUtil.scaleUp(img), 0, 0);
 
-	}
-	
-	private void addItem(Item item) {
+		if (item != null) {
+			canvas.setOnMouseClicked((mouseEvent) -> {
+				if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
+		            if(mouseEvent.getClickCount() == 2){
+		            	GameController.getPlayer().unEquipItem(item);
+		            	update();
+		            }
+		        }
+			});
+			DrawUtil.drawItem(canvas.getGraphicsContext2D(), 8, 8, item);
+		}
 
-		// TODO render item
+	}
+
+	private void addItem(Item item) {
 
 		Canvas canvas = new Canvas(40 * GameConfig.getScale(), 40 * GameConfig.getScale());
 		itemPane.getChildren().add(canvas);
 		PixelReader itemFrame = DrawUtil.getImagePixelReader("sprites/inventory/item.png");
 
-		canvas.setOnMouseClicked((event) -> {
-			System.out.println("Use");
-		});
+		
 
 		WritableImage img = new WritableImage(itemFrame, 0, 0, 40, 40);
 		canvas.getGraphicsContext2D().drawImage(DrawUtil.scaleUp(img), 0, 0);
-		
+
 		if (item != null) {
 			DrawUtil.drawItem(canvas.getGraphicsContext2D(), 8, 8, item);
+			canvas.setOnMouseClicked((mouseEvent) -> {
+				if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
+		            if(mouseEvent.getClickCount() == 2){
+		            	GameController.getPlayer().equipItem(item);
+		            	update();
+		            }
+		        }
+			});
 		}
 
 	}
-	
 
 	private void addHeader() {
 

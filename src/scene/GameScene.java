@@ -41,7 +41,6 @@ public class GameScene {
 	private static void initScene() {
 		Potion newPotion = new HealingPotion("Salty Potion", "With 100 years salt effect", 10, 1, false);
 		GameLogic.getItemList().add(newPotion);
-		GameController.getPlayer().equipItem(newPotion);
 
 		StackPane root = new StackPane();
 		scene = new Scene(root, GameConfig.getScreenWidth(), GameConfig.getScreenHeight());

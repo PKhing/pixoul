@@ -18,6 +18,7 @@ import javafx.util.Pair;
 import logic.Cell;
 import logic.Direction;
 import logic.GameLogic;
+import scene.GameScene;
 import utils.GameConfig;
 
 public class Player extends Entity implements Moveable, Attackable {
@@ -75,10 +76,13 @@ public class Player extends Entity implements Moveable, Attackable {
 	
 	public void equipItem(Item item) {
 		item.onEquip(this);
+		GameLogic.getItemList().remove(item);
+		if(item instanceof Potion) GameScene.getEffectPane().update();
 	}
 
 	public void unEquipItem(Item item) {
 		item.onUnequip(this);
+		GameLogic.getItemList().add(item);
 	}
 
 	public ArrayList<Pair<Integer, Integer>> getAllVisibleField(int startIdxY, int endIdxY, int startIdxX, int endIdxX) {
