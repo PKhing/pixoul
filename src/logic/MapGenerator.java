@@ -1,5 +1,7 @@
 package logic;
 
+import java.util.LinkedList;
+import java.util.Queue;
 import javafx.util.Pair;
 import utils.GameConfig;
 import utils.Util;
@@ -185,38 +187,78 @@ public class MapGenerator {
 		}
 	}
 
-	public static GameMap generateMap() {
+	private static boolean validate(GameMap gameMap) {
+		boolean[][] visit = new boolean[GameConfig.MAP_SIZE + 10][GameConfig.MAP_SIZE + 10];
 
-		GameMap gameMap = new GameMap();
-		map = new int[GameConfig.MAP_SIZE + 10][GameConfig.MAP_SIZE + 10];
-		int roomCnt = 1;
-		while (roomCnt <= MAX_ROOM) {
-			int y = Util.random(0, GameConfig.MAP_SIZE);
-			int x = Util.random(0, GameConfig.MAP_SIZE);
-			if (makeRoom(y, x, roomCnt)) {
-				gameMap.getRoomList().add(new Pair<>(y, x));
-				roomCnt++;
+		int move[][] = { { 0, 1 }, { 0, -1 }, { 1, 0 }, { -1, 0 } };
+
+		Queue<Pair<Integer, Integer>> queue = new LinkedList<>();
+		queue.add(gameMap.getRoomList().get(0));
+
+		while (!queue.isEmpty()) {
+
+			int y = queue.peek().getKey();
+			int x = queue.peek().getValue();
+
+			queue.remove();
+
+			if (gameMap.get(y, x).getType() != Cell.PATH || visit[y][x]) {
+				continue;
+			}
+			visit[y][x] = true;
+
+			for (int i = 0; i < 4; i++) {
+				if (!visit[y + move[i][0]][x + move[i][1]]) {
+					queue.add(new Pair<>(y + move[i][0], x + move[i][1]));
+				}
 			}
 		}
-		int pathCnt = 1;
-		while (pathCnt <= MAX_PATH) {
-			int y = Util.random(0, GameConfig.MAP_SIZE);
-			int x = Util.random(0, GameConfig.MAP_SIZE);
-			while (map[y][x] < 1) {
-				y = Util.random(0, GameConfig.MAP_SIZE);
-				x = Util.random(0, GameConfig.MAP_SIZE);
-			}
-			State state = new State(y, x, Util.random(0, 3));
-			int tmp = state.getType();
-			state.setType(0);
-			if (makePath(state, tmp, 0)) {
-				pathCnt++;
-				state.setType(PATH);
-			} else {
-				state.setType(tmp);
+
+		for (int i = 0; i <= GameConfig.MAP_SIZE; i++) {
+			for (int j = 0; j <= GameConfig.MAP_SIZE; j++) {
+				if (gameMap.get(i, j).getType() == Cell.PATH && !visit[i][j]) {
+					return false;
+				}
 			}
 		}
-		makeMap(gameMap.getGameMap());
+
+		return true;
+	}
+
+	public static GameMap generateMap() {
+		GameMap gameMap;
+		do {
+			gameMap = new GameMap();
+			map = new int[GameConfig.MAP_SIZE + 10][GameConfig.MAP_SIZE + 10];
+			int roomCnt = 1;
+			while (roomCnt <= MAX_ROOM) {
+				int y = Util.random(0, GameConfig.MAP_SIZE);
+				int x = Util.random(0, GameConfig.MAP_SIZE);
+				if (makeRoom(y, x, roomCnt)) {
+					gameMap.getRoomList().add(new Pair<>(y, x));
+					roomCnt++;
+				}
+			}
+			int pathCnt = 1;
+			while (pathCnt <= MAX_PATH) {
+				int y = Util.random(0, GameConfig.MAP_SIZE);
+				int x = Util.random(0, GameConfig.MAP_SIZE);
+				while (map[y][x] < 1) {
+					y = Util.random(0, GameConfig.MAP_SIZE);
+					x = Util.random(0, GameConfig.MAP_SIZE);
+				}
+				State state = new State(y, x, Util.random(0, 3));
+				int tmp = state.getType();
+				state.setType(0);
+				if (makePath(state, tmp, 0)) {
+					pathCnt++;
+					state.setType(PATH);
+				} else {
+					state.setType(tmp);
+				}
+			}
+			makeMap(gameMap.getGameMap());
+		} while (!validate(gameMap));
 		return gameMap;
 	}
 
