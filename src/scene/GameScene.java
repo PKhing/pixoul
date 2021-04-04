@@ -1,7 +1,6 @@
 package scene;
 
 import components.EffectPane;
-import components.EquipmentPane;
 import components.InventoryPane;
 import components.MessagePane;
 import components.StatusPane;
@@ -37,7 +36,6 @@ public class GameScene {
 	private static InventoryPane inventoryPane;
 	private static PausePane pausePane;
 	private static AnchorPane buttonPane;
-	private static EquipmentPane equipmentPane;
 	private static GraphicsContext gc;
 
 	private static void initScene() {
@@ -85,7 +83,6 @@ public class GameScene {
 				if (InterruptController.isInventoryOpen())
 					return;
 				root.getChildren().add(inventoryPane);
-				overlay.getChildren().add(equipmentPane);
 				inventoryPane.requestFocus();
 				InterruptController.setInventoryOpen(true);
 			}
@@ -117,7 +114,6 @@ public class GameScene {
 		overlay.getChildren().add(pauseBtn);
 
 		inventoryPane = new InventoryPane();
-		equipmentPane = new EquipmentPane();
 		pausePane = new PausePane();
 
 		StackPane.setAlignment(new Group(inventoryPane), Pos.CENTER);
@@ -212,19 +208,12 @@ public class GameScene {
 		return gc;
 	}
 
-	public static EquipmentPane getEquipmentPane() {
-		if (equipmentPane == null) {
-			initScene();
-		}
-		return equipmentPane;
-	}
-
 	public static void setPlayerPositionOnNewMap() {
 		Pair<Integer, Integer> firstRoomPos = GameController.getRoomList().get(0);
 		GameController.getPlayer().setInitialPos(firstRoomPos.getKey(), firstRoomPos.getValue());
 
-		Skeleton skeleton = new Skeleton(3, 10, 1, firstRoomPos.getKey() - 3, firstRoomPos.getValue() + 1, Direction.DOWN,
-				0, 0, 1);
+		Skeleton skeleton = new Skeleton(3, 10, 1, firstRoomPos.getKey() - 3, firstRoomPos.getValue() + 1,
+				Direction.DOWN, 0, 0, 1);
 		skeleton.setHealth(8);
 		GameController.getGameMap().getMonsterList().add(skeleton);
 	}

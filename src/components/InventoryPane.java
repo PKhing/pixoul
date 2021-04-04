@@ -2,6 +2,7 @@ package components;
 
 import java.util.ArrayList;
 
+import controller.GameController;
 import controller.InterruptController;
 import items.base.Item;
 import javafx.geometry.Pos;
@@ -13,30 +14,36 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import logic.GameLogic;
-import scene.GameScene;
 import utils.DrawUtil;
 import utils.FontUtil;
 import utils.GameConfig;
 import utils.RandomUtil;
 
-public class InventoryPane extends FlowPane {
+public class InventoryPane extends AnchorPane {
 	public InventoryPane() {
 		super();
-		this.setStyle("-fx-background-color: white");
-		this.setPrefHeight(200 * GameConfig.getScale());
-		this.setPrefWidth(160 * GameConfig.getScale());
-		this.setMaxHeight(200 * GameConfig.getScale());
-		this.setMaxWidth(160 * GameConfig.getScale());
-		addHeader();
+
+		
+		// itemPane
+		FlowPane itemPane = new FlowPane();
+		AnchorPane.setLeftAnchor(itemPane, (double) (GameConfig.getScreenWidth() / 2 - 80 * GameConfig.getScale()));
+		AnchorPane.setTopAnchor(itemPane, (double) (GameConfig.getScreenHeight() / 2 - 100 * GameConfig.getScale()));
+		this.getChildren().add(itemPane);
+		itemPane.setPrefHeight(200 * GameConfig.getScale());
+		itemPane.setPrefWidth(160 * GameConfig.getScale());
+		itemPane.setMaxHeight(200 * GameConfig.getScale());
+		itemPane.setMaxWidth(160 * GameConfig.getScale());
+		addHeader(itemPane);
 		ArrayList<Item> itemList = GameLogic.getItemList();
 		for (int i = 0; i < GameConfig.MAX_ITEM; i++) {
 			if (i < itemList.size())
-				addItem(itemList.get(i));
+				addItem(itemPane,itemList.get(i));
 			else
-				addItem(null);
+				addItem(itemPane,null);
 		}
 		this.setOnKeyPressed((event) -> {
 			if (event.getCode() == KeyCode.ESCAPE) {
@@ -44,28 +51,60 @@ public class InventoryPane extends FlowPane {
 				InterruptController.setOpenFromInside(true);
 			}
 		});
+		
+		
+		//EquipmentPane
+		VBox EquipmentPane = new VBox();
+		this.getChildren().add(EquipmentPane);
+		AnchorPane.setRightAnchor(EquipmentPane, (double) (GameConfig.getScreenWidth() / 2 - 130 * GameConfig.getScale()));
+		AnchorPane.setTopAnchor(EquipmentPane, (double) (GameConfig.getScreenHeight() / 2 - 60 * GameConfig.getScale()));
+		addEquipment(EquipmentPane,GameController.getPlayer().getEquippedWeapon());
+		addEquipment(EquipmentPane,GameController.getPlayer().getEquippedArmor());
 	}
 
-	private void addItem(Item item) {
+	private void addEquipment(VBox EquipmentPane, Item item) {
 
 		// TODO render item
 
 		Canvas canvas = new Canvas(40 * GameConfig.getScale(), 40 * GameConfig.getScale());
-		this.getChildren().add(canvas);
+		EquipmentPane.getChildren().add(canvas);
 		PixelReader itemFrame = DrawUtil.getImagePixelReader("sprites/inventory/item.png");
+
+		canvas.setOnMouseClicked((event) -> {
+			System.out.println("Unequip");
+		});
 
 		WritableImage img = new WritableImage(itemFrame, 0, 0, 40, 40);
 		canvas.getGraphicsContext2D().drawImage(DrawUtil.scaleUp(img), 0, 0);
 
+	}
+	
+	private void addItem(FlowPane itemPane,Item item) {
+
+		// TODO render item
+
+		Canvas canvas = new Canvas(40 * GameConfig.getScale(), 40 * GameConfig.getScale());
+		itemPane.getChildren().add(canvas);
+		PixelReader itemFrame = DrawUtil.getImagePixelReader("sprites/inventory/item.png");
+
+		canvas.setOnMouseClicked((event) -> {
+			System.out.println("Use");
+		});
+
+		WritableImage img = new WritableImage(itemFrame, 0, 0, 40, 40);
+		canvas.getGraphicsContext2D().drawImage(DrawUtil.scaleUp(img), 0, 0);
+		
 		if (item != null) {
 			DrawUtil.drawPotion(canvas.getGraphicsContext2D(), 8, 8, item.getSymbol());
 		}
-	}
 
-	private void addHeader() {
+	}
+	
+
+	private void addHeader(FlowPane itemPane) {
 
 		StackPane header = new StackPane();
-		this.getChildren().add(header);
+		itemPane.getChildren().add(header);
 
 		// Texture
 		Canvas canvas = new Canvas(160 * GameConfig.getScale(), 40 * GameConfig.getScale());
@@ -94,7 +133,6 @@ public class InventoryPane extends FlowPane {
 	public void remove() {
 		try {
 			((Pane) getParent()).getChildren().remove(InventoryPane.this);
-			GameScene.getEquipmentPane().remove();
 			InterruptController.setInventoryOpen(false);
 		} catch (ClassCastException e) {
 			System.out.println(this.getClass().getName() + " has already closed");

@@ -26,7 +26,6 @@ public class SceneController {
 	
 	public static void backToMainMenu() {
 		GameScene.getInventoryPane().remove();
-		GameScene.getEquipmentPane().remove();
 		GameScene.getPausePane().remove();
 		setSceneToStage(LandingScene.getScene());
 	}
