@@ -8,20 +8,18 @@ public class ShieldPotion extends Potion {
 
 	public ShieldPotion(String name, String description, int shield, int duration) {
 		super(name, description, duration);
-		// TODO Auto-generated constructor stub
+		setShield(shield);
 	}
 
 	@Override
 	public void onEquip(Player player) {
-		// TODO Auto-generated method stub
-		player.setAttack(player.getDefense() + getShield());
+		player.setDefense(player.getDefense() + getShield());
 		player.getPotionList().add(this);
 	}
 
 	@Override
 	public void onDeequip(Player player) {
-		// TODO Auto-generated method stub
-		player.setAttack(player.getDefense() - getShield());
+		player.setDefense(player.getDefense() - getShield());
 		player.getPotionList().remove(this);
 
 	}
@@ -36,6 +34,6 @@ public class ShieldPotion extends Potion {
 	}
 
 	public void setShield(int shield) {
-		this.shield = shield;
+		this.shield = Math.max(0, shield);
 	}
 }

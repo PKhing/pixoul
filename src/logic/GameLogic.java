@@ -64,7 +64,6 @@ public class GameLogic {
 		int diffY = Math.abs(player.getPosY() - entity.getPosY());
 
 		if (diffX <= 1 && diffY <= 1) {
-			System.out.println("Action attack");
 			player.attack(entity);
 			postGameUpdate();
 		}
@@ -94,9 +93,11 @@ public class GameLogic {
 
 			if (!each.update()) {
 				each.onDeequip(player);
+				GameLogic.getItemList().remove(each);
 				player.getPotionList().remove(each);
 			}
 		}
+		GameScene.getEffectPane().update();
 	}
 
 	public static void monsterUpdate() {

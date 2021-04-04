@@ -10,6 +10,7 @@ import controller.GameController;
 import controller.InterruptController;
 import entity.Skeleton;
 import entity.base.DispatchAction;
+import items.base.Potion;
 import items.potion.HealingPotion;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -40,15 +41,9 @@ public class GameScene {
 	private static GraphicsContext gc;
 
 	private static void initScene() {
-		Pair<Integer, Integer> firstRoomPos = GameController.getRoomList().get(0);
-		GameController.getPlayer().setInitialPos(firstRoomPos.getKey(), firstRoomPos.getValue());
-
-		Skeleton skeleton = new Skeleton(1, 10, 1, firstRoomPos.getKey(), firstRoomPos.getValue() + 1, Direction.DOWN,
-				0, 0, 1);
-		skeleton.setHealth(8);
-		GameController.getGameMap().getMonsterList().add(skeleton);
-		GameLogic.getItemList().add(new HealingPotion("Salty Potion", "With 100 years salt effect", 10, 100));
-		GameController.getPlayer().equipItem(new HealingPotion("Salty Potion", "With 100 years salt effect", 10, 100));
+		Potion newPotion = new HealingPotion("Salty Potion", "With 100 years salt effect", 10, 1);
+		GameLogic.getItemList().add(newPotion);
+		GameController.getPlayer().equipItem(newPotion);
 
 		StackPane root = new StackPane();
 		scene = new Scene(root, GameConfig.getScreenWidth(), GameConfig.getScreenHeight());
@@ -79,11 +74,16 @@ public class GameScene {
 		inventoryBtn.setPrefHeight(30.0 * GameConfig.getScale());
 		inventoryBtn.setPrefWidth(30.0 * GameConfig.getScale());
 		Canvas backpack = new Canvas(32 * GameConfig.getScale(), 32 * GameConfig.getScale());
+
+		DrawUtil.addCursorHover(backpack, false);
 		DrawUtil.drawBackpack(backpack.getGraphicsContext2D());
+
 		inventoryBtn.setGraphic(backpack);
 		inventoryBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent arg0) {
+				if (InterruptController.isInventoryOpen())
+					return;
 				root.getChildren().add(inventoryPane);
 				overlay.getChildren().add(equipmentPane);
 				inventoryPane.requestFocus();
@@ -104,6 +104,8 @@ public class GameScene {
 		pauseBtn.setPrefWidth(15.0 * GameConfig.getScale());
 
 		pauseBtn.setOnMouseClicked((event) -> {
+			if (InterruptController.isPauseOpen())
+				return;
 			root.getChildren().add(pausePane);
 			pausePane.requestFocus();
 			InterruptController.setPauseOpen(true);
@@ -131,7 +133,6 @@ public class GameScene {
 			}
 			KeyCode keycode = event.getCode();
 
-			boolean isDraw = true;
 			switch (keycode) {
 			case A:
 				GameLogic.gameUpdate(DispatchAction.MOVE_LEFT);
@@ -153,16 +154,11 @@ public class GameScene {
 					InterruptController.setOpenFromInside(false);
 				} else {
 					GameController.exitToMainMenu();
-					isDraw = false;
 				}
 				break;
 			default:
 				System.out.println("Invalid key");
-				isDraw = false;
 				break;
-			}
-			if (isDraw) {
-				GameController.getGameMap().drawMap();
 			}
 		});
 	}
@@ -217,6 +213,20 @@ public class GameScene {
 	}
 
 	public static EquipmentPane getEquipmentPane() {
+		if (equipmentPane == null) {
+			initScene();
+		}
 		return equipmentPane;
 	}
+
+	public static void setPlayerPositionOnNewMap() {
+		Pair<Integer, Integer> firstRoomPos = GameController.getRoomList().get(0);
+		GameController.getPlayer().setInitialPos(firstRoomPos.getKey(), firstRoomPos.getValue());
+
+		Skeleton skeleton = new Skeleton(3, 10, 1, firstRoomPos.getKey(), firstRoomPos.getValue() + 1, Direction.DOWN,
+				0, 0, 1);
+		skeleton.setHealth(8);
+		GameController.getGameMap().getMonsterList().add(skeleton);
+	}
+
 }

@@ -7,6 +7,9 @@ import entity.Skeleton;
 import entity.base.DispatchAction;
 import entity.base.Entity;
 import entity.base.Monster;
+import javafx.scene.Cursor;
+import javafx.scene.ImageCursor;
+import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -29,8 +32,12 @@ public class DrawUtil {
 	private static PixelReader pauseSprites = getImagePixelReader("sprites/pause.png");
 	private static PixelReader potionSprites = getImagePixelReader("sprites/potion.png");
 
+	private static Image getImage(String filePath) {
+		return new Image(ClassLoader.getSystemResource(filePath).toString());
+	}
+
 	public static PixelReader getImagePixelReader(String filePath) {
-		return new Image(ClassLoader.getSystemResource(filePath).toString()).getPixelReader();
+		return getImage(filePath).getPixelReader();
 	}
 
 	public static void drawBackpack(GraphicsContext gc) {
@@ -38,16 +45,16 @@ public class DrawUtil {
 		gc.drawImage(scaleUp(img), 0, 0);
 	}
 
-	public static void drawPause(GraphicsContext gc) {		
+	public static void drawPause(GraphicsContext gc) {
 		WritableImage img = new WritableImage(pauseSprites, 0, 0, 16, 16);
 		gc.drawImage(scaleUp(img), 0, 0);
 	}
 
-	public static void drawPotion(GraphicsContext gc, int y,int x,int index) {		
+	public static void drawPotion(GraphicsContext gc, int y, int x, int index) {
 		WritableImage img = new WritableImage(potionSprites, index * 32, 0, 32, 32);
 		gc.drawImage(scaleUp(img), y, x);
 	}
-	
+
 	public static void drawCell(int y, int x, Cell cell) {
 		GraphicsContext gc = GameScene.getGraphicsContext();
 		if (cell.getType() != Cell.VOID) {
@@ -121,9 +128,24 @@ public class DrawUtil {
 		canvas.setOnMouseClicked((event) -> {
 			GameLogic.gameUpdate(DispatchAction.ATTACK, entity);
 		});
+		addCursorHover(canvas, true);
 		AnchorPane.setTopAnchor(canvas, (double) (y - 8));
 		AnchorPane.setLeftAnchor(canvas, (double) x);
 		GameScene.getButtonPane().getChildren().add(canvas);
+	}
+
+	public static void addCursorHover(Node node, boolean isEntity) {
+		node.setOnMouseEntered((event) -> {
+			if(isEntity) {
+				GameScene.getScene().setCursor(new ImageCursor(getImage("sprites/backpack.png")));	
+			} else {
+				GameScene.getScene().setCursor(Cursor.HAND);
+			}
+		});
+
+		node.setOnMouseExited((event) -> {
+			GameScene.getScene().setCursor(null);
+		});
 	}
 
 }

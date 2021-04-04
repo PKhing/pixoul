@@ -2,6 +2,7 @@ package controller;
 
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import scene.GameScene;
 import scene.LandingScene;
 
 public class SceneController {
@@ -24,6 +25,9 @@ public class SceneController {
 	}
 	
 	public static void backToMainMenu() {
+		GameScene.getInventoryPane().remove();
+		GameScene.getEquipmentPane().remove();
+		GameScene.getPausePane().remove();
 		setSceneToStage(LandingScene.getScene());
 	}
 	

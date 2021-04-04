@@ -26,7 +26,7 @@ public class Player extends Entity implements Moveable, Attackable {
 	private Weapon equippedWeapon;
 
 	public Player() {
-		super(1, 10, 1, 0, 0, Direction.DOWN, 1, 1, 1);
+		super(5, 10, 1, 0, 0, Direction.DOWN, 1, 1, 1);
 		setPotionList(new CopyOnWriteArrayList<>());
 		setEquippedArmor(null);
 		setEquippedWeapon(null);
@@ -81,7 +81,7 @@ public class Player extends Entity implements Moveable, Attackable {
 		item.onDeequip(this);
 	}
 
-	public ArrayList<Pair<Integer, Integer>> getAllVisibleField() {
+	public ArrayList<Pair<Integer, Integer>> getAllVisibleField(int startIdxY, int endIdxY, int startIdxX, int endIdxX) {
 		int posY = this.getPosY();
 		int posX = this.getPosX();
 
@@ -102,6 +102,10 @@ public class Player extends Entity implements Moveable, Attackable {
 			queue.remove();
 
 			if (level > GameConfig.LINE_OF_SIGHT) {
+				continue;
+			}
+			
+			if(nowY > endIdxY || nowY < startIdxY || nowX > endIdxX || nowX < startIdxX) {
 				continue;
 			}
 

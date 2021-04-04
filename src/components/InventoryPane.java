@@ -37,7 +37,7 @@ public class InventoryPane extends FlowPane {
 				addItem(null);
 		}
 		this.setOnKeyPressed((event) -> {
-			if(event.getCode() == KeyCode.ESCAPE) {
+			if (event.getCode() == KeyCode.ESCAPE) {
 				this.remove();
 				InterruptController.setOpenFromInside(true);
 			}
@@ -51,15 +51,11 @@ public class InventoryPane extends FlowPane {
 		Canvas canvas = new Canvas(40 * GameConfig.getScale(), 40 * GameConfig.getScale());
 		this.getChildren().add(canvas);
 		PixelReader itemFrame = DrawUtil.getImagePixelReader("sprites/inventory/item.png");
-		
-		canvas.setOnMouseClicked((event) -> {
-			System.out.println("Hello World");
-		});
-		
+
 		WritableImage img = new WritableImage(itemFrame, 0, 0, 40, 40);
 		canvas.getGraphicsContext2D().drawImage(DrawUtil.scaleUp(img), 0, 0);
-		
-		if(item!=null) {
+
+		if (item != null) {
 			DrawUtil.drawPotion(canvas.getGraphicsContext2D(), 8, 8, item.getSymbol());
 		}
 	}
@@ -92,11 +88,16 @@ public class InventoryPane extends FlowPane {
 			this.remove();
 		});
 	}
-	
+
 	public void remove() {
-		((Pane) getParent()).getChildren().remove(InventoryPane.this);
-		GameScene.getEquipmentPane().remove();
-		InterruptController.setInventoryOpen(false);
-		
+		try {
+			((Pane) getParent()).getChildren().remove(InventoryPane.this);
+			GameScene.getEquipmentPane().remove();
+			InterruptController.setInventoryOpen(false);
+		} catch (ClassCastException e) {
+			System.out.println(this.getClass().getName() + " has already closed");
+		} catch (NullPointerException e) {
+			System.out.println(this.getClass().getName() + " has not opened yet.");
+		}
 	}
 }

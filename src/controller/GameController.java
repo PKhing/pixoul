@@ -18,7 +18,11 @@ public class GameController {
 	private static GameMap gameMap;
 	private static MediaPlayer bgmMedia = GameAudioUtils.GameSceneBGM;
 	private static int level;
-	private static Player player = new Player();
+	private static Player player;
+	
+	static {
+		setPlayer(new Player());
+	}
 
 	public static GameMap getFloor(int floor) throws InvalidFloorException {
 		if (floorList.size() < floor || floor <= 0) {
@@ -65,6 +69,8 @@ public class GameController {
 		reset();
 		GameMap newFloor = addNewFloor();
 		setGameMap(newFloor);
+		GameScene.setPlayerPositionOnNewMap();
+		getGameMap().drawMap();
 		SceneController.setSceneToStage(GameScene.getScene());
 		bgmMedia.play();
 	}

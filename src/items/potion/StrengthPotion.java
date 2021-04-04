@@ -4,24 +4,25 @@ import entity.Player;
 import items.base.Potion;
 
 public class StrengthPotion extends Potion {
-	private int atk;
+	private int attack;
 
-	public StrengthPotion(String name, String description, int duration) {
+	public StrengthPotion(String name, String description, int attack, int duration) {
 		super(name, description, duration);
+		setAttack(attack);
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public void onEquip(Player player) {
 		// TODO Auto-generated method stub
-		player.setAttack(player.getAttack() + getAtk());
+		player.setAttack(player.getAttack() + getAttack());
 		player.getPotionList().add(this);
 	}
 
 	@Override
 	public void onDeequip(Player player) {
 		// TODO Auto-generated method stub
-		player.setAttack(player.getAttack() - getAtk());
+		player.setAttack(player.getAttack() - getAttack());
 		player.getPotionList().remove(this);
 	}
 
@@ -30,12 +31,11 @@ public class StrengthPotion extends Potion {
 		return 0;
 	}
 
-	public int getAtk() {
-		return atk;
+	public int getAttack() {
+		return attack;
 	}
 
-	public void setAtk(int atk) {
-		atk = Math.max(0, atk);
-		this.atk = atk;
+	public void setAttack(int attack) {
+		this.attack = Math.max(0, attack);
 	}
 }

@@ -28,7 +28,7 @@ public class PausePane extends VBox {
 		setOnKeyPressed((event) -> {
 			System.out.println("Run Pause");
 			if(event.getCode() == KeyCode.ESCAPE) {
-				removePausePane();
+				remove();
 				InterruptController.setOpenFromInside(true);
 			}
 		});
@@ -47,7 +47,7 @@ public class PausePane extends VBox {
 		Button resumeBtn = new Button("Resume");
 
 		resumeBtn.setOnMouseClicked((event) -> {
-			removePausePane();
+			remove();
 		});
 
 		getChildren().add(resumeBtn);
@@ -86,9 +86,14 @@ public class PausePane extends VBox {
 		getChildren().add(exitBtn);
 	}
 	
-	private void removePausePane() {
-		((StackPane) getParent()).getChildren().remove(this);
-		InterruptController.setPauseOpen(false);
-		
+	public void remove() {
+		try {
+			((StackPane) getParent()).getChildren().remove(this);
+			InterruptController.setPauseOpen(false);
+		} catch(ClassCastException e) {
+			System.out.println(this.getClass().getName() + " has already closed");
+		} catch (NullPointerException e) {
+			System.out.println(this.getClass().getName() + " has not opened yet.");
+		}
 	}
 }

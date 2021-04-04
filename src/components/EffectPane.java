@@ -28,6 +28,5 @@ public class EffectPane extends VBox {
 			effect.setFill(Color.WHITE);
 			this.getChildren().add(effect);
 		}
-
 	}
 }

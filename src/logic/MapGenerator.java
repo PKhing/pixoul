@@ -145,12 +145,12 @@ public class MapGenerator {
 		}
 
 		state.setType(PROCESSING);
-		Integer actionTxpe[] = { STRAIGHT, TURN_LEFT, TURN_RIGHT };
-		Util.shuffle(actionTxpe);
+		Integer actionType[] = { STRAIGHT, TURN_LEFT, TURN_RIGHT };
+		Util.shuffle(actionType);
 
 		for (int i = 0; i < 3; i++) {
 			State newState = state.newState();
-			newState.doAction(actionTxpe[i]);
+			newState.doAction(actionType[i]);
 			if (makePath(newState, startRoom, length + 1)) {
 				state.setType(PATH);
 				return true;
