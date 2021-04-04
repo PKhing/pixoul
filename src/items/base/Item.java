@@ -13,7 +13,7 @@ public abstract class Item {
 
 	public abstract int getSymbol();
 	public abstract void onEquip(Player player);
-	public abstract void onDeequip(Player player);
+	public abstract void onUnequip(Player player);
 	
 	public String getDescription() {
 		return description;

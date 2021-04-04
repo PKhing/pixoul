@@ -223,7 +223,7 @@ public class GameScene {
 		Pair<Integer, Integer> firstRoomPos = GameController.getRoomList().get(0);
 		GameController.getPlayer().setInitialPos(firstRoomPos.getKey(), firstRoomPos.getValue());
 
-		Skeleton skeleton = new Skeleton(3, 10, 1, firstRoomPos.getKey(), firstRoomPos.getValue() + 1, Direction.DOWN,
+		Skeleton skeleton = new Skeleton(3, 10, 1, firstRoomPos.getKey() - 3, firstRoomPos.getValue() + 1, Direction.DOWN,
 				0, 0, 1);
 		skeleton.setHealth(8);
 		GameController.getGameMap().getMonsterList().add(skeleton);

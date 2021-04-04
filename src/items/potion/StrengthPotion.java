@@ -20,7 +20,7 @@ public class StrengthPotion extends Potion {
 	}
 
 	@Override
-	public void onDeequip(Player player) {
+	public void onUnequip(Player player) {
 		// TODO Auto-generated method stub
 		player.setAttack(player.getAttack() - getAttack());
 		player.getPotionList().remove(this);

@@ -18,7 +18,7 @@ public class ShieldPotion extends Potion {
 	}
 
 	@Override
-	public void onDeequip(Player player) {
+	public void onUnequip(Player player) {
 		player.setDefense(player.getDefense() - getShield());
 		player.getPotionList().remove(this);
 

@@ -53,6 +53,12 @@ public class StatusPane extends StackPane {
 		WritableImage img = new WritableImage(texture, 0, 0, 75, 48);
 		gc.drawImage(DrawUtil.scaleUp(img), 0, 0);
 	}
+	
+	public void setAllValue(Player player) {
+		this.setHP(player.getHealth(), player.getMaxHealth());
+		this.setAttack(player.getAttack());
+		this.setDefense(player.getDefense());
+	}
 
 	public void setHP(Integer hp, Integer maxHP) {
 		this.hp.setText("HP: " + hp.toString() + " / " + maxHP.toString());

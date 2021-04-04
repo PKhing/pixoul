@@ -78,7 +78,7 @@ public class Player extends Entity implements Moveable, Attackable {
 	}
 
 	public void deEquipItem(Item item) {
-		item.onDeequip(this);
+		item.onUnequip(this);
 	}
 
 	public ArrayList<Pair<Integer, Integer>> getAllVisibleField(int startIdxY, int endIdxY, int startIdxX, int endIdxX) {

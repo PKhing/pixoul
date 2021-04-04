@@ -92,7 +92,7 @@ public class GameLogic {
 			}
 
 			if (!each.update()) {
-				each.onDeequip(player);
+				each.onUnequip(player);
 				GameLogic.getItemList().remove(each);
 				player.getPotionList().remove(each);
 			}

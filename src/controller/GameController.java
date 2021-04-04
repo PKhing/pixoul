@@ -70,6 +70,7 @@ public class GameController {
 		GameMap newFloor = addNewFloor();
 		setGameMap(newFloor);
 		GameScene.setPlayerPositionOnNewMap();
+		GameScene.getStatusPane().setAllValue(GameController.getPlayer());
 		getGameMap().drawMap();
 		SceneController.setSceneToStage(GameScene.getScene());
 		bgmMedia.play();

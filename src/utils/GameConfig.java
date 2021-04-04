@@ -17,8 +17,8 @@ public class GameConfig {
 	public static final int SPRITE_SIZE = 32;
 
 	public static final int MAX_ITEM = 16;
-	public static final int LINE_OF_SIGHT = 5;
-	public static final int MONSTER_LINE_OF_SIGHT = 5;
+	public static final int LINE_OF_SIGHT = 3;
+	public static final int MONSTER_LINE_OF_SIGHT = 3;
 
 	public static int getScreenWidth() {
 		return screenWidth;

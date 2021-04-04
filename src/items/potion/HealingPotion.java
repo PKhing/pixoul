@@ -25,7 +25,7 @@ public class HealingPotion extends Potion implements IConsecutiveEffect {
 	}
 
 	@Override
-	public void onDeequip(Player player) {
+	public void onUnequip(Player player) {
 		return;
 	}
 

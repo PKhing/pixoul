@@ -18,7 +18,7 @@ public class Knife extends Weapon {
 	}
 
 	@Override
-	public void onDeequip(Player player) {
+	public void onUnequip(Player player) {
 		// TODO Auto-generated method stub
 		player.setAttack(player.getAttack() - getAtk());
 		player.setEquippedWeapon(null);

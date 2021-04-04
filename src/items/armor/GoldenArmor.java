@@ -16,7 +16,7 @@ public class GoldenArmor extends Armor {
 	}
 
 	@Override
-	public void onDeequip(Player player) {
+	public void onUnequip(Player player) {
 		// TODO Auto-generated method stub
 		
 	}
