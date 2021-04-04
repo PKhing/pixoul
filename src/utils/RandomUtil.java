@@ -7,27 +7,11 @@ import java.util.Random;
 
 import javafx.scene.text.Font;
 
-public class Util {
+public class RandomUtil {
 	private static Random rand = new Random();
-	private static Font font;
-	private static Font largeFont;
 
 	public static int random(int st, int ed) {
 		return st + rand.nextInt(ed - st + 1);
-	}
-
-	public static Font getFont() {
-		if (font == null) {
-			font = Font.loadFont(ClassLoader.getSystemResourceAsStream("font.ttf"), 12 * GameConfig.getScale());
-		}
-		return font;
-	}
-
-	public static Font getLargeFont() {
-		if (largeFont == null) {
-			largeFont = Font.loadFont(ClassLoader.getSystemResourceAsStream("font.ttf"), 30 * GameConfig.getScale());
-		}
-		return largeFont;
 	}
 
 	public static void shuffle(Integer[] intArray) {

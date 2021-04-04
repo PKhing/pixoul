@@ -41,7 +41,7 @@ public class GameScene {
 	private static GraphicsContext gc;
 
 	private static void initScene() {
-		Potion newPotion = new HealingPotion("Salty Potion", "With 100 years salt effect", 10, 1);
+		Potion newPotion = new HealingPotion("Salty Potion", "With 100 years salt effect", 10, 1, false);
 		GameLogic.getItemList().add(newPotion);
 		GameController.getPlayer().equipItem(newPotion);
 

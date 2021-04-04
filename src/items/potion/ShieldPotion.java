@@ -6,22 +6,26 @@ import items.base.Potion;
 public class ShieldPotion extends Potion {
 	private int shield;
 
-	public ShieldPotion(String name, String description, int shield, int duration) {
-		super(name, description, duration);
+	public ShieldPotion(String name, String description, int shield, int duration, boolean isPermanant) {
+		super(name, description, duration, isPermanant);
 		setShield(shield);
 	}
 
 	@Override
 	public void onEquip(Player player) {
 		player.setDefense(player.getDefense() + getShield());
+		if(!isPermanant()) {
+			setDuration(0);
+		}
 		player.getPotionList().add(this);
 	}
 
 	@Override
 	public void onUnequip(Player player) {
-		player.setDefense(player.getDefense() - getShield());
+		if(!isPermanant()) {
+			player.setDefense(player.getDefense() - getShield());
+		}
 		player.getPotionList().remove(this);
-
 	}
 
 	@Override

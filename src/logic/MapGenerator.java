@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 import javafx.util.Pair;
 import utils.GameConfig;
-import utils.Util;
+import utils.RandomUtil;
 
 public class MapGenerator {
 
@@ -146,7 +146,7 @@ public class MapGenerator {
 
 		state.setType(PROCESSING);
 		Integer actionType[] = { STRAIGHT, TURN_LEFT, TURN_RIGHT };
-		Util.shuffle(actionType);
+		RandomUtil.shuffle(actionType);
 
 		for (int i = 0; i < 3; i++) {
 			State newState = state.newState();
@@ -232,8 +232,8 @@ public class MapGenerator {
 			map = new int[GameConfig.MAP_SIZE + 10][GameConfig.MAP_SIZE + 10];
 			int roomCnt = 1;
 			while (roomCnt <= MAX_ROOM) {
-				int y = Util.random(0, GameConfig.MAP_SIZE);
-				int x = Util.random(0, GameConfig.MAP_SIZE);
+				int y = RandomUtil.random(0, GameConfig.MAP_SIZE);
+				int x = RandomUtil.random(0, GameConfig.MAP_SIZE);
 				if (makeRoom(y, x, roomCnt)) {
 					gameMap.getRoomList().add(new Pair<>(y, x));
 					roomCnt++;
@@ -241,13 +241,13 @@ public class MapGenerator {
 			}
 			int pathCnt = 1;
 			while (pathCnt <= MAX_PATH) {
-				int y = Util.random(0, GameConfig.MAP_SIZE);
-				int x = Util.random(0, GameConfig.MAP_SIZE);
+				int y = RandomUtil.random(0, GameConfig.MAP_SIZE);
+				int x = RandomUtil.random(0, GameConfig.MAP_SIZE);
 				while (map[y][x] < 1) {
-					y = Util.random(0, GameConfig.MAP_SIZE);
-					x = Util.random(0, GameConfig.MAP_SIZE);
+					y = RandomUtil.random(0, GameConfig.MAP_SIZE);
+					x = RandomUtil.random(0, GameConfig.MAP_SIZE);
 				}
-				State state = new State(y, x, Util.random(0, 3));
+				State state = new State(y, x, RandomUtil.random(0, 3));
 				int tmp = state.getType();
 				state.setType(0);
 				if (makePath(state, tmp, 0)) {

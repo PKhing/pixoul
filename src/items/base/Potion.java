@@ -2,10 +2,12 @@ package items.base;
 
 public abstract class Potion extends Item {
 	private int duration;
-
-	public Potion(String name, String description, int duration) {
+	private boolean isPermanant;
+	
+	public Potion(String name, String description, int duration, boolean isPermanant) {
 		super(name, description);
 		setDuration(duration);
+		setPermanant(isPermanant);
 	}
 
 	public boolean update() {
@@ -21,6 +23,14 @@ public abstract class Potion extends Item {
 
 	public void setDuration(int duration) {
 		this.duration = duration;
+	}
+
+	public boolean isPermanant() {
+		return isPermanant;
+	}
+
+	public void setPermanant(boolean isPermanant) {
+		this.isPermanant = isPermanant;
 	}
 
 }

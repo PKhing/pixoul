@@ -12,9 +12,10 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import utils.FontUtil;
 import utils.GameAudioUtils;
 import utils.GameConfig;
-import utils.Util;
+import utils.RandomUtil;
 
 public class SettingPane extends VBox {
 	public SettingPane() {
@@ -44,7 +45,7 @@ public class SettingPane extends VBox {
 		closeBox.setAlignment(Pos.CENTER);
 		
 		Text closeText = new Text("OK");
-		closeText.setFont(Util.getFont());
+		closeText.setFont(FontUtil.getFont());
 		
 		closeText.setOnMouseClicked((event) -> {
 			try {
@@ -63,7 +64,7 @@ public class SettingPane extends VBox {
 	private void addTitle() {
 		Text optionTitle = new Text("Option");
 		
-		optionTitle.setFont(Util.getLargeFont());
+		optionTitle.setFont(FontUtil.getLargeFont());
 		this.getChildren().add(optionTitle);
 	}
 	
@@ -74,7 +75,7 @@ public class SettingPane extends VBox {
 		bgmVolumeBox.setAlignment(Pos.CENTER);
 
 		Label volumeLabel = new Label("BGM Volume");
-		volumeLabel.setFont(Util.getFont());
+		volumeLabel.setFont(FontUtil.getFont());
 		
 		Slider volumeSlider = new Slider(0, 100, (int) (GameConfig.getVolume() * 100));
 		volumeSlider.valueProperty().addListener(new ChangeListener<Number>() {

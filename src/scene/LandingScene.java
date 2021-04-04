@@ -16,9 +16,10 @@ import javafx.scene.layout.VBox;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
+import utils.FontUtil;
 import utils.GameAudioUtils;
 import utils.GameConfig;
-import utils.Util;
+import utils.RandomUtil;
 
 public class LandingScene {
 	private static Scene cachedScene = null;
@@ -41,7 +42,7 @@ public class LandingScene {
 		// Title Text
 
 		Text titleText = new Text("Pixoul");
-		titleText.setFont(Util.getLargeFont());
+		titleText.setFont(FontUtil.getLargeFont());
 
 		box.getChildren().add(titleText);
 

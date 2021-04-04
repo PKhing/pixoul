@@ -12,8 +12,9 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import utils.DrawUtil;
+import utils.FontUtil;
 import utils.GameConfig;
-import utils.Util;
+import utils.RandomUtil;
 
 public class StatusPane extends StackPane {
 	private Text hp, attack, defense;
@@ -36,15 +37,15 @@ public class StatusPane extends StackPane {
 		Player nowPlayer = GameController.getPlayer();
 		
 		hp = new Text("HP: " + nowPlayer.getHealth() + " / " + nowPlayer.getMaxHealth());
-		hp.setFont(Util.getFont());
+		hp.setFont(FontUtil.getFont());
 		statusBox.getChildren().add(hp);
 
 		attack = new Text("Attack: " + nowPlayer.getAttack());
-		attack.setFont(Util.getFont());
+		attack.setFont(FontUtil.getFont());
 		statusBox.getChildren().add(attack);
 
 		defense = new Text("Defense: " + nowPlayer.getDefense());
-		defense.setFont(Util.getFont());
+		defense.setFont(FontUtil.getFont());
 		statusBox.getChildren().add(defense);
 	}
 

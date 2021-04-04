@@ -9,7 +9,8 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-import utils.Util;
+import utils.FontUtil;
+import utils.RandomUtil;
 
 public class PausePane extends VBox {
 	private static SettingPane settingPane = new SettingPane();
@@ -38,7 +39,7 @@ public class PausePane extends VBox {
 	private void addTitle() {
 		Text titleText = new Text("Paused");
 		
-		titleText.setFont(Util.getLargeFont());
+		titleText.setFont(FontUtil.getLargeFont());
 		
 		getChildren().add(titleText);
 	}

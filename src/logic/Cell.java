@@ -2,7 +2,7 @@ package logic;
 
 import entity.base.Entity;
 import items.base.Item;
-import utils.Util;
+import utils.RandomUtil;
 
 public class Cell {
 	public static final int PATH = 0;
@@ -32,7 +32,7 @@ public class Cell {
 	public void setType(int type) {
 		this.type = type;
 		if (type == PATH)
-			setSymbol(Util.random(0, TILE_SPRITE_TYPE - 1));
+			setSymbol(RandomUtil.random(0, TILE_SPRITE_TYPE - 1));
 		if (type == WALL)
 			setSymbol(6);
 	}

@@ -4,8 +4,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import utils.FontUtil;
 import utils.GameConfig;
-import utils.Util;
+import utils.RandomUtil;
 
 public class MessagePane extends VBox {
 	private final int MAX_MESSAGE = 4;
@@ -24,7 +25,7 @@ public class MessagePane extends VBox {
 			this.getChildren().remove(0);
 		}
 		Text message = new Text(text);
-		message.setFont(Util.getFont());
+		message.setFont(FontUtil.getFont());
 		message.setFill(Color.WHITE);
 		this.getChildren().add(message);
 	}

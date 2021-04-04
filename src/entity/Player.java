@@ -77,7 +77,7 @@ public class Player extends Entity implements Moveable, Attackable {
 		item.onEquip(this);
 	}
 
-	public void deEquipItem(Item item) {
+	public void unEquipItem(Item item) {
 		item.onUnequip(this);
 	}
 

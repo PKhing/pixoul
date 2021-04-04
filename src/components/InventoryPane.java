@@ -18,8 +18,9 @@ import javafx.scene.text.Text;
 import logic.GameLogic;
 import scene.GameScene;
 import utils.DrawUtil;
+import utils.FontUtil;
 import utils.GameConfig;
-import utils.Util;
+import utils.RandomUtil;
 
 public class InventoryPane extends FlowPane {
 	public InventoryPane() {
@@ -76,14 +77,14 @@ public class InventoryPane extends FlowPane {
 		// Text
 		Text text = new Text("Inventory");
 		header.getChildren().add(text);
-		text.setFont(Util.getLargeFont());
+		text.setFont(FontUtil.getLargeFont());
 		text.setFill(Color.rgb(123, 126, 94));
 
 		// Exit button
 		Text exit = new Text("x ");
 		StackPane.setAlignment(exit, Pos.TOP_RIGHT);
 		header.getChildren().add(exit);
-		exit.setFont(Util.getLargeFont());
+		exit.setFont(FontUtil.getLargeFont());
 		exit.setFill(Color.rgb(123, 126, 94));
 		exit.setOnMouseClicked((event) -> {
 			this.remove();

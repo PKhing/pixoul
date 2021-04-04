@@ -8,7 +8,7 @@ import entity.Player;
 import javafx.util.Pair;
 import logic.Cell;
 import utils.GameConfig;
-import utils.Util;
+import utils.RandomUtil;
 
 public abstract class Monster extends Entity {
 	@SuppressWarnings("unchecked")
@@ -42,7 +42,7 @@ public abstract class Monster extends Entity {
 	private Pair<Integer, Integer> bfs() {
 
 		int move[][] = { { 0, 1 }, { 0, -1 }, { 1, 0 }, { -1, 0 } };
-		Util.shuffle(move);
+		RandomUtil.shuffle(move);
 		
 		Queue<Pair<Integer, Pair<Integer, Integer>>> queue = new LinkedList<>();
 		queue.add(new Pair<>(0, new Pair<>(this.getPosY(), this.getPosX())));
