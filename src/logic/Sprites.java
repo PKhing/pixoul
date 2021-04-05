@@ -8,7 +8,7 @@ public class Sprites {
 	public static final int POTION = 4;
 	
 	//Armor
-	public static final int NORMAL_ARMOR = 0;
+	public static final int WOODEN_ARMOR = 0;
 	public static final int IRON_ARMOR = 1;
 	public static final int GOLDEN_ARMOR = 2;
 	

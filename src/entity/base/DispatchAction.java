@@ -1,8 +1,9 @@
 package entity.base;
 
 public enum DispatchAction {
-	USEITEM,
+	USE_ITEM,
 	UNEQUIP,
+	SWITCH_EQUIP,
 	ATTACK,
 	MOVE_LEFT,
 	MOVE_RIGHT,

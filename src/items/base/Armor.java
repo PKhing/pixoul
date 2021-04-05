@@ -8,8 +8,6 @@ public abstract class Armor extends Item {
 		setDefense(defense);
 	}
 
-	
-
 	public int getDefense() {
 		return defense;
 	}

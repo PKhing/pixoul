@@ -40,7 +40,7 @@ public class GameScene {
 	private static AnchorPane buttonPane;
 	private static GraphicsContext gc;
 
-	private static void initScene() {
+	public static void initScene() {
 		StackPane root = new StackPane();
 		scene = new Scene(root, GameConfig.getScreenWidth(), GameConfig.getScreenHeight());
 
@@ -207,6 +207,7 @@ public class GameScene {
 	}
 
 	public static void setPlayerPositionOnNewMap() {
+		
 		Pair<Integer, Integer> firstRoomPos = GameController.getRoomList().get(0);
 		GameController.getPlayer().setInitialPos(firstRoomPos.getKey(), firstRoomPos.getValue());
 		GameController.getPlayer().getItemList().add(new Sword("Salty Sword", "With 100 years salt effect", 10, 1));

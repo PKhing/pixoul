@@ -1,5 +1,6 @@
 package components;
 
+import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -11,6 +12,7 @@ public class MessagePane extends VBox {
 	private final int MAX_MESSAGE = 4;
 
 	public MessagePane() {
+		super();
 		AnchorPane.setBottomAnchor(this, 0.0);
 		AnchorPane.setLeftAnchor(this, 0.0);
 		this.setPrefHeight(50.0 * GameConfig.getScale());
@@ -27,5 +29,9 @@ public class MessagePane extends VBox {
 		message.setFont(FontUtil.getFont(12));
 		message.setFill(Color.WHITE);
 		this.getChildren().add(message);
+	}
+	
+	public void resetMessage() {
+		this.getChildren().clear();
 	}
 }

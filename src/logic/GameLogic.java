@@ -5,11 +5,13 @@ import entity.Player;
 import entity.base.DispatchAction;
 import entity.base.Entity;
 import entity.base.Monster;
+import items.base.Armor;
 import items.base.IConsecutiveEffect;
 import items.base.Item;
 import items.base.Potion;
 import scene.GameScene;
 import utils.GameConfig;
+import utils.MessageTextUtil;
 
 public class GameLogic {
 	
@@ -50,7 +52,7 @@ public class GameLogic {
 			if(cellItem != null && player.getItemList().size() != GameConfig.MAX_ITEM) {
 				player.getItemList().add(cellItem);
 				thisGameMap.get(player.getPosY(), player.getPosX()).setItem(null);
-				GameScene.getInventoryPane().update();
+				MessageTextUtil.textWhenPickUpItem(cellItem);
 			}
 			postGameUpdate();
 		}
@@ -70,14 +72,22 @@ public class GameLogic {
 	public static void gameUpdate(DispatchAction action, Item item) {
 		Player player = GameController.getPlayer();
 		switch (action) {
-		case USEITEM:
+		case USE_ITEM:
 			player.equipItem(item);
+			break;
+		case SWITCH_EQUIP:
+			if(item instanceof Armor) {
+				player.getEquippedArmor().onUnequip(player);
+			} else {
+				player.getEquippedWeapon().onUnequip(player);
+			}
+			item.onEquip(player);
 			break;
 		case UNEQUIP:
 			player.unEquipItem(item);
 			break;
 		default:
-			break;
+			return;
 		}
 		postGameUpdate();
 	}
@@ -104,7 +114,7 @@ public class GameLogic {
 		}
 	}
 
-	private static void postGameUpdate() {
+	public static void postGameUpdate() {
 		Player player = GameController.getPlayer();
 		monsterUpdate();
 		potionUpdate();

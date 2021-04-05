@@ -4,9 +4,9 @@ import entity.Player;
 import items.base.Armor;
 import logic.Sprites;
 
-public class NormalArmor extends Armor {
+public class WoodenArmor extends Armor {
 
-	public NormalArmor(String name, String description, int defense) {
+	public WoodenArmor(String name, String description, int defense) {
 		super(name, description, defense);
 		// TODO Auto-generated constructor stub
 	}
@@ -14,18 +14,20 @@ public class NormalArmor extends Armor {
 	@Override
 	public void onEquip(Player player) {
 		// TODO Auto-generated method stub
-
+		player.setDefense(player.getDefense() + getDefense());
+		player.setEquippedArmor(this);
 	}
 
 	@Override
 	public void onUnequip(Player player) {
 		// TODO Auto-generated method stub
-
+		player.setDefense(player.getDefense() - getDefense());
+		player.setEquippedArmor(null);
 	}
 
 	@Override
 	public int getSymbol() {
-		return Sprites.NORMAL_ARMOR;
+		return Sprites.WOODEN_ARMOR;
 	}
 
 }

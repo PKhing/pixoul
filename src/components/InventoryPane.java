@@ -5,7 +5,9 @@ import java.util.List;
 import controller.GameController;
 import controller.InterruptController;
 import entity.base.DispatchAction;
+import items.base.Armor;
 import items.base.Item;
+import items.base.Weapon;
 import javafx.geometry.Pos;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.PixelReader;
@@ -92,11 +94,19 @@ public class InventoryPane extends AnchorPane {
 			canvas.setOnMouseClicked((mouseEvent) -> {
 				if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
 					if (mouseEvent.getClickCount() == 2) {
-						if (item == GameController.getPlayer().getEquippedArmor()
-								|| item == GameController.getPlayer().getEquippedWeapon()) {
+						Weapon currentWeapon = GameController.getPlayer().getEquippedWeapon();
+						Armor currentArmor = GameController.getPlayer().getEquippedArmor();
+						if (item == currentWeapon
+								|| item == currentArmor) {
 							GameLogic.gameUpdate(DispatchAction.UNEQUIP, item);
 						} else {
-							GameLogic.gameUpdate(DispatchAction.USEITEM, item);
+							if(item instanceof Weapon && currentWeapon != null) {
+								GameLogic.gameUpdate(DispatchAction.SWITCH_EQUIP, item);
+							} else if(item instanceof Armor && currentArmor != null) {
+								GameLogic.gameUpdate(DispatchAction.SWITCH_EQUIP, item);	
+							} else {
+								GameLogic.gameUpdate(DispatchAction.USE_ITEM, item);
+							}
 						}
 					}
 				}
@@ -109,7 +119,6 @@ public class InventoryPane extends AnchorPane {
 				this.getChildren().remove(this.getChildren().size() - 1);
 			});
 		}
-
 	}
 
 	private void addHeader() {

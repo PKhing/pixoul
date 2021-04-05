@@ -1,28 +1,28 @@
 package items.base;
 
 public abstract class Weapon extends Item {
-	private int atk;
-	private int atkSpeed;
+	private int attack;
+	private int attackSpeed;
 
-	public Weapon(String name, String description, int atk, int atkSpeed) {
+	public Weapon(String name, String description, int attack, int attackSpeed) {
 		super(name, description);
-		setAtk(atk);
-		setAtkSpeed(atkSpeed);
+		setAtk(attack);
+		setAtkSpeed(attackSpeed);
 	}
 
 	public int getAtk() {
-		return atk;
+		return attack;
 	}
 
-	public void setAtk(int atk) {
-		this.atk = atk;
+	public void setAtk(int attack) {
+		this.attack = attack;
 	}
 
 	public int getAtkSpeed() {
-		return atkSpeed;
+		return attackSpeed;
 	}
 
-	public void setAtkSpeed(int atkSpeed) {
-		this.atkSpeed = atkSpeed;
+	public void setAtkSpeed(int attackSpeed) {
+		this.attackSpeed = attackSpeed;
 	}
 }

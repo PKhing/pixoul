@@ -8,6 +8,7 @@ import exception.InvalidFloorException;
 import exception.NullMapException;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Pair;
+import logic.GameLogic;
 import logic.GameMap;
 import logic.MapGenerator;
 import scene.GameScene;
@@ -69,10 +70,12 @@ public class GameController {
 		reset();
 		GameMap newFloor = addNewFloor();
 		setGameMap(newFloor);
+		GameScene.getMessagePane().resetMessage();
 		GameScene.setPlayerPositionOnNewMap();
 		GameScene.getStatusPane().setAllValue(GameController.getPlayer());
 		getGameMap().drawMap();
 		SceneController.setSceneToStage(GameScene.getScene());
+		GameLogic.postGameUpdate();
 		bgmMedia.play();
 	}
 

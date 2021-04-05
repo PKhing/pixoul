@@ -2,6 +2,7 @@ package items.weapon;
 
 import entity.Player;
 import items.base.Weapon;
+import logic.Sprites;
 
 public class Knife extends Weapon {
 
@@ -27,7 +28,7 @@ public class Knife extends Weapon {
 	@Override
 	public int getSymbol() {
 		// TODO Auto-generated method stub
-		return 0;
+		return Sprites.WOODEN_ARMOR;
 	}
 
 }
