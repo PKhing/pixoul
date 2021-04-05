@@ -24,7 +24,7 @@ public class MessagePane extends VBox {
 			this.getChildren().remove(0);
 		}
 		Text message = new Text(text);
-		message.setFont(FontUtil.getFont());
+		message.setFont(FontUtil.getFont(12));
 		message.setFill(Color.WHITE);
 		this.getChildren().add(message);
 	}

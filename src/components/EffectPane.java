@@ -35,7 +35,7 @@ public class EffectPane extends VBox {
 		}
 		for (Potion potion : GameController.getPlayer().getPotionList()) {
 			Text effect = new Text(potion.getName() + ": " + String.valueOf(potion.getDuration()));
-			effect.setFont(FontUtil.getFont());
+			effect.setFont(FontUtil.getFont(12));
 			effect.setFill(Color.WHITE);
 			this.getChildren().add(effect);
 		}

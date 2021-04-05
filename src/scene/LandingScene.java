@@ -41,7 +41,7 @@ public class LandingScene {
 		// Title Text
 
 		Text titleText = new Text("Pixoul");
-		titleText.setFont(FontUtil.getLargeFont());
+		titleText.setFont(FontUtil.getFont(30));
 
 		box.getChildren().add(titleText);
 

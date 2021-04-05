@@ -36,15 +36,15 @@ public class StatusPane extends StackPane {
 		Player nowPlayer = GameController.getPlayer();
 		
 		hp = new Text("HP: " + nowPlayer.getHealth() + " / " + nowPlayer.getMaxHealth());
-		hp.setFont(FontUtil.getFont());
+		hp.setFont(FontUtil.getFont(12));
 		statusBox.getChildren().add(hp);
 
 		attack = new Text("Attack: " + nowPlayer.getAttack());
-		attack.setFont(FontUtil.getFont());
+		attack.setFont(FontUtil.getFont(12));
 		statusBox.getChildren().add(attack);
 
 		defense = new Text("Defense: " + nowPlayer.getDefense());
-		defense.setFont(FontUtil.getFont());
+		defense.setFont(FontUtil.getFont(12));
 		statusBox.getChildren().add(defense);
 	}
 

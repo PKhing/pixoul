@@ -51,7 +51,7 @@ public class SettingPane extends VBox {
 		closeBox.setAlignment(Pos.CENTER);
 		
 		Text closeText = new Text("OK");
-		closeText.setFont(FontUtil.getFont());
+		closeText.setFont(FontUtil.getFont(12));
 		
 		closeText.setOnMouseClicked((event) -> {
 			try {
@@ -70,7 +70,7 @@ public class SettingPane extends VBox {
 	private void addTitle() {
 		Text optionTitle = new Text("Option");
 		
-		optionTitle.setFont(FontUtil.getLargeFont());
+		optionTitle.setFont(FontUtil.getFont(30));
 		this.getChildren().add(optionTitle);
 	}
 	
@@ -81,7 +81,7 @@ public class SettingPane extends VBox {
 		bgmVolumeBox.setAlignment(Pos.CENTER);
 
 		Label volumeLabel = new Label("BGM Volume");
-		volumeLabel.setFont(FontUtil.getFont());
+		volumeLabel.setFont(FontUtil.getFont(12));
 		
 		Slider volumeSlider = new Slider(0, 100, (int) (GameConfig.getVolume() * 100));
 		volumeSlider.valueProperty().addListener(new ChangeListener<Number>() {

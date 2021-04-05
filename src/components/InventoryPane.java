@@ -127,14 +127,14 @@ public class InventoryPane extends AnchorPane {
 		// Text
 		Text text = new Text("Inventory");
 		header.getChildren().add(text);
-		text.setFont(FontUtil.getLargeFont());
+		text.setFont(FontUtil.getFont(30));
 		text.setFill(Color.rgb(123, 126, 94));
 
 		// Exit button
 		Text exit = new Text("x ");
 		StackPane.setAlignment(exit, Pos.TOP_RIGHT);
 		header.getChildren().add(exit);
-		exit.setFont(FontUtil.getLargeFont());
+		exit.setFont(FontUtil.getFont(30));
 		exit.setFill(Color.rgb(123, 126, 94));
 		exit.setOnMouseClicked((event) -> {
 			this.remove();

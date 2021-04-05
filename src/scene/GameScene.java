@@ -11,7 +11,6 @@ import entity.Skeleton;
 import entity.base.DispatchAction;
 import items.base.Potion;
 import items.potion.HealingPotion;
-import items.weapon.Knife;
 import items.weapon.Sword;
 import items.potion.ShieldPotion;
 import javafx.event.EventHandler;

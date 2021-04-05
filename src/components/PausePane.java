@@ -45,7 +45,7 @@ public class PausePane extends VBox {
 	private void addTitle() {
 		Text titleText = new Text("Paused");
 		
-		titleText.setFont(FontUtil.getLargeFont());
+		titleText.setFont(FontUtil.getFont(30));
 		
 		getChildren().add(titleText);
 	}
