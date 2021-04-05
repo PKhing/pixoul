@@ -25,7 +25,8 @@ public class Player extends Entity implements Moveable, Attackable {
 	private List<Potion> potionList;
 	private Armor equippedArmor;
 	private Weapon equippedWeapon;
-
+	private ArrayList<Item> itemList = new ArrayList<Item>();
+	
 	public Player() {
 		super(5, 10, 1, 0, 0, Direction.DOWN, 1, 1, 1);
 		setPotionList(new CopyOnWriteArrayList<>());
@@ -76,13 +77,13 @@ public class Player extends Entity implements Moveable, Attackable {
 	
 	public void equipItem(Item item) {
 		item.onEquip(this);
-		GameLogic.getItemList().remove(item);
+		getItemList().remove(item);
 		if(item instanceof Potion) GameScene.getEffectPane().update();
 	}
 
 	public void unEquipItem(Item item) {
 		item.onUnequip(this);
-		GameLogic.getItemList().add(item);
+		getItemList().add(item);
 	}
 
 	public ArrayList<Pair<Integer, Integer>> getAllVisibleField(int startIdxY, int endIdxY, int startIdxX, int endIdxX) {
@@ -174,5 +175,13 @@ public class Player extends Entity implements Moveable, Attackable {
 
 	public void setEquippedWeapon(Weapon equippedWeapon) {
 		this.equippedWeapon = equippedWeapon;
+	}
+	
+	public ArrayList<Item> getItemList() {
+		return itemList;
+	}
+
+	public void setItemList(ArrayList<Item> itemList) {
+		this.itemList = itemList;
 	}
 }

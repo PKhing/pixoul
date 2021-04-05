@@ -50,60 +50,54 @@ public class DrawUtil {
 
 	public static void drawBackpack(GraphicsContext gc) {
 		WritableImage img = new WritableImage(backpackSprites, 0, 0, 32, 32);
-		gc.drawImage(scaleUp(img), 0, 0);
+		gc.drawImage(scaleUp(img, GameConfig.getScale()), 0, 0);
 	}
 
 	public static void drawPause(GraphicsContext gc) {
 		WritableImage img = new WritableImage(pauseSprites, 0, 0, 16, 16);
-		gc.drawImage(scaleUp(img), 0, 0);
+		gc.drawImage(scaleUp(img, GameConfig.getScale()), 0, 0);
 	}
 
 	public static void drawItem(GraphicsContext gc, int y, int x, Item item) {
-		int index = 0;
-		if (item instanceof Sword)
-			index = Sprites.SWORD;
-		if (item instanceof Spear)
-			index = Sprites.SPEAR;
-		if (item instanceof Knife)
-			index = Sprites.KNIFE;
-		if (item instanceof Armor)
-			index = Sprites.ARMOR;
-		if (item instanceof Potion)
-			index = Sprites.POTION;
-
+		int index = getIndexItemSymbol(item);
 		WritableImage img = new WritableImage(itemSprites, item.getSymbol() * 32, index * 32, 32, 32);
-		gc.drawImage(scaleUp(img), y, x);
+		gc.drawImage(scaleUp(img, GameConfig.getScale()), y, x);
 	}
 
 	public static void drawCell(int y, int x, Cell cell) {
 		GraphicsContext gc = GameScene.getGraphicsContext();
 		if (cell.getType() != Cell.VOID) {
 			WritableImage img = new WritableImage(wallSprites, cell.getSymbol() * 32, 0, 32, 40);
-			gc.drawImage(scaleUp(img), x, y - 16);
+			gc.drawImage(scaleUp(img, GameConfig.getScale()), x, y - 16);
 		}
+	}
+	
+	public static void drawItemOnCell(int y, int x, Item item) {
+		int index = getIndexItemSymbol(item);
+		GraphicsContext gc = GameScene.getGraphicsContext();
+		WritableImage img = new WritableImage(itemSprites, item.getSymbol() * 32, index * 32, 32, 32);
+		gc.drawImage(scaleUp(img, 1), x + 16, y + 16);
 	}
 
 	public static void drawEntity(int y, int x, Entity entity) {
-
 		GraphicsContext gc = GameScene.getGraphicsContext();
 		int direction = 0;
-		if (entity.getDirection() == Direction.UP)
-			direction = 3;
 		if (entity.getDirection() == Direction.LEFT)
 			direction = 1;
 		if (entity.getDirection() == Direction.RIGHT)
 			direction = 2;
+		if (entity.getDirection() == Direction.UP)
+			direction = 3;
 		WritableImage img = null;
 		if (entity instanceof Player)
 			img = new WritableImage(playerSprites, 1 * 32, direction * 32, 32, 32);
 		if (entity instanceof Skeleton)
 			img = new WritableImage(skeletonSprites, 1 * 32, direction * 32, 32, 32);
-		gc.drawImage(scaleUp(img), x, y - 8);
+		gc.drawImage(scaleUp(img, GameConfig.getScale()), x, y - 8);
 
 		if (entity instanceof Monster)
 			drawHPBar(y, x, (Monster) entity);
 	}
-
 	public static void drawHPBar(int y, int x, Monster monster) {
 		GraphicsContext gc = GameScene.getGraphicsContext();
 		gc.setFill(Color.BLACK);
@@ -112,11 +106,10 @@ public class DrawUtil {
 		gc.fillRect(x + 7, y - 8, Math.ceil((double) monster.getHealth() / (double) monster.getMaxHealth() * 50.0), 4);
 	}
 
-	public static WritableImage scaleUp(WritableImage image) {
+	public static WritableImage scaleUp(WritableImage image, int z) {
 		int width = (int) image.getWidth();
 		int height = (int) image.getHeight();
 
-		int z = GameConfig.getScale();
 		IntBuffer src = IntBuffer.allocate(width * height);
 		WritablePixelFormat<IntBuffer> pf = PixelFormat.getIntArgbInstance();
 		image.getPixelReader().getPixels(0, 0, width, height, pf, src, width);
@@ -139,7 +132,6 @@ public class DrawUtil {
 		WritableImage bigImage = new WritableImage(newWidth, newHeight);
 		bigImage.getPixelWriter().setPixels(0, 0, newWidth, newHeight, pf, dst, 0, newWidth);
 		return bigImage;
-
 	}
 
 	public static void addEntityButton(int y, int x, Entity entity) {
@@ -171,5 +163,19 @@ public class DrawUtil {
 	private static Image getAttackMouseIcon() {	
 		return new WritableImage(itemSprites, 0, 0, 32, 32);
 	}
-
+	
+	private static int getIndexItemSymbol(Item item) {
+		int index = 0;
+		if (item instanceof Sword)
+			index = Sprites.SWORD;
+		if (item instanceof Spear)
+			index = Sprites.SPEAR;
+		if (item instanceof Knife)
+			index = Sprites.KNIFE;
+		if (item instanceof Armor)
+			index = Sprites.ARMOR;
+		if (item instanceof Potion)
+			index = Sprites.POTION;
+		return index;
+	}
 }

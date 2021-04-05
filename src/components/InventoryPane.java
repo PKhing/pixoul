@@ -1,9 +1,11 @@
 package components;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import controller.GameController;
 import controller.InterruptController;
+import entity.base.DispatchAction;
 import items.base.Item;
 import javafx.geometry.Pos;
 import javafx.scene.canvas.Canvas;
@@ -64,7 +66,7 @@ public class InventoryPane extends AnchorPane {
 		equipmentPane.getChildren().clear();
 
 		addHeader();
-		ArrayList<Item> itemList = GameLogic.getItemList();
+		List<Item> itemList = GameController.getPlayer().getItemList();
 		for (int i = 0; i < GameConfig.MAX_ITEM; i++) {
 			if (i < itemList.size())
 				addItem(itemList.get(i),itemPane);
@@ -83,7 +85,7 @@ public class InventoryPane extends AnchorPane {
 		PixelReader itemFrame = DrawUtil.getImagePixelReader("sprites/inventory/item.png");
 
 		WritableImage img = new WritableImage(itemFrame, 0, 0, 40, 40);
-		canvas.getGraphicsContext2D().drawImage(DrawUtil.scaleUp(img), 0, 0);
+		canvas.getGraphicsContext2D().drawImage(DrawUtil.scaleUp(img, GameConfig.getScale()), 0, 0);
 
 		if (item != null) {
 			DrawUtil.drawItem(canvas.getGraphicsContext2D(), 8, 8, item);
@@ -92,11 +94,10 @@ public class InventoryPane extends AnchorPane {
 					if (mouseEvent.getClickCount() == 2) {
 						if (item == GameController.getPlayer().getEquippedArmor()
 								|| item == GameController.getPlayer().getEquippedWeapon()) {
-							GameController.getPlayer().unEquipItem(item);
+							GameLogic.gameUpdate(DispatchAction.UNEQUIP, item);
 						} else {
-							GameController.getPlayer().equipItem(item);
+							GameLogic.gameUpdate(DispatchAction.USEITEM, item);
 						}
-						update();
 					}
 				}
 			});
@@ -121,7 +122,7 @@ public class InventoryPane extends AnchorPane {
 		header.getChildren().add(canvas);
 		PixelReader headerSprite = DrawUtil.getImagePixelReader("sprites/inventory/header.png");
 		WritableImage img = new WritableImage(headerSprite, 0, 0, 160, 40);
-		canvas.getGraphicsContext2D().drawImage(DrawUtil.scaleUp(img), 0, 0);
+		canvas.getGraphicsContext2D().drawImage(DrawUtil.scaleUp(img, GameConfig.getScale()), 0, 0);
 
 		// Text
 		Text text = new Text("Inventory");

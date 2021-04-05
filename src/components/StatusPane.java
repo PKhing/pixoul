@@ -51,7 +51,7 @@ public class StatusPane extends StackPane {
 	private void drawTexture(GraphicsContext gc) {
 		PixelReader texture = DrawUtil.getImagePixelReader("sprites/statusPane.png");
 		WritableImage img = new WritableImage(texture, 0, 0, 75, 48);
-		gc.drawImage(DrawUtil.scaleUp(img), 0, 0);
+		gc.drawImage(DrawUtil.scaleUp(img, GameConfig.getScale()), 0, 0);
 	}
 	
 	public void setAllValue(Player player) {

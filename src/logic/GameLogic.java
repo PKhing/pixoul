@@ -1,7 +1,5 @@
 package logic;
 
-import java.util.ArrayList;
-
 import controller.GameController;
 import entity.Player;
 import entity.base.DispatchAction;
@@ -11,17 +9,10 @@ import items.base.IConsecutiveEffect;
 import items.base.Item;
 import items.base.Potion;
 import scene.GameScene;
+import utils.GameConfig;
 
 public class GameLogic {
-	private static ArrayList<Item> itemList = new ArrayList<Item>();
-
-	public static ArrayList<Item> getItemList() {
-		return itemList;
-	}
-
-	public static void setItemList(ArrayList<Item> itemList) {
-		GameLogic.itemList = itemList;
-	}
+	
 
 	public static int calculateAttackValue(Entity from, Entity target) {
 		double fromAttack = from.getAttack();
@@ -54,6 +45,13 @@ public class GameLogic {
 			break;
 		}
 		if (moveSuccess) {
+			GameMap thisGameMap = GameController.getGameMap();
+			Item cellItem = thisGameMap.get(player.getPosY(), player.getPosX()).getItem();
+			if(cellItem != null && player.getItemList().size() != GameConfig.MAX_ITEM) {
+				player.getItemList().add(cellItem);
+				thisGameMap.get(player.getPosY(), player.getPosX()).setItem(null);
+				GameScene.getInventoryPane().update();
+			}
 			postGameUpdate();
 		}
 	}
@@ -93,7 +91,7 @@ public class GameLogic {
 
 			if (!each.update()) {
 				each.onUnequip(player);
-				GameLogic.getItemList().remove(each);
+				player.getItemList().remove(each);
 				player.getPotionList().remove(each);
 			}
 		}
@@ -110,6 +108,7 @@ public class GameLogic {
 		Player player = GameController.getPlayer();
 		monsterUpdate();
 		potionUpdate();
+		GameScene.getInventoryPane().update();
 		GameScene.getStatusPane().setHP(player.getHealth(), player.getMaxHealth());
 		GameScene.getStatusPane().setAttack(player.getAttack());
 		GameScene.getStatusPane().setDefense(player.getDefense());

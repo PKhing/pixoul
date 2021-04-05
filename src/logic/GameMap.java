@@ -68,23 +68,27 @@ public class GameMap {
 		int endIdxX = Math.min(GameConfig.MAP_SIZE, GameController.getPlayer().getPosX() + maxCellX / 2 + 1);
 
 		GameMap gameMap = GameController.getGameMap();
-		
-		ArrayList<Pair<Integer, Integer>> allVisibleField = GameController.getPlayer().getAllVisibleField(startIdxY, endIdxY, startIdxX, endIdxX);
-		
+
+		ArrayList<Pair<Integer, Integer>> allVisibleField = GameController.getPlayer().getAllVisibleField(startIdxY,
+				endIdxY, startIdxX, endIdxX);
+
 		allVisibleField.sort(Comparator.comparing(Pair<Integer, Integer>::getKey).thenComparingInt(Pair::getValue));
 
 		for (Pair<Integer, Integer> pos : allVisibleField) {
 			int posX = pos.getValue();
 			int posY = pos.getKey();
 
-			DrawUtil.drawCell(newSpriteSize * posY - startY, newSpriteSize * posX - startX,
-					gameMap.get(posY, posX));
+			int writeX = newSpriteSize * posX - startX;
+			int writeY = newSpriteSize * posY - startY;
+
+			DrawUtil.drawCell(writeY, writeX, gameMap.get(posY, posX));
+			if (gameMap.get(posY, posX).getItem() != null) {
+				DrawUtil.drawItemOnCell(writeY, writeX, gameMap.get(posY, posX).getItem());
+			}
 			if (gameMap.get(posY, posX).getEntity() != null)
-				DrawUtil.drawEntity(newSpriteSize * posY - startY, newSpriteSize * posX - startX,
-						gameMap.get(posY, posX).getEntity());
+				DrawUtil.drawEntity(writeY, writeX, gameMap.get(posY, posX).getEntity());
 			if (gameMap.get(posY, posX).getEntity() instanceof Monster)
-				DrawUtil.addEntityButton(newSpriteSize * posY - startY, newSpriteSize * posX - startX,
-						gameMap.get(posY, posX).getEntity());
+				DrawUtil.addEntityButton(writeY, writeX, gameMap.get(posY, posX).getEntity());
 		}
 
 //		for (int i = startIdxY; i <= endIdxY; i++) {

@@ -12,6 +12,7 @@ import entity.base.DispatchAction;
 import items.base.Potion;
 import items.potion.HealingPotion;
 import items.weapon.Knife;
+import items.potion.ShieldPotion;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
@@ -40,10 +41,6 @@ public class GameScene {
 	private static GraphicsContext gc;
 
 	private static void initScene() {
-		Potion newPotion = new HealingPotion("Salty Potion", "With 100 years salt effect", 10, 1, false);
-		GameLogic.getItemList().add(newPotion);
-		GameLogic.getItemList().add(new Knife("Salty Knife", "With 100 years salt effect", 10, 1));
-
 		StackPane root = new StackPane();
 		scene = new Scene(root, GameConfig.getScreenWidth(), GameConfig.getScreenHeight());
 
@@ -212,9 +209,18 @@ public class GameScene {
 	public static void setPlayerPositionOnNewMap() {
 		Pair<Integer, Integer> firstRoomPos = GameController.getRoomList().get(0);
 		GameController.getPlayer().setInitialPos(firstRoomPos.getKey(), firstRoomPos.getValue());
-
-		Skeleton skeleton = new Skeleton(3, 10, 1, firstRoomPos.getKey() - 3, firstRoomPos.getValue() + 1,
+		GameController.getPlayer().getItemList().add(new Knife("Salty Knife", "With 100 years salt effect", 10, 1));
+		
+		Skeleton skeleton = new Skeleton(5, 10, 1, firstRoomPos.getKey() - 3, firstRoomPos.getValue() + 1,
 				Direction.DOWN, 0, 0, 1);
+
+		Potion maxHealthPotion = new HealingPotion("Bitset Potion", "Extends for 1 bit shift", GameController.getPlayer().getHealth(), 1, true);
+		Potion currentPotion = new HealingPotion("Salty Potion", "With 100 years salt effect", 10, 1, false);
+		GameController.getPlayer().getItemList().add(currentPotion);
+		GameController.getPlayer().getItemList().add(maxHealthPotion);
+	
+		Potion newPotion = new ShieldPotion("Shield Potion", "For extra armor", 5, 0, true);
+		GameController.getGameMap().get(firstRoomPos.getKey() + 3, firstRoomPos.getValue()).setItem(newPotion);
 		skeleton.setHealth(8);
 		GameController.getGameMap().getMonsterList().add(skeleton);
 	}
