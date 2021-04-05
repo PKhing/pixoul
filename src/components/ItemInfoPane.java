@@ -31,17 +31,17 @@ public class ItemInfoPane extends StackPane {
 		infoPane.getChildren().add(name);
 		
 		Text description = new Text(item.getDescription());
-		description.setWrappingWidth(200.0);
+		description.setWrappingWidth(100.0* GameConfig.getScale());
 		description.setFont(FontUtil.getFont());
 		infoPane.getChildren().add(description);
 		
 	}
 
 	public void addTexture() {
-		Canvas canvas = new Canvas(200,100);
+		Canvas canvas = new Canvas(100* GameConfig.getScale(),50* GameConfig.getScale());
 		GraphicsContext gc = canvas.getGraphicsContext2D();
 		gc.setFill(Color.WHITE);
-		gc.fillRect(0, 0, 200, 100);
+		gc.fillRect(0, 0, 100* GameConfig.getScale(), 50* GameConfig.getScale());
 		this.getChildren().add(canvas);
 	}
 }

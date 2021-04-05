@@ -12,6 +12,7 @@ import entity.base.DispatchAction;
 import items.base.Potion;
 import items.potion.HealingPotion;
 import items.weapon.Knife;
+import items.weapon.Sword;
 import items.potion.ShieldPotion;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -209,7 +210,7 @@ public class GameScene {
 	public static void setPlayerPositionOnNewMap() {
 		Pair<Integer, Integer> firstRoomPos = GameController.getRoomList().get(0);
 		GameController.getPlayer().setInitialPos(firstRoomPos.getKey(), firstRoomPos.getValue());
-		GameController.getPlayer().getItemList().add(new Knife("Salty Knife", "With 100 years salt effect", 10, 1));
+		GameController.getPlayer().getItemList().add(new Sword("Salty Sword", "With 100 years salt effect", 10, 1));
 		
 		Skeleton skeleton = new Skeleton(5, 10, 1, firstRoomPos.getKey() - 3, firstRoomPos.getValue() + 1,
 				Direction.DOWN, 0, 0, 1);
@@ -220,6 +221,7 @@ public class GameScene {
 		GameController.getPlayer().getItemList().add(maxHealthPotion);
 	
 		Potion newPotion = new ShieldPotion("Shield Potion", "For extra armor", 5, 0, true);
+		
 		GameController.getGameMap().get(firstRoomPos.getKey() + 3, firstRoomPos.getValue()).setItem(newPotion);
 		skeleton.setHealth(8);
 		GameController.getGameMap().getMonsterList().add(skeleton);

@@ -38,8 +38,9 @@ public class DrawUtil {
 	private static PixelReader backpackSprites = getImagePixelReader("sprites/backpack.png");
 	private static PixelReader pauseSprites = getImagePixelReader("sprites/pause.png");
 	private static PixelReader itemSprites = getImagePixelReader("sprites/item.png");
+	private static PixelReader smallPotionSprites = getImagePixelReader("sprites/smallPotion.png");
 	private static Image attackMouseIcon = getAttackMouseIcon();
-	
+
 	private static Image getImage(String filePath) {
 		return new Image(ClassLoader.getSystemResource(filePath).toString());
 	}
@@ -68,15 +69,21 @@ public class DrawUtil {
 		GraphicsContext gc = GameScene.getGraphicsContext();
 		if (cell.getType() != Cell.VOID) {
 			WritableImage img = new WritableImage(wallSprites, cell.getSymbol() * 32, 0, 32, 40);
-			gc.drawImage(scaleUp(img, GameConfig.getScale()), x, y - 16);
+			gc.drawImage(scaleUp(img, GameConfig.getScale()), x, y - 8* GameConfig.getScale());
 		}
 	}
-	
+
 	public static void drawItemOnCell(int y, int x, Item item) {
 		int index = getIndexItemSymbol(item);
 		GraphicsContext gc = GameScene.getGraphicsContext();
+		if(item instanceof Potion) {
+			WritableImage img = new WritableImage(smallPotionSprites, item.getSymbol() * 32, 0, 32, 32);
+			gc.drawImage(scaleUp(img, GameConfig.getScale()), x-1 , y );
+		}
+		else {
 		WritableImage img = new WritableImage(itemSprites, item.getSymbol() * 32, index * 32, 32, 32);
-		gc.drawImage(scaleUp(img, 1), x + 16, y + 16);
+		gc.drawImage(scaleUp(img, GameConfig.getScale()), x , y - 4* GameConfig.getScale());
+		}
 	}
 
 	public static void drawEntity(int y, int x, Entity entity) {
@@ -93,17 +100,22 @@ public class DrawUtil {
 			img = new WritableImage(playerSprites, 1 * 32, direction * 32, 32, 32);
 		if (entity instanceof Skeleton)
 			img = new WritableImage(skeletonSprites, 1 * 32, direction * 32, 32, 32);
-		gc.drawImage(scaleUp(img, GameConfig.getScale()), x, y - 8);
+		gc.drawImage(scaleUp(img, GameConfig.getScale()), x, y - 4 * GameConfig.getScale());
 
 		if (entity instanceof Monster)
 			drawHPBar(y, x, (Monster) entity);
 	}
+
 	public static void drawHPBar(int y, int x, Monster monster) {
 		GraphicsContext gc = GameScene.getGraphicsContext();
 		gc.setFill(Color.BLACK);
-		gc.fillRect(x + 7, y - 8, 50, 4);
+		gc.fillRect(x + 4 * GameConfig.getScale(), y - 4 * GameConfig.getScale(), 25 * GameConfig.getScale(),
+				2 * GameConfig.getScale());
 		gc.setFill(Color.RED);
-		gc.fillRect(x + 7, y - 8, Math.ceil((double) monster.getHealth() / (double) monster.getMaxHealth() * 50.0), 4);
+		gc.fillRect(x + 4 * GameConfig.getScale(), y - 4 * GameConfig.getScale(),
+				Math.ceil(
+						(double) monster.getHealth() / (double) monster.getMaxHealth() * 25.0 * GameConfig.getScale()),
+				2 * GameConfig.getScale());
 	}
 
 	public static WritableImage scaleUp(WritableImage image, int z) {
@@ -159,11 +171,11 @@ public class DrawUtil {
 			GameScene.getScene().setCursor(null);
 		});
 	}
-	
-	private static Image getAttackMouseIcon() {	
+
+	private static Image getAttackMouseIcon() {
 		return new WritableImage(itemSprites, 0, 0, 32, 32);
 	}
-	
+
 	private static int getIndexItemSymbol(Item item) {
 		int index = 0;
 		if (item instanceof Sword)

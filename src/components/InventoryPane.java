@@ -1,6 +1,5 @@
 package components;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import controller.GameController;
@@ -69,13 +68,13 @@ public class InventoryPane extends AnchorPane {
 		List<Item> itemList = GameController.getPlayer().getItemList();
 		for (int i = 0; i < GameConfig.MAX_ITEM; i++) {
 			if (i < itemList.size())
-				addItem(itemList.get(i),itemPane);
+				addItem(itemList.get(i), itemPane);
 			else
-				addItem(null,itemPane);
+				addItem(null, itemPane);
 		}
 
-		addItem(GameController.getPlayer().getEquippedWeapon(),equipmentPane);
-		addItem(GameController.getPlayer().getEquippedArmor(),equipmentPane);
+		addItem(GameController.getPlayer().getEquippedWeapon(), equipmentPane);
+		addItem(GameController.getPlayer().getEquippedArmor(), equipmentPane);
 	}
 
 	private void addItem(Item item, Pane parent) {
@@ -88,7 +87,8 @@ public class InventoryPane extends AnchorPane {
 		canvas.getGraphicsContext2D().drawImage(DrawUtil.scaleUp(img, GameConfig.getScale()), 0, 0);
 
 		if (item != null) {
-			DrawUtil.drawItem(canvas.getGraphicsContext2D(), 8, 8, item);
+			DrawUtil.drawItem(canvas.getGraphicsContext2D(), 4 * GameConfig.getScale(), 4 * GameConfig.getScale(),
+					item);
 			canvas.setOnMouseClicked((mouseEvent) -> {
 				if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
 					if (mouseEvent.getClickCount() == 2) {
