@@ -67,58 +67,45 @@ public class InventoryPane extends AnchorPane {
 		ArrayList<Item> itemList = GameLogic.getItemList();
 		for (int i = 0; i < GameConfig.MAX_ITEM; i++) {
 			if (i < itemList.size())
-				addItem(itemList.get(i));
+				addItem(itemList.get(i),itemPane);
 			else
-				addItem(null);
+				addItem(null,itemPane);
 		}
 
-		addEquipment(GameController.getPlayer().getEquippedWeapon());
-		addEquipment(GameController.getPlayer().getEquippedArmor());
+		addItem(GameController.getPlayer().getEquippedWeapon(),equipmentPane);
+		addItem(GameController.getPlayer().getEquippedArmor(),equipmentPane);
 	}
 
-	private void addEquipment(Item item) {
+	private void addItem(Item item, Pane parent) {
 
 		Canvas canvas = new Canvas(40 * GameConfig.getScale(), 40 * GameConfig.getScale());
-		equipmentPane.getChildren().add(canvas);
+		parent.getChildren().add(canvas);
 		PixelReader itemFrame = DrawUtil.getImagePixelReader("sprites/inventory/item.png");
 
 		WritableImage img = new WritableImage(itemFrame, 0, 0, 40, 40);
 		canvas.getGraphicsContext2D().drawImage(DrawUtil.scaleUp(img), 0, 0);
 
 		if (item != null) {
+			DrawUtil.drawItem(canvas.getGraphicsContext2D(), 8, 8, item);
 			canvas.setOnMouseClicked((mouseEvent) -> {
-				if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
-		            if(mouseEvent.getClickCount() == 2){
-		            	GameController.getPlayer().unEquipItem(item);
-		            	update();
-		            }
-		        }
+				if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
+					if (mouseEvent.getClickCount() == 2) {
+						if (item == GameController.getPlayer().getEquippedArmor()
+								|| item == GameController.getPlayer().getEquippedWeapon()) {
+							GameController.getPlayer().unEquipItem(item);
+						} else {
+							GameController.getPlayer().equipItem(item);
+						}
+						update();
+					}
+				}
 			});
-			DrawUtil.drawItem(canvas.getGraphicsContext2D(), 8, 8, item);
-		}
-
-	}
-
-	private void addItem(Item item) {
-
-		Canvas canvas = new Canvas(40 * GameConfig.getScale(), 40 * GameConfig.getScale());
-		itemPane.getChildren().add(canvas);
-		PixelReader itemFrame = DrawUtil.getImagePixelReader("sprites/inventory/item.png");
-
-		
-
-		WritableImage img = new WritableImage(itemFrame, 0, 0, 40, 40);
-		canvas.getGraphicsContext2D().drawImage(DrawUtil.scaleUp(img), 0, 0);
-
-		if (item != null) {
-			DrawUtil.drawItem(canvas.getGraphicsContext2D(), 8, 8, item);
-			canvas.setOnMouseClicked((mouseEvent) -> {
-				if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
-		            if(mouseEvent.getClickCount() == 2){
-		            	GameController.getPlayer().equipItem(item);
-		            	update();
-		            }
-		        }
+			canvas.setOnMouseEntered((event) -> {
+				this.getChildren().add(new ItemInfoPane(item, (int) canvas.getLayoutY() + (int) parent.getLayoutY(),
+						(int) canvas.getLayoutX() + (int) parent.getLayoutX()));
+			});
+			canvas.setOnMouseExited((event) -> {
+				this.getChildren().remove(this.getChildren().size() - 1);
 			});
 		}
 

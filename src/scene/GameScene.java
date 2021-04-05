@@ -11,6 +11,7 @@ import entity.Skeleton;
 import entity.base.DispatchAction;
 import items.base.Potion;
 import items.potion.HealingPotion;
+import items.weapon.Knife;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
@@ -41,6 +42,7 @@ public class GameScene {
 	private static void initScene() {
 		Potion newPotion = new HealingPotion("Salty Potion", "With 100 years salt effect", 10, 1, false);
 		GameLogic.getItemList().add(newPotion);
+		GameLogic.getItemList().add(new Knife("Salty Knife", "With 100 years salt effect", 10, 1));
 
 		StackPane root = new StackPane();
 		scene = new Scene(root, GameConfig.getScreenWidth(), GameConfig.getScreenHeight());
