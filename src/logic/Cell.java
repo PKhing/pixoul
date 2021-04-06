@@ -8,6 +8,8 @@ public class Cell {
 	public static final int PATH = 0;
 	public static final int WALL = 1;
 	public static final int VOID = 2;
+	public static final int LADDER_UP = 3;
+	public static final int LADDER_DOWN = 4;
 	private static final int TILE_SPRITE_TYPE = 6;
 	private int type;
 	private int symbol;
@@ -34,7 +36,7 @@ public class Cell {
 		if (type == PATH)
 			setSymbol(RandomUtil.random(0, TILE_SPRITE_TYPE - 1));
 		if (type == WALL)
-			setSymbol(6);
+			setSymbol(TILE_SPRITE_TYPE);
 	}
 
 	public Entity getEntity() {

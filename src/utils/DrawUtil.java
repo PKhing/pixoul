@@ -32,14 +32,27 @@ import logic.Sprites;
 import scene.GameScene;
 
 public class DrawUtil {
-	private static PixelReader wallSprites = getImagePixelReader("sprites/wall.png");
-	private static PixelReader playerSprites = getImagePixelReader("sprites/player.png");
-	private static PixelReader skeletonSprites = getImagePixelReader("sprites/skeleton.png");
-	private static PixelReader backpackSprites = getImagePixelReader("sprites/backpack.png");
-	private static PixelReader pauseSprites = getImagePixelReader("sprites/pause.png");
-	private static PixelReader itemSprites = getImagePixelReader("sprites/item.png");
-	private static PixelReader smallPotionSprites = getImagePixelReader("sprites/smallPotion.png");
-	private static Image attackMouseIcon = getAttackMouseIcon();
+	private static PixelReader wallSprites;
+	private static PixelReader playerSprites;
+	private static PixelReader skeletonSprites;
+	private static PixelReader backpackSprites;
+	private static PixelReader pauseSprites;
+	private static PixelReader itemSprites;
+	private static PixelReader smallPotionSprites;
+	private static PixelReader ladderSprites;
+	private static Image attackMouseIcon;
+
+	static {
+		wallSprites = getImagePixelReader("sprites/wall.png");
+		playerSprites = getImagePixelReader("sprites/player.png");
+		skeletonSprites = getImagePixelReader("sprites/skeleton.png");
+		backpackSprites = getImagePixelReader("sprites/backpack.png");
+		pauseSprites = getImagePixelReader("sprites/pause.png");
+		itemSprites = getImagePixelReader("sprites/item.png");
+		smallPotionSprites = getImagePixelReader("sprites/smallPotion.png");
+		ladderSprites = getImagePixelReader("sprites/ladder.png");
+		attackMouseIcon = getAttackMouseIcon();
+	}
 
 	private static Image getImage(String filePath) {
 		return new Image(ClassLoader.getSystemResource(filePath).toString());
@@ -69,20 +82,34 @@ public class DrawUtil {
 		GraphicsContext gc = GameScene.getGraphicsContext();
 		if (cell.getType() != Cell.VOID) {
 			WritableImage img = new WritableImage(wallSprites, cell.getSymbol() * 32, 0, 32, 40);
-			gc.drawImage(scaleUp(img, GameConfig.getScale()), x, y - 8* GameConfig.getScale());
+			gc.drawImage(scaleUp(img, GameConfig.getScale()), x, y - 8 * GameConfig.getScale());
 		}
+	}
+	
+	public static void drawLadder(int y, int x, Cell cell) {
+		GraphicsContext gc = GameScene.getGraphicsContext();
+		int idx = -1;
+		if(cell.getType() == Cell.LADDER_DOWN) {
+			idx = 0;
+		} else if(cell.getType() == Cell.LADDER_UP) {
+			idx = 1;
+		} else {
+			return;
+		}
+		WritableImage img = new WritableImage(ladderSprites, idx * 32, 0, 32, 32);
+		gc.drawImage(scaleUp(img, GameConfig.getScale()), x, y - 8 * GameConfig.getScale());
+		
 	}
 
 	public static void drawItemOnCell(int y, int x, Item item) {
 		int index = getIndexItemSymbol(item);
 		GraphicsContext gc = GameScene.getGraphicsContext();
-		if(item instanceof Potion) {
+		if (item instanceof Potion) {
 			WritableImage img = new WritableImage(smallPotionSprites, item.getSymbol() * 32, 0, 32, 32);
-			gc.drawImage(scaleUp(img, GameConfig.getScale()), x-1 , y );
-		}
-		else {
-		WritableImage img = new WritableImage(itemSprites, item.getSymbol() * 32, index * 32, 32, 32);
-		gc.drawImage(scaleUp(img, GameConfig.getScale()), x , y - 4* GameConfig.getScale());
+			gc.drawImage(scaleUp(img, GameConfig.getScale()), x - 1, y);
+		} else {
+			WritableImage img = new WritableImage(itemSprites, item.getSymbol() * 32, index * 32, 32, 32);
+			gc.drawImage(scaleUp(img, GameConfig.getScale()), x, y - 4 * GameConfig.getScale());
 		}
 	}
 

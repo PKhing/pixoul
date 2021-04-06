@@ -40,23 +40,42 @@ public class GameController {
 
 	public static boolean descending() {
 		level += 1;
+		gameMap.get(player.getPosY(), player.getPosX()).setEntity(null);
 		try {
-			setGameMap(getFloor(level));
+			setGameMap(getFloor(level));	
 		} catch (InvalidFloorException e) {
 			GameMap newFloor = addNewFloor();
 			setGameMap(newFloor);
 		}
+		int posX = gameMap.getRoomList().get(0).getValue();
+		int posY = gameMap.getRoomList().get(0).getKey();
+		
+		player.setInitialPos(posY, posX);
+		gameMap.get(posY, posX).setEntity(player);
 		return true;
 	}
 
 	public static boolean ascending() {
 		try {
-			setGameMap(getFloor(level));
+			GameMap newMap = getFloor(level - 1);
+			
+			gameMap.get(player.getPosY(), player.getPosX()).setEntity(null);
+			
+			setGameMap(newMap);
 		} catch (InvalidFloorException e) {
 			return false;
 		}
 
 		level -= 1;
+
+		List<Pair<Integer, Integer>> roomList = gameMap.getRoomList();
+		
+		int posX = roomList.get(roomList.size() - 1).getValue();
+		int posY = roomList.get(roomList.size() - 1).getKey();
+		
+		player.setInitialPos(posY, posX);
+		gameMap.get(posY, posX).setEntity(player);
+		
 		return true;
 	}
 

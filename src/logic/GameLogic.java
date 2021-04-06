@@ -48,11 +48,24 @@ public class GameLogic {
 		}
 		if (moveSuccess) {
 			GameMap thisGameMap = GameController.getGameMap();
-			Item cellItem = thisGameMap.get(player.getPosY(), player.getPosX()).getItem();
+			
+			Cell currentCell = thisGameMap.get(player.getPosY(), player.getPosX());
+			Item cellItem = currentCell.getItem();
+			
 			if (cellItem != null && player.getItemList().size() != GameConfig.MAX_ITEM) {
 				player.getItemList().add(cellItem);
-				thisGameMap.get(player.getPosY(), player.getPosX()).setItem(null);
+				currentCell.setItem(null);
 				MessageTextUtil.textWhenPickUpItem(cellItem);
+			} else if (currentCell.getType() == Cell.LADDER_UP) {
+				boolean isAscending = GameController.ascending();
+				int level = GameController.getLevel();
+				if(!isAscending) {
+					level = 0;
+				}
+				MessageTextUtil.textWhenAscending(level);
+			} else if (currentCell.getType() == Cell.LADDER_DOWN) {
+				GameController.descending();
+				MessageTextUtil.textWhenDescending(GameController.getLevel());
 			}
 			postGameUpdate();
 		}
@@ -106,7 +119,7 @@ public class GameLogic {
 			break;
 		case DELETE_ITEM:
 			 GameController.getPlayer().getItemList().remove(item);
-			 //TODO add message
+			 MessageTextUtil.textWhenDropItem(item);
 			break;
 		default:
 			return;

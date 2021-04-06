@@ -259,6 +259,13 @@ public class MapGenerator {
 			}
 			makeMap(gameMap.getGameMap());
 		} while (!validate(gameMap));
+		
+		Pair<Integer, Integer> posLadderUp = gameMap.getRoomList().get(0);
+		Pair<Integer, Integer> posLadderDown = gameMap.getRoomList().get(gameMap.getRoomList().size() - 1);
+		
+		gameMap.getGameMap()[posLadderUp.getKey()][posLadderUp.getValue()].setType(Cell.LADDER_UP);
+		gameMap.getGameMap()[posLadderDown.getKey()][posLadderDown.getValue()].setType(Cell.LADDER_DOWN);
+		
 		return gameMap;
 	}
 

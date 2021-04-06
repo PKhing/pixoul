@@ -33,7 +33,7 @@ import utils.GameConfig;
 public class InventoryPane extends AnchorPane {
 	private FlowPane itemPane;
 	private VBox equipmentPane;
-	private boolean mode = false;
+	private boolean isDeleteMode = false;
 
 	public InventoryPane() {
 		super();
@@ -73,8 +73,8 @@ public class InventoryPane extends AnchorPane {
 				(double) (GameConfig.getScreenWidth() / 2 - 125 * GameConfig.getScale()));
 		AnchorPane.setTopAnchor(deleteButton, (double) (GameConfig.getScreenHeight() / 2 + 30 * GameConfig.getScale()));
 		deleteButton.setOnMouseClicked((event) -> {
-			mode = !mode;
-			if (mode == true) {
+			isDeleteMode = !isDeleteMode;
+			if (isDeleteMode == true) {
 				Image binIcon = new WritableImage(DrawUtil.getImagePixelReader("sprites/bin.png"), 0, 0, 32, 32);
 				GameScene.getScene().setCursor(new ImageCursor(binIcon));
 			} else {
@@ -118,7 +118,7 @@ public class InventoryPane extends AnchorPane {
 			canvas.setOnMouseClicked((mouseEvent) -> {
 
 				if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
-					if (mode) {
+					if (isDeleteMode) {
 						GameLogic.gameUpdate(DispatchAction.DELETE_ITEM, item);
 					} 
 					else if (mouseEvent.getClickCount() == 2) {
@@ -138,8 +138,8 @@ public class InventoryPane extends AnchorPane {
 					}
 				}
 				else if (mouseEvent.getButton().equals(MouseButton.SECONDARY)) {
-					if (mode == true) {
-						mode = false;
+					if (isDeleteMode == true) {
+						isDeleteMode = false;
 						GameScene.getScene().setCursor(Cursor.DEFAULT);
 					}
 				}
@@ -153,9 +153,8 @@ public class InventoryPane extends AnchorPane {
 			});
 		} else {
 			canvas.setOnMouseClicked((event) -> {
-
-				if (mode == true) {
-					mode = false;
+				if (isDeleteMode == true) {
+					isDeleteMode = false;
 					GameScene.getScene().setCursor(Cursor.DEFAULT);
 				}
 			});
@@ -188,6 +187,8 @@ public class InventoryPane extends AnchorPane {
 		exit.setFill(Color.rgb(123, 126, 94));
 		exit.setOnMouseClicked((event) -> {
 			this.remove();
+			isDeleteMode = false;
+			GameScene.getScene().setCursor(Cursor.DEFAULT);
 		});
 	}
 
