@@ -10,4 +10,5 @@ public enum DispatchAction {
 	MOVE_UP,
 	MOVE_DOWN,
 	STAY_STILL,
+	DELETE_ITEM,
 }

@@ -15,7 +15,6 @@ import utils.GameConfig;
 import utils.MessageTextUtil;
 
 public class GameLogic {
-	
 
 	public static int calculateAttackValue(Entity from, Entity target) {
 		double fromAttack = from.getAttack();
@@ -50,7 +49,7 @@ public class GameLogic {
 		if (moveSuccess) {
 			GameMap thisGameMap = GameController.getGameMap();
 			Item cellItem = thisGameMap.get(player.getPosY(), player.getPosX()).getItem();
-			if(cellItem != null && player.getItemList().size() != GameConfig.MAX_ITEM) {
+			if (cellItem != null && player.getItemList().size() != GameConfig.MAX_ITEM) {
 				player.getItemList().add(cellItem);
 				thisGameMap.get(player.getPosY(), player.getPosX()).setItem(null);
 				MessageTextUtil.textWhenPickUpItem(cellItem);
@@ -75,9 +74,9 @@ public class GameLogic {
 		switch (action) {
 		case USE_ITEM:
 			player.equipItem(item);
-			if(item instanceof Armor) {
+			if (item instanceof Armor) {
 				MessageTextUtil.textWhenEquipArmor((Armor) item);
-			} else if(item instanceof Weapon) {
+			} else if (item instanceof Weapon) {
 				MessageTextUtil.textWhenEquipWeapon((Weapon) item);
 			} else {
 				MessageTextUtil.textWhenUsedPotion((Potion) item);
@@ -85,7 +84,7 @@ public class GameLogic {
 			break;
 		case SWITCH_EQUIP:
 			Item beforeSwitch = null;
-			if(item instanceof Armor) {
+			if (item instanceof Armor) {
 				beforeSwitch = player.getEquippedArmor();
 				player.unEquipItem(beforeSwitch);
 				MessageTextUtil.textWhenSwitchArmor((Armor) item);
@@ -95,15 +94,19 @@ public class GameLogic {
 				MessageTextUtil.textWhenSwitchWeapon((Weapon) item);
 			}
 			player.equipItem(item);
-			
+
 			break;
 		case UNEQUIP:
 			player.unEquipItem(item);
-			if(item instanceof Armor) {
+			if (item instanceof Armor) {
 				MessageTextUtil.textWhenUnequipArmor((Armor) item);
 			} else {
 				MessageTextUtil.textWhenUnequipWeapon((Weapon) item);
 			}
+			break;
+		case DELETE_ITEM:
+			 GameController.getPlayer().getItemList().remove(item);
+			 //TODO add message
 			break;
 		default:
 			return;

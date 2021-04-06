@@ -9,7 +9,10 @@ import items.base.Armor;
 import items.base.Item;
 import items.base.Weapon;
 import javafx.geometry.Pos;
+import javafx.scene.Cursor;
+import javafx.scene.ImageCursor;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.image.Image;
 import javafx.scene.image.PixelReader;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.KeyCode;
@@ -22,6 +25,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import logic.GameLogic;
+import scene.GameScene;
 import utils.DrawUtil;
 import utils.FontUtil;
 import utils.GameConfig;
@@ -29,6 +33,7 @@ import utils.GameConfig;
 public class InventoryPane extends AnchorPane {
 	private FlowPane itemPane;
 	private VBox equipmentPane;
+	private boolean mode = false;
 
 	public InventoryPane() {
 		super();
@@ -57,6 +62,25 @@ public class InventoryPane extends AnchorPane {
 				(double) (GameConfig.getScreenWidth() / 2 - 130 * GameConfig.getScale()));
 		AnchorPane.setTopAnchor(equipmentPane,
 				(double) (GameConfig.getScreenHeight() / 2 - 60 * GameConfig.getScale()));
+
+		
+		// DeleteButton
+		Canvas deleteButton = new Canvas(32 * GameConfig.getScale(), 32 * GameConfig.getScale());
+		this.getChildren().add(deleteButton);
+		WritableImage img = new WritableImage(DrawUtil.getImagePixelReader("sprites/bin.png"), 0, 0, 32, 32);
+		deleteButton.getGraphicsContext2D().drawImage(DrawUtil.scaleUp(img, GameConfig.getScale()), 0, 0);
+		AnchorPane.setRightAnchor(deleteButton,
+				(double) (GameConfig.getScreenWidth() / 2 - 125 * GameConfig.getScale()));
+		AnchorPane.setTopAnchor(deleteButton, (double) (GameConfig.getScreenHeight() / 2 + 30 * GameConfig.getScale()));
+		deleteButton.setOnMouseClicked((event) -> {
+			mode = !mode;
+			if (mode == true) {
+				Image binIcon = new WritableImage(DrawUtil.getImagePixelReader("sprites/bin.png"), 0, 0, 32, 32);
+				GameScene.getScene().setCursor(new ImageCursor(binIcon));
+			} else {
+				GameScene.getScene().setCursor(Cursor.DEFAULT);
+			}
+		});
 
 		update();
 
@@ -92,22 +116,31 @@ public class InventoryPane extends AnchorPane {
 			DrawUtil.drawItem(canvas.getGraphicsContext2D(), 4 * GameConfig.getScale(), 4 * GameConfig.getScale(),
 					item);
 			canvas.setOnMouseClicked((mouseEvent) -> {
+
 				if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
-					if (mouseEvent.getClickCount() == 2) {
+					if (mode) {
+						GameLogic.gameUpdate(DispatchAction.DELETE_ITEM, item);
+					} 
+					else if (mouseEvent.getClickCount() == 2) {
 						Weapon currentWeapon = GameController.getPlayer().getEquippedWeapon();
 						Armor currentArmor = GameController.getPlayer().getEquippedArmor();
-						if (item == currentWeapon
-								|| item == currentArmor) {
+						if (item == currentWeapon || item == currentArmor) {
 							GameLogic.gameUpdate(DispatchAction.UNEQUIP, item);
 						} else {
-							if(item instanceof Weapon && currentWeapon != null) {
+							if (item instanceof Weapon && currentWeapon != null) {
 								GameLogic.gameUpdate(DispatchAction.SWITCH_EQUIP, item);
-							} else if(item instanceof Armor && currentArmor != null) {
-								GameLogic.gameUpdate(DispatchAction.SWITCH_EQUIP, item);	
+							} else if (item instanceof Armor && currentArmor != null) {
+								GameLogic.gameUpdate(DispatchAction.SWITCH_EQUIP, item);
 							} else {
 								GameLogic.gameUpdate(DispatchAction.USE_ITEM, item);
 							}
 						}
+					}
+				}
+				else if (mouseEvent.getButton().equals(MouseButton.SECONDARY)) {
+					if (mode == true) {
+						mode = false;
+						GameScene.getScene().setCursor(Cursor.DEFAULT);
 					}
 				}
 			});
@@ -117,6 +150,14 @@ public class InventoryPane extends AnchorPane {
 			});
 			canvas.setOnMouseExited((event) -> {
 				this.getChildren().remove(this.getChildren().size() - 1);
+			});
+		} else {
+			canvas.setOnMouseClicked((event) -> {
+
+				if (mode == true) {
+					mode = false;
+					GameScene.getScene().setCursor(Cursor.DEFAULT);
+				}
 			});
 		}
 	}
