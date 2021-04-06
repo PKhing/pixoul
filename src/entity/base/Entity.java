@@ -1,8 +1,11 @@
 package entity.base;
 
 import controller.GameController;
+import utils.MessageTextUtil;
 
 public abstract class Entity {
+	private String name;
+	
 	private int health;
 
 	private int attack;
@@ -23,8 +26,9 @@ public abstract class Entity {
 
 	private int moveSpeed;
 
-	public Entity(int attack, int maxHealth, int defense, int posY, int posX, int direction,
+	public Entity(String name, int attack, int maxHealth, int defense, int posY, int posX, int direction,
 			double critRate, double critPercent, int moveSpeed) {
+		this.setName(name);
 		this.health = maxHealth;
 		this.attack = attack;
 		this.defense = defense;
@@ -40,6 +44,7 @@ public abstract class Entity {
 	public void remove() {
 		GameController.getGameMap().get(this.getPosY(), this.getPosX()).setEntity(null);
 		GameController.getGameMap().getMonsterList().remove(this);
+		MessageTextUtil.textWhenSlained(this);
 	}
 
 	public int getHealth() {
@@ -120,6 +125,14 @@ public abstract class Entity {
 
 	public void setMaxHealth(int maxHealth) {
 		this.maxHealth = maxHealth;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 }

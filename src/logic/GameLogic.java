@@ -9,6 +9,7 @@ import items.base.Armor;
 import items.base.IConsecutiveEffect;
 import items.base.Item;
 import items.base.Potion;
+import items.base.Weapon;
 import scene.GameScene;
 import utils.GameConfig;
 import utils.MessageTextUtil;
@@ -74,17 +75,35 @@ public class GameLogic {
 		switch (action) {
 		case USE_ITEM:
 			player.equipItem(item);
+			if(item instanceof Armor) {
+				MessageTextUtil.textWhenEquipArmor((Armor) item);
+			} else if(item instanceof Weapon) {
+				MessageTextUtil.textWhenEquipWeapon((Weapon) item);
+			} else {
+				MessageTextUtil.textWhenUsedPotion((Potion) item);
+			}
 			break;
 		case SWITCH_EQUIP:
+			Item beforeSwitch = null;
 			if(item instanceof Armor) {
-				player.getEquippedArmor().onUnequip(player);
+				beforeSwitch = player.getEquippedArmor();
+				player.unEquipItem(beforeSwitch);
+				MessageTextUtil.textWhenSwitchArmor((Armor) item);
 			} else {
-				player.getEquippedWeapon().onUnequip(player);
+				beforeSwitch = player.getEquippedWeapon();
+				player.unEquipItem(beforeSwitch);
+				MessageTextUtil.textWhenSwitchWeapon((Weapon) item);
 			}
-			item.onEquip(player);
+			player.equipItem(item);
+			
 			break;
 		case UNEQUIP:
 			player.unEquipItem(item);
+			if(item instanceof Armor) {
+				MessageTextUtil.textWhenUnequipArmor((Armor) item);
+			} else {
+				MessageTextUtil.textWhenUnequipWeapon((Weapon) item);
+			}
 			break;
 		default:
 			return;

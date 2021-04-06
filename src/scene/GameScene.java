@@ -9,8 +9,11 @@ import controller.GameController;
 import controller.InterruptController;
 import entity.Skeleton;
 import entity.base.DispatchAction;
+import items.armor.GoldenArmor;
+import items.armor.IronArmor;
 import items.base.Potion;
 import items.potion.HealingPotion;
+import items.weapon.Spear;
 import items.weapon.Sword;
 import items.potion.ShieldPotion;
 import javafx.event.EventHandler;
@@ -211,6 +214,9 @@ public class GameScene {
 		Pair<Integer, Integer> firstRoomPos = GameController.getRoomList().get(0);
 		GameController.getPlayer().setInitialPos(firstRoomPos.getKey(), firstRoomPos.getValue());
 		GameController.getPlayer().getItemList().add(new Sword("Salty Sword", "With 100 years salt effect", 10, 1));
+		GameController.getPlayer().getItemList().add(new Spear("More Salty Sword", "With 100 years salt effect", 10, 1));
+		GameController.getPlayer().getItemList().add(new IronArmor("More Salty Sword", "With 100 years salt effect", 5));
+		GameController.getPlayer().getItemList().add(new GoldenArmor("More Salty Sword", "With 100 years salt effect", 5));
 		
 		Skeleton skeleton = new Skeleton(5, 10, 1, firstRoomPos.getKey() - 3, firstRoomPos.getValue() + 1,
 				Direction.DOWN, 0, 0, 1);

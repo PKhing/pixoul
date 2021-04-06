@@ -8,13 +8,13 @@ import items.base.Weapon;
 import scene.GameScene;
 
 public class MessageTextUtil {
-	public static void textWhenAttack(Entity from, Entity to) {
-		String displayText = "%s has attacked %s for %d damage".formatted("", "", 0);
+	public static void textWhenAttack(Entity from, Entity to, int attackValue) {
+		String displayText = "%s has attacked %s for %d damage".formatted(from.getName(), to.getName(), attackValue);
 		GameScene.getMessagePane().addMessage(displayText);
 	}
 	
-	public static void textWhenSlained(Entity from, Entity to) {
-		String displayText = "%s has attacked %s for %d damage".formatted("", "", 0);
+	public static void textWhenSlained(Entity entity) {
+		String displayText = "%s has been slained.".formatted(entity.getName());
 		GameScene.getMessagePane().addMessage(displayText);
 	}
 	
@@ -44,7 +44,7 @@ public class MessageTextUtil {
 	}
 	
 	public static void textWhenSwitchArmor(Armor armor) {
-		String displayText = "Player has switched weapon to %s.".formatted(armor.getName());
+		String displayText = "Player has switched armor to %s.".formatted(armor.getName());
 		GameScene.getMessagePane().addMessage(displayText);
 	}
 	

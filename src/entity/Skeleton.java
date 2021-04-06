@@ -9,12 +9,13 @@ import javafx.util.Pair;
 import logic.Cell;
 import logic.Direction;
 import logic.GameLogic;
+import utils.MessageTextUtil;
 
 public class Skeleton extends Monster implements Moveable, Attackable {
 
 	public Skeleton(int attack, int maxHealth, int defense, int posY, int posX, int direction, double critRate,
 			double critPercent, int moveSpeed) {
-		super(attack, maxHealth, defense, posY, posX, direction, critRate, critPercent, moveSpeed);
+		super("Skelaton", attack, maxHealth, defense, posY, posX, direction, critRate, critPercent, moveSpeed);
 		GameController.getGameMap().get(posY, posX).setEntity(this);
 		// TODO Auto-generated constructor stub
 	}
@@ -54,6 +55,7 @@ public class Skeleton extends Monster implements Moveable, Attackable {
 	@Override
 	public boolean attack(Entity target) {
 		int atkValue = GameLogic.calculateAttackValue(this, target);
+		MessageTextUtil.textWhenAttack(this, target, atkValue);
 		target.setHealth(target.getHealth() - atkValue);
 		return true;
 	}

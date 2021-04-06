@@ -20,6 +20,7 @@ import logic.Direction;
 import logic.GameLogic;
 import scene.GameScene;
 import utils.GameConfig;
+import utils.MessageTextUtil;
 
 public class Player extends Entity implements Moveable, Attackable {
 	private List<Potion> potionList;
@@ -28,7 +29,7 @@ public class Player extends Entity implements Moveable, Attackable {
 	private ArrayList<Item> itemList = new ArrayList<Item>();
 	
 	public Player() {
-		super(5, 10, 1, 0, 0, Direction.DOWN, 1, 1, 1);
+		super("Player", 5, 10, 1, 0, 0, Direction.DOWN, 1, 1, 1);
 		setPotionList(new CopyOnWriteArrayList<>());
 		setEquippedArmor(null);
 		setEquippedWeapon(null);
@@ -71,6 +72,7 @@ public class Player extends Entity implements Moveable, Attackable {
 	@Override
 	public boolean attack(Entity target) {
 		int atkValue = GameLogic.calculateAttackValue(this, target);
+		MessageTextUtil.textWhenAttack(this, target, atkValue);
 		target.setHealth(target.getHealth() - atkValue);
 		return true;
 	}
