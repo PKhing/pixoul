@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
-import java.util.concurrent.CopyOnWriteArrayList;
-
 import controller.GameController;
 import entity.base.Attackable;
 import entity.base.Entity;
@@ -23,14 +21,12 @@ import utils.GameConfig;
 import utils.MessageTextUtil;
 
 public class Player extends Entity implements Moveable, Attackable {
-	private List<Potion> potionList;
 	private Armor equippedArmor;
 	private Weapon equippedWeapon;
 	private ArrayList<Item> itemList = new ArrayList<Item>();
 	
 	public Player() {
 		super("Player", 5, 10, 1, 0, 0, Direction.DOWN, 1, 1, 1);
-		setPotionList(new CopyOnWriteArrayList<>());
 		setEquippedArmor(null);
 		setEquippedWeapon(null);
 	}
@@ -154,15 +150,7 @@ public class Player extends Entity implements Moveable, Attackable {
 		}
 		return allPos;
 	}
-
-	public List<Potion> getPotionList() {
-		return potionList;
-	}
-
-	public void setPotionList(List<Potion> potionList) {
-		this.potionList = potionList;
-	}
-
+	
 	public Armor getEquippedArmor() {
 		return equippedArmor;
 	}

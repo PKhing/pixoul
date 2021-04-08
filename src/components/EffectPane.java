@@ -3,7 +3,7 @@ package components;
 import java.util.List;
 
 import controller.GameController;
-import items.base.Potion;
+import effects.EntityEffect;
 import javafx.geometry.Insets;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
@@ -27,13 +27,13 @@ public class EffectPane extends VBox {
 
 	public void update() {
 		this.getChildren().clear();
-		List<Potion> playerEffect = GameController.getPlayer().getPotionList();
+		List<EntityEffect> playerEffect = GameController.getPlayer().getEffectList();
 		if(playerEffect.size() == 0) {
 			this.setVisible(false);
 		} else {
 			this.setVisible(true);
 		}
-		for (Potion potion : GameController.getPlayer().getPotionList()) {
+		for (EntityEffect potion : playerEffect) {
 			Text effect = new Text(potion.getName() + ": " + String.valueOf(potion.getDuration()));
 			effect.setFont(FontUtil.getFont(12));
 			effect.setFill(Color.WHITE);

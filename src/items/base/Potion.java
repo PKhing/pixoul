@@ -1,5 +1,7 @@
 package items.base;
 
+import entity.Player;
+
 public abstract class Potion extends Item {
 	private int duration;
 	private boolean isPermanant;
@@ -8,13 +10,6 @@ public abstract class Potion extends Item {
 		super(name, description);
 		setDuration(duration);
 		setPermanant(isPermanant);
-	}
-
-	public boolean update() {
-		setDuration(getDuration() - 1);
-		if (getDuration() <= 0)
-			return false;
-		return true;
 	}
 
 	public int getDuration() {
@@ -33,4 +28,7 @@ public abstract class Potion extends Item {
 		this.isPermanant = isPermanant;
 	}
 
+	@Override
+	public void onUnequip(Player player) {}
+	
 }

@@ -12,7 +12,8 @@ import entity.base.DispatchAction;
 import items.armor.GoldenArmor;
 import items.armor.IronArmor;
 import items.base.Potion;
-import items.potion.HealingPotion;
+import items.potion.InstantHealPotion;
+import items.potion.RegenerationPotion;
 import items.weapon.Spear;
 import items.weapon.Sword;
 import items.potion.ShieldPotion;
@@ -221,8 +222,8 @@ public class GameScene {
 		Skeleton skeleton = new Skeleton(5, 10, 1, firstRoomPos.getKey() - 3, firstRoomPos.getValue() + 1,
 				Direction.DOWN, 0, 0, 1);
 
-		Potion maxHealthPotion = new HealingPotion("Bitset Potion", "Extends for 1 bit shift", GameController.getPlayer().getHealth(), 1, true);
-		Potion currentPotion = new HealingPotion("Salty Potion", "With 100 years salt effect", 10, 1, false);
+		Potion maxHealthPotion = new InstantHealPotion("Bitset Potion", "Extends for 1 bit shift", GameController.getPlayer().getHealth(), true);
+		Potion currentPotion = new RegenerationPotion("Salty Potion", "With 100 years salt effect", 10, 100);
 		GameController.getPlayer().getItemList().add(currentPotion);
 		GameController.getPlayer().getItemList().add(maxHealthPotion);
 	
