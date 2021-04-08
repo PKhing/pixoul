@@ -1,5 +1,6 @@
 package items.potion;
 
+import effects.DefenseBoost;
 import entity.Player;
 import items.base.Potion;
 import logic.Sprites;
@@ -14,19 +15,7 @@ public class ShieldPotion extends Potion {
 
 	@Override
 	public void onEquip(Player player) {
-		player.setDefense(player.getDefense() + getShield());
-		if(!isPermanant()) {
-			setDuration(0);
-		}
-		player.getPotionList().add(this);
-	}
-
-	@Override
-	public void onUnequip(Player player) {
-		if(!isPermanant()) {
-			player.setDefense(player.getDefense() - getShield());
-		}
-		player.getPotionList().remove(this);
+		player.getEffectList().add(new DefenseBoost(player, getName(), getShield(), getDuration(), isPermanant()));
 	}
 
 	@Override

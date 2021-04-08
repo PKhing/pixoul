@@ -1,6 +1,10 @@
 package entity.base;
 
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
+
 import controller.GameController;
+import effects.EntityEffect;
 import utils.MessageTextUtil;
 
 public abstract class Entity {
@@ -25,6 +29,8 @@ public abstract class Entity {
 	private double critPercent;
 
 	private int moveSpeed;
+	
+	private List<EntityEffect> effectList;
 
 	public Entity(String name, int attack, int maxHealth, int defense, int posY, int posX, int direction,
 			double critRate, double critPercent, int moveSpeed) {
@@ -39,6 +45,7 @@ public abstract class Entity {
 		this.critPercent = critPercent;
 		this.moveSpeed = moveSpeed;
 		this.maxHealth = maxHealth;
+		this.effectList = new CopyOnWriteArrayList<>();
 	}
 
 	public void remove() {
@@ -133,6 +140,14 @@ public abstract class Entity {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public List<EntityEffect> getEffectList() {
+		return effectList;
+	}
+
+	public void setEffectList(List<EntityEffect> effectList) {
+		this.effectList = effectList;
 	}
 
 }

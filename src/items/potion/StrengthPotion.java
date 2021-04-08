@@ -1,5 +1,7 @@
 package items.potion;
 
+import effects.AttackBoost;
+import effects.DefenseBoost;
 import entity.Player;
 import items.base.Potion;
 import logic.Sprites;
@@ -10,26 +12,11 @@ public class StrengthPotion extends Potion {
 	public StrengthPotion(String name, String description, int attack, int duration, boolean isPermanant) {
 		super(name, description, duration, isPermanant);
 		setAttack(attack);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public void onEquip(Player player) {
-		// TODO Auto-generated method stub
-		player.setAttack(player.getAttack() + getAttack());
-		if(isPermanant()) {
-			setDuration(0);
-		}
-		player.getPotionList().add(this);
-	}
-
-	@Override
-	public void onUnequip(Player player) {
-		// TODO Auto-generated method stub
-		if(!isPermanant()) {
-			player.setAttack(player.getAttack() - getAttack());	
-		}
-		player.getPotionList().remove(this);
+		new AttackBoost(player, getName(), getAttack(), getDuration(), isPermanant()).onAdd(player);
 	}
 
 	@Override

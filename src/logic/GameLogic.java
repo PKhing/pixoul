@@ -1,12 +1,13 @@
 package logic;
 
 import controller.GameController;
+import effects.EntityEffect;
+import effects.IConsecutiveEffect;
 import entity.Player;
 import entity.base.DispatchAction;
 import entity.base.Entity;
 import entity.base.Monster;
 import items.base.Armor;
-import items.base.IConsecutiveEffect;
 import items.base.Item;
 import items.base.Potion;
 import items.base.Weapon;
@@ -44,14 +45,15 @@ public class GameLogic {
 		case STAY_STILL:
 			break;
 		default:
+			moveSuccess = false;
 			break;
 		}
 		if (moveSuccess) {
 			GameMap thisGameMap = GameController.getGameMap();
-			
+
 			Cell currentCell = thisGameMap.get(player.getPosY(), player.getPosX());
 			Item cellItem = currentCell.getItem();
-			
+
 			if (cellItem != null && player.getItemList().size() != GameConfig.MAX_ITEM) {
 				player.getItemList().add(cellItem);
 				currentCell.setItem(null);
@@ -59,7 +61,7 @@ public class GameLogic {
 			} else if (currentCell.getType() == Cell.LADDER_UP) {
 				boolean isAscending = GameController.ascending();
 				int level = GameController.getLevel();
-				if(!isAscending) {
+				if (!isAscending) {
 					level = 0;
 				}
 				MessageTextUtil.textWhenAscending(level);
@@ -118,8 +120,8 @@ public class GameLogic {
 			}
 			break;
 		case DELETE_ITEM:
-			 GameController.getPlayer().getItemList().remove(item);
-			 MessageTextUtil.textWhenDropItem(item);
+			GameController.getPlayer().getItemList().remove(item);
+			MessageTextUtil.textWhenDropItem(item);
 			break;
 		default:
 			return;
@@ -129,17 +131,10 @@ public class GameLogic {
 
 	public static void potionUpdate() {
 		Player player = GameController.getPlayer();
-		for (Potion each : player.getPotionList()) {
-			if (each instanceof IConsecutiveEffect) {
-				((IConsecutiveEffect) each).effect(player);
-			}
-
-			if (!each.update()) {
-				each.onUnequip(player);
-				player.getItemList().remove(each);
-				player.getPotionList().remove(each);
-			}
+		for(Monster each: GameController.getGameMap().getMonsterList()) {
+			updateEntityEffect(each);
 		}
+		updateEntityEffect(player);
 		GameScene.getEffectPane().update();
 	}
 
@@ -158,5 +153,18 @@ public class GameLogic {
 		GameScene.getStatusPane().setAttack(player.getAttack());
 		GameScene.getStatusPane().setDefense(player.getDefense());
 		GameController.getGameMap().drawMap();
+	}
+	
+	private static void updateEntityEffect(Entity entity) {
+		for (EntityEffect each : entity.getEffectList()) {
+			if (each instanceof IConsecutiveEffect) {
+				((IConsecutiveEffect) each).effect(entity);
+			}
+
+			if (!each.onUpdate(entity)) {
+				each.onWearOff(entity);
+				entity.getEffectList().remove(each);
+			}
+		}
 	}
 }
