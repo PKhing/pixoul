@@ -3,6 +3,7 @@ package logic;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.PriorityQueue;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import controller.GameController;
@@ -96,20 +97,48 @@ public class GameMap {
 		// if (nowCell.getEntity() instanceof Monster)
 		// DrawUtil.addEntityButton(writeY, writeX, nowCell.getEntity());
 		// }
+		class Node implements Comparable<Node> {
+			public int x;
+			public int y;
+			public Renderable obj;
 
-		for (int i = startIdxY; i <= endIdxY; i++) {
-			for (int j = startIdxX; j <= endIdxX; j++) {
-				DrawUtil.drawCell(newSpriteSize * i - startY, newSpriteSize * j - startX, gameMap.get(i, j));
-				DrawUtil.drawLadder(newSpriteSize * i - startY, newSpriteSize * j - startX, gameMap.get(i, j));
-				DrawUtil.drawItemOnCell(newSpriteSize * i - startY, newSpriteSize * j - startX,
-						gameMap.get(i, j).getItem());
-				DrawUtil.drawEntity(newSpriteSize * i - startY, newSpriteSize * j - startX,
-						gameMap.get(i, j).getEntity());
-				DrawUtil.addEntityButton(newSpriteSize * i - startY, newSpriteSize * j - startX,
-						gameMap.get(i, j).getEntity());
+			public Node(Renderable obj, int y, int x) {
+				this.obj = obj;
+				this.y = y;
+				this.x = x;
+			}
+
+			public int compareTo(Node node) {
+				if (this.obj.getPriority() == node.obj.getPriority()) {
+					if (this.y < node.y)
+						return -1;
+					return 1;
+				}
+				if (this.obj.getPriority() < node.obj.getPriority())
+					return -1;
+				return 1;
 			}
 		}
 
+		PriorityQueue<Node> pq = new PriorityQueue<Node>();
+		
+		for (int i = startIdxY; i <= endIdxY; i++) {
+			for (int j = startIdxX; j <= endIdxX; j++) {
+
+				int posY = newSpriteSize * i - startY;
+				int posX = newSpriteSize * j - startX;
+				pq.add(new Node(gameMap.get(i, j), posY, posX));
+				if (gameMap.get(i, j).getItem() != null)
+					pq.add(new Node(gameMap.get(i, j).getItem(), posY, posX));
+				if (gameMap.get(i, j).getEntity() != null)
+					pq.add(new Node(gameMap.get(i, j).getEntity(), posY, posX));
+			}
+		}
+
+		while (!pq.isEmpty()) {
+			Node node = pq.poll();
+			DrawUtil.draw(node.obj, node.y, node.x);
+		}
 	}
 
 	public Cell[][] getGameMap() {

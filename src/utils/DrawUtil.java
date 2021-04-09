@@ -28,6 +28,7 @@ import javafx.scene.paint.Color;
 import logic.Cell;
 import logic.Direction;
 import logic.GameLogic;
+import logic.Renderable;
 import logic.Sprites;
 import scene.GameScene;
 
@@ -53,7 +54,7 @@ public class DrawUtil {
 		ladderSprites = getImagePixelReader("sprites/ladder.png");
 		attackMouseIcon = getAttackMouseIcon();
 	}
-
+	
 	private static Image getImage(String filePath) {
 		return new Image(ClassLoader.getSystemResource(filePath).toString());
 	}
@@ -62,6 +63,22 @@ public class DrawUtil {
 		return getImage(filePath).getPixelReader();
 	}
 
+	public static void draw(Renderable obj,int y,int x) {
+		if(obj instanceof Cell) {
+			drawCell(y,x,(Cell) obj);
+			drawLadder(y,x,(Cell) obj);
+		}
+		if(obj instanceof Item) {
+			drawItemOnCell(y,x,(Item) obj);
+		}
+		if(obj instanceof Entity) {
+			drawEntity(y,x,(Entity)obj);
+		}
+		if(obj instanceof Monster) {
+			addEntityButton(y,x,(Monster)obj);
+		}
+	}
+	
 	public static void drawBackpack(GraphicsContext gc) {
 		WritableImage img = new WritableImage(backpackSprites, 0, 0, 32, 32);
 		gc.drawImage(scaleUp(img, GameConfig.getScale()), 0, 0);
@@ -137,7 +154,8 @@ public class DrawUtil {
 			img = new WritableImage(playerSprites, 1 * 32, direction * 32, 32, 32);
 		if (entity instanceof Skeleton)
 			img = new WritableImage(skeletonSprites, 1 * 32, direction * 32, 32, 32);
-		gc.drawImage(scaleUp(img, GameConfig.getScale()), x, y - 4 * GameConfig.getScale());
+		// Fix later?
+		gc.drawImage(scaleUp(img, GameConfig.getScale()), x, y /*- 4 * GameConfig.getScale()*/);
 
 		if (entity instanceof Monster)
 			drawHPBar(y, x, (Monster) entity);
