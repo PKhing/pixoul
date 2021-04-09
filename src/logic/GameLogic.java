@@ -14,11 +14,15 @@ import items.base.Weapon;
 import scene.GameScene;
 import utils.GameConfig;
 import utils.MessageTextUtil;
+import utils.RandomUtil;
 
 public class GameLogic {
 
 	public static int calculateAttackValue(Entity from, Entity target) {
-		double fromAttack = from.getAttack();
+		int lowerBound = (int)(from.getAttack() / from.getCritRate());
+		int upperBound = (int)(from.getAttack() * from.getCritRate());
+		
+		double fromAttack = RandomUtil.random(lowerBound, upperBound);
 		double targetDefense = target.getDefense();
 
 		int atkCal = (int) Math.max(1, (fromAttack / (fromAttack + targetDefense)) * fromAttack);

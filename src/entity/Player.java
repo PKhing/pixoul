@@ -26,7 +26,7 @@ public class Player extends Entity implements Moveable, Attackable {
 	private ArrayList<Item> itemList = new ArrayList<Item>();
 	
 	public Player() {
-		super("Player", 5, 10, 1, 0, 0, Direction.DOWN, 1, 1, 1);
+		super("Player", 5, 10, 1, 0, 0, Direction.DOWN, 1.5, 1, 1);
 		setEquippedArmor(null);
 		setEquippedWeapon(null);
 	}

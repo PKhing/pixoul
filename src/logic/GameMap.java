@@ -101,6 +101,7 @@ public class GameMap {
 						gameMap.get(i, j));
 				DrawUtil.drawLadder(newSpriteSize * i - startY, newSpriteSize * j - startX,
 						gameMap.get(i, j));
+				
 				if (gameMap.get(i, j).getEntity() != null)
 					DrawUtil.drawEntity(newSpriteSize * i - startY, newSpriteSize * j - startX,
 							gameMap.get(i, j).getEntity());

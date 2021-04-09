@@ -220,7 +220,7 @@ public class GameScene {
 		GameController.getPlayer().getItemList().add(new GoldenArmor("More Salty Sword", "With 100 years salt effect", 5));
 		
 		Skeleton skeleton = new Skeleton(5, 10, 1, firstRoomPos.getKey() - 3, firstRoomPos.getValue() + 1,
-				Direction.DOWN, 0, 0, 1);
+				Direction.DOWN, 1.25, 0, 1);
 
 		Potion maxHealthPotion = new InstantHealPotion("Bitset Potion", "Extends for 1 bit shift", GameController.getPlayer().getHealth(), true);
 		Potion currentPotion = new RegenerationPotion("Salty Potion", "With 100 years salt effect", 10, 100);

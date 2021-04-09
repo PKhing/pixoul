@@ -9,7 +9,7 @@ import utils.MessageTextUtil;
 
 public abstract class Entity {
 	private String name;
-	
+
 	private int health;
 
 	private int attack;
@@ -27,25 +27,26 @@ public abstract class Entity {
 	private double critRate;
 
 	private double critPercent;
-
-	private int moveSpeed;
 	
+	private int moveSpeed;
+
 	private List<EntityEffect> effectList;
 
 	public Entity(String name, int attack, int maxHealth, int defense, int posY, int posX, int direction,
 			double critRate, double critPercent, int moveSpeed) {
-		this.setName(name);
-		this.health = maxHealth;
-		this.attack = attack;
-		this.defense = defense;
-		this.posX = posX;
-		this.posY = posY;
-		this.direction = direction;
-		this.critRate = critRate;
-		this.critPercent = critPercent;
-		this.moveSpeed = moveSpeed;
-		this.maxHealth = maxHealth;
-		this.effectList = new CopyOnWriteArrayList<>();
+		setName(name);
+		setHealth(maxHealth);
+		setMaxHealth(maxHealth);
+		setAttack(attack);
+		setDefense(defense);
+		setPosX(posX);
+		setPosY(posY);
+		setDirection(direction);
+		setCritRate(critRate);
+		setCritPercent(critPercent);
+		setMoveSpeed(moveSpeed);
+		setMaxHealth(maxHealth);
+		setEffectList(new CopyOnWriteArrayList<>());
 	}
 
 	public void remove() {
@@ -75,7 +76,7 @@ public abstract class Entity {
 	}
 
 	public void setDefense(int defense) {
-		this.defense = defense;
+		this.defense = Math.max(1, defense);
 	}
 
 	public double getCritRate() {
@@ -83,7 +84,7 @@ public abstract class Entity {
 	}
 
 	public void setCritRate(double critRate) {
-		this.critRate = critRate;
+		this.critRate = Math.max(1, critRate);
 	}
 
 	public int getMoveSpeed() {
@@ -91,7 +92,7 @@ public abstract class Entity {
 	}
 
 	public void setMoveSpeed(int moveSpeed) {
-		this.moveSpeed = moveSpeed;
+		this.moveSpeed = Math.max(1, moveSpeed);
 	}
 
 	public double getCritPercent() {
@@ -99,7 +100,7 @@ public abstract class Entity {
 	}
 
 	public void setCritPercent(double critPercent) {
-		this.critPercent = critPercent;
+		this.critPercent = Math.max(Math.min(1, critPercent), 0);
 	}
 
 	public int getPosX() {
@@ -141,7 +142,7 @@ public abstract class Entity {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
 	public List<EntityEffect> getEffectList() {
 		return effectList;
 	}
