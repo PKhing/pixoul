@@ -97,47 +97,70 @@ public class GameMap {
 		// if (nowCell.getEntity() instanceof Monster)
 		// DrawUtil.addEntityButton(writeY, writeX, nowCell.getEntity());
 		// }
+		
 		class Node implements Comparable<Node> {
 			public int x;
 			public int y;
+			public int priority;
 			public Renderable obj;
 
-			public Node(Renderable obj, int y, int x) {
+			public Node(int y, int x, int priority, Renderable obj) {
 				this.obj = obj;
 				this.y = y;
 				this.x = x;
+				this.priority = priority;
 			}
 
 			public int compareTo(Node node) {
-				if (this.obj.getPriority() == node.obj.getPriority()) {
+				if (this.priority == node.priority) {
 					if (this.y < node.y)
 						return -1;
 					return 1;
 				}
-				if (this.obj.getPriority() < node.obj.getPriority())
+				if (this.priority < node.priority)
 					return -1;
 				return 1;
 			}
 		}
 
 		PriorityQueue<Node> pq = new PriorityQueue<Node>();
-		
+
 		for (int i = startIdxY; i <= endIdxY; i++) {
 			for (int j = startIdxX; j <= endIdxX; j++) {
-
+				
 				int posY = newSpriteSize * i - startY;
 				int posX = newSpriteSize * j - startX;
-				pq.add(new Node(gameMap.get(i, j), posY, posX));
+				Cell thisCell = gameMap.get(i, j);
+				if (gameMap.get(i, j).getType() == Cell.WALL)
+					pq.add(new Node(posY, posX, 50, () -> {
+						DrawUtil.drawCell(posY, posX, thisCell);
+					}));
+				else
+					pq.add(new Node(posY, posX, 0, () -> {
+						DrawUtil.drawCell(posY, posX, thisCell);
+					}));
 				if (gameMap.get(i, j).getItem() != null)
-					pq.add(new Node(gameMap.get(i, j).getItem(), posY, posX));
+					pq.add(new Node(posY, posX, 1, () -> {
+						DrawUtil.drawItemOnCell(posY, posX, thisCell.getItem());
+					}));
 				if (gameMap.get(i, j).getEntity() != null)
-					pq.add(new Node(gameMap.get(i, j).getEntity(), posY, posX));
+					pq.add(new Node(posY, posX, 2, () -> {
+						DrawUtil.drawEntity(posY, posX, thisCell.getEntity());
+					}));
+				if (gameMap.get(i, j).getEntity() instanceof Monster)
+					pq.add(new Node(posY, posX, 100, () -> {
+						DrawUtil.drawHPBar(posY, posX, thisCell.getEntity());
+					}));
+				if (gameMap.get(i, j).getEntity() instanceof Monster)
+					pq.add(new Node(posY, posX, 2, () -> {
+						DrawUtil.addEntityButton(posY, posX, thisCell.getEntity());
+					}));
 			}
 		}
 
 		while (!pq.isEmpty()) {
 			Node node = pq.poll();
-			DrawUtil.draw(node.obj, node.y, node.x);
+			node.obj.render();
 		}
 	}
 

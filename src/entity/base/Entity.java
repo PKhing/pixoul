@@ -8,7 +8,7 @@ import effects.EntityEffect;
 import logic.Renderable;
 import utils.MessageTextUtil;
 
-public abstract class Entity implements Renderable{
+public abstract class Entity{
 	private String name;
 
 	private int health;

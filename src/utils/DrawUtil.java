@@ -62,22 +62,6 @@ public class DrawUtil {
 	public static PixelReader getImagePixelReader(String filePath) {
 		return getImage(filePath).getPixelReader();
 	}
-
-	public static void draw(Renderable obj,int y,int x) {
-		if(obj instanceof Cell) {
-			drawCell(y,x,(Cell) obj);
-			drawLadder(y,x,(Cell) obj);
-		}
-		if(obj instanceof Item) {
-			drawItemOnCell(y,x,(Item) obj);
-		}
-		if(obj instanceof Entity) {
-			drawEntity(y,x,(Entity)obj);
-		}
-		if(obj instanceof Monster) {
-			addEntityButton(y,x,(Monster)obj);
-		}
-	}
 	
 	public static void drawBackpack(GraphicsContext gc) {
 		WritableImage img = new WritableImage(backpackSprites, 0, 0, 32, 32);

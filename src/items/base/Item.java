@@ -3,7 +3,7 @@ package items.base;
 import entity.Player;
 import logic.Renderable;
 
-public abstract class Item implements Renderable{
+public abstract class Item{
 	private String name;
 	private String description;
 
@@ -30,8 +30,5 @@ public abstract class Item implements Renderable{
 
 	public void setName(String name) {
 		this.name = name;
-	}
-	public int getPriority(){
-		return 1;
 	}
 }
