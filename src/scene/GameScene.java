@@ -52,13 +52,17 @@ public class GameScene {
 
 	public static void initScene() {
 		StackPane root = new StackPane();
-
+		
+		root.setPadding(new Insets(0));
 		root.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
 
 		gamePane = new StackPane();
 
+		gamePane.setMinSize(GameConfig.getScreenWidth(), GameConfig.getScreenHeight());
+		gamePane.setMaxSize(GameConfig.getScreenWidth(), GameConfig.getScreenHeight());
+		
 		root.getChildren().add(gamePane);
-
+		
 		scene = new Scene(root, GameConfig.getScreenWidth(), GameConfig.getScreenHeight());
 
 		Canvas canvas = new Canvas(GameConfig.getScreenWidth(), GameConfig.getScreenHeight());
@@ -105,6 +109,7 @@ public class GameScene {
 		// Pause Button
 		Button pauseBtn = new Button();
 		pauseBtn.setStyle("-fx-margin:0;-fx-padding:0");
+	
 		AnchorPane.setTopAnchor(pauseBtn, 5.0 * GameConfig.getScale());
 		AnchorPane.setRightAnchor(pauseBtn, 5.0 * GameConfig.getScale());
 		pauseBtn.setPrefHeight(15.0 * GameConfig.getScale());

@@ -157,6 +157,8 @@ public class GameController {
 	}
 	
 	private static FadeTransition makeFadingScene(Node node, double from, double to) {
+		
+		
 		FadeTransition fadeIn = new FadeTransition(Duration.seconds(1.0), node);
 		FadeTransition fadeOut = new FadeTransition(Duration.seconds(1.0), node);
 		
