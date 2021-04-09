@@ -6,7 +6,10 @@ import java.util.List;
 import entity.Player;
 import exception.InvalidFloorException;
 import exception.NullMapException;
+import javafx.animation.FadeTransition;
+import javafx.scene.Node;
 import javafx.scene.media.MediaPlayer;
+import javafx.util.Duration;
 import javafx.util.Pair;
 import logic.GameLogic;
 import logic.GameMap;
@@ -39,28 +42,42 @@ public class GameController {
 	}
 
 	public static boolean descending() {
+		FadeTransition fadeOut = makeFadingScene(GameScene.getGamePane(), 1.0, 0.0);
+		
 		level += 1;
 		gameMap.get(player.getPosY(), player.getPosX()).setEntity(null);
+		GameMap newMap = null;
+		
 		try {
-			setGameMap(getFloor(level));	
+			newMap = getFloor(level);
 		} catch (InvalidFloorException e) {
-			GameMap newFloor = addNewFloor();
-			setGameMap(newFloor);
+			newMap = addNewFloor();
 		}
+		
+		fadeOut.play();
+		
+		setGameMap(newMap);
+		InterruptController.setTransition(true);
+		
 		int posX = gameMap.getRoomList().get(0).getValue();
 		int posY = gameMap.getRoomList().get(0).getKey();
 		
 		player.setInitialPos(posY, posX);
 		gameMap.get(posY, posX).setEntity(player);
+		
 		return true;
 	}
 
 	public static boolean ascending() {
+		FadeTransition fadeOut = makeFadingScene(GameScene.getGamePane(), 1.0, 0.0);
+		
 		try {
 			GameMap newMap = getFloor(level - 1);
 			
 			gameMap.get(player.getPosY(), player.getPosX()).setEntity(null);
 			
+			fadeOut.play();
+			InterruptController.setTransition(true);
 			setGameMap(newMap);
 		} catch (InvalidFloorException e) {
 			return false;
@@ -137,5 +154,24 @@ public class GameController {
 	
 	public static int getLevel() {
 		return level;
+	}
+	
+	private static FadeTransition makeFadingScene(Node node, double from, double to) {
+		FadeTransition fadeIn = new FadeTransition(Duration.seconds(1.0), node);
+		FadeTransition fadeOut = new FadeTransition(Duration.seconds(1.0), node);
+		
+		fadeOut.setFromValue(from);
+		fadeOut.setToValue(to);
+		
+		fadeIn.setFromValue(to);
+		fadeIn.setToValue(from);
+		
+		fadeOut.setOnFinished((event) -> {
+			fadeIn.play();
+			gameMap.drawMap();
+			InterruptController.setTransition(false);
+		});
+		
+		return fadeOut;
 	}
 }

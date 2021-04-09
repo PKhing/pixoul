@@ -20,10 +20,9 @@ public class ItemInfoPane extends StackPane {
 		if (x < GameConfig.getScreenWidth() / 2) {
 			AnchorPane.setLeftAnchor(this, (double) (x + 45 * GameConfig.getScale()));
 		} else {
-
 			AnchorPane.setLeftAnchor(this, (double) (x - 105 * GameConfig.getScale()));
 		}
-
+		
 		AnchorPane.setTopAnchor(this, (double) y);
 		addTexture();
 		VBox infoPane = new VBox();

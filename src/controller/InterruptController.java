@@ -5,15 +5,17 @@ public class InterruptController {
 	private static boolean isInventoryOpen;
 	private static boolean isSettingOpen;
 	private static boolean isOpenFromInside;
+	private static boolean isTransition;
 
 	public static void resetInterruptState() {
 		isPauseOpen = false;
 		isInventoryOpen = false;
 		isSettingOpen = false;
+		isTransition = false;
 	}
 	
 	public static boolean isInterruptPlayerInput() {
-		return isPauseOpen || isInventoryOpen;
+		return isPauseOpen || isInventoryOpen || isTransition;
 	}
 	
 	public static boolean isPauseOpen() {
@@ -46,6 +48,14 @@ public class InterruptController {
 
 	public static void setOpenFromInside(boolean isOpenFromInside) {
 		InterruptController.isOpenFromInside = isOpenFromInside;
+	}
+
+	public static boolean isTransition() {
+		return isTransition;
+	}
+
+	public static void setTransition(boolean isTransition) {
+		InterruptController.isTransition = isTransition;
 	}
 
 	
