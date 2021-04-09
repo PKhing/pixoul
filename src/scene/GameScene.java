@@ -18,6 +18,7 @@ import items.weapon.Spear;
 import items.weapon.Sword;
 import items.potion.ShieldPotion;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -27,7 +28,11 @@ import javafx.scene.control.Button;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import utils.GameConfig;
 import javafx.util.Pair;
 import logic.Direction;
@@ -43,29 +48,35 @@ public class GameScene {
 	private static PausePane pausePane;
 	private static AnchorPane buttonPane;
 	private static GraphicsContext gc;
+	private static StackPane gamePane;
 
 	public static void initScene() {
 		StackPane root = new StackPane();
+
+		root.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
+
+		gamePane = new StackPane();
+
+		root.getChildren().add(gamePane);
+
 		scene = new Scene(root, GameConfig.getScreenWidth(), GameConfig.getScreenHeight());
 
 		Canvas canvas = new Canvas(GameConfig.getScreenWidth(), GameConfig.getScreenHeight());
 		gc = canvas.getGraphicsContext2D();
-		root.getChildren().add(canvas);
+		gamePane.getChildren().add(canvas);
 
 		buttonPane = new AnchorPane();
-		root.getChildren().add(buttonPane);
+		gamePane.getChildren().add(buttonPane);
 		addEventListener(scene, gc, buttonPane);
 
 		// Overlay
 		AnchorPane overlay = new AnchorPane();
 		statusPane = new StatusPane();
-		overlay.getChildren().add(statusPane);
 		messagePane = new MessagePane();
-		overlay.getChildren().add(messagePane);
 		effectPane = new EffectPane();
-		overlay.getChildren().add(effectPane);
+
 		overlay.setPickOnBounds(false);
-		root.getChildren().add(overlay);
+		gamePane.getChildren().add(overlay);
 
 		// Inventory Button
 		Button inventoryBtn = new Button();
@@ -79,15 +90,12 @@ public class GameScene {
 		DrawUtil.drawBackpack(backpack.getGraphicsContext2D());
 
 		inventoryBtn.setGraphic(backpack);
-		inventoryBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent arg0) {
-				if (InterruptController.isPauseOpen())
-					return;
-				root.getChildren().add(inventoryPane);
-				inventoryPane.requestFocus();
-				InterruptController.setInventoryOpen(true);
-			}
+		inventoryBtn.setOnMouseClicked((event) -> {
+			if (InterruptController.isPauseOpen())
+				return;
+			gamePane.getChildren().add(inventoryPane);
+			inventoryPane.requestFocus();
+			InterruptController.setInventoryOpen(true);
 		});
 		AnchorPane.setBottomAnchor(inventoryBtn, 5.0 * GameConfig.getScale());
 		AnchorPane.setRightAnchor(inventoryBtn, 5.0 * GameConfig.getScale());
@@ -105,7 +113,7 @@ public class GameScene {
 		pauseBtn.setOnMouseClicked((event) -> {
 			if (InterruptController.isPauseOpen())
 				return;
-			root.getChildren().add(pausePane);
+			gamePane.getChildren().add(pausePane);
 			pausePane.requestFocus();
 			InterruptController.setPauseOpen(true);
 		});
@@ -113,7 +121,8 @@ public class GameScene {
 		Canvas pause = new Canvas(16 * GameConfig.getScale(), 16 * GameConfig.getScale());
 		DrawUtil.drawPause(pause.getGraphicsContext2D());
 		pauseBtn.setGraphic(pause);
-		overlay.getChildren().add(pauseBtn);
+
+		overlay.getChildren().addAll(statusPane, messagePane, effectPane, pauseBtn);
 
 		inventoryPane = new InventoryPane();
 		pausePane = new PausePane();
@@ -210,25 +219,35 @@ public class GameScene {
 		return gc;
 	}
 
+	public static StackPane getGamePane() {
+		if (gamePane == null)
+			initScene();
+		return gamePane;
+	}
+
 	public static void setPlayerPositionOnNewMap() {
-		
+
 		Pair<Integer, Integer> firstRoomPos = GameController.getRoomList().get(0);
 		GameController.getPlayer().setInitialPos(firstRoomPos.getKey(), firstRoomPos.getValue());
 		GameController.getPlayer().getItemList().add(new Sword("Salty Sword", "With 100 years salt effect", 10, 1));
-		GameController.getPlayer().getItemList().add(new Spear("More Salty Sword", "With 100 years salt effect", 10, 1));
-		GameController.getPlayer().getItemList().add(new IronArmor("More Salty Sword", "With 100 years salt effect", 5));
-		GameController.getPlayer().getItemList().add(new GoldenArmor("More Salty Sword", "With 100 years salt effect", 5));
-		
+		GameController.getPlayer().getItemList()
+				.add(new Spear("More Salty Sword", "With 100 years salt effect", 10, 1));
+		GameController.getPlayer().getItemList()
+				.add(new IronArmor("More Salty Sword", "With 100 years salt effect", 5));
+		GameController.getPlayer().getItemList()
+				.add(new GoldenArmor("More Salty Sword", "With 100 years salt effect", 5));
+
 		Skeleton skeleton = new Skeleton(5, 10, 1, firstRoomPos.getKey() - 3, firstRoomPos.getValue() + 1,
 				Direction.DOWN, 1.25, 0, 1);
 
-		Potion maxHealthPotion = new InstantHealPotion("Bitset Potion", "Extends for 1 bit shift", GameController.getPlayer().getHealth(), true);
+		Potion maxHealthPotion = new InstantHealPotion("Bitset Potion", "Extends for 1 bit shift",
+				GameController.getPlayer().getHealth(), true);
 		Potion currentPotion = new RegenerationPotion("Salty Potion", "With 100 years salt effect", 10, 100);
 		GameController.getPlayer().getItemList().add(currentPotion);
 		GameController.getPlayer().getItemList().add(maxHealthPotion);
-	
+
 		Potion newPotion = new ShieldPotion("Shield Potion", "For extra armor", 5, 0, true);
-		
+
 		GameController.getGameMap().get(firstRoomPos.getKey() + 3, firstRoomPos.getValue()).setItem(newPotion);
 		skeleton.setHealth(8);
 		GameController.getGameMap().getMonsterList().add(skeleton);

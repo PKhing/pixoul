@@ -11,9 +11,13 @@ import javafx.scene.CacheHint;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 import utils.FontUtil;
@@ -32,6 +36,9 @@ public class LandingScene {
 		}
 		
 		StackPane root = new StackPane();
+		
+		root.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
+		
 		VBox box = new VBox();
 
 		box.setAlignment(Pos.CENTER);
@@ -44,6 +51,7 @@ public class LandingScene {
 
 		Text titleText = new Text("Pixoul");
 		titleText.setFont(FontUtil.getFont(30));
+		titleText.setFill(Color.WHITE);
 
 		box.getChildren().add(titleText);
 

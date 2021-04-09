@@ -1,6 +1,7 @@
 package logic;
 
 import controller.GameController;
+import controller.InterruptController;
 import effects.EntityEffect;
 import effects.IConsecutiveEffect;
 import entity.Player;
@@ -156,7 +157,10 @@ public class GameLogic {
 		GameScene.getStatusPane().setHP(player.getHealth(), player.getMaxHealth());
 		GameScene.getStatusPane().setAttack(player.getAttack());
 		GameScene.getStatusPane().setDefense(player.getDefense());
-		GameController.getGameMap().drawMap();
+		
+		if(!InterruptController.isTransition()) {
+			GameController.getGameMap().drawMap();	
+		}
 	}
 	
 	private static void updateEntityEffect(Entity entity) {
