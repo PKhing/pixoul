@@ -29,6 +29,8 @@ public abstract class Entity {
 	private double critPercent;
 
 	private int moveSpeed;
+	
+	private boolean isMoving;
 
 	private List<EntityEffect> effectList;
 
@@ -46,7 +48,9 @@ public abstract class Entity {
 		setCritPercent(critPercent);
 		setMoveSpeed(moveSpeed);
 		setMaxHealth(maxHealth);
+		setMoving(false);
 		setEffectList(new CopyOnWriteArrayList<>());
+		
 	}
 
 	public abstract int getSymbol();
@@ -166,6 +170,14 @@ public abstract class Entity {
 		GameController.getGameMap().get(this.getPosY(), this.getPosX()).setEntity(null);
 		GameController.getGameMap().getMonsterList().remove(this);
 		MessageTextUtil.textWhenSlained(this);
+	}
+
+	public boolean isMoving() {
+		return isMoving;
+	}
+
+	public void setMoving(boolean isMoving) {
+		this.isMoving = isMoving;
 	}
 
 }
