@@ -30,12 +30,14 @@ public class LandingScene {
 		if (cachedScene != null) {
 			return cachedScene;
 		}
-
+		
 		StackPane root = new StackPane();
 		VBox box = new VBox();
 
 		box.setAlignment(Pos.CENTER);
 
+		box.setSpacing(10.0);
+		
 		box.setPadding(new Insets(25, 25, 25, 25));
 
 		// Title Text

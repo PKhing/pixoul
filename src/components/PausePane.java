@@ -20,6 +20,7 @@ public class PausePane extends VBox {
 	public PausePane() {
 		super();
 		
+		setSpacing(10.0);
 		setAlignment(Pos.CENTER);
 		setStyle("-fx-background-color: white");
 		setPrefHeight(heightBox * GameConfig.getScale());
