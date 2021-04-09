@@ -20,11 +20,6 @@ public class InstantHealPotion extends Potion {
 	}
 
 	@Override
-	public void onUnequip(Player player) {
-		return;
-	}
-
-	@Override
 	public int getSymbol() {
 		return Sprites.HEALING_POTION;
 	}

@@ -15,7 +15,7 @@ public class ShieldPotion extends Potion {
 
 	@Override
 	public void onEquip(Player player) {
-		player.getEffectList().add(new DefenseBoost(player, getName(), getShield(), getDuration(), isPermanant()));
+		new DefenseBoost(player, getName(), getShield(), getDuration(), isPermanant()).onAdd(player);
 	}
 
 	@Override
