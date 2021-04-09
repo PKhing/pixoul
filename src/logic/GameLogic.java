@@ -13,6 +13,7 @@ import items.base.Item;
 import items.base.Potion;
 import items.base.Weapon;
 import scene.GameScene;
+import utils.AnimationUtil;
 import utils.GameConfig;
 import utils.MessageTextUtil;
 import utils.RandomUtil;
@@ -41,15 +42,23 @@ public class GameLogic {
 		switch (action) {
 		case MOVE_UP:
 			moveSuccess = player.move(Direction.UP);
+			if(moveSuccess)
+				AnimationUtil.playerMove(Direction.UP);
 			break;
 		case MOVE_DOWN:
 			moveSuccess = player.move(Direction.DOWN);
+			if(moveSuccess)
+				AnimationUtil.playerMove(Direction.DOWN);
 			break;
 		case MOVE_LEFT:
 			moveSuccess = player.move(Direction.LEFT);
+			if(moveSuccess)
+				AnimationUtil.playerMove(Direction.LEFT);
 			break;
 		case MOVE_RIGHT:
 			moveSuccess = player.move(Direction.RIGHT);
+			if(moveSuccess)
+				AnimationUtil.playerMove(Direction.RIGHT);
 			break;
 		case STAY_STILL:
 			break;
@@ -168,7 +177,7 @@ public class GameLogic {
 		GameScene.getStatusPane().setDefense(player.getDefense());
 		
 		if(!InterruptController.isTransition()) {
-			GameController.getGameMap().drawMap();	
+//			GameController.getGameMap().drawMap();	
 		}
 	}
 

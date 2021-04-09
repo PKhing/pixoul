@@ -6,6 +6,7 @@ import java.util.PriorityQueue;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import controller.GameController;
+import entity.base.Entity;
 import entity.base.Monster;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.AnchorPane;
@@ -65,8 +66,17 @@ public class GameMap {
 			return 1;
 		}
 	}
-	
+
 	public void drawMap() {
+		int newSpriteSize = GameConfig.SPRITE_SIZE * GameConfig.getScale();
+		int centerY = GameController.getPlayer().getPosY() * newSpriteSize
+				+ GameConfig.SPRITE_SIZE * GameConfig.getScale() / 2;
+		int centerX = GameController.getPlayer().getPosX() * newSpriteSize
+				+ GameConfig.SPRITE_SIZE * GameConfig.getScale() / 2;
+		drawMap(centerY, centerX, 0);
+	}
+
+	public void drawMap(int centerY, int centerX, int cnt) {
 		GraphicsContext gc = GameScene.getGraphicsContext();
 		AnchorPane buttonPane = GameScene.getButtonPane();
 		buttonPane.getChildren().clear();
@@ -74,11 +84,6 @@ public class GameMap {
 		gc.fillRect(0, 0, GameConfig.getScreenWidth(), GameConfig.getScreenHeight());
 
 		int newSpriteSize = GameConfig.SPRITE_SIZE * GameConfig.getScale();
-
-		int centerY = GameController.getPlayer().getPosY() * newSpriteSize
-				+ GameConfig.SPRITE_SIZE * GameConfig.getScale() / 2;
-		int centerX = GameController.getPlayer().getPosX() * newSpriteSize
-				+ GameConfig.SPRITE_SIZE * GameConfig.getScale() / 2;
 
 		int startY = centerY - GameConfig.getScreenHeight() / 2;
 		int startX = centerX - GameConfig.getScreenWidth() / 2;
@@ -119,18 +124,15 @@ public class GameMap {
 		// DrawUtil.addEntityButton(writeY, writeX, nowCell.getEntity());
 		// }
 
-		
-
 		ArrayList<Pair<Integer, Integer>> posList = new ArrayList<>();
-		
+
 		for (int i = startIdxY; i <= endIdxY; i++) {
 			for (int j = startIdxX; j <= endIdxX; j++) {
 				posList.add(new Pair<Integer, Integer>(i, j));
-				
 			}
 		}
-		
-		PriorityQueue<Node> pq = buildPrioritizeNode(allVisibleField, newSpriteSize, startY, startX);
+
+		PriorityQueue<Node> pq = buildPrioritizeNode(allVisibleField, newSpriteSize, startY, startX, cnt);
 
 		while (!pq.isEmpty()) {
 			Node node = pq.poll();
@@ -155,19 +157,36 @@ public class GameMap {
 	public List<Monster> getMonsterList() {
 		return monsterList;
 	}
-	
-	private PriorityQueue<Node> buildPrioritizeNode(ArrayList<Pair<Integer, Integer>> arr, int newSpriteSize, int startY, int startX) {
+
+	private PriorityQueue<Node> buildPrioritizeNode(ArrayList<Pair<Integer, Integer>> arr, int newSpriteSize,
+			int startY, int startX, int cnt) {
 		GameMap gameMap = GameController.getGameMap();
 		PriorityQueue<Node> pq = new PriorityQueue<Node>();
-		
-		for(Pair<Integer, Integer> pos: arr) {
+
+		for (Pair<Integer, Integer> pos : arr) {
 			int i = pos.getKey();
 			int j = pos.getValue();
-			
+
 			int posY = newSpriteSize * i - startY;
 			int posX = newSpriteSize * j - startX;
 			Cell thisCell = gameMap.get(i, j);
-			
+			Entity entity = thisCell.getEntity();
+			int shiftX = 0;
+			int shiftY = 0;
+
+			if (entity != null && entity.isMoving()) {
+				if (entity.getDirection() == Direction.UP)
+					shiftY = cnt * GameConfig.getScale();
+				if (entity.getDirection() == Direction.DOWN)
+					shiftY = -cnt * GameConfig.getScale();
+				if (entity.getDirection() == Direction.LEFT)
+					shiftX = cnt * GameConfig.getScale();
+				if (entity.getDirection() == Direction.RIGHT)
+					shiftX = -cnt * GameConfig.getScale();
+			}
+			int finalShiftY = shiftY;
+			int finalShiftX = shiftX;
+
 			// Draw Wall and Path
 			if (thisCell.getType() == Cell.WALL) {
 				pq.add(new Node(posY, posX, 50, () -> {
@@ -178,14 +197,14 @@ public class GameMap {
 					DrawUtil.drawCell(posY, posX, thisCell);
 				}));
 			}
-			
+
 			// Draw Ladder
 			int ladderPriority = 3;
-			
-			if(thisCell.getEntity() != null) {
+
+			if (thisCell.getEntity() != null) {
 				ladderPriority = 1;
 			}
-			
+
 			if (thisCell.getType() == Cell.LADDER_UP) {
 				pq.add(new Node(posY, posX, ladderPriority, () -> {
 					DrawUtil.drawLadder(posY, posX, thisCell);
@@ -195,30 +214,30 @@ public class GameMap {
 					DrawUtil.drawLadder(posY, posX, thisCell);
 				}));
 			}
-			
+
 			// Draw item which on cell
 			if (thisCell.getItem() != null)
 				pq.add(new Node(posY, posX, 1, () -> {
 					DrawUtil.drawItemOnCell(posY, posX, thisCell.getItem());
 				}));
-			
+
 			// Draw entity
 			if (thisCell.getEntity() != null)
 				pq.add(new Node(posY, posX, 2, () -> {
-					DrawUtil.drawEntity(posY, posX, thisCell.getEntity());
+					DrawUtil.drawEntity(posY + finalShiftY, posX + finalShiftX, thisCell.getEntity());
 				}));
-			
+
 			// Draw Monster HP Bar
 			if (thisCell.getEntity() instanceof Monster)
 				pq.add(new Node(posY, posX, 100, () -> {
-					DrawUtil.drawHPBar(posY, posX, thisCell.getEntity());
+					DrawUtil.drawHPBar(posY + finalShiftY, posX + finalShiftX, thisCell.getEntity());
 				}));
 			if (thisCell.getEntity() instanceof Monster)
 				pq.add(new Node(posY, posX, 2, () -> {
-					DrawUtil.addEntityButton(posY, posX, thisCell.getEntity());
+					DrawUtil.addEntityButton(posY + finalShiftY, posX + finalShiftX, thisCell.getEntity());
 				}));
 		}
-		
+
 		return pq;
 	}
 }
