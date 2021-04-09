@@ -101,16 +101,12 @@ public class GameMap {
 			for (int j = startIdxX; j <= endIdxX; j++) {
 				DrawUtil.drawCell(newSpriteSize * i - startY, newSpriteSize * j - startX, gameMap.get(i, j));
 				DrawUtil.drawLadder(newSpriteSize * i - startY, newSpriteSize * j - startX, gameMap.get(i, j));
-				if (gameMap.get(i, j).getItem() != null) {
-					DrawUtil.drawItemOnCell(newSpriteSize * i - startY, newSpriteSize * j - startX,
-							gameMap.get(i, j).getItem());
-				}
-				if (gameMap.get(i, j).getEntity() != null)
-					DrawUtil.drawEntity(newSpriteSize * i - startY, newSpriteSize * j - startX,
-							gameMap.get(i, j).getEntity());
-				if (gameMap.get(i, j).getEntity() instanceof Monster)
-					DrawUtil.addEntityButton(newSpriteSize * i - startY, newSpriteSize * j - startX,
-							gameMap.get(i, j).getEntity());
+				DrawUtil.drawItemOnCell(newSpriteSize * i - startY, newSpriteSize * j - startX,
+						gameMap.get(i, j).getItem());
+				DrawUtil.drawEntity(newSpriteSize * i - startY, newSpriteSize * j - startX,
+						gameMap.get(i, j).getEntity());
+				DrawUtil.addEntityButton(newSpriteSize * i - startY, newSpriteSize * j - startX,
+						gameMap.get(i, j).getEntity());
 			}
 		}
 

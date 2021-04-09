@@ -73,6 +73,9 @@ public class DrawUtil {
 	}
 
 	public static void drawItem(GraphicsContext gc, int y, int x, Item item) {
+		if(item == null) {
+			return;
+		}
 		int index = getIndexItemSymbol(item);
 		WritableImage img = new WritableImage(itemSprites, item.getSymbol() * 32, index * 32, 32, 32);
 		gc.drawImage(scaleUp(img, GameConfig.getScale()), y, x);
@@ -102,6 +105,10 @@ public class DrawUtil {
 	}
 
 	public static void drawItemOnCell(int y, int x, Item item) {
+		if(item == null) {
+			return;
+		}
+		
 		int index = getIndexItemSymbol(item);
 		GraphicsContext gc = GameScene.getGraphicsContext();
 		if (item instanceof Potion) {
@@ -114,6 +121,9 @@ public class DrawUtil {
 	}
 
 	public static void drawEntity(int y, int x, Entity entity) {
+		if(entity == null) {
+			return;
+		}
 		GraphicsContext gc = GameScene.getGraphicsContext();
 		int direction = 0;
 		if (entity.getDirection() == Direction.LEFT)
@@ -133,7 +143,10 @@ public class DrawUtil {
 			drawHPBar(y, x, (Monster) entity);
 	}
 
-	public static void drawHPBar(int y, int x, Monster monster) {
+	public static void drawHPBar(int y, int x, Entity entity) {
+		if(!(entity instanceof Monster)) {
+			return;
+		}
 		GraphicsContext gc = GameScene.getGraphicsContext();
 		gc.setFill(Color.BLACK);
 		gc.fillRect(x + 4 * GameConfig.getScale(), y - 4 * GameConfig.getScale(), 25 * GameConfig.getScale(),
@@ -141,7 +154,7 @@ public class DrawUtil {
 		gc.setFill(Color.RED);
 		gc.fillRect(x + 4 * GameConfig.getScale(), y - 4 * GameConfig.getScale(),
 				Math.ceil(
-						(double) monster.getHealth() / (double) monster.getMaxHealth() * 25.0 * GameConfig.getScale()),
+						(double) entity.getHealth() / (double) entity.getMaxHealth() * 25.0 * GameConfig.getScale()),
 				2 * GameConfig.getScale());
 	}
 
@@ -174,6 +187,10 @@ public class DrawUtil {
 	}
 
 	public static void addEntityButton(int y, int x, Entity entity) {
+		if(entity == null || !(entity instanceof Monster)) {
+			return;
+		}
+		
 		Canvas canvas = new Canvas(GameConfig.SPRITE_SIZE * GameConfig.getScale(),
 				GameConfig.SPRITE_SIZE * GameConfig.getScale());
 		canvas.setOnMouseClicked((event) -> {
