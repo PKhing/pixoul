@@ -4,7 +4,7 @@ import entity.base.Entity;
 import items.base.Item;
 import utils.RandomUtil;
 
-public class Cell {
+public class Cell implements Renderable{
 	public static final int PATH = 0;
 	public static final int WALL = 1;
 	public static final int VOID = 2;
@@ -61,6 +61,12 @@ public class Cell {
 
 	public void setItem(Item item) {
 		this.item = item;
+	}
+
+	@Override
+	public int getPriority() {
+		if(this.type == WALL) return 100;
+		return 0;
 	}
 
 }

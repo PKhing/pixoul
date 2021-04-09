@@ -5,9 +5,10 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import controller.GameController;
 import effects.EntityEffect;
+import logic.Renderable;
 import utils.MessageTextUtil;
 
-public abstract class Entity {
+public abstract class Entity implements Renderable{
 	private String name;
 
 	private int health;
@@ -149,6 +150,9 @@ public abstract class Entity {
 
 	public void setEffectList(List<EntityEffect> effectList) {
 		this.effectList = effectList;
+	}
+	public int getPriority() {
+		return 2;
 	}
 
 }
