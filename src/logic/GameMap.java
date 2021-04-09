@@ -97,7 +97,7 @@ public class GameMap {
 		// if (nowCell.getEntity() instanceof Monster)
 		// DrawUtil.addEntityButton(writeY, writeX, nowCell.getEntity());
 		// }
-		
+
 		class Node implements Comparable<Node> {
 			public int x;
 			public int y;
@@ -127,31 +127,51 @@ public class GameMap {
 
 		for (int i = startIdxY; i <= endIdxY; i++) {
 			for (int j = startIdxX; j <= endIdxX; j++) {
-				
+
 				int posY = newSpriteSize * i - startY;
 				int posX = newSpriteSize * j - startX;
 				Cell thisCell = gameMap.get(i, j);
-				if (gameMap.get(i, j).getType() == Cell.WALL)
+				
+				// Draw Wall and Path
+				if (thisCell.getType() == Cell.WALL) {
 					pq.add(new Node(posY, posX, 50, () -> {
 						DrawUtil.drawCell(posY, posX, thisCell);
 					}));
-				else
+				} else {
 					pq.add(new Node(posY, posX, 0, () -> {
 						DrawUtil.drawCell(posY, posX, thisCell);
 					}));
-				if (gameMap.get(i, j).getItem() != null)
+				}
+				
+				// Draw Ladder
+				if (thisCell.getType() == Cell.LADDER_UP) {
+					pq.add(new Node(posY, posX, 1, () -> {
+						DrawUtil.drawLadder(posY, posX, thisCell);
+					}));
+				} else if (thisCell.getType() == Cell.LADDER_DOWN) {
+					pq.add(new Node(posY, posX, 1, () -> {
+						DrawUtil.drawLadder(posY, posX, thisCell);
+					}));
+				}
+				
+				// Draw item which on cell
+				if (thisCell.getItem() != null)
 					pq.add(new Node(posY, posX, 1, () -> {
 						DrawUtil.drawItemOnCell(posY, posX, thisCell.getItem());
 					}));
-				if (gameMap.get(i, j).getEntity() != null)
+				
+				// Draw entity
+				if (thisCell.getEntity() != null)
 					pq.add(new Node(posY, posX, 2, () -> {
 						DrawUtil.drawEntity(posY, posX, thisCell.getEntity());
 					}));
-				if (gameMap.get(i, j).getEntity() instanceof Monster)
+				
+				// Draw Monster HP Bar
+				if (thisCell.getEntity() instanceof Monster)
 					pq.add(new Node(posY, posX, 100, () -> {
 						DrawUtil.drawHPBar(posY, posX, thisCell.getEntity());
 					}));
-				if (gameMap.get(i, j).getEntity() instanceof Monster)
+				if (thisCell.getEntity() instanceof Monster)
 					pq.add(new Node(posY, posX, 2, () -> {
 						DrawUtil.addEntityButton(posY, posX, thisCell.getEntity());
 					}));
