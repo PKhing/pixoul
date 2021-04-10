@@ -35,8 +35,10 @@ public class AnimationUtil {
 		}.start();
 	}
 
-	public static void monsterMove() {
-		new Thread() {
+	public static void postGame() {
+
+		GameController.getGameMap().drawMap();
+		Thread monsterMove = new Thread() {
 			public void run() {
 				boolean isMove = false;
 				for (Monster monster : GameController.getGameMap().getMonsterList())
@@ -48,8 +50,74 @@ public class AnimationUtil {
 						monster.setMoving(false);
 				}
 			}
+		};
+		Thread playerAttacked = new Thread() {
+			public void run() {
+
+				if(!GameController.getPlayer().isAttacked())return;
+				try {
+					Thread.sleep(300);
+					GameController.getPlayer().setAttacked(false);
+					Platform.runLater(() -> {
+						GameController.getGameMap().drawMap();
+					});
+					
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
+		};
+
+		monsterMove.start();
+		playerAttacked.start();
+		
+		new Thread() {
+			public void run() {
+				try {
+					monsterMove.join();
+					playerAttacked.join();
+					Platform.runLater(() -> {
+						GameController.getGameMap().drawMap();
+					});
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				
+			}
 		}.start();
+		
 	}
+	
+	public static void monsterAttacked(Monster monster) {
+		new Thread() {
+			public void run() {
+				try {
+					monster.setAttacked(true);
+					Platform.runLater(() -> {
+						GameController.getGameMap().drawMap();
+					});
+					Thread.sleep(300);
+					monster.setAttacked(false);
+					Platform.runLater(() -> {
+						GameLogic.postGameUpdate();
+						GameController.getGameMap().drawMap();
+					});
+
+					
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
+		}.start();
+		
+	}
+	
 
 	public static void move(int stepY, int stepX) {
 		Player player = GameController.getPlayer();

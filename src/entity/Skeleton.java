@@ -61,6 +61,7 @@ public class Skeleton extends Monster implements Moveable, Attackable {
 		int atkValue = GameLogic.calculateAttackValue(this, target);
 		MessageTextUtil.textWhenAttack(this, target, atkValue);
 		target.setHealth(target.getHealth() - atkValue);
+		target.setAttacked(true);
 		return true;
 	}
 
