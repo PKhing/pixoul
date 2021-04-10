@@ -17,6 +17,7 @@ import logic.Direction;
 import logic.GameLogic;
 import logic.Sprites;
 import scene.GameScene;
+import utils.AnimationUtil;
 import utils.GameConfig;
 import utils.MessageTextUtil;
 
@@ -65,6 +66,7 @@ public class Player extends Entity implements Moveable, Attackable {
 			GameController.getGameMap().get(newPosY, newPosX).setEntity(this);
 			setPosY(newPosY);
 			setPosX(newPosX);
+			AnimationUtil.playerMove(direction);
 			return true;
 		}
 		

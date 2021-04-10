@@ -52,6 +52,7 @@ public class Skeleton extends Monster implements Moveable, Attackable {
 			if (newX - this.getPosX() == 1) {
 				this.move(Direction.RIGHT);
 			}
+			this.setMoving(true);
 		}
 	}
 
