@@ -8,9 +8,13 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import utils.FontUtil;
 import utils.GameAudioUtils;
@@ -23,7 +27,7 @@ public class SettingPane extends VBox {
 	public SettingPane() {
 		super();
 		
-		this.setStyle("-fx-background-color: white");
+		setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
 		this.setPadding(new Insets(20));
 
 		this.setAlignment(Pos.CENTER);
@@ -52,6 +56,7 @@ public class SettingPane extends VBox {
 		
 		Text closeText = new Text("OK");
 		closeText.setFont(FontUtil.getFont(12));
+		closeText.setFill(Color.WHITE);
 		
 		closeText.setOnMouseClicked((event) -> {
 			try {
@@ -71,6 +76,8 @@ public class SettingPane extends VBox {
 		Text optionTitle = new Text("Option");
 		
 		optionTitle.setFont(FontUtil.getFont(30));
+		optionTitle.setFill(Color.WHITE);
+		
 		this.getChildren().add(optionTitle);
 	}
 	
@@ -82,6 +89,7 @@ public class SettingPane extends VBox {
 
 		Label volumeLabel = new Label("BGM Volume");
 		volumeLabel.setFont(FontUtil.getFont(12));
+		volumeLabel.setTextFill(Color.WHITE);
 		
 		Slider volumeSlider = new Slider(0, 100, (int) (GameConfig.getVolume() * 100));
 		volumeSlider.valueProperty().addListener(new ChangeListener<Number>() {

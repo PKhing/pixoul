@@ -7,7 +7,7 @@ public class GameConfig {
 	private static double volume = 0.1;
 
 	public static final int SCREEN_RESPONSIVE = 864;
-	public static final boolean SCREEN_SCALABLE = true;
+	public static final boolean SCREEN_SCALABLE = false;
 	public static final String GAME_TITLE = "Pixoul";
 	public static final String ICON_NAME = "icon.png";
 	public static final double SCREEN_SCALING = 0.8;

@@ -66,10 +66,6 @@ public class DrawUtil {
 		hauntedMaidSprites = getImagePixelReader("sprites/hauntedMaid.png");
 		attackMouseIcon = getAttackMouseIcon();
 	}
-	
-	private static Image getImage(String filePath) {
-		return new Image(ClassLoader.getSystemResource(filePath).toString());
-	}
 
 	public static PixelReader getImagePixelReader(String filePath) {
 		return getImage(filePath).getPixelReader();
@@ -255,5 +251,9 @@ public class DrawUtil {
 		if (item instanceof Potion)
 			index = Sprites.POTION;
 		return index;
+	}
+	
+	private static Image getImage(String filePath) {
+		return new Image(ClassLoader.getSystemResource(filePath).toString());
 	}
 }
