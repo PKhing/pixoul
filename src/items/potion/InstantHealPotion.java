@@ -16,7 +16,7 @@ public class InstantHealPotion extends Potion {
 
 	@Override
 	public void onEquip(Player player) {
-		new InstantHealth(player, getName(), getValue(), getDuration(), isPermanant()).onAdd(player);
+		new InstantHealth(getName(), getValue(), getDuration(), isPermanant()).onAdd(player);
 	}
 
 	@Override

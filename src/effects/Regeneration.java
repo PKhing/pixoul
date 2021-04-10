@@ -4,7 +4,7 @@ import entity.base.Entity;
 
 public class Regeneration extends EntityEffect implements IConsecutiveEffect {
 
-	public Regeneration(Entity entity, String name, int value, int duration, boolean isPermanant) {
+	public Regeneration(String name, int value, int duration, boolean isPermanant) {
 		super(name, value, duration, false);
 	}
 

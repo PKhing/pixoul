@@ -22,7 +22,7 @@ public class RegenerationPotion extends Potion {
 
 	@Override
 	public void onEquip(Player player) {
-		new Regeneration(player, getName(), getHealValue(), getDuration(), isPermanant()).onAdd(player);;
+		new Regeneration(getName(), getHealValue(), getDuration(), isPermanant()).onAdd(player);;
 	}
 
 	public int getHealValue() {

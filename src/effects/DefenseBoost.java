@@ -4,7 +4,7 @@ import entity.base.Entity;
 
 public class DefenseBoost extends EntityEffect {
 
-	public DefenseBoost(Entity entity, String name, int value, int duration, boolean isPermanant) {
+	public DefenseBoost(String name, int value, int duration, boolean isPermanant) {
 		super(name, value, duration, isPermanant);
 	}
 

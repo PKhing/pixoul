@@ -20,9 +20,9 @@ import utils.RandomUtil;
 public class GameLogic {
 
 	public static int calculateAttackValue(Entity from, Entity target) {
-		int lowerBound = (int)(from.getAttack() / from.getCritRate());
-		int upperBound = (int)(from.getAttack() * from.getCritRate());
-		
+		int lowerBound = (int) (from.getAttack() / from.getCritRate());
+		int upperBound = (int) (from.getAttack() * from.getCritRate());
+
 		double fromAttack = RandomUtil.random(lowerBound, upperBound);
 		double targetDefense = target.getDefense();
 
@@ -136,7 +136,7 @@ public class GameLogic {
 
 	public static void potionUpdate() {
 		Player player = GameController.getPlayer();
-		for(Monster each: GameController.getGameMap().getMonsterList()) {
+		for (Monster each : GameController.getGameMap().getMonsterList()) {
 			updateEntityEffect(each);
 		}
 		updateEntityEffect(player);
@@ -162,7 +162,7 @@ public class GameLogic {
 			GameController.getGameMap().drawMap();	
 		}
 	}
-	
+
 	private static void updateEntityEffect(Entity entity) {
 		for (EntityEffect each : entity.getEffectList()) {
 			if (each instanceof IConsecutiveEffect) {

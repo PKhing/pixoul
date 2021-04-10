@@ -4,7 +4,7 @@ import entity.base.Entity;
 
 public class InstantHealth extends EntityEffect {
 
-	public InstantHealth(Entity entity, String name, int value, int duration, boolean isPermanant) {
+	public InstantHealth(String name, int value, int duration, boolean isPermanant) {
 		super(name, value, duration, isPermanant);
 	}
 

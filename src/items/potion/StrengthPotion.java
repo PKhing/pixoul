@@ -16,7 +16,7 @@ public class StrengthPotion extends Potion {
 
 	@Override
 	public void onEquip(Player player) {
-		new AttackBoost(player, getName(), getAttack(), getDuration(), isPermanant()).onAdd(player);
+		new AttackBoost(getName(), getAttack(), getDuration(), isPermanant()).onAdd(player);
 	}
 
 	@Override
