@@ -33,11 +33,11 @@ public class EffectPane extends VBox {
 		} else {
 			this.setVisible(true);
 		}
-		for (EntityEffect potion : playerEffect) {
-			Text effect = new Text(potion.getName() + ": " + String.valueOf(potion.getDuration()));
-			effect.setFont(FontUtil.getFont(12));
-			effect.setFill(Color.WHITE);
-			this.getChildren().add(effect);
+		for (EntityEffect effect : playerEffect) {
+			Text effectText = new Text(effect.toString());
+			effectText.setFont(FontUtil.getFont(12));
+			effectText.setFill(Color.WHITE);
+			this.getChildren().add(effectText);
 		}
 	}
 }
