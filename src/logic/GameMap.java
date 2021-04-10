@@ -42,6 +42,31 @@ public class GameMap {
 		}
 	}
 
+	class Node implements Comparable<Node> {
+		public int x;
+		public int y;
+		public int priority;
+		public Renderable obj;
+
+		public Node(int y, int x, int priority, Renderable obj) {
+			this.obj = obj;
+			this.y = y;
+			this.x = x;
+			this.priority = priority;
+		}
+
+		public int compareTo(Node node) {
+			if (this.priority == node.priority) {
+				if (this.y < node.y)
+					return -1;
+				return 1;
+			}
+			if (this.priority < node.priority)
+				return -1;
+			return 1;
+		}
+	}
+	
 	public void drawMap() {
 		GraphicsContext gc = GameScene.getGraphicsContext();
 		AnchorPane buttonPane = GameScene.getButtonPane();
@@ -68,11 +93,8 @@ public class GameMap {
 		int startIdxX = Math.max(0, GameController.getPlayer().getPosX() - maxCellX / 2 - 1);
 		int endIdxX = Math.min(GameConfig.MAP_SIZE, GameController.getPlayer().getPosX() + maxCellX / 2 + 1);
 
-		GameMap gameMap = GameController.getGameMap();
-
-		// ArrayList<Pair<Integer, Integer>> allVisibleField =
-		// GameController.getPlayer().getAllVisibleField(startIdxY,
-		// endIdxY, startIdxX, endIdxX);
+		ArrayList<Pair<Integer, Integer>> allVisibleField = GameController.getPlayer().getAllVisibleField(startIdxY,
+				endIdxY, startIdxX, endIdxX);
 		//
 		// allVisibleField.sort(Comparator.comparing(Pair<Integer,
 		// Integer>::getKey).thenComparingInt(Pair::getValue));
@@ -98,85 +120,18 @@ public class GameMap {
 		// DrawUtil.addEntityButton(writeY, writeX, nowCell.getEntity());
 		// }
 
-		class Node implements Comparable<Node> {
-			public int x;
-			public int y;
-			public int priority;
-			public Renderable obj;
+		
 
-			public Node(int y, int x, int priority, Renderable obj) {
-				this.obj = obj;
-				this.y = y;
-				this.x = x;
-				this.priority = priority;
-			}
-
-			public int compareTo(Node node) {
-				if (this.priority == node.priority) {
-					if (this.y < node.y)
-						return -1;
-					return 1;
-				}
-				if (this.priority < node.priority)
-					return -1;
-				return 1;
-			}
-		}
-
-		PriorityQueue<Node> pq = new PriorityQueue<Node>();
-
+		ArrayList<Pair<Integer, Integer>> posList = new ArrayList<>();
+		
 		for (int i = startIdxY; i <= endIdxY; i++) {
 			for (int j = startIdxX; j <= endIdxX; j++) {
-
-				int posY = newSpriteSize * i - startY;
-				int posX = newSpriteSize * j - startX;
-				Cell thisCell = gameMap.get(i, j);
+				posList.add(new Pair<Integer, Integer>(i, j));
 				
-				// Draw Wall and Path
-				if (thisCell.getType() == Cell.WALL) {
-					pq.add(new Node(posY, posX, 50, () -> {
-						DrawUtil.drawCell(posY, posX, thisCell);
-					}));
-				} else {
-					pq.add(new Node(posY, posX, 0, () -> {
-						DrawUtil.drawCell(posY, posX, thisCell);
-					}));
-				}
-				
-				// Draw Ladder
-				if (thisCell.getType() == Cell.LADDER_UP) {
-					pq.add(new Node(posY, posX, 1, () -> {
-						DrawUtil.drawLadder(posY, posX, thisCell);
-					}));
-				} else if (thisCell.getType() == Cell.LADDER_DOWN) {
-					pq.add(new Node(posY, posX, 1, () -> {
-						DrawUtil.drawLadder(posY, posX, thisCell);
-					}));
-				}
-				
-				// Draw item which on cell
-				if (thisCell.getItem() != null)
-					pq.add(new Node(posY, posX, 1, () -> {
-						DrawUtil.drawItemOnCell(posY, posX, thisCell.getItem());
-					}));
-				
-				// Draw entity
-				if (thisCell.getEntity() != null)
-					pq.add(new Node(posY, posX, 2, () -> {
-						DrawUtil.drawEntity(posY, posX, thisCell.getEntity());
-					}));
-				
-				// Draw Monster HP Bar
-				if (thisCell.getEntity() instanceof Monster)
-					pq.add(new Node(posY, posX, 100, () -> {
-						DrawUtil.drawHPBar(posY, posX, thisCell.getEntity());
-					}));
-				if (thisCell.getEntity() instanceof Monster)
-					pq.add(new Node(posY, posX, 2, () -> {
-						DrawUtil.addEntityButton(posY, posX, thisCell.getEntity());
-					}));
 			}
 		}
+		
+		PriorityQueue<Node> pq = buildPrioritizeNode(allVisibleField, newSpriteSize, startY, startX);
 
 		while (!pq.isEmpty()) {
 			Node node = pq.poll();
@@ -200,5 +155,71 @@ public class GameMap {
 
 	public List<Monster> getMonsterList() {
 		return monsterList;
+	}
+	
+	private PriorityQueue<Node> buildPrioritizeNode(ArrayList<Pair<Integer, Integer>> arr, int newSpriteSize, int startY, int startX) {
+		GameMap gameMap = GameController.getGameMap();
+		PriorityQueue<Node> pq = new PriorityQueue<Node>();
+		
+		for(Pair<Integer, Integer> pos: arr) {
+			int i = pos.getKey();
+			int j = pos.getValue();
+			
+			int posY = newSpriteSize * i - startY;
+			int posX = newSpriteSize * j - startX;
+			Cell thisCell = gameMap.get(i, j);
+			
+			// Draw Wall and Path
+			if (thisCell.getType() == Cell.WALL) {
+				pq.add(new Node(posY, posX, 50, () -> {
+					DrawUtil.drawCell(posY, posX, thisCell);
+				}));
+			} else {
+				pq.add(new Node(posY, posX, 0, () -> {
+					DrawUtil.drawCell(posY, posX, thisCell);
+				}));
+			}
+			
+			// Draw Ladder
+			int ladderPriority = 3;
+			
+			if(thisCell.getEntity() != null) {
+				ladderPriority = 1;
+			}
+			
+			if (thisCell.getType() == Cell.LADDER_UP) {
+				pq.add(new Node(posY, posX, ladderPriority, () -> {
+					DrawUtil.drawLadder(posY, posX, thisCell);
+				}));
+			} else if (thisCell.getType() == Cell.LADDER_DOWN) {
+				pq.add(new Node(posY, posX, ladderPriority, () -> {
+					DrawUtil.drawLadder(posY, posX, thisCell);
+				}));
+			}
+			
+			// Draw item which on cell
+			if (thisCell.getItem() != null)
+				pq.add(new Node(posY, posX, 1, () -> {
+					DrawUtil.drawItemOnCell(posY, posX, thisCell.getItem());
+				}));
+			
+			// Draw entity
+			if (thisCell.getEntity() != null)
+				pq.add(new Node(posY, posX, 2, () -> {
+					DrawUtil.drawEntity(posY, posX, thisCell.getEntity());
+				}));
+			
+			// Draw Monster HP Bar
+			if (thisCell.getEntity() instanceof Monster)
+				pq.add(new Node(posY, posX, 100, () -> {
+					DrawUtil.drawHPBar(posY, posX, thisCell.getEntity());
+				}));
+			if (thisCell.getEntity() instanceof Monster)
+				pq.add(new Node(posY, posX, 2, () -> {
+					DrawUtil.addEntityButton(posY, posX, thisCell.getEntity());
+				}));
+		}
+		
+		return pq;
 	}
 }

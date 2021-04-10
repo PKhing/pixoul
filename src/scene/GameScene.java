@@ -7,6 +7,7 @@ import components.StatusPane;
 import components.PausePane;
 import controller.GameController;
 import controller.InterruptController;
+import effects.Blindness;
 import entity.Skeleton;
 import entity.base.DispatchAction;
 import items.armor.GoldenArmor;
@@ -17,6 +18,7 @@ import items.potion.RegenerationPotion;
 import items.weapon.Spear;
 import items.weapon.Sword;
 import items.potion.ShieldPotion;
+import items.potion.VisionPotion;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -248,8 +250,13 @@ public class GameScene {
 		Potion maxHealthPotion = new InstantHealPotion("Bitset Potion", "Extends for 1 bit shift",
 				GameController.getPlayer().getHealth(), true);
 		Potion currentPotion = new RegenerationPotion("Salty Potion", "With 100 years salt effect", 10, 100);
+		Potion newVisionPotion = new VisionPotion("Brightness Potion", "Let your world filled with light", 2, 50, false);
+		Potion newPotionInventory = new RegenerationPotion("High Regeneration Potionssssssssssssssssssssssssssssssssssssssssssssssssssss", "With 100 years salt effect", 10, 100);
+		
 		GameController.getPlayer().getItemList().add(currentPotion);
 		GameController.getPlayer().getItemList().add(maxHealthPotion);
+		GameController.getPlayer().getItemList().add(newPotionInventory);
+		GameController.getPlayer().getItemList().add(newVisionPotion);
 
 		Potion newPotion = new ShieldPotion("Shield Potion", "For extra armor", 5, 0, true);
 

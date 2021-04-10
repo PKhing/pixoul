@@ -35,10 +35,10 @@ public abstract class EntityEffect {
 	}
 	
 	public boolean onUpdate(Entity entity) {
+		setDuration(getDuration() - 1);
 		if (getDuration() <= 0) {
 			return false;
 		}
-		setDuration(getDuration() - 1);
 		return true;
 	}
 

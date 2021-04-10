@@ -24,9 +24,11 @@ public class Player extends Entity implements Moveable, Attackable {
 	private Armor equippedArmor;
 	private Weapon equippedWeapon;
 	private ArrayList<Item> itemList = new ArrayList<Item>();
+	private int lineOfSight;
 	
 	public Player() {
 		super("Player", 5, 10, 1, 0, 0, Direction.DOWN, 1.5, 1, 1);
+		setLineOfSight(GameConfig.LINE_OF_SIGHT);
 		setEquippedArmor(null);
 		setEquippedWeapon(null);
 	}
@@ -104,7 +106,7 @@ public class Player extends Entity implements Moveable, Attackable {
 
 			queue.remove();
 
-			if (level > GameConfig.LINE_OF_SIGHT) {
+			if (level > getLineOfSight()) {
 				continue;
 			}
 			
@@ -173,5 +175,13 @@ public class Player extends Entity implements Moveable, Attackable {
 
 	public void setItemList(ArrayList<Item> itemList) {
 		this.itemList = itemList;
+	}
+
+	public int getLineOfSight() {
+		return lineOfSight;
+	}
+
+	public void setLineOfSight(int lineOfSight) {
+		this.lineOfSight = Math.max(1, lineOfSight);
 	}
 }
