@@ -81,15 +81,16 @@ public class GameLogic {
 			MessageTextUtil.textWhenDescending(GameController.getLevel());
 		}
 	}
-	public static void gameUpdate(DispatchAction action, Entity entity) {
+
+	public static void gameUpdate(DispatchAction action, Monster monster) {
 		Player player = GameController.getPlayer();
-		int diffX = Math.abs(player.getPosX() - entity.getPosX());
-		int diffY = Math.abs(player.getPosY() - entity.getPosY());
+		int diffX = Math.abs(player.getPosX() - monster.getPosX());
+		int diffY = Math.abs(player.getPosY() - monster.getPosY());
 
 		if (diffX <= 1 && diffY <= 1) {
-			player.attack(entity);
-			postGameUpdate();
-			
+			player.attack(monster);
+			AnimationUtil.monsterAttacked(monster);
+
 		}
 	}
 
@@ -166,9 +167,9 @@ public class GameLogic {
 		GameScene.getStatusPane().setHP(player.getHealth(), player.getMaxHealth());
 		GameScene.getStatusPane().setAttack(player.getAttack());
 		GameScene.getStatusPane().setDefense(player.getDefense());
-		AnimationUtil.monsterMove();
-		if(!InterruptController.isTransition()) {
-//			GameController.getGameMap().drawMap();	
+		AnimationUtil.postGame();
+		if (!InterruptController.isTransition()) {
+			// GameController.getGameMap().drawMap();
 		}
 	}
 

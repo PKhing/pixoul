@@ -50,7 +50,28 @@ public class DrawUtil {
 		attackMouseIcon = getAttackMouseIcon();
 	}
 
+	private static WritableImage changeColor(WritableImage img) {
 
+		int width = (int) img.getWidth();
+		int height = (int) img.getHeight();
+		WritableImage newImg = new WritableImage(width, height);
+		for (int y = 0; y < height; y++) {
+			for (int x = 0; x < width; x++) {
+				Color color = img.getPixelReader().getColor(x, y);
+				newImg.getPixelWriter().setColor(x, y, color);
+
+				double hue = 0;
+				double saturation = 0.7;
+				double brightness = color.getBrightness();
+				double opacity = color.getOpacity();
+
+				Color newColor = Color.hsb(hue, saturation, brightness, opacity);
+				newImg.getPixelWriter().setColor(x, y, newColor);
+
+			}
+		}
+		return newImg;
+	}
 
 	public static PixelReader getImagePixelReader(String filePath) {
 		return getImage(filePath).getPixelReader();
@@ -114,9 +135,8 @@ public class DrawUtil {
 		}
 	}
 
-	
 	public static void drawEntity(int y, int x, Entity entity) {
-		if (entity == null) 
+		if (entity == null)
 			return;
 		GraphicsContext gc = GameScene.getGraphicsContext();
 		int direction = 0;
@@ -126,10 +146,14 @@ public class DrawUtil {
 			direction = 2;
 		if (entity.getDirection() == Direction.UP)
 			direction = 3;
-		
-		WritableImage img = new WritableImage(entitySprites,(96*entity.getSymbol())+32*1,direction*32,32,32);
+
+		WritableImage img = new WritableImage(entitySprites, (96 * entity.getSymbol()) + 32 * 1, direction * 32, 32,
+				32);
 		// Fix later?
-		gc.drawImage(scaleUp(img, GameConfig.getScale()), x, y /*- 4 * GameConfig.getScale()*/);
+		img = scaleUp(img, GameConfig.getScale());
+		if (entity.isAttacked())
+			img = changeColor(img);
+		gc.drawImage(img, x, y /*- 4 * GameConfig.getScale()*/);
 
 		if (entity instanceof Monster)
 			drawHPBar(y, x, (Monster) entity);
@@ -185,7 +209,7 @@ public class DrawUtil {
 		Canvas canvas = new Canvas(GameConfig.SPRITE_SIZE * GameConfig.getScale(),
 				GameConfig.SPRITE_SIZE * GameConfig.getScale());
 		canvas.setOnMouseClicked((event) -> {
-			GameLogic.gameUpdate(DispatchAction.ATTACK, entity);
+			GameLogic.gameUpdate(DispatchAction.ATTACK, (Monster) entity);
 		});
 		addCursorHover(canvas, true);
 		AnchorPane.setTopAnchor(canvas, (double) (y - 8));

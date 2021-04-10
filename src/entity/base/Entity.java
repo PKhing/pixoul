@@ -32,6 +32,9 @@ public abstract class Entity {
 	
 	private boolean isMoving;
 
+	private boolean isAttacked;
+
+
 	private List<EntityEffect> effectList;
 
 	public Entity(String name, int attack, int maxHealth, int defense, int posY, int posX, int direction,
@@ -49,6 +52,7 @@ public abstract class Entity {
 		setMoveSpeed(moveSpeed);
 		setMaxHealth(maxHealth);
 		setMoving(false);
+		setAttacked(false);
 		setEffectList(new CopyOnWriteArrayList<>());
 		
 	}
@@ -178,6 +182,14 @@ public abstract class Entity {
 
 	public void setMoving(boolean isMoving) {
 		this.isMoving = isMoving;
+	}
+
+	public boolean isAttacked() {
+		return isAttacked;
+	}
+
+	public void setAttacked(boolean isAttacked) {
+		this.isAttacked = isAttacked;
 	}
 
 }
