@@ -8,6 +8,8 @@ import components.PausePane;
 import controller.GameController;
 import controller.InterruptController;
 import effects.Blindness;
+import entity.HauntedMaid;
+import entity.PumpkinHead;
 import entity.Reaper;
 import entity.Skeleton;
 import entity.Soul;
@@ -252,7 +254,11 @@ public class GameScene {
 				Direction.DOWN, 1);
 		Reaper reaper = new Reaper(5, 10, 1, firstRoomPos.getKey() - 2, firstRoomPos.getValue() + 1,
 				Direction.DOWN, 1.25, 0, 1);
-		
+		PumpkinHead pumpkinHead = new PumpkinHead(5, 10, 1, firstRoomPos.getKey() - 2, firstRoomPos.getValue() + 2,
+				Direction.DOWN, 1.25, 0, 1);
+
+		HauntedMaid hauntedMaid= new HauntedMaid(5, 10, 1, firstRoomPos.getKey() - 2, firstRoomPos.getValue() + 3,
+				Direction.DOWN, 1.25, 0, 1);
 		Potion maxHealthPotion = new InstantHealPotion("Bitset Potion", "Extends for 1 bit shift",
 				GameController.getPlayer().getHealth(), true);
 		Potion currentPotion = new RegenerationPotion("Salty Potion", "With 100 years salt effect", 10, 100);
@@ -271,6 +277,8 @@ public class GameScene {
 		GameController.getGameMap().getMonsterList().add(skeleton);
 		GameController.getGameMap().getMonsterList().add(reaper);
 		GameController.getGameMap().getMonsterList().add(soul);
+		GameController.getGameMap().getMonsterList().add(pumpkinHead);
+		GameController.getGameMap().getMonsterList().add(hauntedMaid);
 	}
 
 }

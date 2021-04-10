@@ -2,7 +2,9 @@ package utils;
 
 import java.nio.IntBuffer;
 
+import entity.HauntedMaid;
 import entity.Player;
+import entity.PumpkinHead;
 import entity.Reaper;
 import entity.Skeleton;
 import entity.Soul;
@@ -40,6 +42,8 @@ public class DrawUtil {
 	private static PixelReader skeletonSprites;
 	private static PixelReader soulSprites;
 	private static PixelReader reaperSprites;
+	private static PixelReader pumpkinHeadSprites;
+	private static PixelReader hauntedMaidSprites;
 	private static PixelReader backpackSprites;
 	private static PixelReader pauseSprites;
 	private static PixelReader itemSprites;
@@ -58,6 +62,8 @@ public class DrawUtil {
 		ladderSprites = getImagePixelReader("sprites/ladder.png");
 		soulSprites = getImagePixelReader("sprites/soul.png");
 		reaperSprites = getImagePixelReader("sprites/reaper.png");
+		pumpkinHeadSprites = getImagePixelReader("sprites/pumpkinHead.png");
+		hauntedMaidSprites = getImagePixelReader("sprites/hauntedMaid.png");
 		attackMouseIcon = getAttackMouseIcon();
 	}
 	
@@ -148,6 +154,10 @@ public class DrawUtil {
 			img = new WritableImage(soulSprites, 1 * 32, direction * 32, 32, 32);
 		if (entity instanceof Reaper)
 			img = new WritableImage(reaperSprites, 1 * 32, direction * 32, 32, 32);
+		if (entity instanceof PumpkinHead)
+			img = new WritableImage(pumpkinHeadSprites, 1 * 32, direction * 32, 32, 32);
+		if (entity instanceof HauntedMaid)
+			img = new WritableImage(hauntedMaidSprites, 1 * 32, direction * 32, 32, 32);
 		// Fix later?
 		gc.drawImage(scaleUp(img, GameConfig.getScale()), x, y /*- 4 * GameConfig.getScale()*/);
 
