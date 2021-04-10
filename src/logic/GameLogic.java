@@ -125,6 +125,11 @@ public class GameLogic {
 			}
 			break;
 		case DELETE_ITEM:
+			if(item == GameController.getPlayer().getEquippedArmor()) {
+				GameController.getPlayer().setEquippedArmor(null);
+			} else if(item == GameController.getPlayer().getEquippedWeapon()) {
+				GameController.getPlayer().setEquippedWeapon(null);
+			}
 			GameController.getPlayer().getItemList().remove(item);
 			MessageTextUtil.textWhenDropItem(item);
 			break;
