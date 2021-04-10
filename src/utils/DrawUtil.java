@@ -49,6 +49,7 @@ public class DrawUtil {
 	private static PixelReader itemSprites;
 	private static PixelReader smallPotionSprites;
 	private static PixelReader ladderSprites;
+	private static PixelReader friendlySoulSprites;
 	private static Image attackMouseIcon;
 
 	static {
@@ -64,13 +65,16 @@ public class DrawUtil {
 		reaperSprites = getImagePixelReader("sprites/reaper.png");
 		pumpkinHeadSprites = getImagePixelReader("sprites/pumpkinHead.png");
 		hauntedMaidSprites = getImagePixelReader("sprites/hauntedMaid.png");
+		friendlySoulSprites = getImagePixelReader("sprites/friendlySoul.png");
 		attackMouseIcon = getAttackMouseIcon();
 	}
+
+
 
 	public static PixelReader getImagePixelReader(String filePath) {
 		return getImage(filePath).getPixelReader();
 	}
-	
+
 	public static void drawBackpack(GraphicsContext gc) {
 		WritableImage img = new WritableImage(backpackSprites, 0, 0, 32, 32);
 		gc.drawImage(scaleUp(img, GameConfig.getScale()), 0, 0);
@@ -82,7 +86,7 @@ public class DrawUtil {
 	}
 
 	public static void drawItem(GraphicsContext gc, int y, int x, Item item) {
-		if(item == null) {
+		if (item == null) {
 			return;
 		}
 		int index = getIndexItemSymbol(item);
@@ -97,27 +101,27 @@ public class DrawUtil {
 			gc.drawImage(scaleUp(img, GameConfig.getScale()), x, y - 8 * GameConfig.getScale());
 		}
 	}
-	
+
 	public static void drawLadder(int y, int x, Cell cell) {
 		GraphicsContext gc = GameScene.getGraphicsContext();
 		int idx = -1;
-		if(cell.getType() == Cell.LADDER_DOWN) {
+		if (cell.getType() == Cell.LADDER_DOWN) {
 			idx = 0;
-		} else if(cell.getType() == Cell.LADDER_UP) {
+		} else if (cell.getType() == Cell.LADDER_UP) {
 			idx = 1;
 		} else {
 			return;
 		}
 		WritableImage img = new WritableImage(ladderSprites, idx * 32, 0, 32, 32);
 		gc.drawImage(scaleUp(img, GameConfig.getScale()), x, y - 8 * GameConfig.getScale());
-		
+
 	}
 
 	public static void drawItemOnCell(int y, int x, Item item) {
-		if(item == null) {
+		if (item == null) {
 			return;
 		}
-		
+
 		int index = getIndexItemSymbol(item);
 		GraphicsContext gc = GameScene.getGraphicsContext();
 		if (item instanceof Potion) {
@@ -130,7 +134,7 @@ public class DrawUtil {
 	}
 
 	public static void drawEntity(int y, int x, Entity entity) {
-		if(entity == null) {
+		if (entity == null) {
 			return;
 		}
 		GraphicsContext gc = GameScene.getGraphicsContext();
@@ -146,8 +150,12 @@ public class DrawUtil {
 			img = new WritableImage(playerSprites, 1 * 32, direction * 32, 32, 32);
 		if (entity instanceof Skeleton)
 			img = new WritableImage(skeletonSprites, 1 * 32, direction * 32, 32, 32);
-		if (entity instanceof Soul)
-			img = new WritableImage(soulSprites, 1 * 32, direction * 32, 32, 32);
+		if (entity instanceof Soul) {
+			if (((Soul) entity).isFriendly())
+				img = new WritableImage(friendlySoulSprites, 1 * 32, direction * 32, 32, 32);
+			else
+				img = new WritableImage(soulSprites, 1 * 32, direction * 32, 32, 32);
+		}
 		if (entity instanceof Reaper)
 			img = new WritableImage(reaperSprites, 1 * 32, direction * 32, 32, 32);
 		if (entity instanceof PumpkinHead)
@@ -162,7 +170,7 @@ public class DrawUtil {
 	}
 
 	public static void drawHPBar(int y, int x, Entity entity) {
-		if(!(entity instanceof Monster)) {
+		if (!(entity instanceof Monster)) {
 			return;
 		}
 		GraphicsContext gc = GameScene.getGraphicsContext();
@@ -171,8 +179,7 @@ public class DrawUtil {
 				2 * GameConfig.getScale());
 		gc.setFill(Color.RED);
 		gc.fillRect(x + 4 * GameConfig.getScale(), y - 4 * GameConfig.getScale(),
-				Math.ceil(
-						(double) entity.getHealth() / (double) entity.getMaxHealth() * 25.0 * GameConfig.getScale()),
+				Math.ceil((double) entity.getHealth() / (double) entity.getMaxHealth() * 25.0 * GameConfig.getScale()),
 				2 * GameConfig.getScale());
 	}
 
@@ -205,10 +212,10 @@ public class DrawUtil {
 	}
 
 	public static void addEntityButton(int y, int x, Entity entity) {
-		if(entity == null || !(entity instanceof Monster)) {
+		if (entity == null || !(entity instanceof Monster)) {
 			return;
 		}
-		
+
 		Canvas canvas = new Canvas(GameConfig.SPRITE_SIZE * GameConfig.getScale(),
 				GameConfig.SPRITE_SIZE * GameConfig.getScale());
 		canvas.setOnMouseClicked((event) -> {
@@ -252,7 +259,7 @@ public class DrawUtil {
 			index = Sprites.POTION;
 		return index;
 	}
-	
+
 	private static Image getImage(String filePath) {
 		return new Image(ClassLoader.getSystemResource(filePath).toString());
 	}

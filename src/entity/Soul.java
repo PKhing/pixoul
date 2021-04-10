@@ -9,6 +9,7 @@ import utils.RandomUtil;
 
 public class Soul extends Monster implements Attackable {
 	private final int attackPercent = 20;
+	private boolean isFriendly;
 
 	public Soul(int posY, int posX, int direction, int moveSpeed) {
 		super("Soul", 0, 1, 0, posY, posX, direction, 0, 0, moveSpeed);
@@ -17,6 +18,10 @@ public class Soul extends Monster implements Attackable {
 
 	@Override
 	public void update() {
+		if (RandomUtil.random(0, 100) < attackPercent) {
+			setFriendly(false);
+		} else
+			setFriendly(true);
 		if (getHealth() <= 0) {
 			remove();
 			return;
@@ -29,14 +34,19 @@ public class Soul extends Monster implements Attackable {
 
 	@Override
 	public boolean attack(Entity target) {
-		int randValue = RandomUtil.random(0, 100);
-		if (randValue >= attackPercent) {
-			MessageTextUtil.textWhenAttack(this, target, 0);
-		} else {
-			MessageTextUtil.textWhenAttack(this, target, target.getHealth() - 1);
-			target.setHealth(1);
-		}
+		if (isFriendly())
+			return true;
+		MessageTextUtil.textWhenAttack(this, target, target.getHealth() - 1);
+		target.setHealth(1);
 		return true;
+	}
+
+	public boolean isFriendly() {
+		return isFriendly;
+	}
+
+	public void setFriendly(boolean isFriendly) {
+		this.isFriendly = isFriendly;
 	}
 
 }
