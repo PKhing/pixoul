@@ -1,6 +1,6 @@
 package items.potion;
 
-import effects.DefenseBoost;
+import effects.Protection;
 import entity.Player;
 import items.base.Potion;
 import logic.Sprites;
@@ -15,7 +15,7 @@ public class ShieldPotion extends Potion {
 
 	@Override
 	public void onEquip(Player player) {
-		new DefenseBoost(getName(), getShield(), getDuration(), isPermanant()).onAdd(player);
+		new Protection(getName(), getShield(), getDuration(), isPermanant()).onAdd(player);
 	}
 
 	@Override

@@ -10,6 +10,9 @@ public class Regeneration extends EntityEffect implements IConsecutiveEffect {
 
 	@Override
 	public void onAdd(Entity entity) {
+		if(isDuplicate(entity)) {
+			return;
+		}
 		entity.getEffectList().add(this);
 	}
 
@@ -22,5 +25,10 @@ public class Regeneration extends EntityEffect implements IConsecutiveEffect {
 	@Override
 	public void onWearOff(Entity entity) {
 		entity.getEffectList().remove(this);
+	}
+
+	@Override
+	public String getEffectName() {
+		return EffectName.REGENERATION;
 	}
 }

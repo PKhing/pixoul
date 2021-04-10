@@ -2,14 +2,18 @@ package effects;
 
 import entity.base.Entity;
 
-public class DefenseBoost extends EntityEffect {
+public class Protection extends EntityEffect {
 
-	public DefenseBoost(String name, int value, int duration, boolean isPermanant) {
+	public Protection(String name, int value, int duration, boolean isPermanant) {
 		super(name, value, duration, isPermanant);
 	}
 
 	@Override
 	public void onAdd(Entity entity) {
+		if(isDuplicate(entity)) {
+			return;
+		}
+		
 		entity.getEffectList().add(this);
 		
 		int newDefense = entity.getDefense() + getValue();
@@ -25,6 +29,11 @@ public class DefenseBoost extends EntityEffect {
 		int newDefense = entity.getDefense() - getValue();
 		entity.setDefense(newDefense);
 		remove(entity);
+	}
+
+	@Override
+	public String getEffectName() {
+		return EffectName.PROTECTION;
 	}
 
 }

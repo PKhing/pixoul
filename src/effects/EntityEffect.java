@@ -2,6 +2,7 @@ package effects;
 
 import entity.Player;
 import entity.base.Entity;
+import utils.MessageTextUtil;
 
 public abstract class EntityEffect {
 	private String name;
@@ -21,7 +22,18 @@ public abstract class EntityEffect {
 	}
 
 	public abstract void onAdd(Entity entity);
-
+	public abstract String getEffectName();
+	
+	public boolean isDuplicate(Entity entity) {
+		for (EntityEffect effect: entity.getEffectList()) {
+			if(effect.getName() == getName() && effect.getEffectName() == getEffectName()) {
+				effect.setDuration(effect.getDuration() + getDuration());
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	public boolean onUpdate(Entity entity) {
 		if (getDuration() <= 0) {
 			return false;
@@ -65,6 +77,12 @@ public abstract class EntityEffect {
 		this.value = value;
 	}
 
+	public String toString() {
+		String effectName = MessageTextUtil.shortenWord(getEffectName());
+		String usedName = MessageTextUtil.shortenWord(name);
+		return "%s [%s]: %d".formatted(effectName, usedName, duration);
+	}
+	
 	protected void remove(Entity entity) {
 		entity.getEffectList().remove(this);
 	}

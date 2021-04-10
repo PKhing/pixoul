@@ -1,7 +1,7 @@
 package items.potion;
 
-import effects.AttackBoost;
-import effects.DefenseBoost;
+import effects.Strength;
+import effects.Protection;
 import entity.Player;
 import items.base.Potion;
 import logic.Sprites;
@@ -16,7 +16,7 @@ public class StrengthPotion extends Potion {
 
 	@Override
 	public void onEquip(Player player) {
-		new AttackBoost(getName(), getAttack(), getDuration(), isPermanant()).onAdd(player);
+		new Strength(getName(), getAttack(), getDuration(), isPermanant()).onAdd(player);
 	}
 
 	@Override
