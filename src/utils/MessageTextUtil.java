@@ -8,43 +8,45 @@ import items.base.Weapon;
 import scene.GameScene;
 
 public class MessageTextUtil {
+	private static int wordMaxSize = 20;
+	
 	public static void textWhenAttack(Entity from, Entity to, int attackValue) {
-		String displayText = "%s has attacked %s for %d damage".formatted(from.getName(), to.getName(), attackValue);
+		String displayText = "%s has attacked %s for %d damage".formatted(shortenWord(from.getName()), shortenWord(to.getName()), attackValue);
 		writeMessage(displayText);
 	}
 	
 	public static void textWhenSlained(Entity entity) {
-		String displayText = "%s has been slained.".formatted(entity.getName());
+		String displayText = "%s has been slained.".formatted(shortenWord(entity.getName()));
 		writeMessage(displayText);
 	}
 	
 	public static void textWhenUsedPotion(Potion potion) {
-		String displayText = "Player has used %s".formatted(potion.getName());
+		String displayText = "Player has used %s".formatted(shortenWord(potion.getName()));
 		writeMessage(displayText);
 	}
 	
 	public static void textWhenEquipWeapon(Weapon weapon) {
-		String displayText = "Player is using %s now".formatted(weapon.getName());
+		String displayText = "Player is using %s now".formatted(shortenWord(weapon.getName()));
 		writeMessage(displayText);
 	}
 	
 	public static void textWhenUnequipWeapon(Weapon weapon) {
-		String displayText = "Player has not used weapon now.".formatted(weapon.getName());
+		String displayText = "Player has not used weapon now.".formatted(shortenWord(weapon.getName()));
 		writeMessage(displayText);
 	}
 	
 	public static void textWhenSwitchWeapon(Weapon weapon) {
-		String displayText = "Player has switched weapon to %s.".formatted(weapon.getName());
+		String displayText = "Player has switched weapon to %s.".formatted(shortenWord(weapon.getName()));
 		writeMessage(displayText);
 	}
 	
 	public static void textWhenEquipArmor(Armor armor) {
-		String displayText = "Player is wearing %s now.".formatted(armor.getName());
+		String displayText = "Player is wearing %s now.".formatted(shortenWord(armor.getName()));
 		writeMessage(displayText);
 	}
 	
 	public static void textWhenSwitchArmor(Armor armor) {
-		String displayText = "Player has switched armor to %s.".formatted(armor.getName());
+		String displayText = "Player has switched armor to %s.".formatted(shortenWord(armor.getName()));
 		writeMessage(displayText);
 	}
 	
@@ -54,12 +56,12 @@ public class MessageTextUtil {
 	}
 	
 	public static void textWhenPickUpItem(Item item) {
-		String displayText = "Player has picked up %s".formatted(item.getName());
+		String displayText = "Player has picked up %s".formatted(shortenWord(item.getName()));
 		writeMessage(displayText);
 	}
 	
 	public static void textWhenDropItem(Item item) {
-		String displayText = "Player has dropped %s and it is gone forever".formatted(item.getName());
+		String displayText = "Player has dropped %s and it is gone forever".formatted(shortenWord(item.getName()));
 		writeMessage(displayText);
 	}
 	
@@ -81,5 +83,16 @@ public class MessageTextUtil {
 	
 	private static void writeMessage(String text) {
 		GameScene.getMessagePane().addMessage(text);
+	}
+	
+	public static String shortenWord(String text) {
+		int sz = Math.min(wordMaxSize, text.length());
+		
+		String newText = text.substring(0, sz);
+		if(sz != text.length()) {
+			newText += "...";
+		}
+		
+		return newText;
 	}
 }
