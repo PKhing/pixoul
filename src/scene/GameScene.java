@@ -9,6 +9,7 @@ import controller.GameController;
 import controller.InterruptController;
 import effects.Blindness;
 import entity.Skeleton;
+import entity.Soul;
 import entity.base.DispatchAction;
 import items.armor.GoldenArmor;
 import items.armor.IronArmor;
@@ -246,7 +247,9 @@ public class GameScene {
 
 		Skeleton skeleton = new Skeleton(5, 10, 1, firstRoomPos.getKey() - 3, firstRoomPos.getValue() + 1,
 				Direction.DOWN, 1.25, 0, 1);
-
+		Soul soul = new Soul(firstRoomPos.getKey() + 2, firstRoomPos.getValue() - 1,
+				Direction.DOWN, 1);
+		
 		Potion maxHealthPotion = new InstantHealPotion("Bitset Potion", "Extends for 1 bit shift",
 				GameController.getPlayer().getHealth(), true);
 		Potion currentPotion = new RegenerationPotion("Salty Potion", "With 100 years salt effect", 10, 100);
@@ -263,6 +266,7 @@ public class GameScene {
 		GameController.getGameMap().get(firstRoomPos.getKey() + 3, firstRoomPos.getValue()).setItem(newPotion);
 		skeleton.setHealth(8);
 		GameController.getGameMap().getMonsterList().add(skeleton);
+		GameController.getGameMap().getMonsterList().add(soul);
 	}
 
 }

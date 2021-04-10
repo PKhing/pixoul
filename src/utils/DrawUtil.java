@@ -4,6 +4,7 @@ import java.nio.IntBuffer;
 
 import entity.Player;
 import entity.Skeleton;
+import entity.Soul;
 import entity.base.DispatchAction;
 import entity.base.Entity;
 import entity.base.Monster;
@@ -36,6 +37,7 @@ public class DrawUtil {
 	private static PixelReader wallSprites;
 	private static PixelReader playerSprites;
 	private static PixelReader skeletonSprites;
+	private static PixelReader soulSprites;
 	private static PixelReader backpackSprites;
 	private static PixelReader pauseSprites;
 	private static PixelReader itemSprites;
@@ -52,6 +54,7 @@ public class DrawUtil {
 		itemSprites = getImagePixelReader("sprites/item.png");
 		smallPotionSprites = getImagePixelReader("sprites/smallPotion.png");
 		ladderSprites = getImagePixelReader("sprites/ladder.png");
+		soulSprites = getImagePixelReader("sprites/soul.png");
 		attackMouseIcon = getAttackMouseIcon();
 	}
 	
@@ -138,6 +141,8 @@ public class DrawUtil {
 			img = new WritableImage(playerSprites, 1 * 32, direction * 32, 32, 32);
 		if (entity instanceof Skeleton)
 			img = new WritableImage(skeletonSprites, 1 * 32, direction * 32, 32, 32);
+		if (entity instanceof Soul)
+			img = new WritableImage(soulSprites, 1 * 32, direction * 32, 32, 32);
 		// Fix later?
 		gc.drawImage(scaleUp(img, GameConfig.getScale()), x, y /*- 4 * GameConfig.getScale()*/);
 
