@@ -8,6 +8,7 @@ import components.PausePane;
 import controller.GameController;
 import controller.InterruptController;
 import effects.Blindness;
+import entity.Reaper;
 import entity.Skeleton;
 import entity.Soul;
 import entity.base.DispatchAction;
@@ -249,6 +250,8 @@ public class GameScene {
 				Direction.DOWN, 1.25, 0, 1);
 		Soul soul = new Soul(firstRoomPos.getKey() + 2, firstRoomPos.getValue() - 1,
 				Direction.DOWN, 1);
+		Reaper reaper = new Reaper(5, 10, 1, firstRoomPos.getKey() - 2, firstRoomPos.getValue() + 1,
+				Direction.DOWN, 1.25, 0, 1);
 		
 		Potion maxHealthPotion = new InstantHealPotion("Bitset Potion", "Extends for 1 bit shift",
 				GameController.getPlayer().getHealth(), true);
@@ -266,6 +269,7 @@ public class GameScene {
 		GameController.getGameMap().get(firstRoomPos.getKey() + 3, firstRoomPos.getValue()).setItem(newPotion);
 		skeleton.setHealth(8);
 		GameController.getGameMap().getMonsterList().add(skeleton);
+		GameController.getGameMap().getMonsterList().add(reaper);
 		GameController.getGameMap().getMonsterList().add(soul);
 	}
 

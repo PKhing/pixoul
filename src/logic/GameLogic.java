@@ -34,6 +34,10 @@ public class GameLogic {
 	public static void gameUpdate(DispatchAction action) {
 		boolean moveSuccess = true;
 		Player player = GameController.getPlayer();
+		if(InterruptController.isBinding()&&action!=DispatchAction.STAY_STILL) {
+			//TODO add message
+			return;
+		}
 		switch (action) {
 		case MOVE_UP:
 			moveSuccess = player.move(Direction.UP);

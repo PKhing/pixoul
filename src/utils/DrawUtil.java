@@ -3,6 +3,7 @@ package utils;
 import java.nio.IntBuffer;
 
 import entity.Player;
+import entity.Reaper;
 import entity.Skeleton;
 import entity.Soul;
 import entity.base.DispatchAction;
@@ -38,6 +39,7 @@ public class DrawUtil {
 	private static PixelReader playerSprites;
 	private static PixelReader skeletonSprites;
 	private static PixelReader soulSprites;
+	private static PixelReader reaperSprites;
 	private static PixelReader backpackSprites;
 	private static PixelReader pauseSprites;
 	private static PixelReader itemSprites;
@@ -55,6 +57,7 @@ public class DrawUtil {
 		smallPotionSprites = getImagePixelReader("sprites/smallPotion.png");
 		ladderSprites = getImagePixelReader("sprites/ladder.png");
 		soulSprites = getImagePixelReader("sprites/soul.png");
+		reaperSprites = getImagePixelReader("sprites/reaper.png");
 		attackMouseIcon = getAttackMouseIcon();
 	}
 	
@@ -143,6 +146,8 @@ public class DrawUtil {
 			img = new WritableImage(skeletonSprites, 1 * 32, direction * 32, 32, 32);
 		if (entity instanceof Soul)
 			img = new WritableImage(soulSprites, 1 * 32, direction * 32, 32, 32);
+		if (entity instanceof Reaper)
+			img = new WritableImage(reaperSprites, 1 * 32, direction * 32, 32, 32);
 		// Fix later?
 		gc.drawImage(scaleUp(img, GameConfig.getScale()), x, y /*- 4 * GameConfig.getScale()*/);
 
