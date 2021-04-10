@@ -42,23 +42,15 @@ public class GameLogic {
 		switch (action) {
 		case MOVE_UP:
 			moveSuccess = player.move(Direction.UP);
-			if(moveSuccess)
-				AnimationUtil.playerMove(Direction.UP);
 			break;
 		case MOVE_DOWN:
 			moveSuccess = player.move(Direction.DOWN);
-			if(moveSuccess)
-				AnimationUtil.playerMove(Direction.DOWN);
 			break;
 		case MOVE_LEFT:
 			moveSuccess = player.move(Direction.LEFT);
-			if(moveSuccess)
-				AnimationUtil.playerMove(Direction.LEFT);
 			break;
 		case MOVE_RIGHT:
 			moveSuccess = player.move(Direction.RIGHT);
-			if(moveSuccess)
-				AnimationUtil.playerMove(Direction.RIGHT);
 			break;
 		case STAY_STILL:
 			break;
@@ -66,31 +58,29 @@ public class GameLogic {
 			moveSuccess = false;
 			break;
 		}
-		if (moveSuccess) {
-			GameMap thisGameMap = GameController.getGameMap();
+	}
+	public static void postMoveUpdate() {
+		GameMap thisGameMap = GameController.getGameMap();
+		Player player = GameController.getPlayer();
+		Cell currentCell = thisGameMap.get(player.getPosY(), player.getPosX());
+		Item cellItem = currentCell.getItem();
 
-			Cell currentCell = thisGameMap.get(player.getPosY(), player.getPosX());
-			Item cellItem = currentCell.getItem();
-
-			if (cellItem != null && player.getItemList().size() != GameConfig.MAX_ITEM) {
-				player.getItemList().add(cellItem);
-				currentCell.setItem(null);
-				MessageTextUtil.textWhenPickUpItem(cellItem);
-			} else if (currentCell.getType() == Cell.LADDER_UP) {
-				boolean isAscending = GameController.ascending();
-				int level = GameController.getLevel();
-				if (!isAscending) {
-					level = 0;
-				}
-				MessageTextUtil.textWhenAscending(level);
-			} else if (currentCell.getType() == Cell.LADDER_DOWN) {
-				GameController.descending();
-				MessageTextUtil.textWhenDescending(GameController.getLevel());
+		if (cellItem != null && player.getItemList().size() != GameConfig.MAX_ITEM) {
+			player.getItemList().add(cellItem);
+			currentCell.setItem(null);
+			MessageTextUtil.textWhenPickUpItem(cellItem);
+		} else if (currentCell.getType() == Cell.LADDER_UP) {
+			boolean isAscending = GameController.ascending();
+			int level = GameController.getLevel();
+			if (!isAscending) {
+				level = 0;
 			}
-			postGameUpdate();
+			MessageTextUtil.textWhenAscending(level);
+		} else if (currentCell.getType() == Cell.LADDER_DOWN) {
+			GameController.descending();
+			MessageTextUtil.textWhenDescending(GameController.getLevel());
 		}
 	}
-
 	public static void gameUpdate(DispatchAction action, Entity entity) {
 		Player player = GameController.getPlayer();
 		int diffX = Math.abs(player.getPosX() - entity.getPosX());
@@ -99,6 +89,7 @@ public class GameLogic {
 		if (diffX <= 1 && diffY <= 1) {
 			player.attack(entity);
 			postGameUpdate();
+			
 		}
 	}
 
@@ -175,7 +166,7 @@ public class GameLogic {
 		GameScene.getStatusPane().setHP(player.getHealth(), player.getMaxHealth());
 		GameScene.getStatusPane().setAttack(player.getAttack());
 		GameScene.getStatusPane().setDefense(player.getDefense());
-		
+		AnimationUtil.monsterMove();
 		if(!InterruptController.isTransition()) {
 //			GameController.getGameMap().drawMap();	
 		}
