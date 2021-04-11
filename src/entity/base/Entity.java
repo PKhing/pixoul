@@ -56,6 +56,7 @@ public abstract class Entity{
 		MessageTextUtil.textWhenSlained(this);
 	}
 
+	public abstract int getSymbol();
 	public int getHealth() {
 		return health;
 	}

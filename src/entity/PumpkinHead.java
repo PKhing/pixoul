@@ -9,6 +9,7 @@ import javafx.util.Pair;
 import logic.Cell;
 import logic.Direction;
 import logic.GameLogic;
+import logic.Sprites;
 import utils.MessageTextUtil;
 
 public class PumpkinHead extends Monster implements Moveable, Attackable {
@@ -19,7 +20,10 @@ public class PumpkinHead extends Monster implements Moveable, Attackable {
 		GameController.getGameMap().get(posY, posX).setEntity(this);
 		// TODO Auto-generated constructor stub
 	}
-
+	@Override
+	public int getSymbol(){
+		return Sprites.PUMPKIN_HEAD;
+	}
 	@Override
 	public void update() {
 		if(getHealth() <= 0) {

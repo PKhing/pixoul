@@ -17,4 +17,14 @@ public class Sprites {
 	public static final int SHIELD_POTION = 1;
 	public static final int HEALING_POTION = 2;
 	
+	//Entity
+	public static final int PLAYER = 0;
+	public static final int SKELETON = 1;
+	public static final int SOUL = 2;
+	public static final int FRIENDLY_SOUL = 3;
+	public static final int REAPER = 4;
+	public static final int PUMPKIN_HEAD = 5;
+	public static final int HAUNTED_MAID = 6;
+	public static final int DARK_MAGE = 7;
+	
 }

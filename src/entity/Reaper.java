@@ -10,6 +10,7 @@ import javafx.util.Pair;
 import logic.Cell;
 import logic.Direction;
 import logic.GameLogic;
+import logic.Sprites;
 import utils.MessageTextUtil;
 
 public class Reaper extends Monster implements Attackable,Moveable{
@@ -20,7 +21,10 @@ public class Reaper extends Monster implements Attackable,Moveable{
 		GameController.getGameMap().get(posY, posX).setEntity(this);
 		// TODO Auto-generated constructor stub
 	}
-
+	@Override
+	public int getSymbol(){
+		return Sprites.REAPER;
+	}
 	@Override
 	public void update() {
 		if(getHealth() <= 0) {

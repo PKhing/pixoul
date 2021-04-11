@@ -4,6 +4,7 @@ import controller.GameController;
 import entity.base.Attackable;
 import entity.base.Entity;
 import entity.base.Monster;
+import logic.Sprites;
 import utils.MessageTextUtil;
 import utils.RandomUtil;
 
@@ -15,7 +16,12 @@ public class Soul extends Monster implements Attackable {
 		super("Soul", 0, 1, 0, posY, posX, direction, 0, 0, moveSpeed);
 		GameController.getGameMap().get(posY, posX).setEntity(this);
 	}
-
+	@Override
+	public int getSymbol(){
+		if(isFriendly) 
+			return Sprites.FRIENDLY_SOUL;
+		return Sprites.SOUL;
+	}
 	@Override
 	public void update() {
 		if (RandomUtil.random(0, 100) < attackPercent) {

@@ -16,6 +16,7 @@ import javafx.util.Pair;
 import logic.Cell;
 import logic.Direction;
 import logic.GameLogic;
+import logic.Sprites;
 import scene.GameScene;
 import utils.GameConfig;
 import utils.MessageTextUtil;
@@ -32,7 +33,11 @@ public class Player extends Entity implements Moveable, Attackable {
 		setEquippedArmor(null);
 		setEquippedWeapon(null);
 	}
-
+	@Override
+	public int getSymbol(){
+		return Sprites.PLAYER;
+	}
+	
 	public void setInitialPos(int posY, int posX) {
 		GameController.getGameMap().get(posY, posX).setEntity(this);
 		setPosX(posX);

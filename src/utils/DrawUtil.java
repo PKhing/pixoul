@@ -38,34 +38,22 @@ import scene.GameScene;
 
 public class DrawUtil {
 	private static PixelReader wallSprites;
-	private static PixelReader playerSprites;
-	private static PixelReader skeletonSprites;
-	private static PixelReader soulSprites;
-	private static PixelReader reaperSprites;
-	private static PixelReader pumpkinHeadSprites;
-	private static PixelReader hauntedMaidSprites;
 	private static PixelReader backpackSprites;
 	private static PixelReader pauseSprites;
 	private static PixelReader itemSprites;
 	private static PixelReader smallPotionSprites;
 	private static PixelReader ladderSprites;
-	private static PixelReader friendlySoulSprites;
+	private static PixelReader entitySprites;
 	private static Image attackMouseIcon;
 
 	static {
 		wallSprites = getImagePixelReader("sprites/wall.png");
-		playerSprites = getImagePixelReader("sprites/player.png");
-		skeletonSprites = getImagePixelReader("sprites/skeleton.png");
+		entitySprites = getImagePixelReader("sprites/entity.png");
 		backpackSprites = getImagePixelReader("sprites/backpack.png");
 		pauseSprites = getImagePixelReader("sprites/pause.png");
 		itemSprites = getImagePixelReader("sprites/item.png");
 		smallPotionSprites = getImagePixelReader("sprites/smallPotion.png");
 		ladderSprites = getImagePixelReader("sprites/ladder.png");
-		soulSprites = getImagePixelReader("sprites/soul.png");
-		reaperSprites = getImagePixelReader("sprites/reaper.png");
-		pumpkinHeadSprites = getImagePixelReader("sprites/pumpkinHead.png");
-		hauntedMaidSprites = getImagePixelReader("sprites/hauntedMaid.png");
-		friendlySoulSprites = getImagePixelReader("sprites/friendlySoul.png");
 		attackMouseIcon = getAttackMouseIcon();
 	}
 
@@ -133,10 +121,10 @@ public class DrawUtil {
 		}
 	}
 
+	
 	public static void drawEntity(int y, int x, Entity entity) {
-		if (entity == null) {
+		if (entity == null) 
 			return;
-		}
 		GraphicsContext gc = GameScene.getGraphicsContext();
 		int direction = 0;
 		if (entity.getDirection() == Direction.LEFT)
@@ -145,23 +133,8 @@ public class DrawUtil {
 			direction = 2;
 		if (entity.getDirection() == Direction.UP)
 			direction = 3;
-		WritableImage img = null;
-		if (entity instanceof Player)
-			img = new WritableImage(playerSprites, 1 * 32, direction * 32, 32, 32);
-		if (entity instanceof Skeleton)
-			img = new WritableImage(skeletonSprites, 1 * 32, direction * 32, 32, 32);
-		if (entity instanceof Soul) {
-			if (((Soul) entity).isFriendly())
-				img = new WritableImage(friendlySoulSprites, 1 * 32, direction * 32, 32, 32);
-			else
-				img = new WritableImage(soulSprites, 1 * 32, direction * 32, 32, 32);
-		}
-		if (entity instanceof Reaper)
-			img = new WritableImage(reaperSprites, 1 * 32, direction * 32, 32, 32);
-		if (entity instanceof PumpkinHead)
-			img = new WritableImage(pumpkinHeadSprites, 1 * 32, direction * 32, 32, 32);
-		if (entity instanceof HauntedMaid)
-			img = new WritableImage(hauntedMaidSprites, 1 * 32, direction * 32, 32, 32);
+		
+		WritableImage img = new WritableImage(entitySprites,(96*entity.getSymbol())+32*1,direction*32,32,32);
 		// Fix later?
 		gc.drawImage(scaleUp(img, GameConfig.getScale()), x, y /*- 4 * GameConfig.getScale()*/);
 

@@ -9,6 +9,7 @@ import javafx.util.Pair;
 import logic.Cell;
 import logic.Direction;
 import logic.GameLogic;
+import logic.Sprites;
 import utils.MessageTextUtil;
 
 public class HauntedMaid extends Monster implements Moveable, Attackable {
@@ -21,7 +22,10 @@ public class HauntedMaid extends Monster implements Moveable, Attackable {
 		GameController.getGameMap().get(posY, posX).setEntity(this);
 		// TODO Auto-generated constructor stub
 	}
-
+	@Override
+	public int getSymbol(){
+		return Sprites.HAUNTED_MAID;
+	}
 	@Override
 	public void update() {
 		if(getHealth() <= 0) {
