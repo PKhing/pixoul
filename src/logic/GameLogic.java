@@ -33,7 +33,6 @@ public class GameLogic {
 	}
 
 	public static void gameUpdate(DispatchAction action) {
-		boolean moveSuccess = true;
 		Player player = GameController.getPlayer();
 		if(InterruptController.isImmobilize()&&action!=DispatchAction.STAY_STILL) {
 			//TODO add message
@@ -41,23 +40,22 @@ public class GameLogic {
 		}
 		switch (action) {
 		case MOVE_UP:
-			moveSuccess = player.move(Direction.UP);
+			player.move(Direction.UP);
 			break;
 		case MOVE_DOWN:
-			moveSuccess = player.move(Direction.DOWN);
+			player.move(Direction.DOWN);
 			break;
 		case MOVE_LEFT:
-			moveSuccess = player.move(Direction.LEFT);
+			player.move(Direction.LEFT);
 			break;
 		case MOVE_RIGHT:
-			moveSuccess = player.move(Direction.RIGHT);
+			player.move(Direction.RIGHT);
 			break;
 		case STAY_STILL:
 			postGameUpdate();
 			postMoveUpdate();
 			break;
 		default:
-			moveSuccess = false;
 			break;
 		}
 	}

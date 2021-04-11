@@ -11,7 +11,6 @@ import javafx.scene.Node;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 import javafx.util.Pair;
-import logic.GameLogic;
 import logic.GameMap;
 import logic.MapGenerator;
 import scene.GameScene;

@@ -6,7 +6,6 @@ import entity.base.Attackable;
 import entity.base.Entity;
 import entity.base.Monster;
 import entity.base.Moveable;
-import javafx.util.Pair;
 import logic.Cell;
 import logic.Direction;
 import logic.GameLogic;
@@ -21,10 +20,12 @@ public class Reaper extends Monster implements Attackable, Moveable {
 		GameController.getGameMap().get(posY, posX).setEntity(this);
 		// TODO Auto-generated constructor stub
 	}
+
 	@Override
-	public int getSymbol(){
+	public int getSymbol() {
 		return Sprites.REAPER;
 	}
+
 	@Override
 	public void update() {
 		if (getHealth() <= 0) {
@@ -36,27 +37,11 @@ public class Reaper extends Monster implements Attackable, Moveable {
 		if (Math.abs(gamePlayer.getPosX() - getPosX()) <= 1 && Math.abs(gamePlayer.getPosY() - getPosY()) <= 1) {
 			attack(gamePlayer);
 		} else {
-			Pair<Integer, Integer> newPos = this.getNextPos();
-			if (newPos == null) {
-				return;
+			int nextDirection = this.getNextDirection();
+			if (nextDirection != -1) {
+				this.move(nextDirection);
+				this.setMoving(true);
 			}
-			int newY = newPos.getKey();
-			int newX = newPos.getValue();
-			if (GameController.getGameMap().get(newY, newX).getEntity() != null)
-				return;
-			if (newY - this.getPosY() == 1) {
-				this.move(Direction.DOWN);
-			}
-			if (newY - this.getPosY() == -1) {
-				this.move(Direction.UP);
-			}
-			if (newX - this.getPosX() == -1) {
-				this.move(Direction.LEFT);
-			}
-			if (newX - this.getPosX() == 1) {
-				this.move(Direction.RIGHT);
-			}
-			this.setMoving(true);
 		}
 	}
 

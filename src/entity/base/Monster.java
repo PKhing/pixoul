@@ -7,6 +7,7 @@ import controller.GameController;
 import entity.Player;
 import javafx.util.Pair;
 import logic.Cell;
+import logic.Direction;
 import utils.GameConfig;
 import utils.RandomUtil;
 
@@ -22,19 +23,36 @@ public abstract class Monster extends Entity {
 
 	public abstract void update();
 
-	public Pair<Integer, Integer> getNextPos() {
+	public int getNextDirection() {
 		
 		Pair<Integer, Integer> playerPos = bfs(1);
 		if (playerPos == null) {
 			playerPos = bfs(2);
 		}
 		if (playerPos == null)
-			return null;
+			return -1;
 		Pair<Integer, Integer> newPos = playerPos;
 		while (!(new Pair<>(getPosY(), getPosX()).equals(parent[newPos.getKey()][newPos.getValue()]))) {
 			newPos = parent[newPos.getKey()][newPos.getValue()];
 		}
-		return newPos;
+		int newY = newPos.getKey();
+		int newX = newPos.getValue();
+	
+		if (GameController.getGameMap().get(newY, newX).getEntity() != null)
+			return -1;
+		if (newY - this.getPosY() == 1) {
+			return Direction.DOWN;
+		}
+		if (newY - this.getPosY() == -1) {
+			return Direction.UP;
+		}
+		if (newX - this.getPosX() == -1) {
+			return Direction.LEFT;
+		}
+		if (newX - this.getPosX() == 1) {
+			return Direction.RIGHT;
+		}
+		return -1;
 	}
 
 	private Pair<Integer, Integer> bfs(int type) {

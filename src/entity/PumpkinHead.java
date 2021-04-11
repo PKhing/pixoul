@@ -5,7 +5,6 @@ import entity.base.Attackable;
 import entity.base.Entity;
 import entity.base.Monster;
 import entity.base.Moveable;
-import javafx.util.Pair;
 import logic.Cell;
 import logic.Direction;
 import logic.GameLogic;
@@ -34,27 +33,11 @@ public class PumpkinHead extends Monster implements Moveable, Attackable {
 		if (isAttackable(gamePlayer)) {
 			attack(gamePlayer);
 		} else {
-			Pair<Integer, Integer> newPos = this.getNextPos();
-			if (newPos == null) {
-				return;
+			int nextDirection = this.getNextDirection();
+			if (nextDirection != -1) {
+				this.move(nextDirection);
+				this.setMoving(true);
 			}
-			int newY = newPos.getKey();
-			int newX = newPos.getValue();
-			if (GameController.getGameMap().get(newY, newX).getEntity() != null)
-				return;
-			if (newY - this.getPosY() == 1) {
-				this.move(Direction.DOWN);
-			}
-			if (newY - this.getPosY() == -1) {
-				this.move(Direction.UP);
-			}
-			if (newX - this.getPosX() == -1) {
-				this.move(Direction.LEFT);
-			}
-			if (newX - this.getPosX() == 1) {
-				this.move(Direction.RIGHT);
-			}
-			this.setMoving(true);
 		}
 	}
 
