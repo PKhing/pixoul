@@ -2,6 +2,7 @@ package utils;
 
 import java.nio.IntBuffer;
 
+import controller.InterruptController;
 import entity.base.DispatchAction;
 import entity.base.Entity;
 import entity.base.Monster;
@@ -207,7 +208,9 @@ public class DrawUtil {
 		Canvas canvas = new Canvas(GameConfig.SPRITE_SIZE * GameConfig.getScale(),
 				GameConfig.SPRITE_SIZE * GameConfig.getScale());
 		canvas.setOnMouseClicked((event) -> {
-			GameLogic.gameUpdate(DispatchAction.ATTACK, (Monster) entity);
+			if(!InterruptController.isInterruptPlayerInput()) {
+				GameLogic.gameUpdate(DispatchAction.ATTACK, (Monster) entity);
+			}
 		});
 		addCursorHover(canvas, true);
 		AnchorPane.setTopAnchor(canvas, (double) (y - 8));

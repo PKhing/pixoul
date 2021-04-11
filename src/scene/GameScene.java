@@ -168,8 +168,6 @@ public class GameScene {
 			case ESCAPE:
 				if (InterruptController.isOpenFromInside()) {
 					InterruptController.setOpenFromInside(false);
-				} else {
-					GameController.exitToMainMenu();
 				}
 				break;
 			default:

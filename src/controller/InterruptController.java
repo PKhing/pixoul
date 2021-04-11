@@ -7,6 +7,7 @@ public class InterruptController {
 	private static boolean isOpenFromInside;
 	private static boolean isTransition;
 	private static boolean isImmobilize;
+	private static boolean isStillAnimation;
 	
 	public static void resetInterruptState() {
 		isPauseOpen = false;
@@ -14,10 +15,11 @@ public class InterruptController {
 		isSettingOpen = false;
 		isTransition = false;
 		isImmobilize = false;
+		isStillAnimation = false;
 	}
 	
 	public static boolean isInterruptPlayerInput() {
-		return isPauseOpen || isInventoryOpen || isTransition;
+		return isPauseOpen || isInventoryOpen || isTransition || isStillAnimation;
 	}
 	
 	public static boolean isPauseOpen() {
@@ -66,6 +68,14 @@ public class InterruptController {
 
 	public static void setImmobilize(boolean isImmobilize) {
 		InterruptController.isImmobilize = isImmobilize;
+	}
+
+	public static boolean isStillAnimation() {
+		return isStillAnimation;
+	}
+
+	public static void setStillAnimation(boolean isStillAnimation) {
+		InterruptController.isStillAnimation = isStillAnimation;
 	}
 
 }
