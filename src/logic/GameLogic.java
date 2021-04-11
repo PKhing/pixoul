@@ -22,6 +22,7 @@ public class GameLogic {
 	private static Runnable nextAction = null;
 
 	public static void doNextAction() {
+		if(InterruptController.isInterruptPlayerInput())return;
 		if (nextAction != null) {
 			nextAction.run();
 		}

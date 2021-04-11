@@ -96,7 +96,9 @@ public class AnimationUtil {
 				}
 				
 				InterruptController.setStillAnimation(false);
-				GameLogic.doNextAction();
+				Platform.runLater(() -> {
+					GameLogic.doNextAction();
+				});
 			}
 		}.start();
 		
