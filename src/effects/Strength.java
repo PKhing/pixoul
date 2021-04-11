@@ -14,13 +14,13 @@ public class Strength extends EntityEffect {
 			return;
 		}
 		
-		entity.getEffectList().add(this);
+		addEffect(entity);
 		
 		int newAttack = entity.getAttack() + getValue();
 		entity.setAttack(newAttack);
 		
 		if(isPermanant()) {
-			remove(entity);
+			removeEffect(entity);
 		}
 	}
 
@@ -28,7 +28,7 @@ public class Strength extends EntityEffect {
 	public void onWearOff(Entity entity) {
 		int newAttack = entity.getAttack() - getValue();
 		entity.setAttack(newAttack);
-		remove(entity);
+		removeEffect(entity);
 	}
 
 	@Override

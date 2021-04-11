@@ -13,7 +13,7 @@ public class Regeneration extends EntityEffect implements IConsecutiveEffect {
 		if(isDuplicate(entity)) {
 			return;
 		}
-		entity.getEffectList().add(this);
+		addEffect(entity);
 	}
 
 	@Override

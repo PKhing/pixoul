@@ -10,7 +10,7 @@ public class InstantHealth extends EntityEffect {
 
 	@Override
 	public void onAdd(Entity entity) {
-		entity.getEffectList().add(this);
+		addEffect(entity);
 		
 		if (isPermanant()) {
 			int newMaxHealth = entity.getMaxHealth() + getValue();
@@ -19,7 +19,7 @@ public class InstantHealth extends EntityEffect {
 
 		int newHealth = Math.min(entity.getMaxHealth(), entity.getHealth() + getValue());
 		entity.setHealth(newHealth);
-		remove(entity);
+		removeEffect(entity);
 	}
 
 	@Override

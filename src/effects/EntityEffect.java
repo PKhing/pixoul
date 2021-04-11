@@ -82,8 +82,12 @@ public abstract class EntityEffect {
 		return "%s [%s]: %d".formatted(effectName, usedName, duration);
 	}
 	
-	protected void remove(Entity entity) {
+	protected void removeEffect(Entity entity) {
 		entity.getEffectList().remove(this);
+	}
+	
+	protected void addEffect(Entity entity) {
+		entity.getEffectList().add(this);
 	}
 
 }

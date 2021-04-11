@@ -14,13 +14,13 @@ public class Protection extends EntityEffect {
 			return;
 		}
 		
-		entity.getEffectList().add(this);
+		addEffect(entity);
 		
 		int newDefense = entity.getDefense() + getValue();
 		entity.setDefense(newDefense);
 
 		if (isPermanant()) {
-			remove(entity);
+			removeEffect(entity);
 		}
 	}
 
@@ -28,7 +28,7 @@ public class Protection extends EntityEffect {
 	public void onWearOff(Entity entity) {
 		int newDefense = entity.getDefense() - getValue();
 		entity.setDefense(newDefense);
-		remove(entity);
+		removeEffect(entity);
 	}
 
 	@Override
