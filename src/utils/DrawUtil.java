@@ -34,7 +34,6 @@ public class DrawUtil {
 	private static PixelReader backpackSprites;
 	private static PixelReader pauseSprites;
 	private static PixelReader itemSprites;
-	private static PixelReader smallPotionSprites;
 	private static PixelReader ladderSprites;
 	private static PixelReader entitySprites;
 	private static Image attackMouseIcon;
@@ -45,7 +44,6 @@ public class DrawUtil {
 		backpackSprites = getImagePixelReader("sprites/backpack.png");
 		pauseSprites = getImagePixelReader("sprites/pause.png");
 		itemSprites = getImagePixelReader("sprites/item.png");
-		smallPotionSprites = getImagePixelReader("sprites/smallPotion.png");
 		ladderSprites = getImagePixelReader("sprites/ladder.png");
 		attackMouseIcon = getAttackMouseIcon();
 	}
@@ -106,7 +104,7 @@ public class DrawUtil {
 		int index = getIndexItemSymbol(item);
 		GraphicsContext gc = GameScene.getGraphicsContext();
 		if (item instanceof Potion) {
-			WritableImage img = new WritableImage(smallPotionSprites, item.getSymbol() * 32, 0, 32, 32);
+			WritableImage img = new WritableImage(itemSprites, item.getSymbol() * 32, Sprites.SMALL_POTION * 32, 32, 32);
 			gc.drawImage(scaleUp(img, GameConfig.getScale()), x - 1, y);
 		} else {
 			WritableImage img = new WritableImage(itemSprites, item.getSymbol() * 32, index * 32, 32, 32);
