@@ -144,7 +144,7 @@ public class GameScene {
 
 	private static void addEventListener(Scene s, GraphicsContext gc, AnchorPane buttonPane) {
 		s.setOnKeyPressed((event) -> {
-			if (InterruptController.isInterruptPlayerInput()) {
+			if (InterruptController.isInterruptPlayerInput()&&!InterruptController.isStillAnimation()) {
 				return;
 			}
 			KeyCode keycode = event.getCode();

@@ -38,8 +38,9 @@ public abstract class Monster extends Entity {
 		int newY = newPos.getKey();
 		int newX = newPos.getValue();
 	
-		if (GameController.getGameMap().get(newY, newX).getEntity() != null)
+		if (GameController.getGameMap().get(newY, newX).getEntity() != null) {
 			return -1;
+		}
 		if (newY - this.getPosY() == 1) {
 			return Direction.DOWN;
 		}
