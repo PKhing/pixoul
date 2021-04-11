@@ -40,6 +40,8 @@ public class Skeleton extends Monster implements Moveable, Attackable {
 			}
 			int newY = newPos.getKey();
 			int newX = newPos.getValue();
+			if (GameController.getGameMap().get(newY, newX).getEntity() != null)
+				return;
 			if (newY - this.getPosY() == 1) {
 				this.move(Direction.DOWN);
 			}

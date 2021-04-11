@@ -21,15 +21,13 @@ public abstract class Monster extends Entity {
 	}
 
 	public abstract void update();
-	
+
 	public Pair<Integer, Integer> getNextPos() {
-		for (int i = 0; i <= GameConfig.MAP_SIZE; i++) {
-			for (int j = 0; j <= GameConfig.MAP_SIZE; j++) {
-				parent[i][j] = null;
-				visit[i][j] = false;
-			}
+		
+		Pair<Integer, Integer> playerPos = bfs(1);
+		if (playerPos == null) {
+			playerPos = bfs(2);
 		}
-		Pair<Integer, Integer> playerPos = bfs();
 		if (playerPos == null)
 			return null;
 		Pair<Integer, Integer> newPos = playerPos;
@@ -39,11 +37,16 @@ public abstract class Monster extends Entity {
 		return newPos;
 	}
 
-	private Pair<Integer, Integer> bfs() {
-
+	private Pair<Integer, Integer> bfs(int type) {
+		for (int i = 0; i <= GameConfig.MAP_SIZE; i++) {
+			for (int j = 0; j <= GameConfig.MAP_SIZE; j++) {
+				parent[i][j] = null;
+				visit[i][j] = false;
+			}
+		}
 		int move[][] = { { 0, 1 }, { 0, -1 }, { 1, 0 }, { -1, 0 } };
 		RandomUtil.shuffle(move);
-		
+
 		Queue<Pair<Integer, Pair<Integer, Integer>>> queue = new LinkedList<>();
 		queue.add(new Pair<>(0, new Pair<>(this.getPosY(), this.getPosX())));
 
@@ -55,9 +58,17 @@ public abstract class Monster extends Entity {
 
 			queue.remove();
 
-			if (GameController.getGameMap().get(y, x).getType() != Cell.PATH
+			if (GameController.getGameMap().get(y, x).getType() == Cell.WALL
 					|| length > GameConfig.MONSTER_LINE_OF_SIGHT || visit[y][x]) {
 				continue;
+			}
+
+			if (type == 1) {
+				if (GameController.getGameMap().get(y, x).getEntity() != null
+						&& GameController.getGameMap().get(y, x).getEntity() != this
+						&& !(GameController.getGameMap().get(y, x).getEntity() instanceof Player)) {
+					continue;
+				}
 			}
 			visit[y][x] = true;
 

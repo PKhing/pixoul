@@ -14,21 +14,21 @@ import utils.MessageTextUtil;
 
 public class HauntedMaid extends Monster implements Moveable, Attackable {
 
-
-
 	public HauntedMaid(int attack, int maxHealth, int defense, int posY, int posX, int direction, double critRate,
 			double critPercent, int moveSpeed) {
 		super("Haunted Maid", attack, maxHealth, defense, posY, posX, direction, critRate, critPercent, moveSpeed);
 		GameController.getGameMap().get(posY, posX).setEntity(this);
 		// TODO Auto-generated constructor stub
 	}
+
 	@Override
-	public int getSymbol(){
+	public int getSymbol() {
 		return Sprites.HAUNTED_MAID;
 	}
+
 	@Override
 	public void update() {
-		if(getHealth() <= 0) {
+		if (getHealth() <= 0) {
 			remove();
 			return;
 		}
@@ -42,6 +42,8 @@ public class HauntedMaid extends Monster implements Moveable, Attackable {
 			}
 			int newY = newPos.getKey();
 			int newX = newPos.getValue();
+			if (GameController.getGameMap().get(newY, newX).getEntity() != null)
+				return;
 			if (newY - this.getPosY() == 1) {
 				this.move(Direction.DOWN);
 			}
@@ -91,9 +93,8 @@ public class HauntedMaid extends Monster implements Moveable, Attackable {
 			setPosX(newPosX);
 			return true;
 		}
-		
+
 		return false;
 	}
-
 
 }
