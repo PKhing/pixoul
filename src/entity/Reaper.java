@@ -13,7 +13,7 @@ import logic.GameLogic;
 import logic.Sprites;
 import utils.MessageTextUtil;
 
-public class Reaper extends Monster implements Attackable,Moveable{
+public class Reaper extends Monster implements Attackable, Moveable {
 
 	public Reaper(int attack, int maxHealth, int defense, int posY, int posX, int direction, double critRate,
 			double critPercent, int moveSpeed) {
@@ -27,14 +27,13 @@ public class Reaper extends Monster implements Attackable,Moveable{
 	}
 	@Override
 	public void update() {
-		if(getHealth() <= 0) {
+		if (getHealth() <= 0) {
 			remove();
 			InterruptController.setBinding(false);
 			return;
 		}
 		Player gamePlayer = GameController.getPlayer();
-		if (Math.abs(gamePlayer.getPosX() - getPosX()) <= 1
-				&& Math.abs(gamePlayer.getPosY() - getPosY()) <= 1) {
+		if (Math.abs(gamePlayer.getPosX() - getPosX()) <= 1 && Math.abs(gamePlayer.getPosY() - getPosY()) <= 1) {
 			attack(gamePlayer);
 		} else {
 			Pair<Integer, Integer> newPos = this.getNextPos();
@@ -61,8 +60,8 @@ public class Reaper extends Monster implements Attackable,Moveable{
 	@Override
 	public boolean attack(Entity target) {
 
-		if(!InterruptController.isBinding()) {
-			//TODO add message
+		if (!InterruptController.isBinding()) {
+			// TODO add message
 			InterruptController.setBinding(true);
 		}
 		int atkValue = GameLogic.calculateAttackValue(this, target);
@@ -95,7 +94,7 @@ public class Reaper extends Monster implements Attackable,Moveable{
 			setPosX(newPosX);
 			return true;
 		}
-		
+
 		return false;
 	}
 

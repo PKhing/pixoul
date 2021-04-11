@@ -5,10 +5,11 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import controller.GameController;
 import effects.EntityEffect;
+import entity.Player;
 import logic.Renderable;
 import utils.MessageTextUtil;
 
-public abstract class Entity{
+public abstract class Entity {
 	private String name;
 
 	private int health;
@@ -28,7 +29,7 @@ public abstract class Entity{
 	private double critRate;
 
 	private double critPercent;
-	
+
 	private int moveSpeed;
 
 	private List<EntityEffect> effectList;
@@ -50,13 +51,8 @@ public abstract class Entity{
 		setEffectList(new CopyOnWriteArrayList<>());
 	}
 
-	public void remove() {
-		GameController.getGameMap().get(this.getPosY(), this.getPosX()).setEntity(null);
-		GameController.getGameMap().getMonsterList().remove(this);
-		MessageTextUtil.textWhenSlained(this);
-	}
-
 	public abstract int getSymbol();
+	
 	public int getHealth() {
 		return health;
 	}
@@ -152,8 +148,26 @@ public abstract class Entity{
 	public void setEffectList(List<EntityEffect> effectList) {
 		this.effectList = effectList;
 	}
+
 	public int getPriority() {
 		return 2;
+	}
+	
+	// Attack Range ? (Customize later ?) 
+	protected boolean isAttackable(Entity x) {
+		int diffX = Math.abs(x.getPosX() - getPosX());
+		int diffY = Math.abs(x.getPosY() - getPosY());
+
+		if (diffX <= 1 && diffY <= 1) {
+			return true;
+		}
+		return false;
+	}
+
+	protected void remove() {
+		GameController.getGameMap().get(this.getPosY(), this.getPosX()).setEntity(null);
+		GameController.getGameMap().getMonsterList().remove(this);
+		MessageTextUtil.textWhenSlained(this);
 	}
 
 }

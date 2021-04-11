@@ -110,9 +110,7 @@ public class LandingScene {
 
 		});
 
-		box.getChildren().add(startBtn);
-		box.getChildren().add(optionBtn);
-		box.getChildren().add(exitBtn);
+		box.getChildren().addAll(startBtn, optionBtn, exitBtn);
 
 		root.getChildren().add(box);
 

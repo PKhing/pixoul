@@ -31,8 +31,7 @@ public class Skeleton extends Monster implements Moveable, Attackable {
 			return;
 		}
 		Player gamePlayer = GameController.getPlayer();
-		if (Math.abs(gamePlayer.getPosX() - getPosX()) <= 1
-				&& Math.abs(gamePlayer.getPosY() - getPosY()) <= 1) {
+		if (isAttackable(gamePlayer)) {
 			attack(gamePlayer);
 		} else {
 			Pair<Integer, Integer> newPos = this.getNextPos();
