@@ -29,7 +29,7 @@ public class Reaper extends Monster implements Attackable, Moveable {
 	public void update() {
 		if (getHealth() <= 0) {
 			remove();
-			InterruptController.setBinding(false);
+			InterruptController.setImmobilize(false);
 			return;
 		}
 		Player gamePlayer = GameController.getPlayer();
@@ -61,9 +61,9 @@ public class Reaper extends Monster implements Attackable, Moveable {
 	@Override
 	public boolean attack(Entity target) {
 
-		if (!InterruptController.isBinding()) {
+		if (!InterruptController.isImmobilize()) {
 			// TODO add message
-			InterruptController.setBinding(true);
+			InterruptController.setImmobilize(true);
 		}
 		int atkValue = GameLogic.calculateAttackValue(this, target);
 		MessageTextUtil.textWhenAttack(this, target, atkValue);

@@ -35,7 +35,7 @@ public class GameLogic {
 	public static void gameUpdate(DispatchAction action) {
 		boolean moveSuccess = true;
 		Player player = GameController.getPlayer();
-		if(InterruptController.isBinding()&&action!=DispatchAction.STAY_STILL) {
+		if(InterruptController.isImmobilize()&&action!=DispatchAction.STAY_STILL) {
 			//TODO add message
 			return;
 		}
