@@ -1,7 +1,6 @@
 package items.base;
 
 import entity.Player;
-import logic.Renderable;
 
 public abstract class Item{
 	private String name;

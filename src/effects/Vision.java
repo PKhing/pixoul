@@ -2,7 +2,6 @@ package effects;
 
 import entity.Player;
 import entity.base.Entity;
-import utils.GameConfig;
 
 public class Vision extends EntityEffect {
 

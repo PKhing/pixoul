@@ -2,12 +2,6 @@ package utils;
 
 import java.nio.IntBuffer;
 
-import entity.HauntedMaid;
-import entity.Player;
-import entity.PumpkinHead;
-import entity.Reaper;
-import entity.Skeleton;
-import entity.Soul;
 import entity.base.DispatchAction;
 import entity.base.Entity;
 import entity.base.Monster;
@@ -32,7 +26,6 @@ import javafx.scene.paint.Color;
 import logic.Cell;
 import logic.Direction;
 import logic.GameLogic;
-import logic.Renderable;
 import logic.Sprites;
 import scene.GameScene;
 

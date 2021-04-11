@@ -1,7 +1,6 @@
 package items.potion;
 
 import effects.Strength;
-import effects.Protection;
 import entity.Player;
 import items.base.Potion;
 import logic.Sprites;
