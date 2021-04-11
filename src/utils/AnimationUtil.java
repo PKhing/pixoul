@@ -8,7 +8,6 @@ import logic.Direction;
 import logic.GameLogic;
 
 public class AnimationUtil {
-	private static boolean skipMoveAnimation = false;
 
 	public static void playerMove(int direction) {
 		final int step = GameConfig.getScale();
@@ -26,7 +25,7 @@ public class AnimationUtil {
 		int finalStepX = stepX;
 		new Thread() {
 			public void run() {
-				if (!skipMoveAnimation) {
+				if (!GameConfig.isSkipMoveAnimation()) {
 					GameController.getPlayer().setMoving(true);
 					move(finalStepY, finalStepX);
 					GameController.getPlayer().setMoving(false);
@@ -46,11 +45,11 @@ public class AnimationUtil {
 			if (monster.isMoving())
 				isMove = true;
 		boolean finalIsMove = isMove;
-		if (!isMove || skipMoveAnimation)
+		if (!isMove || GameConfig.isSkipMoveAnimation())
 			GameController.getGameMap().drawMap();
 		Thread monsterMove = new Thread() {
 			public void run() {
-				if (finalIsMove && !skipMoveAnimation) {
+				if (finalIsMove && !GameConfig.isSkipMoveAnimation()) {
 					move(0, 0);
 					for (Monster monster : GameController.getGameMap().getMonsterList())
 						monster.setMoving(false);
@@ -70,7 +69,7 @@ public class AnimationUtil {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				if (!finalIsMove || skipMoveAnimation) {
+				if (!finalIsMove || GameConfig.isSkipMoveAnimation()) {
 					Platform.runLater(() -> {
 						GameController.getGameMap().drawMap();
 					});

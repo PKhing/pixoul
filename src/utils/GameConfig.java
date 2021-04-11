@@ -5,7 +5,8 @@ public class GameConfig {
 	private static int screenHeight = 400;
 	private static int scale = 2;
 	private static double volume = 0.1;
-
+	private static boolean skipMoveAnimation = false;
+	
 	public static final int SCREEN_RESPONSIVE = 864;
 	public static final boolean SCREEN_SCALABLE = false;
 	public static final String GAME_TITLE = "Pixoul";
@@ -50,5 +51,13 @@ public class GameConfig {
 
 	public static void setVolume(double volume) {
 		GameConfig.volume = volume;
+	}
+
+	public static boolean isSkipMoveAnimation() {
+		return skipMoveAnimation;
+	}
+
+	public static void setSkipMoveAnimation(boolean skipMoveAnimation) {
+		GameConfig.skipMoveAnimation = skipMoveAnimation;
 	}
 }
