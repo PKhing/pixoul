@@ -58,6 +58,9 @@ public class AnimationUtil {
 					for (Monster monster : GameController.getGameMap().getMonsterList())
 						monster.setMoving(false);
 				}
+				Platform.runLater(() -> {
+					GameController.getGameMap().drawMap();
+				});
 			}
 		};
 

@@ -208,7 +208,7 @@ public class GameMap {
 				pq.add(new Node(posY, posX, 100, () -> {
 					DrawUtil.drawHPBar(posY + finalShiftY, posX + finalShiftX, thisCell.getEntity());
 				}));
-			if (thisCell.getEntity() instanceof Monster)
+			if (thisCell.getEntity() instanceof Monster && cnt == 0)
 				pq.add(new Node(posY, posX, 2, () -> {
 					DrawUtil.addEntityButton(posY + finalShiftY, posX + finalShiftX, thisCell.getEntity());
 				}));
