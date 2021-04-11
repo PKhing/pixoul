@@ -34,8 +34,8 @@ public class GameLogic {
 
 	public static void gameUpdate(DispatchAction action) {
 		Player player = GameController.getPlayer();
-		if(InterruptController.isImmobilize()&&action!=DispatchAction.STAY_STILL) {
-			//TODO add message
+		if (InterruptController.isImmobilize() && action != DispatchAction.STAY_STILL) {
+			// TODO add message
 			return;
 		}
 		switch (action) {
@@ -59,6 +59,7 @@ public class GameLogic {
 			break;
 		}
 	}
+
 	public static void postMoveUpdate() {
 		GameMap thisGameMap = GameController.getGameMap();
 		Player player = GameController.getPlayer();
@@ -130,9 +131,9 @@ public class GameLogic {
 			}
 			break;
 		case DELETE_ITEM:
-			if(item == GameController.getPlayer().getEquippedArmor()) {
+			if (item == GameController.getPlayer().getEquippedArmor()) {
 				GameController.getPlayer().setEquippedArmor(null);
-			} else if(item == GameController.getPlayer().getEquippedWeapon()) {
+			} else if (item == GameController.getPlayer().getEquippedWeapon()) {
 				GameController.getPlayer().setEquippedWeapon(null);
 			}
 			GameController.getPlayer().getItemList().remove(item);
@@ -160,6 +161,7 @@ public class GameLogic {
 	}
 
 	public static void postGameUpdate() {
+		InterruptController.setStillAnimation(true);
 		Player player = GameController.getPlayer();
 		monsterUpdate();
 		potionUpdate();

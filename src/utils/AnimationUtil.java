@@ -1,6 +1,7 @@
 package utils;
 
 import controller.GameController;
+import controller.InterruptController;
 import entity.Player;
 import entity.base.Monster;
 import javafx.application.Platform;
@@ -10,6 +11,7 @@ import logic.GameLogic;
 public class AnimationUtil {
 
 	public static void playerMove(int direction) {
+		InterruptController.setStillAnimation(true);
 		final int step = GameConfig.getScale();
 		int stepX = 0;
 		int stepY = 0;
@@ -39,14 +41,16 @@ public class AnimationUtil {
 	}
 
 	public static void postGame() {
-
 		boolean isMove = false;
+		
 		for (Monster monster : GameController.getGameMap().getMonsterList())
 			if (monster.isMoving())
 				isMove = true;
+		
 		boolean finalIsMove = isMove;
 		if (!isMove || GameConfig.isSkipMoveAnimation())
 			GameController.getGameMap().drawMap();
+		
 		Thread monsterMove = new Thread() {
 			public void run() {
 				if (finalIsMove && !GameConfig.isSkipMoveAnimation()) {
@@ -74,9 +78,24 @@ public class AnimationUtil {
 						GameController.getGameMap().drawMap();
 					});
 				}
-
 			}
 		};
+		
+		new Thread() {
+			@Override
+			public void run() {
+				try {
+					monsterMove.join();
+					playerAttacked.join();
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				InterruptController.setStillAnimation(false);
+			}
+		}.start();
+		
 		monsterMove.start();
 		playerAttacked.start();
 	}
