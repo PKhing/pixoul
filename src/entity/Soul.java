@@ -44,6 +44,7 @@ public class Soul extends Monster implements Attackable {
 			return true;
 		MessageTextUtil.textWhenAttack(this, target, target.getHealth() - 1);
 		target.setHealth(1);
+		target.setAttacked(true);
 		return true;
 	}
 
