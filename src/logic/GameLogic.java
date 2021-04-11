@@ -53,6 +53,8 @@ public class GameLogic {
 			moveSuccess = player.move(Direction.RIGHT);
 			break;
 		case STAY_STILL:
+			postGameUpdate();
+			postMoveUpdate();
 			break;
 		default:
 			moveSuccess = false;

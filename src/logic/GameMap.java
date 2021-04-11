@@ -99,30 +99,6 @@ public class GameMap {
 
 		ArrayList<Pair<Integer, Integer>> allVisibleField = GameController.getPlayer().getAllVisibleField(startIdxY,
 				endIdxY, startIdxX, endIdxX);
-		//
-		// allVisibleField.sort(Comparator.comparing(Pair<Integer,
-		// Integer>::getKey).thenComparingInt(Pair::getValue));
-		//
-		// for (Pair<Integer, Integer> pos : allVisibleField) {
-		// int posX = pos.getValue();
-		// int posY = pos.getKey();
-		//
-		// int writeX = newSpriteSize * posX - startX;
-		// int writeY = newSpriteSize * posY - startY;
-		//
-		// Cell nowCell = gameMap.get(posY, posX);
-		//
-		// DrawUtil.drawCell(writeY, writeX, nowCell);
-		// DrawUtil.drawLadder(writeY, writeX, nowCell);
-		// if (nowCell.getItem() != null) {
-		// DrawUtil.drawItemOnCell(writeY, writeX, nowCell.getItem());
-		// }
-		//
-		// if (nowCell.getEntity() != null)
-		// DrawUtil.drawEntity(writeY, writeX, nowCell.getEntity());
-		// if (nowCell.getEntity() instanceof Monster)
-		// DrawUtil.addEntityButton(writeY, writeX, nowCell.getEntity());
-		// }
 
 		ArrayList<Pair<Integer, Integer>> posList = new ArrayList<>();
 
@@ -132,7 +108,7 @@ public class GameMap {
 			}
 		}
 
-		PriorityQueue<Node> pq = buildPrioritizeNode(allVisibleField, newSpriteSize, startY, startX, cnt);
+		PriorityQueue<Node> pq = buildPrioritizeNode(posList, newSpriteSize, startY, startX, cnt);
 
 		while (!pq.isEmpty()) {
 			Node node = pq.poll();

@@ -23,7 +23,7 @@ public class GameController {
 	private static MediaPlayer bgmMedia = GameAudioUtils.GameSceneBGM;
 	private static int level;
 	private static Player player;
-	
+
 	static {
 		setPlayer(new Player());
 	}
@@ -42,57 +42,37 @@ public class GameController {
 	}
 
 	public static boolean descending() {
-		FadeTransition fadeOut = makeFadingScene(GameScene.getGamePane(), 1.0, 0.0);
-		
 		level += 1;
-		gameMap.get(player.getPosY(), player.getPosX()).setEntity(null);
 		GameMap newMap = null;
-		
+
 		try {
 			newMap = getFloor(level);
 		} catch (InvalidFloorException e) {
 			newMap = addNewFloor();
 		}
-		
+
+		FadeTransition fadeOut = makeFadingScene(GameScene.getGamePane(), 1.0, 0.0, newMap, false);
+
 		fadeOut.play();
-		
-		setGameMap(newMap);
 		InterruptController.setTransition(true);
-		
-		int posX = gameMap.getRoomList().get(0).getValue();
-		int posY = gameMap.getRoomList().get(0).getKey();
-		
-		player.setInitialPos(posY, posX);
-		gameMap.get(posY, posX).setEntity(player);
-		
+
 		return true;
 	}
 
 	public static boolean ascending() {
-		FadeTransition fadeOut = makeFadingScene(GameScene.getGamePane(), 1.0, 0.0);
-		
 		try {
 			GameMap newMap = getFloor(level - 1);
-			
-			gameMap.get(player.getPosY(), player.getPosX()).setEntity(null);
-			
+
+			FadeTransition fadeOut = makeFadingScene(GameScene.getGamePane(), 1.0, 0.0, newMap, true);
+
 			fadeOut.play();
 			InterruptController.setTransition(true);
-			setGameMap(newMap);
 		} catch (InvalidFloorException e) {
 			return false;
 		}
 
 		level -= 1;
 
-		List<Pair<Integer, Integer>> roomList = gameMap.getRoomList();
-		
-		int posX = roomList.get(roomList.size() - 1).getValue();
-		int posY = roomList.get(roomList.size() - 1).getKey();
-		
-		player.setInitialPos(posY, posX);
-		gameMap.get(posY, posX).setEntity(player);
-		
 		return true;
 	}
 
@@ -151,29 +131,49 @@ public class GameController {
 	public static void setPlayer(Player newPlayer) {
 		player = newPlayer;
 	}
-	
+
 	public static int getLevel() {
 		return level;
 	}
-	
-	private static FadeTransition makeFadingScene(Node node, double from, double to) {
-		
-		
+
+	private static FadeTransition makeFadingScene(Node node, double from, double to, GameMap newMap, boolean isAscending) {
+		// Fade in, Fade out setup
 		FadeTransition fadeIn = new FadeTransition(Duration.seconds(1.0), node);
 		FadeTransition fadeOut = new FadeTransition(Duration.seconds(1.0), node);
-		
+
 		fadeOut.setFromValue(from);
 		fadeOut.setToValue(to);
-		
+
 		fadeIn.setFromValue(to);
 		fadeIn.setToValue(from);
-		
+
+		// Fade out when finished
 		fadeOut.setOnFinished((event) -> {
+			gameMap.get(player.getPosY(), player.getPosX()).setEntity(null);
+			
+			setGameMap(newMap);
+			List<Pair<Integer, Integer>> roomList = newMap.getRoomList();
+
+			int idxPos = 0;
+			
+			if(isAscending) {
+				idxPos = roomList.size() - 1;
+			}
+			
+			int posX = roomList.get(idxPos).getValue();
+			int posY = roomList.get(idxPos).getKey();
+
+			player.setInitialPos(posY, posX);
+			newMap.get(posY, posX).setEntity(player);
+			newMap.drawMap();
 			fadeIn.play();
-			gameMap.drawMap();
+		});
+
+		// Fade in when finished
+		fadeIn.setOnFinished((event) -> {
 			InterruptController.setTransition(false);
 		});
-		
+
 		return fadeOut;
 	}
 }
