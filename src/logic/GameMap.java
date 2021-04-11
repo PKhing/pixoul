@@ -108,7 +108,7 @@ public class GameMap {
 			}
 		}
 
-		PriorityQueue<Node> pq = buildPrioritizeNode(posList, newSpriteSize, startY, startX, cnt);
+		PriorityQueue<Node> pq = buildPrioritizeNode(allVisibleField, newSpriteSize, startY, startX, cnt);
 
 		while (!pq.isEmpty()) {
 			Node node = pq.poll();
