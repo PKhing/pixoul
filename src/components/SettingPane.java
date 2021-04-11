@@ -3,8 +3,11 @@ package components;
 import controller.InterruptController;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.Event;
+import javafx.event.EventType;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.input.KeyCode;
@@ -28,19 +31,21 @@ public class SettingPane extends VBox {
 		super();
 		
 		setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
-		this.setPadding(new Insets(20));
+		setPadding(new Insets(30));
+		setSpacing(10);
 
-		this.setAlignment(Pos.CENTER);
+		setAlignment(Pos.CENTER);
 		setPrefHeight(heightBox * GameConfig.getScale());
 		setPrefWidth(widthBox * GameConfig.getScale());
 		setMaxHeight(heightBox * GameConfig.getScale());
 		setMaxWidth(widthBox * GameConfig.getScale());
 		
 		addTitle();
-		this.addVolumeSlider();
-		this.addCloseText();
+		addVolumeSlider();
+		addDisableAnimation();
+		addCloseText();
 		
-		this.setOnKeyPressed((event) -> {
+		setOnKeyPressed((event) -> {
 			if(event.getCode() == KeyCode.ESCAPE) {
 				((Pane) this.getParent()).getChildren().remove(this);
 			}
@@ -55,7 +60,7 @@ public class SettingPane extends VBox {
 		closeBox.setAlignment(Pos.CENTER);
 		
 		Text closeText = new Text("OK");
-		closeText.setFont(FontUtil.getFont(12));
+		closeText.setFont(FontUtil.getFont(18));
 		closeText.setFill(Color.WHITE);
 		
 		closeText.setOnMouseClicked((event) -> {
@@ -85,8 +90,8 @@ public class SettingPane extends VBox {
 		HBox bgmVolumeBox = new HBox();
 		bgmVolumeBox.setPadding(new Insets(10));
 		bgmVolumeBox.setSpacing(10);
-		bgmVolumeBox.setAlignment(Pos.CENTER);
-
+		bgmVolumeBox.setAlignment(Pos.CENTER_LEFT);
+		
 		Label volumeLabel = new Label("BGM Volume");
 		volumeLabel.setFont(FontUtil.getFont(12));
 		volumeLabel.setTextFill(Color.WHITE);
@@ -104,5 +109,29 @@ public class SettingPane extends VBox {
 		
 		bgmVolumeBox.getChildren().addAll(volumeLabel, volumeSlider);
 		this.getChildren().add(bgmVolumeBox);
+	}
+	
+	private void addDisableAnimation() {
+		HBox disableAnimationBox = new HBox();
+		disableAnimationBox.setPadding(new Insets(10));
+		disableAnimationBox.setSpacing(7);
+		disableAnimationBox.setAlignment(Pos.CENTER_LEFT);
+		
+		Label disableLabel = new Label("Disable Animation ");
+		disableLabel.setFont(FontUtil.getFont(12));
+		disableLabel.setTextFill(Color.WHITE);
+		
+		CheckBox checkBox = new CheckBox();
+		checkBox.setSelected(GameConfig.isSkipMoveAnimation()); 
+		
+		checkBox.setOnMouseClicked((event) -> {
+			boolean newSkipMove = !GameConfig.isSkipMoveAnimation();
+			
+			GameConfig.setSkipMoveAnimation(newSkipMove);
+			checkBox.setSelected(newSkipMove);
+		});
+		
+		disableAnimationBox.getChildren().addAll(disableLabel, checkBox);
+		this.getChildren().add(disableAnimationBox);
 	}
 }
