@@ -12,6 +12,9 @@ public class Immobilize extends EntityEffect {
 
 	@Override
 	public void onAdd(Entity entity) {
+		if(isDuplicate(entity)) {
+			return;
+		}
 		InterruptController.setImmobilize(true);
 		addEffect(entity);
 	}
