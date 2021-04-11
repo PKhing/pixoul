@@ -2,6 +2,7 @@ package entity;
 
 import controller.GameController;
 import controller.InterruptController;
+import effects.Immobilize;
 import entity.base.Attackable;
 import entity.base.Entity;
 import entity.base.Monster;
@@ -47,11 +48,7 @@ public class Reaper extends Monster implements Attackable, Moveable {
 
 	@Override
 	public boolean attack(Entity target) {
-
-		if (!InterruptController.isImmobilize()) {
-			// TODO add message
-			InterruptController.setImmobilize(true);
-		}
+		new Immobilize(getName(), 1, 1, false).onAdd(target);
 		int atkValue = GameLogic.calculateAttackValue(this, target);
 		MessageTextUtil.textWhenAttack(this, target, atkValue);
 		target.setHealth(target.getHealth() - atkValue);
