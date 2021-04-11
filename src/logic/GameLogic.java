@@ -114,9 +114,9 @@ public class GameLogic {
 		int diffY = Math.abs(player.getPosY() - monster.getPosY());
 
 		if (diffX <= 1 && diffY <= 1) {
+			InterruptController.setStillAnimation(true);
 			player.attack(monster);
 			AnimationUtil.monsterAttacked(monster);
-
 		}
 	}
 
