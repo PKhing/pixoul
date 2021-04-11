@@ -8,4 +8,5 @@ public class EffectName {
 	public static final String POISON = "Poison";
 	public static final String VISION = "Vision";
 	public static final String BLINDNESS = "Blindness";
+	public static final String IMMOBILIZED = "Immobilize";
 }

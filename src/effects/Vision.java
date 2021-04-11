@@ -22,11 +22,10 @@ public class Vision extends EntityEffect {
 	@Override
 	public void onWearOff(Entity entity) {
 		if(entity instanceof Player) {
-			entity.getEffectList().add(this);
 			int newLineOfSight = ((Player) entity).getLineOfSight() - getValue();
 			((Player) entity).setLineOfSight(newLineOfSight);
 		}
-		remove(entity);
+		removeEffect(entity);
 	}
 
 	@Override

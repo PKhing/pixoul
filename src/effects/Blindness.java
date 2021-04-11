@@ -13,7 +13,7 @@ public class Blindness extends EntityEffect {
 	@Override
 	public void onAdd(Entity entity) {
 		if(entity instanceof Player) {
-			entity.getEffectList().add(this);
+			addEffect(entity);
 			int newLineOfSight = ((Player) entity).getLineOfSight() - getValue();
 			((Player) entity).setLineOfSight(newLineOfSight);
 		}
@@ -22,11 +22,10 @@ public class Blindness extends EntityEffect {
 	@Override
 	public void onWearOff(Entity entity) {
 		if(entity instanceof Player) {
-			entity.getEffectList().add(this);
 			int newLineOfSight = ((Player) entity).getLineOfSight() + getValue();
 			((Player) entity).setLineOfSight(newLineOfSight);
 		}
-		remove(entity);
+		removeEffect(entity);
 	}
 	
 	@Override
