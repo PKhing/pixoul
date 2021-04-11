@@ -8,6 +8,7 @@ import components.PausePane;
 import controller.GameController;
 import controller.InterruptController;
 import effects.Blindness;
+import entity.DarkMage;
 import entity.HauntedMaid;
 import entity.PumpkinHead;
 import entity.Reaper;
@@ -259,6 +260,7 @@ public class GameScene {
 
 		HauntedMaid hauntedMaid= new HauntedMaid(5, 10, 1, firstRoomPos.getKey() - 2, firstRoomPos.getValue() + 3,
 				Direction.DOWN, 1.25, 0, 1);
+		DarkMage darkMage = new DarkMage(10, 1,firstRoomPos.getKey() - 3, firstRoomPos.getValue() + 2, Direction.DOWN);
 		Potion maxHealthPotion = new InstantHealPotion("Bitset Potion", "Extends for 1 bit shift",
 				GameController.getPlayer().getHealth(), true);
 		Potion currentPotion = new RegenerationPotion("Salty Potion", "With 100 years salt effect", 10, 100);
@@ -279,6 +281,7 @@ public class GameScene {
 		GameController.getGameMap().getMonsterList().add(soul);
 		GameController.getGameMap().getMonsterList().add(pumpkinHead);
 		GameController.getGameMap().getMonsterList().add(hauntedMaid);
+		GameController.getGameMap().getMonsterList().add(darkMage);
 	}
 
 }

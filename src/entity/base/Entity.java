@@ -5,8 +5,6 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import controller.GameController;
 import effects.EntityEffect;
-import entity.Player;
-import logic.Renderable;
 import utils.MessageTextUtil;
 
 public abstract class Entity {
