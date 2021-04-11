@@ -134,7 +134,8 @@ public class DrawUtil {
 		}
 	}
 
-	public static void drawEntity(int y, int x, Entity entity) {
+	public static void drawEntity(int y, int x, Entity entity,int cnt) {
+		
 		if (entity == null)
 			return;
 		GraphicsContext gc = GameScene.getGraphicsContext();
@@ -145,8 +146,12 @@ public class DrawUtil {
 			direction = 2;
 		if (entity.getDirection() == Direction.UP)
 			direction = 3;
-
-		WritableImage img = new WritableImage(entitySprites, (96 * entity.getSymbol()) + 32 * 1, direction * 32, 32,
+		int walkIndex=(cnt/8+1)%4;
+		if(walkIndex==3)walkIndex = 1;
+		if(!entity.isMoving()){
+			walkIndex = 1;
+		}
+		WritableImage img = new WritableImage(entitySprites, (96 * entity.getSymbol()) + 32 * walkIndex, direction * 32, 32,
 				32);
 		// Fix later?
 		img = scaleUp(img, GameConfig.getScale());
