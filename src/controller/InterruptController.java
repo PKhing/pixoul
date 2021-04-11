@@ -6,14 +6,14 @@ public class InterruptController {
 	private static boolean isSettingOpen;
 	private static boolean isOpenFromInside;
 	private static boolean isTransition;
-	private static boolean isBinding;
+	private static boolean isImmobilize;
 	
 	public static void resetInterruptState() {
 		isPauseOpen = false;
 		isInventoryOpen = false;
 		isSettingOpen = false;
 		isTransition = false;
-		setBinding(false);
+		isImmobilize = false;
 	}
 	
 	public static boolean isInterruptPlayerInput() {
@@ -60,12 +60,12 @@ public class InterruptController {
 		InterruptController.isTransition = isTransition;
 	}
 
-	public static boolean isBinding() {
-		return isBinding;
+	public static boolean isImmobilize() {
+		return isImmobilize;
 	}
 
-	public static void setBinding(boolean isBinding) {
-		InterruptController.isBinding = isBinding;
+	public static void setImmobilize(boolean isImmobilize) {
+		InterruptController.isImmobilize = isImmobilize;
 	}
 
 }

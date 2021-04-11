@@ -12,13 +12,13 @@ public class Immobilize extends EntityEffect {
 
 	@Override
 	public void onAdd(Entity entity) {
-		InterruptController.setBinding(true);
+		InterruptController.setImmobilize(true);
 		addEffect(entity);
 	}
 	
 	@Override
 	public void onWearOff(Entity entity) {
-		InterruptController.setBinding(false);
+		InterruptController.setImmobilize(false);
 		removeEffect(entity);
 	}
 
