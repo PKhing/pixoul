@@ -19,6 +19,14 @@ import utils.MessageTextUtil;
 import utils.RandomUtil;
 
 public class GameLogic {
+	private static Runnable nextAction = null;
+
+	public static void doNextAction() {
+		if (nextAction != null) {
+			nextAction.run();
+		}
+		nextAction = null;
+	}
 
 	public static int calculateAttackValue(Entity from, Entity target) {
 		int lowerBound = (int) (from.getAttack() / from.getCritRate());
@@ -34,6 +42,14 @@ public class GameLogic {
 
 	public static void gameUpdate(DispatchAction action) {
 		Player player = GameController.getPlayer();
+		if (InterruptController.isStillAnimation()) {
+			nextAction = new Runnable() {
+				public void run() {
+					gameUpdate(action);
+				}
+			};
+			return ;
+		}
 		if (InterruptController.isImmobilize() && action != DispatchAction.STAY_STILL) {
 			// TODO add message
 			return;
@@ -84,6 +100,14 @@ public class GameLogic {
 	}
 
 	public static void gameUpdate(DispatchAction action, Monster monster) {
+		if (InterruptController.isStillAnimation()) {
+			nextAction = new Runnable() {
+				public void run() {
+					gameUpdate(action, monster);
+				}
+			};
+			return;
+		}
 		Player player = GameController.getPlayer();
 		int diffX = Math.abs(player.getPosX() - monster.getPosX());
 		int diffY = Math.abs(player.getPosY() - monster.getPosY());

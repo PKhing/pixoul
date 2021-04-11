@@ -96,6 +96,7 @@ public class AnimationUtil {
 				}
 				
 				InterruptController.setStillAnimation(false);
+				GameLogic.doNextAction();
 			}
 		}.start();
 		
