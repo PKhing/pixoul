@@ -42,8 +42,12 @@ public class Soul extends Monster implements Attackable {
 	public boolean attack(Entity target) {
 		if (isFriendly())
 			return true;
-		MessageTextUtil.textWhenAttack(this, target, target.getHealth() - 1);
-		target.setHealth(1);
+		if(target.getHealth() > 0) {
+			MessageTextUtil.textWhenAttack(this, target, target.getHealth() - 1);
+			target.setHealth(1);	
+		} else {
+			MessageTextUtil.textWhenAttack(this, target, 0);
+		}
 		target.setAttacked(true);
 		return true;
 	}
