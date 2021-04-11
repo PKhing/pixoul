@@ -64,7 +64,7 @@ public abstract class Entity {
 	}
 
 	public void setHealth(int health) {
-		this.health = health;
+		this.health = Math.max(0, health);
 	}
 
 	public int getAttack() {
@@ -72,7 +72,7 @@ public abstract class Entity {
 	}
 
 	public void setAttack(int attack) {
-		this.attack = attack;
+		this.attack = Math.max(1, attack);
 	}
 
 	public int getDefense() {
@@ -136,7 +136,7 @@ public abstract class Entity {
 	}
 
 	public void setMaxHealth(int maxHealth) {
-		this.maxHealth = maxHealth;
+		this.maxHealth = Math.max(1, maxHealth);
 	}
 
 	public String getName() {
