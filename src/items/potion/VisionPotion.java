@@ -20,7 +20,7 @@ public class VisionPotion extends Potion {
 
 	@Override
 	public int getSymbol() {
-		return Sprites.STRENGTH_POTION;
+		return Sprites.VISION_POTION;
 	}
 
 	public int getVision() {
