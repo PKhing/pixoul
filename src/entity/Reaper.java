@@ -54,6 +54,7 @@ public class Reaper extends Monster implements Attackable, Moveable {
 			if (newX - this.getPosX() == 1) {
 				this.move(Direction.RIGHT);
 			}
+			this.setMoving(true);
 		}
 	}
 
@@ -67,6 +68,7 @@ public class Reaper extends Monster implements Attackable, Moveable {
 		int atkValue = GameLogic.calculateAttackValue(this, target);
 		MessageTextUtil.textWhenAttack(this, target, atkValue);
 		target.setHealth(target.getHealth() - atkValue);
+		target.setAttacked(true);
 		return true;
 	}
 
