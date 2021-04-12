@@ -32,8 +32,9 @@ public class InventoryPane extends AnchorPane {
 	private FlowPane itemPane;
 	private VBox equipmentPane;
 	private boolean isDeleteMode = false;
-	private static WritableImage itemFrame = new WritableImage(
-			DrawUtil.getImagePixelReader("sprites/inventory/item.png"), 0, 0, 40, 40);
+	private static WritableImage itemFrameSprite = DrawUtil.getWritableImage("sprites/inventory/itemFrame.png");
+	private static WritableImage headerBackground = DrawUtil.getWritableImage("sprites/inventory/header.png");
+	private static WritableImage binSprite = DrawUtil.getWritableImage("sprites/inventory/bin.png");
 
 	public InventoryPane() {
 
@@ -90,7 +91,7 @@ public class InventoryPane extends AnchorPane {
 
 		// Draw item frame
 		Canvas canvas = new Canvas(40 * GameConfig.getScale(), 40 * GameConfig.getScale());
-		canvas.getGraphicsContext2D().drawImage(DrawUtil.scaleUp(itemFrame, GameConfig.getScale()), 0, 0);
+		canvas.getGraphicsContext2D().drawImage(DrawUtil.scaleUp(itemFrameSprite, GameConfig.getScale()), 0, 0);
 		parent.getChildren().add(canvas);
 
 		if (item == null) {
@@ -154,9 +155,7 @@ public class InventoryPane extends AnchorPane {
 		// Texture
 		Canvas canvas = new Canvas(160 * GameConfig.getScale(), 40 * GameConfig.getScale());
 		header.getChildren().add(canvas);
-		PixelReader headerSprite = DrawUtil.getImagePixelReader("sprites/inventory/header.png");
-		WritableImage img = new WritableImage(headerSprite, 0, 0, 160, 40);
-		canvas.getGraphicsContext2D().drawImage(DrawUtil.scaleUp(img, GameConfig.getScale()), 0, 0);
+		canvas.getGraphicsContext2D().drawImage(DrawUtil.scaleUp(headerBackground, GameConfig.getScale()), 0, 0);
 
 		// Text
 		Text text = new Text("Inventory");
@@ -188,14 +187,13 @@ public class InventoryPane extends AnchorPane {
 		AnchorPane.setTopAnchor(deleteButton, (double) (GameConfig.getScreenHeight() / 2 + 30 * GameConfig.getScale()));
 
 		// Set image
-		WritableImage binImg = new WritableImage(DrawUtil.getImagePixelReader("sprites/bin.png"), 0, 0, 32, 32);
-		deleteButton.getGraphicsContext2D().drawImage(DrawUtil.scaleUp(binImg, GameConfig.getScale()), 0, 0);
+		deleteButton.getGraphicsContext2D().drawImage(DrawUtil.scaleUp(binSprite, GameConfig.getScale()), 0, 0);
 
 		// Add event listener
 		deleteButton.setOnMouseClicked((event) -> {
 			isDeleteMode = !isDeleteMode;
 			if (isDeleteMode == true) {
-				GameScene.getScene().setCursor(new ImageCursor(binImg));
+				GameScene.getScene().setCursor(new ImageCursor(binSprite));
 			} else {
 				GameScene.getScene().setCursor(Cursor.DEFAULT);
 			}

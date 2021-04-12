@@ -16,8 +16,7 @@ import utils.GameConfig;
 public class StatusPane extends VBox {
 	private Text hp, attack, defense;
 
-	private static WritableImage background = new WritableImage(DrawUtil.getImagePixelReader("sprites/statusPane.png"),
-			0, 0, 75, 48);
+	private static WritableImage background = DrawUtil.getWritableImage("sprites/statusPane.png");
 
 	public StatusPane() {
 

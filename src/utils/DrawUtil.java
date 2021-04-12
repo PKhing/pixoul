@@ -72,8 +72,18 @@ public class DrawUtil {
 		return newImg;
 	}
 
+	private static Image getImage(String filePath) {
+		return new Image(ClassLoader.getSystemResource(filePath).toString());
+	}
+
 	public static PixelReader getImagePixelReader(String filePath) {
 		return getImage(filePath).getPixelReader();
+	}
+
+	public static WritableImage getWritableImage(String filePath) {
+		Image img = getImage(filePath);
+		PixelReader pixelReader = getImagePixelReader(filePath);
+		return new WritableImage(pixelReader, 0, 0, (int) img.getWidth(), (int) img.getHeight());
 	}
 
 	public static void drawBackpack(GraphicsContext gc) {
@@ -147,8 +157,8 @@ public class DrawUtil {
 		if (!entity.isMoving()) {
 			walkIndex = 1;
 		}
-		WritableImage img = new WritableImage(entitySprites, (96 * entity.getSymbol()) + 32 * walkIndex, directionIndex * 32,
-				32, 32);
+		WritableImage img = new WritableImage(entitySprites, (96 * entity.getSymbol()) + 32 * walkIndex,
+				directionIndex * 32, 32, 32);
 		// Fix later?
 		img = scaleUp(img, GameConfig.getScale());
 		if (entity.isAttacked())
@@ -252,7 +262,4 @@ public class DrawUtil {
 		return index;
 	}
 
-	private static Image getImage(String filePath) {
-		return new Image(ClassLoader.getSystemResource(filePath).toString());
-	}
 }
