@@ -22,7 +22,8 @@ public class GameLogic {
 	private static Runnable nextAction = null;
 
 	public static void doNextAction() {
-		if(InterruptController.isInterruptPlayerInput())return;
+		if (InterruptController.isInterruptPlayerInput())
+			return;
 		if (nextAction != null) {
 			nextAction.run();
 		}
@@ -45,14 +46,15 @@ public class GameLogic {
 		Player player = GameController.getPlayer();
 		if (InterruptController.isStillAnimation()) {
 			nextAction = new Runnable() {
+				@Override
 				public void run() {
 					gameUpdate(action);
 				}
 			};
-			return ;
+			return;
 		}
 		if (InterruptController.isImmobilize() && action != DispatchAction.STAY_STILL) {
-			// TODO add message
+			MessageTextUtil.textWhenImmobilized();
 			return;
 		}
 		switch (action) {
@@ -103,6 +105,7 @@ public class GameLogic {
 	public static void gameUpdate(DispatchAction action, Monster monster) {
 		if (InterruptController.isStillAnimation()) {
 			nextAction = new Runnable() {
+				@Override
 				public void run() {
 					gameUpdate(action, monster);
 				}
