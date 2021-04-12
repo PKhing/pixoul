@@ -1,9 +1,12 @@
 package controller;
 
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import scene.GameScene;
 import scene.LandingScene;
+import utils.GameConfig;
 
 public class SceneController {
 	private static Stage mainStage;
@@ -32,5 +35,10 @@ public class SceneController {
 
 	public static void exitGame() {
 		System.exit(0);
+	}
+	
+	public static Scene makeNewScene(Parent node) {
+		Scene scene = new Scene(node, GameConfig.getScreenWidth(), GameConfig.getScreenHeight());
+		return scene;
 	}
 }

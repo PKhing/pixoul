@@ -2,6 +2,7 @@ package scene;
 
 import components.SettingPane;
 import controller.GameController;
+import controller.SceneController;
 import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -22,7 +23,6 @@ import javafx.scene.text.Text;
 import javafx.util.Duration;
 import utils.FontUtil;
 import utils.GameAudioUtils;
-import utils.GameConfig;
 
 public class LandingScene {
 	private static Scene cachedScene = null;
@@ -67,54 +67,32 @@ public class LandingScene {
 
 		// Start Button
 		Button startBtn = new Button("Start");
-		fading.setOnFinished(new EventHandler<ActionEvent>() {
-
-			@Override
-			public void handle(ActionEvent arg0) {
-				bgm.stop();
-				bgm.seek(Duration.ZERO);
-				GameController.start();
-				box.setOpacity(1.0);
-			}
+		fading.setOnFinished((event) -> {
+			bgm.stop();
+			bgm.seek(Duration.ZERO);
+//			SceneController.setSceneToStage(GameOverScene.getScene());
+			GameController.start();
+			box.setOpacity(1.0);
 		});
 
-		startBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
-
-			@Override
-			public void handle(MouseEvent arg0) {
-				fading.play();
-			}
-
-		});
+		startBtn.setOnMouseClicked((event) -> fading.play());
 
 		// Exit button
 		Button optionBtn = new Button("Option");
-		optionBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
-
-			@Override
-			public void handle(MouseEvent arg0) {
-				SettingPane settingPane = new SettingPane();
-				root.getChildren().add(settingPane);
-				settingPane.requestFocus();
-			};
-
+		optionBtn.setOnMouseClicked((event) -> {
+			SettingPane settingPane = new SettingPane();
+			root.getChildren().add(settingPane);
+			settingPane.requestFocus();
 		});
 
 		Button exitBtn = new Button("Exit");
-		exitBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
-
-			@Override
-			public void handle(MouseEvent arg0) {
-				System.exit(0);
-			};
-
-		});
+		exitBtn.setOnMouseClicked((event) -> SceneController.exitGame());
 
 		box.getChildren().addAll(startBtn, optionBtn, exitBtn);
 
 		root.getChildren().add(box);
 
-		Scene scene = new Scene(root, GameConfig.getScreenWidth(), GameConfig.getScreenHeight());
+		Scene scene = SceneController.makeNewScene(root);
 		cachedScene = scene;
 
 		return scene;
