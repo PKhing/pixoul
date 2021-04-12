@@ -17,7 +17,6 @@ public class MessagePane extends VBox {
 		this.setPrefHeight(50.0 * GameConfig.getScale());
 		this.setPrefWidth(140.0 * GameConfig.getScale());
 		this.setStyle("-fx-background-color: rgba(0,0,0, 0.5);-fx-padding:7 7 7 14");
-
 	}
 
 	public void addMessage(String text) {
@@ -25,11 +24,12 @@ public class MessagePane extends VBox {
 			this.getChildren().remove(0);
 		}
 		Text message = new Text(text);
+		message.setWrappingWidth(200.0 * GameConfig.getScale());
 		message.setFont(FontUtil.getFont(12));
 		message.setFill(Color.WHITE);
 		this.getChildren().add(message);
 	}
-	
+
 	public void resetMessage() {
 		this.getChildren().clear();
 	}
