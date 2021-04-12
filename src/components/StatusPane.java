@@ -34,7 +34,7 @@ public class StatusPane extends StackPane {
 				10 * GameConfig.getScale(), 15 * GameConfig.getScale()));
 
 		Player nowPlayer = GameController.getPlayer();
-		
+
 		hp = new Text("HP: " + nowPlayer.getHealth() + " / " + nowPlayer.getMaxHealth());
 		hp.setFont(FontUtil.getFont(12));
 		statusBox.getChildren().add(hp);
@@ -53,7 +53,7 @@ public class StatusPane extends StackPane {
 		WritableImage img = new WritableImage(texture, 0, 0, 75, 48);
 		gc.drawImage(DrawUtil.scaleUp(img, GameConfig.getScale()), 0, 0);
 	}
-	
+
 	public void setAllValue(Player player) {
 		this.setHP(player.getHealth(), player.getMaxHealth());
 		this.setAttack(player.getAttack());

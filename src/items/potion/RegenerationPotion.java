@@ -8,7 +8,7 @@ import logic.Sprites;
 public class RegenerationPotion extends Potion {
 
 	private int healValue;
-	
+
 	public RegenerationPotion(String name, String description, int healValue, int duration) {
 		super(name, description, duration, false);
 		setHealValue(healValue);
@@ -22,7 +22,8 @@ public class RegenerationPotion extends Potion {
 
 	@Override
 	public void onEquip(Player player) {
-		new Regeneration(getName(), getHealValue(), getDuration(), isPermanant()).onAdd(player);;
+		new Regeneration(getName(), getHealValue(), getDuration(), isPermanant()).onAdd(player);
+		;
 	}
 
 	public int getHealValue() {

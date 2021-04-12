@@ -55,6 +55,7 @@ public class GameMap {
 			this.priority = priority;
 		}
 
+		@Override
 		public int compareTo(Node node) {
 			if (this.priority == node.priority) {
 				if (this.y < node.y)
@@ -150,7 +151,6 @@ public class GameMap {
 			int shiftX = 0;
 			int shiftY = 0;
 
-			
 			if (entity != null && entity.isMoving()) {
 				if (entity.getDirection() == Direction.UP)
 					shiftY = cnt * GameConfig.getScale();
@@ -201,7 +201,7 @@ public class GameMap {
 			// Draw entity
 			if (thisCell.getEntity() != null)
 				pq.add(new Node(posY, posX, 2, () -> {
-					DrawUtil.drawEntity(posY + finalShiftY, posX + finalShiftX, thisCell.getEntity(),cnt);
+					DrawUtil.drawEntity(posY + finalShiftY, posX + finalShiftX, thisCell.getEntity(), cnt);
 				}));
 
 			// Draw Monster HP Bar

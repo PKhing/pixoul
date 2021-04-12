@@ -5,7 +5,7 @@ import entity.Player;
 public abstract class Potion extends Item {
 	private int duration;
 	private boolean isPermanant;
-	
+
 	public Potion(String name, String description, int duration, boolean isPermanant) {
 		super(name, description);
 		setDuration(duration);
@@ -29,6 +29,7 @@ public abstract class Potion extends Item {
 	}
 
 	@Override
-	public void onUnequip(Player player) {}
-	
+	public void onUnequip(Player player) {
+	}
+
 }

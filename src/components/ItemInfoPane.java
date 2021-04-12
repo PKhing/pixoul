@@ -18,7 +18,7 @@ import utils.GameConfig;
 
 public class ItemInfoPane extends VBox {
 	public ItemInfoPane(Item item, int y, int x) {
-		
+
 		// Set anchor
 		if (x < GameConfig.getScreenWidth() / 2) {
 			AnchorPane.setLeftAnchor(this, (double) (x + 45 * GameConfig.getScale()));
@@ -26,13 +26,13 @@ public class ItemInfoPane extends VBox {
 			AnchorPane.setLeftAnchor(this, (double) (x - 105 * GameConfig.getScale()));
 		}
 		AnchorPane.setTopAnchor(this, (double) y);
-		
+
 		// Set style
-		this.setBackground(new Background(new BackgroundFill(Color.rgb(245, 246, 231),null,null)));
+		this.setBackground(new Background(new BackgroundFill(Color.rgb(245, 246, 231), null, null)));
 		this.setPadding(new Insets(0, 5 * GameConfig.getScale(), 5 * GameConfig.getScale(), 5 * GameConfig.getScale()));
-		this.setBorder(new Border(
-				new BorderStroke(Color.rgb(87, 89, 66), BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(GameConfig.getScale()))));
-		
+		this.setBorder(new Border(new BorderStroke(Color.rgb(87, 89, 66), BorderStrokeStyle.SOLID, CornerRadii.EMPTY,
+				new BorderWidths(GameConfig.getScale()))));
+
 		// Add name
 		Text name = new Text(item.getName());
 		name.setFont(FontUtil.getFont(18));

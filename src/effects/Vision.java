@@ -12,16 +12,16 @@ public class Vision extends EntityEffect {
 
 	@Override
 	public void onAdd(Entity entity) {
-		if(entity instanceof Player) {
+		if (entity instanceof Player) {
 			entity.getEffectList().add(this);
 			int newLineOfSight = ((Player) entity).getLineOfSight() + getValue();
 			((Player) entity).setLineOfSight(newLineOfSight);
 		}
 	}
-	
+
 	@Override
 	public void onWearOff(Entity entity) {
-		if(entity instanceof Player) {
+		if (entity instanceof Player) {
 			int newLineOfSight = ((Player) entity).getLineOfSight() - getValue();
 			((Player) entity).setLineOfSight(newLineOfSight);
 		}

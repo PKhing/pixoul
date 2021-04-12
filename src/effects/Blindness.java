@@ -12,22 +12,22 @@ public class Blindness extends EntityEffect {
 
 	@Override
 	public void onAdd(Entity entity) {
-		if(entity instanceof Player) {
+		if (entity instanceof Player) {
 			addEffect(entity);
 			int newLineOfSight = ((Player) entity).getLineOfSight() - getValue();
 			((Player) entity).setLineOfSight(newLineOfSight);
 		}
 	}
-	
+
 	@Override
 	public void onWearOff(Entity entity) {
-		if(entity instanceof Player) {
+		if (entity instanceof Player) {
 			int newLineOfSight = ((Player) entity).getLineOfSight() + getValue();
 			((Player) entity).setLineOfSight(newLineOfSight);
 		}
 		removeEffect(entity);
 	}
-	
+
 	@Override
 	public String getEffectName() {
 		return EffectName.BLINDNESS;

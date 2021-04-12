@@ -16,10 +16,10 @@ public class PausePane extends VBox {
 	private static SettingPane settingPane = new SettingPane();
 	private final int heightBox = 200;
 	private final int widthBox = 180;
-	
+
 	public PausePane() {
 		super();
-		
+
 		setSpacing(10.0);
 		setAlignment(Pos.CENTER);
 		setStyle("-fx-background-color: white");
@@ -27,30 +27,30 @@ public class PausePane extends VBox {
 		setPrefWidth(widthBox * GameConfig.getScale());
 		setMaxHeight(heightBox * GameConfig.getScale());
 		setMaxWidth(widthBox * GameConfig.getScale());
-		
+
 		addTitle();
 		addResumeBtn();
 		addSettingBtn();
 		addToMainMenuBtn();
 		addExitBtn();
-		
+
 		setOnKeyPressed((event) -> {
-			if(event.getCode() == KeyCode.ESCAPE) {
+			if (event.getCode() == KeyCode.ESCAPE) {
 				remove();
 				InterruptController.setOpenFromInside(true);
 			}
 		});
-		
+
 	}
 
 	private void addTitle() {
 		Text titleText = new Text("Paused");
-		
+
 		titleText.setFont(FontUtil.getFont(30));
-		
+
 		getChildren().add(titleText);
 	}
-	
+
 	private void addResumeBtn() {
 		Button resumeBtn = new Button("Resume");
 
@@ -72,7 +72,7 @@ public class PausePane extends VBox {
 
 		getChildren().add(settingBtn);
 	}
-	
+
 	private void addToMainMenuBtn() {
 		Button toMainMenuBtn = new Button("Back to main menu");
 
@@ -83,7 +83,7 @@ public class PausePane extends VBox {
 
 		getChildren().add(toMainMenuBtn);
 	}
-	
+
 	private void addExitBtn() {
 		Button exitBtn = new Button("Exit");
 
@@ -93,12 +93,12 @@ public class PausePane extends VBox {
 
 		getChildren().add(exitBtn);
 	}
-	
+
 	public void remove() {
 		try {
 			((StackPane) getParent()).getChildren().remove(this);
 			InterruptController.setPauseOpen(false);
-		} catch(ClassCastException e) {
+		} catch (ClassCastException e) {
 			System.out.println(this.getClass().getName() + " has already closed");
 		} catch (NullPointerException e) {
 			System.out.println(this.getClass().getName() + " has not opened yet.");

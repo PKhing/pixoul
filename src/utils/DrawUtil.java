@@ -126,7 +126,8 @@ public class DrawUtil {
 		int index = getIndexItemSymbol(item);
 		GraphicsContext gc = GameScene.getGraphicsContext();
 		if (item instanceof Potion) {
-			WritableImage img = new WritableImage(itemSprites, item.getSymbol() * 32, Sprites.SMALL_POTION * 32, 32, 32);
+			WritableImage img = new WritableImage(itemSprites, item.getSymbol() * 32, Sprites.SMALL_POTION * 32, 32,
+					32);
 			gc.drawImage(scaleUp(img, GameConfig.getScale()), x - 1, y);
 		} else {
 			WritableImage img = new WritableImage(itemSprites, item.getSymbol() * 32, index * 32, 32, 32);
@@ -134,8 +135,8 @@ public class DrawUtil {
 		}
 	}
 
-	public static void drawEntity(int y, int x, Entity entity,int cnt) {
-		
+	public static void drawEntity(int y, int x, Entity entity, int cnt) {
+
 		if (entity == null)
 			return;
 		GraphicsContext gc = GameScene.getGraphicsContext();
@@ -146,13 +147,14 @@ public class DrawUtil {
 			direction = 2;
 		if (entity.getDirection() == Direction.UP)
 			direction = 3;
-		int walkIndex=(cnt/8+1)%4;
-		if(walkIndex==3)walkIndex = 1;
-		if(!entity.isMoving()){
+		int walkIndex = (cnt / 8 + 1) % 4;
+		if (walkIndex == 3)
+			walkIndex = 1;
+		if (!entity.isMoving()) {
 			walkIndex = 1;
 		}
-		WritableImage img = new WritableImage(entitySprites, (96 * entity.getSymbol()) + 32 * walkIndex, direction * 32, 32,
-				32);
+		WritableImage img = new WritableImage(entitySprites, (96 * entity.getSymbol()) + 32 * walkIndex, direction * 32,
+				32, 32);
 		// Fix later?
 		img = scaleUp(img, GameConfig.getScale());
 		if (entity.isAttacked())
@@ -160,7 +162,7 @@ public class DrawUtil {
 		gc.drawImage(img, x, y /*- 4 * GameConfig.getScale()*/);
 
 		if (entity instanceof Monster)
-			drawHPBar(y, x, (Monster) entity);
+			drawHPBar(y, x, entity);
 	}
 
 	public static void drawHPBar(int y, int x, Entity entity) {
@@ -213,7 +215,7 @@ public class DrawUtil {
 		Canvas canvas = new Canvas(GameConfig.SPRITE_SIZE * GameConfig.getScale(),
 				GameConfig.SPRITE_SIZE * GameConfig.getScale());
 		canvas.setOnMouseClicked((event) -> {
-			if(!InterruptController.isInterruptPlayerInput()) {
+			if (!InterruptController.isInterruptPlayerInput()) {
 				GameLogic.gameUpdate(DispatchAction.ATTACK, (Monster) entity);
 			}
 		});

@@ -14,7 +14,7 @@ public class GameAudioUtils {
 		GameSceneBGM = getAudioLoop("bgm/BGMDungeon.mp3", GameConfig.getVolume());
 		LandingSceneBGM = getAudioLoop("bgm/BGMMainScene.mp3", GameConfig.getVolume());
 	}
-	
+
 	private static MediaPlayer getAudioLoop(String filePath, double volumes) {
 		URL resource = ClassLoader.getSystemResource(filePath);
 		MediaPlayer player = new MediaPlayer(new Media(resource.toString()));

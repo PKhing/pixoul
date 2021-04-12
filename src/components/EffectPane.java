@@ -18,7 +18,7 @@ public class EffectPane extends VBox {
 
 		AnchorPane.setTopAnchor(this, 25.0 * GameConfig.getScale());
 		AnchorPane.setRightAnchor(this, 0.0);
-		
+
 		this.setPadding(new Insets(7));
 		this.setStyle("-fx-background-color: rgba(0,0,0, 0.5)");
 
@@ -28,7 +28,7 @@ public class EffectPane extends VBox {
 	public void update() {
 		this.getChildren().clear();
 		List<EntityEffect> playerEffect = GameController.getPlayer().getEffectList();
-		if(playerEffect.size() == 0) {
+		if (playerEffect.size() == 0) {
 			this.setVisible(false);
 		} else {
 			this.setVisible(true);

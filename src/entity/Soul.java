@@ -16,12 +16,14 @@ public class Soul extends Monster implements Attackable {
 		super("Soul", 0, 1, 0, posY, posX, direction, 0, 0, moveSpeed);
 		GameController.getGameMap().get(posY, posX).setEntity(this);
 	}
+
 	@Override
-	public int getSymbol(){
-		if(isFriendly) 
+	public int getSymbol() {
+		if (isFriendly)
 			return Sprites.FRIENDLY_SOUL;
 		return Sprites.SOUL;
 	}
+
 	@Override
 	public void update() {
 		if (RandomUtil.random(0, 100) < attackPercent) {
@@ -42,9 +44,9 @@ public class Soul extends Monster implements Attackable {
 	public boolean attack(Entity target) {
 		if (isFriendly())
 			return true;
-		if(target.getHealth() > 0) {
+		if (target.getHealth() > 0) {
 			MessageTextUtil.textWhenAttack(this, target, target.getHealth() - 1);
-			target.setHealth(1);	
+			target.setHealth(1);
 		} else {
 			MessageTextUtil.textWhenAttack(this, target, 0);
 		}

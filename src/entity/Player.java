@@ -26,24 +26,25 @@ public class Player extends Entity implements Moveable, Attackable {
 	private Weapon equippedWeapon;
 	private ArrayList<Item> itemList = new ArrayList<Item>();
 	private int lineOfSight;
-	
+
 	public Player() {
 		super("Player", 5, 10, 1, 0, 0, Direction.DOWN, 1.5, 1, 1);
 		setLineOfSight(GameConfig.LINE_OF_SIGHT);
 		setEquippedArmor(null);
 		setEquippedWeapon(null);
 	}
+
 	@Override
-	public int getSymbol(){
+	public int getSymbol() {
 		return Sprites.PLAYER;
 	}
-	
+
 	public void setInitialPos(int posY, int posX) {
 		GameController.getGameMap().get(posY, posX).setEntity(this);
 		setPosX(posX);
 		setPosY(posY);
 	}
-	
+
 	@Override
 	public boolean move(int direction) {
 		int newPosY = getPosY();
@@ -69,7 +70,7 @@ public class Player extends Entity implements Moveable, Attackable {
 			AnimationUtil.playerMove(direction);
 			return true;
 		}
-		
+
 		return false;
 	}
 
@@ -80,11 +81,12 @@ public class Player extends Entity implements Moveable, Attackable {
 		target.setHealth(target.getHealth() - atkValue);
 		return true;
 	}
-	
+
 	public void equipItem(Item item) {
 		item.onEquip(this);
 		getItemList().remove(item);
-		if(item instanceof Potion) GameScene.getEffectPane().update();
+		if (item instanceof Potion)
+			GameScene.getEffectPane().update();
 	}
 
 	public void unEquipItem(Item item) {
@@ -92,7 +94,8 @@ public class Player extends Entity implements Moveable, Attackable {
 		getItemList().add(item);
 	}
 
-	public ArrayList<Pair<Integer, Integer>> getAllVisibleField(int startIdxY, int endIdxY, int startIdxX, int endIdxX) {
+	public ArrayList<Pair<Integer, Integer>> getAllVisibleField(int startIdxY, int endIdxY, int startIdxX,
+			int endIdxX) {
 		int posY = this.getPosY();
 		int posX = this.getPosX();
 
@@ -115,8 +118,8 @@ public class Player extends Entity implements Moveable, Attackable {
 			if (level > getLineOfSight()) {
 				continue;
 			}
-			
-			if(nowY > endIdxY || nowY < startIdxY || nowX > endIdxX || nowX < startIdxX) {
+
+			if (nowY > endIdxY || nowY < startIdxY || nowX > endIdxX || nowX < startIdxX) {
 				continue;
 			}
 
@@ -158,7 +161,7 @@ public class Player extends Entity implements Moveable, Attackable {
 		}
 		return allPos;
 	}
-	
+
 	public Armor getEquippedArmor() {
 		return equippedArmor;
 	}
@@ -174,7 +177,7 @@ public class Player extends Entity implements Moveable, Attackable {
 	public void setEquippedWeapon(Weapon equippedWeapon) {
 		this.equippedWeapon = equippedWeapon;
 	}
-	
+
 	public ArrayList<Item> getItemList() {
 		return itemList;
 	}

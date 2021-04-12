@@ -12,13 +12,13 @@ public class Immobilize extends EntityEffect {
 
 	@Override
 	public void onAdd(Entity entity) {
-		if(isDuplicate(entity)) {
+		if (isDuplicate(entity)) {
 			return;
 		}
 		InterruptController.setImmobilize(true);
 		addEffect(entity);
 	}
-	
+
 	@Override
 	public void onWearOff(Entity entity) {
 		InterruptController.setImmobilize(false);
@@ -30,5 +30,5 @@ public class Immobilize extends EntityEffect {
 		// TODO Auto-generated method stub
 		return EffectName.IMMOBILIZED;
 	}
-	
+
 }

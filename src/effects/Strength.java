@@ -10,16 +10,16 @@ public class Strength extends EntityEffect {
 
 	@Override
 	public void onAdd(Entity entity) {
-		if(isDuplicate(entity)) {
+		if (isDuplicate(entity)) {
 			return;
 		}
-		
+
 		addEffect(entity);
-		
+
 		int newAttack = entity.getAttack() + getValue();
 		entity.setAttack(newAttack);
-		
-		if(isPermanant()) {
+
+		if (isPermanant()) {
 			removeEffect(entity);
 		}
 	}
@@ -35,5 +35,5 @@ public class Strength extends EntityEffect {
 	public String getEffectName() {
 		return EffectName.STRENGTH;
 	}
-	
+
 }
