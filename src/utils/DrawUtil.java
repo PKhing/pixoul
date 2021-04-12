@@ -32,8 +32,6 @@ import scene.GameScene;
 
 public class DrawUtil {
 	private static PixelReader wallSprites;
-	private static PixelReader backpackSprites;
-	private static PixelReader pauseSprites;
 	private static PixelReader itemSprites;
 	private static PixelReader ladderSprites;
 	private static PixelReader entitySprites;
@@ -42,67 +40,9 @@ public class DrawUtil {
 	static {
 		wallSprites = getImagePixelReader("sprites/wall.png");
 		entitySprites = getImagePixelReader("sprites/entity.png");
-		backpackSprites = getImagePixelReader("sprites/backpack.png");
-		pauseSprites = getImagePixelReader("sprites/pause.png");
 		itemSprites = getImagePixelReader("sprites/item.png");
 		ladderSprites = getImagePixelReader("sprites/ladder.png");
 		attackMouseIcon = getAttackMouseIcon();
-	}
-
-	private static WritableImage changeColor(WritableImage img) {
-
-		int width = (int) img.getWidth();
-		int height = (int) img.getHeight();
-		WritableImage newImg = new WritableImage(width, height);
-		for (int y = 0; y < height; y++) {
-			for (int x = 0; x < width; x++) {
-				Color color = img.getPixelReader().getColor(x, y);
-				newImg.getPixelWriter().setColor(x, y, color);
-
-				double hue = 0;
-				double saturation = 0.7;
-				double brightness = color.getBrightness();
-				double opacity = color.getOpacity();
-
-				Color newColor = Color.hsb(hue, saturation, brightness, opacity);
-				newImg.getPixelWriter().setColor(x, y, newColor);
-
-			}
-		}
-		return newImg;
-	}
-
-	private static Image getImage(String filePath) {
-		return new Image(ClassLoader.getSystemResource(filePath).toString());
-	}
-
-	public static PixelReader getImagePixelReader(String filePath) {
-		return getImage(filePath).getPixelReader();
-	}
-
-	public static WritableImage getWritableImage(String filePath) {
-		Image img = getImage(filePath);
-		PixelReader pixelReader = getImagePixelReader(filePath);
-		return new WritableImage(pixelReader, 0, 0, (int) img.getWidth(), (int) img.getHeight());
-	}
-
-	public static void drawBackpack(GraphicsContext gc) {
-		WritableImage img = new WritableImage(backpackSprites, 0, 0, 32, 32);
-		gc.drawImage(scaleUp(img, GameConfig.getScale()), 0, 0);
-	}
-
-	public static void drawPause(GraphicsContext gc) {
-		WritableImage img = new WritableImage(pauseSprites, 0, 0, 16, 16);
-		gc.drawImage(scaleUp(img, GameConfig.getScale()), 0, 0);
-	}
-
-	public static void drawItem(GraphicsContext gc, int y, int x, Item item) {
-		if (item == null) {
-			return;
-		}
-		int index = getIndexItemSymbol(item);
-		WritableImage img = new WritableImage(itemSprites, item.getSymbol() * 32, index * 32, 32, 32);
-		gc.drawImage(scaleUp(img, GameConfig.getScale()), y, x);
 	}
 
 	public static void drawCell(int y, int x, Cell cell) {
@@ -146,33 +86,33 @@ public class DrawUtil {
 	}
 
 	public static void drawEntity(int y, int x, Entity entity, int cnt) {
-
-		if (entity == null)
+		if (entity == null) {
 			return;
+		}
+
 		GraphicsContext gc = GameScene.getGraphicsContext();
 		int directionIndex = Direction.getSpriteIndex(entity.getDirection());
 		int walkIndex = (cnt / 8 + 1) % 4;
-		if (walkIndex == 3)
-			walkIndex = 1;
-		if (!entity.isMoving()) {
+		if (walkIndex == 3 || !entity.isMoving()) {
 			walkIndex = 1;
 		}
+
 		WritableImage img = new WritableImage(entitySprites, (96 * entity.getSymbol()) + 32 * walkIndex,
 				directionIndex * 32, 32, 32);
-		// Fix later?
 		img = scaleUp(img, GameConfig.getScale());
 		if (entity.isAttacked())
 			img = changeColor(img);
-		gc.drawImage(img, x, y /*- 4 * GameConfig.getScale()*/);
 
-		if (entity instanceof Monster)
-			drawHPBar(y, x, entity);
+		// Fix later?
+		gc.drawImage(img, x, y /*- 4 * GameConfig.getScale()*/);
+		drawHPBar(y, x, entity);
 	}
 
 	public static void drawHPBar(int y, int x, Entity entity) {
 		if (!(entity instanceof Monster)) {
 			return;
 		}
+
 		GraphicsContext gc = GameScene.getGraphicsContext();
 		gc.setFill(Color.BLACK);
 		gc.fillRect(x + 4 * GameConfig.getScale(), y - 4 * GameConfig.getScale(), 25 * GameConfig.getScale(),
@@ -181,6 +121,80 @@ public class DrawUtil {
 		gc.fillRect(x + 4 * GameConfig.getScale(), y - 4 * GameConfig.getScale(),
 				Math.ceil((double) entity.getHealth() / (double) entity.getMaxHealth() * 25.0 * GameConfig.getScale()),
 				2 * GameConfig.getScale());
+	}
+
+	public static void drawItem(GraphicsContext gc, int y, int x, Item item) {
+		if (item == null) {
+			return;
+		}
+
+		int index = getIndexItemSymbol(item);
+		WritableImage img = new WritableImage(itemSprites, item.getSymbol() * 32, index * 32, 32, 32);
+		gc.drawImage(scaleUp(img, GameConfig.getScale()), y, x);
+	}
+
+	public static void addEntityButton(int y, int x, Entity entity) {
+		if (entity == null || !(entity instanceof Monster)) {
+			return;
+		}
+
+		Canvas canvas = new Canvas(GameConfig.SPRITE_SIZE * GameConfig.getScale(),
+				GameConfig.SPRITE_SIZE * GameConfig.getScale());
+		canvas.setOnMouseClicked((event) -> {
+			if (!InterruptController.isInterruptPlayerInput()) {
+				GameLogic.gameUpdate(DispatchAction.ATTACK, (Monster) entity);
+			}
+		});
+		addCursorHover(canvas, true);
+		AnchorPane.setTopAnchor(canvas, (double) (y/* - 8 */));
+		AnchorPane.setLeftAnchor(canvas, (double) x);
+		GameScene.getButtonPane().getChildren().add(canvas);
+	}
+
+	public static void addCursorHover(Node node, boolean isEntity) {
+		node.setOnMouseEntered((event) -> {
+			if (isEntity) {
+				GameScene.getScene().setCursor(new ImageCursor(attackMouseIcon));
+			} else {
+				GameScene.getScene().setCursor(Cursor.HAND);
+			}
+		});
+
+		node.setOnMouseExited((event) -> {
+			GameScene.getScene().setCursor(null);
+		});
+	}
+
+	private static Image getAttackMouseIcon() {
+		return new WritableImage(itemSprites, 0, 0, 32, 32);
+	}
+
+	private static int getIndexItemSymbol(Item item) {
+		if (item instanceof Sword)
+			return Sprites.SWORD;
+		if (item instanceof Spear)
+			return Sprites.SPEAR;
+		if (item instanceof Knife)
+			return Sprites.KNIFE;
+		if (item instanceof Armor)
+			return Sprites.ARMOR;
+		if (item instanceof Potion)
+			return Sprites.POTION;
+		return 0;
+	}
+
+	private static Image getImage(String filePath) {
+		return new Image(ClassLoader.getSystemResource(filePath).toString());
+	}
+
+	public static PixelReader getImagePixelReader(String filePath) {
+		return getImage(filePath).getPixelReader();
+	}
+
+	public static WritableImage getWritableImage(String filePath) {
+		Image img = getImage(filePath);
+		PixelReader pixelReader = getImagePixelReader(filePath);
+		return new WritableImage(pixelReader, 0, 0, (int) img.getWidth(), (int) img.getHeight());
 	}
 
 	public static WritableImage scaleUp(WritableImage image, int z) {
@@ -211,55 +225,27 @@ public class DrawUtil {
 		return bigImage;
 	}
 
-	public static void addEntityButton(int y, int x, Entity entity) {
-		if (entity == null || !(entity instanceof Monster)) {
-			return;
+	private static WritableImage changeColor(WritableImage img) {
+
+		int width = (int) img.getWidth();
+		int height = (int) img.getHeight();
+		WritableImage newImg = new WritableImage(width, height);
+		for (int y = 0; y < height; y++) {
+			for (int x = 0; x < width; x++) {
+				Color color = img.getPixelReader().getColor(x, y);
+				newImg.getPixelWriter().setColor(x, y, color);
+
+				double hue = 0;
+				double saturation = 0.7;
+				double brightness = color.getBrightness();
+				double opacity = color.getOpacity();
+
+				Color newColor = Color.hsb(hue, saturation, brightness, opacity);
+				newImg.getPixelWriter().setColor(x, y, newColor);
+
+			}
 		}
-
-		Canvas canvas = new Canvas(GameConfig.SPRITE_SIZE * GameConfig.getScale(),
-				GameConfig.SPRITE_SIZE * GameConfig.getScale());
-		canvas.setOnMouseClicked((event) -> {
-			if (!InterruptController.isInterruptPlayerInput()) {
-				GameLogic.gameUpdate(DispatchAction.ATTACK, (Monster) entity);
-			}
-		});
-		addCursorHover(canvas, true);
-		AnchorPane.setTopAnchor(canvas, (double) (y - 8));
-		AnchorPane.setLeftAnchor(canvas, (double) x);
-		GameScene.getButtonPane().getChildren().add(canvas);
-	}
-
-	public static void addCursorHover(Node node, boolean isEntity) {
-		node.setOnMouseEntered((event) -> {
-			if (isEntity) {
-				GameScene.getScene().setCursor(new ImageCursor(attackMouseIcon));
-			} else {
-				GameScene.getScene().setCursor(Cursor.HAND);
-			}
-		});
-
-		node.setOnMouseExited((event) -> {
-			GameScene.getScene().setCursor(null);
-		});
-	}
-
-	private static Image getAttackMouseIcon() {
-		return new WritableImage(itemSprites, 0, 0, 32, 32);
-	}
-
-	private static int getIndexItemSymbol(Item item) {
-		int index = 0;
-		if (item instanceof Sword)
-			index = Sprites.SWORD;
-		if (item instanceof Spear)
-			index = Sprites.SPEAR;
-		if (item instanceof Knife)
-			index = Sprites.KNIFE;
-		if (item instanceof Armor)
-			index = Sprites.ARMOR;
-		if (item instanceof Potion)
-			index = Sprites.POTION;
-		return index;
+		return newImg;
 	}
 
 }

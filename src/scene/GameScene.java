@@ -29,7 +29,7 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Button;
+import javafx.scene.image.WritableImage;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
@@ -52,22 +52,22 @@ public class GameScene {
 	private static PausePane pausePane;
 	private static AnchorPane buttonPane;
 	private static GraphicsContext gc;
+	private static WritableImage backpackSprite = DrawUtil.getWritableImage("sprites/backpack.png");
+	private static WritableImage pauseSprite = DrawUtil.getWritableImage("sprites/pause.png");
 	private static StackPane gamePane;
+	private static StackPane root;
 
 	public static void initScene() {
-		StackPane root = new StackPane();
-
+		root = new StackPane();
 		root.setPadding(new Insets(0));
 		root.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
-
-		gamePane = new StackPane();
-
-		gamePane.setMinSize(GameConfig.getScreenWidth(), GameConfig.getScreenHeight());
-		gamePane.setMaxSize(GameConfig.getScreenWidth(), GameConfig.getScreenHeight());
-
-		root.getChildren().add(gamePane);
-
+		root.setMinSize(GameConfig.getScreenWidth(), GameConfig.getScreenHeight());
+		root.setMaxSize(GameConfig.getScreenWidth(), GameConfig.getScreenHeight());
 		scene = new Scene(root, GameConfig.getScreenWidth(), GameConfig.getScreenHeight());
+
+		// GamePane
+		gamePane = new StackPane();
+		root.getChildren().add(gamePane);
 
 		Canvas canvas = new Canvas(GameConfig.getScreenWidth(), GameConfig.getScreenHeight());
 		gc = canvas.getGraphicsContext2D();
@@ -75,75 +75,67 @@ public class GameScene {
 
 		buttonPane = new AnchorPane();
 		gamePane.getChildren().add(buttonPane);
-		addEventListener(scene, gc, buttonPane);
+		addEventListener();
 
 		// Overlay
 		AnchorPane overlay = new AnchorPane();
+		overlay.setPickOnBounds(false);
+		root.getChildren().add(overlay);
+
+		addInventoryButton(overlay);
+		addPauseButton(overlay);
+
 		statusPane = new StatusPane();
 		messagePane = new MessagePane();
 		effectPane = new EffectPane();
-
-		overlay.setPickOnBounds(false);
-		gamePane.getChildren().add(overlay);
-
-		// Inventory Button
-		Button inventoryBtn = new Button();
-
-		inventoryBtn.setStyle("-fx-margin:0;-fx-padding:0");
-		inventoryBtn.setPrefHeight(30.0 * GameConfig.getScale());
-		inventoryBtn.setPrefWidth(30.0 * GameConfig.getScale());
-		Canvas backpack = new Canvas(32 * GameConfig.getScale(), 32 * GameConfig.getScale());
-
-		DrawUtil.addCursorHover(backpack, false);
-		DrawUtil.drawBackpack(backpack.getGraphicsContext2D());
-
-		inventoryBtn.setGraphic(backpack);
-		inventoryBtn.setOnMouseClicked((event) -> {
-			if (InterruptController.isPauseOpen())
-				return;
-			gamePane.getChildren().add(inventoryPane);
-			inventoryPane.requestFocus();
-			InterruptController.setInventoryOpen(true);
-		});
-		AnchorPane.setBottomAnchor(inventoryBtn, 5.0 * GameConfig.getScale());
-		AnchorPane.setRightAnchor(inventoryBtn, 5.0 * GameConfig.getScale());
-
-		overlay.getChildren().add(inventoryBtn);
-
-		// Pause Button
-		Button pauseBtn = new Button();
-		pauseBtn.setStyle("-fx-margin:0;-fx-padding:0");
-
-		AnchorPane.setTopAnchor(pauseBtn, 5.0 * GameConfig.getScale());
-		AnchorPane.setRightAnchor(pauseBtn, 5.0 * GameConfig.getScale());
-		pauseBtn.setPrefHeight(15.0 * GameConfig.getScale());
-		pauseBtn.setPrefWidth(15.0 * GameConfig.getScale());
-
-		pauseBtn.setOnMouseClicked((event) -> {
-			if (InterruptController.isPauseOpen())
-				return;
-			gamePane.getChildren().add(pausePane);
-			pausePane.requestFocus();
-			InterruptController.setPauseOpen(true);
-		});
-
-		Canvas pause = new Canvas(16 * GameConfig.getScale(), 16 * GameConfig.getScale());
-		DrawUtil.drawPause(pause.getGraphicsContext2D());
-		pauseBtn.setGraphic(pause);
-
-		overlay.getChildren().addAll(statusPane, messagePane, effectPane, pauseBtn);
-
 		inventoryPane = new InventoryPane();
 		pausePane = new PausePane();
 
+		overlay.getChildren().addAll(statusPane, messagePane, effectPane);
 		StackPane.setAlignment(new Group(inventoryPane), Pos.CENTER);
 		StackPane.setAlignment(new Group(pausePane), Pos.CENTER);
 
 		GameController.getGameMap().drawMap();
 	}
 
-	private static void addEventListener(Scene s, GraphicsContext gc, AnchorPane buttonPane) {
-		s.setOnKeyPressed((event) -> {
+	private static void addInventoryButton(AnchorPane overlay) {
+		Canvas inventoryBtn = new Canvas(32 * GameConfig.getScale(), 32 * GameConfig.getScale());
+		overlay.getChildren().add(inventoryBtn);
+
+		AnchorPane.setBottomAnchor(inventoryBtn, 5.0 * GameConfig.getScale());
+		AnchorPane.setRightAnchor(inventoryBtn, 5.0 * GameConfig.getScale());
+
+		inventoryBtn.getGraphicsContext2D().drawImage(DrawUtil.scaleUp(backpackSprite, GameConfig.getScale()), 0, 0);
+
+		inventoryBtn.setOnMouseClicked((event) -> {
+			if (InterruptController.isPauseOpen())
+				return;
+			root.getChildren().add(inventoryPane);
+			inventoryPane.requestFocus();
+			InterruptController.setInventoryOpen(true);
+		});
+	}
+
+	private static void addPauseButton(AnchorPane overlay) {
+		Canvas pauseBtn = new Canvas(16 * GameConfig.getScale(), 16 * GameConfig.getScale());
+		overlay.getChildren().add(pauseBtn);
+
+		AnchorPane.setTopAnchor(pauseBtn, 5.0 * GameConfig.getScale());
+		AnchorPane.setRightAnchor(pauseBtn, 5.0 * GameConfig.getScale());
+
+		pauseBtn.getGraphicsContext2D().drawImage(DrawUtil.scaleUp(pauseSprite, GameConfig.getScale()), 0, 0);
+
+		pauseBtn.setOnMouseClicked((event) -> {
+			if (InterruptController.isPauseOpen())
+				return;
+			root.getChildren().add(pausePane);
+			pausePane.requestFocus();
+			InterruptController.setPauseOpen(true);
+		});
+	}
+
+	private static void addEventListener() {
+		scene.setOnKeyPressed((event) -> {
 			if (InterruptController.isInterruptPlayerInput() && !InterruptController.isStillAnimation()) {
 				return;
 			}
