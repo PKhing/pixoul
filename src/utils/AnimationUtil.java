@@ -77,6 +77,7 @@ public class AnimationUtil {
 				}
 				InterruptController.setStillAnimation(false);
 				Platform.runLater(() -> {
+					GameController.isGameOver();
 					GameController.getGameMap().drawMap();
 					GameLogic.doNextAction();
 				});

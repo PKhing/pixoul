@@ -3,6 +3,7 @@ package controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import components.GameOverPane;
 import entity.Player;
 import exception.InvalidFloorException;
 import exception.NullMapException;
@@ -13,6 +14,7 @@ import javafx.util.Duration;
 import javafx.util.Pair;
 import logic.GameMap;
 import logic.MapGenerator;
+import scene.GameOverScene;
 import scene.GameScene;
 import utils.GameAudioUtils;
 
@@ -119,10 +121,23 @@ public class GameController {
 		fadeIn.setOnFinished((event) -> SceneController.backToMainMenu());
 
 		fadeIn.play();
-
 	}
 
-	public static void gameover() {
+	public static void isGameOver() {
+		if(player.getHealth() <= 0) {
+			bgmMedia.stop();
+			FadeTransition fadeOut = new FadeTransition(Duration.seconds(1.0), GameScene.getGamePane());
+			
+			fadeOut.setFromValue(1.0);
+			fadeOut.setToValue(0.0);
+			
+			fadeOut.setOnFinished((event) -> {
+				InterruptController.setTransition(true);
+				SceneController.setSceneToStage(GameOverScene.getScene());
+			});
+			
+			fadeOut.play();
+		}
 		return;
 	}
 
