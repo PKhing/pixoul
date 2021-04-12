@@ -1,7 +1,6 @@
 package components;
 
 import java.util.List;
-
 import controller.GameController;
 import controller.InterruptController;
 import entity.base.DispatchAction;
@@ -12,7 +11,6 @@ import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.ImageCursor;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.image.Image;
 import javafx.scene.image.PixelReader;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.KeyCode;
