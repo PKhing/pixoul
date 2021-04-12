@@ -34,9 +34,17 @@ public class InventoryPane extends AnchorPane {
 	private FlowPane itemPane;
 	private VBox equipmentPane;
 	private boolean isDeleteMode = false;
+	private static WritableImage itemFrame = new WritableImage(
+			DrawUtil.getImagePixelReader("sprites/inventory/item.png"), 0, 0, 40, 40);
 
 	public InventoryPane() {
-		super();
+
+		this.setOnKeyPressed((event) -> {
+			if (event.getCode() == KeyCode.ESCAPE) {
+				this.remove();
+				InterruptController.setOpenFromInside(true);
+			}
+		});
 
 		// itemPane
 		itemPane = new FlowPane();
@@ -48,13 +56,6 @@ public class InventoryPane extends AnchorPane {
 		itemPane.setMaxHeight(200 * GameConfig.getScale());
 		itemPane.setMaxWidth(160 * GameConfig.getScale());
 
-		this.setOnKeyPressed((event) -> {
-			if (event.getCode() == KeyCode.ESCAPE) {
-				this.remove();
-				InterruptController.setOpenFromInside(true);
-			}
-		});
-
 		// EquipmentPane
 		equipmentPane = new VBox();
 		this.getChildren().add(equipmentPane);
@@ -63,26 +64,10 @@ public class InventoryPane extends AnchorPane {
 		AnchorPane.setTopAnchor(equipmentPane,
 				(double) (GameConfig.getScreenHeight() / 2 - 60 * GameConfig.getScale()));
 
-		
 		// DeleteButton
-		Canvas deleteButton = new Canvas(32 * GameConfig.getScale(), 32 * GameConfig.getScale());
-		this.getChildren().add(deleteButton);
-		WritableImage img = new WritableImage(DrawUtil.getImagePixelReader("sprites/bin.png"), 0, 0, 32, 32);
-		deleteButton.getGraphicsContext2D().drawImage(DrawUtil.scaleUp(img, GameConfig.getScale()), 0, 0);
-		AnchorPane.setRightAnchor(deleteButton,
-				(double) (GameConfig.getScreenWidth() / 2 - 125 * GameConfig.getScale()));
-		AnchorPane.setTopAnchor(deleteButton, (double) (GameConfig.getScreenHeight() / 2 + 30 * GameConfig.getScale()));
-		deleteButton.setOnMouseClicked((event) -> {
-			isDeleteMode = !isDeleteMode;
-			if (isDeleteMode == true) {
-				Image binIcon = new WritableImage(DrawUtil.getImagePixelReader("sprites/bin.png"), 0, 0, 32, 32);
-				GameScene.getScene().setCursor(new ImageCursor(binIcon));
-			} else {
-				GameScene.getScene().setCursor(Cursor.DEFAULT);
-			}
-		});
+		this.addDeleteButton();
 
-		update();
+		this.update();
 
 	}
 
@@ -105,23 +90,31 @@ public class InventoryPane extends AnchorPane {
 
 	private void addItem(Item item, Pane parent) {
 
+		// Draw item frame
 		Canvas canvas = new Canvas(40 * GameConfig.getScale(), 40 * GameConfig.getScale());
+		canvas.getGraphicsContext2D().drawImage(DrawUtil.scaleUp(itemFrame, GameConfig.getScale()), 0, 0);
 		parent.getChildren().add(canvas);
-		PixelReader itemFrame = DrawUtil.getImagePixelReader("sprites/inventory/item.png");
 
-		WritableImage img = new WritableImage(itemFrame, 0, 0, 40, 40);
-		canvas.getGraphicsContext2D().drawImage(DrawUtil.scaleUp(img, GameConfig.getScale()), 0, 0);
+		if (item == null) {
+			// Mouse click
+			canvas.setOnMouseClicked((event) -> {
+				if (isDeleteMode == true) {
+					isDeleteMode = false;
+					GameScene.getScene().setCursor(Cursor.DEFAULT);
+				}
+			});
+		} else {
 
-		if (item != null) {
+			// Draw item
 			DrawUtil.drawItem(canvas.getGraphicsContext2D(), 4 * GameConfig.getScale(), 4 * GameConfig.getScale(),
 					item);
-			canvas.setOnMouseClicked((mouseEvent) -> {
 
+			// Mouse click
+			canvas.setOnMouseClicked((mouseEvent) -> {
 				if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
 					if (isDeleteMode) {
 						GameLogic.gameUpdate(DispatchAction.DELETE_ITEM, item);
-					} 
-					else if (mouseEvent.getClickCount() == 2) {
+					} else if (mouseEvent.getClickCount() == 2) {
 						Weapon currentWeapon = GameController.getPlayer().getEquippedWeapon();
 						Armor currentArmor = GameController.getPlayer().getEquippedArmor();
 						if (item == currentWeapon || item == currentArmor) {
@@ -136,27 +129,21 @@ public class InventoryPane extends AnchorPane {
 							}
 						}
 					}
-				}
-				else if (mouseEvent.getButton().equals(MouseButton.SECONDARY)) {
+				} else if (mouseEvent.getButton().equals(MouseButton.SECONDARY)) {
 					if (isDeleteMode == true) {
 						isDeleteMode = false;
 						GameScene.getScene().setCursor(Cursor.DEFAULT);
 					}
 				}
 			});
+
+			// ItemInfoPane
 			canvas.setOnMouseEntered((event) -> {
 				this.getChildren().add(new ItemInfoPane(item, (int) canvas.getLayoutY() + (int) parent.getLayoutY(),
 						(int) canvas.getLayoutX() + (int) parent.getLayoutX()));
 			});
 			canvas.setOnMouseExited((event) -> {
 				this.getChildren().remove(this.getChildren().size() - 1);
-			});
-		} else {
-			canvas.setOnMouseClicked((event) -> {
-				if (isDeleteMode == true) {
-					isDeleteMode = false;
-					GameScene.getScene().setCursor(Cursor.DEFAULT);
-				}
 			});
 		}
 	}
@@ -189,6 +176,31 @@ public class InventoryPane extends AnchorPane {
 			this.remove();
 			isDeleteMode = false;
 			GameScene.getScene().setCursor(Cursor.DEFAULT);
+		});
+	}
+
+	private void addDeleteButton() {
+
+		Canvas deleteButton = new Canvas(32 * GameConfig.getScale(), 32 * GameConfig.getScale());
+		this.getChildren().add(deleteButton);
+
+		// Set anchor
+		AnchorPane.setRightAnchor(deleteButton,
+				(double) (GameConfig.getScreenWidth() / 2 - 125 * GameConfig.getScale()));
+		AnchorPane.setTopAnchor(deleteButton, (double) (GameConfig.getScreenHeight() / 2 + 30 * GameConfig.getScale()));
+
+		// Set image
+		WritableImage binImg = new WritableImage(DrawUtil.getImagePixelReader("sprites/bin.png"), 0, 0, 32, 32);
+		deleteButton.getGraphicsContext2D().drawImage(DrawUtil.scaleUp(binImg, GameConfig.getScale()), 0, 0);
+
+		// Add event listener
+		deleteButton.setOnMouseClicked((event) -> {
+			isDeleteMode = !isDeleteMode;
+			if (isDeleteMode == true) {
+				GameScene.getScene().setCursor(new ImageCursor(binImg));
+			} else {
+				GameScene.getScene().setCursor(Cursor.DEFAULT);
+			}
 		});
 	}
 
