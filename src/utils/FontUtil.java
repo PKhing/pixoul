@@ -12,7 +12,7 @@ public class FontUtil {
 		font18 = Font.loadFont(ClassLoader.getSystemResourceAsStream("font.ttf"), 18 * GameConfig.getScale());
 		font30 = Font.loadFont(ClassLoader.getSystemResourceAsStream("font.ttf"), 30 * GameConfig.getScale());
 	}
-	
+
 	public static Font getFont(int size) {
 		if (size <= 12)
 			return font12;

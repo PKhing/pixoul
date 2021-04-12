@@ -10,7 +10,7 @@ public class Regeneration extends EntityEffect implements IConsecutiveEffect {
 
 	@Override
 	public void onAdd(Entity entity) {
-		if(isDuplicate(entity)) {
+		if (isDuplicate(entity)) {
 			return;
 		}
 		addEffect(entity);
@@ -21,7 +21,7 @@ public class Regeneration extends EntityEffect implements IConsecutiveEffect {
 		int newHealth = Math.min(entity.getMaxHealth(), entity.getHealth() + getValue());
 		entity.setHealth(newHealth);
 	}
-	
+
 	@Override
 	public void onWearOff(Entity entity) {
 		entity.getEffectList().remove(this);

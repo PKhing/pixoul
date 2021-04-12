@@ -29,11 +29,10 @@ public abstract class Entity {
 	private double critPercent;
 
 	private int moveSpeed;
-	
+
 	private boolean isMoving;
 
 	private boolean isAttacked;
-
 
 	private List<EntityEffect> effectList;
 
@@ -54,11 +53,11 @@ public abstract class Entity {
 		setMoving(false);
 		setAttacked(false);
 		setEffectList(new CopyOnWriteArrayList<>());
-		
+
 	}
 
 	public abstract int getSymbol();
-	
+
 	public int getHealth() {
 		return health;
 	}
@@ -158,8 +157,8 @@ public abstract class Entity {
 	public int getPriority() {
 		return 2;
 	}
-	
-	// Attack Range ? (Customize later ?) 
+
+	// Attack Range ? (Customize later ?)
 	protected boolean isAttackable(Entity x) {
 		int diffX = Math.abs(x.getPosX() - getPosX());
 		int diffY = Math.abs(x.getPosY() - getPosY());

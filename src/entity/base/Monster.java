@@ -24,7 +24,7 @@ public abstract class Monster extends Entity {
 	public abstract void update();
 
 	public int getNextDirection() {
-		
+
 		Pair<Integer, Integer> playerPos = bfs(1);
 		if (playerPos == null) {
 			playerPos = bfs(2);
@@ -37,7 +37,7 @@ public abstract class Monster extends Entity {
 		}
 		int newY = newPos.getKey();
 		int newX = newPos.getValue();
-	
+
 		if (GameController.getGameMap().get(newY, newX).getEntity() != null) {
 			return -1;
 		}

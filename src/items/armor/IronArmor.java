@@ -29,6 +29,5 @@ public class IronArmor extends Armor {
 	public int getSymbol() {
 		return Sprites.IRON_ARMOR;
 	}
-	
-	
+
 }

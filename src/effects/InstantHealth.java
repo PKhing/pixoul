@@ -11,7 +11,7 @@ public class InstantHealth extends EntityEffect {
 	@Override
 	public void onAdd(Entity entity) {
 		addEffect(entity);
-		
+
 		if (isPermanant()) {
 			int newMaxHealth = entity.getMaxHealth() + getValue();
 			entity.setMaxHealth(newMaxHealth);

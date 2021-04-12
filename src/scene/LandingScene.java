@@ -34,17 +34,17 @@ public class LandingScene {
 		if (cachedScene != null) {
 			return cachedScene;
 		}
-		
+
 		StackPane root = new StackPane();
-		
+
 		root.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
-		
+
 		VBox box = new VBox();
 
 		box.setAlignment(Pos.CENTER);
 
 		box.setSpacing(10.0);
-		
+
 		box.setPadding(new Insets(25, 25, 25, 25));
 
 		// Title Text

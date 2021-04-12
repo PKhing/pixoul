@@ -99,7 +99,7 @@ public class GameController {
 		FadeTransition fadeIn = new FadeTransition(Duration.seconds(1.0), GameScene.getGamePane());
 
 		newFloor.drawMap();
-		
+
 		fadeIn.setFromValue(0.0);
 		fadeIn.setToValue(1.0);
 

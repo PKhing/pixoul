@@ -27,7 +27,7 @@ public class SettingPane extends VBox {
 
 	public SettingPane() {
 		super();
-		
+
 		setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
 		setPadding(new Insets(30));
 		setSpacing(10);
@@ -37,18 +37,18 @@ public class SettingPane extends VBox {
 		setPrefWidth(widthBox * GameConfig.getScale());
 		setMaxHeight(heightBox * GameConfig.getScale());
 		setMaxWidth(widthBox * GameConfig.getScale());
-		
+
 		addTitle();
 		addVolumeSlider();
 		addDisableAnimation();
 		addCloseText();
-		
+
 		setOnKeyPressed((event) -> {
-			if(event.getCode() == KeyCode.ESCAPE) {
+			if (event.getCode() == KeyCode.ESCAPE) {
 				((Pane) this.getParent()).getChildren().remove(this);
 			}
 		});
-		
+
 		InterruptController.setSettingOpen(true);
 	}
 
@@ -56,44 +56,44 @@ public class SettingPane extends VBox {
 		HBox closeBox = new HBox();
 		closeBox.setPadding(new Insets(20));
 		closeBox.setAlignment(Pos.CENTER);
-		
+
 		Text closeText = new Text("OK");
 		closeText.setFont(FontUtil.getFont(18));
 		closeText.setFill(Color.WHITE);
-		
+
 		closeText.setOnMouseClicked((event) -> {
 			try {
 				((Pane) this.getParent()).getChildren().remove(this);
 				InterruptController.setSettingOpen(false);
-			} catch(UnsupportedOperationException e) {
+			} catch (UnsupportedOperationException e) {
 				e.printStackTrace();
 			}
 		});
-		
+
 		closeBox.getChildren().add(closeText);
-		
+
 		this.getChildren().add(closeBox);
 	}
-	
+
 	private void addTitle() {
 		Text optionTitle = new Text("Option");
-		
+
 		optionTitle.setFont(FontUtil.getFont(30));
 		optionTitle.setFill(Color.WHITE);
-		
+
 		this.getChildren().add(optionTitle);
 	}
-	
+
 	private void addVolumeSlider() {
 		HBox bgmVolumeBox = new HBox();
 		bgmVolumeBox.setPadding(new Insets(10));
 		bgmVolumeBox.setSpacing(10);
 		bgmVolumeBox.setAlignment(Pos.CENTER_LEFT);
-		
+
 		Label volumeLabel = new Label("BGM Volume");
 		volumeLabel.setFont(FontUtil.getFont(12));
 		volumeLabel.setTextFill(Color.WHITE);
-		
+
 		Slider volumeSlider = new Slider(0, 100, (int) (GameConfig.getVolume() * 100));
 		volumeSlider.valueProperty().addListener(new ChangeListener<Number>() {
 
@@ -102,33 +102,33 @@ public class SettingPane extends VBox {
 				GameConfig.setVolume((double) newValue / 100);
 				GameAudioUtils.updateBGMVolume();
 			}
-			
+
 		});
-		
+
 		bgmVolumeBox.getChildren().addAll(volumeLabel, volumeSlider);
 		this.getChildren().add(bgmVolumeBox);
 	}
-	
+
 	private void addDisableAnimation() {
 		HBox disableAnimationBox = new HBox();
 		disableAnimationBox.setPadding(new Insets(10));
 		disableAnimationBox.setSpacing(7);
 		disableAnimationBox.setAlignment(Pos.CENTER_LEFT);
-		
+
 		Label disableLabel = new Label("Disable Animation ");
 		disableLabel.setFont(FontUtil.getFont(12));
 		disableLabel.setTextFill(Color.WHITE);
-		
+
 		CheckBox checkBox = new CheckBox();
-		checkBox.setSelected(GameConfig.isSkipMoveAnimation()); 
-		
+		checkBox.setSelected(GameConfig.isSkipMoveAnimation());
+
 		checkBox.setOnMouseClicked((event) -> {
 			boolean newSkipMove = !GameConfig.isSkipMoveAnimation();
-			
+
 			GameConfig.setSkipMoveAnimation(newSkipMove);
 			checkBox.setSelected(newSkipMove);
 		});
-		
+
 		disableAnimationBox.getChildren().addAll(disableLabel, checkBox);
 		this.getChildren().add(disableAnimationBox);
 	}

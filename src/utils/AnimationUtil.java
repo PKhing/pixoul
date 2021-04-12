@@ -26,6 +26,7 @@ public class AnimationUtil {
 		int finalStepY = stepY;
 		int finalStepX = stepX;
 		new Thread() {
+			@Override
 			public void run() {
 				if (!GameConfig.isSkipMoveAnimation()) {
 					GameController.getPlayer().setMoving(true);
@@ -42,16 +43,17 @@ public class AnimationUtil {
 
 	public static void postGame() {
 		boolean isMove = false;
-		
+
 		for (Monster monster : GameController.getGameMap().getMonsterList())
 			if (monster.isMoving())
 				isMove = true;
-		
+
 		boolean finalIsMove = isMove;
 		if (!isMove || GameConfig.isSkipMoveAnimation())
 			GameController.getGameMap().drawMap();
-		
+
 		Thread monsterMove = new Thread() {
+			@Override
 			public void run() {
 				if (finalIsMove && !GameConfig.isSkipMoveAnimation()) {
 					move(0, 0);
@@ -65,6 +67,7 @@ public class AnimationUtil {
 		};
 
 		Thread playerAttacked = new Thread() {
+			@Override
 			public void run() {
 				if (!GameController.getPlayer().isAttacked())
 					return;
@@ -83,7 +86,7 @@ public class AnimationUtil {
 				}
 			}
 		};
-		
+
 		new Thread() {
 			@Override
 			public void run() {
@@ -94,20 +97,21 @@ public class AnimationUtil {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				
+
 				InterruptController.setStillAnimation(false);
 				Platform.runLater(() -> {
 					GameLogic.doNextAction();
 				});
 			}
 		}.start();
-		
+
 		monsterMove.start();
 		playerAttacked.start();
 	}
 
 	public static void monsterAttacked(Monster monster) {
 		new Thread() {
+			@Override
 			public void run() {
 				try {
 					monster.setAttacked(true);

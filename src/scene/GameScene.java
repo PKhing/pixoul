@@ -56,7 +56,7 @@ public class GameScene {
 
 	public static void initScene() {
 		StackPane root = new StackPane();
-		
+
 		root.setPadding(new Insets(0));
 		root.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
 
@@ -64,9 +64,9 @@ public class GameScene {
 
 		gamePane.setMinSize(GameConfig.getScreenWidth(), GameConfig.getScreenHeight());
 		gamePane.setMaxSize(GameConfig.getScreenWidth(), GameConfig.getScreenHeight());
-		
+
 		root.getChildren().add(gamePane);
-		
+
 		scene = new Scene(root, GameConfig.getScreenWidth(), GameConfig.getScreenHeight());
 
 		Canvas canvas = new Canvas(GameConfig.getScreenWidth(), GameConfig.getScreenHeight());
@@ -113,7 +113,7 @@ public class GameScene {
 		// Pause Button
 		Button pauseBtn = new Button();
 		pauseBtn.setStyle("-fx-margin:0;-fx-padding:0");
-	
+
 		AnchorPane.setTopAnchor(pauseBtn, 5.0 * GameConfig.getScale());
 		AnchorPane.setRightAnchor(pauseBtn, 5.0 * GameConfig.getScale());
 		pauseBtn.setPrefHeight(15.0 * GameConfig.getScale());
@@ -144,7 +144,7 @@ public class GameScene {
 
 	private static void addEventListener(Scene s, GraphicsContext gc, AnchorPane buttonPane) {
 		s.setOnKeyPressed((event) -> {
-			if (InterruptController.isInterruptPlayerInput()&&!InterruptController.isStillAnimation()) {
+			if (InterruptController.isInterruptPlayerInput() && !InterruptController.isStillAnimation()) {
 				return;
 			}
 			KeyCode keycode = event.getCode();
@@ -246,22 +246,24 @@ public class GameScene {
 
 		Skeleton skeleton = new Skeleton(5, 10, 1, firstRoomPos.getKey() - 3, firstRoomPos.getValue() + 1,
 				Direction.DOWN, 1.25, 0, 1);
-		Soul soul = new Soul(firstRoomPos.getKey() + 2, firstRoomPos.getValue() - 1,
-				Direction.DOWN, 1);
-		Reaper reaper = new Reaper(5, 10, 1, firstRoomPos.getKey() - 2, firstRoomPos.getValue() + 1,
-				Direction.DOWN, 1.25, 0, 1);
+		Soul soul = new Soul(firstRoomPos.getKey() + 2, firstRoomPos.getValue() - 1, Direction.DOWN, 1);
+		Reaper reaper = new Reaper(5, 10, 1, firstRoomPos.getKey() - 2, firstRoomPos.getValue() + 1, Direction.DOWN,
+				1.25, 0, 1);
 		PumpkinHead pumpkinHead = new PumpkinHead(5, 10, 1, firstRoomPos.getKey() - 2, firstRoomPos.getValue() + 2,
 				Direction.DOWN, 1.25, 0, 1);
 
-		HauntedMaid hauntedMaid= new HauntedMaid(5, 10, 1, firstRoomPos.getKey() - 2, firstRoomPos.getValue() + 3,
+		HauntedMaid hauntedMaid = new HauntedMaid(5, 10, 1, firstRoomPos.getKey() - 2, firstRoomPos.getValue() + 3,
 				Direction.DOWN, 1.25, 0, 1);
-		DarkMage darkMage = new DarkMage(10, 1,firstRoomPos.getKey() - 3, firstRoomPos.getValue() + 2, Direction.DOWN);
+		DarkMage darkMage = new DarkMage(10, 1, firstRoomPos.getKey() - 3, firstRoomPos.getValue() + 2, Direction.DOWN);
 		Potion maxHealthPotion = new InstantHealPotion("Bitset Potion", "Extends for 1 bit shift",
 				GameController.getPlayer().getHealth(), true);
 		Potion currentPotion = new RegenerationPotion("Salty Potion", "With 100 years salt effect", 10, 100);
-		Potion newVisionPotion = new VisionPotion("Brightness Potion", "Let your world filled with light", 2, 50, false);
-		Potion newPotionInventory = new RegenerationPotion("High Regeneration Potionssssssssssssssssssssssssssssssssssssssssssssssssssss", "With 100 years salt effect", 10, 100);
-		
+		Potion newVisionPotion = new VisionPotion("Brightness Potion", "Let your world filled with light", 2, 50,
+				false);
+		Potion newPotionInventory = new RegenerationPotion(
+				"High Regeneration Potionssssssssssssssssssssssssssssssssssssssssssssssssssss",
+				"With 100 years salt effect", 10, 100);
+
 		GameController.getPlayer().getItemList().add(currentPotion);
 		GameController.getPlayer().getItemList().add(maxHealthPotion);
 		GameController.getPlayer().getItemList().add(newPotionInventory);

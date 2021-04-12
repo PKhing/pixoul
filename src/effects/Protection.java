@@ -10,12 +10,12 @@ public class Protection extends EntityEffect {
 
 	@Override
 	public void onAdd(Entity entity) {
-		if(isDuplicate(entity)) {
+		if (isDuplicate(entity)) {
 			return;
 		}
-		
+
 		addEffect(entity);
-		
+
 		int newDefense = entity.getDefense() + getValue();
 		entity.setDefense(newDefense);
 

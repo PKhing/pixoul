@@ -8,7 +8,7 @@ public class InterruptController {
 	private static boolean isTransition;
 	private static boolean isImmobilize;
 	private static boolean isStillAnimation;
-	
+
 	public static void resetInterruptState() {
 		isPauseOpen = false;
 		isInventoryOpen = false;
@@ -17,11 +17,11 @@ public class InterruptController {
 		isImmobilize = false;
 		isStillAnimation = false;
 	}
-	
+
 	public static boolean isInterruptPlayerInput() {
 		return isPauseOpen || isInventoryOpen || isTransition || isStillAnimation;
 	}
-	
+
 	public static boolean isPauseOpen() {
 		return isPauseOpen;
 	}

@@ -23,13 +23,13 @@ public class SceneController {
 	public static void showStage() {
 		mainStage.show();
 	}
-	
+
 	public static void backToMainMenu() {
 		GameScene.getInventoryPane().remove();
 		GameScene.getPausePane().remove();
 		setSceneToStage(LandingScene.getScene());
 	}
-	
+
 	public static void exitGame() {
 		System.exit(0);
 	}

@@ -19,13 +19,15 @@ public class PumpkinHead extends Monster implements Moveable, Attackable {
 		GameController.getGameMap().get(posY, posX).setEntity(this);
 		// TODO Auto-generated constructor stub
 	}
+
 	@Override
-	public int getSymbol(){
+	public int getSymbol() {
 		return Sprites.PUMPKIN_HEAD;
 	}
+
 	@Override
 	public void update() {
-		if(getHealth() <= 0) {
+		if (getHealth() <= 0) {
 			remove();
 			return;
 		}
@@ -74,9 +76,8 @@ public class PumpkinHead extends Monster implements Moveable, Attackable {
 			setPosX(newPosX);
 			return true;
 		}
-		
+
 		return false;
 	}
-
 
 }

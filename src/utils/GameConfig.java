@@ -6,7 +6,7 @@ public class GameConfig {
 	private static int scale = 2;
 	private static double volume = 0.1;
 	private static boolean skipMoveAnimation = false;
-	
+
 	public static final int SCREEN_RESPONSIVE = 864;
 	public static final boolean SCREEN_SCALABLE = false;
 	public static final String GAME_TITLE = "Pixoul";
