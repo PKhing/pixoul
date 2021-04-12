@@ -152,15 +152,10 @@ public class GameMap {
 			int shiftY = 0;
 
 			if (entity != null && entity.isMoving()) {
-				if (entity.getDirection() == Direction.UP)
-					shiftY = cnt * GameConfig.getScale();
-				if (entity.getDirection() == Direction.DOWN)
-					shiftY = -cnt * GameConfig.getScale();
-				if (entity.getDirection() == Direction.LEFT)
-					shiftX = cnt * GameConfig.getScale();
-				if (entity.getDirection() == Direction.RIGHT)
-					shiftX = -cnt * GameConfig.getScale();
+				shiftX = -Direction.getMoveX(entity.getDirection(), cnt * GameConfig.getScale());
+				shiftY = -Direction.getMoveY(entity.getDirection(), cnt * GameConfig.getScale());
 			}
+			
 			int finalShiftY = shiftY;
 			int finalShiftX = shiftX;
 

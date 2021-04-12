@@ -71,8 +71,8 @@ public class GameLogic {
 			player.move(Direction.RIGHT);
 			break;
 		case STAY_STILL:
-			postGameUpdate();
 			postMoveUpdate();
+			postGameUpdate();
 			break;
 		default:
 			break;
@@ -198,9 +198,6 @@ public class GameLogic {
 		GameScene.getStatusPane().setAttack(player.getAttack());
 		GameScene.getStatusPane().setDefense(player.getDefense());
 		AnimationUtil.postGame();
-		if (!InterruptController.isTransition()) {
-			// GameController.getGameMap().drawMap();
-		}
 	}
 
 	private static void updateEntityEffect(Entity entity) {

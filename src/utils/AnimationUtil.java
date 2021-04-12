@@ -13,24 +13,12 @@ public class AnimationUtil {
 	public static void playerMove(int direction) {
 		InterruptController.setStillAnimation(true);
 		final int step = GameConfig.getScale();
-		int stepX = 0;
-		int stepY = 0;
-		if (direction == Direction.UP)
-			stepY = step;
-		if (direction == Direction.DOWN)
-			stepY = -step;
-		if (direction == Direction.LEFT)
-			stepX = step;
-		if (direction == Direction.RIGHT)
-			stepX = -step;
-		int finalStepY = stepY;
-		int finalStepX = stepX;
 		new Thread() {
 			@Override
 			public void run() {
 				if (!GameConfig.isSkipMoveAnimation()) {
 					GameController.getPlayer().setMoving(true);
-					move(finalStepY, finalStepX);
+					move(-Direction.getMoveY(direction, step), -Direction.getMoveX(direction, step));
 					GameController.getPlayer().setMoving(false);
 				}
 				Platform.runLater(() -> {
@@ -42,8 +30,8 @@ public class AnimationUtil {
 	}
 
 	public static void postGame() {
-		boolean isMove = false;
 
+		boolean isMove = false;
 		for (Monster monster : GameController.getGameMap().getMonsterList())
 			if (monster.isMoving())
 				isMove = true;
@@ -57,12 +45,10 @@ public class AnimationUtil {
 			public void run() {
 				if (finalIsMove && !GameConfig.isSkipMoveAnimation()) {
 					move(0, 0);
-					for (Monster monster : GameController.getGameMap().getMonsterList())
+					for (Monster monster : GameController.getGameMap().getMonsterList()) {
 						monster.setMoving(false);
+					}
 				}
-				Platform.runLater(() -> {
-					GameController.getGameMap().drawMap();
-				});
 			}
 		};
 
@@ -74,15 +60,8 @@ public class AnimationUtil {
 				try {
 					Thread.sleep(300);
 					GameController.getPlayer().setAttacked(false);
-
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				if (!finalIsMove || GameConfig.isSkipMoveAnimation()) {
-					Platform.runLater(() -> {
-						GameController.getGameMap().drawMap();
-					});
+					System.out.println("Player attacked animation interrupted");
 				}
 			}
 		};
@@ -94,12 +73,11 @@ public class AnimationUtil {
 					monsterMove.join();
 					playerAttacked.join();
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					System.out.println("Post game animation interrupted");
 				}
-
 				InterruptController.setStillAnimation(false);
 				Platform.runLater(() -> {
+					GameController.getGameMap().drawMap();
 					GameLogic.doNextAction();
 				});
 			}
@@ -125,10 +103,8 @@ public class AnimationUtil {
 					});
 
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					System.out.println("Monster attacked animation interrupted");
 				}
-
 			}
 		}.start();
 
@@ -139,7 +115,6 @@ public class AnimationUtil {
 		int newSpriteSize = GameConfig.SPRITE_SIZE * GameConfig.getScale();
 		int centerY = player.getPosY() * newSpriteSize + GameConfig.SPRITE_SIZE * GameConfig.getScale() / 2;
 		int centerX = player.getPosX() * newSpriteSize + GameConfig.SPRITE_SIZE * GameConfig.getScale() / 2;
-//				InterruptController.setAnimate(true);
 
 		for (int cnt = 31; cnt >= 0; cnt -= 2) {
 			try {
@@ -151,11 +126,9 @@ public class AnimationUtil {
 				});
 				Thread.sleep(20);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				System.out.println("Move animation interrupted");
 			}
 		}
-//				InterruptController.setAnimate(false);
 
 	}
 }

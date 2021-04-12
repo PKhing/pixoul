@@ -140,20 +140,14 @@ public class DrawUtil {
 		if (entity == null)
 			return;
 		GraphicsContext gc = GameScene.getGraphicsContext();
-		int direction = 0;
-		if (entity.getDirection() == Direction.LEFT)
-			direction = 1;
-		if (entity.getDirection() == Direction.RIGHT)
-			direction = 2;
-		if (entity.getDirection() == Direction.UP)
-			direction = 3;
+		int directionIndex = Direction.getSpriteIndex(entity.getDirection());
 		int walkIndex = (cnt / 8 + 1) % 4;
 		if (walkIndex == 3)
 			walkIndex = 1;
 		if (!entity.isMoving()) {
 			walkIndex = 1;
 		}
-		WritableImage img = new WritableImage(entitySprites, (96 * entity.getSymbol()) + 32 * walkIndex, direction * 32,
+		WritableImage img = new WritableImage(entitySprites, (96 * entity.getSymbol()) + 32 * walkIndex, directionIndex * 32,
 				32, 32);
 		// Fix later?
 		img = scaleUp(img, GameConfig.getScale());

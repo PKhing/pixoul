@@ -54,16 +54,8 @@ public class Skeleton extends Monster implements Moveable, Attackable {
 
 	@Override
 	public boolean move(int direction) {
-		int newPosY = getPosY();
-		int newPosX = getPosX();
-		if (direction == Direction.UP)
-			newPosY -= getMoveSpeed();
-		if (direction == Direction.DOWN)
-			newPosY += getMoveSpeed();
-		if (direction == Direction.LEFT)
-			newPosX -= getMoveSpeed();
-		if (direction == Direction.RIGHT)
-			newPosX += getMoveSpeed();
+		int newPosY = getPosY()+Direction.getMoveY(direction, getMoveSpeed());
+		int newPosX = getPosX()+Direction.getMoveX(direction, getMoveSpeed());
 
 		setDirection(direction);
 
