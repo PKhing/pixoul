@@ -122,7 +122,6 @@ public class AnimationUtil {
 					monster.setAttacked(false);
 					Platform.runLater(() -> {
 						GameLogic.postGameUpdate();
-						GameController.getGameMap().drawMap();
 					});
 
 				} catch (InterruptedException e) {
