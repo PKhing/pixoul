@@ -124,48 +124,18 @@ public class GameLogic {
 	}
 
 	public static void gameUpdate(DispatchAction action, Item item) {
-		Player player = GameController.getPlayer();
 		switch (action) {
 		case USE_ITEM:
-			player.equipItem(item);
-			if (item instanceof Armor) {
-				MessageTextUtil.textWhenEquipArmor((Armor) item);
-			} else if (item instanceof Weapon) {
-				MessageTextUtil.textWhenEquipWeapon((Weapon) item);
-			} else {
-				MessageTextUtil.textWhenUsedPotion((Potion) item);
-			}
+			useItemHandler(item);
 			break;
 		case SWITCH_EQUIP:
-			Item beforeSwitch = null;
-			if (item instanceof Armor) {
-				beforeSwitch = player.getEquippedArmor();
-				player.unEquipItem(beforeSwitch);
-				MessageTextUtil.textWhenSwitchArmor((Armor) item);
-			} else {
-				beforeSwitch = player.getEquippedWeapon();
-				player.unEquipItem(beforeSwitch);
-				MessageTextUtil.textWhenSwitchWeapon((Weapon) item);
-			}
-			player.equipItem(item);
-
+			switchEquipmentHandler(item);
 			break;
 		case UNEQUIP:
-			player.unEquipItem(item);
-			if (item instanceof Armor) {
-				MessageTextUtil.textWhenUnequipArmor((Armor) item);
-			} else {
-				MessageTextUtil.textWhenUnequipWeapon((Weapon) item);
-			}
+			unEquipItemHandler(item);
 			break;
 		case DELETE_ITEM:
-			if (item == GameController.getPlayer().getEquippedArmor()) {
-				GameController.getPlayer().setEquippedArmor(null);
-			} else if (item == GameController.getPlayer().getEquippedWeapon()) {
-				GameController.getPlayer().setEquippedWeapon(null);
-			}
-			GameController.getPlayer().getItemList().remove(item);
-			MessageTextUtil.textWhenDropItem(item);
+			deleteItemHandler(item);
 			break;
 		default:
 			return;
@@ -197,7 +167,7 @@ public class GameLogic {
 		GameScene.getStatusPane().setHP(player.getHealth(), player.getMaxHealth());
 		GameScene.getStatusPane().setAttack(player.getAttack());
 		GameScene.getStatusPane().setDefense(player.getDefense());
-		AnimationUtil.postGame();
+		AnimationUtil.postGameAnimation();
 	}
 
 	private static void updateEntityEffect(Entity entity) {
@@ -210,6 +180,52 @@ public class GameLogic {
 				each.onWearOff(entity);
 				entity.getEffectList().remove(each);
 			}
+		}
+	}
+	
+	private static void deleteItemHandler(Item item) {
+		if (item == GameController.getPlayer().getEquippedArmor()) {
+			GameController.getPlayer().setEquippedArmor(null);
+		} else if (item == GameController.getPlayer().getEquippedWeapon()) {
+			GameController.getPlayer().setEquippedWeapon(null);
+		}
+		GameController.getPlayer().getItemList().remove(item);
+		MessageTextUtil.textWhenDropItem(item);
+	}
+	
+	private static void unEquipItemHandler(Item item) {
+		Player player = GameController.getPlayer();
+		player.unEquipItem(item);
+		if (item instanceof Armor) {
+			MessageTextUtil.textWhenUnequipArmor((Armor) item);
+		} else {
+			MessageTextUtil.textWhenUnequipWeapon((Weapon) item);
+		}
+	}
+	
+	private static void switchEquipmentHandler(Item item) {
+		Player player = GameController.getPlayer();
+		Item beforeSwitch = null;
+		if (item instanceof Armor) {
+			beforeSwitch = player.getEquippedArmor();
+			player.unEquipItem(beforeSwitch);
+			MessageTextUtil.textWhenSwitchArmor((Armor) item);
+		} else {
+			beforeSwitch = player.getEquippedWeapon();
+			player.unEquipItem(beforeSwitch);
+			MessageTextUtil.textWhenSwitchWeapon((Weapon) item);
+		}
+		player.equipItem(item);
+	}
+	private static void useItemHandler(Item item) {
+		Player player = GameController.getPlayer();
+		player.equipItem(item);
+		if (item instanceof Armor) {
+			MessageTextUtil.textWhenEquipArmor((Armor) item);
+		} else if (item instanceof Weapon) {
+			MessageTextUtil.textWhenEquipWeapon((Weapon) item);
+		} else {
+			MessageTextUtil.textWhenUsedPotion((Potion) item);
 		}
 	}
 }

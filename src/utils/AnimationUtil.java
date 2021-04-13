@@ -29,7 +29,7 @@ public class AnimationUtil {
 		}.start();
 	}
 
-	public static void postGame() {
+	public static void postGameAnimation() {
 
 		boolean isMove = false;
 		for (Monster monster : GameController.getGameMap().getMonsterList())
