@@ -1,5 +1,6 @@
 package controller;
 
+import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -21,6 +22,7 @@ public class SceneController {
 		if (newScene == null)
 			return;
 		mainStage.setScene(newScene);
+		newScene.setCursor(Cursor.DEFAULT);
 	}
 
 	public static void showStage() {
