@@ -17,46 +17,25 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
-import utils.FontUtil;
 import utils.GameConfig;
 
 public class PausePane extends VBox {
 	private static SettingPane settingPane = new SettingPane();
 	private final int heightBox = 90;
 	private final int widthBox = 120;
-
-	class ButtonWithStyle extends Button {
-		ButtonWithStyle(String text) {
-			this.setText(text);
-			this.setPadding(new Insets(-GameConfig.getScale()));
-			this.setFont(FontUtil.getFont(16));
-			this.setMinWidth(widthBox* GameConfig.getScale());
-			this.setBackground(new Background(new BackgroundFill(Color.rgb(245, 246, 231), null, null)));
-			this.setBorder(new Border(new BorderStroke(Color.rgb(245, 246, 231), BorderStrokeStyle.SOLID,
-					CornerRadii.EMPTY, new BorderWidths(GameConfig.getScale()))));
-
-			this.setOnMouseEntered((event) -> {
-				this.setBorder(new Border(new BorderStroke(Color.rgb(87, 89, 66), BorderStrokeStyle.SOLID,
-						CornerRadii.EMPTY, new BorderWidths(GameConfig.getScale()))));
-			});
-			this.setOnMouseExited((event) -> {
-				this.setBorder(new Border(new BorderStroke(Color.rgb(245, 246, 231), BorderStrokeStyle.SOLID,
-						CornerRadii.EMPTY, new BorderWidths(GameConfig.getScale()))));
-			});
-
-		}
-	}
+	private static final Color colorOnHover = Color.rgb(87, 89, 66);
+	private static final Color colorBg = Color.rgb(245, 246, 231);
 
 	public PausePane() {
 		super();
 
 		setSpacing(10.0);
 		setAlignment(Pos.CENTER);
-		this.setBackground(new Background(new BackgroundFill(Color.rgb(245, 246, 231), null, null)));
+		this.setBackground(new Background(new BackgroundFill(colorBg, null, null)));
 		this.setPadding(new Insets(5 * GameConfig.getScale()));
-		this.setBorder(new Border(new BorderStroke(Color.rgb(87, 89, 66), BorderStrokeStyle.SOLID, CornerRadii.EMPTY,
+		this.setBorder(new Border(new BorderStroke(colorOnHover, BorderStrokeStyle.SOLID, CornerRadii.EMPTY,
 				new BorderWidths(GameConfig.getScale()))));
+
 		setPrefHeight(heightBox * GameConfig.getScale());
 		setPrefWidth(widthBox * GameConfig.getScale());
 		setMaxHeight(heightBox * GameConfig.getScale());
@@ -78,7 +57,7 @@ public class PausePane extends VBox {
 	}
 
 	private void addStartNewGameBtn() {
-		Button startNewGameBtn = new Button("Start New Game");
+		Button startNewGameBtn = new StyledButton(widthBox, "Start New Game", colorOnHover, colorBg);
 
 		startNewGameBtn.setOnMouseClicked((event) -> {
 			remove();
@@ -88,16 +67,8 @@ public class PausePane extends VBox {
 		getChildren().add(startNewGameBtn);
 	}
 
-	private void addTitle() {
-		Text titleText = new Text("Paused");
-
-		titleText.setFont(FontUtil.getFont(30));
-
-		getChildren().add(titleText);
-	}
-
 	private void addResumeBtn() {
-		Button resumeBtn = new ButtonWithStyle("Resume");
+		Button resumeBtn = new StyledButton(widthBox, "Resume", colorOnHover, colorBg);
 
 		resumeBtn.setOnMouseClicked((event) -> {
 			remove();
@@ -107,7 +78,7 @@ public class PausePane extends VBox {
 	}
 
 	private void addSettingBtn() {
-		Button settingBtn = new ButtonWithStyle("Setting");
+		Button settingBtn = new StyledButton(widthBox, "Setting", colorOnHover, colorBg);
 
 		settingBtn.setOnMouseClicked((event) -> {
 			((StackPane) getParent()).getChildren().add(settingPane);
@@ -119,7 +90,7 @@ public class PausePane extends VBox {
 	}
 
 	private void addToMainMenuBtn() {
-		Button toMainMenuBtn = new ButtonWithStyle("Back to main menu");
+		Button toMainMenuBtn = new StyledButton(widthBox, "Back to main menu", colorOnHover, colorBg);
 
 		toMainMenuBtn.setOnMouseClicked((event) -> {
 			GameController.exitToMainMenu();
@@ -130,7 +101,7 @@ public class PausePane extends VBox {
 	}
 
 	private void addExitBtn() {
-		Button exitBtn = new ButtonWithStyle("Exit");
+		Button exitBtn = new StyledButton(widthBox, "Exit", colorOnHover, colorBg);
 
 		exitBtn.setOnMouseClicked((event) -> {
 			SceneController.exitGame();

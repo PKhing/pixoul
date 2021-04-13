@@ -36,10 +36,9 @@ public class InventoryPane extends AnchorPane {
 	private static WritableImage binSprite = DrawUtil.getWritableImage("sprites/inventory/bin.png");
 
 	public InventoryPane() {
-
 		this.setOnKeyPressed((event) -> {
 			if (event.getCode() == KeyCode.ESCAPE) {
-				this.remove();
+				remove();
 				InterruptController.setOpenFromInside(true);
 			}
 		});
@@ -48,11 +47,11 @@ public class InventoryPane extends AnchorPane {
 		itemPane = new FlowPane();
 		AnchorPane.setLeftAnchor(itemPane, (double) (GameConfig.getScreenWidth() / 2 - 80 * GameConfig.getScale()));
 		AnchorPane.setTopAnchor(itemPane, (double) (GameConfig.getScreenHeight() / 2 - 100 * GameConfig.getScale()));
+		
 		this.getChildren().add(itemPane);
-		itemPane.setPrefHeight(200 * GameConfig.getScale());
-		itemPane.setPrefWidth(160 * GameConfig.getScale());
-		itemPane.setMaxHeight(200 * GameConfig.getScale());
-		itemPane.setMaxWidth(160 * GameConfig.getScale());
+
+		itemPane.setPrefSize(160 * GameConfig.getScale(), 200 * GameConfig.getScale());
+		itemPane.setMaxSize(160 * GameConfig.getScale(), 200 * GameConfig.getScale());
 
 		// EquipmentPane
 		equipmentPane = new VBox();
@@ -147,22 +146,34 @@ public class InventoryPane extends AnchorPane {
 	}
 
 	private void addHeader() {
-
 		StackPane header = new StackPane();
 		itemPane.getChildren().add(header);
 
 		// Texture
+		addTextureToHeader(header);
+		
+		// Text
+		addInventoryText(header);
+
+		// Exit button
+		addExitButton(header);
+	}
+	
+	private void addTextureToHeader(StackPane header) {
 		Canvas canvas = new Canvas(160 * GameConfig.getScale(), 40 * GameConfig.getScale());
 		header.getChildren().add(canvas);
 		canvas.getGraphicsContext2D().drawImage(DrawUtil.scaleUp(headerBackground, GameConfig.getScale()), 0, 0);
-
-		// Text
+	}
+	
+	private void addInventoryText(StackPane header) {
 		Text text = new Text("Inventory");
-		header.getChildren().add(text);
 		text.setFont(FontUtil.getFont(30));
 		text.setFill(Color.rgb(123, 126, 94));
-
-		// Exit button
+		
+		header.getChildren().add(text);
+	}
+	
+	private void addExitButton(StackPane header) {
 		Text exit = new Text("x ");
 		StackPane.setAlignment(exit, Pos.TOP_RIGHT);
 		header.getChildren().add(exit);
@@ -174,7 +185,7 @@ public class InventoryPane extends AnchorPane {
 			GameScene.getScene().setCursor(Cursor.DEFAULT);
 		});
 	}
-
+	
 	private void addDeleteButton() {
 
 		Canvas deleteButton = new Canvas(32 * GameConfig.getScale(), 32 * GameConfig.getScale());

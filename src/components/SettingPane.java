@@ -26,18 +26,7 @@ public class SettingPane extends VBox {
 	private final int widthBox = 200;
 
 	public SettingPane() {
-		super();
-
-		setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
-		setPadding(new Insets(30));
-		setSpacing(10);
-
-		setAlignment(Pos.CENTER);
-		setPrefHeight(heightBox * GameConfig.getScale());
-		setPrefWidth(widthBox * GameConfig.getScale());
-		setMaxHeight(heightBox * GameConfig.getScale());
-		setMaxWidth(widthBox * GameConfig.getScale());
-
+		styleSetup();
 		addTitle();
 		addVolumeSlider();
 		addDisableAnimation();
@@ -52,6 +41,19 @@ public class SettingPane extends VBox {
 		InterruptController.setSettingOpen(true);
 	}
 
+	private void styleSetup() {
+		setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
+		setPadding(new Insets(30));
+		setSpacing(10);
+
+		setAlignment(Pos.CENTER);
+		setPrefHeight(heightBox * GameConfig.getScale());
+		setPrefWidth(widthBox * GameConfig.getScale());
+		setMaxHeight(heightBox * GameConfig.getScale());
+		setMaxWidth(widthBox * GameConfig.getScale());
+
+	}
+	
 	private void addCloseText() {
 		HBox closeBox = new HBox();
 		closeBox.setPadding(new Insets(20));

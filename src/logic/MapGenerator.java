@@ -2,6 +2,9 @@ package logic;
 
 import java.util.LinkedList;
 import java.util.Queue;
+
+import controller.GameController;
+import entity.Player;
 import javafx.util.Pair;
 import utils.GameConfig;
 import utils.RandomUtil;
@@ -21,6 +24,21 @@ public class MapGenerator {
 
 	private static int map[][];
 
+	public static GameMap generateMap() {
+		GameMap gameMap = buildNewEmptyMap();
+
+		Pair<Integer, Integer> posLadderUp = gameMap.getRoomList().get(0);
+		Pair<Integer, Integer> posLadderDown = gameMap.getRoomList().get(gameMap.getRoomList().size() - 1);
+
+		gameMap.getGameMap()[posLadderUp.getKey()][posLadderUp.getValue()].setType(Cell.LADDER_UP);
+		gameMap.getGameMap()[posLadderDown.getKey()][posLadderDown.getValue()].setType(Cell.LADDER_DOWN);
+
+		generateItemOnMap(gameMap);
+		generateMonsterOnMap(gameMap);
+		
+		return gameMap;
+	}
+	
 	static class State {
 		private int y, x, direction;
 
@@ -100,6 +118,44 @@ public class MapGenerator {
 		}
 	}
 
+	private static GameMap buildNewEmptyMap() {
+		GameMap gameMap;
+		do {
+			gameMap = new GameMap();
+			map = new int[GameConfig.MAP_SIZE + 10][GameConfig.MAP_SIZE + 10];
+			int roomCnt = 1;
+			while (roomCnt <= MAX_ROOM) {
+				int y = RandomUtil.random(0, GameConfig.MAP_SIZE);
+				int x = RandomUtil.random(0, GameConfig.MAP_SIZE);
+				if (makeRoom(y, x, roomCnt)) {
+					gameMap.getRoomList().add(new Pair<>(y, x));
+					roomCnt++;
+				}
+			}
+			int pathCnt = 1;
+			while (pathCnt <= MAX_PATH) {
+				int y = RandomUtil.random(0, GameConfig.MAP_SIZE);
+				int x = RandomUtil.random(0, GameConfig.MAP_SIZE);
+				while (map[y][x] < 1) {
+					y = RandomUtil.random(0, GameConfig.MAP_SIZE);
+					x = RandomUtil.random(0, GameConfig.MAP_SIZE);
+				}
+				State state = new State(y, x, RandomUtil.random(0, 3));
+				int tmp = state.getType();
+				state.setType(0);
+				if (makePath(state, tmp, 0)) {
+					pathCnt++;
+					state.setType(PATH);
+				} else {
+					state.setType(tmp);
+				}
+			}
+			makeMap(gameMap.getGameMap());
+		} while (!validate(gameMap));
+		
+		return gameMap;
+	}
+	
 	private static boolean makeRoom(int y, int x, int no) {
 
 		// check if room is valid or not
@@ -225,48 +281,18 @@ public class MapGenerator {
 		return true;
 	}
 
-	public static GameMap generateMap() {
-		GameMap gameMap;
-		do {
-			gameMap = new GameMap();
-			map = new int[GameConfig.MAP_SIZE + 10][GameConfig.MAP_SIZE + 10];
-			int roomCnt = 1;
-			while (roomCnt <= MAX_ROOM) {
-				int y = RandomUtil.random(0, GameConfig.MAP_SIZE);
-				int x = RandomUtil.random(0, GameConfig.MAP_SIZE);
-				if (makeRoom(y, x, roomCnt)) {
-					gameMap.getRoomList().add(new Pair<>(y, x));
-					roomCnt++;
-				}
-			}
-			int pathCnt = 1;
-			while (pathCnt <= MAX_PATH) {
-				int y = RandomUtil.random(0, GameConfig.MAP_SIZE);
-				int x = RandomUtil.random(0, GameConfig.MAP_SIZE);
-				while (map[y][x] < 1) {
-					y = RandomUtil.random(0, GameConfig.MAP_SIZE);
-					x = RandomUtil.random(0, GameConfig.MAP_SIZE);
-				}
-				State state = new State(y, x, RandomUtil.random(0, 3));
-				int tmp = state.getType();
-				state.setType(0);
-				if (makePath(state, tmp, 0)) {
-					pathCnt++;
-					state.setType(PATH);
-				} else {
-					state.setType(tmp);
-				}
-			}
-			makeMap(gameMap.getGameMap());
-		} while (!validate(gameMap));
-
-		Pair<Integer, Integer> posLadderUp = gameMap.getRoomList().get(0);
-		Pair<Integer, Integer> posLadderDown = gameMap.getRoomList().get(gameMap.getRoomList().size() - 1);
-
-		gameMap.getGameMap()[posLadderUp.getKey()][posLadderUp.getValue()].setType(Cell.LADDER_UP);
-		gameMap.getGameMap()[posLadderDown.getKey()][posLadderDown.getValue()].setType(Cell.LADDER_DOWN);
-
-		return gameMap;
+	private static void generateItemOnMap(GameMap gameMap) {
+		Cell[][] cellMap = gameMap.getGameMap();
+		int level = GameController.getLevel();
+		
+		
+	}
+	
+	private static void generateMonsterOnMap(GameMap gameMap) {
+		Cell[][] cellMap = gameMap.getGameMap();
+		Player player = GameController.getPlayer();
+		
+		int playerAtk = player.getAttack();
 	}
 
 }
