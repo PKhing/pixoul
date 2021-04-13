@@ -4,6 +4,7 @@ import controller.GameController;
 import entity.base.Attackable;
 import entity.base.Entity;
 import entity.base.Monster;
+import logic.Direction;
 import logic.Sprites;
 import utils.MessageTextUtil;
 import utils.RandomUtil;
@@ -12,8 +13,8 @@ public class Soul extends Monster implements Attackable {
 	private final int attackPercent = 20;
 	private boolean isFriendly;
 
-	public Soul(int posY, int posX, int direction, int moveSpeed) {
-		super("Soul", 0, 1, 0, posY, posX, direction, 0, 0, moveSpeed);
+	public Soul(int posY, int posX) {
+		super("Soul", 0, 1, 0, posY, posX, Direction.DOWN, 0, 0, 0);
 		GameController.getGameMap().get(posY, posX).setEntity(this);
 	}
 

@@ -47,22 +47,10 @@ public class Player extends Entity implements Moveable, Attackable {
 
 	@Override
 	public boolean move(int direction) {
-		int newPosY = getPosY()+Direction.getMoveY(direction, getMoveSpeed());
-		int newPosX = getPosX()+Direction.getMoveX(direction, getMoveSpeed());
-
-		setDirection(direction);
-
-		Cell newPosCell = GameController.getGameMap().get(newPosY, newPosX);
-
-		if (newPosCell.getType() != Cell.WALL && !(newPosCell.getEntity() instanceof Entity)) {
-			GameController.getGameMap().get(getPosY(), getPosX()).setEntity(null);
-			GameController.getGameMap().get(newPosY, newPosX).setEntity(this);
-			setPosY(newPosY);
-			setPosX(newPosX);
+		if (super.move(direction)) {
 			AnimationUtil.playerMove(direction);
 			return true;
 		}
-
 		return false;
 	}
 

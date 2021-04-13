@@ -5,6 +5,8 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import controller.GameController;
 import effects.EntityEffect;
+import logic.Cell;
+import logic.Direction;
 import utils.MessageTextUtil;
 
 public abstract class Entity {
@@ -57,6 +59,45 @@ public abstract class Entity {
 	}
 
 	public abstract int getSymbol();
+
+	protected void remove() {
+		GameController.getGameMap().get(this.getPosY(), this.getPosX()).setEntity(null);
+		GameController.getGameMap().getMonsterList().remove(this);
+		MessageTextUtil.textWhenSlained(this);
+	}
+
+	// Attack Range ? (Customize later ?)
+	protected boolean isAttackable(Entity x) {
+		int diffX = Math.abs(x.getPosX() - getPosX());
+		int diffY = Math.abs(x.getPosY() - getPosY());
+
+		if (diffX <= 1 && diffY <= 1) {
+			return true;
+		}
+		return false;
+	}
+
+	public boolean move(int direction) {
+		if (!(this instanceof Moveable))
+			return false;
+
+		int newPosY = getPosY() + Direction.getMoveY(direction, getMoveSpeed());
+		int newPosX = getPosX() + Direction.getMoveX(direction, getMoveSpeed());
+
+		setDirection(direction);
+
+		Cell newPosCell = GameController.getGameMap().get(newPosY, newPosX);
+
+		if (newPosCell.getType() != Cell.WALL && !(newPosCell.getEntity() instanceof Entity)) {
+			GameController.getGameMap().get(getPosY(), getPosX()).setEntity(null);
+			GameController.getGameMap().get(newPosY, newPosX).setEntity(this);
+			setPosY(newPosY);
+			setPosX(newPosX);
+			return true;
+		}
+
+		return false;
+	}
 
 	public int getHealth() {
 		return health;
@@ -156,23 +197,6 @@ public abstract class Entity {
 
 	public int getPriority() {
 		return 2;
-	}
-
-	// Attack Range ? (Customize later ?)
-	protected boolean isAttackable(Entity x) {
-		int diffX = Math.abs(x.getPosX() - getPosX());
-		int diffY = Math.abs(x.getPosY() - getPosY());
-
-		if (diffX <= 1 && diffY <= 1) {
-			return true;
-		}
-		return false;
-	}
-
-	protected void remove() {
-		GameController.getGameMap().get(this.getPosY(), this.getPosX()).setEntity(null);
-		GameController.getGameMap().getMonsterList().remove(this);
-		MessageTextUtil.textWhenSlained(this);
 	}
 
 	public boolean isMoving() {

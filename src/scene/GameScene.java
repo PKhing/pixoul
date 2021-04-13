@@ -238,7 +238,7 @@ public class GameScene {
 
 		Skeleton skeleton = new Skeleton(5, 10, 1, firstRoomPos.getKey() - 3, firstRoomPos.getValue() + 1,
 				Direction.DOWN, 1.25, 0, 1);
-		Soul soul = new Soul(firstRoomPos.getKey() + 2, firstRoomPos.getValue() - 1, Direction.DOWN, 1);
+		Soul soul = new Soul(firstRoomPos.getKey() + 2, firstRoomPos.getValue() - 1);
 		Reaper reaper = new Reaper(5, 10, 1, firstRoomPos.getKey() - 2, firstRoomPos.getValue() + 1, Direction.DOWN,
 				1.25, 0, 1);
 		PumpkinHead pumpkinHead = new PumpkinHead(5, 10, 1, firstRoomPos.getKey() - 2, firstRoomPos.getValue() + 2,

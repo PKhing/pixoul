@@ -7,8 +7,6 @@ import entity.base.Attackable;
 import entity.base.Entity;
 import entity.base.Monster;
 import entity.base.Moveable;
-import logic.Cell;
-import logic.Direction;
 import logic.GameLogic;
 import logic.Sprites;
 import utils.MessageTextUtil;
@@ -19,7 +17,6 @@ public class Reaper extends Monster implements Attackable, Moveable {
 			double critPercent, int moveSpeed) {
 		super("Reaper", attack, maxHealth, defense, posY, posX, direction, critRate, critPercent, moveSpeed);
 		GameController.getGameMap().get(posY, posX).setEntity(this);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -54,26 +51,6 @@ public class Reaper extends Monster implements Attackable, Moveable {
 		target.setHealth(target.getHealth() - atkValue);
 		target.setAttacked(true);
 		return true;
-	}
-
-	@Override
-	public boolean move(int direction) {
-		int newPosY = getPosY()+Direction.getMoveY(direction, getMoveSpeed());
-		int newPosX = getPosX()+Direction.getMoveX(direction, getMoveSpeed());
-
-		setDirection(direction);
-
-		Cell newPosCell = GameController.getGameMap().get(newPosY, newPosX);
-
-		if (newPosCell.getType() != Cell.WALL && !(newPosCell.getEntity() instanceof Entity)) {
-			GameController.getGameMap().get(getPosY(), getPosX()).setEntity(null);
-			GameController.getGameMap().get(newPosY, newPosX).setEntity(this);
-			setPosY(newPosY);
-			setPosX(newPosX);
-			return true;
-		}
-
-		return false;
 	}
 
 }
