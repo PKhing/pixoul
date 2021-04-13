@@ -60,23 +60,6 @@ public abstract class Entity {
 
 	public abstract int getSymbol();
 
-	protected void remove() {
-		GameController.getGameMap().get(this.getPosY(), this.getPosX()).setEntity(null);
-		GameController.getGameMap().getMonsterList().remove(this);
-		MessageTextUtil.textWhenSlained(this);
-	}
-
-	// Attack Range ? (Customize later ?)
-	protected boolean isAttackable(Entity x) {
-		int diffX = Math.abs(x.getPosX() - getPosX());
-		int diffY = Math.abs(x.getPosY() - getPosY());
-
-		if (diffX <= 1 && diffY <= 1) {
-			return true;
-		}
-		return false;
-	}
-
 	public boolean move(int direction) {
 		if (!(this instanceof Moveable))
 			return false;
