@@ -17,6 +17,7 @@ import logic.MapGenerator;
 import scene.GameOverScene;
 import scene.GameScene;
 import utils.GameAudioUtils;
+import utils.TransitionUtil;
 
 public class GameController {
 	private static ArrayList<GameMap> floorList = new ArrayList<>();
@@ -87,9 +88,11 @@ public class GameController {
 		reset();
 
 		GameMap newFloor = addNewFloor();
+		InterruptController.resetInterruptState();
 		setGameMap(newFloor);
 
 		GameScene.getMessagePane().resetMessage();
+		GameScene.getEffectPane().update();
 		GameScene.setPlayerPositionOnNewMap();
 		GameScene.getStatusPane().setAllValue(GameController.getPlayer());
 		SceneController.setSceneToStage(GameScene.getScene());
@@ -98,12 +101,9 @@ public class GameController {
 		GameScene.getGamePane().setOpacity(0.0);
 
 		InterruptController.setTransition(true);
-		FadeTransition fadeIn = new FadeTransition(Duration.seconds(1.0), GameScene.getGamePane());
+		FadeTransition fadeIn = TransitionUtil.makeFadingNode(GameScene.getGamePane(), 0.0, 1.0);
 
 		newFloor.drawMap();
-
-		fadeIn.setFromValue(0.0);
-		fadeIn.setToValue(1.0);
 
 		fadeIn.play();
 		fadeIn.setOnFinished((event) -> InterruptController.setTransition(false));
@@ -112,27 +112,22 @@ public class GameController {
 	}
 
 	public static void exitToMainMenu() {
-		FadeTransition fadeIn = new FadeTransition(Duration.seconds(1.0), GameScene.getGamePane());
+		FadeTransition fadeOut = TransitionUtil.makeFadingNode(GameScene.getGamePane(), 1.0, 0.0);
 
-		fadeIn.setFromValue(1.0);
-		fadeIn.setToValue(0.0);
 		bgmMedia.stop();
 
-		fadeIn.setOnFinished((event) -> SceneController.backToMainMenu());
+		fadeOut.setOnFinished((event) -> SceneController.backToMainMenu());
 
-		fadeIn.play();
+		fadeOut.play();
 	}
 
 	public static void isGameOver() {
 		if(player.getHealth() <= 0) {
 			bgmMedia.stop();
-			FadeTransition fadeOut = new FadeTransition(Duration.seconds(1.0), GameScene.getGamePane());
+			FadeTransition fadeOut = TransitionUtil.makeFadingNode(GameScene.getGamePane(), 1.0, 0.0);
 			
-			fadeOut.setFromValue(1.0);
-			fadeOut.setToValue(0.0);
-			
-			fadeOut.setOnFinished((event) -> {
-				InterruptController.setTransition(true);
+			InterruptController.setTransition(true);
+			fadeOut.setOnFinished((event) -> {	
 				SceneController.setSceneToStage(GameOverScene.getScene());
 			});
 			
@@ -176,17 +171,17 @@ public class GameController {
 	private static FadeTransition makeFadingScene(Node node, double from, double to, GameMap newMap,
 			boolean isAscending) {
 		// Fade in, Fade out setup
-		FadeTransition fadeIn = new FadeTransition(Duration.seconds(1.0), node);
-		FadeTransition fadeOut = new FadeTransition(Duration.seconds(1.0), node);
+		FadeTransition fadeFirst = TransitionUtil.makeFadingNode(GameScene.getGamePane(), from, to);
+		FadeTransition fadeSecond = TransitionUtil.makeFadingNode(GameScene.getGamePane(), to, from);
 
-		fadeOut.setFromValue(from);
-		fadeOut.setToValue(to);
+		fadeSecond.setFromValue(from);
+		fadeSecond.setToValue(to);
 
-		fadeIn.setFromValue(to);
-		fadeIn.setToValue(from);
+		fadeFirst.setFromValue(to);
+		fadeFirst.setToValue(from);
 
 		// Fade out when finished
-		fadeOut.setOnFinished((event) -> {
+		fadeSecond.setOnFinished((event) -> {
 			gameMap.get(player.getPosY(), player.getPosX()).setEntity(null);
 
 			setGameMap(newMap);
@@ -204,12 +199,12 @@ public class GameController {
 			player.setInitialPos(posY, posX);
 			newMap.get(posY, posX).setEntity(player);
 			newMap.drawMap();
-			fadeIn.play();
+			fadeFirst.play();
 		});
 
 		// Fade in when finished
-		fadeIn.setOnFinished((event) -> InterruptController.setTransition(false));
+		fadeFirst.setOnFinished((event) -> InterruptController.setTransition(false));
 
-		return fadeOut;
+		return fadeSecond;
 	}
 }
