@@ -195,10 +195,6 @@ public abstract class Entity {
 		this.effectList = effectList;
 	}
 
-	public int getPriority() {
-		return 2;
-	}
-
 	public boolean isMoving() {
 		return isMoving;
 	}
@@ -213,6 +209,23 @@ public abstract class Entity {
 
 	public void setAttacked(boolean isAttacked) {
 		this.isAttacked = isAttacked;
+	}
+
+	// Attack Range ? (Customize later ?)
+	protected boolean isAttackable(Entity x) {
+		int diffX = Math.abs(x.getPosX() - getPosX());
+		int diffY = Math.abs(x.getPosY() - getPosY());
+
+		if (diffX <= 1 && diffY <= 1) {
+			return true;
+		}
+		return false;
+	}
+
+	protected void remove() {
+		GameController.getGameMap().get(this.getPosY(), this.getPosX()).setEntity(null);
+		GameController.getGameMap().getMonsterList().remove(this);
+		MessageTextUtil.textWhenSlained(this);
 	}
 
 }

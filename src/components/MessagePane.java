@@ -1,6 +1,10 @@
 package components;
 
+import javafx.geometry.Insets;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -8,7 +12,7 @@ import utils.FontUtil;
 import utils.GameConfig;
 
 public class MessagePane extends VBox {
-	private final int MAX_MESSAGE = 4;
+	private final int MAX_MESSAGE = 5;
 
 	public MessagePane() {
 		super();
@@ -16,7 +20,8 @@ public class MessagePane extends VBox {
 		AnchorPane.setLeftAnchor(this, 0.0);
 		this.setPrefHeight(50.0 * GameConfig.getScale());
 		this.setPrefWidth(140.0 * GameConfig.getScale());
-		this.setStyle("-fx-background-color: rgba(0,0,0, 0.5);-fx-padding:7 7 7 14");
+		this.setBackground(new Background(new BackgroundFill(Color.rgb(0, 0, 0, 0.5), CornerRadii.EMPTY, Insets.EMPTY)));
+		this.setPadding(new Insets(7, 7, 7, 14));
 	}
 
 	public void addMessage(String text) {
