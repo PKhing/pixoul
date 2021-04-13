@@ -1,5 +1,7 @@
 package components;
 
+import controller.GameController;
+import controller.SceneController;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -35,12 +37,17 @@ public class GameOverPane extends VBox {
 		buttonBox.setAlignment(Pos.CENTER);
 		
 		Button tryAgainBtn = new Button("Try Again");
+		
+		tryAgainBtn.setOnMouseClicked((event) -> GameController.start());
+		
 		Button backToMenuBtn = new Button("Back To Main Menu");
+		backToMenuBtn.setOnMouseClicked((event) -> SceneController.backToMainMenu());
+		
 		Button exitBtn = new Button("Exit Game");
+		exitBtn.setOnMouseClicked((event) -> SceneController.exitGame());
 		
 		buttonBox.getChildren().addAll(tryAgainBtn, backToMenuBtn, exitBtn);
 		
 		getChildren().addAll(gameOverTitle, buttonBox);
 	}
-	
 }
