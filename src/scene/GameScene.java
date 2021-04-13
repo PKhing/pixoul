@@ -80,7 +80,7 @@ public class GameScene {
 		// Overlay
 		AnchorPane overlay = new AnchorPane();
 		overlay.setPickOnBounds(false);
-		root.getChildren().add(overlay);
+		gamePane.getChildren().add(overlay);
 
 		addInventoryButton(overlay);
 		addPauseButton(overlay);
@@ -110,7 +110,7 @@ public class GameScene {
 		inventoryBtn.setOnMouseClicked((event) -> {
 			if (InterruptController.isPauseOpen())
 				return;
-			root.getChildren().add(inventoryPane);
+			gamePane.getChildren().add(inventoryPane);
 			inventoryPane.requestFocus();
 			InterruptController.setInventoryOpen(true);
 		});
@@ -128,7 +128,7 @@ public class GameScene {
 		pauseBtn.setOnMouseClicked((event) -> {
 			if (InterruptController.isPauseOpen())
 				return;
-			root.getChildren().add(pausePane);
+			gamePane.getChildren().add(pausePane);
 			pausePane.requestFocus();
 			InterruptController.setPauseOpen(true);
 		});

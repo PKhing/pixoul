@@ -34,13 +34,21 @@ public class ItemInfoPane extends VBox {
 				new BorderWidths(GameConfig.getScale()))));
 
 		// Add name
+		addItemName(item);
+		
+		// Add description
+		addItemDescription(item);
+	}
+	
+	private void addItemName(Item item) {
 		Text name = new Text(item.getName());
 		name.setFont(FontUtil.getFont(18));
 		name.setWrappingWidth(90.0 * GameConfig.getScale());
 		name.setFill(Color.rgb(76, 77, 56));
-		this.getChildren().add(name);
-
-		// Add description
+		this.getChildren().add(name);		
+	}
+	
+	private void addItemDescription(Item item) {
 		Text description = new Text(item.getDescription());
 		description.setWrappingWidth(90.0 * GameConfig.getScale());
 		description.setFont(FontUtil.getFont(12));
