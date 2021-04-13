@@ -71,15 +71,16 @@ public class GameLogic {
 			player.move(Direction.RIGHT);
 			break;
 		case STAY_STILL:
-			postMoveUpdate();
+			MessageTextUtil.textWhenStayStill(player);
 			postGameUpdate();
+			postMoveUpdate(false);
 			break;
 		default:
 			break;
 		}
 	}
 
-	public static void postMoveUpdate() {
+	public static void postMoveUpdate(boolean isMove) {
 		GameMap thisGameMap = GameController.getGameMap();
 		Player player = GameController.getPlayer();
 		Cell currentCell = thisGameMap.get(player.getPosY(), player.getPosX());
@@ -89,14 +90,14 @@ public class GameLogic {
 			player.getItemList().add(cellItem);
 			currentCell.setItem(null);
 			MessageTextUtil.textWhenPickUpItem(cellItem);
-		} else if (currentCell.getType() == Cell.LADDER_UP) {
+		} else if (currentCell.getType() == Cell.LADDER_UP && isMove) {
 			boolean isAscending = GameController.ascending();
 			int level = GameController.getLevel();
 			if (!isAscending) {
 				level = 0;
 			}
 			MessageTextUtil.textWhenAscending(level);
-		} else if (currentCell.getType() == Cell.LADDER_DOWN) {
+		} else if (currentCell.getType() == Cell.LADDER_DOWN && isMove) {
 			GameController.descending();
 			MessageTextUtil.textWhenDescending(GameController.getLevel());
 		}

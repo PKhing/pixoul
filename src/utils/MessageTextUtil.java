@@ -77,13 +77,17 @@ public class MessageTextUtil {
 	}
 
 	public static void textWhenDescending(int level) {
-		String displayText = null;
-		displayText = "You have gone down to floor level %d".formatted(level);
+		String displayText = "You have gone down to floor level %d".formatted(level);
 		writeMessage(displayText);
 	}
 
 	public static void textWhenImmobilized() {
 		String displayText = "You can not move because you are immobilize now (but still can attack).";
+		writeMessage(displayText);
+	}
+	
+	public static void textWhenStayStill(Entity entity) {
+		String displayText = "%s does nothing.".formatted(entity.getName());
 		writeMessage(displayText);
 	}
 

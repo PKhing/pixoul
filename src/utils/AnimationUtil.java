@@ -22,7 +22,7 @@ public class AnimationUtil {
 					GameController.getPlayer().setMoving(false);
 				}
 				Platform.runLater(() -> {
-					GameLogic.postMoveUpdate();
+					GameLogic.postMoveUpdate(true);
 					GameLogic.postGameUpdate();
 				});
 			}
