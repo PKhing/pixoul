@@ -174,12 +174,6 @@ public class GameController {
 		FadeTransition fadeFirst = TransitionUtil.makeFadingNode(GameScene.getGamePane(), from, to);
 		FadeTransition fadeSecond = TransitionUtil.makeFadingNode(GameScene.getGamePane(), to, from);
 
-		fadeSecond.setFromValue(from);
-		fadeSecond.setToValue(to);
-
-		fadeFirst.setFromValue(to);
-		fadeFirst.setToValue(from);
-
 		// Fade out when finished
 		fadeSecond.setOnFinished((event) -> {
 			gameMap.get(player.getPosY(), player.getPosX()).setEntity(null);
