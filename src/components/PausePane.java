@@ -63,6 +63,7 @@ public class PausePane extends VBox {
 		setMaxWidth(widthBox * GameConfig.getScale());
 
 		addResumeBtn();
+		addStartNewGameBtn();
 		addSettingBtn();
 		addToMainMenuBtn();
 		addExitBtn();
@@ -74,6 +75,25 @@ public class PausePane extends VBox {
 			}
 		});
 
+	}
+
+	private void addStartNewGameBtn() {
+		Button startNewGameBtn = new Button("Start New Game");
+
+		startNewGameBtn.setOnMouseClicked((event) -> {
+			remove();
+			GameController.start();
+		});
+
+		getChildren().add(startNewGameBtn);
+	}
+
+	private void addTitle() {
+		Text titleText = new Text("Paused");
+
+		titleText.setFont(FontUtil.getFont(30));
+
+		getChildren().add(titleText);
 	}
 
 	private void addResumeBtn() {

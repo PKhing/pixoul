@@ -36,7 +36,7 @@ public class GameOverPane extends VBox {
 		buttonBox.setSpacing(15.0 * GameConfig.getScale());
 		buttonBox.setAlignment(Pos.CENTER);
 		
-		Button tryAgainBtn = new Button("Try Again");
+		Button tryAgainBtn = new Button("Start New Game");
 		
 		tryAgainBtn.setOnMouseClicked((event) -> GameController.start());
 		
