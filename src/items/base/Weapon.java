@@ -2,12 +2,10 @@ package items.base;
 
 public abstract class Weapon extends Item {
 	private int attack;
-	private int attackSpeed;
-
-	public Weapon(String name, String description, int attack, int attackSpeed) {
+	
+	public Weapon(String name, String description, int attack) {
 		super(name, description);
 		setAtk(attack);
-		setAtkSpeed(attackSpeed);
 	}
 
 	public int getAtk() {
@@ -18,11 +16,4 @@ public abstract class Weapon extends Item {
 		this.attack = attack;
 	}
 
-	public int getAtkSpeed() {
-		return attackSpeed;
-	}
-
-	public void setAtkSpeed(int attackSpeed) {
-		this.attackSpeed = attackSpeed;
-	}
 }

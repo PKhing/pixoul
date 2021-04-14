@@ -6,8 +6,8 @@ import logic.Sprites;
 
 public class Spear extends Weapon {
 
-	public Spear(String name, String description, int atk, int atkSpeed) {
-		super(name, description, atk, atkSpeed);
+	public Spear(String name, String description, int atk) {
+		super(name, description, atk);
 		// TODO Auto-generated constructor stub
 	}
 
