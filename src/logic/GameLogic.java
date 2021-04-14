@@ -150,7 +150,6 @@ public class GameLogic {
 			updateEntityEffect(each);
 		}
 		updateEntityEffect(player);
-		GameScene.getEffectPane().update();
 	}
 
 	public static void monsterUpdate() {
@@ -165,9 +164,8 @@ public class GameLogic {
 		potionUpdate();
 		monsterUpdate();
 		GameScene.getInventoryPane().update();
-		GameScene.getStatusPane().setHP(player.getHealth(), player.getMaxHealth());
-		GameScene.getStatusPane().setAttack(player.getAttack());
-		GameScene.getStatusPane().setDefense(player.getDefense());
+		GameScene.getEffectPane().update();
+		GameScene.getStatusPane().setAllValue(player);
 		AnimationUtil.postGameAnimation();
 	}
 

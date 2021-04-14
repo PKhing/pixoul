@@ -35,10 +35,10 @@ public abstract class EntityEffect {
 	}
 
 	public boolean onUpdate(Entity entity) {
+		setDuration(getDuration() - 1);
 		if (getDuration() <= 0) {
 			return false;
 		}
-		setDuration(getDuration() - 1);
 		return true;
 	}
 
@@ -81,7 +81,7 @@ public abstract class EntityEffect {
 	public String toString() {
 		String effectName = MessageTextUtil.shortenWord(getEffectName());
 		String usedName = MessageTextUtil.shortenWord(name);
-		return "%s [%s]: %d".formatted(effectName, usedName, duration + 1);
+		return "%s [%s]: %d".formatted(effectName, usedName, duration);
 	}
 
 	protected void removeEffect(Entity entity) {
