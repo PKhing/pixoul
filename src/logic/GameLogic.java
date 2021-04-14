@@ -162,8 +162,8 @@ public class GameLogic {
 	public static void postGameUpdate() {
 		InterruptController.setStillAnimation(true);
 		Player player = GameController.getPlayer();
-		monsterUpdate();
 		potionUpdate();
+		monsterUpdate();
 		GameScene.getInventoryPane().update();
 		GameScene.getStatusPane().setHP(player.getHealth(), player.getMaxHealth());
 		GameScene.getStatusPane().setAttack(player.getAttack());
