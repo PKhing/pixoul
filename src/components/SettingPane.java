@@ -21,15 +21,17 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
 import utils.FontUtil;
 import utils.GameAudioUtils;
 import utils.GameConfig;
 
 public class SettingPane extends VBox {
-	private final int heightBox = 180;
+	private final int heightBox = 140;
 	private final int widthBox = 180;
-
+	
+	private Slider volumeSlider;
+	private CheckBox disableCheckBox;
+	
 	public SettingPane() {
 		styleSetup();
 		addTitle();
@@ -44,6 +46,11 @@ public class SettingPane extends VBox {
 		});
 
 		InterruptController.setSettingOpen(true);
+	}
+	
+	public void updateSetting() {
+		volumeSlider.setValue((int) (GameConfig.getVolume() * 100));
+		disableCheckBox.setSelected(GameConfig.isSkipMoveAnimation());
 	}
 
 	private void styleSetup() {
@@ -62,7 +69,7 @@ public class SettingPane extends VBox {
 	
 	private void addCloseText() {
 		HBox closeBox = new HBox();
-		closeBox.setPadding(new Insets(20));
+		closeBox.setPadding(new Insets(20, 0, 0, 0));
 		closeBox.setAlignment(Pos.CENTER);
 		
 		Text closeText = new Text("OK");
@@ -103,7 +110,7 @@ public class SettingPane extends VBox {
 		volumeLabel.setFont(FontUtil.getFont(12));
 		volumeLabel.setTextFill(Color.BLACK);
 
-		Slider volumeSlider = new Slider(0, 100, (int) (GameConfig.getVolume() * 100));
+		volumeSlider = new Slider(0, 100, (int) (GameConfig.getVolume() * 100));
 		volumeSlider.valueProperty().addListener(new ChangeListener<Number>() {
 
 			@Override
@@ -128,17 +135,17 @@ public class SettingPane extends VBox {
 		disableLabel.setFont(FontUtil.getFont(12));
 		disableLabel.setTextFill(Color.BLACK);
 
-		CheckBox checkBox = new CheckBox();
-		checkBox.setSelected(GameConfig.isSkipMoveAnimation());
+		disableCheckBox = new CheckBox();
+		disableCheckBox.setSelected(GameConfig.isSkipMoveAnimation());
 
-		checkBox.setOnMouseClicked((event) -> {
+		disableCheckBox.setOnMouseClicked((event) -> {
 			boolean newSkipMove = !GameConfig.isSkipMoveAnimation();
 
 			GameConfig.setSkipMoveAnimation(newSkipMove);
-			checkBox.setSelected(newSkipMove);
+			disableCheckBox.setSelected(newSkipMove);
 		});
 
-		disableAnimationBox.getChildren().addAll(disableLabel, checkBox);
+		disableAnimationBox.getChildren().addAll(disableLabel, disableCheckBox);
 		this.getChildren().add(disableAnimationBox);
 	}
 }

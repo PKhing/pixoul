@@ -5,14 +5,15 @@ import controller.SceneController;
 import javafx.scene.Scene;
 
 public class GameOverScene {
-	private static Scene scene = null;
+	private static Scene cachedScene = null;
+	private static GameOverPane gameOverPane;
 	
 	public static Scene getScene() {
-		if(scene != null) {
-			return scene;
+		if(cachedScene != null) {
+			return cachedScene;
 		}
-		GameOverPane newPane = new GameOverPane();
-		scene = SceneController.makeNewScene(newPane);
-		return scene;
+		gameOverPane = new GameOverPane();
+		cachedScene = SceneController.makeNewScene(gameOverPane);
+		return cachedScene;
 	}
 }
