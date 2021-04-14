@@ -3,14 +3,12 @@ package controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import components.GameOverPane;
 import entity.Player;
 import exception.InvalidFloorException;
 import exception.NullMapException;
 import javafx.animation.FadeTransition;
 import javafx.scene.Node;
 import javafx.scene.media.MediaPlayer;
-import javafx.util.Duration;
 import javafx.util.Pair;
 import logic.GameMap;
 import logic.MapGenerator;
@@ -22,7 +20,7 @@ import utils.TransitionUtil;
 public class GameController {
 	private static ArrayList<GameMap> floorList = new ArrayList<>();
 	private static GameMap gameMap;
-	private static MediaPlayer bgmMedia = GameAudioUtils.GameSceneBGM;
+	private static MediaPlayer bgm = GameAudioUtils.GameSceneBGM;
 	private static int level;
 	private static Player player;
 
@@ -108,13 +106,13 @@ public class GameController {
 		fadeIn.play();
 		fadeIn.setOnFinished((event) -> InterruptController.setTransition(false));
 
-		bgmMedia.play();
+		bgm.play();
 	}
 
 	public static void exitToMainMenu() {
 		FadeTransition fadeOut = TransitionUtil.makeFadingNode(GameScene.getGamePane(), 1.0, 0.0);
 
-		bgmMedia.stop();
+		bgm.stop();
 
 		fadeOut.setOnFinished((event) -> SceneController.backToMainMenu());
 
@@ -123,7 +121,7 @@ public class GameController {
 
 	public static void isGameOver() {
 		if(player.getHealth() <= 0) {
-			bgmMedia.stop();
+			bgm.stop();
 			FadeTransition fadeOut = TransitionUtil.makeFadingNode(GameScene.getGamePane(), 1.0, 0.0);
 			
 			InterruptController.setTransition(true);

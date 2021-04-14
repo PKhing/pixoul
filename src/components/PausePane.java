@@ -20,12 +20,14 @@ import javafx.scene.paint.Color;
 import utils.GameConfig;
 
 public class PausePane extends VBox {
-	private static SettingPane settingPane = new SettingPane();
 	private final int heightBox = 90;
 	private final int widthBox = 120;
+	
 	private static final Color colorOnHover = Color.rgb(87, 89, 66);
 	private static final Color colorBg = Color.rgb(245, 246, 231);
-
+	
+	private static SettingPane settingPane = new SettingPane();
+	
 	public PausePane() {
 		super();
 
@@ -81,6 +83,7 @@ public class PausePane extends VBox {
 		Button settingBtn = new StyledButton(widthBox, "Setting", colorOnHover, colorBg);
 
 		settingBtn.setOnMouseClicked((event) -> {
+			settingPane.updateSetting();
 			((StackPane) getParent()).getChildren().add(settingPane);
 			settingPane.requestFocus();
 			InterruptController.setSettingOpen(true);

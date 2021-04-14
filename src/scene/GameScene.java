@@ -65,7 +65,16 @@ public class GameScene {
 		root.setMaxSize(GameConfig.getScreenWidth(), GameConfig.getScreenHeight());
 		scene = new Scene(root, GameConfig.getScreenWidth(), GameConfig.getScreenHeight());
 
-		// GamePane
+		setupGamePane();
+		setupGameOverlay();
+		
+		StackPane.setAlignment(new Group(inventoryPane), Pos.CENTER);
+		StackPane.setAlignment(new Group(pausePane), Pos.CENTER);
+
+		GameController.getGameMap().drawMap();
+	}
+	
+	private static void setupGamePane() {
 		gamePane = new StackPane();
 		root.getChildren().add(gamePane);
 
@@ -76,12 +85,13 @@ public class GameScene {
 		buttonPane = new AnchorPane();
 		gamePane.getChildren().add(buttonPane);
 		addEventListener();
-
-		// Overlay
+	}
+	
+	private static void setupGameOverlay() {
 		AnchorPane overlay = new AnchorPane();
 		overlay.setPickOnBounds(false);
 		gamePane.getChildren().add(overlay);
-
+		
 		addInventoryButton(overlay);
 		addPauseButton(overlay);
 
@@ -92,10 +102,6 @@ public class GameScene {
 		pausePane = new PausePane();
 
 		overlay.getChildren().addAll(statusPane, messagePane, effectPane);
-		StackPane.setAlignment(new Group(inventoryPane), Pos.CENTER);
-		StackPane.setAlignment(new Group(pausePane), Pos.CENTER);
-
-		GameController.getGameMap().drawMap();
 	}
 
 	private static void addInventoryButton(AnchorPane overlay) {
@@ -108,7 +114,7 @@ public class GameScene {
 		inventoryBtn.getGraphicsContext2D().drawImage(DrawUtil.scaleUp(backpackSprite, GameConfig.getScale()), 0, 0);
 
 		inventoryBtn.setOnMouseClicked((event) -> {
-			if (InterruptController.isPauseOpen())
+			if (InterruptController.isPauseOpen() || InterruptController.isTransition())
 				return;
 			gamePane.getChildren().add(inventoryPane);
 			inventoryPane.requestFocus();
@@ -126,7 +132,7 @@ public class GameScene {
 		pauseBtn.getGraphicsContext2D().drawImage(DrawUtil.scaleUp(pauseSprite, GameConfig.getScale()), 0, 0);
 
 		pauseBtn.setOnMouseClicked((event) -> {
-			if (InterruptController.isPauseOpen())
+			if (InterruptController.isInventoryOpen() || InterruptController.isTransition())
 				return;
 			gamePane.getChildren().add(pausePane);
 			pausePane.requestFocus();
@@ -156,11 +162,6 @@ public class GameScene {
 				break;
 			case Q:
 				GameLogic.gameUpdate(DispatchAction.STAY_STILL);
-				break;
-			case ESCAPE:
-				if (InterruptController.isOpenFromInside()) {
-					InterruptController.setOpenFromInside(false);
-				}
 				break;
 			default:
 				System.out.println("Invalid key");

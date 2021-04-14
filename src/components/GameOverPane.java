@@ -4,12 +4,10 @@ import controller.GameController;
 import controller.SceneController;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -24,7 +22,7 @@ public class GameOverPane extends VBox {
 	
 	private Text gameOverTitle;
 	
-	private HBox buttonBox;
+	private VBox buttonBox;
 
 	public GameOverPane() {
 		styleSetup();
@@ -46,26 +44,29 @@ public class GameOverPane extends VBox {
 	private void addGameOverTitle() {
 		gameOverTitle = new Text("Game Over");
 		gameOverTitle.setFont(FontUtil.getFont(30));
-		gameOverTitle.setFill(Color.WHITE);
+		gameOverTitle.setFill(Color.RED);
 		gameOverTitle.setTextAlignment(TextAlignment.CENTER);
 	}
 	
 	private void addButtonBox() {
-		buttonBox = new HBox();
-		buttonBox.setSpacing(15.0 * GameConfig.getScale());
+		buttonBox = new VBox();
+		buttonBox.setSpacing(8.0 * GameConfig.getScale());
 		buttonBox.setAlignment(Pos.CENTER);
 	}
 	
 	private void addButtontoBox() {
-		Button tryAgainBtn = new Button("Start New Game");
-		tryAgainBtn.setOnMouseClicked((event) -> GameController.start());
+		Button startNewGameBtn = new StyledButton(widthBox * GameConfig.getScale(), "Start New Game", Color.WHITE, Color.BLACK);
+		startNewGameBtn.setTextFill(Color.WHITE);
+		startNewGameBtn.setOnMouseClicked((event) -> GameController.start());
 		
-		Button backToMenuBtn = new Button("Back To Main Menu");
+		Button backToMenuBtn = new StyledButton(widthBox * GameConfig.getScale(), "Back To Menu", Color.WHITE, Color.BLACK);
+		backToMenuBtn.setTextFill(Color.WHITE);
 		backToMenuBtn.setOnMouseClicked((event) -> SceneController.backToMainMenu());
 		
-		Button exitBtn = new Button("Exit Game");
+		Button exitBtn = new StyledButton(widthBox * GameConfig.getScale(), "Exit Game", Color.WHITE, Color.BLACK);
+		exitBtn.setTextFill(Color.WHITE);
 		exitBtn.setOnMouseClicked((event) -> SceneController.exitGame());
 		
-		buttonBox.getChildren().addAll(tryAgainBtn, backToMenuBtn, exitBtn);
+		buttonBox.getChildren().addAll(startNewGameBtn, backToMenuBtn, exitBtn);
 	}
 }
