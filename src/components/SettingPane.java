@@ -11,19 +11,24 @@ import javafx.scene.control.Slider;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
+import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import utils.FontUtil;
 import utils.GameAudioUtils;
 import utils.GameConfig;
 
 public class SettingPane extends VBox {
-	private final int heightBox = 200;
-	private final int widthBox = 200;
+	private final int heightBox = 180;
+	private final int widthBox = 180;
 
 	public SettingPane() {
 		styleSetup();
@@ -42,8 +47,9 @@ public class SettingPane extends VBox {
 	}
 
 	private void styleSetup() {
-		setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
-		setPadding(new Insets(30));
+		setBackground(new Background(new BackgroundFill(Color.WHEAT, CornerRadii.EMPTY, Insets.EMPTY)));
+		setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+		setPadding(new Insets(20));
 		setSpacing(10);
 
 		setAlignment(Pos.CENTER);
@@ -58,10 +64,11 @@ public class SettingPane extends VBox {
 		HBox closeBox = new HBox();
 		closeBox.setPadding(new Insets(20));
 		closeBox.setAlignment(Pos.CENTER);
-
+		
 		Text closeText = new Text("OK");
 		closeText.setFont(FontUtil.getFont(18));
-		closeText.setFill(Color.WHITE);
+		closeText.setFill(Color.BLACK);
+		closeText.setStroke(null);
 
 		closeText.setOnMouseClicked((event) -> {
 			try {
@@ -71,8 +78,8 @@ public class SettingPane extends VBox {
 				e.printStackTrace();
 			}
 		});
-
-		closeBox.getChildren().add(closeText);
+		
+		closeBox.getChildren().addAll(closeText);
 
 		this.getChildren().add(closeBox);
 	}
@@ -81,7 +88,7 @@ public class SettingPane extends VBox {
 		Text optionTitle = new Text("Option");
 
 		optionTitle.setFont(FontUtil.getFont(30));
-		optionTitle.setFill(Color.WHITE);
+		optionTitle.setFill(Color.BLACK);
 
 		this.getChildren().add(optionTitle);
 	}
@@ -94,7 +101,7 @@ public class SettingPane extends VBox {
 
 		Label volumeLabel = new Label("BGM Volume");
 		volumeLabel.setFont(FontUtil.getFont(12));
-		volumeLabel.setTextFill(Color.WHITE);
+		volumeLabel.setTextFill(Color.BLACK);
 
 		Slider volumeSlider = new Slider(0, 100, (int) (GameConfig.getVolume() * 100));
 		volumeSlider.valueProperty().addListener(new ChangeListener<Number>() {
@@ -119,7 +126,7 @@ public class SettingPane extends VBox {
 
 		Label disableLabel = new Label("Disable Animation ");
 		disableLabel.setFont(FontUtil.getFont(12));
-		disableLabel.setTextFill(Color.WHITE);
+		disableLabel.setTextFill(Color.BLACK);
 
 		CheckBox checkBox = new CheckBox();
 		checkBox.setSelected(GameConfig.isSkipMoveAnimation());
