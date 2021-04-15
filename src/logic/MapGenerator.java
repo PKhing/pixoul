@@ -32,6 +32,10 @@ public class MapGenerator {
 	 */
 	private static final int MIN_LENGTH = 4;
 	/**
+	 * Representing void type
+	 */
+	private static final int VOID = 0;
+	/**
 	 * Representing path type
 	 */
 	private static final int PATH = -1;
@@ -67,7 +71,7 @@ public class MapGenerator {
 	 */
 	public static GameMap generateMap() {
 		GameMap gameMap = buildNewEmptyMap();
-
+		gameMap.printMap();
 		// Generates ladder
 		Pair<Integer, Integer> posLadderUp = gameMap.getRoomList().get(0);
 		Pair<Integer, Integer> posLadderDown = gameMap.getRoomList().get(gameMap.getRoomList().size() - 1);
@@ -134,9 +138,6 @@ public class MapGenerator {
 			if ((y <= 0) || (x <= 0) || (y >= GameConfig.MAP_SIZE) || (x >= GameConfig.MAP_SIZE)) {
 				return false;
 			}
-			if (isConnectTo(PROCESSING)) {
-				return false;
-			}
 			return true;
 		}
 
@@ -156,7 +157,7 @@ public class MapGenerator {
 			l.move();
 			r.turnRight();
 			r.move();
-			if ((f.getType() == type) || (l.getType() == type) || (r.getType() == type)) {
+			if ((f.getCellType() == type) || (l.getCellType() == type) || (r.getCellType() == type)) {
 				return true;
 			}
 			return false;
@@ -166,13 +167,13 @@ public class MapGenerator {
 		 * Moves this state forward one cell.
 		 */
 		public void move() {
-			if (direction == 0) {
+			if (direction == Direction.UP) {
 				y--;
-			} else if (direction == 1) {
+			} else if (direction == Direction.RIGHT) {
 				x++;
-			} else if (direction == 2) {
+			} else if (direction == Direction.DOWN) {
 				y++;
-			} else {
+			} else if (direction == Direction.LEFT) {
 				x--;
 			}
 		}
@@ -218,9 +219,10 @@ public class MapGenerator {
 		 * 
 		 * @return type of the cell
 		 */
-		public int getType() {
-			if ((y <= 0) || (x <= 0) || (y >= GameConfig.MAP_SIZE) || (x >= GameConfig.MAP_SIZE))
+		public int getCellType() {
+			if (!this.isValid()) {
 				return -1000;
+			}
 			return map[y][x];
 		}
 
@@ -229,7 +231,7 @@ public class MapGenerator {
 		 * 
 		 * @param type the type to be set
 		 */
-		public void setType(int type) {
+		public void setCellType(int type) {
 			map[y][x] = type;
 		}
 	}
@@ -259,20 +261,27 @@ public class MapGenerator {
 			// Generates paths
 			int pathCnt = 1;
 			while (pathCnt <= MAX_PATH) {
-				int y = RandomUtil.random(1, GameConfig.MAP_SIZE - 1);
-				int x = RandomUtil.random(1, GameConfig.MAP_SIZE - 1);
-				while (map[y][x] < 1) {
+				int x, y;
+				do {
 					y = RandomUtil.random(1, GameConfig.MAP_SIZE - 1);
 					x = RandomUtil.random(1, GameConfig.MAP_SIZE - 1);
-				}
+
+					// Random until the cell type is room's wall
+				} while (map[y][x] < 1);
+
 				State state = new State(y, x, RandomUtil.random(0, 3));
-				int tmp = state.getType();
-				state.setType(0);
+				int tmp = state.getCellType();
+
+				// Changes cell type from room's wall to void
+				state.setCellType(VOID);
 				if (makePath(state, tmp, 0)) {
+
+					// If path generated successfully, changes cell type to PATH
+					state.setCellType(PATH);
 					pathCnt++;
-					state.setType(PATH);
 				} else {
-					state.setType(tmp);
+					// otherwise changes cell type back to room's wall
+					state.setCellType(tmp);
 				}
 			}
 			makeMap(gameMap.getGameMap());
@@ -293,35 +302,39 @@ public class MapGenerator {
 	 */
 	private static boolean makeRoom(int y, int x, int number) {
 
+		int startY = y - GameConfig.ROOM_SIZE;
+		int endY = y + GameConfig.ROOM_SIZE;
+		int startX = x - GameConfig.ROOM_SIZE;
+		int endX = x + GameConfig.ROOM_SIZE;
+
 		// Checks if the room is valid or not
-		if ((y - GameConfig.ROOM_SIZE <= 0) || (y + GameConfig.ROOM_SIZE >= GameConfig.MAP_SIZE)
-				|| (x - GameConfig.ROOM_SIZE <= 0) || (x + GameConfig.ROOM_SIZE >= GameConfig.MAP_SIZE))
+		if ((startY <= 0) || (endY >= GameConfig.MAP_SIZE) || (startX <= 0) || (endX >= GameConfig.MAP_SIZE))
 			return false;
-		for (int i = y - GameConfig.ROOM_SIZE; i <= y + GameConfig.ROOM_SIZE; i++) {
-			for (int j = x - GameConfig.ROOM_SIZE; j <= x + GameConfig.ROOM_SIZE; j++) {
-				if (map[i][j] != 0) {
+		for (int i = startY; i <= endY; i++) {
+			for (int j = startX; j <= endX; j++) {
+				if (map[i][j] != VOID) {
 					return false;
 				}
 			}
 		}
 
 		// Creates room
-		for (int i = y - GameConfig.ROOM_SIZE; i <= y + GameConfig.ROOM_SIZE; i++) {
-			for (int j = x - GameConfig.ROOM_SIZE; j <= x + GameConfig.ROOM_SIZE; j++) {
-				if ((j != x - GameConfig.ROOM_SIZE) && (j != x + GameConfig.ROOM_SIZE)
-						&& (i != y - GameConfig.ROOM_SIZE) && (i != y + GameConfig.ROOM_SIZE)) {
+		for (int i = startY; i <= endY; i++) {
+			for (int j = startX; j <= endX; j++) {
+				if ((j != startX) && (j != endX) && (i != startY) && (i != endY)) {
 					map[i][j] = ROOM;
+				} else {
+					map[i][j] = number;
 				}
-				if ((j != x - GameConfig.ROOM_SIZE) && (j != x + GameConfig.ROOM_SIZE)) {
-					map[y - GameConfig.ROOM_SIZE][j] = number;
-					map[y + GameConfig.ROOM_SIZE][j] = number;
-				}
-			}
-			if ((i != y - GameConfig.ROOM_SIZE) && (i != y + GameConfig.ROOM_SIZE)) {
-				map[i][x - GameConfig.ROOM_SIZE] = number;
-				map[i][x + GameConfig.ROOM_SIZE] = number;
 			}
 		}
+
+		// Changes corner cell type to void
+		map[startY][startX] = VOID;
+		map[startY][endX] = VOID;
+		map[endY][startX] = VOID;
+		map[endY][endX] = VOID;
+
 		return true;
 	}
 
@@ -334,23 +347,33 @@ public class MapGenerator {
 	 * @return true if path is generated successfully; false otherwise
 	 */
 	private static boolean makePath(State state, int startRoom, int length) {
-		if (length >= MAX_LENGTH) {
+		
+		// Path is too long or the path have self loop
+		if (length >= MAX_LENGTH || state.isConnectTo(PROCESSING) || (state.getCellType() == startRoom)) {
 			return false;
 		}
-		if (!state.isValid() || (state.getType() == startRoom) || (state.getType() <= ROOM)) {
+		
+		// The state is not valid or cell type is PROCESSING or ROOM
+		if (!state.isValid() || (state.getCellType() == PROCESSING)|| (state.getCellType() == ROOM)) {
 			return false;
 		}
-		if ((state.getType() > 0) || state.isConnectTo(PATH) || (state.getType() == PATH)) {
+		
+		// Cell type is room's wall or PATH or this path connect to other path
+		if ((state.getCellType() > 0) || (state.getCellType() == PATH) || state.isConnectTo(PATH) ) {
+			
+			// Path is too short
 			if (length < MIN_LENGTH) {
 				return false;
 			}
-			state.setType(PATH);
+			
+			// Success!
+			state.setCellType(PATH);
 			return true;
 		}
 
-		state.setType(PROCESSING);
+		state.setCellType(PROCESSING);
 
-		// Does next action randomly
+		// Does next action in random order
 
 		Integer actionType[] = { STRAIGHT, TURN_LEFT, TURN_RIGHT };
 		RandomUtil.shuffle(actionType);
@@ -358,11 +381,11 @@ public class MapGenerator {
 			State newState = state.Duplicate();
 			newState.doAction(actionType[i]);
 			if (makePath(newState, startRoom, length + 1)) {
-				state.setType(PATH);
+				state.setCellType(PATH);
 				return true;
 			}
 		}
-		state.setType(0);
+		state.setCellType(VOID);
 		return false;
 	}
 
