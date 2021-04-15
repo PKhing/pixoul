@@ -1,12 +1,16 @@
 package application;
 
+import java.util.ArrayList;
+
 import controller.SceneController;
+import items.base.Weapon;
 import javafx.application.Application;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.image.Image;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import scene.LandingScene;
+import utils.CSVUtil;
 import utils.GameConfig;
 
 public class Main extends Application {
@@ -26,6 +30,11 @@ public class Main extends Application {
 			GameConfig.setScale(3);
 		}
 
+		ArrayList<Weapon> arr = CSVUtil.readWeaponCSV();
+		for(Weapon weapon: arr) {
+			System.out.println(weapon.getName() + " " + weapon.getDescription());
+		}
+		
 		primaryStage.getIcons().add(new Image(iconPath));
 		primaryStage.setTitle(GameConfig.GAME_TITLE);
 		primaryStage.setResizable(GameConfig.SCREEN_SCALABLE);
