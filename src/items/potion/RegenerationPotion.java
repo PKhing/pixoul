@@ -1,5 +1,6 @@
 package items.potion;
 
+import effects.EntityEffect;
 import effects.Regeneration;
 import entity.Player;
 import items.base.Potion;
@@ -22,8 +23,8 @@ public class RegenerationPotion extends Potion {
 
 	@Override
 	public void onEquip(Player player) {
-		new Regeneration(getName(), getHealValue(), getDuration(), isPermanant()).onAdd(player);
-		;
+		EntityEffect effect = new Regeneration(getName(), getHealValue(), getDuration(), isPermanant());
+		effect.onAdd(player);
 	}
 
 	public int getHealValue() {

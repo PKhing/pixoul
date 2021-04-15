@@ -1,5 +1,6 @@
 package items.potion;
 
+import effects.EntityEffect;
 import effects.Protection;
 import entity.Player;
 import items.base.Potion;
@@ -15,7 +16,8 @@ public class ShieldPotion extends Potion {
 
 	@Override
 	public void onEquip(Player player) {
-		new Protection(getName(), getShield(), getDuration(), isPermanant()).onAdd(player);
+		EntityEffect effect = new Protection(getName(), getShield(), getDuration(), isPermanant());
+		effect.onAdd(player);
 	}
 
 	@Override

@@ -1,5 +1,6 @@
 package items.potion;
 
+import effects.EntityEffect;
 import effects.Vision;
 import entity.Player;
 import items.base.Potion;
@@ -15,7 +16,8 @@ public class VisionPotion extends Potion {
 
 	@Override
 	public void onEquip(Player player) {
-		new Vision(getName(), getVision(), getDuration(), isPermanant()).onAdd(player);
+		EntityEffect effect = new Vision(getName(), getVision(), getDuration(), isPermanant());
+		effect.onAdd(player);
 	}
 
 	@Override

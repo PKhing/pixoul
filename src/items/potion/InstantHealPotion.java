@@ -1,5 +1,6 @@
 package items.potion;
 
+import effects.EntityEffect;
 import effects.InstantHealth;
 import entity.Player;
 import items.base.Potion;
@@ -15,7 +16,8 @@ public class InstantHealPotion extends Potion {
 
 	@Override
 	public void onEquip(Player player) {
-		new InstantHealth(getName(), getValue(), getDuration(), isPermanant()).onAdd(player);
+		EntityEffect effect = new InstantHealth(getName(), getValue(), getDuration(), isPermanant());
+		effect.onAdd(player);
 	}
 
 	@Override
