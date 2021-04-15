@@ -102,7 +102,8 @@ public abstract class Monster extends Entity {
 				}
 			}
 		}
-		return null;
+		RandomUtil.shuffle(move);
+		return new Pair<>(getPosY() + move[0][0], getPosX() + move[0][1]);
 	}
 
 }
