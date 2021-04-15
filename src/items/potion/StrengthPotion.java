@@ -1,5 +1,6 @@
 package items.potion;
 
+import effects.EntityEffect;
 import effects.Strength;
 import entity.Player;
 import items.base.Potion;
@@ -15,7 +16,8 @@ public class StrengthPotion extends Potion {
 
 	@Override
 	public void onEquip(Player player) {
-		new Strength(getName(), getAttack(), getDuration(), isPermanant()).onAdd(player);
+		EntityEffect effect = new Strength(getName(), getAttack(), getDuration(), isPermanant());
+		effect.onAdd(player);
 	}
 
 	@Override
