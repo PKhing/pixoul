@@ -17,7 +17,7 @@ public class MessageTextUtil {
 	}
 
 	public static void textWhenSlained(Entity entity) {
-		String displayText = "%s has been slained.".formatted(shortenWord(entity.getName()));
+		String displayText = "%s has been slain.".formatted(shortenWord(entity.getName()));
 		writeMessage(displayText);
 	}
 
@@ -89,6 +89,10 @@ public class MessageTextUtil {
 	public static void textWhenStayStill(Entity entity) {
 		String displayText = "%s does nothing.".formatted(entity.getName());
 		writeMessage(displayText);
+	}
+	
+	public static void makeNewMessage(String string) {
+		writeMessage(string);
 	}
 
 	public static String shortenWord(String text) {

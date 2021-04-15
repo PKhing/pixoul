@@ -27,7 +27,7 @@ public class Soul extends Monster implements Attackable {
 
 	@Override
 	public void update() {
-		if (RandomUtil.random(0, 100) < attackPercent) {
+		if (RandomUtil.random(1, 100) <= attackPercent) {
 			setFriendly(false);
 		} else
 			setFriendly(true);

@@ -1,12 +1,17 @@
 package entity;
 
 import controller.GameController;
+import controller.InterruptController;
 import effects.Poison;
 import entity.base.Entity;
 import entity.base.Monster;
+import javafx.animation.FadeTransition;
 import javafx.util.Pair;
 import logic.Sprites;
+import scene.GameScene;
+import utils.MessageTextUtil;
 import utils.RandomUtil;
+import utils.TransitionUtil;
 
 public class DarkMage extends Monster {
 
@@ -20,7 +25,6 @@ public class DarkMage extends Monster {
 		GameController.getGameMap().get(posY, posX).setEntity(this);
 		setPoisonDamage(poisonDamage);
 		setPoisonDuration(poisonDuration);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -36,11 +40,11 @@ public class DarkMage extends Monster {
 		}
 		Player gamePlayer = GameController.getPlayer();
 		if (isAttackable(gamePlayer)) {
-			//TODO change action ratio?
+			// TODO change action ratio?
 			int action = RandomUtil.random(0, 2);
 			if (action == 0)
 				poison(gamePlayer);
-			else if (action== 1)
+			else if (action == 1)
 				warp(gamePlayer);
 			else
 				summonMonster();
@@ -49,10 +53,23 @@ public class DarkMage extends Monster {
 
 	private void warp(Entity target) {
 		Pair<Integer, Integer> newPos = GameController.getRoomList()
-				.get(RandomUtil.random(0, GameController.getRoomList().size() - 2));
-		target.setPos(newPos.getKey(), newPos.getValue());
+				.get(RandomUtil.random(1, GameController.getRoomList().size() - 2));
 		// TODO add fade animation
-		// TODO add message
+		FadeTransition fadeOut = TransitionUtil.makeFadingNode(GameScene.getGamePane(), 1.0, 0.0);
+		FadeTransition fadeIn = TransitionUtil.makeFadingNode(GameScene.getGamePane(), 0.0, 1.0);
+
+		InterruptController.setTransition(true);
+
+		fadeOut.setOnFinished((event) -> {
+			target.setPos(newPos.getKey(), newPos.getValue());
+			GameController.getGameMap().drawMap();
+			MessageTextUtil
+					.makeNewMessage("%s has been teleported to somewhere in this level".formatted(target.getName()));
+			fadeIn.play();
+		});
+		fadeIn.setOnFinished((event) -> InterruptController.setTransition(false));
+
+		fadeOut.play();
 	}
 
 	private void poison(Entity target) {
@@ -62,12 +79,13 @@ public class DarkMage extends Monster {
 		} else {
 			poison.setDuration(poisonDuration);
 		}
-		// TODO add message
+		MessageTextUtil.makeNewMessage("%s has been poisoned by Dark mage".formatted(target.getName()));
 	}
 
 	private void summonMonster() {
-		//TODO
+		// TODO
 	}
+
 	public int getPoisonDamage() {
 		return poisonDamage;
 	}

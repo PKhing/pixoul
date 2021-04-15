@@ -18,6 +18,7 @@ public class Poison extends EntityEffect implements IConsecutiveEffect {
 	public void effect(Entity entity) {
 		int newHealth = entity.getHealth() - getValue();
 		entity.setHealth(newHealth);
+		entity.setAttacked(true);
 	}
 
 	@Override
@@ -27,7 +28,6 @@ public class Poison extends EntityEffect implements IConsecutiveEffect {
 
 	@Override
 	public String getEffectName() {
-		// TODO Auto-generated method stub
 		return EffectName.POISON;
 	}
 

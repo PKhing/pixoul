@@ -12,7 +12,7 @@ import utils.FontUtil;
 import utils.GameConfig;
 
 public class MessagePane extends VBox {
-	private final int MAX_MESSAGE = 5;
+	private final int MAX_MESSAGE = 8;
 
 	public MessagePane() {
 		super();

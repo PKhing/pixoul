@@ -282,13 +282,16 @@ public class MapGenerator {
 	}
 
 	private static void generateItemOnMap(GameMap gameMap) {
+		// TODO Generate item on map
 		Cell[][] cellMap = gameMap.getGameMap();
 		int level = GameController.getLevel();
 		
 		
 	}
 	
+	
 	private static void generateMonsterOnMap(GameMap gameMap) {
+		// TODO Generate monster on map
 		Cell[][] cellMap = gameMap.getGameMap();
 		Player player = GameController.getPlayer();
 		
