@@ -82,6 +82,15 @@ public abstract class Entity {
 		return false;
 	}
 
+	public void setPos(int posY, int posX) {
+		if(GameController.getGameMap().get(this.getPosY(), this.getPosX()).getEntity()==this) {
+			GameController.getGameMap().get(this.getPosY(), this.getPosX()).setEntity(null);
+		}
+		GameController.getGameMap().get(posY, posX).setEntity(this);
+		setPosX(posX);
+		setPosY(posY);
+	}
+
 	public int getHealth() {
 		return health;
 	}

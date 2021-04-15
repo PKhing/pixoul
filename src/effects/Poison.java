@@ -28,7 +28,7 @@ public class Poison extends EntityEffect implements IConsecutiveEffect {
 	@Override
 	public String getEffectName() {
 		// TODO Auto-generated method stub
-		return null;
+		return EffectName.POISON;
 	}
 
 }

@@ -188,7 +188,7 @@ public class GameController {
 			int posX = roomList.get(idxPos).getValue();
 			int posY = roomList.get(idxPos).getKey();
 
-			player.setInitialPos(posY, posX);
+			player.setPos(posY, posX);
 			newMap.get(posY, posX).setEntity(player);
 			newMap.drawMap();
 			fadeFirst.play();

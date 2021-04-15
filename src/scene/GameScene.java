@@ -228,7 +228,7 @@ public class GameScene {
 	public static void setPlayerPositionOnNewMap() {
 
 		Pair<Integer, Integer> firstRoomPos = GameController.getRoomList().get(0);
-		GameController.getPlayer().setInitialPos(firstRoomPos.getKey(), firstRoomPos.getValue());
+		GameController.getPlayer().setPos(firstRoomPos.getKey(), firstRoomPos.getValue());
 		GameController.getPlayer().getItemList().add(new Sword("Salty Sword", "With 100 years salt effect", 10, 1));
 		GameController.getPlayer().getItemList()
 				.add(new Spear("More Salty Sword", "With 100 years salt effect", 10, 1));
@@ -247,7 +247,7 @@ public class GameScene {
 
 		HauntedMaid hauntedMaid = new HauntedMaid(5, 10, 1, firstRoomPos.getKey() - 2, firstRoomPos.getValue() + 3,
 				Direction.DOWN, 1.25, 0, 1);
-		DarkMage darkMage = new DarkMage(10, 1, firstRoomPos.getKey() - 3, firstRoomPos.getValue() + 2, Direction.DOWN);
+		DarkMage darkMage = new DarkMage(10, 1, firstRoomPos.getKey() - 3, firstRoomPos.getValue() + 2, Direction.DOWN,2,10);
 		Potion maxHealthPotion = new InstantHealPotion("Bitset Potion", "Extends for 1 bit shift",
 				GameController.getPlayer().getHealth(), true);
 		Potion currentPotion = new RegenerationPotion("Salty Potion", "With 100 years salt effect", 10, 100);

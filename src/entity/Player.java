@@ -39,12 +39,7 @@ public class Player extends Entity implements Moveable, Attackable {
 		return Sprites.PLAYER;
 	}
 
-	public void setInitialPos(int posY, int posX) {
-		GameController.getGameMap().get(posY, posX).setEntity(this);
-		setPosX(posX);
-		setPosY(posY);
-	}
-
+	
 	@Override
 	public boolean move(int direction) {
 		if (super.move(direction)) {
