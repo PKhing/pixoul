@@ -262,13 +262,13 @@ public class GameScene {
 		DarkMage darkMage = new DarkMage(10, 1, firstRoomPos.getKey() - 3, firstRoomPos.getValue() + 2, Direction.DOWN,
 				2, 10);
 		Potion maxHealthPotion = new InstantHealPotion("Bitset Potion", "Extends for 1 bit shift",
-				GameController.getPlayer().getHealth(), true);
-		Potion currentPotion = new RegenerationPotion("Salty Potion", "With 100 years salt effect", 10, 100);
+				GameController.getPlayer().getHealth(), 100, true);
+		Potion currentPotion = new RegenerationPotion("Salty Potion", "With 100 years salt effect", 10, 100, false);
 		Potion newVisionPotion = new VisionPotion("Brightness Potion", "Let your world filled with light", 2, 50,
 				false);
 		Potion newPotionInventory = new RegenerationPotion(
 				"High Regeneration Potionssssssssssssssssssssssssssssssssssssssssssssssssssss",
-				"With 100 years salt effect", 10, 100);
+				"With 100 years salt effect", 10, 100, false);
 
 		GameController.getPlayer().getItemList().add(currentPotion);
 		GameController.getPlayer().getItemList().add(maxHealthPotion);

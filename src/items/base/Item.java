@@ -13,6 +13,8 @@ public abstract class Item {
 
 	public abstract int getSymbol();
 
+	public abstract Item clone();
+	
 	public abstract void onEquip(Player player);
 
 	public abstract void onUnequip(Player player);

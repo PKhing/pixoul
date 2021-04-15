@@ -2,6 +2,7 @@ package items.armor;
 
 import entity.Player;
 import items.base.Armor;
+import items.weapon.Knife;
 import logic.Sprites;
 
 public class GoldenArmor extends Armor {
@@ -10,6 +11,10 @@ public class GoldenArmor extends Armor {
 		// TODO Auto-generated constructor stub
 	}
 
+	public GoldenArmor clone() {
+		return new GoldenArmor(getName(), getDescription(), getDefense());
+	}
+	
 	@Override
 	public void onEquip(Player player) {
 		// TODO Auto-generated method stub

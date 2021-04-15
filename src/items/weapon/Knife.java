@@ -10,6 +10,10 @@ public class Knife extends Weapon {
 		super(name, description, attack);
 	}
 
+	public Knife clone() {
+		return new Knife(getName(), getDescription(), getAttack());
+	}
+	
 	@Override
 	public void onEquip(Player player) {
 		// TODO Auto-generated method stub

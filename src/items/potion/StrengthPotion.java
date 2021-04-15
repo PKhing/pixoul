@@ -14,6 +14,10 @@ public class StrengthPotion extends Potion {
 		setAttack(attack);
 	}
 
+	public StrengthPotion clone() {
+		return new StrengthPotion(getName(), getDescription(), getAttack(), getDuration(), isPermanant());
+	}
+	
 	@Override
 	public void onEquip(Player player) {
 		EntityEffect effect = new Strength(getName(), getAttack(), getDuration(), isPermanant());
