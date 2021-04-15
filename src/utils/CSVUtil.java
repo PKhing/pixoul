@@ -1,60 +1,82 @@
 package utils;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
-import entity.base.Monster;
 import items.base.Armor;
 import items.base.Potion;
 import items.base.Weapon;
 
 public class CSVUtil {
-	private static final String baseUrl = "res/csv/";
-	
-	public static ArrayList<String[]> readCSV(String filename) {
+	private static final String baseUrl = "csv/";
+
+	public static String[][] readCSV(String filename) {
 		try {
-			BufferedReader csvReader = new BufferedReader(new FileReader(filename));
+			InputStream inputStream = ClassLoader.getSystemResourceAsStream(filename);
+
+			assert inputStream != null;
+
+			InputStreamReader streamReader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
+			BufferedReader in = new BufferedReader(streamReader);
+
 			ArrayList<String[]> output = new ArrayList<>();
 			String row = null;
-			while ((row = csvReader.readLine()) != null) {
-			    String[] data = row.split(",");
-			    output.add(data);
+
+			while ((row = in.readLine()) != null) {
+				String[] data = row.split(",");
+				output.add(data);
 			}
-			csvReader.close();
-			return output;
-		} catch(IOException e) {
+
+			in.close();
+			output.remove(output.size() - 1);
+			return output.toArray(new String[output.size()][]);
+		} catch (IOException e) {
 			System.out.println("%s not found".formatted(filename));
+			e.printStackTrace();
 			return null;
 		}
 	}
-	
-	public static ArrayList<Monster> readMonsterCSV() {
-		ArrayList<String[]> monsterData = readCSV(baseUrl + "monster.csv");
-		ArrayList<Monster> output = new ArrayList<>();
+
+	public static boolean[][] readMonsterFilterCSV() {
+		// TODO Read MonsterFloor CSV File
 		
-		return output;
+		String[][] monsterFloorData = readCSV(baseUrl + "MonsterFloor.csv");
+		
+		int sz = monsterFloorData.length;
+		
+		return null;
 	}
-	
+
 	public static ArrayList<Potion> readPotionCSV() {
-		ArrayList<String[]> potionData = readCSV(baseUrl + "potion.csv");
+		// TODO Read Potion CSV File
+		
+		String[][] potionData = readCSV(baseUrl + "PotionData.csv");
 		ArrayList<Potion> output = new ArrayList<>();
-		
+
 		return output;
 	}
-	
+
 	public static ArrayList<Armor> readArmorCSV() {
-		ArrayList<String[]> armorData = readCSV(baseUrl + "armor.csv");
-		ArrayList<Armor> output = new ArrayList<>();
+		// TODO Read Armor CSV File
 		
+		String[][] armorData = readCSV(baseUrl + "ArmorData.csv");
+		ArrayList<Armor> output = new ArrayList<>();
+
 		return output;
 	}
-	
+
 	public static ArrayList<Weapon> readWeaponCSV() {
-		ArrayList<String[]> weaponData = readCSV(baseUrl + "weapon.csv");
-		ArrayList<Weapon> output = new ArrayList<>();
+		// TODO Read Weapon CSV File
 		
+		String[][] weaponData = readCSV(baseUrl + "WeaponData.csv");
+		ArrayList<Weapon> output = new ArrayList<>();
+
+		int sz = weaponData.length;
+
 		return output;
 	}
 }
