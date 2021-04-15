@@ -240,7 +240,7 @@ public class GameScene {
 	public static void setPlayerPositionOnNewMap() {
 
 		Pair<Integer, Integer> firstRoomPos = GameController.getRoomList().get(0);
-		GameController.getPlayer().setInitialPos(firstRoomPos.getKey(), firstRoomPos.getValue());
+		GameController.getPlayer().setPos(firstRoomPos.getKey(), firstRoomPos.getValue());
 		GameController.getPlayer().getItemList().add(new Sword("Salty Sword", "With 100 years salt effect", 10));
 		GameController.getPlayer().getItemList()
 				.add(new Spear("More Salty Sword", "With 100 years salt effect", 10));
