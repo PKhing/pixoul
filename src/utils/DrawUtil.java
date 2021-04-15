@@ -100,8 +100,9 @@ public class DrawUtil {
 		WritableImage img = new WritableImage(entitySprites, (96 * entity.getSymbol()) + 32 * walkIndex,
 				directionIndex * 32, 32, 32);
 		img = scaleUp(img, GameConfig.getScale());
-		if (entity.isAttacked())
+		if (entity.isAttacked()) {
 			img = changeColor(img);
+		}
 
 		// Fix later?
 		gc.drawImage(img, x, y /*- 4 * GameConfig.getScale()*/);
@@ -170,16 +171,21 @@ public class DrawUtil {
 	}
 
 	private static int getIndexItemSymbol(Item item) {
-		if (item instanceof Sword)
+		if (item instanceof Sword) {
 			return Sprites.SWORD;
-		if (item instanceof Spear)
+		}
+		if (item instanceof Spear) {
 			return Sprites.SPEAR;
-		if (item instanceof Knife)
+		}
+		if (item instanceof Knife) {
 			return Sprites.KNIFE;
-		if (item instanceof Armor)
+		}
+		if (item instanceof Armor) {
 			return Sprites.ARMOR;
-		if (item instanceof Potion)
+		}
+		if (item instanceof Potion) {
 			return Sprites.POTION;
+		}
 		return 0;
 	}
 

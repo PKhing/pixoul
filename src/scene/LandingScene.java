@@ -10,7 +10,7 @@ public class LandingScene {
 	private static Scene cachedScene = null;
 	private static MediaPlayer bgm = LandingPane.getBgm();
 	private static StackPane root;
-	
+
 	public static Scene getScene() {
 		bgm.play();
 
@@ -19,10 +19,10 @@ public class LandingScene {
 		}
 
 		root = new StackPane();
-		
+
 		LandingPane newLandingPane = new LandingPane();
 		root.getChildren().add(newLandingPane);
-		
+
 		Scene scene = SceneController.makeNewScene(root);
 		cachedScene = scene;
 

@@ -22,12 +22,12 @@ import utils.GameConfig;
 public class PausePane extends VBox {
 	private final int heightBox = 90;
 	private final int widthBox = 120;
-	
+
 	private static final Color colorOnHover = Color.rgb(87, 89, 66);
 	private static final Color colorBg = Color.rgb(245, 246, 231);
-	
+
 	private static SettingPane settingPane = new SettingPane();
-	
+
 	public PausePane() {
 		super();
 

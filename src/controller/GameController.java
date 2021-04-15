@@ -29,7 +29,7 @@ public class GameController {
 	}
 
 	public static GameMap getFloor(int floor) throws InvalidFloorException {
-		if (floorList.size() < floor || floor <= 0) {
+		if ((floorList.size() < floor) || (floor <= 0)) {
 			throw new InvalidFloorException();
 		}
 		return floorList.get(floor - 1);
@@ -120,15 +120,15 @@ public class GameController {
 	}
 
 	public static void isGameOver() {
-		if(player.getHealth() <= 0) {
+		if (player.getHealth() <= 0) {
 			bgm.stop();
 			FadeTransition fadeOut = TransitionUtil.makeFadingNode(GameScene.getGamePane(), 1.0, 0.0);
-			
+
 			InterruptController.setTransition(true);
-			fadeOut.setOnFinished((event) -> {	
+			fadeOut.setOnFinished((event) -> {
 				SceneController.setSceneToStage(GameOverScene.getScene());
 			});
-			
+
 			fadeOut.play();
 		}
 		return;
@@ -194,7 +194,7 @@ public class GameController {
 			player.setPos(posY, posX);
 			newMap.get(posY, posX).setEntity(player);
 			newMap.drawMap();
-			fadeSecond.play();			
+			fadeSecond.play();
 		});
 
 		return fadeFirst;

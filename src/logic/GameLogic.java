@@ -22,8 +22,9 @@ public class GameLogic {
 	private static Runnable nextAction = null;
 
 	public static void doNextAction() {
-		if (InterruptController.isInterruptPlayerInput())
+		if (InterruptController.isInterruptPlayerInput()) {
 			return;
+		}
 		if (nextAction != null) {
 			nextAction.run();
 		}
@@ -53,7 +54,7 @@ public class GameLogic {
 			};
 			return;
 		}
-		if (InterruptController.isImmobilize() && action != DispatchAction.STAY_STILL) {
+		if ((InterruptController.isImmobilize()) && (action != DispatchAction.STAY_STILL)) {
 			MessageTextUtil.textWhenImmobilized();
 			return;
 		}
@@ -86,18 +87,18 @@ public class GameLogic {
 		Cell currentCell = thisGameMap.get(player.getPosY(), player.getPosX());
 		Item cellItem = currentCell.getItem();
 
-		if (cellItem != null && player.getItemList().size() != GameConfig.MAX_ITEM) {
+		if ((cellItem != null) && (player.getItemList().size() != GameConfig.MAX_ITEM)) {
 			player.getItemList().add(cellItem);
 			currentCell.setItem(null);
 			MessageTextUtil.textWhenPickUpItem(cellItem);
-		} else if (currentCell.getType() == Cell.LADDER_UP && isMove) {
+		} else if ((currentCell.getType() == Cell.LADDER_UP) && isMove) {
 			boolean isAscending = GameController.ascending();
 			int level = GameController.getLevel();
 			if (!isAscending) {
 				level = 0;
 			}
 			MessageTextUtil.textWhenAscending(level);
-		} else if (currentCell.getType() == Cell.LADDER_DOWN && isMove) {
+		} else if ((currentCell.getType() == Cell.LADDER_DOWN) && isMove) {
 			GameController.descending();
 			MessageTextUtil.textWhenDescending(GameController.getLevel());
 		}
@@ -181,7 +182,7 @@ public class GameLogic {
 			}
 		}
 	}
-	
+
 	private static void deleteItemHandler(Item item) {
 		if (item == GameController.getPlayer().getEquippedArmor()) {
 			GameController.getPlayer().setEquippedArmor(null);
@@ -191,7 +192,7 @@ public class GameLogic {
 		GameController.getPlayer().getItemList().remove(item);
 		MessageTextUtil.textWhenDropItem(item);
 	}
-	
+
 	private static void unEquipItemHandler(Item item) {
 		Player player = GameController.getPlayer();
 		player.unEquipItem(item);
@@ -201,7 +202,7 @@ public class GameLogic {
 			MessageTextUtil.textWhenUnequipWeapon((Weapon) item);
 		}
 	}
-	
+
 	private static void switchEquipmentHandler(Item item) {
 		Player player = GameController.getPlayer();
 		Item beforeSwitch = null;
@@ -216,6 +217,7 @@ public class GameLogic {
 		}
 		player.equipItem(item);
 	}
+
 	private static void useItemHandler(Item item) {
 		Player player = GameController.getPlayer();
 		player.equipItem(item);

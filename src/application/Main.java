@@ -22,8 +22,9 @@ public class Main extends Application {
 
 		GameConfig.setScreenWidth((int) rectangleSize);
 		GameConfig.setScreenHeight((int) rectangleSize);
-		if (rectangleSize > GameConfig.SCREEN_RESPONSIVE)
+		if (rectangleSize > GameConfig.SCREEN_RESPONSIVE) {
 			GameConfig.setScale(3);
+		}
 
 		primaryStage.getIcons().add(new Image(iconPath));
 		primaryStage.setTitle(GameConfig.GAME_TITLE);

@@ -28,10 +28,10 @@ import utils.GameConfig;
 public class SettingPane extends VBox {
 	private final int heightBox = 140;
 	private final int widthBox = 180;
-	
+
 	private Slider volumeSlider;
 	private CheckBox disableCheckBox;
-	
+
 	public SettingPane() {
 		styleSetup();
 		addTitle();
@@ -47,7 +47,7 @@ public class SettingPane extends VBox {
 
 		InterruptController.setSettingOpen(true);
 	}
-	
+
 	public void updateSetting() {
 		volumeSlider.setValue((int) (GameConfig.getVolume() * 100));
 		disableCheckBox.setSelected(GameConfig.isSkipMoveAnimation());
@@ -55,7 +55,8 @@ public class SettingPane extends VBox {
 
 	private void styleSetup() {
 		setBackground(new Background(new BackgroundFill(Color.WHEAT, CornerRadii.EMPTY, Insets.EMPTY)));
-		setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+		setBorder(new Border(
+				new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 		setPadding(new Insets(20));
 		setSpacing(10);
 
@@ -66,12 +67,12 @@ public class SettingPane extends VBox {
 		setMaxWidth(widthBox * GameConfig.getScale());
 
 	}
-	
+
 	private void addCloseText() {
 		HBox closeBox = new HBox();
 		closeBox.setPadding(new Insets(20, 0, 0, 0));
 		closeBox.setAlignment(Pos.CENTER);
-		
+
 		Text closeText = new Text("OK");
 		closeText.setFont(FontUtil.getFont(18));
 		closeText.setFill(Color.BLACK);
@@ -85,7 +86,7 @@ public class SettingPane extends VBox {
 				e.printStackTrace();
 			}
 		});
-		
+
 		closeBox.getChildren().addAll(closeText);
 
 		this.getChildren().add(closeBox);

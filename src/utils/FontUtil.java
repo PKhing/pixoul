@@ -14,10 +14,12 @@ public class FontUtil {
 	}
 
 	public static Font getFont(int size) {
-		if (size <= 12)
+		if (size <= 12) {
 			return font12;
-		if (size <= 18)
+		}
+		if (size <= 18) {
 			return font18;
+		}
 		return font30;
 	}
 

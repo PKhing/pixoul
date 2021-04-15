@@ -30,11 +30,11 @@ public class GameMap {
 	public void printMap() {
 		for (int i = 0; i <= GameConfig.MAP_SIZE; i++) {
 			for (int j = 0; j <= GameConfig.MAP_SIZE; j++) {
-				if (gameMap[i][j].getType() == Cell.PATH)
+				if (gameMap[i][j].getType() == Cell.PATH) {
 					System.out.print(" ");
-				else if (gameMap[i][j].getType() == Cell.WALL)
+				} else if (gameMap[i][j].getType() == Cell.WALL) {
 					System.out.print("#");
-				else {
+				} else {
 					System.out.print(".");
 				}
 			}
@@ -58,12 +58,14 @@ public class GameMap {
 		@Override
 		public int compareTo(Node node) {
 			if (this.priority == node.priority) {
-				if (this.y < node.y)
+				if (this.y < node.y) {
 					return -1;
+				}
 				return 1;
 			}
-			if (this.priority < node.priority)
+			if (this.priority < node.priority) {
 				return -1;
+			}
 			return 1;
 		}
 	}
@@ -122,8 +124,9 @@ public class GameMap {
 	}
 
 	public Cell get(int i, int j) {
-		if (i < 0 || i > GameConfig.MAP_SIZE || j < 0 || j > GameConfig.MAP_SIZE)
+		if (i < 0 || i > GameConfig.MAP_SIZE || j < 0 || j > GameConfig.MAP_SIZE) {
 			return new Cell();
+		}
 		return gameMap[i][j];
 	}
 
@@ -151,11 +154,11 @@ public class GameMap {
 			int shiftX = 0;
 			int shiftY = 0;
 
-			if (entity != null && entity.isMoving()) {
+			if ((entity != null) && entity.isMoving()) {
 				shiftX = -Direction.getMoveX(entity.getDirection(), cnt * GameConfig.getScale());
 				shiftY = -Direction.getMoveY(entity.getDirection(), cnt * GameConfig.getScale());
 			}
-			
+
 			int finalShiftY = shiftY;
 			int finalShiftX = shiftX;
 
@@ -188,26 +191,29 @@ public class GameMap {
 			}
 
 			// Draw item which on cell
-			if (thisCell.getItem() != null)
+			if (thisCell.getItem() != null) {
 				pq.add(new Node(posY, posX, 1, () -> {
 					DrawUtil.drawItemOnCell(posY, posX, thisCell.getItem());
 				}));
+			}
 
 			// Draw entity
-			if (thisCell.getEntity() != null)
+			if (thisCell.getEntity() != null) {
 				pq.add(new Node(posY, posX, 2, () -> {
 					DrawUtil.drawEntity(posY + finalShiftY, posX + finalShiftX, thisCell.getEntity(), cnt);
 				}));
-
+			}
 			// Draw Monster HP Bar
-			if (thisCell.getEntity() instanceof Monster)
+			if (thisCell.getEntity() instanceof Monster) {
 				pq.add(new Node(posY, posX, 100, () -> {
 					DrawUtil.drawHPBar(posY + finalShiftY, posX + finalShiftX, thisCell.getEntity());
 				}));
-			if (thisCell.getEntity() instanceof Monster && cnt == 0)
+			}
+			if ((thisCell.getEntity() instanceof Monster) && (cnt == 0)) {
 				pq.add(new Node(posY, posX, 2, () -> {
 					DrawUtil.addEntityButton(posY + finalShiftY, posX + finalShiftX, thisCell.getEntity());
 				}));
+			}
 		}
 
 		return pq;

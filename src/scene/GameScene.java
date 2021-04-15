@@ -67,13 +67,13 @@ public class GameScene {
 
 		setupGamePane();
 		setupGameOverlay();
-		
+
 		StackPane.setAlignment(new Group(inventoryPane), Pos.CENTER);
 		StackPane.setAlignment(new Group(pausePane), Pos.CENTER);
 
 		GameController.getGameMap().drawMap();
 	}
-	
+
 	private static void setupGamePane() {
 		gamePane = new StackPane();
 		root.getChildren().add(gamePane);
@@ -86,12 +86,12 @@ public class GameScene {
 		gamePane.getChildren().add(buttonPane);
 		addEventListener();
 	}
-	
+
 	private static void setupGameOverlay() {
 		AnchorPane overlay = new AnchorPane();
 		overlay.setPickOnBounds(false);
 		gamePane.getChildren().add(overlay);
-		
+
 		addInventoryButton(overlay);
 		addPauseButton(overlay);
 
@@ -114,8 +114,9 @@ public class GameScene {
 		inventoryBtn.getGraphicsContext2D().drawImage(DrawUtil.scaleUp(backpackSprite, GameConfig.getScale()), 0, 0);
 
 		inventoryBtn.setOnMouseClicked((event) -> {
-			if (InterruptController.isPauseOpen() || InterruptController.isTransition())
+			if (InterruptController.isPauseOpen() || InterruptController.isTransition()) {
 				return;
+			}
 			gamePane.getChildren().add(inventoryPane);
 			inventoryPane.requestFocus();
 			InterruptController.setInventoryOpen(true);
@@ -132,8 +133,9 @@ public class GameScene {
 		pauseBtn.getGraphicsContext2D().drawImage(DrawUtil.scaleUp(pauseSprite, GameConfig.getScale()), 0, 0);
 
 		pauseBtn.setOnMouseClicked((event) -> {
-			if (InterruptController.isInventoryOpen() || InterruptController.isTransition())
+			if (InterruptController.isInventoryOpen() || InterruptController.isTransition()) {
 				return;
+			}
 			gamePane.getChildren().add(pausePane);
 			pausePane.requestFocus();
 			InterruptController.setPauseOpen(true);
@@ -171,57 +173,66 @@ public class GameScene {
 	}
 
 	public static Scene getScene() {
-		if (scene == null)
+		if (scene == null) {
 			initScene();
+		}
 		return scene;
 
 	}
 
 	public static StatusPane getStatusPane() {
-		if (statusPane == null)
+		if (statusPane == null) {
 			initScene();
+		}
 		return statusPane;
 	}
 
 	public static MessagePane getMessagePane() {
-		if (messagePane == null)
+		if (messagePane == null) {
 			initScene();
+		}
 		return messagePane;
 	}
 
 	public static EffectPane getEffectPane() {
-		if (effectPane == null)
+		if (effectPane == null) {
 			initScene();
+		}
 		return effectPane;
 	}
 
 	public static InventoryPane getInventoryPane() {
-		if (inventoryPane == null)
+		if (inventoryPane == null) {
 			initScene();
+		}
 		return inventoryPane;
 	}
 
 	public static PausePane getPausePane() {
-		if (pausePane == null)
+		if (pausePane == null) {
 			initScene();
+		}
 		return pausePane;
 	}
 
 	public static AnchorPane getButtonPane() {
-		if (buttonPane == null)
+		if (buttonPane == null) {
 			initScene();
+		}
 		return buttonPane;
 	}
 
 	public static GraphicsContext getGraphicsContext() {
-		if (gc == null)
+		if (gc == null) {
 			initScene();
+		}
 		return gc;
 	}
 
 	public static StackPane getGamePane() {
-		if (gamePane == null)
+		if (gamePane == null) {
 			initScene();
+		}
 		return gamePane;
 	}
 
@@ -247,7 +258,8 @@ public class GameScene {
 
 		HauntedMaid hauntedMaid = new HauntedMaid(5, 10, 1, firstRoomPos.getKey() - 2, firstRoomPos.getValue() + 3,
 				Direction.DOWN, 1.25, 0, 1);
-		DarkMage darkMage = new DarkMage(10, 1, firstRoomPos.getKey() - 3, firstRoomPos.getValue() + 2, Direction.DOWN,2,10);
+		DarkMage darkMage = new DarkMage(10, 1, firstRoomPos.getKey() - 3, firstRoomPos.getValue() + 2, Direction.DOWN,
+				2, 10);
 		Potion maxHealthPotion = new InstantHealPotion("Bitset Potion", "Extends for 1 bit shift",
 				GameController.getPlayer().getHealth(), true);
 		Potion currentPotion = new RegenerationPotion("Salty Potion", "With 100 years salt effect", 10, 100);

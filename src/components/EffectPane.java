@@ -23,7 +23,8 @@ public class EffectPane extends VBox {
 		AnchorPane.setRightAnchor(this, 0.0);
 
 		this.setPadding(new Insets(7));
-		this.setBackground(new Background(new BackgroundFill(Color.rgb(0, 0, 0, 0.5), CornerRadii.EMPTY, Insets.EMPTY)));
+		this.setBackground(
+				new Background(new BackgroundFill(Color.rgb(0, 0, 0, 0.5), CornerRadii.EMPTY, Insets.EMPTY)));
 		this.setAlignment(Pos.CENTER_RIGHT);
 
 		update();
@@ -32,7 +33,7 @@ public class EffectPane extends VBox {
 	public void update() {
 		this.getChildren().clear();
 		List<EntityEffect> playerEffect = GameController.getPlayer().getEffectList();
-		
+
 		if (playerEffect.size() == 0) {
 			this.setVisible(false);
 		} else {

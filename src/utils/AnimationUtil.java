@@ -33,12 +33,14 @@ public class AnimationUtil {
 
 		boolean isMove = false;
 		for (Monster monster : GameController.getGameMap().getMonsterList())
-			if (monster.isMoving())
+			if (monster.isMoving()) {
 				isMove = true;
+			}
 
 		boolean finalIsMove = isMove;
-		if (!isMove || GameConfig.isSkipMoveAnimation())
+		if (!isMove || GameConfig.isSkipMoveAnimation()) {
 			GameController.getGameMap().drawMap();
+		}
 
 		Thread monsterMove = new Thread() {
 			@Override
@@ -55,8 +57,9 @@ public class AnimationUtil {
 		Thread playerAttacked = new Thread() {
 			@Override
 			public void run() {
-				if (!GameController.getPlayer().isAttacked())
+				if (!GameController.getPlayer().isAttacked()) {
 					return;
+				}
 				try {
 					Thread.sleep(300);
 					GameController.getPlayer().setAttacked(false);

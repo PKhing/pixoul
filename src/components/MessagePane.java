@@ -20,7 +20,8 @@ public class MessagePane extends VBox {
 		AnchorPane.setLeftAnchor(this, 0.0);
 		this.setPrefHeight(50.0 * GameConfig.getScale());
 		this.setPrefWidth(140.0 * GameConfig.getScale());
-		this.setBackground(new Background(new BackgroundFill(Color.rgb(0, 0, 0, 0.5), CornerRadii.EMPTY, Insets.EMPTY)));
+		this.setBackground(
+				new Background(new BackgroundFill(Color.rgb(0, 0, 0, 0.5), CornerRadii.EMPTY, Insets.EMPTY)));
 		this.setPadding(new Insets(7, 7, 7, 14));
 	}
 

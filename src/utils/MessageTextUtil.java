@@ -85,12 +85,12 @@ public class MessageTextUtil {
 		String displayText = "You can not move because you are immobilize now (but still can attack).";
 		writeMessage(displayText);
 	}
-	
+
 	public static void textWhenStayStill(Entity entity) {
 		String displayText = "%s does nothing.".formatted(entity.getName());
 		writeMessage(displayText);
 	}
-	
+
 	public static void makeNewMessage(String string) {
 		writeMessage(string);
 	}

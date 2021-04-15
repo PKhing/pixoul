@@ -28,9 +28,11 @@ public abstract class Monster extends Entity {
 		Pair<Integer, Integer> playerPos = bfs(1);
 		if (playerPos == null) {
 			playerPos = bfs(2);
+
+			if (playerPos == null) {
+				return -1;
+			}
 		}
-		if (playerPos == null)
-			return -1;
 		Pair<Integer, Integer> newPos = playerPos;
 		while (!(new Pair<>(getPosY(), getPosX()).equals(parent[newPos.getKey()][newPos.getValue()]))) {
 			newPos = parent[newPos.getKey()][newPos.getValue()];
@@ -83,8 +85,8 @@ public abstract class Monster extends Entity {
 			}
 
 			if (type == 1) {
-				if (GameController.getGameMap().get(y, x).getEntity() != null
-						&& GameController.getGameMap().get(y, x).getEntity() != this
+				if ((GameController.getGameMap().get(y, x).getEntity() != null)
+						&& (GameController.getGameMap().get(y, x).getEntity() != this)
 						&& !(GameController.getGameMap().get(y, x).getEntity() instanceof Player)) {
 					continue;
 				}

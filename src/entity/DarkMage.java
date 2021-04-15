@@ -73,7 +73,7 @@ public class DarkMage extends Monster {
 	}
 
 	private void poison(Entity target) {
-		if (poison == null || poison.getDuration() == 0) {
+		if ((poison == null) || (poison.getDuration() == 0)) {
 			poison = new Poison(getName(), poisonDamage, poisonDuration, false);
 			poison.onAdd(target);
 		} else {

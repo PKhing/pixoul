@@ -33,10 +33,12 @@ public class Cell {
 
 	public void setType(int type) {
 		this.type = type;
-		if (type == PATH)
+		if (type == PATH) {
 			setSymbol(RandomUtil.random(0, TILE_SPRITE_TYPE - 1));
-		if (type == WALL)
+		}
+		if (type == WALL) {
 			setSymbol(TILE_SPRITE_TYPE);
+		}
 	}
 
 	public Entity getEntity() {

@@ -61,8 +61,9 @@ public abstract class Entity {
 	public abstract int getSymbol();
 
 	public boolean move(int direction) {
-		if (!(this instanceof Moveable))
+		if (!(this instanceof Moveable)) {
 			return false;
+		}
 
 		int newPosY = getPosY() + Direction.getMoveY(direction, getMoveSpeed());
 		int newPosX = getPosX() + Direction.getMoveX(direction, getMoveSpeed());
@@ -71,7 +72,7 @@ public abstract class Entity {
 
 		Cell newPosCell = GameController.getGameMap().get(newPosY, newPosX);
 
-		if (newPosCell.getType() != Cell.WALL && !(newPosCell.getEntity() instanceof Entity)) {
+		if ((newPosCell.getType() != Cell.WALL) && !(newPosCell.getEntity() instanceof Entity)) {
 			GameController.getGameMap().get(getPosY(), getPosX()).setEntity(null);
 			GameController.getGameMap().get(newPosY, newPosX).setEntity(this);
 			setPosY(newPosY);
@@ -83,7 +84,7 @@ public abstract class Entity {
 	}
 
 	public void setPos(int posY, int posX) {
-		if(GameController.getGameMap().get(this.getPosY(), this.getPosX()).getEntity()==this) {
+		if (GameController.getGameMap().get(this.getPosY(), this.getPosX()).getEntity() == this) {
 			GameController.getGameMap().get(this.getPosY(), this.getPosX()).setEntity(null);
 		}
 		GameController.getGameMap().get(posY, posX).setEntity(this);

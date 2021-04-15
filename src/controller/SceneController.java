@@ -37,7 +37,7 @@ public class SceneController {
 	public static void exitGame() {
 		System.exit(0);
 	}
-	
+
 	public static Scene makeNewScene(Parent node) {
 		Scene scene = new Scene(node, GameConfig.getScreenWidth(), GameConfig.getScreenHeight());
 		return scene;

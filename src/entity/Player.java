@@ -39,7 +39,6 @@ public class Player extends Entity implements Moveable, Attackable {
 		return Sprites.PLAYER;
 	}
 
-	
 	@Override
 	public boolean move(int direction) {
 		if (super.move(direction)) {
@@ -94,14 +93,14 @@ public class Player extends Entity implements Moveable, Attackable {
 				continue;
 			}
 
-			if (nowY > endIdxY || nowY < startIdxY || nowX > endIdxX || nowX < startIdxX) {
+			if ((nowY > endIdxY) || (nowY < startIdxY) || (nowX > endIdxX) || (nowX < startIdxX)) {
 				continue;
 			}
 
 			boolean found = false;
 
 			for (Pair<Integer, Integer> each : allPos) {
-				if (each.getKey() == nowY && each.getValue() == nowX) {
+				if ((each.getKey() == nowY) && (each.getValue() == nowX)) {
 					found = true;
 					break;
 				}
@@ -120,13 +119,13 @@ public class Player extends Entity implements Moveable, Attackable {
 			for (int i = 0; i < directionSz; i++) {
 				int newX = directionArr[i][0] + nowX;
 				int newY = directionArr[i][1] + nowY;
-				if (directionArr[i][0] == 0 || directionArr[i][1] == 0) {
+				if ((directionArr[i][0] == 0) || (directionArr[i][1] == 0)) {
 					queue.add(new Pair<>(level + 1, new Pair<>(newY, newX)));
 				} else {
 					int cellTypeY = GameController.getGameMap().get(newY, nowX).getType();
 					int cellTypeX = GameController.getGameMap().get(nowY, newX).getType();
 
-					if (cellTypeY == Cell.WALL && cellTypeX == Cell.WALL) {
+					if ((cellTypeY == Cell.WALL) && (cellTypeX == Cell.WALL)) {
 						continue;
 					} else {
 						queue.add(new Pair<>(level + 1, new Pair<>(newY, newX)));

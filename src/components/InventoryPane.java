@@ -47,7 +47,7 @@ public class InventoryPane extends AnchorPane {
 		itemPane = new FlowPane();
 		AnchorPane.setLeftAnchor(itemPane, (double) (GameConfig.getScreenWidth() / 2 - 80 * GameConfig.getScale()));
 		AnchorPane.setTopAnchor(itemPane, (double) (GameConfig.getScreenHeight() / 2 - 100 * GameConfig.getScale()));
-		
+
 		this.getChildren().add(itemPane);
 
 		itemPane.setPrefSize(160 * GameConfig.getScale(), 200 * GameConfig.getScale());
@@ -75,10 +75,11 @@ public class InventoryPane extends AnchorPane {
 		addHeader();
 		List<Item> itemList = GameController.getPlayer().getItemList();
 		for (int i = 0; i < GameConfig.MAX_ITEM; i++) {
-			if (i < itemList.size())
+			if (i < itemList.size()) {
 				addItem(itemList.get(i), itemPane);
-			else
+			} else {
 				addItem(null, itemPane);
+			}
 		}
 
 		addItem(GameController.getPlayer().getEquippedWeapon(), equipmentPane);
@@ -114,12 +115,12 @@ public class InventoryPane extends AnchorPane {
 					} else if (mouseEvent.getClickCount() == 2) {
 						Weapon currentWeapon = GameController.getPlayer().getEquippedWeapon();
 						Armor currentArmor = GameController.getPlayer().getEquippedArmor();
-						if (item == currentWeapon || item == currentArmor) {
+						if ((item == currentWeapon) || (item == currentArmor)) {
 							GameLogic.gameUpdate(DispatchAction.UNEQUIP, item);
 						} else {
-							if (item instanceof Weapon && currentWeapon != null) {
+							if ((item instanceof Weapon) && (currentWeapon != null)) {
 								GameLogic.gameUpdate(DispatchAction.SWITCH_EQUIP, item);
-							} else if (item instanceof Armor && currentArmor != null) {
+							} else if ((item instanceof Armor) && (currentArmor != null)) {
 								GameLogic.gameUpdate(DispatchAction.SWITCH_EQUIP, item);
 							} else {
 								GameLogic.gameUpdate(DispatchAction.USE_ITEM, item);
@@ -127,7 +128,7 @@ public class InventoryPane extends AnchorPane {
 						}
 					}
 				} else if (mouseEvent.getButton().equals(MouseButton.SECONDARY)) {
-					if (isDeleteMode == true) {
+					if (isDeleteMode) {
 						isDeleteMode = false;
 						GameScene.getScene().setCursor(Cursor.DEFAULT);
 					}
@@ -151,28 +152,28 @@ public class InventoryPane extends AnchorPane {
 
 		// Texture
 		addTextureToHeader(header);
-		
+
 		// Text
 		addInventoryText(header);
 
 		// Exit button
 		addExitButton(header);
 	}
-	
+
 	private void addTextureToHeader(StackPane header) {
 		Canvas canvas = new Canvas(160 * GameConfig.getScale(), 40 * GameConfig.getScale());
 		header.getChildren().add(canvas);
 		canvas.getGraphicsContext2D().drawImage(DrawUtil.scaleUp(headerBackground, GameConfig.getScale()), 0, 0);
 	}
-	
+
 	private void addInventoryText(StackPane header) {
 		Text text = new Text("Inventory");
 		text.setFont(FontUtil.getFont(30));
 		text.setFill(Color.rgb(123, 126, 94));
-		
+
 		header.getChildren().add(text);
 	}
-	
+
 	private void addExitButton(StackPane header) {
 		Text exit = new Text("x ");
 		StackPane.setAlignment(exit, Pos.TOP_RIGHT);
@@ -185,7 +186,7 @@ public class InventoryPane extends AnchorPane {
 			GameScene.getScene().setCursor(Cursor.DEFAULT);
 		});
 	}
-	
+
 	private void addDeleteButton() {
 
 		Canvas deleteButton = new Canvas(32 * GameConfig.getScale(), 32 * GameConfig.getScale());
@@ -202,7 +203,7 @@ public class InventoryPane extends AnchorPane {
 		// Add event listener
 		deleteButton.setOnMouseClicked((event) -> {
 			isDeleteMode = !isDeleteMode;
-			if (isDeleteMode == true) {
+			if (isDeleteMode) {
 				GameScene.getScene().setCursor(new ImageCursor(binSprite));
 			} else {
 				GameScene.getScene().setCursor(Cursor.DEFAULT);

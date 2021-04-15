@@ -26,7 +26,7 @@ public abstract class EntityEffect {
 
 	public boolean isDuplicate(Entity entity) {
 		for (EntityEffect effect : entity.getEffectList()) {
-			if (effect.getName() == getName() && effect.getEffectName() == getEffectName()) {
+			if ((effect.getName() == getName()) && (effect.getEffectName() == getEffectName())) {
 				effect.setDuration(effect.getDuration() + getDuration());
 				return true;
 			}

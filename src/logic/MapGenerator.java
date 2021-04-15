@@ -35,10 +35,10 @@ public class MapGenerator {
 
 		generateItemOnMap(gameMap);
 		generateMonsterOnMap(gameMap);
-		
+
 		return gameMap;
 	}
-	
+
 	static class State {
 		private int y, x, direction;
 
@@ -53,14 +53,16 @@ public class MapGenerator {
 		}
 
 		public boolean isValid() {
-			if (y <= 0 || x <= 0 || y >= GameConfig.MAP_SIZE || x >= GameConfig.MAP_SIZE)
+			if ((y <= 0) || (x <= 0) || (y >= GameConfig.MAP_SIZE) || (x >= GameConfig.MAP_SIZE)) {
 				return true;
-			if (isConnectTo(PROCESSING))
+			}
+			if (isConnectTo(PROCESSING)) {
 				return false;
+			}
 			return true;
 		}
 
-		public boolean isConnectTo(int txpe) {
+		public boolean isConnectTo(int type) {
 			State f = this.newState();
 			State l = this.newState();
 			State r = this.newState();
@@ -69,32 +71,36 @@ public class MapGenerator {
 			l.move();
 			r.turnRight();
 			r.move();
-			if (f.getType() == txpe || l.getType() == txpe || r.getType() == txpe)
+			if ((f.getType() == type) || (l.getType() == type) || (r.getType() == type)) {
 				return true;
+			}
 			return false;
 		}
 
 		public void move() {
-			if (direction == 0)
+			if (direction == 0) {
 				y--;
-			else if (direction == 1)
+			} else if (direction == 1) {
 				x++;
-			else if (direction == 2)
+			} else if (direction == 2) {
 				y++;
-			else
+			} else {
 				x--;
+			}
 		}
 
 		public void turnLeft() {
 			direction--;
-			if (direction == -1)
+			if (direction == -1) {
 				direction = 3;
+			}
 		}
 
 		public void turnRight() {
 			direction++;
-			if (direction == 4)
+			if (direction == 4) {
 				direction = 0;
+			}
 		}
 
 		public void doAction(int action) {
@@ -108,7 +114,7 @@ public class MapGenerator {
 		}
 
 		public int getType() {
-			if (y <= 0 || x <= 0 || y >= GameConfig.MAP_SIZE || x >= GameConfig.MAP_SIZE)
+			if ((y <= 0) || (x <= 0) || (y >= GameConfig.MAP_SIZE) || (x >= GameConfig.MAP_SIZE))
 				return -1000;
 			return map[y][x];
 		}
@@ -152,35 +158,37 @@ public class MapGenerator {
 			}
 			makeMap(gameMap.getGameMap());
 		} while (!validate(gameMap));
-		
+
 		return gameMap;
 	}
-	
+
 	private static boolean makeRoom(int y, int x, int no) {
 
 		// check if room is valid or not
-		if (y - GameConfig.ROOM_SIZE <= 0 || y + GameConfig.ROOM_SIZE >= GameConfig.MAP_SIZE
-				|| x - GameConfig.ROOM_SIZE <= 0 || x + GameConfig.ROOM_SIZE >= GameConfig.MAP_SIZE)
+		if ((y - GameConfig.ROOM_SIZE <= 0) || (y + GameConfig.ROOM_SIZE >= GameConfig.MAP_SIZE)
+				|| (x - GameConfig.ROOM_SIZE <= 0) || (x + GameConfig.ROOM_SIZE >= GameConfig.MAP_SIZE))
 			return false;
 		for (int i = y - GameConfig.ROOM_SIZE; i <= y + GameConfig.ROOM_SIZE; i++) {
 			for (int j = x - GameConfig.ROOM_SIZE; j <= x + GameConfig.ROOM_SIZE; j++) {
-				if (map[i][j] != 0)
+				if (map[i][j] != 0) {
 					return false;
+				}
 			}
 		}
 
 		// make room
 		for (int i = y - GameConfig.ROOM_SIZE; i <= y + GameConfig.ROOM_SIZE; i++) {
 			for (int j = x - GameConfig.ROOM_SIZE; j <= x + GameConfig.ROOM_SIZE; j++) {
-				if (j != x - GameConfig.ROOM_SIZE && j != x + GameConfig.ROOM_SIZE && i != y - GameConfig.ROOM_SIZE
-						&& i != y + GameConfig.ROOM_SIZE)
+				if ((j != x - GameConfig.ROOM_SIZE) && (j != x + GameConfig.ROOM_SIZE)
+						&& (i != y - GameConfig.ROOM_SIZE) && (i != y + GameConfig.ROOM_SIZE)) {
 					map[i][j] = ROOM;
-				if (j != x - GameConfig.ROOM_SIZE && j != x + GameConfig.ROOM_SIZE) {
+				}
+				if ((j != x - GameConfig.ROOM_SIZE) && (j != x + GameConfig.ROOM_SIZE)) {
 					map[y - GameConfig.ROOM_SIZE][j] = no;
 					map[y + GameConfig.ROOM_SIZE][j] = no;
 				}
 			}
-			if (i != y - GameConfig.ROOM_SIZE && i != y + GameConfig.ROOM_SIZE) {
+			if ((i != y - GameConfig.ROOM_SIZE) && (i != y + GameConfig.ROOM_SIZE)) {
 				map[i][x - GameConfig.ROOM_SIZE] = no;
 				map[i][x + GameConfig.ROOM_SIZE] = no;
 			}
@@ -189,13 +197,16 @@ public class MapGenerator {
 	}
 
 	private static boolean makePath(State state, int startRoom, int length) {
-		if (length >= MAX_LENGTH)
+		if (length >= MAX_LENGTH) {
 			return false;
-		if (!state.isValid() || state.getType() == startRoom || state.getType() <= ROOM)
+		}
+		if (!state.isValid() || (state.getType() == startRoom) || (state.getType() <= ROOM)) {
 			return false;
-		if (state.getType() > 0 || state.isConnectTo(PATH) || state.getType() == PATH) {
-			if (length < MIN_LENGTH)
+		}
+		if ((state.getType() > 0) || state.isConnectTo(PATH) || (state.getType() == PATH)) {
+			if (length < MIN_LENGTH) {
 				return false;
+			}
 			state.setType(PATH);
 			return true;
 		}
@@ -220,7 +231,7 @@ public class MapGenerator {
 		for (int i = 0; i <= GameConfig.MAP_SIZE; i++) {
 			for (int j = 0; j <= GameConfig.MAP_SIZE; j++) {
 				gameMap[i][j] = new Cell(Cell.VOID);
-				if (map[i][j] == ROOM || map[i][j] == PATH) {
+				if ((map[i][j] == ROOM) || (map[i][j] == PATH)) {
 					gameMap[i][j].setType(Cell.PATH);
 				}
 			}
@@ -231,14 +242,17 @@ public class MapGenerator {
 				int pathCount = 0;
 				for (int k = i - 1; k <= i + 1; k++) {
 					for (int l = j - 1; l <= j + 1; l++) {
-						if (k < 0 || l < 0 || k > GameConfig.MAP_SIZE || l > GameConfig.MAP_SIZE)
+						if ((k < 0) || (l < 0) || (k > GameConfig.MAP_SIZE) || (l > GameConfig.MAP_SIZE)) {
 							continue;
-						if (gameMap[k][l].getType() == Cell.PATH)
+						}
+						if (gameMap[k][l].getType() == Cell.PATH) {
 							pathCount += 1;
+						}
 					}
 				}
-				if (pathCount > 0 && gameMap[i][j].getType() != Cell.PATH)
+				if ((pathCount > 0) && (gameMap[i][j].getType() != Cell.PATH)) {
 					gameMap[i][j].setType(Cell.WALL);
+				}
 			}
 		}
 	}
@@ -258,7 +272,7 @@ public class MapGenerator {
 
 			queue.remove();
 
-			if (gameMap.get(y, x).getType() != Cell.PATH || visit[y][x]) {
+			if ((gameMap.get(y, x).getType() != Cell.PATH) || visit[y][x]) {
 				continue;
 			}
 			visit[y][x] = true;
@@ -285,16 +299,14 @@ public class MapGenerator {
 		// TODO Generate item on map
 		Cell[][] cellMap = gameMap.getGameMap();
 		int level = GameController.getLevel();
-		
-		
+
 	}
-	
-	
+
 	private static void generateMonsterOnMap(GameMap gameMap) {
 		// TODO Generate monster on map
 		Cell[][] cellMap = gameMap.getGameMap();
 		Player player = GameController.getPlayer();
-		
+
 		int playerAtk = player.getAttack();
 	}
 
