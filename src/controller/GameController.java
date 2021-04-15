@@ -173,7 +173,10 @@ public class GameController {
 		FadeTransition fadeSecond = TransitionUtil.makeFadingNode(GameScene.getGamePane(), to, from);
 
 		// Fade out when finished
-		fadeSecond.setOnFinished((event) -> {
+		fadeSecond.setOnFinished((event) -> InterruptController.setTransition(false));
+
+		// Fade in when finished
+		fadeFirst.setOnFinished((event) -> {
 			gameMap.get(player.getPosY(), player.getPosX()).setEntity(null);
 
 			setGameMap(newMap);
@@ -191,12 +194,9 @@ public class GameController {
 			player.setPos(posY, posX);
 			newMap.get(posY, posX).setEntity(player);
 			newMap.drawMap();
-			fadeFirst.play();
+			fadeSecond.play();			
 		});
 
-		// Fade in when finished
-		fadeFirst.setOnFinished((event) -> InterruptController.setTransition(false));
-
-		return fadeSecond;
+		return fadeFirst;
 	}
 }
