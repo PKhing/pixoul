@@ -13,7 +13,11 @@ public class ShieldPotion extends Potion {
 		super(name, description, duration, isPermanant);
 		setShield(shield);
 	}
-
+	
+	public ShieldPotion clone() {
+		return new ShieldPotion(getName(), getDescription(), getShield(), getDuration(), isPermanant());
+	}
+	
 	@Override
 	public void onEquip(Player player) {
 		EntityEffect effect = new Protection(getName(), getShield(), getDuration(), isPermanant());

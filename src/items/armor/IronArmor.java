@@ -11,6 +11,10 @@ public class IronArmor extends Armor {
 		// TODO Auto-generated constructor stub
 	}
 
+	public IronArmor clone() {
+		return new IronArmor(getName(), getDescription(), getDefense());
+	}
+	
 	@Override
 	public void onEquip(Player player) {
 		// TODO Auto-generated method stub

@@ -9,9 +9,13 @@ import logic.Sprites;
 public class InstantHealPotion extends Potion {
 	private int value;
 
-	public InstantHealPotion(String name, String description, int value, boolean isPermanant) {
+	public InstantHealPotion(String name, String description, int value, int duration, boolean isPermanant) {
 		super(name, description, 0, isPermanant);
 		setValue(value);
+	}
+	
+	public InstantHealPotion clone() {
+		return new InstantHealPotion(getName(), getDescription(), getValue(), getDuration(), isPermanant());
 	}
 
 	@Override

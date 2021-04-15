@@ -10,11 +10,15 @@ public class RegenerationPotion extends Potion {
 
 	private int healValue;
 
-	public RegenerationPotion(String name, String description, int healValue, int duration) {
+	public RegenerationPotion(String name, String description, int healValue, int duration, boolean isPermanant) {
 		super(name, description, duration, false);
 		setHealValue(healValue);
 	}
 
+	public RegenerationPotion clone() {
+		return new RegenerationPotion(getName(), getDescription(), getHealValue(), getDuration(), isPermanant());
+	}
+	
 	@Override
 	public int getSymbol() {
 		// TODO Auto-generated method stub

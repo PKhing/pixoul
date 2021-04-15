@@ -8,9 +8,12 @@ public class Spear extends Weapon {
 
 	public Spear(String name, String description, int attack) {
 		super(name, description, attack);
-		// TODO Auto-generated constructor stub
 	}
 
+	public Spear clone() {
+		return new Spear(getName(), getDescription(), getAttack());
+	}
+	
 	@Override
 	public void onEquip(Player player) {
 		// TODO Auto-generated method stub

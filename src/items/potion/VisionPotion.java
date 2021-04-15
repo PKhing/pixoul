@@ -13,6 +13,10 @@ public class VisionPotion extends Potion {
 		super(name, description, duration, isPermanant);
 		setVision(vision);
 	}
+	
+	public VisionPotion clone() {
+		return new VisionPotion(getName(), getDescription(), getVision(), getDuration(), isPermanant());
+	}
 
 	@Override
 	public void onEquip(Player player) {

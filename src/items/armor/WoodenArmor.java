@@ -11,6 +11,10 @@ public class WoodenArmor extends Armor {
 		// TODO Auto-generated constructor stub
 	}
 
+	public WoodenArmor clone() {
+		return new WoodenArmor(getName(), getDescription(), getDefense());
+	}
+	
 	@Override
 	public void onEquip(Player player) {
 		// TODO Auto-generated method stub
