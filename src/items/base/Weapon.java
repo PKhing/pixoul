@@ -2,18 +2,17 @@ package items.base;
 
 public abstract class Weapon extends Item {
 	private int attack;
-	
+
 	public Weapon(String name, String description, int attack) {
 		super(name, description);
-		setAtk(attack);
+		setAttack(attack);
 	}
 
-	public int getAtk() {
+	public int getAttack() {
 		return attack;
 	}
 
-	public void setAtk(int attack) {
+	public void setAttack(int attack) {
 		this.attack = attack;
 	}
-
 }
