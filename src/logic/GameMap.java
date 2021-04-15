@@ -16,17 +16,43 @@ import scene.GameScene;
 import utils.DrawUtil;
 import utils.GameConfig;
 
+/**
+ * The GameMap class represents a level of the game. It stores data of each
+ * {@link Cell}, room position, and {@link Monster} on this level
+ *
+ */
 public class GameMap {
+	/**
+	 * The Array of {@link Cell} on this level.
+	 */
 	private Cell gameMap[][];
+	/**
+	 * The List of room position on this level.
+	 */
 	private List<Pair<Integer, Integer>> roomList;
+
+	/**
+	 * The List of {@link Monster} on this level.
+	 */
 	private List<Monster> monsterList;
 
+	/**
+	 * Creates an empty map.
+	 */
 	public GameMap() {
 		gameMap = new Cell[GameConfig.MAP_SIZE + 10][GameConfig.MAP_SIZE + 10];
 		monsterList = new CopyOnWriteArrayList<Monster>();
 		roomList = new CopyOnWriteArrayList<Pair<Integer, Integer>>();
 	}
 
+	/**
+	 * Prints map in the console. (For debugging purposes)
+	 * <ul>
+	 * <li>{@code '.'} represents VOID</li>
+	 * <li>{@code '#'} represents WALL</li>
+	 * <li>{@code ' '} represents PATH</li>
+	 * <ul>
+	 */
 	public void printMap() {
 		for (int i = 0; i <= GameConfig.MAP_SIZE; i++) {
 			for (int j = 0; j <= GameConfig.MAP_SIZE; j++) {
@@ -42,12 +68,37 @@ public class GameMap {
 		}
 	}
 
+	/**
+	 * A class to represents position, priority, and method for rendering. This
+	 * class is used for map rendering only.
+	 *
+	 */
 	class Node implements Comparable<Node> {
+		/**
+		 * Cell index of this Node in the X-axis.
+		 */
 		public int x;
+		/**
+		 * Cell index of this Node in the Y-axis.
+		 */
 		public int y;
+		/**
+		 * Priority of this Node.
+		 */
 		public int priority;
+		/**
+		 * Object that contains render method.
+		 */
 		public Renderable obj;
 
+		/**
+		 * Creates new node
+		 * 
+		 * @param y        Cell index of this Node in the Y-axis.
+		 * @param x        Cell index of this Node in the X-axis.
+		 * @param priority Priority of this Node.
+		 * @param obj      Object that contains render method.
+		 */
 		public Node(int y, int x, int priority, Renderable obj) {
 			this.obj = obj;
 			this.y = y;
@@ -70,6 +121,9 @@ public class GameMap {
 		}
 	}
 
+	/**
+	 * Renders this level by having the player at the center of the screen.
+	 */
 	public void drawMap() {
 		int newSpriteSize = GameConfig.SPRITE_SIZE * GameConfig.getScale();
 		int centerY = GameController.getPlayer().getPosY() * newSpriteSize
@@ -79,7 +133,15 @@ public class GameMap {
 		drawMap(centerY, centerX, 0);
 	}
 
-	public void drawMap(int centerY, int centerX, int cnt) {
+	/**
+	 * Renders this level by having the specified position at the center of the
+	 * screen.
+	 * 
+	 * @param centerY Center position in Y-axis
+	 * @param centerX Center position in X-axis
+	 * @param frame   Current animation frame
+	 */
+	public void drawMap(int centerY, int centerX, int frame) {
 		GraphicsContext gc = GameScene.getGraphicsContext();
 		AnchorPane buttonPane = GameScene.getButtonPane();
 		buttonPane.getChildren().clear();
@@ -111,7 +173,7 @@ public class GameMap {
 			}
 		}
 
-		PriorityQueue<Node> pq = buildPrioritizeNode(allVisibleField, newSpriteSize, startY, startX, cnt);
+		PriorityQueue<Node> pq = buildPrioritizedNode(allVisibleField, startY, startX, frame);
 
 		while (!pq.isEmpty()) {
 			Node node = pq.poll();
@@ -119,10 +181,22 @@ public class GameMap {
 		}
 	}
 
+	/**
+	 * Getter for array of {@link Cell} on this level.
+	 * 
+	 * @return an array of {@link Cell} on this level
+	 */
 	public Cell[][] getGameMap() {
 		return gameMap;
 	}
 
+	/**
+	 * Getter for {@link Cell} of the specified position
+	 * 
+	 * @param i Position of cell in Y-axis
+	 * @param j Position of cell in X-axis
+	 * @return Cell of the specified position
+	 */
 	public Cell get(int i, int j) {
 		if (i < 0 || i > GameConfig.MAP_SIZE || j < 0 || j > GameConfig.MAP_SIZE) {
 			return new Cell();
@@ -130,20 +204,41 @@ public class GameMap {
 		return gameMap[i][j];
 	}
 
+	/**
+	 * Getter for roomList.
+	 * 
+	 * @return This level's roomList
+	 */
 	public List<Pair<Integer, Integer>> getRoomList() {
 		return roomList;
 	}
 
+	/**
+	 * Getter for monsterList
+	 * 
+	 * @return This level's monsterListss
+	 */
 	public List<Monster> getMonsterList() {
 		return monsterList;
 	}
 
-	private PriorityQueue<Node> buildPrioritizeNode(ArrayList<Pair<Integer, Integer>> arr, int newSpriteSize,
-			int startY, int startX, int cnt) {
+	/**
+	 * Builds priority queue of nodes to be rendered. Sorted by priority of each
+	 * rendering method.
+	 * 
+	 * @param posList List of cell's position to be rendered
+	 * @param startY  Start rendering position in Y-axis
+	 * @param startX  Start rendering position in X-axis
+	 * @param frame   Current animation frame
+	 * @return priority queue of nodes to be rendered.
+	 */
+	private PriorityQueue<Node> buildPrioritizedNode(ArrayList<Pair<Integer, Integer>> posList, int startY, int startX,
+			int frame) {
 		GameMap gameMap = GameController.getGameMap();
 		PriorityQueue<Node> pq = new PriorityQueue<Node>();
+		int newSpriteSize = GameConfig.SPRITE_SIZE * GameConfig.getScale();
 
-		for (Pair<Integer, Integer> pos : arr) {
+		for (Pair<Integer, Integer> pos : posList) {
 			int i = pos.getKey();
 			int j = pos.getValue();
 
@@ -155,8 +250,8 @@ public class GameMap {
 			int shiftY = 0;
 
 			if ((entity != null) && entity.isMoving()) {
-				shiftX = -Direction.getMoveX(entity.getDirection(), cnt * GameConfig.getScale());
-				shiftY = -Direction.getMoveY(entity.getDirection(), cnt * GameConfig.getScale());
+				shiftX = -Direction.getMoveX(entity.getDirection(), frame * GameConfig.getScale());
+				shiftY = -Direction.getMoveY(entity.getDirection(), frame * GameConfig.getScale());
 			}
 
 			int finalShiftY = shiftY;
@@ -200,7 +295,7 @@ public class GameMap {
 			// Draw entity
 			if (thisCell.getEntity() != null) {
 				pq.add(new Node(posY, posX, 2, () -> {
-					DrawUtil.drawEntity(posY + finalShiftY, posX + finalShiftX, thisCell.getEntity(), cnt);
+					DrawUtil.drawEntity(posY + finalShiftY, posX + finalShiftX, thisCell.getEntity(), frame);
 				}));
 			}
 			// Draw Monster HP Bar
@@ -209,7 +304,7 @@ public class GameMap {
 					DrawUtil.drawHPBar(posY + finalShiftY, posX + finalShiftX, thisCell.getEntity());
 				}));
 			}
-			if ((thisCell.getEntity() instanceof Monster) && (cnt == 0)) {
+			if ((thisCell.getEntity() instanceof Monster) && (frame == 0)) {
 				pq.add(new Node(posY, posX, 2, () -> {
 					DrawUtil.addEntityButton(posY + finalShiftY, posX + finalShiftX, thisCell.getEntity());
 				}));

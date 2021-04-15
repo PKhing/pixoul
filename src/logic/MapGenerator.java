@@ -10,7 +10,7 @@ import utils.GameConfig;
 import utils.RandomUtil;
 
 /**
- * An instance of this class is used to generate {@link GameMap}.
+ * The MapGenerator class is used to generate {@link GameMap}.
  * 
  */
 public class MapGenerator {
@@ -60,7 +60,7 @@ public class MapGenerator {
 	 */
 	private static final int TURN_RIGHT = 3;
 	/**
-	 * Array of integer that represents type of each cell.
+	 * The Array of integer that represents a type of each cell.
 	 */
 	private static int map[][];
 
@@ -71,7 +71,6 @@ public class MapGenerator {
 	 */
 	public static GameMap generateMap() {
 		GameMap gameMap = buildNewEmptyMap();
-		gameMap.printMap();
 		// Generates ladder
 		Pair<Integer, Integer> posLadderUp = gameMap.getRoomList().get(0);
 		Pair<Integer, Integer> posLadderDown = gameMap.getRoomList().get(gameMap.getRoomList().size() - 1);
@@ -101,7 +100,7 @@ public class MapGenerator {
 		 */
 		private int x;
 		/**
-		 * Direction of this state.
+		 * The Direction of this state.
 		 * 
 		 * @see Direction
 		 */
@@ -239,7 +238,7 @@ public class MapGenerator {
 	/**
 	 * Generates new empty map.
 	 * 
-	 * @return randomly created empty map
+	 * @return randomly generated empty map
 	 */
 	private static GameMap buildNewEmptyMap() {
 		GameMap gameMap;
