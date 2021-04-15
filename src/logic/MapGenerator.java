@@ -63,17 +63,19 @@ public class MapGenerator {
 	/**
 	 * Generates new {@link GameMap}.
 	 * 
-	 * @return Randomly generated {@link GameMap}.
+	 * @return Randomly generated {@link GameMap}
 	 */
 	public static GameMap generateMap() {
 		GameMap gameMap = buildNewEmptyMap();
-		gameMap.printMap();
+
+		// Generates ladder
 		Pair<Integer, Integer> posLadderUp = gameMap.getRoomList().get(0);
 		Pair<Integer, Integer> posLadderDown = gameMap.getRoomList().get(gameMap.getRoomList().size() - 1);
 
 		gameMap.getGameMap()[posLadderUp.getKey()][posLadderUp.getValue()].setType(Cell.LADDER_UP);
 		gameMap.getGameMap()[posLadderDown.getKey()][posLadderDown.getValue()].setType(Cell.LADDER_DOWN);
 
+		// Generates items and monsters
 		generateItemOnMap(gameMap);
 		generateMonsterOnMap(gameMap);
 
@@ -104,9 +106,9 @@ public class MapGenerator {
 		/**
 		 * Creates a new state.
 		 * 
-		 * @param x         position in Y-axis of this state.
-		 * @param x         position in X-axis of this state.
-		 * @param direction direction of this state.
+		 * @param x         The position in the Y-axis of this state
+		 * @param x         The position in the X-axis of this state
+		 * @param direction The direction of this state
 		 */
 		public State(int y, int x, int direction) {
 			this.y = y;
@@ -117,7 +119,7 @@ public class MapGenerator {
 		/**
 		 * Creates a copy of this state.
 		 * 
-		 * @return a copy of this state.
+		 * @return a copy of this state
 		 */
 		public State Duplicate() {
 			return new State(y, x, direction);
@@ -126,7 +128,7 @@ public class MapGenerator {
 		/**
 		 * Checks if this state is valid to create a path or not.
 		 * 
-		 * @return true if this state is valid; false otherwise.
+		 * @return true if this state is valid; false otherwise
 		 */
 		public boolean isValid() {
 			if ((y <= 0) || (x <= 0) || (y >= GameConfig.MAP_SIZE) || (x >= GameConfig.MAP_SIZE)) {
@@ -141,9 +143,9 @@ public class MapGenerator {
 		/**
 		 * Checks if cells in the front left or right have a specified type or not.
 		 * 
-		 * @param type the type to check.
+		 * @param type the type to check with
 		 * @return true if this state connects to a cell with a specified type; false
-		 *         otherwise.
+		 *         otherwise
 		 */
 		public boolean isConnectTo(int type) {
 			State f = this.Duplicate();
@@ -199,7 +201,7 @@ public class MapGenerator {
 		 * Does the specified action.
 		 * 
 		 * @param action the action to be done. It can be <code>STRAIGHT</code>,
-		 *               <code>TURN_LEFT</code> or <code>TURN_RIGHT</code>.
+		 *               <code>TURN_LEFT</code> or <code>TURN_RIGHT</code>
 		 */
 		public void doAction(int action) {
 			if (action == TURN_LEFT) {
@@ -225,7 +227,7 @@ public class MapGenerator {
 		/**
 		 * Sets type of cell that this state is on.
 		 * 
-		 * @param type type to be set.
+		 * @param type the type to be set
 		 */
 		public void setType(int type) {
 			map[y][x] = type;
@@ -235,7 +237,7 @@ public class MapGenerator {
 	/**
 	 * Generates new empty map.
 	 * 
-	 * @return randomly created empty map.
+	 * @return randomly created empty map
 	 */
 	private static GameMap buildNewEmptyMap() {
 		GameMap gameMap;
@@ -281,9 +283,17 @@ public class MapGenerator {
 		return gameMap;
 	}
 
-	private static boolean makeRoom(int y, int x, int no) {
+	/**
+	 * Generates room at the specified position.
+	 * 
+	 * @param y      the position of the room in the Y-axis
+	 * @param x      the position of the room in the X-axis
+	 * @param number the room number
+	 * @return true if room is generated successfully; false otherwise
+	 */
+	private static boolean makeRoom(int y, int x, int number) {
 
-		// check if room is valid or not
+		// Checks if the room is valid or not
 		if ((y - GameConfig.ROOM_SIZE <= 0) || (y + GameConfig.ROOM_SIZE >= GameConfig.MAP_SIZE)
 				|| (x - GameConfig.ROOM_SIZE <= 0) || (x + GameConfig.ROOM_SIZE >= GameConfig.MAP_SIZE))
 			return false;
@@ -295,7 +305,7 @@ public class MapGenerator {
 			}
 		}
 
-		// make room
+		// Creates room
 		for (int i = y - GameConfig.ROOM_SIZE; i <= y + GameConfig.ROOM_SIZE; i++) {
 			for (int j = x - GameConfig.ROOM_SIZE; j <= x + GameConfig.ROOM_SIZE; j++) {
 				if ((j != x - GameConfig.ROOM_SIZE) && (j != x + GameConfig.ROOM_SIZE)
@@ -303,18 +313,26 @@ public class MapGenerator {
 					map[i][j] = ROOM;
 				}
 				if ((j != x - GameConfig.ROOM_SIZE) && (j != x + GameConfig.ROOM_SIZE)) {
-					map[y - GameConfig.ROOM_SIZE][j] = no;
-					map[y + GameConfig.ROOM_SIZE][j] = no;
+					map[y - GameConfig.ROOM_SIZE][j] = number;
+					map[y + GameConfig.ROOM_SIZE][j] = number;
 				}
 			}
 			if ((i != y - GameConfig.ROOM_SIZE) && (i != y + GameConfig.ROOM_SIZE)) {
-				map[i][x - GameConfig.ROOM_SIZE] = no;
-				map[i][x + GameConfig.ROOM_SIZE] = no;
+				map[i][x - GameConfig.ROOM_SIZE] = number;
+				map[i][x + GameConfig.ROOM_SIZE] = number;
 			}
 		}
 		return true;
 	}
 
+	/**
+	 * Generates path at the specified position.
+	 * 
+	 * @param state     the state of the path to be created
+	 * @param startRoom the number of the room that this path starts
+	 * @param length    current path length
+	 * @return true if path is generated successfully; false otherwise
+	 */
 	private static boolean makePath(State state, int startRoom, int length) {
 		if (length >= MAX_LENGTH) {
 			return false;
@@ -331,9 +349,11 @@ public class MapGenerator {
 		}
 
 		state.setType(PROCESSING);
+
+		// Does next action randomly
+
 		Integer actionType[] = { STRAIGHT, TURN_LEFT, TURN_RIGHT };
 		RandomUtil.shuffle(actionType);
-
 		for (int i = 0; i < 3; i++) {
 			State newState = state.Duplicate();
 			newState.doAction(actionType[i]);
@@ -346,7 +366,14 @@ public class MapGenerator {
 		return false;
 	}
 
+	/**
+	 * Creates {@link Cell} array from array of cell type
+	 * 
+	 * @param gameMap the array of {@link Cell} to store the result in
+	 */
 	private static void makeMap(Cell[][] gameMap) {
+
+		// Sets PATH
 		for (int i = 0; i <= GameConfig.MAP_SIZE; i++) {
 			for (int j = 0; j <= GameConfig.MAP_SIZE; j++) {
 				gameMap[i][j] = new Cell(Cell.VOID);
@@ -356,6 +383,7 @@ public class MapGenerator {
 			}
 		}
 
+		// Sets WALL
 		for (int i = 0; i <= GameConfig.MAP_SIZE; i++) {
 			for (int j = 0; j <= GameConfig.MAP_SIZE; j++) {
 				int pathCount = 0;
@@ -376,14 +404,21 @@ public class MapGenerator {
 		}
 	}
 
+	/**
+	 * Checks if the map is valid or not by checking whether the map is connected.
+	 * 
+	 * @param gameMap the map to be checked
+	 * @return true if the map is valid; false otherwise
+	 */
 	private static boolean isValid(GameMap gameMap) {
 		boolean[][] visit = new boolean[GameConfig.MAP_SIZE + 10][GameConfig.MAP_SIZE + 10];
 
 		int move[][] = { { 0, 1 }, { 0, -1 }, { 1, 0 }, { -1, 0 } };
 
 		Queue<Pair<Integer, Integer>> queue = new LinkedList<>();
-		queue.add(gameMap.getRoomList().get(0));
 
+		// Flood fill
+		queue.add(gameMap.getRoomList().get(0));
 		while (!queue.isEmpty()) {
 
 			int y = queue.peek().getKey();
