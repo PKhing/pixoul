@@ -48,7 +48,6 @@ public class CSVUtil {
 			output.remove(output.size() - 1);
 			return output.toArray(new String[output.size()][]);
 		} catch (IOException e) {
-			System.out.println("%s not found".formatted(filename));
 			e.printStackTrace();
 			return null;
 		}
@@ -64,7 +63,6 @@ public class CSVUtil {
 	}
 
 	public static ArrayList<Potion> readPotionCSV() {
-		// TODO Read Potion CSV File
 		String[][] potionData = readCSV(baseUrl + "PotionData.csv");
 		ArrayList<Potion> output = new ArrayList<>();
 
@@ -91,8 +89,6 @@ public class CSVUtil {
 	}
 
 	public static ArrayList<Armor> readArmorCSV() {
-		// TODO Read Armor CSV File
-
 		String[][] armorData = readCSV(baseUrl + "ArmorData.csv");
 		ArrayList<Armor> output = new ArrayList<>();
 
@@ -117,8 +113,6 @@ public class CSVUtil {
 	}
 
 	public static ArrayList<Weapon> readWeaponCSV() {
-		// TODO Read Weapon CSV File
-
 		String[][] weaponData = readCSV(baseUrl + "WeaponData.csv");
 		ArrayList<Weapon> output = new ArrayList<>();
 
