@@ -17,6 +17,8 @@ public class RandomUtil {
 	private static ArrayList<Potion> potionPool;
 	private static ArrayList<Armor> armorPool;
 	private static ArrayList<Weapon> weaponPool;
+	private static ArrayList<MonsterLevelFilter> monsterFilter;
+	private static int filterIndex = 0;
 	
 	private static final int MIN_POTION = 4;
 	private static final int MAX_POTION = 10;
@@ -34,6 +36,7 @@ public class RandomUtil {
 		potionPool = CSVUtil.readPotionCSV();
 		armorPool = CSVUtil.readArmorCSV();
 		weaponPool = CSVUtil.readWeaponCSV();
+		monsterFilter = CSVUtil.readMonsterFilterCSV();
 	}
 	
 	public static int random(int st, int ed) {
