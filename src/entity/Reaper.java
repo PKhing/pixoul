@@ -38,7 +38,6 @@ public class Reaper extends Monster implements Attackable, Moveable {
 			int nextDirection = this.getNextDirection();
 			if (nextDirection != -1) {
 				this.move(nextDirection);
-				this.setMoving(true);
 			}
 		}
 	}

@@ -35,7 +35,6 @@ public class PumpkinHead extends Monster implements Moveable, Attackable {
 			int nextDirection = this.getNextDirection();
 			if (nextDirection != -1) {
 				this.move(nextDirection);
-				this.setMoving(true);
 			}
 		}
 	}
