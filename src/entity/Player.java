@@ -17,7 +17,6 @@ import logic.Direction;
 import logic.GameLogic;
 import logic.Sprites;
 import scene.GameScene;
-import utils.AnimationUtil;
 import utils.GameConfig;
 import utils.MessageTextUtil;
 
@@ -37,15 +36,6 @@ public class Player extends Entity implements Moveable, Attackable {
 	@Override
 	public int getSymbol() {
 		return Sprites.PLAYER;
-	}
-
-	@Override
-	public boolean move(int direction) {
-		if (super.move(direction)) {
-			this.setMoving(true);
-			return true;
-		}
-		return false;
 	}
 
 	@Override

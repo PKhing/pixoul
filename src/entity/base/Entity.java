@@ -77,6 +77,7 @@ public abstract class Entity {
 			GameController.getGameMap().get(newPosY, newPosX).setEntity(this);
 			setPosY(newPosY);
 			setPosX(newPosX);
+			this.setMoving(true);
 			return true;
 		}
 
