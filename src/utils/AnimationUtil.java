@@ -8,11 +8,35 @@ import entity.base.Monster;
 import javafx.application.Platform;
 import logic.Direction;
 
+/**
+ * The AnimationUtil class provides animation methods.
+ *
+ */
 public class AnimationUtil {
 
+	/**
+	 * A constant holding duration of attack animation in millisecond.
+	 */
 	private static final int ATTACK_ANIMATION_DURATION_MS = 300;
+	/**
+	 * A constant holding duration of move animation frame in millisecond.
+	 */
 	private static final int FRAME_DURATION_MS = 20;
+	/**
+	 * A constant holding max frame number.
+	 */
+	private static final int MAX_FRAME_NUMBER = 31;
+	/**
+	 * A constant holding amount of frame change per loop.
+	 */
+	private static final int FRAME_CHANGE_PER_LOOP = 2;
 
+	/**
+	 * Plays attack and move animation and return animation thread.
+	 * 
+	 * @param step The amount of center position change per frame (in pixel)
+	 * @return Animation thread
+	 */
 	public static Thread playAnimation(int step) {
 		Player player = GameController.getPlayer();
 		List<Monster> monsterList = GameController.getGameMap().getMonsterList();
@@ -73,6 +97,11 @@ public class AnimationUtil {
 		return animation;
 	}
 
+	/**
+	 * Plays attack animation and return animation thread.
+	 * 
+	 * @return Attack animation thread
+	 */
 	public static Thread playAttackAnimation() {
 		Thread attackAnimation = new Thread() {
 			@Override
@@ -88,6 +117,15 @@ public class AnimationUtil {
 		return attackAnimation;
 	}
 
+	/**
+	 * Plays move animation and return animation thread.
+	 * 
+	 * @param stepY The amount of center position change per frame in Y-axis (in
+	 *              pixel)
+	 * @param stepX The amount of center position change per frame in X-axis (in
+	 *              pixel)
+	 * @return Move animation thread
+	 */
 	public static Thread playMoveAnimation(int stepY, int stepX) {
 		Thread moveAnimation = new Thread() {
 			@Override
@@ -97,7 +135,7 @@ public class AnimationUtil {
 				int centerY = player.getPosY() * newSpriteSize + newSpriteSize / 2;
 				int centerX = player.getPosX() * newSpriteSize + newSpriteSize / 2;
 
-				for (int frame = 31; frame >= 0; frame -= 2) {
+				for (int frame = MAX_FRAME_NUMBER; frame >= 0; frame -= FRAME_CHANGE_PER_LOOP) {
 					try {
 						final int nowI = centerY + frame * stepY;
 						final int nowJ = centerX + frame * stepX;
