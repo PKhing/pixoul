@@ -12,6 +12,7 @@ import items.base.Armor;
 import items.base.Item;
 import items.base.Potion;
 import items.base.Weapon;
+import javafx.application.Platform;
 import scene.GameScene;
 import utils.AnimationUtil;
 import utils.GameConfig;
@@ -58,26 +59,47 @@ public class GameLogic {
 			MessageTextUtil.textWhenImmobilized();
 			return;
 		}
+		boolean moveSuccess = false;
 		switch (action) {
 		case MOVE_UP:
-			player.move(Direction.UP);
+			moveSuccess = player.move(Direction.UP);
 			break;
 		case MOVE_DOWN:
-			player.move(Direction.DOWN);
+			moveSuccess = player.move(Direction.DOWN);
 			break;
 		case MOVE_LEFT:
-			player.move(Direction.LEFT);
+			moveSuccess = player.move(Direction.LEFT);
 			break;
 		case MOVE_RIGHT:
-			player.move(Direction.RIGHT);
+			moveSuccess = player.move(Direction.RIGHT);
 			break;
 		case STAY_STILL:
+			moveSuccess = true;
 			MessageTextUtil.textWhenStayStill(player);
-			postGameUpdate();
-			postMoveUpdate(false);
 			break;
 		default:
 			break;
+		}
+		if (moveSuccess) {
+			InterruptController.setStillAnimation(true);
+			new Thread() {
+				public void run() {
+					try {
+						AnimationUtil.playAnimation(2).join();
+					} catch (InterruptedException e) {
+						System.out.println("animation interrupted");
+					}
+					Platform.runLater(() -> {
+						if (action == DispatchAction.STAY_STILL) {
+							GameLogic.postMoveUpdate(false);
+						} else {
+							GameLogic.postMoveUpdate(true);
+						}
+						postGameUpdate();
+					});
+				}
+			}.start();
+
 		}
 	}
 
@@ -121,8 +143,23 @@ public class GameLogic {
 		if (diffX <= 1 && diffY <= 1) {
 			InterruptController.setStillAnimation(true);
 			player.attack(monster);
-			AnimationUtil.monsterAttacked(monster);
+			monster.setAttacked(true);
+			InterruptController.setStillAnimation(true);
+			new Thread() {
+				public void run() {
+					try {
+						AnimationUtil.playAnimation(2).join();
+					} catch (InterruptedException e) {
+						System.out.println("animation interrupted");
+						e.printStackTrace();
+					}
+					Platform.runLater(() -> {
+						postGameUpdate();
+					});
+				}
+			}.start();
 		}
+
 	}
 
 	public static void gameUpdate(DispatchAction action, Item item) {
@@ -142,6 +179,7 @@ public class GameLogic {
 		default:
 			return;
 		}
+		InterruptController.setStillAnimation(true);
 		postGameUpdate();
 	}
 
@@ -160,14 +198,28 @@ public class GameLogic {
 	}
 
 	public static void postGameUpdate() {
-		InterruptController.setStillAnimation(true);
 		Player player = GameController.getPlayer();
 		potionUpdate();
 		monsterUpdate();
 		GameScene.getInventoryPane().update();
 		GameScene.getEffectPane().update();
 		GameScene.getStatusPane().setAllValue(player);
-		AnimationUtil.postGameAnimation();
+		new Thread() {
+			public void run() {
+				try {
+					AnimationUtil.playAnimation(0).join();
+				} catch (InterruptedException e) {
+					System.out.println("post game animation interrupted");
+					e.printStackTrace();
+				}
+				Platform.runLater(() -> {
+					GameController.getGameMap().drawMap();
+					InterruptController.setStillAnimation(false);
+					doNextAction();
+				});
+			}
+		}.start();
+
 	}
 
 	private static void updateEntityEffect(Entity entity) {

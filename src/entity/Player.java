@@ -42,7 +42,7 @@ public class Player extends Entity implements Moveable, Attackable {
 	@Override
 	public boolean move(int direction) {
 		if (super.move(direction)) {
-			AnimationUtil.playerMove(direction);
+			this.setMoving(true);
 			return true;
 		}
 		return false;
