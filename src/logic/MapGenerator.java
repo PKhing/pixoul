@@ -1,10 +1,15 @@
 package logic;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
 import controller.GameController;
 import entity.Player;
+import entity.base.Monster;
+import items.base.Armor;
+import items.base.Potion;
+import items.base.Weapon;
 import javafx.util.Pair;
 import utils.GameConfig;
 import utils.RandomUtil;
@@ -79,7 +84,9 @@ public class MapGenerator {
 		gameMap.getGameMap()[posLadderDown.getKey()][posLadderDown.getValue()].setType(Cell.LADDER_DOWN);
 
 		// Generates items and monsters
-		generateItemOnMap(gameMap);
+		generateWeaponOnMap(gameMap);
+		generateArmorOnMap(gameMap);
+		generatePotionOnMap(gameMap);
 		generateMonsterOnMap(gameMap);
 
 		return gameMap;
@@ -469,19 +476,95 @@ public class MapGenerator {
 		return true;
 	}
 
-	private static void generateItemOnMap(GameMap gameMap) {
+	private static void generateWeaponOnMap(GameMap gameMap) {
+		// TODO Generate weapon on map
+		Cell[][] cellMap = gameMap.getGameMap();
+		Player player = GameController.getPlayer();
+		int level = GameController.getLevel();
+		
+		ArrayList<Weapon> weaponList = RandomUtil.randomWeaponList(player, level);
+		
+		for(Weapon each: weaponList) {
+			boolean isAdd = false;
+			do {
+				int randomX = RandomUtil.random(0, GameConfig.MAP_SIZE - 1);
+				int randomY = RandomUtil.random(0, GameConfig.MAP_SIZE - 1);
+				Cell currentCell = cellMap[randomX][randomY];
+				
+				if(currentCell.getSymbol() == Cell.PATH && currentCell.getItem() == null) {
+					currentCell.setItem(each);
+					isAdd = true;
+				}
+			} while(!isAdd);
+		}
+	}
+	
+	private static void generateArmorOnMap(GameMap gameMap) {
+		// TODO Generate armor on map
+		Cell[][] cellMap = gameMap.getGameMap();
+		Player player = GameController.getPlayer();
+		int level = GameController.getLevel();
+		
+		ArrayList<Armor> armorList = RandomUtil.randomArmorList(player, level);
+		
+		for(Armor each: armorList) {
+			boolean isAdd = false;
+			do {
+				int randomX = RandomUtil.random(0, GameConfig.MAP_SIZE - 1);
+				int randomY = RandomUtil.random(0, GameConfig.MAP_SIZE - 1);
+				Cell currentCell = cellMap[randomX][randomY];
+				
+				if(currentCell.getSymbol() == Cell.PATH && currentCell.getItem() == null) {
+					currentCell.setItem(each);
+					isAdd = true;
+				}
+			} while(!isAdd);
+		}
+	}
+	
+	private static void generatePotionOnMap(GameMap gameMap) {
 		// TODO Generate item on map
 		Cell[][] cellMap = gameMap.getGameMap();
+		Player player = GameController.getPlayer();
 		int level = GameController.getLevel();
-
+		
+		ArrayList<Potion> potionList = RandomUtil.randomPotionList(player, level);
+		
+		for(Potion each: potionList) {
+			boolean isAdd = false;
+			do {
+				int randomX = RandomUtil.random(0, GameConfig.MAP_SIZE - 1);
+				int randomY = RandomUtil.random(0, GameConfig.MAP_SIZE - 1);
+				Cell currentCell = cellMap[randomX][randomY];
+				
+				if(currentCell.getSymbol() == Cell.PATH && currentCell.getItem() == null) {
+					currentCell.setItem(each);
+					isAdd = true;
+				}
+			} while(!isAdd);
+		}
 	}
 
 	private static void generateMonsterOnMap(GameMap gameMap) {
 		// TODO Generate monster on map
 		Cell[][] cellMap = gameMap.getGameMap();
 		Player player = GameController.getPlayer();
+		int level = GameController.getLevel();
 
-		int playerAtk = player.getAttack();
+		ArrayList<Monster> monsterList = RandomUtil.randomMonsterList(player, level);
+		
+		for(Monster each: monsterList) {
+			boolean isAdd = false;
+			do {
+				int randomX = RandomUtil.random(0, GameConfig.MAP_SIZE - 1);
+				int randomY = RandomUtil.random(0, GameConfig.MAP_SIZE - 1);
+				Cell currentCell = cellMap[randomX][randomY];
+				
+				if(currentCell.getSymbol() == Cell.PATH && currentCell.getEntity() == null) {
+					currentCell.setEntity(each);
+					isAdd = true;
+				}
+			} while(!isAdd);
+		}
 	}
-
 }
