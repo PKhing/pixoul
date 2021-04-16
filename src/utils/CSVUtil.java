@@ -53,13 +53,27 @@ public class CSVUtil {
 		}
 	}
 
-	public static boolean[][] readMonsterFilterCSV() {
+	// (LEVEL),(DARK_MAGE),(HAUNTED_MAID),(PUMPKIN_HEAD),(REAPER),(SKELETON),(SOUL)
+	public static ArrayList<MonsterLevelFilter> readMonsterFilterCSV() {
 		// TODO Read MonsterFloor CSV File
-		String[][] monsterFloorData = readCSV(baseUrl + "MonsterFloor.csv");
+		String[][] monsterLevelData = readCSV(baseUrl + "MonsterFloor.csv");
 
-		int sz = monsterFloorData.length;
+		ArrayList<MonsterLevelFilter> filterList = new ArrayList<>();
+		int sz = monsterLevelData.length;
 
-		return null;
+		for (int i = 0; i < sz; i++) {
+			int level = Integer.parseInt(monsterLevelData[i][0]);
+			boolean darkMage = Boolean.parseBoolean(monsterLevelData[i][1]);
+			boolean hauntedMaid = Boolean.parseBoolean(monsterLevelData[i][2]);
+			boolean pumpkinHead = Boolean.parseBoolean(monsterLevelData[i][3]);
+			boolean reaper = Boolean.parseBoolean(monsterLevelData[i][4]);
+			boolean skeleton = Boolean.parseBoolean(monsterLevelData[i][5]);
+			boolean soul = Boolean.parseBoolean(monsterLevelData[i][6]);
+
+			filterList.add(new MonsterLevelFilter(level, darkMage, hauntedMaid, pumpkinHead, reaper, skeleton, soul));
+		}
+
+		return filterList;
 	}
 
 	public static ArrayList<Potion> readPotionCSV() {
@@ -123,10 +137,10 @@ public class CSVUtil {
 			String name = weaponData[i][1];
 			String description = weaponData[i][2];
 
-			int defense = Integer.parseInt(weaponData[i][3]);
+			int attack = Integer.parseInt(weaponData[i][3]);
 
 			try {
-				Weapon parseWeaponResult = Weapon.parseWeapon(type, name, description, defense);
+				Weapon parseWeaponResult = Weapon.parseWeapon(type, name, description, attack);
 				output.add(parseWeaponResult);
 			} catch (UnknownItemTypeException e) {
 				e.printStackTrace();
