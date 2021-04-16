@@ -184,7 +184,7 @@ public class GameMap {
 	/**
 	 * Getter for array of {@link Cell} on this level.
 	 * 
-	 * @return an array of {@link Cell} on this level
+	 * @return An array of {@link Cell} on this level
 	 */
 	public Cell[][] getGameMap() {
 		return gameMap;
@@ -230,7 +230,7 @@ public class GameMap {
 	 * @param startY  Start rendering position in Y-axis
 	 * @param startX  Start rendering position in X-axis
 	 * @param frame   Current animation frame
-	 * @return priority queue of nodes to be rendered.
+	 * @return Priority queue of nodes to be rendered.
 	 */
 	private PriorityQueue<Node> buildPrioritizedNode(ArrayList<Pair<Integer, Integer>> posList, int startY, int startX,
 			int frame) {

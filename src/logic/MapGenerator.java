@@ -122,7 +122,7 @@ public class MapGenerator {
 		/**
 		 * Creates a copy of this state.
 		 * 
-		 * @return a copy of this state
+		 * @return A copy of this state
 		 */
 		public State Duplicate() {
 			return new State(y, x, direction);
@@ -131,7 +131,7 @@ public class MapGenerator {
 		/**
 		 * Checks if this state is valid to create a path or not.
 		 * 
-		 * @return true if this state is valid; false otherwise
+		 * @return True if this state is valid; false otherwise
 		 */
 		public boolean isValid() {
 			if ((y <= 0) || (x <= 0) || (y >= GameConfig.MAP_SIZE) || (x >= GameConfig.MAP_SIZE)) {
@@ -143,8 +143,8 @@ public class MapGenerator {
 		/**
 		 * Checks if cells in the front left or right have a specified type or not.
 		 * 
-		 * @param type the type to check with
-		 * @return true if this state connects to a cell with a specified type; false
+		 * @param type The type to check with
+		 * @return True if this state connects to a cell with a specified type; false
 		 *         otherwise
 		 */
 		public boolean isConnectTo(int type) {
@@ -200,7 +200,7 @@ public class MapGenerator {
 		/**
 		 * Does the specified action.
 		 * 
-		 * @param action the action to be done. It can be <code>STRAIGHT</code>,
+		 * @param action The action to be done. It can be <code>STRAIGHT</code>,
 		 *               <code>TURN_LEFT</code> or <code>TURN_RIGHT</code>
 		 */
 		public void doAction(int action) {
@@ -216,7 +216,7 @@ public class MapGenerator {
 		/**
 		 * Gets the type of cell that this state is on.
 		 * 
-		 * @return type of the cell
+		 * @return Type of the cell
 		 */
 		public int getCellType() {
 			if (!this.isValid()) {
@@ -228,7 +228,7 @@ public class MapGenerator {
 		/**
 		 * Sets type of cell that this state is on.
 		 * 
-		 * @param type the type to be set
+		 * @param type The type to be set
 		 */
 		public void setCellType(int type) {
 			map[y][x] = type;
@@ -238,7 +238,7 @@ public class MapGenerator {
 	/**
 	 * Generates new empty map.
 	 * 
-	 * @return randomly generated empty map
+	 * @return Randomly generated empty map
 	 */
 	private static GameMap buildNewEmptyMap() {
 		GameMap gameMap;
@@ -294,10 +294,10 @@ public class MapGenerator {
 	/**
 	 * Generates room at the specified position.
 	 * 
-	 * @param y      the position of the room in the Y-axis
-	 * @param x      the position of the room in the X-axis
-	 * @param number the room number
-	 * @return true if room is generated successfully; false otherwise
+	 * @param y      The position of the room in the Y-axis
+	 * @param x      The position of the room in the X-axis
+	 * @param number The room number
+	 * @return True if room is generated successfully; false otherwise
 	 */
 	private static boolean makeRoom(int y, int x, int number) {
 
@@ -340,10 +340,10 @@ public class MapGenerator {
 	/**
 	 * Generates path at the specified position.
 	 * 
-	 * @param state     the state of the path to be created
-	 * @param startRoom the number of the room that this path starts
-	 * @param length    current path length
-	 * @return true if path is generated successfully; false otherwise
+	 * @param state     The state of the path to be created
+	 * @param startRoom The number of the room that this path starts
+	 * @param length    Current path length
+	 * @return True if path is generated successfully; false otherwise
 	 */
 	private static boolean makePath(State state, int startRoom, int length) {
 		
@@ -391,7 +391,7 @@ public class MapGenerator {
 	/**
 	 * Creates {@link Cell} array from array of cell type
 	 * 
-	 * @param gameMap the array of {@link Cell} to store the result in
+	 * @param gameMap The array of {@link Cell} to store the result in
 	 */
 	private static void makeMap(Cell[][] gameMap) {
 
@@ -429,8 +429,8 @@ public class MapGenerator {
 	/**
 	 * Checks if the map is valid or not by checking whether the map is connected.
 	 * 
-	 * @param gameMap the map to be checked
-	 * @return true if the map is valid; false otherwise
+	 * @param gameMap The map to be checked
+	 * @return True if the map is valid; false otherwise
 	 */
 	private static boolean isValid(GameMap gameMap) {
 		boolean[][] visit = new boolean[GameConfig.MAP_SIZE + 10][GameConfig.MAP_SIZE + 10];
