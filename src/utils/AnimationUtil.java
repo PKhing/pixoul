@@ -1,23 +1,28 @@
 package utils;
 
+import java.util.List;
+
 import controller.GameController;
-import controller.InterruptController;
 import entity.Player;
 import entity.base.Monster;
 import javafx.application.Platform;
 import logic.Direction;
-import logic.GameLogic;
 
 public class AnimationUtil {
 
+	private static final int ATTACK_ANIMATION_DURATION_MS = 300;
+	private static final int FRAME_DURATION_MS = 20;
+
 	public static Thread playAnimation(int step) {
 		Player player = GameController.getPlayer();
+		List<Monster> monsterList = GameController.getGameMap().getMonsterList();
 		Thread animation = new Thread() {
+			@Override
 			public void run() {
-
+				// Checks if any entity move or attacked
 				boolean isAttacked = player.isAttacked();
 				boolean isMove = player.isMoving();
-				for (Monster monster : GameController.getGameMap().getMonsterList()) {
+				for (Monster monster : monsterList) {
 					isMove |= monster.isMoving();
 					isAttacked |= monster.isAttacked();
 				}
@@ -27,16 +32,18 @@ public class AnimationUtil {
 						GameController.getGameMap().drawMap();
 					});
 				}
+
+				// Plays move and attack animation
 				Thread attackAnimation = null;
 				Thread moveAnimation = null;
 				try {
 					if (isAttacked) {
-						attackAnimation = AnimationUtil.playAttackAnimation();
+						attackAnimation = playAttackAnimation();
 					}
 					if (isMove) {
-						moveAnimation = AnimationUtil.playMoveAnimation(
-								-Direction.getMoveY(player.getDirection(), step),
-								-Direction.getMoveX(player.getDirection(), step));
+						int stepX = -Direction.getMoveX(player.getDirection(), step);
+						int stepY = -Direction.getMoveY(player.getDirection(), step);
+						moveAnimation = playMoveAnimation(stepY, stepX);
 					}
 					if (moveAnimation != null) {
 						moveAnimation.join();
@@ -47,17 +54,17 @@ public class AnimationUtil {
 
 				} catch (InterruptedException e) {
 					System.out.println("animation interrupted");
-					e.printStackTrace();
 				}
+
 				Platform.runLater(() -> {
 					GameController.getGameMap().drawMap();
-					for (Monster monster : GameController.getGameMap().getMonsterList()) {
+
+					// Reset isMove and isAttacked of each entity
+					for (Monster monster : monsterList) {
 						monster.setAttacked(false);
-					}
-					GameController.getPlayer().setAttacked(false);
-					for (Monster monster : GameController.getGameMap().getMonsterList()) {
 						monster.setMoving(false);
 					}
+					player.setAttacked(false);
 					player.setMoving(false);
 				});
 			}
@@ -71,11 +78,10 @@ public class AnimationUtil {
 			@Override
 			public void run() {
 				try {
-					Thread.sleep(300);
+					Thread.sleep(ATTACK_ANIMATION_DURATION_MS);
 				} catch (InterruptedException e) {
 					System.out.println("attack animation interrupted");
 				}
-
 			}
 		};
 		attackAnimation.start();
@@ -88,18 +94,18 @@ public class AnimationUtil {
 			public void run() {
 				Player player = GameController.getPlayer();
 				int newSpriteSize = GameConfig.SPRITE_SIZE * GameConfig.getScale();
-				int centerY = player.getPosY() * newSpriteSize + GameConfig.SPRITE_SIZE * GameConfig.getScale() / 2;
-				int centerX = player.getPosX() * newSpriteSize + GameConfig.SPRITE_SIZE * GameConfig.getScale() / 2;
+				int centerY = player.getPosY() * newSpriteSize + newSpriteSize / 2;
+				int centerX = player.getPosX() * newSpriteSize + newSpriteSize / 2;
 
-				for (int cnt = 31; cnt >= 0; cnt -= 2) {
+				for (int frame = 31; frame >= 0; frame -= 2) {
 					try {
-						final int nowI = centerY + cnt * stepY;
-						final int nowJ = centerX + cnt * stepX;
-						final int nowCnt = cnt;
+						final int nowI = centerY + frame * stepY;
+						final int nowJ = centerX + frame * stepX;
+						final int nowCnt = frame;
 						Platform.runLater(() -> {
 							GameController.getGameMap().drawMap(nowI, nowJ, nowCnt);
 						});
-						Thread.sleep(20);
+						Thread.sleep(FRAME_DURATION_MS);
 					} catch (InterruptedException e) {
 						System.out.println("Move animation interrupted");
 					}
