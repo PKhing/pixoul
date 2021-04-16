@@ -109,7 +109,7 @@ public class AnimationUtil {
 				try {
 					Thread.sleep(ATTACK_ANIMATION_DURATION_MS);
 				} catch (InterruptedException e) {
-					System.out.println("attack animation interrupted");
+					System.out.println("Attack animation interrupted");
 				}
 			}
 		};

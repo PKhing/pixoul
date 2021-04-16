@@ -214,7 +214,7 @@ public class GameMap {
 	}
 
 	/**
-	 * Getter for monsterList
+	 * Getter for monsterList.
 	 * 
 	 * @return This level's monsterListss
 	 */
@@ -230,7 +230,7 @@ public class GameMap {
 	 * @param startY  Start rendering position in Y-axis
 	 * @param startX  Start rendering position in X-axis
 	 * @param frame   Current animation frame
-	 * @return Priority queue of nodes to be rendered.
+	 * @return Priority queue of nodes to be rendered
 	 */
 	private PriorityQueue<Node> buildPrioritizedNode(ArrayList<Pair<Integer, Integer>> posList, int startY, int startX,
 			int frame) {

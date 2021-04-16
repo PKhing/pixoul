@@ -87,7 +87,7 @@ public class GameLogic {
 					try {
 						AnimationUtil.playAnimation(2).join();
 					} catch (InterruptedException e) {
-						System.out.println("animation interrupted");
+						System.out.println("Move animation interrupted");
 					}
 					Platform.runLater(() -> {
 						if (action == DispatchAction.STAY_STILL) {
@@ -150,7 +150,7 @@ public class GameLogic {
 					try {
 						AnimationUtil.playAnimation(2).join();
 					} catch (InterruptedException e) {
-						System.out.println("animation interrupted");
+						System.out.println("Attack animation interrupted");
 						e.printStackTrace();
 					}
 					Platform.runLater(() -> {
@@ -209,7 +209,7 @@ public class GameLogic {
 				try {
 					AnimationUtil.playAnimation(0).join();
 				} catch (InterruptedException e) {
-					System.out.println("post game animation interrupted");
+					System.out.println("Post game animation interrupted");
 					e.printStackTrace();
 				}
 				Platform.runLater(() -> {
