@@ -51,7 +51,7 @@ public class GameMap {
 	 * <li>{@code '.'} represents VOID</li>
 	 * <li>{@code '#'} represents WALL</li>
 	 * <li>{@code ' '} represents PATH</li>
-	 * <ul>
+	 * </ul>
 	 */
 	public void printMap() {
 		for (int i = 0; i <= GameConfig.MAP_SIZE; i++) {
