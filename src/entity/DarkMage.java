@@ -7,6 +7,7 @@ import entity.base.Entity;
 import entity.base.Monster;
 import javafx.animation.FadeTransition;
 import javafx.util.Pair;
+import logic.MapRenderer;
 import logic.Sprites;
 import scene.GameScene;
 import utils.MessageTextUtil;
@@ -62,7 +63,7 @@ public class DarkMage extends Monster {
 
 		fadeOut.setOnFinished((event) -> {
 			target.setPos(newPos.getKey(), newPos.getValue());
-			GameController.getGameMap().drawMap();
+			MapRenderer.render();
 			MessageTextUtil
 					.makeNewMessage("%s has been teleported to somewhere in this level".formatted(target.getName()));
 			fadeIn.play();

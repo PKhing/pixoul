@@ -32,15 +32,15 @@ public class MapGenerator {
 	 */
 	private static final int MIN_LENGTH = 4;
 	/**
-	 * Representing void type
+	 * Represents void type.
 	 */
 	private static final int VOID = 0;
 	/**
-	 * Representing path type
+	 * Represents path type.
 	 */
 	private static final int PATH = -1;
 	/**
-	 * Representing room type
+	 * Represents room type.
 	 */
 	private static final int ROOM = -2;
 	/**

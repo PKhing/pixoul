@@ -41,6 +41,7 @@ import utils.GameConfig;
 import javafx.util.Pair;
 import logic.Direction;
 import logic.GameLogic;
+import logic.MapRenderer;
 import utils.DrawUtil;
 
 public class GameScene {
@@ -71,7 +72,7 @@ public class GameScene {
 		StackPane.setAlignment(new Group(inventoryPane), Pos.CENTER);
 		StackPane.setAlignment(new Group(pausePane), Pos.CENTER);
 
-		GameController.getGameMap().drawMap();
+		MapRenderer.render();
 	}
 
 	private static void setupGamePane() {

@@ -12,6 +12,7 @@ import javafx.scene.media.MediaPlayer;
 import javafx.util.Pair;
 import logic.GameMap;
 import logic.MapGenerator;
+import logic.MapRenderer;
 import scene.GameOverScene;
 import scene.GameScene;
 import utils.GameAudioUtils;
@@ -101,7 +102,7 @@ public class GameController {
 		InterruptController.setTransition(true);
 		FadeTransition fadeIn = TransitionUtil.makeFadingNode(GameScene.getGamePane(), 0.0, 1.0);
 
-		newFloor.drawMap();
+		MapRenderer.render();
 
 		fadeIn.play();
 		fadeIn.setOnFinished((event) -> InterruptController.setTransition(false));
@@ -193,7 +194,7 @@ public class GameController {
 
 			player.setPos(posY, posX);
 			newMap.get(posY, posX).setEntity(player);
-			newMap.drawMap();
+			MapRenderer.render();
 			fadeSecond.play();
 		});
 
