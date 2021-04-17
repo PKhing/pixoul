@@ -23,7 +23,7 @@ public class DarkMage extends Monster {
 	public DarkMage(int maxHealth, int defense, int posY, int posX, int direction, int poisonDamage,
 			int poisonDuration) {
 		super("Dark Mage", maxHealth, 0, defense, posY, posX, direction, 0, 0, 0);
-		GameController.getGameMap().get(posY, posX).setEntity(this);
+		setPos(posY, posX);
 		setPoisonDamage(poisonDamage);
 		setPoisonDuration(poisonDuration);
 	}
