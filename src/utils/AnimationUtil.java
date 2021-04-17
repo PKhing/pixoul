@@ -10,7 +10,7 @@ import logic.Direction;
 import logic.MapRenderer;
 
 /**
- * The AnimationUtil class provides animation methods.
+ * The AnimationUtil class provides methods about animation.
  *
  */
 public class AnimationUtil {

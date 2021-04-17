@@ -14,9 +14,13 @@ import scene.GameScene;
 import utils.DrawUtil;
 import utils.GameConfig;
 
+/**
+ * The MapRenderer class is used to render {@link GameMap}
+ *
+ */
 public class MapRenderer {
 	/**
-	 * The renderable interface allows an object to be rendered. This interface
+	 * The Renderable interface allows an object to be rendered. This interface
 	 * should be implemented to pass render function as a parameter.
 	 * 
 	 */

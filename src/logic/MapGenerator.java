@@ -32,19 +32,19 @@ public class MapGenerator {
 	 */
 	private static final int MIN_LENGTH = 4;
 	/**
-	 * Represents void type.
+	 * Represents void.
 	 */
 	private static final int VOID = 0;
 	/**
-	 * Represents path type.
+	 * Represents path.
 	 */
 	private static final int PATH = -1;
 	/**
-	 * Represents room type.
+	 * Represents room.
 	 */
 	private static final int ROOM = -2;
 	/**
-	 * Represents processing type.
+	 * Represents processing.
 	 */
 	private static final int PROCESSING = -3;
 	/**
@@ -100,9 +100,7 @@ public class MapGenerator {
 		 */
 		private int x;
 		/**
-		 * The Direction of this state.
-		 * 
-		 * @see Direction
+		 * The {@link Direction} of this state.
 		 */
 		private int direction;
 
@@ -346,25 +344,25 @@ public class MapGenerator {
 	 * @return True if path is generated successfully; false otherwise
 	 */
 	private static boolean makePath(State state, int startRoom, int length) {
-		
+
 		// Path is too long or the path have self loop
 		if (length >= MAX_LENGTH || state.isConnectTo(PROCESSING) || (state.getCellType() == startRoom)) {
 			return false;
 		}
-		
+
 		// The state is not valid or cell type is PROCESSING or ROOM
-		if (!state.isValid() || (state.getCellType() == PROCESSING)|| (state.getCellType() == ROOM)) {
+		if (!state.isValid() || (state.getCellType() == PROCESSING) || (state.getCellType() == ROOM)) {
 			return false;
 		}
-		
+
 		// Cell type is room's wall or PATH or this path connect to other path
-		if ((state.getCellType() > 0) || (state.getCellType() == PATH) || state.isConnectTo(PATH) ) {
-			
+		if ((state.getCellType() > 0) || (state.getCellType() == PATH) || state.isConnectTo(PATH)) {
+
 			// Path is too short
 			if (length < MIN_LENGTH) {
 				return false;
 			}
-			
+
 			// Success!
 			state.setCellType(PATH);
 			return true;
