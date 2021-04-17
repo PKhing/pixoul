@@ -1,2 +1,9 @@
-
+InstantHealPotion,Potion of healing I,Heal small amount of health,5,0,false
+InstantHealPotion,Potion of healing II,Heal medium amount of health,10,0,false
+InstantHealPotion,Potion of healing III,Heal large amount of health,20,0,false
+InstantHealPotion,Potion of healing IV,Heal huge amount of health,25,0,false
+InstantHealPotion,Potion of permanant health stat I,Heal and increase max health (Small),4,0,true
+InstantHealPotion,Potion of permanant health stat II,Heal and increase max health (Medium),8,0,true 
+RegenerationPotion,Potion of regeneration I,Provide small health generation,2,5,false
+VisionPotion,Potion of vision,Make player have more field of view,2,20,false
 (TYPE),(NAME),(DESCRIPTION),(VALUE),(DURATION),(IS_PERMANANT_STAT)
