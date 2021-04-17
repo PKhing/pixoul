@@ -23,7 +23,7 @@ public class DarkMage extends Monster {
 	public DarkMage(int maxHealth, int defense, int posY, int posX, int direction, int poisonDamage,
 			int poisonDuration) {
 		super("Dark Mage", maxHealth, 0, defense, posY, posX, direction, 0, 0, 0);
-		setPos(posY, posX);
+		setPositionOnMap(posY, posX);
 		setPoisonDamage(poisonDamage);
 		setPoisonDuration(poisonDuration);
 	}
@@ -62,7 +62,7 @@ public class DarkMage extends Monster {
 		InterruptController.setTransition(true);
 
 		fadeOut.setOnFinished((event) -> {
-			target.setPos(newPos.getKey(), newPos.getValue());
+			target.setPositionOnMap(newPos.getKey(), newPos.getValue());
 			MapRenderer.render();
 			MessageTextUtil
 					.makeNewMessage("%s has been teleported to somewhere in this level".formatted(target.getName()));

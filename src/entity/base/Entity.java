@@ -84,7 +84,7 @@ public abstract class Entity {
 		return false;
 	}
 
-	public void setPos(int posY, int posX) {
+	public void setPositionOnMap(int posY, int posX) {
 		if (GameController.getGameMap() != null) {
 			if (GameController.getGameMap().get(this.getPosY(), this.getPosX()).getEntity() == this) {
 				GameController.getGameMap().get(this.getPosY(), this.getPosX()).setEntity(null);
@@ -92,6 +92,10 @@ public abstract class Entity {
 			GameController.getGameMap().get(posY, posX).setEntity(this);
 		}
 
+		setInternalPostion(posY, posX);
+	}
+	
+	public void setInternalPostion(int posY, int posX) {
 		setPosX(posX);
 		setPosY(posY);
 	}

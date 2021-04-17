@@ -197,9 +197,6 @@ public class GameLogic {
 		Player player = GameController.getPlayer();
 		potionUpdate();
 		monsterUpdate();
-		if(GameController.isGameOver()) {
-			return;
-		}
 		GameScene.getInventoryPane().update();
 		GameScene.getEffectPane().update();
 		GameScene.getStatusPane().setAllValue(player);
@@ -212,6 +209,9 @@ public class GameLogic {
 			}
 			Platform.runLater(() -> {
 				MapRenderer.render();
+				if(GameController.isGameOver()) {
+					return;
+				}
 				InterruptController.setStillAnimation(false);
 				doNextAction();
 			});
@@ -234,8 +234,10 @@ public class GameLogic {
 
 	private static void deleteItemHandler(Item item) {
 		if (item == GameController.getPlayer().getEquippedArmor()) {
+			item.onUnequip(GameController.getPlayer());
 			GameController.getPlayer().setEquippedArmor(null);
 		} else if (item == GameController.getPlayer().getEquippedWeapon()) {
+			item.onUnequip(GameController.getPlayer());
 			GameController.getPlayer().setEquippedWeapon(null);
 		}
 		GameController.getPlayer().getItemList().remove(item);

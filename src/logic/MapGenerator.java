@@ -555,14 +555,17 @@ public class MapGenerator {
 				int randomX = RandomUtil.random(0, GameConfig.MAP_SIZE - 1);
 				int randomY = RandomUtil.random(0, GameConfig.MAP_SIZE - 1);
 				
-				if(isNearPlayer(randomY, randomX)) {
+				int centerX = gameMap.getRoomList().get(0).getValue();
+				int centerY = gameMap.getRoomList().get(0).getKey();
+				
+				if(isNearPlayer(randomY, randomX, centerX, centerY)) {
 					continue;
 				}
 				
 				Cell currentCell = gameMap.get(randomY, randomX);
 				
 				if(currentCell.getType() == Cell.PATH && currentCell.getEntity() == null) {
-					each.setPos(randomY, randomX);
+					each.setInternalPostion(randomY, randomX);
 					gameMap.get(randomY, randomX).setEntity(each);
 					System.out.println(each.getName() + " set to " + randomY + " " + randomX);
 					isAdd = true;
@@ -571,16 +574,15 @@ public class MapGenerator {
 		}
 	}
 	
-	private static boolean isNearPlayer(int y, int x) {
-		Player player = GameController.getPlayer();
+	private static boolean isNearPlayer(int y, int x, int centerX, int centerY) {
 		boolean nearX = false;
 		boolean nearY = false;
 		
-		if(Math.abs(player.getPosY() - y) <= player.getLineOfSight() + 1) {
+		if(Math.abs(centerY - y) <= GameConfig.LINE_OF_SIGHT + 1) {
 			nearY = true;
 		}
 		
-		if(Math.abs(player.getPosX() - x) <= player.getLineOfSight() + 1) {
+		if(Math.abs(centerX - x) <= GameConfig.LINE_OF_SIGHT + 1) {
 			nearX = true;
 		}
 		
