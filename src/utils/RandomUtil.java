@@ -9,6 +9,7 @@ import java.util.Random;
 import entity.DarkMage;
 import entity.HauntedMaid;
 import entity.Player;
+import entity.PumpkinHead;
 import entity.Reaper;
 import entity.Skeleton;
 import entity.Soul;
@@ -77,7 +78,7 @@ public class RandomUtil {
 		int numberOfAllMonster = random(MIN_MONSTER, MAX_MONSTER);
 
 		ArrayList<Monster> monsterList = new ArrayList<>();
-		if (level >= monsterFilter.get(filterIndex).getLevel()) {
+		if (level > monsterFilter.get(filterIndex).getLevel()) {
 			filterIndex = Math.min(filterIndex + 1, monsterFilter.size() - 1);
 		}
 
@@ -91,8 +92,8 @@ public class RandomUtil {
 		int monsterMinAttack = (int) (playerDefense * 0.5 + level * 2);
 		int monsterMaxAttack = (int) (playerDefense * 1.5 + level * 2);
 
-		int monsterMinDefense = (int) (playerAttack / 3 + level * 3);
-		int monsterMaxDefense = (int) (playerAttack * 1.5 + level * 3);
+		int monsterMinDefense = level + 3;
+		int monsterMaxDefense = level + 7;
 
 		int darkMageAmount = random(0, numberOfAllMonster / 4);
 		if (levelFilter.isDarkMageAppear()) {
@@ -145,7 +146,7 @@ public class RandomUtil {
 				int randomAttack = random(monsterMinAttack, monsterMaxAttack);
 				int randomDefense = random(monsterMinDefense, monsterMaxDefense);
 				monsterList.add(
-						new HauntedMaid(randomHealth, randomAttack, randomDefense, 0, 0, Direction.DOWN, 1.4, 0.10, 1));
+						new PumpkinHead(randomHealth, randomAttack, randomDefense, 0, 0, Direction.DOWN, 1.4, 0.10, 1));
 			}
 			numberOfAllMonster -= pumpkinHeadAmount;
 		}
