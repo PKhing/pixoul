@@ -7,9 +7,13 @@ import entity.base.Entity;
 import entity.base.Monster;
 import javafx.animation.FadeTransition;
 import javafx.util.Pair;
+import logic.Cell;
+import logic.Direction;
+import logic.GameMap;
 import logic.MapRenderer;
 import logic.Sprites;
 import scene.GameScene;
+import utils.GameConfig;
 import utils.MessageTextUtil;
 import utils.RandomUtil;
 import utils.TransitionUtil;
@@ -42,13 +46,12 @@ public class DarkMage extends Monster {
 		Player gamePlayer = GameController.getPlayer();
 		if (isAttackable(gamePlayer)) {
 			// TODO change action ratio?
-			int action = RandomUtil.random(0, 2);
-			if (action == 0)
+			int action = RandomUtil.random(1, 100);
+			if (action <= 20) {
 				poison(gamePlayer);
-			else if (action == 1)
+			} else if (action <= 50) {
 				warp(gamePlayer);
-			else
-				summonMonster();
+			}
 		}
 	}
 
@@ -61,8 +64,13 @@ public class DarkMage extends Monster {
 
 		InterruptController.setTransition(true);
 
+		int randSummon = RandomUtil.random(1, 100);
+
 		fadeOut.setOnFinished((event) -> {
 			target.setPositionOnMap(newPos.getKey(), newPos.getValue());
+			if (randSummon <= 50) {
+				summonMonster(target);
+			}
 			MapRenderer.render();
 			MessageTextUtil
 					.makeNewMessage("%s has been teleported to somewhere in this level".formatted(target.getName()));
@@ -83,8 +91,26 @@ public class DarkMage extends Monster {
 		MessageTextUtil.makeNewMessage("%s has been poisoned by Dark mage".formatted(target.getName()));
 	}
 
-	private void summonMonster() {
-		// TODO
+	private void summonMonster(Entity target) {
+		int level = GameController.getLevel();
+		int range = GameConfig.LINE_OF_SIGHT;
+		GameMap gameMap = GameController.getGameMap();
+
+		int posY = target.getPosY();
+		int posX = target.getPosX();
+
+		int diff[][] = { { 0, range }, { range, 0 }, { -range, 0 }, { 0, -range } };
+
+		for (int i = 0; i < 4; i++) {
+			int newY = posY + diff[i][0];
+			int newX = posX + diff[i][1];
+
+			if ((gameMap.get(newY, newX).getEntity() == null) && (gameMap.get(newY, newX).getType() == Cell.PATH)) {
+				Monster summonedMonster = new Skeleton(level * 5, level * 3, level, newY, newX, Direction.DOWN, 1.5,
+						0.5, 1);
+				gameMap.getMonsterList().add(summonedMonster);
+			}
+		}
 	}
 
 	public int getPoisonDamage() {

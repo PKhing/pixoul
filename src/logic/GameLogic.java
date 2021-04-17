@@ -140,7 +140,6 @@ public class GameLogic {
 			InterruptController.setStillAnimation(true);
 			player.attack(monster);
 			monster.setAttacked(true);
-			InterruptController.setStillAnimation(true);
 			new Thread() {
 				public void run() {
 					try {
