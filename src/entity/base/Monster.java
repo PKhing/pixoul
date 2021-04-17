@@ -98,6 +98,9 @@ public abstract class Monster extends Entity {
 			}
 
 			for (int i = 0; i < 4; i++) {
+				if((y + move[i][0] >= GameConfig.MAP_SIZE) || (x + move[i][1] >= GameConfig.MAP_SIZE)) {
+					continue;
+				}
 				if (!visit[y + move[i][0]][x + move[i][1]]) {
 					parent[y + move[i][0]][x + move[i][1]] = new Pair<>(y, x);
 					queue.add(new Pair<>(length + 1, new Pair<>(y + move[i][0], x + move[i][1])));
