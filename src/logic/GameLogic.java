@@ -208,7 +208,6 @@ public class GameLogic {
 				e.printStackTrace();
 			}
 			Platform.runLater(() -> {
-				MapRenderer.render();
 				if(GameController.isGameOver()) {
 					return;
 				}

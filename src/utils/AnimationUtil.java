@@ -50,7 +50,7 @@ public class AnimationUtil {
 				isAttacked |= monster.isAttacked();
 			}
 			isMove &= !GameConfig.isSkipMoveAnimation();
-			if (!isMove) {
+			if (!isMove && isAttacked) {
 				Platform.runLater(() -> {
 					MapRenderer.render();
 				});
@@ -79,16 +79,18 @@ public class AnimationUtil {
 				System.out.println("animation interrupted");
 			}
 
+			boolean finalIsAttacked = isAttacked;
 			Platform.runLater(() -> {
-				MapRenderer.render();
-
-				// Reset isMove and isAttacked of each entity
 				for (Monster monster : monsterList) {
 					monster.setAttacked(false);
 					monster.setMoving(false);
 				}
 				player.setAttacked(false);
 				player.setMoving(false);
+
+				if (step == 0 || !GameConfig.isSkipMoveAnimation() || finalIsAttacked) {
+					MapRenderer.render();
+				}
 			});
 		});
 		animation.start();
