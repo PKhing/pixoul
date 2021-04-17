@@ -197,6 +197,9 @@ public class GameLogic {
 		Player player = GameController.getPlayer();
 		potionUpdate();
 		monsterUpdate();
+		if(GameController.isGameOver()) {
+			return;
+		}
 		GameScene.getInventoryPane().update();
 		GameScene.getEffectPane().update();
 		GameScene.getStatusPane().setAllValue(player);

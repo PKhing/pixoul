@@ -120,7 +120,7 @@ public class GameController {
 		fadeOut.play();
 	}
 
-	public static void isGameOver() {
+	public static boolean isGameOver() {
 		if (player.getHealth() <= 0) {
 			bgm.stop();
 			FadeTransition fadeOut = TransitionUtil.makeFadingNode(GameScene.getGamePane(), 1.0, 0.0);
@@ -131,8 +131,9 @@ public class GameController {
 			});
 
 			fadeOut.play();
+			return true;
 		}
-		return;
+		return false;
 	}
 
 	public static GameMap getGameMap() {
@@ -142,7 +143,6 @@ public class GameController {
 			}
 			return gameMap;
 		} catch (NullMapException err) {
-			err.printStackTrace();
 			return null;
 		}
 	}
