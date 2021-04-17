@@ -86,14 +86,14 @@ public class RandomUtil {
 		int playerAttack = player.getAttack();
 		int playerDefense = player.getDefense();
 
-		int monsterMinHealth = playerAttack * 3 + level * 5;
-		int monsterMaxHealth = playerAttack * 5 + level * 5;
+		int monsterMinHealth = level * 10;
+		int monsterMaxHealth = level * 15;
 
-		int monsterMinAttack = (int) (playerDefense * 0.5 + level * 2);
-		int monsterMaxAttack = (int) (playerDefense * 1.5 + level * 2);
+		int monsterMinAttack = 1;
+		int monsterMaxAttack = level + 10;
 
-		int monsterMinDefense = level + 3;
-		int monsterMaxDefense = level + 7;
+		int monsterMinDefense = 0;
+		int monsterMaxDefense = level + 3;
 
 		int darkMageAmount = random(0, numberOfAllMonster / 4);
 		if (levelFilter.isDarkMageAppear()) {

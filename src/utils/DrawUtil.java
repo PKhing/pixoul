@@ -106,7 +106,6 @@ public class DrawUtil {
 
 		// Fix later?
 		gc.drawImage(img, x, y /*- 4 * GameConfig.getScale()*/);
-		drawHPBar(y, x, entity);
 	}
 
 	public static void drawHPBar(int y, int x, Entity entity) {
