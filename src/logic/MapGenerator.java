@@ -83,6 +83,8 @@ public class MapGenerator {
 		gameMap.getGameMap()[posLadderUp.getKey()][posLadderUp.getValue()].setType(Cell.LADDER_UP);
 		gameMap.getGameMap()[posLadderDown.getKey()][posLadderDown.getValue()].setType(Cell.LADDER_DOWN);
 
+		generateMonsterOnMap(gameMap);
+		
 		return gameMap;
 	}
 
@@ -545,7 +547,8 @@ public class MapGenerator {
 		int level = GameController.getLevel();
 
 		ArrayList<Monster> monsterList = RandomUtil.randomMonsterList(player, level);
-		System.out.println(monsterList.size());
+		gameMap.getMonsterList().addAll(monsterList);
+
 		for(Monster each: monsterList) {
 			boolean isAdd = false;
 			do {
@@ -558,8 +561,9 @@ public class MapGenerator {
 				
 				Cell currentCell = gameMap.get(randomY, randomX);
 				
-				if(currentCell.getSymbol() == Cell.PATH && currentCell.getEntity() == null) {
+				if(currentCell.getType() == Cell.PATH && currentCell.getEntity() == null) {
 					each.setPos(randomY, randomX);
+					gameMap.get(randomY, randomX).setEntity(each);
 					System.out.println(each.getName() + " set to " + randomY + " " + randomX);
 					isAdd = true;
 				}
@@ -572,11 +576,11 @@ public class MapGenerator {
 		boolean nearX = false;
 		boolean nearY = false;
 		
-		if(Math.abs(player.getPosY() - y) <= player.getLineOfSight()) {
+		if(Math.abs(player.getPosY() - y) <= player.getLineOfSight() + 1) {
 			nearY = true;
 		}
 		
-		if(Math.abs(player.getPosX() - x) <= player.getLineOfSight()) {
+		if(Math.abs(player.getPosX() - x) <= player.getLineOfSight() + 1) {
 			nearX = true;
 		}
 		
