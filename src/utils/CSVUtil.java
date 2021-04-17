@@ -49,7 +49,7 @@ public class CSVUtil {
 			return output.toArray(new String[output.size()][]);
 		} catch (IOException e) {
 			e.printStackTrace();
-			return null;
+			return new String[0][0];
 		}
 	}
 
