@@ -3,6 +3,7 @@ package application;
 import java.util.ArrayList;
 
 import controller.SceneController;
+import items.base.Potion;
 import items.base.Weapon;
 import javafx.application.Application;
 import javafx.geometry.Rectangle2D;
@@ -12,6 +13,7 @@ import javafx.stage.Stage;
 import scene.LandingScene;
 import utils.CSVUtil;
 import utils.GameConfig;
+import utils.MonsterLevelFilter;
 
 public class Main extends Application {
 
@@ -28,11 +30,6 @@ public class Main extends Application {
 		GameConfig.setScreenHeight((int) rectangleSize);
 		if (rectangleSize > GameConfig.SCREEN_RESPONSIVE) {
 			GameConfig.setScale(3);
-		}
-
-		ArrayList<Weapon> arr = CSVUtil.readWeaponCSV();
-		for(Weapon weapon: arr) {
-			System.out.println(weapon.getName() + " " + weapon.getDescription());
 		}
 		
 		primaryStage.getIcons().add(new Image(iconPath));

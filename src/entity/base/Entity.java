@@ -38,7 +38,7 @@ public abstract class Entity {
 
 	private List<EntityEffect> effectList;
 
-	public Entity(String name, int attack, int maxHealth, int defense, int posY, int posX, int direction,
+	public Entity(String name, int maxHealth, int attack, int defense, int posY, int posX, int direction,
 			double critRate, double critPercent, int moveSpeed) {
 		setName(name);
 		setHealth(maxHealth);
