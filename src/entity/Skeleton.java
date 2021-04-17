@@ -11,9 +11,9 @@ import utils.MessageTextUtil;
 
 public class Skeleton extends Monster implements Moveable, Attackable {
 
-	public Skeleton(int attack, int maxHealth, int defense, int posY, int posX, int direction, double critRate,
+	public Skeleton(int maxHealth, int attack, int defense, int posY, int posX, int direction, double critRate,
 			double critPercent, int moveSpeed) {
-		super("Skelaton", attack, maxHealth, defense, posY, posX, direction, critRate, critPercent, moveSpeed);
+		super("Skelaton", maxHealth, attack, defense, posY, posX, direction, critRate, critPercent, moveSpeed);
 		GameController.getGameMap().get(posY, posX).setEntity(this);
 	}
 

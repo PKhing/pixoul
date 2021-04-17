@@ -11,9 +11,9 @@ import utils.MessageTextUtil;
 
 public class PumpkinHead extends Monster implements Moveable, Attackable {
 
-	public PumpkinHead(int attack, int maxHealth, int defense, int posY, int posX, int direction, double critRate,
+	public PumpkinHead(int maxHealth, int attack, int defense, int posY, int posX, int direction, double critRate,
 			double critPercent, int moveSpeed) {
-		super("Pumpkin Head", attack, maxHealth, defense, posY, posX, direction, critRate, critPercent, moveSpeed);
+		super("Pumpkin Head", maxHealth, attack, defense, posY, posX, direction, critRate, critPercent, moveSpeed);
 		GameController.getGameMap().get(posY, posX).setEntity(this);
 	}
 

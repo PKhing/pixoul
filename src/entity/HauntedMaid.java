@@ -11,9 +11,9 @@ import utils.MessageTextUtil;
 
 public class HauntedMaid extends Monster implements Moveable, Attackable {
 
-	public HauntedMaid(int attack, int maxHealth, int defense, int posY, int posX, int direction, double critRate,
+	public HauntedMaid(int maxHealth, int attack, int defense, int posY, int posX, int direction, double critRate,
 			double critPercent, int moveSpeed) {
-		super("Haunted Maid", attack, maxHealth, defense, posY, posX, direction, critRate, critPercent, moveSpeed);
+		super("Haunted Maid", maxHealth, attack, defense, posY, posX, direction, critRate, critPercent, moveSpeed);
 		GameController.getGameMap().get(posY, posX).setEntity(this);
 	}
 

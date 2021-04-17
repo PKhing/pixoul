@@ -249,15 +249,15 @@ public class GameScene {
 		GameController.getPlayer().getItemList()
 				.add(new GoldenArmor("More Salty Sword", "With 100 years salt effect", 5));
 
-		Skeleton skeleton = new Skeleton(5, 10, 1, firstRoomPos.getKey() - 3, firstRoomPos.getValue() + 1,
+		Skeleton skeleton = new Skeleton(10, 5, 1, firstRoomPos.getKey() - 3, firstRoomPos.getValue() + 1,
 				Direction.DOWN, 1.25, 0, 1);
 		Soul soul = new Soul(firstRoomPos.getKey() + 2, firstRoomPos.getValue() - 1);
-		Reaper reaper = new Reaper(5, 10, 1, firstRoomPos.getKey() - 2, firstRoomPos.getValue() + 1, Direction.DOWN,
+		Reaper reaper = new Reaper(10, 5, 1, firstRoomPos.getKey() - 2, firstRoomPos.getValue() + 1, Direction.DOWN,
 				1.25, 0, 1);
-		PumpkinHead pumpkinHead = new PumpkinHead(5, 10, 1, firstRoomPos.getKey() - 2, firstRoomPos.getValue() + 2,
+		PumpkinHead pumpkinHead = new PumpkinHead(10, 5, 1, firstRoomPos.getKey() - 2, firstRoomPos.getValue() + 2,
 				Direction.DOWN, 1.25, 0, 1);
 
-		HauntedMaid hauntedMaid = new HauntedMaid(5, 10, 1, firstRoomPos.getKey() - 2, firstRoomPos.getValue() + 3,
+		HauntedMaid hauntedMaid = new HauntedMaid(10, 5, 1, firstRoomPos.getKey() - 2, firstRoomPos.getValue() + 3,
 				Direction.DOWN, 1.25, 0, 1);
 		DarkMage darkMage = new DarkMage(10, 1, firstRoomPos.getKey() - 3, firstRoomPos.getValue() + 2, Direction.DOWN,
 				2, 10);
