@@ -16,7 +16,7 @@ public class Reaper extends Monster implements Attackable, Moveable {
 	public Reaper(int maxHealth, int attack, int defense, int posY, int posX, int direction, double critRate,
 			double critPercent, int moveSpeed) {
 		super("Reaper", maxHealth, attack, defense, posY, posX, direction, critRate, critPercent, moveSpeed);
-		GameController.getGameMap().get(posY, posX).setEntity(this);
+		setPos(posY, posX);
 	}
 
 	@Override

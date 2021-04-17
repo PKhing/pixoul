@@ -85,10 +85,13 @@ public abstract class Entity {
 	}
 
 	public void setPos(int posY, int posX) {
-		if (GameController.getGameMap().get(this.getPosY(), this.getPosX()).getEntity() == this) {
-			GameController.getGameMap().get(this.getPosY(), this.getPosX()).setEntity(null);
+		if (GameController.getGameMap() != null) {
+			if (GameController.getGameMap().get(this.getPosY(), this.getPosX()).getEntity() == this) {
+				GameController.getGameMap().get(this.getPosY(), this.getPosX()).setEntity(null);
+			}
+			GameController.getGameMap().get(posY, posX).setEntity(this);
 		}
-		GameController.getGameMap().get(posY, posX).setEntity(this);
+
 		setPosX(posX);
 		setPosY(posY);
 	}
@@ -205,7 +208,6 @@ public abstract class Entity {
 		this.isAttacked = isAttacked;
 	}
 
-	// Attack Range ? (Customize later ?)
 	protected boolean isAttackable(Entity x) {
 		int diffX = Math.abs(x.getPosX() - getPosX());
 		int diffY = Math.abs(x.getPosY() - getPosY());
