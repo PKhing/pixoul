@@ -137,6 +137,10 @@ public class GameScene {
 			if (InterruptController.isInventoryOpen() || InterruptController.isTransition()) {
 				return;
 			}
+			if(InterruptController.isPauseOpen()) {
+				pausePane.remove();
+				return;
+			}
 			gamePane.getChildren().add(pausePane);
 			pausePane.requestFocus();
 			InterruptController.setPauseOpen(true);
