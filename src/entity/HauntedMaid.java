@@ -14,7 +14,7 @@ public class HauntedMaid extends Monster implements Moveable, Attackable {
 	public HauntedMaid(int maxHealth, int attack, int defense, int posY, int posX, int direction, double critRate,
 			double critPercent, int moveSpeed) {
 		super("Haunted Maid", maxHealth, attack, defense, posY, posX, direction, critRate, critPercent, moveSpeed);
-		setPos(posY, posX);
+		setPositionOnMap(posY, posX);
 	}
 
 	@Override

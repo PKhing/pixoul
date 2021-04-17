@@ -15,7 +15,7 @@ public class Soul extends Monster implements Attackable {
 
 	public Soul(int posY, int posX) {
 		super("Soul", 1, 0, 0, posY, posX, Direction.DOWN, 0, 0, 0);
-		setPos(posY, posX);
+		setPositionOnMap(posY, posX);
 	}
 
 	@Override
