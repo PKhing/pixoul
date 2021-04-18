@@ -84,7 +84,10 @@ public class MapGenerator {
 		gameMap.getGameMap()[posLadderDown.getKey()][posLadderDown.getValue()].setType(Cell.LADDER_DOWN);
 
 		generateMonsterOnMap(gameMap);
-
+		generateArmorOnMap(gameMap);
+		generatePotionOnMap(gameMap);
+		generateWeaponOnMap(gameMap);
+		
 		return gameMap;
 	}
 
@@ -569,6 +572,16 @@ public class MapGenerator {
 			} while (!isAdd);
 		}
 	}
+
+	/**
+	 * Check position that near ladder which used for go upper floor or not
+	 * 
+	 * @param y       position in y-axis which is currently checking
+	 * @param x       position in x-axis which is currently checking
+	 * @param ladderY The ladder position in y-axis
+	 * @param ladderX The ladder position in x-axis
+	 * @return True if near ladder otherwise False
+	 */
 
 	private static boolean isNearLadder(int y, int x, int ladderY, int ladderX) {
 		boolean nearX = false;

@@ -17,6 +17,7 @@ import entity.base.Monster;
 import items.base.Armor;
 import items.base.Potion;
 import items.base.Weapon;
+import items.potion.VisionPotion;
 import logic.Direction;
 
 public class RandomUtil {
@@ -66,10 +67,30 @@ public class RandomUtil {
 	public static ArrayList<Potion> randomPotionList(Player player, int level) {
 		// TODO PotionList Generator
 		int numberOfPotion = random(MIN_POTION, MAX_POTION);
-		Collections.shuffle(potionPool);
-
+		int nowIdx = 0;
 		ArrayList<Potion> potionList = new ArrayList<>();
 
+		Collections.shuffle(potionPool);
+
+		while(numberOfPotion > 0 && armorPool.size() > 0) {
+			if(nowIdx >= armorPool.size()) {
+				nowIdx -= armorPool.size();
+			}
+			
+			Potion newPotion = (Potion) (potionPool.get(nowIdx).clone());
+			
+			if(!(newPotion instanceof VisionPotion)) {
+				int lowerBound = (newPotion.getPotionValue() + level) / 2;
+				int upperBound = newPotion.getPotionValue() + level;
+				
+				newPotion.setPotionValue(random(lowerBound, upperBound));	
+			}
+			
+			potionList.add(newPotion);
+			
+			numberOfPotion -= 1;
+		}
+		
 		return potionList;
 	}
 
@@ -83,11 +104,9 @@ public class RandomUtil {
 		}
 
 		MonsterLevelFilter levelFilter = monsterFilter.get(filterIndex);
-		int playerAttack = player.getAttack();
-		int playerDefense = player.getDefense();
 
-		int monsterMinHealth = level * 10;
-		int monsterMaxHealth = level * 15;
+		int monsterMinHealth = level * 4;
+		int monsterMaxHealth = level * 8;
 
 		int monsterMinAttack = 1;
 		int monsterMaxAttack = level + 10;
@@ -168,20 +187,54 @@ public class RandomUtil {
 	public static ArrayList<Weapon> randomWeaponList(Player player, int level) {
 		// TODO WeaponList Generator
 		int numberOfWeapon = random(MIN_WEAPON, MAX_WEAPON);
+		int nowIdx = 0;
+		ArrayList<Weapon> weaponList = new ArrayList<>();
+		
 		Collections.shuffle(weaponPool);
 
-		ArrayList<Weapon> weaponList = new ArrayList<>();
-
+		while(numberOfWeapon > 0 && weaponPool.size() > 0) {
+			if(nowIdx >= weaponPool.size()) {
+				nowIdx -= weaponPool.size();
+			}
+			
+			Weapon newWeapon = (Weapon) (weaponPool.get(nowIdx).clone());
+			
+			int lowerBound = (newWeapon.getAttack() + level) / 2;
+			int upperBound = newWeapon.getAttack() + level;
+			
+			newWeapon.setAttack(random(lowerBound, upperBound));
+			weaponList.add(newWeapon);
+			
+			numberOfWeapon -= 1;
+		}
+		
 		return weaponList;
 	}
 
 	public static ArrayList<Armor> randomArmorList(Player player, int level) {
 		// TODO ArmorList Generator
 		int numberOfArmor = random(MIN_ARMOR, MAX_ARMOR);
+		int nowIdx = 0;
 		ArrayList<Armor> armorList = new ArrayList<>();
 
 		Collections.shuffle(armorPool);
-
+		
+		while(numberOfArmor > 0 && armorPool.size() > 0) {
+			if(nowIdx >= armorPool.size()) {
+				nowIdx -= armorPool.size();
+			}
+			
+			Armor newArmor = (Armor) (armorPool.get(nowIdx).clone());
+			
+			int lowerBound = (newArmor.getDefense() + level) / 2;
+			int upperBound = newArmor.getDefense() + level;
+			
+			newArmor.setDefense(random(lowerBound, upperBound));
+			armorList.add(newArmor);
+			
+			numberOfArmor -= 1;
+		}
+		
 		return armorList;
 	}
 }
