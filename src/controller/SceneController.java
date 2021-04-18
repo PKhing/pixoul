@@ -20,6 +20,9 @@ public class SceneController {
 	public static void setSceneToStage(Scene newScene) {
 		if (newScene == null)
 			return;
+		if (mainStage.getScene() != null) {
+			mainStage.getScene().setCursor(Cursor.DEFAULT);
+		}
 		mainStage.setScene(newScene);
 		newScene.setCursor(Cursor.DEFAULT);
 	}
