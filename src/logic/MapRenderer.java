@@ -15,7 +15,7 @@ import utils.DrawUtil;
 import utils.GameConfig;
 
 /**
- * The MapRenderer class is used to render {@link GameMap}
+ * The MapRenderer class is used to render {@link GameMap}.
  *
  */
 public class MapRenderer {
@@ -27,7 +27,7 @@ public class MapRenderer {
 	private static interface Renderable {
 
 		/**
-		 * Render an object by calling {@link DrawUtil}
+		 * Render an object by calling {@link DrawUtil}.
 		 */
 		public void render();
 	}
@@ -56,7 +56,7 @@ public class MapRenderer {
 		public Renderable obj;
 
 		/**
-		 * Creates new node
+		 * Creates new node.
 		 * 
 		 * @param y        Cell index of this Node in the Y-axis.
 		 * @param x        Cell index of this Node in the X-axis.

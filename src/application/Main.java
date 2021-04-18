@@ -1,37 +1,40 @@
 package application;
 
-import java.util.ArrayList;
-
 import controller.SceneController;
-import items.base.Potion;
-import items.base.Weapon;
 import javafx.application.Application;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.image.Image;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import scene.LandingScene;
-import utils.CSVUtil;
 import utils.GameConfig;
-import utils.MonsterLevelFilter;
 
+/**
+ * Main class launches the JavaFX application.
+ *
+ */
 public class Main extends Application {
 
+	
+	/**
+	 * Initialize primary stage and set application size scale. 
+	 * @param primaryStage Application's main stage
+	 */
 	@Override
-	public void start(Stage primaryStage) throws Exception {
+	public void start(Stage primaryStage){
+
 		String iconPath = ClassLoader.getSystemResource(GameConfig.ICON_NAME).toString();
-
 		Rectangle2D screenBound = Screen.getPrimary().getBounds();
-
-		double rectangleSize = Math.min(screenBound.getMaxX() * GameConfig.SCREEN_SCALING,
-				screenBound.getMaxY() * GameConfig.SCREEN_SCALING);
+		double MaxX = screenBound.getMaxX() * GameConfig.SCREEN_SCALING;
+		double MaxY = screenBound.getMaxY() * GameConfig.SCREEN_SCALING;
+		double rectangleSize = Math.min(MaxX, MaxY);
 
 		GameConfig.setScreenWidth((int) rectangleSize);
 		GameConfig.setScreenHeight((int) rectangleSize);
 		if (rectangleSize > GameConfig.SCREEN_RESPONSIVE) {
 			GameConfig.setScale(3);
 		}
-		
+
 		primaryStage.getIcons().add(new Image(iconPath));
 		primaryStage.setTitle(GameConfig.GAME_TITLE);
 		primaryStage.setResizable(GameConfig.SCREEN_SCALABLE);
@@ -42,6 +45,10 @@ public class Main extends Application {
 		SceneController.showStage();
 	}
 
+	/**
+	 * Launches JavaFX application.
+	 * @param args Arguments
+	 */
 	public static void main(String[] args) {
 		launch(args);
 	}
