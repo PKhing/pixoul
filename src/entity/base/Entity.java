@@ -9,11 +9,21 @@ import effects.EntityEffect;
 import logic.Cell;
 import logic.Direction;
 import utils.MessageTextUtil;
-import utils.TransitionUtil;
 
+/**
+ * Base class to represent all entity
+ */
 public abstract class Entity {
+	public final int MOVE_SPEED = 1;
+	
+	/*
+	 * Name of this entity
+	 */
 	private String name;
 
+	/**
+	 * 
+	 */
 	private int health;
 
 	private int attack;
@@ -32,8 +42,7 @@ public abstract class Entity {
 
 	private double critPercent;
 
-	private int moveSpeed;
-
+	
 	private boolean isMoving;
 
 	private boolean isAttacked;
@@ -41,7 +50,7 @@ public abstract class Entity {
 	private List<EntityEffect> effectList;
 
 	public Entity(String name, int maxHealth, int attack, int defense, int posY, int posX, int direction,
-			double critRate, double critPercent, int moveSpeed) {
+			double critRate, double critPercent) {
 		setName(name);
 		setHealth(maxHealth);
 		setMaxHealth(maxHealth);
@@ -52,7 +61,6 @@ public abstract class Entity {
 		setDirection(direction);
 		setCritRate(critRate);
 		setCritPercent(critPercent);
-		setMoveSpeed(moveSpeed);
 		setMaxHealth(maxHealth);
 		setMoving(false);
 		setAttacked(false);
@@ -67,8 +75,8 @@ public abstract class Entity {
 			return false;
 		}
 
-		int newPosY = getPosY() + Direction.getMoveY(direction, getMoveSpeed());
-		int newPosX = getPosX() + Direction.getMoveX(direction, getMoveSpeed());
+		int newPosY = getPosY() + Direction.getMoveY(direction, MOVE_SPEED);
+		int newPosX = getPosX() + Direction.getMoveX(direction, MOVE_SPEED);
 
 		setDirection(direction);
 
@@ -96,7 +104,7 @@ public abstract class Entity {
 
 		setInternalPostion(posY, posX);
 	}
-	
+
 	public void setInternalPostion(int posY, int posX) {
 		setPosX(posX);
 		setPosY(posY);
@@ -132,14 +140,6 @@ public abstract class Entity {
 
 	public void setCritRate(double critRate) {
 		this.critRate = Math.max(1, critRate);
-	}
-
-	public int getMoveSpeed() {
-		return moveSpeed;
-	}
-
-	public void setMoveSpeed(int moveSpeed) {
-		this.moveSpeed = Math.max(1, moveSpeed);
 	}
 
 	public double getCritPercent() {

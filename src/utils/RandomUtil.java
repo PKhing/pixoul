@@ -72,9 +72,9 @@ public class RandomUtil {
 
 		Collections.shuffle(potionPool);
 
-		while(numberOfPotion > 0 && armorPool.size() > 0) {
-			if(nowIdx >= armorPool.size()) {
-				nowIdx -= armorPool.size();
+		while(numberOfPotion > 0 && potionPool.size() > 0) {
+			if(nowIdx >= potionPool.size()) {
+				nowIdx -= potionPool.size();
 			}
 			
 			Potion newPotion = (Potion) (potionPool.get(nowIdx).clone());
@@ -85,9 +85,9 @@ public class RandomUtil {
 				
 				newPotion.setPotionValue(random(lowerBound, upperBound));	
 			}
-			
 			potionList.add(newPotion);
 			
+			nowIdx += 1;
 			numberOfPotion -= 1;
 		}
 		
@@ -141,7 +141,7 @@ public class RandomUtil {
 				int randomAttack = random(monsterMinAttack, monsterMaxAttack);
 				int randomDefense = random(monsterMinDefense, monsterMaxDefense);
 				monsterList
-						.add(new Reaper(randomHealth, randomAttack, randomDefense, 0, 0, Direction.DOWN, 1.5, 0.5, 1));
+						.add(new Reaper(randomHealth, randomAttack, randomDefense, 0, 0, Direction.DOWN, 1.5, 0.5));
 			}
 			numberOfAllMonster -= reaperAmount;
 		}
@@ -153,7 +153,7 @@ public class RandomUtil {
 				int randomAttack = random(monsterMinAttack, monsterMaxAttack);
 				int randomDefense = random(monsterMinDefense, monsterMaxDefense);
 				monsterList.add(
-						new HauntedMaid(randomHealth, randomAttack, randomDefense, 0, 0, Direction.DOWN, 2.0, 0.25, 1));
+						new HauntedMaid(randomHealth, randomAttack, randomDefense, 0, 0, Direction.DOWN, 2.0, 0.25));
 			}
 			numberOfAllMonster -= hauntedMaidAmount;
 		}
@@ -165,7 +165,7 @@ public class RandomUtil {
 				int randomAttack = random(monsterMinAttack, monsterMaxAttack);
 				int randomDefense = random(monsterMinDefense, monsterMaxDefense);
 				monsterList.add(
-						new PumpkinHead(randomHealth, randomAttack, randomDefense, 0, 0, Direction.DOWN, 1.4, 0.10, 1));
+						new PumpkinHead(randomHealth, randomAttack, randomDefense, 0, 0, Direction.DOWN, 1.4, 0.10));
 			}
 			numberOfAllMonster -= pumpkinHeadAmount;
 		}
@@ -177,7 +177,7 @@ public class RandomUtil {
 				int randomAttack = random(monsterMinAttack, monsterMaxAttack);
 				int randomDefense = random(monsterMinDefense, monsterMaxDefense);
 				monsterList.add(
-						new Skeleton(randomHealth, randomAttack, randomDefense, 0, 0, Direction.DOWN, 1.25, 0.10, 1));
+						new Skeleton(randomHealth, randomAttack, randomDefense, 0, 0, Direction.DOWN, 1.25, 0.10));
 			}
 		}
 
@@ -205,6 +205,7 @@ public class RandomUtil {
 			newWeapon.setAttack(random(lowerBound, upperBound));
 			weaponList.add(newWeapon);
 			
+			nowIdx += 1;
 			numberOfWeapon -= 1;
 		}
 		
@@ -232,6 +233,7 @@ public class RandomUtil {
 			newArmor.setDefense(random(lowerBound, upperBound));
 			armorList.add(newArmor);
 			
+			nowIdx += 1;
 			numberOfArmor -= 1;
 		}
 		

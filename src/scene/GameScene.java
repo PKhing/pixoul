@@ -254,17 +254,17 @@ public class GameScene {
 				.add(new GoldenArmor("More Salty Sword", "With 100 years salt effect", 5));
 
 		Skeleton skeleton = new Skeleton(10, 5, 1, firstRoomPos.getKey() - 3, firstRoomPos.getValue() + 1,
-				Direction.DOWN, 1.25, 0, 1);
+				Direction.DOWN, 1.25, 0);
 		Soul soul = new Soul(firstRoomPos.getKey() + 2, firstRoomPos.getValue() - 1);
 		DarkMage darkMage = new DarkMage(10, 1, firstRoomPos.getKey() - 3, firstRoomPos.getValue() + 2, Direction.DOWN,
 				2, 10);
 		Reaper reaper = new Reaper(10, 5, 1, firstRoomPos.getKey() - 3, firstRoomPos.getValue() + 3, Direction.DOWN,
-				1.25, 0, 1);
+				1.25, 0);
 		PumpkinHead pumpkinHead = new PumpkinHead(10, 5, 1, firstRoomPos.getKey() - 2, firstRoomPos.getValue() + 2,
-				Direction.DOWN, 1.25, 0, 1);
+				Direction.DOWN, 1.25, 0);
 
 		HauntedMaid hauntedMaid = new HauntedMaid(10, 5, 1, firstRoomPos.getKey() - 2, firstRoomPos.getValue() + 3,
-				Direction.DOWN, 1.25, 0, 1);
+				Direction.DOWN, 1.25, 0);
 		
 		Potion maxHealthPotion = new InstantHealPotion("Bitset Potion", "Extends for 1 bit shift",
 				GameController.getPlayer().getHealth(), 100, true);

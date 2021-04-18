@@ -26,7 +26,7 @@ public class DarkMage extends Monster {
 
 	public DarkMage(int maxHealth, int defense, int posY, int posX, int direction, int poisonDamage,
 			int poisonDuration) {
-		super("Dark Mage", maxHealth, 0, defense, posY, posX, direction, 0, 0, 0);
+		super("Dark Mage", maxHealth, 0, defense, posY, posX, direction, 0, 0);
 		setPositionOnMap(posY, posX);
 		setPoisonDamage(poisonDamage);
 		setPoisonDuration(poisonDuration);
@@ -114,7 +114,7 @@ public class DarkMage extends Monster {
 
 			if ((gameMap.get(newY, newX).getEntity() == null) && (gameMap.get(newY, newX).getType() == Cell.PATH)) {
 				Monster summonedMonster = new Skeleton(level * 5, level * 3, level, newY, newX, Direction.DOWN, 1.5,
-						0.5, 1);
+						0.5);
 				gameMap.getMonsterList().add(summonedMonster);
 			}
 		}

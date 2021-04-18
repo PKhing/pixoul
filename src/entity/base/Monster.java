@@ -17,8 +17,8 @@ public abstract class Monster extends Entity {
 	private boolean visit[][] = new boolean[GameConfig.MAP_SIZE + 1][GameConfig.MAP_SIZE + 1];
 
 	public Monster(String name, int maxHealth, int attack, int defense, int posY, int posX, int direction,
-			double critRate, double critPercent, int moveSpeed) {
-		super(name, maxHealth, attack, defense, posY, posX, direction, critRate, critPercent, moveSpeed);
+			double critRate, double critPercent) {
+		super(name, maxHealth, attack, defense, posY, posX, direction, critRate, critPercent);
 	}
 
 	public abstract void update();

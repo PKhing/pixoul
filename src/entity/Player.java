@@ -27,7 +27,7 @@ public class Player extends Entity implements Moveable, Attackable {
 	private int lineOfSight;
 
 	public Player() {
-		super("Player", 20, 5, 1, 0, 0, Direction.DOWN, 1.5, 1, 1);
+		super("Player", 20, 5, 1, 0, 0, Direction.DOWN, 1.5, 1);
 		setLineOfSight(GameConfig.LINE_OF_SIGHT);
 		setEquippedArmor(null);
 		setEquippedWeapon(null);
