@@ -7,33 +7,22 @@ import items.base.Potion;
 import logic.Sprites;
 
 public class VisionPotion extends Potion {
-	private int vision;
-
 	public VisionPotion(String name, String description, int vision, int duration, boolean isPermanant) {
-		super(name, description, duration, isPermanant);
-		setVision(vision);
+		super(name, description, vision, duration, isPermanant);
 	}
 	
 	public VisionPotion clone() {
-		return new VisionPotion(getName(), getDescription(), getVision(), getDuration(), isPermanant());
+		return new VisionPotion(getName(), getDescription(), getPotionValue(), getDuration(), isPermanant());
 	}
 
 	@Override
 	public void onEquip(Player player) {
-		EntityEffect effect = new Vision(getName(), getVision(), getDuration(), isPermanant());
+		EntityEffect effect = new Vision(getName(), getPotionValue(), getDuration(), isPermanant());
 		effect.onAdd(player);
 	}
 
 	@Override
 	public int getSymbol() {
 		return Sprites.VISION_POTION;
-	}
-
-	public int getVision() {
-		return vision;
-	}
-
-	public void setVision(int attack) {
-		this.vision = Math.max(0, attack);
 	}
 }

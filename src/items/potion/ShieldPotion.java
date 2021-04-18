@@ -7,20 +7,17 @@ import items.base.Potion;
 import logic.Sprites;
 
 public class ShieldPotion extends Potion {
-	private int shield;
-
 	public ShieldPotion(String name, String description, int shield, int duration, boolean isPermanant) {
-		super(name, description, duration, isPermanant);
-		setShield(shield);
+		super(name, description, shield, duration, isPermanant);
 	}
 	
 	public ShieldPotion clone() {
-		return new ShieldPotion(getName(), getDescription(), getShield(), getDuration(), isPermanant());
+		return new ShieldPotion(getName(), getDescription(), getPotionValue(), getDuration(), isPermanant());
 	}
 	
 	@Override
 	public void onEquip(Player player) {
-		EntityEffect effect = new Protection(getName(), getShield(), getDuration(), isPermanant());
+		EntityEffect effect = new Protection(getName(), getPotionValue(), getDuration(), isPermanant());
 		effect.onAdd(player);
 	}
 
@@ -29,11 +26,4 @@ public class ShieldPotion extends Potion {
 		return Sprites.SHIELD_POTION;
 	}
 
-	public int getShield() {
-		return shield;
-	}
-
-	public void setShield(int shield) {
-		this.shield = Math.max(0, shield);
-	}
 }

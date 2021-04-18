@@ -11,9 +11,11 @@ import items.potion.VisionPotion;
 public abstract class Potion extends Item {
 	private int duration;
 	private boolean isPermanant;
+	private int potionValue;
 
-	public Potion(String name, String description, int duration, boolean isPermanant) {
+	public Potion(String name, String description, int value, int duration, boolean isPermanant) {
 		super(name, description);
+		setPotionValue(value);
 		setDuration(duration);
 		setPermanant(isPermanant);
 	}
@@ -32,6 +34,14 @@ public abstract class Potion extends Item {
 
 	public void setPermanant(boolean isPermanant) {
 		this.isPermanant = isPermanant;
+	}
+
+	public int getPotionValue() {
+		return potionValue;
+	}
+
+	public void setPotionValue(int potionValue) {
+		this.potionValue = Math.max(0, potionValue);
 	}
 
 	@Override
@@ -62,5 +72,5 @@ public abstract class Potion extends Item {
 
 		throw new UnknownItemTypeException("%s potion type is unknown".formatted(type));
 	}
-	
+
 }

@@ -7,16 +7,12 @@ import items.base.Potion;
 import logic.Sprites;
 
 public class RegenerationPotion extends Potion {
-
-	private int healValue;
-
 	public RegenerationPotion(String name, String description, int healValue, int duration, boolean isPermanant) {
-		super(name, description, duration, false);
-		setHealValue(healValue);
+		super(name, description, healValue, duration, false);
 	}
 
 	public RegenerationPotion clone() {
-		return new RegenerationPotion(getName(), getDescription(), getHealValue(), getDuration(), isPermanant());
+		return new RegenerationPotion(getName(), getDescription(), getPotionValue(), getDuration(), isPermanant());
 	}
 	
 	@Override
@@ -27,16 +23,8 @@ public class RegenerationPotion extends Potion {
 
 	@Override
 	public void onEquip(Player player) {
-		EntityEffect effect = new Regeneration(getName(), getHealValue(), getDuration(), isPermanant());
+		EntityEffect effect = new Regeneration(getName(), getPotionValue(), getDuration(), isPermanant());
 		effect.onAdd(player);
-	}
-
-	public int getHealValue() {
-		return healValue;
-	}
-
-	public void setHealValue(int healValue) {
-		this.healValue = healValue;
 	}
 
 }

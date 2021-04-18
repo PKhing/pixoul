@@ -10,8 +10,7 @@ public class StrengthPotion extends Potion {
 	private int attack;
 
 	public StrengthPotion(String name, String description, int attack, int duration, boolean isPermanant) {
-		super(name, description, duration, isPermanant);
-		setAttack(attack);
+		super(name, description, attack, duration, isPermanant);
 	}
 
 	public StrengthPotion clone() {
