@@ -63,9 +63,16 @@ public class DarkMage extends Monster {
 		FadeTransition fadeIn = TransitionUtil.makeFadingNode(GameScene.getGamePane(), 0.0, 1.0);
 
 		InterruptController.setTransition(true);
-
+		
+		Entity currentEntity = GameController.getGameMap().get(newPos.getKey(), newPos.getValue()).getEntity();
+		
+		if(currentEntity != null) {
+			GameController.getGameMap().getMonsterList().remove(currentEntity);
+			GameController.getGameMap().get(newPos.getKey(), newPos.getValue()).setEntity(null);
+		}
+		
 		int randSummon = RandomUtil.random(1, 100);
-
+		
 		fadeOut.setOnFinished((event) -> {
 			target.setPositionOnMap(newPos.getKey(), newPos.getValue());
 			if (randSummon <= 50) {

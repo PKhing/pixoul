@@ -256,15 +256,16 @@ public class GameScene {
 		Skeleton skeleton = new Skeleton(10, 5, 1, firstRoomPos.getKey() - 3, firstRoomPos.getValue() + 1,
 				Direction.DOWN, 1.25, 0, 1);
 		Soul soul = new Soul(firstRoomPos.getKey() + 2, firstRoomPos.getValue() - 1);
-		Reaper reaper = new Reaper(10, 5, 1, firstRoomPos.getKey() - 2, firstRoomPos.getValue() + 1, Direction.DOWN,
+		DarkMage darkMage = new DarkMage(10, 1, firstRoomPos.getKey() - 3, firstRoomPos.getValue() + 2, Direction.DOWN,
+				2, 10);
+		Reaper reaper = new Reaper(10, 5, 1, firstRoomPos.getKey() - 3, firstRoomPos.getValue() + 3, Direction.DOWN,
 				1.25, 0, 1);
 		PumpkinHead pumpkinHead = new PumpkinHead(10, 5, 1, firstRoomPos.getKey() - 2, firstRoomPos.getValue() + 2,
 				Direction.DOWN, 1.25, 0, 1);
 
 		HauntedMaid hauntedMaid = new HauntedMaid(10, 5, 1, firstRoomPos.getKey() - 2, firstRoomPos.getValue() + 3,
 				Direction.DOWN, 1.25, 0, 1);
-		DarkMage darkMage = new DarkMage(10, 1, firstRoomPos.getKey() - 3, firstRoomPos.getValue() + 2, Direction.DOWN,
-				2, 10);
+		
 		Potion maxHealthPotion = new InstantHealPotion("Bitset Potion", "Extends for 1 bit shift",
 				GameController.getPlayer().getHealth(), 100, true);
 		Potion currentPotion = new RegenerationPotion("Salty Potion", "With 100 years salt effect", 10, 100, false);
@@ -284,11 +285,12 @@ public class GameScene {
 		GameController.getGameMap().get(firstRoomPos.getKey() + 3, firstRoomPos.getValue()).setItem(newPotion);
 		skeleton.setHealth(8);
 		GameController.getGameMap().getMonsterList().add(skeleton);
+		GameController.getGameMap().getMonsterList().add(darkMage);
 		GameController.getGameMap().getMonsterList().add(reaper);
 		GameController.getGameMap().getMonsterList().add(soul);
 		GameController.getGameMap().getMonsterList().add(pumpkinHead);
 		GameController.getGameMap().getMonsterList().add(hauntedMaid);
-		GameController.getGameMap().getMonsterList().add(darkMage);
+		
 	}
 
 }

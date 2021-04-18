@@ -32,7 +32,7 @@ public class Reaper extends Monster implements Attackable, Moveable {
 			return;
 		}
 		Player gamePlayer = GameController.getPlayer();
-		if ((Math.abs(gamePlayer.getPosX() - getPosX()) <= 1) && (Math.abs(gamePlayer.getPosY() - getPosY()) <= 1)) {
+		if (isAttackable(gamePlayer)) {
 			attack(gamePlayer);
 		} else {
 			int nextDirection = this.getNextDirection();

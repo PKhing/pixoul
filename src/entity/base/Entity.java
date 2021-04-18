@@ -4,10 +4,12 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import controller.GameController;
+import controller.InterruptController;
 import effects.EntityEffect;
 import logic.Cell;
 import logic.Direction;
 import utils.MessageTextUtil;
+import utils.TransitionUtil;
 
 public abstract class Entity {
 	private String name;
@@ -217,7 +219,7 @@ public abstract class Entity {
 		int diffY = Math.abs(x.getPosY() - getPosY());
 
 		if (diffX <= 1 && diffY <= 1) {
-			return true;
+			return !InterruptController.isTransition();
 		}
 		return false;
 	}
