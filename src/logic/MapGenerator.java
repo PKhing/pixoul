@@ -84,7 +84,7 @@ public class MapGenerator {
 		gameMap.getGameMap()[posLadderDown.getKey()][posLadderDown.getValue()].setType(Cell.LADDER_DOWN);
 
 		generateMonsterOnMap(gameMap);
-		
+
 		return gameMap;
 	}
 
@@ -474,70 +474,67 @@ public class MapGenerator {
 
 	public static void generateWeaponOnMap(GameMap gameMap) {
 		// TODO Generate weapon on map
-		Cell[][] cellMap = gameMap.getGameMap();
 		Player player = GameController.getPlayer();
 		int level = GameController.getLevel();
-		
+
 		ArrayList<Weapon> weaponList = RandomUtil.randomWeaponList(player, level);
-		
-		for(Weapon each: weaponList) {
+
+		for (Weapon each : weaponList) {
 			boolean isAdd = false;
 			do {
 				int randomX = RandomUtil.random(0, GameConfig.MAP_SIZE - 1);
 				int randomY = RandomUtil.random(0, GameConfig.MAP_SIZE - 1);
-				Cell currentCell = cellMap[randomX][randomY];
-				
-				if(currentCell.getSymbol() == Cell.PATH && currentCell.getItem() == null) {
+				Cell currentCell = gameMap.get(randomY, randomX);
+
+				if (currentCell.getType() == Cell.PATH && currentCell.getItem() == null) {
 					currentCell.setItem(each);
 					isAdd = true;
 				}
-			} while(!isAdd);
+			} while (!isAdd);
 		}
 	}
-	
+
 	public static void generateArmorOnMap(GameMap gameMap) {
 		// TODO Generate armor on map
-		Cell[][] cellMap = gameMap.getGameMap();
 		Player player = GameController.getPlayer();
 		int level = GameController.getLevel();
-		
+
 		ArrayList<Armor> armorList = RandomUtil.randomArmorList(player, level);
-		
-		for(Armor each: armorList) {
+
+		for (Armor each : armorList) {
 			boolean isAdd = false;
 			do {
 				int randomX = RandomUtil.random(0, GameConfig.MAP_SIZE - 1);
 				int randomY = RandomUtil.random(0, GameConfig.MAP_SIZE - 1);
-				Cell currentCell = cellMap[randomX][randomY];
-				
-				if(currentCell.getSymbol() == Cell.PATH && currentCell.getItem() == null) {
+				Cell currentCell = gameMap.get(randomY, randomX);
+
+				if (currentCell.getType() == Cell.PATH && currentCell.getItem() == null) {
 					currentCell.setItem(each);
 					isAdd = true;
 				}
-			} while(!isAdd);
+			} while (!isAdd);
 		}
 	}
-	
+
 	public static void generatePotionOnMap(GameMap gameMap) {
 		// TODO Generate item on map
-		Cell[][] cellMap = gameMap.getGameMap();
 		Player player = GameController.getPlayer();
 		int level = GameController.getLevel();
-		
+
 		ArrayList<Potion> potionList = RandomUtil.randomPotionList(player, level);
-		
-		for(Potion each: potionList) {
+
+		for (Potion each : potionList) {
 			boolean isAdd = false;
 			do {
 				int randomX = RandomUtil.random(0, GameConfig.MAP_SIZE - 1);
 				int randomY = RandomUtil.random(0, GameConfig.MAP_SIZE - 1);
-				Cell currentCell = cellMap[randomX][randomY];
-				
-				if(currentCell.getSymbol() == Cell.PATH && currentCell.getItem() == null) {
+				Cell currentCell = gameMap.get(randomY, randomX);
+
+				if (currentCell.getType() == Cell.PATH && currentCell.getItem() == null) {
 					currentCell.setItem(each);
 					isAdd = true;
 				}
-			} while(!isAdd);
+			} while (!isAdd);
 		}
 	}
 
@@ -549,43 +546,42 @@ public class MapGenerator {
 		ArrayList<Monster> monsterList = RandomUtil.randomMonsterList(player, level);
 		gameMap.getMonsterList().addAll(monsterList);
 
-		for(Monster each: monsterList) {
+		for (Monster each : monsterList) {
 			boolean isAdd = false;
 			do {
 				int randomX = RandomUtil.random(0, GameConfig.MAP_SIZE - 1);
 				int randomY = RandomUtil.random(0, GameConfig.MAP_SIZE - 1);
-				
-				int centerX = gameMap.getRoomList().get(0).getValue();
-				int centerY = gameMap.getRoomList().get(0).getKey();
-				
-				if(isNearPlayer(randomY, randomX, centerX, centerY)) {
+
+				int ladderX = gameMap.getRoomList().get(0).getValue();
+				int ladderY = gameMap.getRoomList().get(0).getKey();
+
+				if (isNearLadder(randomY, randomX, ladderY, ladderX)) {
 					continue;
 				}
-				
+
 				Cell currentCell = gameMap.get(randomY, randomX);
-				
-				if(currentCell.getType() == Cell.PATH && currentCell.getEntity() == null) {
+
+				if (currentCell.getType() == Cell.PATH && currentCell.getEntity() == null) {
 					each.setInternalPostion(randomY, randomX);
 					gameMap.get(randomY, randomX).setEntity(each);
-					System.out.println(each.getName() + " set to " + randomY + " " + randomX);
 					isAdd = true;
 				}
-			} while(!isAdd);
+			} while (!isAdd);
 		}
 	}
-	
-	private static boolean isNearPlayer(int y, int x, int centerX, int centerY) {
+
+	private static boolean isNearLadder(int y, int x, int ladderY, int ladderX) {
 		boolean nearX = false;
 		boolean nearY = false;
-		
-		if(Math.abs(centerY - y) <= GameConfig.LINE_OF_SIGHT + 1) {
+
+		if (Math.abs(ladderY - y) <= GameConfig.LINE_OF_SIGHT + 1) {
 			nearY = true;
 		}
-		
-		if(Math.abs(centerX - x) <= GameConfig.LINE_OF_SIGHT + 1) {
+
+		if (Math.abs(ladderX - x) <= GameConfig.LINE_OF_SIGHT + 1) {
 			nearX = true;
 		}
-		
+
 		return nearX || nearY;
 	}
 }

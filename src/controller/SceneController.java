@@ -12,14 +12,16 @@ public class SceneController {
 	private static Stage mainStage;
 
 	public static void setMainStage(Stage mainStage) {
-		if (mainStage == null)
+		if (mainStage == null) {
 			return;
+		}
 		SceneController.mainStage = mainStage;
 	}
 
 	public static void setSceneToStage(Scene newScene) {
-		if (newScene == null)
+		if (newScene == null) {
 			return;
+		}
 		if (mainStage.getScene() != null) {
 			mainStage.getScene().setCursor(Cursor.DEFAULT);
 		}
