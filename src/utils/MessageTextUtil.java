@@ -91,8 +91,19 @@ public class MessageTextUtil {
 		writeMessage(displayText);
 	}
 
-	public static void makeNewMessage(String string) {
-		writeMessage(string);
+	public static void textWhenPlayerCannotAttack() {
+		String displayText = "You can't attack this monster.";
+		writeMessage(displayText);
+	}
+
+	public static void textWhenDarkMageWarp(Entity entity) {
+		String displayText = "%s has been teleported to somewhere in this level".formatted(entity.getName());
+		writeMessage(displayText);
+	}
+
+	public static void textWhenDarkMageUsePoison(Entity entity) {
+		String displayText = "%s has been poisoned by Dark mage".formatted(entity.getName());
+		writeMessage(displayText);
 	}
 
 	public static String shortenWord(String text) {

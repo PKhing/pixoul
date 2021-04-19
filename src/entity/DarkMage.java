@@ -79,8 +79,7 @@ public class DarkMage extends Monster {
 				summonMonster(target);
 			}
 			MapRenderer.render();
-			MessageTextUtil
-					.makeNewMessage("%s has been teleported to somewhere in this level".formatted(target.getName()));
+			MessageTextUtil.textWhenDarkMageWarp(target);
 			fadeIn.play();
 		});
 		fadeIn.setOnFinished((event) -> InterruptController.setTransition(false));
@@ -95,7 +94,7 @@ public class DarkMage extends Monster {
 		} else {
 			poison.setDuration(poisonDuration);
 		}
-		MessageTextUtil.makeNewMessage("%s has been poisoned by Dark mage".formatted(target.getName()));
+		MessageTextUtil.textWhenDarkMageUsePoison(target);
 	}
 
 	private void summonMonster(Entity target) {
