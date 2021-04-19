@@ -8,6 +8,7 @@ import controller.InterruptController;
 import effects.EntityEffect;
 import logic.Cell;
 import logic.Direction;
+import logic.GameMap;
 import utils.MessageTextUtil;
 
 /**
@@ -15,7 +16,7 @@ import utils.MessageTextUtil;
  */
 public abstract class Entity {
 	public final int MOVE_SPEED = 1;
-	
+
 	/*
 	 * Name of this entity
 	 */
@@ -42,7 +43,6 @@ public abstract class Entity {
 
 	private double critPercent;
 
-	
 	private boolean isMoving;
 
 	private boolean isAttacked;
@@ -218,9 +218,19 @@ public abstract class Entity {
 		int diffX = Math.abs(x.getPosX() - getPosX());
 		int diffY = Math.abs(x.getPosY() - getPosY());
 
-		if (diffX <= 1 && diffY <= 1) {
+		boolean isBothOne = diffX == 1 && diffY == 1;
+
+		if (isBothOne) {
+			GameMap thisMap = GameController.getGameMap();
+			if ((thisMap.get(x.getPosY(), getPosX()).getType() != Cell.WALL)
+					|| (thisMap.get(getPosY(), x.getPosX()).getType() != Cell.WALL)) {
+				return !InterruptController.isTransition();
+
+			}
+		} else if (diffX <= 1 && diffY <= 1) {
 			return !InterruptController.isTransition();
 		}
+
 		return false;
 	}
 
