@@ -40,6 +40,9 @@ public class Player extends Entity implements Moveable, Attackable {
 
 	@Override
 	public boolean attack(Entity target) {
+		if(!isAttackable(target)) {
+			return false;
+		}
 		int atkValue = GameLogic.calculateAttackValue(this, target);
 		MessageTextUtil.textWhenAttack(this, target, atkValue);
 		target.setHealth(target.getHealth() - atkValue);

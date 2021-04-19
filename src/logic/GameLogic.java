@@ -133,27 +133,28 @@ public class GameLogic {
 			return;
 		}
 		Player player = GameController.getPlayer();
-		int diffX = Math.abs(player.getPosX() - monster.getPosX());
-		int diffY = Math.abs(player.getPosY() - monster.getPosY());
 
-		if (diffX <= 1 && diffY <= 1) {
-			InterruptController.setStillAnimation(true);
-			player.attack(monster);
+		InterruptController.setStillAnimation(true);
+		if (player.attack(monster)) {
 			monster.setAttacked(true);
-			new Thread() {
-				public void run() {
-					try {
-						AnimationUtil.playAnimation(2).join();
-					} catch (InterruptedException e) {
-						System.out.println("Attack animation interrupted");
-						e.printStackTrace();
-					}
-					Platform.runLater(() -> {
-						postGameUpdate();
-					});
-				}
-			}.start();
+		} else {
+			MessageTextUtil.textWhenPlayerCannotAttack();
+			InterruptController.setStillAnimation(false);
+			return;
 		}
+		new Thread() {
+			public void run() {
+				try {
+					AnimationUtil.playAnimation(2).join();
+				} catch (InterruptedException e) {
+					System.out.println("Attack animation interrupted");
+					e.printStackTrace();
+				}
+				Platform.runLater(() -> {
+					postGameUpdate();
+				});
+			}
+		}.start();
 
 	}
 
@@ -207,7 +208,7 @@ public class GameLogic {
 				e.printStackTrace();
 			}
 			Platform.runLater(() -> {
-				if(GameController.isGameOver()) {
+				if (GameController.isGameOver()) {
 					return;
 				}
 				InterruptController.setStillAnimation(false);
