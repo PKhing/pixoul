@@ -11,11 +11,23 @@ import javafx.scene.text.Text;
 import utils.FontUtil;
 import utils.GameConfig;
 
+/**
+ * The MessagePane class is the pane that shows the message of each action that
+ * the {@link Player} or {@link Monster} did.
+ * 
+ * @see MessageTextUtil
+ *
+ */
 public class MessagePane extends VBox {
+	/**
+	 * A constant holding the maximum amount of message in the MessagePane.
+	 */
 	private final int MAX_MESSAGE = 8;
 
+	/**
+	 * Creates new MessagePane.
+	 */
 	public MessagePane() {
-		super();
 		AnchorPane.setBottomAnchor(this, 0.0);
 		AnchorPane.setLeftAnchor(this, 0.0);
 		this.setPrefHeight(50.0 * GameConfig.getScale());
@@ -25,10 +37,18 @@ public class MessagePane extends VBox {
 		this.setPadding(new Insets(7, 7, 7, 14));
 	}
 
+	/**
+	 * Adds message to this MessagePane.
+	 * @param text The message to be added
+	 */
 	public void addMessage(String text) {
+		
+		// If the amount of message is more than MAX_MESSAGE, remove the oldest one.
 		if (this.getChildren().size() >= MAX_MESSAGE) {
 			this.getChildren().remove(0);
 		}
+		
+		// Add new message
 		Text message = new Text(text);
 		message.setWrappingWidth(200.0 * GameConfig.getScale());
 		message.setFont(FontUtil.getFont(12));
@@ -36,6 +56,9 @@ public class MessagePane extends VBox {
 		this.getChildren().add(message);
 	}
 
+	/**
+	 * Removes all messages in this MessagePane.
+	 */
 	public void resetMessage() {
 		this.getChildren().clear();
 	}
