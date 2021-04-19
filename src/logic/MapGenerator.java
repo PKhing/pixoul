@@ -561,7 +561,7 @@ public class MapGenerator {
 				int ladderX = gameMap.getRoomList().get(0).getValue();
 				int ladderY = gameMap.getRoomList().get(0).getKey();
 
-				if (isNearLadder(randomY, randomX, ladderY, ladderX)) {
+				if (isNearLadder(randomY, randomX, ladderY, ladderX) || isNearEntity(randomY, randomX, gameMap)) {
 					continue;
 				}
 
@@ -599,5 +599,37 @@ public class MapGenerator {
 		}
 
 		return nearX || nearY;
+	}
+
+	/**
+	 * Check {@link GameMap} cells around the position <code>(y, x)</code> that
+	 * having entity or not.
+	 * 
+	 * @param y       Position in y-axis
+	 * @param x       Position in x-axis
+	 * @param gameMap Map of this floor
+	 * @return true if there is entity in range nearby otherwise false
+	 */
+	private static boolean isNearEntity(int y, int x, GameMap gameMap) {
+		final int prohibitRange = 2;
+		boolean isNear = false;
+
+		for (int i = -prohibitRange; i <= prohibitRange; i++) {
+			for (int j = -prohibitRange; j <= prohibitRange; j++) {
+				int newX = x + i;
+				int newY = y + j;
+
+				if (newY < GameConfig.MAP_SIZE && newY >= 0 && newX >= 0 && newX < GameConfig.MAP_SIZE) {
+					if (gameMap.get(newY, newX).getEntity() != null) {
+						isNear = true;
+						break;
+					}
+				}
+			}
+			if (isNear) {
+				break;
+			}
+		}
+		return isNear;
 	}
 }
