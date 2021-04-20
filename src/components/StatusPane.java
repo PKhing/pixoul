@@ -13,11 +13,33 @@ import utils.DrawUtil;
 import utils.FontUtil;
 import utils.GameConfig;
 
+/**
+ * The StatusPane class is the pane that shows the health point, attack stat,
+ * and defense stat of the {@link Player}.
+ *
+ */
 public class StatusPane extends VBox {
-	private Text hp, attack, defense;
+	/**
+	 * The text that shows the current health point of the player.
+	 */
+	private Text hp;
+	/**
+	 * The text that shows the current attack stat of the player.
+	 */
+	private Text attack;
+	/**
+	 * The text that shows the current defense stat of the player.
+	 */
+	private Text defense;
 
+	/**
+	 * The background image of this pane.
+	 */
 	private static WritableImage background = DrawUtil.getWritableImage("sprites/statusPane.png");
 
+	/**
+	 * Creates new StatusPane.
+	 */
 	public StatusPane() {
 
 		AnchorPane.setTopAnchor(this, 0.0);
@@ -28,7 +50,7 @@ public class StatusPane extends VBox {
 		this.setPrefSize(75 * GameConfig.getScale(), 48 * GameConfig.getScale());
 		this.setPadding(new Insets(9 * GameConfig.getScale(), 0, 0, 14 * GameConfig.getScale()));
 
-		// Add text
+		// Adds text
 		Player nowPlayer = GameController.getPlayer();
 
 		hp = new Text("HP: " + nowPlayer.getHealth() + " / " + nowPlayer.getMaxHealth());
@@ -43,20 +65,40 @@ public class StatusPane extends VBox {
 		this.getChildren().addAll(hp, attack, defense);
 	}
 
-	public void setAllValue(Player player) {
+	/**
+	 * Updates health point, attack stat, and defense stat text of this pane.
+	 */
+	public void update() {
+		Player player = GameController.getPlayer();
 		this.setHP(player.getHealth(), player.getMaxHealth());
 		this.setAttack(player.getAttack());
 		this.setDefense(player.getDefense());
 	}
 
+	/**
+	 * Sets the health point text.
+	 * 
+	 * @param hp    The player's current health point
+	 * @param maxHP The player's max health point
+	 */
 	public void setHP(Integer hp, Integer maxHP) {
 		this.hp.setText("HP: " + hp.toString() + " / " + maxHP.toString());
 	}
 
+	/**
+	 * Sets the attack stat text.
+	 * 
+	 * @param attack The player's attack stat
+	 */
 	public void setAttack(Integer attack) {
 		this.attack.setText("Attack: " + attack.toString());
 	}
 
+	/**
+	 * Sets the defense stat text.
+	 * 
+	 * @param defense The player's defense stat
+	 */
 	public void setDefense(Integer defense) {
 		this.defense.setText("Defense: " + defense.toString());
 	}

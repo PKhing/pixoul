@@ -194,12 +194,11 @@ public class GameLogic {
 	}
 
 	public static void postGameUpdate() {
-		Player player = GameController.getPlayer();
 		potionUpdate();
 		monsterUpdate();
 		GameScene.getInventoryPane().update();
 		GameScene.getEffectPane().update();
-		GameScene.getStatusPane().setAllValue(player);
+		GameScene.getStatusPane().update();
 		new Thread(() -> {
 			try {
 				AnimationUtil.playAnimation(0).join();

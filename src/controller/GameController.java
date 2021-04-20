@@ -93,7 +93,7 @@ public class GameController {
 		GameScene.getMessagePane().resetMessage();
 		GameScene.getEffectPane().update();
 		GameScene.setPlayerPositionOnNewMap();
-		GameScene.getStatusPane().setAllValue(GameController.getPlayer());
+		GameScene.getStatusPane().update();
 		SceneController.setSceneToStage(GameScene.getScene());
 		GameScene.getInventoryPane().update();
 
