@@ -16,6 +16,6 @@ ProtectionPotion,Potion of protection I,Add small amount of defense stat,1,0,fal
 ProtectionPotion,Potion of protection II,Add medium amount of defense stat,2,0,false
 ProtectionPotion,Potion of protection III,Add large amount of defense stat,3,0,false
 ProtectionPotion,Potion of permanent defense II,Add small amount of permanent defense stat,2,0,true
-Potion,Potion of permanent defense III,Add medium amount of permanent defense stat,3,0,true
+ProtectionPotion,Potion of permanent defense III,Add medium amount of permanent defense stat,3,0,true
 VisionPotion,Potion of vision,Make player have more field of view,2,30,false
 (TYPE),(NAME),(DESCRIPTION),(VALUE),(DURATION),(IS_PERMANANT_STAT)
