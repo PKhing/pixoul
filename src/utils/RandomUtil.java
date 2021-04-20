@@ -177,7 +177,7 @@ public class RandomUtil {
 		}
 
 		// Begin to generate Skeleton
-		int skeletonAmount = random(1, numberOfAllMonster / 2);
+		int skeletonAmount = random(1, numberOfAllMonster);
 		if (levelFilter.isSkeletonAppear()) {
 			for (int i = 0; i < skeletonAmount; i++) {
 				int randomHealth = random(monsterMinHealth, monsterMaxHealth);
@@ -186,6 +186,7 @@ public class RandomUtil {
 				monsterList
 						.add(new Skeleton(randomHealth, randomAttack, randomDefense, 0, 0, Direction.DOWN, 1.25, 0.10));
 			}
+			numberOfAllMonster -= skeletonAmount;
 		}
 
 		return monsterList;

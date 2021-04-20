@@ -37,14 +37,21 @@ public class GameLogic {
 	}
 
 	public static int calculateAttackValue(Entity from, Entity target) {
+		int getPercentWeight = (int) (from.getCritPercent() * 100);
+		int getRand = RandomUtil.random(1, 100);
+		int atkCal = 0;
+		
 		int lowerBound = (int) (from.getAttack() / from.getCritRate());
 		int upperBound = (int) (from.getAttack() * from.getCritRate());
+		
+		if(getRand <= getPercentWeight) {
+			atkCal = upperBound;
+		} else {
+			double fromAttack = RandomUtil.random(lowerBound, upperBound);
+			double targetDefense = target.getDefense();
 
-		double fromAttack = RandomUtil.random(lowerBound, upperBound);
-		double targetDefense = target.getDefense();
-
-		int atkCal = (int) Math.max(1, (fromAttack / (fromAttack + targetDefense)) * fromAttack);
-
+			atkCal = (int) Math.max(1, (fromAttack / (fromAttack + targetDefense)) * fromAttack);
+		}
 		return atkCal;
 	}
 

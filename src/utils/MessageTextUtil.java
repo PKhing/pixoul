@@ -8,7 +8,7 @@ import items.base.Weapon;
 import scene.GameScene;
 
 public class MessageTextUtil {
-	private static int wordMaxSize = 20;
+	private static int wordMaxSize = 30;
 
 	public static void textWhenAttack(Entity from, Entity to, int attackValue) {
 		String displayText = "%s has attacked %s for %d damage".formatted(shortenWord(from.getName()),
