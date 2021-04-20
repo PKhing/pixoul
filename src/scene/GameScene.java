@@ -3,26 +3,10 @@ package scene;
 import components.EffectPane;
 import components.InventoryPane;
 import components.MessagePane;
-import components.StatusPane;
 import components.PausePane;
-import controller.GameController;
+import components.StatusPane;
 import controller.InterruptController;
-import entity.DarkMage;
-import entity.HauntedMaid;
-import entity.PumpkinHead;
-import entity.Reaper;
-import entity.Skeleton;
-import entity.Soul;
 import entity.base.DispatchAction;
-import items.armor.GoldenArmor;
-import items.armor.IronArmor;
-import items.base.Potion;
-import items.potion.InstantHealPotion;
-import items.potion.RegenerationPotion;
-import items.weapon.Spear;
-import items.weapon.Sword;
-import items.potion.ProtectionPotion;
-import items.potion.VisionPotion;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
@@ -37,12 +21,10 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import utils.GameConfig;
-import javafx.util.Pair;
-import logic.Direction;
 import logic.GameLogic;
 import logic.MapRenderer;
 import utils.DrawUtil;
+import utils.GameConfig;
 
 public class GameScene {
 	private static Scene scene = null;
@@ -137,7 +119,7 @@ public class GameScene {
 			if (InterruptController.isInventoryOpen() || InterruptController.isTransition()) {
 				return;
 			}
-			if(InterruptController.isPauseOpen()) {
+			if (InterruptController.isPauseOpen()) {
 				pausePane.remove();
 				return;
 			}
@@ -239,58 +221,6 @@ public class GameScene {
 			initScene();
 		}
 		return gamePane;
-	}
-
-	public static void setPlayerPositionOnNewMap() {
-
-		Pair<Integer, Integer> firstRoomPos = GameController.getRoomList().get(0);
-		GameController.getPlayer().setPositionOnMap(firstRoomPos.getKey(), firstRoomPos.getValue());
-		GameController.getPlayer().getItemList().add(new Sword("Salty Sword", "With 100 years salt effect", 10));
-		GameController.getPlayer().getItemList()
-				.add(new Spear("More Salty Sword", "With 100 years salt effect", 10));
-		GameController.getPlayer().getItemList()
-				.add(new IronArmor("More Salty Sword", "With 100 years salt effect", 5));
-		GameController.getPlayer().getItemList()
-				.add(new GoldenArmor("More Salty Sword", "With 100 years salt effect", 5));
-
-		Skeleton skeleton = new Skeleton(10, 5, 1, firstRoomPos.getKey() - 3, firstRoomPos.getValue() + 1,
-				Direction.DOWN, 1.25, 0);
-		Soul soul = new Soul(firstRoomPos.getKey() + 2, firstRoomPos.getValue() - 1);
-		DarkMage darkMage = new DarkMage(10, 1, firstRoomPos.getKey() - 3, firstRoomPos.getValue() + 2, Direction.DOWN,
-				2, 10);
-		Reaper reaper = new Reaper(10, 5, 1, firstRoomPos.getKey() - 3, firstRoomPos.getValue() + 3, Direction.DOWN,
-				1.25, 0);
-		PumpkinHead pumpkinHead = new PumpkinHead(10, 5, 1, firstRoomPos.getKey() - 2, firstRoomPos.getValue() + 2,
-				Direction.DOWN, 1.25, 0);
-
-		HauntedMaid hauntedMaid = new HauntedMaid(10, 5, 1, firstRoomPos.getKey() - 2, firstRoomPos.getValue() + 3,
-				Direction.DOWN, 1.25, 0);
-		
-		Potion maxHealthPotion = new InstantHealPotion("Bitset Potion", "Extends for 1 bit shift",
-				GameController.getPlayer().getHealth(), 100, true);
-		Potion currentPotion = new RegenerationPotion("Salty Potion", "With 100 years salt effect", 10, 100, false);
-		Potion newVisionPotion = new VisionPotion("Brightness Potion", "Let your world filled with light", 2, 50,
-				false);
-		Potion newPotionInventory = new RegenerationPotion(
-				"High Regeneration Potionssssssssssssssssssssssssssssssssssssssssssssssssssss",
-				"With 100 years salt effect", 10, 100, false);
-
-		GameController.getPlayer().getItemList().add(currentPotion);
-		GameController.getPlayer().getItemList().add(maxHealthPotion);
-		GameController.getPlayer().getItemList().add(newPotionInventory);
-		GameController.getPlayer().getItemList().add(newVisionPotion);
-
-		Potion newPotion = new ProtectionPotion("Shield Potion", "For extra armor", 5, 0, true);
-
-		GameController.getGameMap().get(firstRoomPos.getKey() + 3, firstRoomPos.getValue()).setItem(newPotion);
-		skeleton.setHealth(8);
-		GameController.getGameMap().getMonsterList().add(skeleton);
-		GameController.getGameMap().getMonsterList().add(darkMage);
-		GameController.getGameMap().getMonsterList().add(reaper);
-		GameController.getGameMap().getMonsterList().add(soul);
-		GameController.getGameMap().getMonsterList().add(pumpkinHead);
-		GameController.getGameMap().getMonsterList().add(hauntedMaid);
-		
 	}
 
 }

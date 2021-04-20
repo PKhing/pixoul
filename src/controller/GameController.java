@@ -6,6 +6,10 @@ import java.util.List;
 import entity.Player;
 import exception.InvalidFloorException;
 import exception.NullMapException;
+import items.armor.WoodenArmor;
+import items.base.Potion;
+import items.potion.InstantHealPotion;
+import items.weapon.Knife;
 import javafx.animation.FadeTransition;
 import javafx.scene.Node;
 import javafx.scene.media.MediaPlayer;
@@ -24,10 +28,6 @@ public class GameController {
 	private static MediaPlayer bgm = GameAudioUtils.GameSceneBGM;
 	private static int level;
 	private static Player player;
-
-	static {
-		setPlayer(new Player());
-	}
 
 	public static GameMap getFloor(int floor) throws InvalidFloorException {
 		if ((floorList.size() < floor) || (floor <= 0)) {
@@ -77,37 +77,17 @@ public class GameController {
 		return true;
 	}
 
-	public static void reset() {
-		floorList.clear();
-		player = new Player();
-		level = 1;
-	}
-
 	public static void start() {
-		reset();
+		floorList.clear();
+		level = 1;
 
 		GameMap newFloor = addNewFloor();
-		InterruptController.resetInterruptState();
 		setGameMap(newFloor);
 
-		GameScene.getMessagePane().resetMessage();
-		GameScene.getEffectPane().update();
-		GameScene.setPlayerPositionOnNewMap();
-		GameScene.getStatusPane().update();
-		SceneController.setSceneToStage(GameScene.getScene());
-		GameScene.getInventoryPane().update();
+		player = makeNewPlayer();
 
-		GameScene.getGamePane().setOpacity(0.0);
-
-		InterruptController.setTransition(true);
-		FadeTransition fadeIn = TransitionUtil.makeFadingNode(GameScene.getGamePane(), 0.0, 1.0);
-
-		MapRenderer.render();
-
-		fadeIn.play();
-		fadeIn.setOnFinished((event) -> InterruptController.setTransition(false));
-
-		bgm.play();
+		sceneSetup();
+		initialTransition();
 	}
 
 	public static void exitToMainMenu() {
@@ -199,5 +179,44 @@ public class GameController {
 		});
 
 		return fadeFirst;
+	}
+
+	private static void sceneSetup() {
+		InterruptController.resetInterruptState();
+		GameScene.getMessagePane().resetMessage();
+		GameScene.getEffectPane().update();
+		GameScene.getStatusPane().update();
+		GameScene.getInventoryPane().update();
+		SceneController.setSceneToStage(GameScene.getScene());
+	}
+
+	private static Player makeNewPlayer() {
+		Player newPlayer = new Player();
+		Pair<Integer, Integer> firstRoomPos = GameController.getRoomList().get(0);
+
+		newPlayer.setPositionOnMap(firstRoomPos.getKey(), firstRoomPos.getValue());
+		new Knife("Rusty Knife", "A rusty knife which dungeon guard has given", 2).onEquip(newPlayer);
+		new WoodenArmor("Wooden Armor", "With 100 years salt effect", 5).onEquip(newPlayer);
+
+		Potion maxHealthPotion = new InstantHealPotion("Max Healing Potion",
+				"This potion will heal you to max health (have only one per game) [?]", 0, 0, false);
+		
+		newPlayer.getItemList().add(maxHealthPotion);
+
+		return newPlayer;
+	}
+
+	private static void initialTransition() {
+		GameScene.getGamePane().setOpacity(0.0);
+
+		InterruptController.setTransition(true);
+		FadeTransition fadeIn = TransitionUtil.makeFadingNode(GameScene.getGamePane(), 0.0, 1.0);
+
+		MapRenderer.render();
+
+		fadeIn.play();
+		fadeIn.setOnFinished((event) -> InterruptController.setTransition(false));
+
+		bgm.play();
 	}
 }
