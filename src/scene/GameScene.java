@@ -21,7 +21,7 @@ import items.potion.InstantHealPotion;
 import items.potion.RegenerationPotion;
 import items.weapon.Spear;
 import items.weapon.Sword;
-import items.potion.ShieldPotion;
+import items.potion.ProtectionPotion;
 import items.potion.VisionPotion;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -280,7 +280,7 @@ public class GameScene {
 		GameController.getPlayer().getItemList().add(newPotionInventory);
 		GameController.getPlayer().getItemList().add(newVisionPotion);
 
-		Potion newPotion = new ShieldPotion("Shield Potion", "For extra armor", 5, 0, true);
+		Potion newPotion = new ProtectionPotion("Shield Potion", "For extra armor", 5, 0, true);
 
 		GameController.getGameMap().get(firstRoomPos.getKey() + 3, firstRoomPos.getValue()).setItem(newPotion);
 		skeleton.setHealth(8);

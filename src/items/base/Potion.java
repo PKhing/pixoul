@@ -4,7 +4,7 @@ import entity.Player;
 import exception.UnknownItemTypeException;
 import items.potion.InstantHealPotion;
 import items.potion.RegenerationPotion;
-import items.potion.ShieldPotion;
+import items.potion.ProtectionPotion;
 import items.potion.StrengthPotion;
 import items.potion.VisionPotion;
 
@@ -58,8 +58,8 @@ public abstract class Potion extends Item {
 			return new RegenerationPotion(name, description, value, duration, isPermanant);
 		}
 
-		if (type.equals("ShieldPotion")) {
-			return new ShieldPotion(name, description, value, duration, isPermanant);
+		if (type.equals("ProtectionPotion")) {
+			return new ProtectionPotion(name, description, value, duration, isPermanant);
 		}
 
 		if (type.equals("StrengthPotion")) {

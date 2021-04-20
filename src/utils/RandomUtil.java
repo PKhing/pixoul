@@ -48,6 +48,7 @@ public class RandomUtil {
 	}
 
 	public static int random(int st, int ed) {
+		if(st > ed) return 0;
 		return st + rand.nextInt(ed - st + 1);
 	}
 
@@ -72,25 +73,26 @@ public class RandomUtil {
 
 		Collections.shuffle(potionPool);
 
-		while(numberOfPotion > 0 && potionPool.size() > 0) {
-			if(nowIdx >= potionPool.size()) {
+		while (numberOfPotion > 0 && potionPool.size() > 0) {
+			if (nowIdx >= potionPool.size()) {
 				nowIdx -= potionPool.size();
 			}
-			
+
 			Potion newPotion = (Potion) (potionPool.get(nowIdx).clone());
-			
-			if(!(newPotion instanceof VisionPotion)) {
-				int lowerBound = (newPotion.getPotionValue() + level) / 2;
+
+			if (!(newPotion instanceof VisionPotion)) {
+				int lowerBound = Math.max(1, (newPotion.getPotionValue() + level) / 2);
 				int upperBound = newPotion.getPotionValue() + level;
-				
-				newPotion.setPotionValue(random(lowerBound, upperBound));	
+
+				newPotion.setPotionValue(random(lowerBound, upperBound));
 			}
+			newPotion.setDescription(newPotion.getDescription() + " [%d]".formatted(newPotion.getPotionValue()));
 			potionList.add(newPotion);
-			
+
 			nowIdx += 1;
 			numberOfPotion -= 1;
 		}
-		
+
 		return potionList;
 	}
 
@@ -114,7 +116,8 @@ public class RandomUtil {
 		int monsterMinDefense = 0;
 		int monsterMaxDefense = level + 3;
 
-		int darkMageAmount = random(0, numberOfAllMonster / 4);
+		// Begin to generate Dark Mage
+		int darkMageAmount = random(1, numberOfAllMonster / 4);
 		if (levelFilter.isDarkMageAppear()) {
 			for (int i = 0; i < darkMageAmount; i++) {
 				int randomHealth = random(monsterMinHealth, monsterMaxHealth);
@@ -126,7 +129,8 @@ public class RandomUtil {
 			numberOfAllMonster -= darkMageAmount;
 		}
 
-		int soulAmount = random(0, numberOfAllMonster / 4);
+		// Begin to generate soul
+		int soulAmount = random(1, numberOfAllMonster / 4);
 		if (levelFilter.isSoulAppear()) {
 			for (int i = 0; i < soulAmount; i++) {
 				monsterList.add(new Soul(0, 0));
@@ -134,19 +138,20 @@ public class RandomUtil {
 			numberOfAllMonster -= soulAmount;
 		}
 
-		int reaperAmount = random(0, numberOfAllMonster / 4);
+		// Begin to generate reaper
+		int reaperAmount = random(1, numberOfAllMonster / 4);
 		if (levelFilter.isReaperAppear()) {
 			for (int i = 0; i < reaperAmount; i++) {
 				int randomHealth = random(monsterMinHealth, monsterMaxHealth);
 				int randomAttack = random(monsterMinAttack, monsterMaxAttack);
 				int randomDefense = random(monsterMinDefense, monsterMaxDefense);
-				monsterList
-						.add(new Reaper(randomHealth, randomAttack, randomDefense, 0, 0, Direction.DOWN, 1.5, 0.5));
+				monsterList.add(new Reaper(randomHealth, randomAttack, randomDefense, 0, 0, Direction.DOWN, 1.5, 0.5));
 			}
 			numberOfAllMonster -= reaperAmount;
 		}
 
-		int hauntedMaidAmount = random(0, numberOfAllMonster / 2);
+		// Begin to generate Haunted Maid
+		int hauntedMaidAmount = random(1, numberOfAllMonster / 2);
 		if (levelFilter.isHauntedMaidAppear()) {
 			for (int i = 0; i < hauntedMaidAmount; i++) {
 				int randomHealth = random(monsterMinHealth, monsterMaxHealth);
@@ -158,7 +163,8 @@ public class RandomUtil {
 			numberOfAllMonster -= hauntedMaidAmount;
 		}
 
-		int pumpkinHeadAmount = random(0, numberOfAllMonster / 2);
+		// Begin to generate Pumpkin Head
+		int pumpkinHeadAmount = random(1, numberOfAllMonster / 2);
 		if (levelFilter.isPumpkinHeadAppear()) {
 			for (int i = 0; i < pumpkinHeadAmount; i++) {
 				int randomHealth = random(monsterMinHealth, monsterMaxHealth);
@@ -170,14 +176,15 @@ public class RandomUtil {
 			numberOfAllMonster -= pumpkinHeadAmount;
 		}
 
-		int skeletonAmount = random(0, numberOfAllMonster / 2);
+		// Begin to generate Skeleton
+		int skeletonAmount = random(1, numberOfAllMonster / 2);
 		if (levelFilter.isSkeletonAppear()) {
 			for (int i = 0; i < skeletonAmount; i++) {
 				int randomHealth = random(monsterMinHealth, monsterMaxHealth);
 				int randomAttack = random(monsterMinAttack, monsterMaxAttack);
 				int randomDefense = random(monsterMinDefense, monsterMaxDefense);
-				monsterList.add(
-						new Skeleton(randomHealth, randomAttack, randomDefense, 0, 0, Direction.DOWN, 1.25, 0.10));
+				monsterList
+						.add(new Skeleton(randomHealth, randomAttack, randomDefense, 0, 0, Direction.DOWN, 1.25, 0.10));
 			}
 		}
 
@@ -189,26 +196,28 @@ public class RandomUtil {
 		int numberOfWeapon = random(MIN_WEAPON, MAX_WEAPON);
 		int nowIdx = 0;
 		ArrayList<Weapon> weaponList = new ArrayList<>();
-		
+
 		Collections.shuffle(weaponPool);
 
-		while(numberOfWeapon > 0 && weaponPool.size() > 0) {
-			if(nowIdx >= weaponPool.size()) {
+		while (numberOfWeapon > 0 && weaponPool.size() > 0) {
+			if (nowIdx >= weaponPool.size()) {
 				nowIdx -= weaponPool.size();
 			}
-			
+
 			Weapon newWeapon = (Weapon) (weaponPool.get(nowIdx).clone());
-			
-			int lowerBound = (newWeapon.getAttack() + level) / 2;
+
+			int lowerBound = Math.max(1, (newWeapon.getAttack() + level) / 2);
 			int upperBound = newWeapon.getAttack() + level;
-			
+
 			newWeapon.setAttack(random(lowerBound, upperBound));
-			weaponList.add(newWeapon);
 			
+			newWeapon.setDescription(newWeapon.getDescription() + " [%d]".formatted(newWeapon.getAttack()));
+			weaponList.add(newWeapon);
+
 			nowIdx += 1;
 			numberOfWeapon -= 1;
 		}
-		
+
 		return weaponList;
 	}
 
@@ -219,24 +228,26 @@ public class RandomUtil {
 		ArrayList<Armor> armorList = new ArrayList<>();
 
 		Collections.shuffle(armorPool);
-		
-		while(numberOfArmor > 0 && armorPool.size() > 0) {
-			if(nowIdx >= armorPool.size()) {
+
+		while (numberOfArmor > 0 && armorPool.size() > 0) {
+			if (nowIdx >= armorPool.size()) {
 				nowIdx -= armorPool.size();
 			}
-			
+
 			Armor newArmor = (Armor) (armorPool.get(nowIdx).clone());
-			
-			int lowerBound = (newArmor.getDefense() + level) / 2;
+
+			int lowerBound = Math.max(1, (newArmor.getDefense() + level) / 2);
 			int upperBound = newArmor.getDefense() + level;
-			
+
 			newArmor.setDefense(random(lowerBound, upperBound));
-			armorList.add(newArmor);
 			
+			newArmor.setDescription(newArmor.getDescription() + " [%d]".formatted(newArmor.getDefense()));
+			armorList.add(newArmor);
+
 			nowIdx += 1;
 			numberOfArmor -= 1;
 		}
-		
+
 		return armorList;
 	}
 }

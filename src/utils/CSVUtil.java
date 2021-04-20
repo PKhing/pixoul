@@ -17,7 +17,7 @@ import items.base.Potion;
 import items.base.Weapon;
 import items.potion.InstantHealPotion;
 import items.potion.RegenerationPotion;
-import items.potion.ShieldPotion;
+import items.potion.ProtectionPotion;
 import items.potion.StrengthPotion;
 import items.potion.VisionPotion;
 import items.weapon.Knife;

@@ -6,13 +6,13 @@ import entity.Player;
 import items.base.Potion;
 import logic.Sprites;
 
-public class ShieldPotion extends Potion {
-	public ShieldPotion(String name, String description, int shield, int duration, boolean isPermanant) {
+public class ProtectionPotion extends Potion {
+	public ProtectionPotion(String name, String description, int shield, int duration, boolean isPermanant) {
 		super(name, description, shield, duration, isPermanant);
 	}
 	
-	public ShieldPotion clone() {
-		return new ShieldPotion(getName(), getDescription(), getPotionValue(), getDuration(), isPermanant());
+	public ProtectionPotion clone() {
+		return new ProtectionPotion(getName(), getDescription(), getPotionValue(), getDuration(), isPermanant());
 	}
 	
 	@Override
