@@ -19,6 +19,11 @@ public class InstantHealth extends EntityEffect {
 
 		int newHealth = Math.min(entity.getMaxHealth(), entity.getHealth() + getValue());
 		entity.setHealth(newHealth);
+		onWearOff(entity);
+	}
+	
+	@Override
+	public void onWearOff(Entity entity) {
 		removeEffect(entity);
 	}
 
@@ -26,5 +31,7 @@ public class InstantHealth extends EntityEffect {
 	public String getEffectName() {
 		return EffectName.INSTANT_HEALTH;
 	}
+
+	
 
 }

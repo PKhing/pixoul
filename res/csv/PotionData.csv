@@ -1,21 +1,21 @@
-InstantHealPotion,Potion of instant healing I,Heal small amount of health,5,0,false
-InstantHealPotion,Potion of instant healing II,Heal medium amount of health,10,0,false
-InstantHealPotion,Potion of instant healing III,Heal large amount of health,20,0,false
-InstantHealPotion,Potion of permanent health stat I,Heal and increase max health (Small),3,0,true
-InstantHealPotion,Potion of permanent health stat II,Heal and increase max health (Medium),5,0,true
-InstantHealPotion,Potion of permanent health stat III,Heal and increase max health (Medium),7,0,true  
-RegenerationPotion,Potion of regeneration I,Provide small health generation,2,5,false
-RegenerationPotion,Potion of regeneration II,Provide medium health generation,4,5,false  
-RegenerationPotion,Potion of regeneration III,Provide large health generation,6,5,false
-StrengthPotion,Potion of strength I,Add small amount of attack stat,2,10,false
-StrengthPotion,Potion of strength II,Add medium amount of attack stat,3,10,false
-StrengthPotion,Potion of strength III,Add large amount of attack stat,5,10,false
-StrengthPotion,Potion of permanent strength I,Add small amount of permanent attack stat,2,0,true
-StrengthPotion,Potion of permanent strength II,Add large amount of permanent attack stat,4,0,true
-ProtectionPotion,Potion of protection I,Add small amount of defense stat,1,0,false
-ProtectionPotion,Potion of protection II,Add medium amount of defense stat,2,0,false
-ProtectionPotion,Potion of protection III,Add large amount of defense stat,3,0,false
-ProtectionPotion,Potion of permanent defense II,Add small amount of permanent defense stat,2,0,true
-ProtectionPotion,Potion of permanent defense III,Add medium amount of permanent defense stat,3,0,true
-VisionPotion,Potion of vision,Make player have more field of view,2,30,false
+InstantHealPotion,Potion of instant healing I,Heal small amount of health,5,12,FALSE
+InstantHealPotion,Potion of instant healing II,Heal medium amount of health,10,6,FALSE
+InstantHealPotion,Potion of instant healing III,Heal large amount of health,20,3,FALSE
+InstantHealPotion,Potion of permanent health stat I,Heal and increase max health (Small),3,0,TRUE
+InstantHealPotion,Potion of permanent health stat II,Heal and increase max health (Medium),5,0,TRUE
+InstantHealPotion,Potion of permanent health stat III,Heal and increase max health (Large),7,0,TRUE
+RegenerationPotion,Potion of regeneration I,Provide small health generation,2,5,FALSE
+RegenerationPotion,Potion of regeneration II,Provide medium health generation,4,5,FALSE
+RegenerationPotion,Potion of regeneration III,Provide large health generation,6,5,FALSE
+StrengthPotion,Potion of strength I,Add small amount of attack stat,2,10,FALSE
+StrengthPotion,Potion of strength II,Add medium amount of attack stat,3,10,FALSE
+StrengthPotion,Potion of strength III,Add large amount of attack stat,5,10,FALSE
+StrengthPotion,Potion of permanent strength I,Add small amount of permanent attack stat,2,0,TRUE
+StrengthPotion,Potion of permanent strength II,Add large amount of permanent attack stat,4,0,TRUE
+ProtectionPotion,Potion of protection I,Add small amount of defense stat,1,10,FALSE
+ProtectionPotion,Potion of protection II,Add medium amount of defense stat,2,10,FALSE
+ProtectionPotion,Potion of protection III,Add large amount of defense stat,3,10,FALSE
+ProtectionPotion,Potion of permanent defense II,Add small amount of permanent defense stat,2,0,TRUE
+ProtectionPotion,Potion of permanent defense III,Add medium amount of permanent defense stat,3,0,TRUE
+VisionPotion,Potion of vision,Make player have more field of view,2,30,FALSE
 (TYPE),(NAME),(DESCRIPTION),(VALUE),(DURATION),(IS_PERMANANT_STAT)

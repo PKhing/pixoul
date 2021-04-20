@@ -21,7 +21,7 @@ public abstract class EntityEffect {
 	}
 
 	public abstract void onAdd(Entity entity);
-
+	public abstract void onWearOff(Entity entity);
 	public abstract String getEffectName();
 
 	public boolean isDuplicate(Entity entity) {
@@ -40,9 +40,6 @@ public abstract class EntityEffect {
 			return false;
 		}
 		return true;
-	}
-
-	public void onWearOff(Entity entity) {
 	}
 
 	public String getName() {

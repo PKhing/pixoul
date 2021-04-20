@@ -17,6 +17,9 @@ public class InstantHealPotion extends Potion {
 
 	@Override
 	public void onEquip(Player player) {
+		if(getName().contains("Max Healing Potion")) {
+			setPotionValue(player.getMaxHealth() - player.getHealth());
+		}
 		EntityEffect effect = new InstantHealth(getName(), getPotionValue(), getDuration(), isPermanant());
 		effect.onAdd(player);
 	}
