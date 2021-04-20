@@ -62,15 +62,20 @@ public class CSVUtil {
 		int sz = monsterLevelData.length;
 
 		for (int i = 0; i < sz; i++) {
-			int level = Integer.parseInt(monsterLevelData[i][0]);
-			boolean darkMage = Boolean.parseBoolean(monsterLevelData[i][1]);
-			boolean hauntedMaid = Boolean.parseBoolean(monsterLevelData[i][2]);
-			boolean pumpkinHead = Boolean.parseBoolean(monsterLevelData[i][3]);
-			boolean reaper = Boolean.parseBoolean(monsterLevelData[i][4]);
-			boolean skeleton = Boolean.parseBoolean(monsterLevelData[i][5]);
-			boolean soul = Boolean.parseBoolean(monsterLevelData[i][6]);
+			try {
+				int level = Integer.parseInt(monsterLevelData[i][0]);
+				boolean darkMage = Boolean.parseBoolean(monsterLevelData[i][1]);
+				boolean hauntedMaid = Boolean.parseBoolean(monsterLevelData[i][2]);
+				boolean pumpkinHead = Boolean.parseBoolean(monsterLevelData[i][3]);
+				boolean reaper = Boolean.parseBoolean(monsterLevelData[i][4]);
+				boolean skeleton = Boolean.parseBoolean(monsterLevelData[i][5]);
+				boolean soul = Boolean.parseBoolean(monsterLevelData[i][6]);
 
-			filterList.add(new MonsterLevelFilter(level, darkMage, hauntedMaid, pumpkinHead, reaper, skeleton, soul));
+				filterList
+						.add(new MonsterLevelFilter(level, darkMage, hauntedMaid, pumpkinHead, reaper, skeleton, soul));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 
 		return filterList;
@@ -83,18 +88,18 @@ public class CSVUtil {
 		int sz = potionData.length;
 
 		for (int i = 0; i < sz; i++) {
-			String type = potionData[i][0];
-			String name = potionData[i][1];
-			String description = potionData[i][2];
-
-			int value = Integer.parseInt(potionData[i][3]);
-			int duration = Integer.parseInt(potionData[i][4]);
-			boolean isPermanant = Boolean.parseBoolean(potionData[i][5]);
-
 			try {
+				String type = potionData[i][0];
+				String name = potionData[i][1];
+				String description = potionData[i][2];
+
+				int value = Integer.parseInt(potionData[i][3]);
+				int duration = Integer.parseInt(potionData[i][4]);
+				boolean isPermanant = Boolean.parseBoolean(potionData[i][5]);
+
 				Potion parsePotionResult = Potion.parsePotion(type, name, description, value, duration, isPermanant);
 				output.add(parsePotionResult);
-			} catch (UnknownItemTypeException e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
@@ -109,16 +114,16 @@ public class CSVUtil {
 		int sz = armorData.length;
 
 		for (int i = 0; i < sz; i++) {
-			String type = armorData[i][0];
-			String name = armorData[i][1];
-			String description = armorData[i][2];
-
-			int defense = Integer.parseInt(armorData[i][3]);
-
 			try {
+				String type = armorData[i][0];
+				String name = armorData[i][1];
+				String description = armorData[i][2];
+
+				int defense = Integer.parseInt(armorData[i][3]);
+
 				Armor parseArmorResult = Armor.parseArmor(type, name, description, defense);
 				output.add(parseArmorResult);
-			} catch (UnknownItemTypeException e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
@@ -133,16 +138,16 @@ public class CSVUtil {
 		int sz = weaponData.length;
 
 		for (int i = 0; i < sz; i++) {
-			String type = weaponData[i][0];
-			String name = weaponData[i][1];
-			String description = weaponData[i][2];
-
-			int attack = Integer.parseInt(weaponData[i][3]);
-
 			try {
+				String type = weaponData[i][0];
+				String name = weaponData[i][1];
+				String description = weaponData[i][2];
+
+				int attack = Integer.parseInt(weaponData[i][3]);
+
 				Weapon parseWeaponResult = Weapon.parseWeapon(type, name, description, attack);
 				output.add(parseWeaponResult);
-			} catch (UnknownItemTypeException e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 
