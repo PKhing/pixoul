@@ -6,13 +6,13 @@ import logic.Sprites;
 
 public class IronArmor extends Armor {
 
-	public IronArmor(String name, String description, int defense) {
-		super(name, description, defense);
+	public IronArmor(String name, String description, int defense, int spriteIndex) {
+		super(name, description, defense, spriteIndex);
 		// TODO Auto-generated constructor stub
 	}
 
 	public IronArmor clone() {
-		return new IronArmor(getName(), getDescription(), getDefense());
+		return new IronArmor(getName(), getDescription(), getDefense(), getSpriteIndex());
 	}
 	
 	@Override
@@ -31,7 +31,7 @@ public class IronArmor extends Armor {
 
 	@Override
 	public int getSymbol() {
-		return Sprites.IRON_ARMOR;
+		return Sprites.ARMOR;
 	}
 
 }

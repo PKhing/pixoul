@@ -96,8 +96,9 @@ public class CSVUtil {
 				int value = Integer.parseInt(potionData[i][3]);
 				int duration = Integer.parseInt(potionData[i][4]);
 				boolean isPermanant = Boolean.parseBoolean(potionData[i][5]);
-
-				Potion parsePotionResult = Potion.parsePotion(type, name, description, value, duration, isPermanant);
+				int spriteIndex = Integer.parseInt(potionData[i][6]);
+				
+				Potion parsePotionResult = Potion.parsePotion(type, name, description, value, duration, isPermanant, spriteIndex);
 				output.add(parsePotionResult);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -120,8 +121,9 @@ public class CSVUtil {
 				String description = armorData[i][2];
 
 				int defense = Integer.parseInt(armorData[i][3]);
-
-				Armor parseArmorResult = Armor.parseArmor(type, name, description, defense);
+				int spriteIndex = Integer.parseInt(armorData[i][4]);
+				
+				Armor parseArmorResult = Armor.parseArmor(type, name, description, defense, spriteIndex);
 				output.add(parseArmorResult);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -144,8 +146,9 @@ public class CSVUtil {
 				String description = weaponData[i][2];
 
 				int attack = Integer.parseInt(weaponData[i][3]);
-
-				Weapon parseWeaponResult = Weapon.parseWeapon(type, name, description, attack);
+				int spriteIndex = Integer.parseInt(weaponData[i][4]);
+				
+				Weapon parseWeaponResult = Weapon.parseWeapon(type, name, description, attack, spriteIndex);
 				output.add(parseWeaponResult);
 			} catch (Exception e) {
 				e.printStackTrace();

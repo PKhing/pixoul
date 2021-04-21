@@ -6,12 +6,12 @@ import logic.Sprites;
 
 public class Sword extends Weapon {
 
-	public Sword(String name, String description, int attack) {
-		super(name, description, attack);
+	public Sword(String name, String description, int attack, int spriteIndex) {
+		super(name, description, attack, spriteIndex);
 	}
 
 	public Sword clone() {
-		return new Sword(getName(), getDescription(), getAttack());
+		return new Sword(getName(), getDescription(), getAttack(), getSpriteIndex());
 	}
 	
 	@Override

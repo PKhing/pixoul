@@ -8,8 +8,8 @@ import items.armor.WoodenArmor;
 public abstract class Armor extends Item {
 	private int defense;
 
-	public Armor(String name, String description, int defense) {
-		super(name, description);
+	public Armor(String name, String description, int defense, int spriteIndex) {
+		super(name, description, spriteIndex);
 		setDefense(defense);
 	}
 
@@ -21,18 +21,18 @@ public abstract class Armor extends Item {
 		this.defense = defense;
 	}
 
-	public static Armor parseArmor(String type, String name, String description, int defense)
+	public static Armor parseArmor(String type, String name, String description, int defense, int spriteIndex)
 			throws UnknownItemTypeException {
 		if (type.equals("GoldenArmor")) {
-			return new GoldenArmor(name, description, defense);
+			return new GoldenArmor(name, description, defense, spriteIndex);
 		}
 
 		if (type.equals("IronArmor")) {
-			return new IronArmor(name, description, defense);
+			return new IronArmor(name, description, defense, spriteIndex);
 		}
 
 		if (type.equals("WoodenArmor")) {
-			return new WoodenArmor(name, description, defense);
+			return new WoodenArmor(name, description, defense, spriteIndex);
 		}
 
 		throw new UnknownItemTypeException("%s armor type is unknown".formatted(type));

@@ -8,8 +8,8 @@ import items.weapon.Sword;
 public abstract class Weapon extends Item {
 	private int attack;
 
-	public Weapon(String name, String description, int attack) {
-		super(name, description);
+	public Weapon(String name, String description, int attack, int spriteIndex) {
+		super(name, description, spriteIndex);
 		setAttack(attack);
 	}
 
@@ -21,18 +21,18 @@ public abstract class Weapon extends Item {
 		this.attack = attack;
 	}
 	
-	public static Weapon parseWeapon(String type, String name, String description, int defense)
+	public static Weapon parseWeapon(String type, String name, String description, int defense, int spriteIndex)
 			throws UnknownItemTypeException {
 		if (type.equals("Knife")) {
-			return new Knife(name, description, defense);
+			return new Knife(name, description, defense, spriteIndex);
 		}
 
 		if (type.equals("Spear")) {
-			return new Spear(name, description, defense);
+			return new Spear(name, description, defense, spriteIndex);
 		}
 
 		if (type.equals("Sword")) {
-			return new Sword(name, description, defense);
+			return new Sword(name, description, defense, spriteIndex);
 		}
 
 		throw new UnknownItemTypeException("%s weapon type is unknown".formatted(type));

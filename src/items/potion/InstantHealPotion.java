@@ -7,12 +7,12 @@ import items.base.Potion;
 import logic.Sprites;
 
 public class InstantHealPotion extends Potion {
-	public InstantHealPotion(String name, String description, int value, int duration, boolean isPermanant) {
-		super(name, description, value, 0, isPermanant);
+	public InstantHealPotion(String name, String description, int value, int duration, boolean isPermanant, int spriteIndex) {
+		super(name, description, value, 0, isPermanant, spriteIndex);
 	}
 	
 	public InstantHealPotion clone() {
-		return new InstantHealPotion(getName(), getDescription(), getPotionValue(), getDuration(), isPermanant());
+		return new InstantHealPotion(getName(), getDescription(), getPotionValue(), getDuration(), isPermanant(), getSpriteIndex());
 	}
 
 	@Override

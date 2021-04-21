@@ -13,8 +13,8 @@ public abstract class Potion extends Item {
 	private boolean isPermanant;
 	private int potionValue;
 
-	public Potion(String name, String description, int value, int duration, boolean isPermanant) {
-		super(name, description);
+	public Potion(String name, String description, int value, int duration, boolean isPermanant, int spriteIndex) {
+		super(name, description, spriteIndex);
 		setPotionValue(value);
 		setDuration(duration);
 		setPermanant(isPermanant);
@@ -49,25 +49,25 @@ public abstract class Potion extends Item {
 	}
 
 	public static Potion parsePotion(String type, String name, String description, int value, int duration,
-			boolean isPermanant) throws UnknownItemTypeException {
+			boolean isPermanant, int spriteIndex) throws UnknownItemTypeException {
 		if (type.equals("InstantHealPotion")) {
-			return new InstantHealPotion(name, description, value, duration, isPermanant);
+			return new InstantHealPotion(name, description, value, duration, isPermanant, spriteIndex);
 		}
 
 		if (type.equals("RegenerationPotion")) {
-			return new RegenerationPotion(name, description, value, duration, isPermanant);
+			return new RegenerationPotion(name, description, value, duration, isPermanant, spriteIndex);
 		}
 
 		if (type.equals("ProtectionPotion")) {
-			return new ProtectionPotion(name, description, value, duration, isPermanant);
+			return new ProtectionPotion(name, description, value, duration, isPermanant, spriteIndex);
 		}
 
 		if (type.equals("StrengthPotion")) {
-			return new StrengthPotion(name, description, value, duration, isPermanant);
+			return new StrengthPotion(name, description, value, duration, isPermanant, spriteIndex);
 		}
 
 		if (type.equals("VisionPotion")) {
-			return new VisionPotion(name, description, value, duration, isPermanant);
+			return new VisionPotion(name, description, value, duration, isPermanant, spriteIndex);
 		}
 
 		throw new UnknownItemTypeException("%s potion type is unknown".formatted(type));
