@@ -9,12 +9,12 @@ import logic.Sprites;
 public class StrengthPotion extends Potion {
 	private int attack;
 
-	public StrengthPotion(String name, String description, int attack, int duration, boolean isPermanant) {
-		super(name, description, attack, duration, isPermanant);
+	public StrengthPotion(String name, String description, int attack, int duration, boolean isPermanant, int spriteIndex) {
+		super(name, description, attack, duration, isPermanant, spriteIndex);
 	}
 
 	public StrengthPotion clone() {
-		return new StrengthPotion(getName(), getDescription(), getAttack(), getDuration(), isPermanant());
+		return new StrengthPotion(getName(), getDescription(), getAttack(), getDuration(), isPermanant(), getSpriteIndex());
 	}
 	
 	@Override

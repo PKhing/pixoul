@@ -6,13 +6,13 @@ import logic.Sprites;
 
 public class WoodenArmor extends Armor {
 
-	public WoodenArmor(String name, String description, int defense) {
-		super(name, description, defense);
+	public WoodenArmor(String name, String description, int defense, int spriteIndex) {
+		super(name, description, defense, spriteIndex);
 		// TODO Auto-generated constructor stub
 	}
 
 	public WoodenArmor clone() {
-		return new WoodenArmor(getName(), getDescription(), getDefense());
+		return new WoodenArmor(getName(), getDescription(), getDefense(), getSpriteIndex());
 	}
 	
 	@Override
@@ -31,7 +31,7 @@ public class WoodenArmor extends Armor {
 
 	@Override
 	public int getSymbol() {
-		return Sprites.WOODEN_ARMOR;
+		return Sprites.ARMOR;
 	}
 
 }

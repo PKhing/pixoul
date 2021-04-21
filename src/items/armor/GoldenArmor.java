@@ -6,13 +6,13 @@ import items.weapon.Knife;
 import logic.Sprites;
 
 public class GoldenArmor extends Armor {
-	public GoldenArmor(String name, String description, int defense) {
-		super(name, description, defense);
+	public GoldenArmor(String name, String description, int defense, int spriteIndex) {
+		super(name, description, defense, spriteIndex);
 		// TODO Auto-generated constructor stub
 	}
 
 	public GoldenArmor clone() {
-		return new GoldenArmor(getName(), getDescription(), getDefense());
+		return new GoldenArmor(getName(), getDescription(), getDefense(), getSpriteIndex());
 	}
 	
 	@Override
@@ -31,7 +31,7 @@ public class GoldenArmor extends Armor {
 
 	@Override
 	public int getSymbol() {
-		return Sprites.GOLDEN_ARMOR;
+		return Sprites.ARMOR;
 	}
 
 }

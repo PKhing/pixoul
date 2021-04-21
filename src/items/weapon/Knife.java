@@ -6,12 +6,12 @@ import logic.Sprites;
 
 public class Knife extends Weapon {
 
-	public Knife(String name, String description, int attack) {
-		super(name, description, attack);
+	public Knife(String name, String description, int attack, int spriteIndex) {
+		super(name, description, attack, spriteIndex);
 	}
 
 	public Knife clone() {
-		return new Knife(getName(), getDescription(), getAttack());
+		return new Knife(getName(), getDescription(), getAttack(), getSpriteIndex());
 	}
 	
 	@Override
@@ -31,7 +31,7 @@ public class Knife extends Weapon {
 	@Override
 	public int getSymbol() {
 		// TODO Auto-generated method stub
-		return Sprites.WOODEN_ARMOR;
+		return Sprites.KNIFE;
 	}
 
 }

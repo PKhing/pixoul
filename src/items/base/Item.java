@@ -5,9 +5,11 @@ import entity.Player;
 public abstract class Item {
 	private String name;
 	private String description;
-
-	public Item(String name, String description) {
+	private int spriteIndex;
+	
+	public Item(String name, String description, int spriteIndex) {
 		setName(name);
+		setSpriteIndex(spriteIndex);
 		setDescription(description);
 	}
 
@@ -33,5 +35,13 @@ public abstract class Item {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public int getSpriteIndex() {
+		return spriteIndex;
+	}
+
+	public void setSpriteIndex(int spriteIndex) {
+		this.spriteIndex = spriteIndex;
 	}
 }

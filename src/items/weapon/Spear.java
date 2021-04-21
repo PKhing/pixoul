@@ -6,12 +6,12 @@ import logic.Sprites;
 
 public class Spear extends Weapon {
 
-	public Spear(String name, String description, int attack) {
-		super(name, description, attack);
+	public Spear(String name, String description, int attack, int spriteIndex) {
+		super(name, description, attack, spriteIndex);
 	}
 
 	public Spear clone() {
-		return new Spear(getName(), getDescription(), getAttack());
+		return new Spear(getName(), getDescription(), getAttack(), getSpriteIndex());
 	}
 	
 	@Override
