@@ -73,15 +73,14 @@ public class DrawUtil {
 			return;
 		}
 
-		int index = getIndexItemSymbol(item);
+		int index = item.getSpriteIndex();
 		GraphicsContext gc = GameScene.getGraphicsContext();
 		if (item instanceof Potion) {
-			WritableImage img = new WritableImage(itemSprites, item.getSymbol() * 32, Sprites.SMALL_POTION * 32, 32,
-					32);
+			WritableImage img = new WritableImage(itemSprites, 1 * 32, item.getSymbol() * 32, 32, 32);
 			gc.drawImage(scaleUp(img, GameConfig.getScale()), x - 1, y);
 		} else {
-			WritableImage img = new WritableImage(itemSprites, item.getSymbol() * 32, index * 32, 32, 32);
-			gc.drawImage(scaleUp(img, GameConfig.getScale()), x, y - 4 * GameConfig.getScale());
+			WritableImage img = new WritableImage(itemSprites, index * 32, item.getSymbol() * 32, 32, 32);
+			gc.drawImage(scaleUp(img, GameConfig.getScale()), x, y - 2 * GameConfig.getScale());
 		}
 	}
 
@@ -128,8 +127,8 @@ public class DrawUtil {
 			return;
 		}
 
-		int index = getIndexItemSymbol(item);
-		WritableImage img = new WritableImage(itemSprites, item.getSymbol() * 32, index * 32, 32, 32);
+		int index = item.getSpriteIndex();
+		WritableImage img = new WritableImage(itemSprites, index * 32, item.getSymbol() * 32, 32, 32);
 		gc.drawImage(scaleUp(img, GameConfig.getScale()), y, x);
 	}
 
@@ -167,25 +166,6 @@ public class DrawUtil {
 
 	private static Image getAttackMouseIcon() {
 		return new WritableImage(itemSprites, 0, 0, 32, 32);
-	}
-
-	private static int getIndexItemSymbol(Item item) {
-		if (item instanceof Sword) {
-			return Sprites.SWORD;
-		}
-		if (item instanceof Spear) {
-			return Sprites.SPEAR;
-		}
-		if (item instanceof Knife) {
-			return Sprites.KNIFE;
-		}
-		if (item instanceof Armor) {
-			return Sprites.ARMOR;
-		}
-		if (item instanceof Potion) {
-			return Sprites.POTION;
-		}
-		return 0;
 	}
 
 	private static Image getImage(String filePath) {

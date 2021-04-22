@@ -26,7 +26,7 @@ public class InstantHealPotion extends Potion {
 
 	@Override
 	public int getSymbol() {
-		return Sprites.HEALING_POTION;
+		return Sprites.INSTANT_HEALTH_POTION;
 	}
 
 }

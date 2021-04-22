@@ -43,18 +43,25 @@ public class Sprites {
 	 */
 	
 	public static final int SHIELD_POTION = 5;
-	
+
 	/**
-	 * Represents healing potion sprite index.
+	 * Represents instant health potion sprite index.
 	 */
 	
-	public static final int HEALING_POTION = 6;
+	public static final int INSTANT_HEALTH_POTION = 6;
 	
 	/**
 	 * Represents vision potion sprite index.
 	 */
 	
 	public static final int VISION_POTION = 7;
+	
+	/**
+	 * Represents regeneration potion sprite index.
+	 */
+	
+	public static final int REGENERATION_POTION = 8;
+
 
 	/* Entity */
 
