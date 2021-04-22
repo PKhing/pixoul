@@ -34,10 +34,10 @@ public class RandomUtil {
 	private static final int MIN_MONSTER = 20;
 	private static final int MAX_MONSTER = 40;
 
-	private static final int MIN_WEAPON = 3;
-	private static final int MAX_WEAPON = 5;
+	private static final int MIN_WEAPON = 5;
+	private static final int MAX_WEAPON = 10;
 
-	private static final int MIN_ARMOR = 10;
+	private static final int MIN_ARMOR = 5;
 	private static final int MAX_ARMOR = 10;
 
 	static {
