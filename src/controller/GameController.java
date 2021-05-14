@@ -104,7 +104,7 @@ public class GameController {
 
 
 	/**
-	 * Change {@link #gameMap} to upper level and making fade transition if able to do
+	 * Change {@link #gameMap} to upper level and making {@link FadeTransition} if able to do
 	 * 
 	 * @return return true if {@link #player} can go to upper level otherwise false
 	 */
@@ -239,7 +239,7 @@ public class GameController {
 	}
 
 	/**
-	 * Utility method that creating FadingAnimation for switching floor
+	 * Utility method that creating {@link FadeTransition} for switching floor
 	 * 
 	 * @param node the target node that we want to make a fade
 	 * @param from starting opacity 
