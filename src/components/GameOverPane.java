@@ -15,15 +15,35 @@ import javafx.scene.text.TextAlignment;
 import utils.FontUtil;
 import utils.GameConfig;
 
+/**
+ * The GameOverPane class represent the pane that show 
+ * when {@link Player} health is less than or equal zero
+ */
+
 public class GameOverPane extends VBox {
+	/**
+	 * Represent the height of the box in pixel
+	 */
 	private int heightBox = 40;
 
+	/**
+	 * Represent the width of the box in pixel
+	 */
 	private int widthBox = 80;
 
+	/**
+	 * Represent {@link Text} which is the title text in this pane
+	 */
 	private Text gameOverTitle;
-
+	
+	/**
+	 * Represent {@link VBox} which contains all buttons in this pane
+	 */
 	private VBox buttonBox;
 
+	/**
+	 * The constructor of GameOverPane. Initialize the style, button, listener and title. 
+	 */
 	public GameOverPane() {
 		styleSetup();
 		addGameOverTitle();
@@ -33,6 +53,9 @@ public class GameOverPane extends VBox {
 		getChildren().addAll(gameOverTitle, buttonBox);
 	}
 
+	/**
+	 * Setup the pane style
+	 */
 	private void styleSetup() {
 		setPrefHeight(heightBox * GameConfig.getScale());
 		setPrefWidth(widthBox * GameConfig.getScale());
@@ -41,19 +64,30 @@ public class GameOverPane extends VBox {
 		setSpacing(20.0);
 	}
 
+	/**
+	 * Initialize the gameOverTitle and add to display in pane
+	 */
 	private void addGameOverTitle() {
 		gameOverTitle = new Text("Game Over");
 		gameOverTitle.setFont(FontUtil.getFont(30));
 		gameOverTitle.setFill(Color.RED);
 		gameOverTitle.setTextAlignment(TextAlignment.CENTER);
+		getChildren().add(gameOverTitle);
 	}
 
+	/**
+	 * Initialize the buttonBox and add to display in pane
+	 */
 	private void addButtonBox() {
 		buttonBox = new VBox();
 		buttonBox.setSpacing(8.0 * GameConfig.getScale());
 		buttonBox.setAlignment(Pos.CENTER);
+		getChildren().add(buttonBox);
 	}
 
+	/**
+	 * Initialize all {@link Button} that register text and add listener to each button and adding to buttonBox
+	 */
 	private void addButtontoBox() {
 		Button startNewGameBtn = new StyledButton(widthBox * GameConfig.getScale(), "Start New Game", Color.WHITE,
 				Color.BLACK);
