@@ -2,8 +2,8 @@ package logic;
 
 import controller.GameController;
 import controller.InterruptController;
-import effects.EntityEffect;
-import effects.IConsecutiveEffect;
+import effects.base.EntityEffect;
+import effects.base.IConsecutiveEffect;
 import entity.Player;
 import entity.base.DispatchAction;
 import entity.base.Entity;

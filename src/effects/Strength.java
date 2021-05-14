@@ -1,5 +1,7 @@
 package effects;
 
+import effects.base.EffectName;
+import effects.base.EntityEffect;
 import entity.base.Entity;
 
 public class Strength extends EntityEffect {

@@ -3,7 +3,7 @@ package components;
 import java.util.List;
 
 import controller.GameController;
-import effects.EntityEffect;
+import effects.base.EntityEffect;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.layout.AnchorPane;

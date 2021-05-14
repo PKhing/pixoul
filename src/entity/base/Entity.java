@@ -5,7 +5,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import controller.GameController;
 import controller.InterruptController;
-import effects.EntityEffect;
+import effects.base.EntityEffect;
 import logic.Cell;
 import logic.Direction;
 import logic.GameMap;

@@ -1,4 +1,4 @@
-package effects;
+package effects.base;
 
 public class EffectName {
 	public static final String INSTANT_HEALTH = "InstantHealth";

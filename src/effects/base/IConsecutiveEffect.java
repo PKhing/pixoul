@@ -1,4 +1,4 @@
-package effects;
+package effects.base;
 
 import entity.base.Entity;
 

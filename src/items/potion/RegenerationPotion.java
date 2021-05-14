@@ -1,7 +1,7 @@
 package items.potion;
 
-import effects.EntityEffect;
 import effects.Regeneration;
+import effects.base.EntityEffect;
 import entity.Player;
 import items.base.Potion;
 import logic.Sprites;

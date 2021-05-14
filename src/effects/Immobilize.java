@@ -1,6 +1,8 @@
 package effects;
 
 import controller.InterruptController;
+import effects.base.EffectName;
+import effects.base.EntityEffect;
 import entity.base.Entity;
 
 public class Immobilize extends EntityEffect {

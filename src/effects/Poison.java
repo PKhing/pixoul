@@ -1,5 +1,8 @@
 package effects;
 
+import effects.base.EffectName;
+import effects.base.EntityEffect;
+import effects.base.IConsecutiveEffect;
 import entity.base.Entity;
 
 public class Poison extends EntityEffect implements IConsecutiveEffect {
