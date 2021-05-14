@@ -23,35 +23,78 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.util.Duration;
+import scene.GameScene;
 import utils.DrawUtil;
 import utils.FontUtil;
 import utils.GameAudioUtils;
 import utils.GameConfig;
 import utils.TransitionUtil;
 
+/**
+ * The LandingPane class represent the {@link StackPane} 
+ * which display in the first scene
+ */
 public class LandingPane extends StackPane {
+	
+	/**
+	 * Represent the width of the pane
+	 */
 	private static int widthBox = 100;
 
+	/**
+	 * Represent the height of the pane
+	 */
 	private static int heightBox = 60;
 
+	/**
+	 * The {@link VBox} that contain titleText and buttonBox
+	 */
 	private VBox container;
 
+	/**
+	 * The {@link Text} that display as a title
+	 */
 	private Text titleText;
 
+	/**
+	 * The {@link VBox} that contain the start, option and exit button
+	 */
 	private VBox buttonBox;
 
+	/**
+	 * The {@link FadeTransition} which is using for making 
+	 * the fade transition while switch to {@link GameScene}
+	 */
 	private FadeTransition fading;
 
+	/**
+	 * The {@link Button} that used to start the game
+	 */
 	private Button startBtn;
-
+	
+	/**
+	 * The {@link Button} that used to open {@link SettingPane}
+	 */
 	private Button optionBtn;
 
+	/**
+	 * The {@link Button} that used for exit the game
+	 */
 	private Button exitBtn;
 
+	/**
+	 * The {@link SettingPane} that used when click on {@value }
+	 */
 	private SettingPane settingPane = new SettingPane();
 
+	/**
+	 * The {@link MediaPlayer} that play the background music while in LandingPane 
+	 */
 	private static MediaPlayer bgm = GameAudioUtils.LandingSceneBGM;
 
+	/**
+	 * The constructor of LandingPane. Initialize all field of LandingPane
+	 */
 	public LandingPane() {
 		setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
 
@@ -76,6 +119,9 @@ public class LandingPane extends StackPane {
 		buttonBox.getChildren().addAll(startBtn, optionBtn, exitBtn);
 	}
 
+	/**
+	 * Initialize the {@link VBox} that contain buttonBox and titleText
+	 */
 	private void setupContainer() {
 		container = new VBox();
 
@@ -88,6 +134,9 @@ public class LandingPane extends StackPane {
 		container.setBackground(new Background(new BackgroundImage(bgImg, null, null, null, bgSize)));
 	}
 
+	/**
+	 * Initialize the {@link VBox} that contain only button
+	 */
 	private void setupButtonBox() {
 		buttonBox = new VBox();
 
@@ -105,6 +154,9 @@ public class LandingPane extends StackPane {
 		buttonBox.setPrefWidth(widthBox * GameConfig.getScale());
 	}
 
+	/**
+	 * Initialize the title text
+	 */
 	private void setupTitleText() {
 		titleText = new Text("Pixoul");
 		titleText.setFont(FontUtil.getFont(30));
@@ -113,6 +165,12 @@ public class LandingPane extends StackPane {
 		titleText.setTextAlignment(TextAlignment.CENTER);
 	}
 
+	/**
+	 * Initialize Fade Animation by using makeFadingNode 
+	 * and setup event when fading finish
+	 * 
+	 * @see utils.TransitionUtil#makeFadingNode(Node, double, double) makeFadingNode
+	 */
 	private void setupFadingAnimation() {
 		fading = TransitionUtil.makeFadingNode(container, 1.0, 0.0);
 
@@ -124,6 +182,9 @@ public class LandingPane extends StackPane {
 		});
 	}
 
+	/**
+	 * Initialize {@link StyledButton} which used for start button
+	 */
 	private void setupStartButton() {
 		startBtn = new StyledButton(widthBox, "Start", Color.WHITE, Color.BLACK);
 		startBtn.setTextFill(Color.WHITE);
@@ -131,6 +192,9 @@ public class LandingPane extends StackPane {
 		startBtn.setOnMouseClicked((event) -> fading.play());
 	}
 
+	/**
+	 * Initialize {@link StyledButton} which used for setting button
+	 */
 	private void setupSettingButton() {
 		optionBtn = new StyledButton(widthBox, "Option", Color.WHITE, Color.BLACK);
 		optionBtn.setTextFill(Color.WHITE);
@@ -141,12 +205,20 @@ public class LandingPane extends StackPane {
 		});
 	}
 
+	/**
+	 * Initialize {@link StyledButton} which used for exit button
+	 */
 	private void setupExitButton() {
 		exitBtn = new StyledButton(widthBox, "Exit", Color.WHITE, Color.BLACK);
 		exitBtn.setTextFill(Color.WHITE);
 		exitBtn.setOnMouseClicked((event) -> SceneController.exitGame());
 	}
 
+
+	/**
+	 * The static getter of background music
+	 * @return background music of landingPane
+	 */
 	public static MediaPlayer getBgm() {
 		return bgm;
 	}

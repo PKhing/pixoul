@@ -65,24 +65,22 @@ public class GameOverPane extends VBox {
 	}
 
 	/**
-	 * Initialize the gameOverTitle and add to display in pane
+	 * Initialize the gameOverTitle
 	 */
 	private void addGameOverTitle() {
 		gameOverTitle = new Text("Game Over");
 		gameOverTitle.setFont(FontUtil.getFont(30));
 		gameOverTitle.setFill(Color.RED);
 		gameOverTitle.setTextAlignment(TextAlignment.CENTER);
-		getChildren().add(gameOverTitle);
 	}
 
 	/**
-	 * Initialize the buttonBox and add to display in pane
+	 * Initialize the buttonBox 
 	 */
 	private void addButtonBox() {
 		buttonBox = new VBox();
 		buttonBox.setSpacing(8.0 * GameConfig.getScale());
 		buttonBox.setAlignment(Pos.CENTER);
-		getChildren().add(buttonBox);
 	}
 
 	/**
