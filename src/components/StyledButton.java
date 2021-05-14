@@ -13,6 +13,10 @@ import javafx.scene.paint.Color;
 import utils.FontUtil;
 import utils.GameConfig;
 
+/**
+ * The StyledButton is {@link Button} that specifically using in {@link LandingPane} and {@link PausePane}
+ *
+ */
 public class StyledButton extends Button {
 	public StyledButton(int widthBox, String text, Color onHover, Color bgColor) {
 		this.setText(text);
