@@ -14,8 +14,8 @@ import utils.FontUtil;
 import utils.GameConfig;
 
 /**
- * The StatusPane class is the pane that shows the health point, attack stat,
- * and defense stat of the {@link Player}.
+ * The StatusPane class is the pane that shows the health point, attack value,
+ * and defense value of the {@link Player}.
  *
  */
 public class StatusPane extends VBox {
@@ -24,11 +24,11 @@ public class StatusPane extends VBox {
 	 */
 	private Text hp;
 	/**
-	 * The text that shows the current attack stat of the player.
+	 * The text that shows the current attack value of the player.
 	 */
 	private Text attack;
 	/**
-	 * The text that shows the current defense stat of the player.
+	 * The text that shows the current defense value of the player.
 	 */
 	private Text defense;
 
@@ -66,7 +66,7 @@ public class StatusPane extends VBox {
 	}
 
 	/**
-	 * Updates health point, attack stat, and defense stat text of this pane.
+	 * Updates health point, attack value, and defense value text of this pane.
 	 */
 	public void update() {
 		Player player = GameController.getPlayer();
@@ -86,18 +86,18 @@ public class StatusPane extends VBox {
 	}
 
 	/**
-	 * Sets the attack stat text.
+	 * Sets the attack value text.
 	 * 
-	 * @param attack The player's attack stat
+	 * @param attack The player's attack value
 	 */
 	public void setAttack(Integer attack) {
 		this.attack.setText("Attack: " + attack.toString());
 	}
 
 	/**
-	 * Sets the defense stat text.
+	 * Sets the defense value text.
 	 * 
-	 * @param defense The player's defense stat
+	 * @param defense The player's defense value
 	 */
 	public void setDefense(Integer defense) {
 		this.defense.setText("Defense: " + defense.toString());

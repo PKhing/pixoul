@@ -18,12 +18,42 @@ import utils.MessageTextUtil;
 import utils.RandomUtil;
 import utils.TransitionUtil;
 
+/**
+ * The DarkMage class represents dark mage monsters. They can not attack or move
+ * but they can warp the player to a random room on the current floor, inflict
+ * {@link Poison poison effect} on the player, or summon {@link Skeleton
+ * skeleton}.
+ */
 public class DarkMage extends Monster {
 
+	/**
+	 * The damage of the poison effect that the dark mage will inflict on the
+	 * player.
+	 */
 	private int poisonDamage;
+	/**
+	 * The duration of the poison effect that the dark mage will inflict on the
+	 * player.
+	 */
 	private int poisonDuration;
+	/**
+	 * The poison effect that the dark mage inflict on the player.
+	 */
 	private Poison poison;
 
+	/**
+	 * The constructor for DarkMage class.
+	 * 
+	 * @param maxHealth      maximum amount of health point of this monster.
+	 * @param defense        The defense value of this monster
+	 * @param posY           position of this monster in the Y-axis
+	 * @param posX           position of this monster in the X-axis
+	 * @param direction      {@link Direction direction} of this monster
+	 * @param poisonDamage   The damage of the poison effect that the dark mage will
+	 *                       inflict on the player.
+	 * @param poisonDuration The duration of the poison effect that the dark mage
+	 *                       will inflict on the player.
+	 */
 	public DarkMage(int maxHealth, int defense, int posY, int posX, int direction, int poisonDamage,
 			int poisonDuration) {
 		super("Dark Mage", maxHealth, 0, defense, posY, posX, direction, 0, 0);
@@ -32,11 +62,20 @@ public class DarkMage extends Monster {
 		setPoisonDuration(poisonDuration);
 	}
 
+	/**
+	 * Getter for sprite symbol of dark mage.
+	 */
 	@Override
 	public int getSymbol() {
 		return Sprites.DARK_MAGE;
 	}
 
+	/**
+	 * Updates this dark mage. If this dark mage already dies, remove it from the
+	 * game. If this dark mage is near the player, inflict {@link Poison poison
+	 * effect} to the player, warp the player to a random room, or summon
+	 * {@link Skeleton skeleton}.
+	 */
 	@Override
 	public void update() {
 		if (getHealth() <= 0) {
@@ -45,7 +84,6 @@ public class DarkMage extends Monster {
 		}
 		Player gamePlayer = GameController.getPlayer();
 		if (isAttackable(gamePlayer)) {
-			// TODO change action ratio?
 			int action = RandomUtil.random(1, 100);
 			if (action <= 20) {
 				poison(gamePlayer);
@@ -55,24 +93,30 @@ public class DarkMage extends Monster {
 		}
 	}
 
+	/**
+	 * Warp target entity to the random room on the current floor.
+	 * 
+	 * @param target the target that will be warped
+	 */
 	private void warp(Entity target) {
 		Pair<Integer, Integer> newPos = GameController.getRoomList()
 				.get(RandomUtil.random(1, GameController.getRoomList().size() - 2));
-		// TODO add fade animation
+
+		// Plays fade animation
 		FadeTransition fadeOut = TransitionUtil.makeFadingNode(GameScene.getGamePane(), 1.0, 0.0);
 		FadeTransition fadeIn = TransitionUtil.makeFadingNode(GameScene.getGamePane(), 0.0, 1.0);
 
 		InterruptController.setTransition(true);
-		
+
 		Entity currentEntity = GameController.getGameMap().get(newPos.getKey(), newPos.getValue()).getEntity();
-		
-		if(currentEntity != null) {
+
+		if (currentEntity != null) {
 			GameController.getGameMap().getMonsterList().remove(currentEntity);
 			GameController.getGameMap().get(newPos.getKey(), newPos.getValue()).setEntity(null);
 		}
-		
+
 		int randSummon = RandomUtil.random(1, 100);
-		
+
 		fadeOut.setOnFinished((event) -> {
 			target.setPositionOnMap(newPos.getKey(), newPos.getValue());
 			if (randSummon <= 50) {
@@ -87,6 +131,11 @@ public class DarkMage extends Monster {
 		fadeOut.play();
 	}
 
+	/**
+	 * Inflict {@link Poison poison effect} to the target entity.
+	 * 
+	 * @param target the target to inflict poison on
+	 */
 	private void poison(Entity target) {
 		if ((poison == null) || (poison.getDuration() == 0)) {
 			poison = new Poison(getName(), poisonDamage, poisonDuration, false);
@@ -97,6 +146,11 @@ public class DarkMage extends Monster {
 		MessageTextUtil.textWhenDarkMageUsePoison(target);
 	}
 
+	/**
+	 * Summon skeleton around the target entity.
+	 * 
+	 * @param target the target entity
+	 */
 	private void summonMonster(Entity target) {
 		int level = GameController.getLevel();
 		int range = GameConfig.LINE_OF_SIGHT;
@@ -119,18 +173,38 @@ public class DarkMage extends Monster {
 		}
 	}
 
+	/**
+	 * Getter for poison damage
+	 * 
+	 * @return This monster's poison damage
+	 */
 	public int getPoisonDamage() {
 		return poisonDamage;
 	}
 
+	/**
+	 * Setter for poison damage
+	 * 
+	 * @param the poison damage to be set
+	 */
 	public void setPoisonDamage(int poisonDamage) {
 		this.poisonDamage = poisonDamage;
 	}
 
+	/**
+	 * Getter for poison duration
+	 * 
+	 * @return This monster's poison duration
+	 */
 	public int getPoisonDuration() {
 		return poisonDuration;
 	}
 
+	/**
+	 * Setter for poison duration
+	 * 
+	 * @param the poison duration to be set
+	 */
 	public void setPoisonDuration(int poisonDuration) {
 		this.poisonDuration = poisonDuration;
 	}
