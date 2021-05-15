@@ -69,7 +69,6 @@ public class InventoryPane extends AnchorPane {
 		this.setOnKeyPressed((event) -> {
 			if (event.getCode() == KeyCode.ESCAPE) {
 				remove();
-				InterruptController.setOpenFromInside(true);
 			}
 		});
 

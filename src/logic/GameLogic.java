@@ -27,7 +27,7 @@ public class GameLogic {
 	}
 
 	public static void doNextAction() {
-		if (InterruptController.isInterruptPlayerInput()) {
+		if (InterruptController.isInterruptPlayerMovingInput()) {
 			return;
 		}
 		if (nextAction != null) {

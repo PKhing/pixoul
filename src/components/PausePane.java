@@ -52,7 +52,6 @@ public class PausePane extends VBox {
 		setOnKeyPressed((event) -> {
 			if (event.getCode() == KeyCode.ESCAPE) {
 				remove();
-				InterruptController.setOpenFromInside(true);
 			}
 		});
 

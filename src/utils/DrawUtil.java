@@ -140,7 +140,7 @@ public class DrawUtil {
 		Canvas canvas = new Canvas(GameConfig.SPRITE_SIZE * GameConfig.getScale(),
 				GameConfig.SPRITE_SIZE * GameConfig.getScale());
 		canvas.setOnMouseClicked((event) -> {
-			if (!InterruptController.isInterruptPlayerInput()) {
+			if (!InterruptController.isInterruptPlayerMovingInput()) {
 				GameLogic.gameUpdate(DispatchAction.ATTACK, (Monster) entity);
 			}
 		});
