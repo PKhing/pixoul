@@ -24,8 +24,8 @@ import utils.GameAudioUtils;
 import utils.TransitionUtil;
 
 /**
- * The GameController class is the class that control about the floor 
- * which currently render and the floor changing inside the game
+ * The GameController class is the class that control about the {@link #gameMap}
+ * which currently render and the changing of {@link #level} inside the game
  */
 public class GameController {
 	
@@ -63,7 +63,7 @@ public class GameController {
 	 */
 	public static GameMap getFloor(int floor) throws InvalidFloorException {
 		if ((floorList.size() < floor) || (floor <= 0)) {
-			throw new InvalidFloorException();
+			throw new InvalidFloorException("The floor number is out of range");
 		}
 		return floorList.get(floor - 1);
 	}
@@ -185,7 +185,7 @@ public class GameController {
 	public static GameMap getGameMap() {
 		try {
 			if (gameMap == null) {
-				throw new NullMapException();
+				throw new NullMapException("GameMap is not initiated yet");
 			}
 			return gameMap;
 		} catch (NullMapException err) {

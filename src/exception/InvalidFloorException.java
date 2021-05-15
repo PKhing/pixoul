@@ -1,11 +1,23 @@
 package exception;
 
+import controller.GameController;
+
+/**
+ * The InvalidFloorException is {@link Exception} that will be used to throw when
+ * input floor number is invalid such as decimal or negative value
+ * 
+ * @see GameController#getFloor(int floor)
+ */
 public class InvalidFloorException extends Exception {
 
 	private static final long serialVersionUID = 6209367624571488316L;
 
-	@Override
-	public String getMessage() {
-		return super.getMessage();
+	/**
+	 * The constructor of class. Initialize superclass with message
+	 * 
+	 * @param message The message which want to display
+	 */
+	public InvalidFloorException(String message) {
+		super(message);
 	}
 }
