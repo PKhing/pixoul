@@ -44,13 +44,13 @@ public class DarkMage extends Monster {
 	/**
 	 * The constructor for DarkMage class.
 	 * 
-	 * @param maxHealth      maximum amount of health point of this monster.
+	 * @param maxHealth      Maximum amount of health point of this monster.
 	 * @param defense        The defense value of this monster
-	 * @param posY           position of this monster in the Y-axis
-	 * @param posX           position of this monster in the X-axis
-	 * @param direction      {@link Direction direction} of this monster
+	 * @param posY           Position of this monster in the Y-axis
+	 * @param posX           Position of this monster in the X-axis
+	 * @param direction      {@link Direction} of this monster
 	 * @param poisonDamage   The damage of the poison effect that the dark mage will
-	 *                       inflict on the player.
+	 *                       Inflict on the player.
 	 * @param poisonDuration The duration of the poison effect that the dark mage
 	 *                       will inflict on the player.
 	 */
@@ -96,7 +96,7 @@ public class DarkMage extends Monster {
 	/**
 	 * Warp target entity to the random room on the current floor.
 	 * 
-	 * @param target the target that will be warped
+	 * @param target The target that will be warped
 	 */
 	private void warp(Entity target) {
 		Pair<Integer, Integer> newPos = GameController.getRoomList()
@@ -134,7 +134,7 @@ public class DarkMage extends Monster {
 	/**
 	 * Inflict {@link Poison poison effect} to the target entity.
 	 * 
-	 * @param target the target to inflict poison on
+	 * @param target The target to inflict poison on
 	 */
 	private void poison(Entity target) {
 		if ((poison == null) || (poison.getDuration() == 0)) {
@@ -149,7 +149,7 @@ public class DarkMage extends Monster {
 	/**
 	 * Summon skeleton around the target entity.
 	 * 
-	 * @param target the target entity
+	 * @param target The target entity
 	 */
 	private void summonMonster(Entity target) {
 		int level = GameController.getLevel();
@@ -174,7 +174,7 @@ public class DarkMage extends Monster {
 	}
 
 	/**
-	 * Getter for poison damage
+	 * Getter for poison damage.
 	 * 
 	 * @return This monster's poison damage
 	 */
@@ -183,16 +183,16 @@ public class DarkMage extends Monster {
 	}
 
 	/**
-	 * Setter for poison damage
+	 * Setter for poison damage.
 	 * 
-	 * @param the poison damage to be set
+	 * @param poisonDamage The poison damage to be set
 	 */
 	public void setPoisonDamage(int poisonDamage) {
 		this.poisonDamage = poisonDamage;
 	}
 
 	/**
-	 * Getter for poison duration
+	 * Getter for poison duration.
 	 * 
 	 * @return This monster's poison duration
 	 */
@@ -201,9 +201,9 @@ public class DarkMage extends Monster {
 	}
 
 	/**
-	 * Setter for poison duration
+	 * Setter for poison duration.
 	 * 
-	 * @param the poison duration to be set
+	 * @param poisonDuration The poison duration to be set
 	 */
 	public void setPoisonDuration(int poisonDuration) {
 		this.poisonDuration = poisonDuration;

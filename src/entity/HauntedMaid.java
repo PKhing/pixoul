@@ -12,8 +12,8 @@ import utils.MessageTextUtil;
 public class HauntedMaid extends Monster implements Moveable, Attackable {
 
 	public HauntedMaid(int maxHealth, int attack, int defense, int posY, int posX, int direction, double critRate,
-			double critPercent) {
-		super("Haunted Maid", maxHealth, attack, defense, posY, posX, direction, critRate, critPercent);
+			double critDamagePercent) {
+		super("Haunted Maid", maxHealth, attack, defense, posY, posX, direction, critRate, critDamagePercent);
 		setPositionOnMap(posY, posX);
 	}
 

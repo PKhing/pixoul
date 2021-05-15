@@ -12,8 +12,8 @@ import utils.MessageTextUtil;
 public class Skeleton extends Monster implements Moveable, Attackable {
 
 	public Skeleton(int maxHealth, int attack, int defense, int posY, int posX, int direction, double critRate,
-			double critPercent) {
-		super("Skelaton", maxHealth, attack, defense, posY, posX, direction, critRate, critPercent);
+			double critDamagePercent) {
+		super("Skelaton", maxHealth, attack, defense, posY, posX, direction, critRate, critDamagePercent);
 		setPositionOnMap(posY, posX);
 	}
 

@@ -37,14 +37,14 @@ public class GameLogic {
 	}
 
 	public static int calculateAttackValue(Entity from, Entity target) {
-		int getPercentWeight = (int) (from.getCritPercent() * 100);
+		int getPercentWeight = (int) (from.getCritDamagePercent() * 100);
 		int getRand = RandomUtil.random(1, 100);
 		int atkCal = 0;
-		
+
 		int lowerBound = (int) (from.getAttack() / from.getCritRate());
 		int upperBound = (int) (from.getAttack() * from.getCritRate());
-		
-		if(getRand <= getPercentWeight) {
+
+		if (getRand <= getPercentWeight) {
 			atkCal = upperBound;
 		} else {
 			double fromAttack = RandomUtil.random(lowerBound, upperBound);
@@ -69,24 +69,24 @@ public class GameLogic {
 		}
 		boolean moveSuccess = false;
 		switch (action) {
-		case MOVE_UP:
-			moveSuccess = player.move(Direction.UP);
-			break;
-		case MOVE_DOWN:
-			moveSuccess = player.move(Direction.DOWN);
-			break;
-		case MOVE_LEFT:
-			moveSuccess = player.move(Direction.LEFT);
-			break;
-		case MOVE_RIGHT:
-			moveSuccess = player.move(Direction.RIGHT);
-			break;
-		case STAY_STILL:
-			moveSuccess = true;
-			MessageTextUtil.textWhenStayStill(player);
-			break;
-		default:
-			break;
+			case MOVE_UP:
+				moveSuccess = player.move(Direction.UP);
+				break;
+			case MOVE_DOWN:
+				moveSuccess = player.move(Direction.DOWN);
+				break;
+			case MOVE_LEFT:
+				moveSuccess = player.move(Direction.LEFT);
+				break;
+			case MOVE_RIGHT:
+				moveSuccess = player.move(Direction.RIGHT);
+				break;
+			case STAY_STILL:
+				moveSuccess = true;
+				MessageTextUtil.textWhenStayStill(player);
+				break;
+			default:
+				break;
 		}
 		if (moveSuccess) {
 			InterruptController.setStillAnimation(true);
@@ -167,20 +167,20 @@ public class GameLogic {
 
 	public static void gameUpdate(DispatchAction action, Item item) {
 		switch (action) {
-		case USE_ITEM:
-			useItemHandler(item);
-			break;
-		case SWITCH_EQUIP:
-			switchEquipmentHandler(item);
-			break;
-		case UNEQUIP:
-			unEquipItemHandler(item);
-			break;
-		case DELETE_ITEM:
-			deleteItemHandler(item);
-			break;
-		default:
-			return;
+			case USE_ITEM:
+				useItemHandler(item);
+				break;
+			case SWITCH_EQUIP:
+				switchEquipmentHandler(item);
+				break;
+			case UNEQUIP:
+				unEquipItemHandler(item);
+				break;
+			case DELETE_ITEM:
+				deleteItemHandler(item);
+				break;
+			default:
+				return;
 		}
 		InterruptController.setStillAnimation(true);
 		postGameUpdate();
