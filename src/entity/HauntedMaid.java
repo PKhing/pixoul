@@ -1,7 +1,6 @@
 package entity;
 
 import controller.GameController;
-import effects.Poison;
 import entity.base.Attackable;
 import entity.base.Entity;
 import entity.base.Monster;
@@ -11,6 +10,10 @@ import logic.GameLogic;
 import logic.Sprites;
 import utils.MessageTextUtil;
 
+/**
+ * The HauntedMaid class represents haunted maid monsters. They can attack the
+ * player.
+ */
 public class HauntedMaid extends Monster implements Moveable, Attackable {
 
 	/**

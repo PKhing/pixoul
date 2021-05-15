@@ -20,12 +20,32 @@ import scene.GameScene;
 import utils.GameConfig;
 import utils.MessageTextUtil;
 
+/**
+ * The Player class is used to represent the player. It stores status, equipped
+ * armor, equipped weapon, and items that the player has.
+ *
+ */
 public class Player extends Entity implements Moveable, Attackable {
+	/**
+	 * {@link Armor The armor} that the player currently equips.
+	 */
 	private Armor equippedArmor;
+	/**
+	 * {@link Weapon The weapon} that the player currently equips.
+	 */
 	private Weapon equippedWeapon;
+	/**
+	 * {@link Item The items} that the player currently has.
+	 */
 	private ArrayList<Item> itemList = new ArrayList<Item>();
+	/**
+	 * Line of sight of the player.
+	 */
 	private int lineOfSight;
 
+	/**
+	 * The constructor for this class.
+	 */
 	public Player() {
 		super("Player", 25, 3, 3, 0, 0, Direction.DOWN, 1.5, 0.5);
 		setLineOfSight(GameConfig.LINE_OF_SIGHT);
@@ -40,7 +60,7 @@ public class Player extends Entity implements Moveable, Attackable {
 
 	@Override
 	public boolean attack(Entity target) {
-		if(!isAttackable(target)) {
+		if (!isAttackable(target)) {
 			return false;
 		}
 		int atkValue = GameLogic.calculateAttackValue(this, target);
@@ -49,6 +69,11 @@ public class Player extends Entity implements Moveable, Attackable {
 		return true;
 	}
 
+	/**
+	 * Equips the specified {@link Item item}.
+	 * 
+	 * @param item {@link Item The item} to be equipped
+	 */
 	public void equipItem(Item item) {
 		item.onEquip(this);
 		getItemList().remove(item);
@@ -56,11 +81,25 @@ public class Player extends Entity implements Moveable, Attackable {
 			GameScene.getEffectPane().update();
 	}
 
+	/**
+	 * Unequips the specified {@link Item item}.
+	 * 
+	 * @param item {@link Item The item} to be unequipped
+	 */
 	public void unEquipItem(Item item) {
 		item.onUnequip(this);
 		getItemList().add(item);
 	}
 
+	/**
+	 * Finds all cells that the player can see.
+	 * 
+	 * @param startIdxY Start index in the Y-axis
+	 * @param endIdxY   End index in the Y-axis
+	 * @param startIdxX Start index in the X-axis
+	 * @param endIdxX   End index in the X-axis
+	 * @return List of all visible cells
+	 */
 	public ArrayList<Pair<Integer, Integer>> getAllVisibleField(int startIdxY, int endIdxY, int startIdxX,
 			int endIdxX) {
 		int posY = this.getPosY();
@@ -129,34 +168,74 @@ public class Player extends Entity implements Moveable, Attackable {
 		return allPos;
 	}
 
+	/**
+	 * Getter for equipped armor.
+	 * 
+	 * @return The player's equipped armor
+	 */
 	public Armor getEquippedArmor() {
 		return equippedArmor;
 	}
 
+	/**
+	 * Setter for equipped armor.
+	 * 
+	 * @param equippedArmor The armor to be set
+	 */
 	public void setEquippedArmor(Armor equippedArmor) {
 		this.equippedArmor = equippedArmor;
 	}
 
+	/**
+	 * Getter for equipped weapon.
+	 * 
+	 * @return The player's equipped weapon
+	 */
 	public Weapon getEquippedWeapon() {
 		return equippedWeapon;
 	}
 
+	/**
+	 * Setter for equipped weapon.
+	 * 
+	 * @param equippedWeapon The weapon to be set
+	 */
 	public void setEquippedWeapon(Weapon equippedWeapon) {
 		this.equippedWeapon = equippedWeapon;
 	}
 
+	/**
+	 * Getter for item list.
+	 * 
+	 * @return The player's item list
+	 */
 	public ArrayList<Item> getItemList() {
 		return itemList;
 	}
 
+	/**
+	 * Setter for item list.
+	 * 
+	 * @param itemList The item list to be set
+	 */
 	public void setItemList(ArrayList<Item> itemList) {
 		this.itemList = itemList;
 	}
 
+	/**
+	 * Getter for line of sight.
+	 * 
+	 * @return The player's line of sight
+	 */
 	public int getLineOfSight() {
 		return lineOfSight;
 	}
 
+	/**
+	 * Setter for line of sight.
+	 * 
+	 * @param lineOfSight The line of sight to be set
+	 */
 	public void setLineOfSight(int lineOfSight) {
 		this.lineOfSight = Math.max(1, lineOfSight);
 	}
