@@ -12,7 +12,7 @@ import logic.GameMap;
 import utils.MessageTextUtil;
 
 /**
- * Base class to represent all entity
+ * Base class to represent all entities.
  */
 public abstract class Entity {
 	public final int MOVE_SPEED = 1;
