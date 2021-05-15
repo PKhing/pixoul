@@ -62,9 +62,6 @@ public class DarkMage extends Monster {
 		setPoisonDuration(poisonDuration);
 	}
 
-	/**
-	 * Getter for sprite symbol of dark mage.
-	 */
 	@Override
 	public int getSymbol() {
 		return Sprites.DARK_MAGE;

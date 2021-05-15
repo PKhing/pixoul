@@ -1,16 +1,30 @@
 package entity;
 
 import controller.GameController;
+import effects.Poison;
 import entity.base.Attackable;
 import entity.base.Entity;
 import entity.base.Monster;
 import entity.base.Moveable;
+import logic.Direction;
 import logic.GameLogic;
 import logic.Sprites;
 import utils.MessageTextUtil;
 
 public class HauntedMaid extends Monster implements Moveable, Attackable {
 
+	/**
+	 * The constructor for this class.
+	 * 
+	 * @param maxHealth         Max amount of health point of this entity
+	 * @param attack            Attack value of this entity
+	 * @param defense           Defense value of this entity
+	 * @param posY              Position of this entity in the Y-axis
+	 * @param posX              Position of this entity in the X-axis
+	 * @param direction         {@link Direction} of this monster
+	 * @param critRate          Critical rate of this entity
+	 * @param critDamagePercent Critical damage percent of this entity
+	 */
 	public HauntedMaid(int maxHealth, int attack, int defense, int posY, int posX, int direction, double critRate,
 			double critDamagePercent) {
 		super("Haunted Maid", maxHealth, attack, defense, posY, posX, direction, critRate, critDamagePercent);
@@ -22,6 +36,11 @@ public class HauntedMaid extends Monster implements Moveable, Attackable {
 		return Sprites.HAUNTED_MAID;
 	}
 
+	/**
+	 * Updates this haunted maid. If this haunted maid already dies, remove it from
+	 * the game. If this haunted maid is can attack the player, it will attack the
+	 * player. If this haunted maid is near the player, it will move.
+	 */
 	@Override
 	public void update() {
 		if (getHealth() <= 0) {
