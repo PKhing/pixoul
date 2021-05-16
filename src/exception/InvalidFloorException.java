@@ -15,7 +15,7 @@ public class InvalidFloorException extends Exception {
 	/**
 	 * The constructor of class. Initialize superclass with message
 	 * 
-	 * @param message The message which want to display
+	 * @param message The message of exception
 	 */
 	public InvalidFloorException(String message) {
 		super(message);

@@ -19,7 +19,7 @@ public class UnknownItemTypeException extends Exception {
 	/**
 	 * The constructor of class. Initialize superclass with message
 	 * 
-	 * @param message
+	 * @param message The message of exception
 	 */
 	public UnknownItemTypeException(String message) {
 		super(message);

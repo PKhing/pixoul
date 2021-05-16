@@ -15,7 +15,7 @@ public class NullMapException extends Exception {
 	/**
 	 * The constructor of class. Initialize superclass with message
 	 * 
-	 * @param message The message which want to display
+	 * @param message The message of exception
 	 */
 	public NullMapException(String message) {
 		super(message);
