@@ -230,7 +230,7 @@ public class GameLogic {
 				((IConsecutiveEffect) each).effect(entity);
 			}
 
-			if (!each.onUpdate(entity)) {
+			if (!each.onUpdate()) {
 				each.onWearOff(entity);
 				entity.getEffectList().remove(each);
 			}
