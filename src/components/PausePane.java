@@ -17,17 +17,44 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import scene.GameScene;
 import utils.GameConfig;
 
+/**
+ * The PausePane is the pane that appear when click the pause button in the
+ * {@link GameScene}
+ * 
+ */
 public class PausePane extends VBox {
+
+	/**
+	 * Represent the height of the pane
+	 */
 	private final int heightBox = 90;
+
+	/**
+	 * Represent the width of the pane
+	 */
 	private final int widthBox = 120;
 
+	/**
+	 * Represent the color of the {@link Button} outline when hover on
+	 */
 	private static final Color colorOnHover = Color.rgb(87, 89, 66);
+
+	/**
+	 * Represent the background color of the {@link Button}
+	 */
 	private static final Color colorBg = Color.rgb(245, 246, 231);
 
+	/**
+	 * Represent the {@link SettingPane} that appear when click option button
+	 */
 	private static SettingPane settingPane = new SettingPane();
 
+	/**
+	 * The constructor of the class. Initialize the superclass, components and style
+	 */
 	public PausePane() {
 		super();
 
@@ -57,6 +84,9 @@ public class PausePane extends VBox {
 
 	}
 
+	/**
+	 * Initialize new {@link StyledButton} which used for reset game and add to the pane
+	 */
 	private void addStartNewGameBtn() {
 		Button startNewGameBtn = new StyledButton(widthBox, "Start New Game", colorOnHover, colorBg);
 
@@ -67,7 +97,10 @@ public class PausePane extends VBox {
 
 		getChildren().add(startNewGameBtn);
 	}
-
+	
+	/**
+	 * Initialize new {@link StyledButton} which used for resume game and add to the pane
+	 */
 	private void addResumeBtn() {
 		Button resumeBtn = new StyledButton(widthBox, "Resume", colorOnHover, colorBg);
 
@@ -78,6 +111,9 @@ public class PausePane extends VBox {
 		getChildren().add(resumeBtn);
 	}
 
+	/**
+	 * Initialize new {@link StyledButton} which used for open the {@link #settingPane} and add to the pane
+	 */
 	private void addSettingBtn() {
 		Button settingBtn = new StyledButton(widthBox, "Setting", colorOnHover, colorBg);
 
@@ -91,6 +127,9 @@ public class PausePane extends VBox {
 		getChildren().add(settingBtn);
 	}
 
+	/**
+	 *  Initialize new {@link StyledButton} which used for back to main menu and add to the pane
+	 */
 	private void addToMainMenuBtn() {
 		Button toMainMenuBtn = new StyledButton(widthBox, "Back to main menu", colorOnHover, colorBg);
 
@@ -102,6 +141,9 @@ public class PausePane extends VBox {
 		getChildren().add(toMainMenuBtn);
 	}
 
+	/**
+	 * Initialize new {@link StyledButton} which used for exit the game and add to the pane
+	 */
 	private void addExitBtn() {
 		Button exitBtn = new StyledButton(widthBox, "Exit", colorOnHover, colorBg);
 
@@ -112,6 +154,9 @@ public class PausePane extends VBox {
 		getChildren().add(exitBtn);
 	}
 
+	/**
+	 * Handle when component is removed from the scene. 
+	 */
 	public void remove() {
 		try {
 			((StackPane) getParent()).getChildren().remove(this);
