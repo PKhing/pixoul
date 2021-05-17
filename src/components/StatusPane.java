@@ -54,13 +54,13 @@ public class StatusPane extends VBox {
 		Player nowPlayer = GameController.getPlayer();
 
 		hp = new Text("HP: " + nowPlayer.getHealth() + " / " + nowPlayer.getMaxHealth());
-		hp.setFont(FontUtil.getFont(12));
+		hp.setFont(FontUtil.getFont("small"));
 
 		attack = new Text("Attack: " + nowPlayer.getAttack());
-		attack.setFont(FontUtil.getFont(12));
+		attack.setFont(FontUtil.getFont("small"));
 
 		defense = new Text("Defense: " + nowPlayer.getDefense());
-		defense.setFont(FontUtil.getFont(12));
+		defense.setFont(FontUtil.getFont("small"));
 
 		this.getChildren().addAll(hp, attack, defense);
 	}

@@ -31,11 +31,11 @@ import utils.GameConfig;
 import utils.TransitionUtil;
 
 /**
- * The LandingPane class represent the {@link StackPane} 
- * which display in the first scene
+ * The LandingPane class represent the {@link StackPane} which display in the
+ * first scene
  */
 public class LandingPane extends StackPane {
-	
+
 	/**
 	 * Represent the width of the pane
 	 */
@@ -62,8 +62,8 @@ public class LandingPane extends StackPane {
 	private VBox buttonBox;
 
 	/**
-	 * The {@link FadeTransition} which is using for making 
-	 * the fade transition while switch to {@link GameScene}
+	 * The {@link FadeTransition} which is using for making the fade transition
+	 * while switch to {@link GameScene}
 	 */
 	private FadeTransition fading;
 
@@ -71,7 +71,7 @@ public class LandingPane extends StackPane {
 	 * The {@link Button} that used to start the game
 	 */
 	private Button startBtn;
-	
+
 	/**
 	 * The {@link Button} that used to open {@link SettingPane}
 	 */
@@ -88,7 +88,7 @@ public class LandingPane extends StackPane {
 	private SettingPane settingPane = new SettingPane();
 
 	/**
-	 * The {@link MediaPlayer} that play the background music while in LandingPane 
+	 * The {@link MediaPlayer} that play the background music while in LandingPane
 	 */
 	private static MediaPlayer bgm = GameAudioUtils.LandingSceneBGM;
 
@@ -159,15 +159,15 @@ public class LandingPane extends StackPane {
 	 */
 	private void setupTitleText() {
 		titleText = new Text("Pixoul");
-		titleText.setFont(FontUtil.getFont(30));
+		titleText.setFont(FontUtil.getFont("large"));
 		titleText.setFill(Color.CRIMSON);
 		VBox.setMargin(titleText, new Insets(0, 0, 15, 0));
 		titleText.setTextAlignment(TextAlignment.CENTER);
 	}
 
 	/**
-	 * Initialize Fade Animation by using makeFadingNode 
-	 * and setup event when fading finish
+	 * Initialize Fade Animation by using makeFadingNode and setup event when fading
+	 * finish
 	 * 
 	 * @see utils.TransitionUtil#makeFadingNode(Node, double, double) makeFadingNode
 	 */
@@ -214,9 +214,9 @@ public class LandingPane extends StackPane {
 		exitBtn.setOnMouseClicked((event) -> SceneController.exitGame());
 	}
 
-
 	/**
 	 * The static getter of background music
+	 * 
 	 * @return background music of landingPane
 	 */
 	public static MediaPlayer getBgm() {

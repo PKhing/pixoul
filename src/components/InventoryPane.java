@@ -87,7 +87,7 @@ public class InventoryPane extends AnchorPane {
 		equipmentPane.getChildren().clear();
 
 		addHeader();
-		
+
 		List<Item> itemList = GameController.getPlayer().getItemList();
 		for (int i = 0; i < GameConfig.MAX_ITEM; i++) {
 			if (i < itemList.size()) {
@@ -99,7 +99,6 @@ public class InventoryPane extends AnchorPane {
 		addItem(GameController.getPlayer().getEquippedWeapon(), equipmentPane);
 		addItem(GameController.getPlayer().getEquippedArmor(), equipmentPane);
 	}
-
 
 	/**
 	 * Removes this InventoryPane from {@link GameScene}.
@@ -114,7 +113,7 @@ public class InventoryPane extends AnchorPane {
 			System.out.println(this.getClass().getName() + " has not opened yet.");
 		}
 	}
-	
+
 	/* Header */
 
 	/**
@@ -126,7 +125,7 @@ public class InventoryPane extends AnchorPane {
 		addTextureToHeader(header);
 		addInventoryText(header);
 		addExitButton(header);
-		
+
 		itemPane.getChildren().add(header);
 	}
 
@@ -138,7 +137,7 @@ public class InventoryPane extends AnchorPane {
 	private void addTextureToHeader(StackPane header) {
 		Canvas canvas = new Canvas(160 * GameConfig.getScale(), 40 * GameConfig.getScale());
 		canvas.getGraphicsContext2D().drawImage(DrawUtil.scaleUp(headerBackground, GameConfig.getScale()), 0, 0);
-		
+
 		header.getChildren().add(canvas);
 	}
 
@@ -149,7 +148,7 @@ public class InventoryPane extends AnchorPane {
 	 */
 	private void addInventoryText(StackPane header) {
 		Text text = new Text("Inventory");
-		text.setFont(FontUtil.getFont(30));
+		text.setFont(FontUtil.getFont("large"));
 		text.setFill(Color.rgb(123, 126, 94));
 
 		header.getChildren().add(text);
@@ -163,14 +162,14 @@ public class InventoryPane extends AnchorPane {
 	private void addExitButton(StackPane header) {
 		Text exit = new Text("x ");
 		StackPane.setAlignment(exit, Pos.TOP_RIGHT);
-		exit.setFont(FontUtil.getFont(30));
+		exit.setFont(FontUtil.getFont("large"));
 		exit.setFill(Color.rgb(123, 126, 94));
 		exit.setOnMouseClicked((event) -> {
 			this.remove();
 			isDeleteMode = false;
 			GameScene.getScene().setCursor(Cursor.DEFAULT);
 		});
-		
+
 		header.getChildren().add(exit);
 	}
 
@@ -185,7 +184,7 @@ public class InventoryPane extends AnchorPane {
 		AnchorPane.setTopAnchor(itemPane, (double) (GameConfig.getScreenHeight() / 2 - 100 * GameConfig.getScale()));
 		itemPane.setPrefSize(160 * GameConfig.getScale(), 200 * GameConfig.getScale());
 		itemPane.setMaxSize(160 * GameConfig.getScale(), 200 * GameConfig.getScale());
-		
+
 		this.getChildren().add(itemPane);
 	}
 
@@ -198,7 +197,7 @@ public class InventoryPane extends AnchorPane {
 				(double) (GameConfig.getScreenWidth() / 2 - 130 * GameConfig.getScale()));
 		AnchorPane.setTopAnchor(equipmentPane,
 				(double) (GameConfig.getScreenHeight() / 2 - 60 * GameConfig.getScale()));
-		
+
 		this.getChildren().add(equipmentPane);
 	}
 
@@ -209,7 +208,7 @@ public class InventoryPane extends AnchorPane {
 	 * @param parent The pane that item canvas will be added
 	 */
 	private void addItem(Item item, Pane parent) {
-		
+
 		Canvas canvas = new Canvas(40 * GameConfig.getScale(), 40 * GameConfig.getScale());
 
 		// Draws item frame
@@ -293,7 +292,7 @@ public class InventoryPane extends AnchorPane {
 	 */
 	private void addDeleteButton() {
 		Canvas deleteButton = new Canvas(32 * GameConfig.getScale(), 32 * GameConfig.getScale());
-		
+
 		AnchorPane.setRightAnchor(deleteButton,
 				(double) (GameConfig.getScreenWidth() / 2 - 125 * GameConfig.getScale()));
 		AnchorPane.setTopAnchor(deleteButton, (double) (GameConfig.getScreenHeight() / 2 + 30 * GameConfig.getScale()));
@@ -309,7 +308,7 @@ public class InventoryPane extends AnchorPane {
 				GameScene.getScene().setCursor(Cursor.DEFAULT);
 			}
 		});
-		
+
 		this.getChildren().add(deleteButton);
 	}
 }

@@ -26,19 +26,19 @@ import utils.GameAudioUtils;
 import utils.GameConfig;
 
 /**
- * The SettingPane is the pane that contains all the setting 
- * which available to adjust in this game
+ * The SettingPane is the pane that contains all the setting which available to
+ * adjust in this game
  */
 
 public class SettingPane extends VBox {
-	
+
 	/**
 	 * Represent the height of the pane
 	 */
 	private final int heightBox = 140;
-	
+
 	/**
-	 * Represent the width of the pane 
+	 * Represent the width of the pane
 	 */
 	private final int widthBox = 180;
 
@@ -46,14 +46,16 @@ public class SettingPane extends VBox {
 	 * Represent the {@link Slider} that control sound volume
 	 */
 	private Slider volumeSlider;
-	
+
 	/**
-	 * Represent the {@link CheckBox} that disable the animation when entity is moving 
+	 * Represent the {@link CheckBox} that disable the animation when entity is
+	 * moving
 	 */
 	private CheckBox animationCheckBox;
 
 	/**
-	 * The constructor of the class. Initialize the inside component, event handler and style
+	 * The constructor of the class. Initialize the inside component, event handler
+	 * and style
 	 */
 	public SettingPane() {
 		styleSetup();
@@ -106,7 +108,7 @@ public class SettingPane extends VBox {
 		closeBox.setAlignment(Pos.CENTER);
 
 		Text closeText = new Text("OK");
-		closeText.setFont(FontUtil.getFont(18));
+		closeText.setFont(FontUtil.getFont("medium"));
 		closeText.setFill(Color.BLACK);
 		closeText.setStroke(null);
 
@@ -130,7 +132,7 @@ public class SettingPane extends VBox {
 	private void addTitle() {
 		Text optionTitle = new Text("Option");
 
-		optionTitle.setFont(FontUtil.getFont(30));
+		optionTitle.setFont(FontUtil.getFont("large"));
 		optionTitle.setFill(Color.BLACK);
 
 		this.getChildren().add(optionTitle);
@@ -146,7 +148,7 @@ public class SettingPane extends VBox {
 		bgmVolumeBox.setAlignment(Pos.CENTER_LEFT);
 
 		Label volumeLabel = new Label("BGM Volume");
-		volumeLabel.setFont(FontUtil.getFont(12));
+		volumeLabel.setFont(FontUtil.getFont("small"));
 		volumeLabel.setTextFill(Color.BLACK);
 
 		volumeSlider = new Slider(0, 100, (int) (GameConfig.getVolume() * 100));
@@ -174,7 +176,7 @@ public class SettingPane extends VBox {
 		disableAnimationBox.setAlignment(Pos.CENTER_LEFT);
 
 		Label disableLabel = new Label("Disable Animation ");
-		disableLabel.setFont(FontUtil.getFont(12));
+		disableLabel.setFont(FontUtil.getFont("small"));
 		disableLabel.setTextFill(Color.BLACK);
 
 		animationCheckBox = new CheckBox();

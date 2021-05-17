@@ -3,24 +3,24 @@ package utils;
 import javafx.scene.text.Font;
 
 public class FontUtil {
-	private static Font font12;
-	private static Font font18;
-	private static Font font30;
+	private static Font smallFont;
+	private static Font mediumFont;
+	private static Font largeFont;
 
 	static {
-		font12 = Font.loadFont(ClassLoader.getSystemResourceAsStream("font.ttf"), 12 * GameConfig.getScale());
-		font18 = Font.loadFont(ClassLoader.getSystemResourceAsStream("font.ttf"), 18 * GameConfig.getScale());
-		font30 = Font.loadFont(ClassLoader.getSystemResourceAsStream("font.ttf"), 30 * GameConfig.getScale());
+		smallFont = Font.loadFont(ClassLoader.getSystemResourceAsStream("font.ttf"), 12 * GameConfig.getScale());
+		mediumFont = Font.loadFont(ClassLoader.getSystemResourceAsStream("font.ttf"), 18 * GameConfig.getScale());
+		largeFont = Font.loadFont(ClassLoader.getSystemResourceAsStream("font.ttf"), 30 * GameConfig.getScale());
 	}
 
-	public static Font getFont(int size) {
-		if (size <= 12) {
-			return font12;
+	public static Font getFont(String size) {
+		if (size == "small") {
+			return smallFont;
 		}
-		if (size <= 18) {
-			return font18;
+		if (size == "medium") {
+			return mediumFont;
 		}
-		return font30;
+		return largeFont;
 	}
 
 }

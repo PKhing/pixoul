@@ -16,8 +16,8 @@ import utils.FontUtil;
 import utils.GameConfig;
 
 /**
- * The GameOverPane class represent the pane that show 
- * when {@link Player} health is less than or equal zero
+ * The GameOverPane class represent the pane that show when {@link Player}
+ * health is less than or equal zero
  */
 
 public class GameOverPane extends VBox {
@@ -35,14 +35,15 @@ public class GameOverPane extends VBox {
 	 * Represent {@link Text} which is the title text in this pane
 	 */
 	private Text gameOverTitle;
-	
+
 	/**
 	 * Represent {@link VBox} which contains all buttons in this pane
 	 */
 	private VBox buttonBox;
 
 	/**
-	 * The constructor of GameOverPane. Initialize the style, button, listener and title. 
+	 * The constructor of GameOverPane. Initialize the style, button, listener and
+	 * title.
 	 */
 	public GameOverPane() {
 		styleSetup();
@@ -69,13 +70,13 @@ public class GameOverPane extends VBox {
 	 */
 	private void addGameOverTitle() {
 		gameOverTitle = new Text("Game Over");
-		gameOverTitle.setFont(FontUtil.getFont(30));
+		gameOverTitle.setFont(FontUtil.getFont("large"));
 		gameOverTitle.setFill(Color.RED);
 		gameOverTitle.setTextAlignment(TextAlignment.CENTER);
 	}
 
 	/**
-	 * Initialize the buttonBox 
+	 * Initialize the buttonBox
 	 */
 	private void addButtonBox() {
 		buttonBox = new VBox();
@@ -84,7 +85,8 @@ public class GameOverPane extends VBox {
 	}
 
 	/**
-	 * Initialize all {@link Button} that register text and add listener to each button and adding to buttonBox
+	 * Initialize all {@link Button} that register text and add listener to each
+	 * button and adding to buttonBox
 	 */
 	private void addButtontoBox() {
 		Button startNewGameBtn = new StyledButton(widthBox * GameConfig.getScale(), "Start New Game", Color.WHITE,

@@ -39,19 +39,20 @@ public class MessagePane extends VBox {
 
 	/**
 	 * Adds message to this MessagePane.
+	 * 
 	 * @param text The message to be added
 	 */
 	public void addMessage(String text) {
-		
+
 		// If the amount of message is more than MAX_MESSAGE, remove the oldest one.
 		if (this.getChildren().size() >= MAX_MESSAGE) {
 			this.getChildren().remove(0);
 		}
-		
+
 		// Add new message
 		Text message = new Text(text);
 		message.setWrappingWidth(200.0 * GameConfig.getScale());
-		message.setFont(FontUtil.getFont(12));
+		message.setFont(FontUtil.getFont("small"));
 		message.setFill(Color.WHITE);
 		this.getChildren().add(message);
 	}

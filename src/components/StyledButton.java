@@ -14,14 +14,15 @@ import utils.FontUtil;
 import utils.GameConfig;
 
 /**
- * The StyledButton is {@link Button} that specifically using in {@link LandingPane} and {@link PausePane}
+ * The StyledButton is {@link Button} that specifically using in
+ * {@link LandingPane} and {@link PausePane}
  *
  */
 public class StyledButton extends Button {
 	public StyledButton(int widthBox, String text, Color onHover, Color bgColor) {
 		this.setText(text);
 		this.setPadding(new Insets(-GameConfig.getScale()));
-		this.setFont(FontUtil.getFont(16));
+		this.setFont(FontUtil.getFont("medium"));
 		this.setMinWidth(widthBox * GameConfig.getScale());
 		this.setBackground(new Background(new BackgroundFill(bgColor, null, null)));
 		this.setBorder(new Border(new BorderStroke(bgColor, BorderStrokeStyle.SOLID, CornerRadii.EMPTY,

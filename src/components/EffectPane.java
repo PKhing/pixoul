@@ -56,7 +56,7 @@ public class EffectPane extends VBox {
 		// Adds effect information
 		for (EntityEffect effect : playerEffect) {
 			Text effectText = new Text(effect.toString());
-			effectText.setFont(FontUtil.getFont(12));
+			effectText.setFont(FontUtil.getFont("small"));
 			effectText.setFill(Color.WHITE);
 			this.getChildren().add(effectText);
 		}

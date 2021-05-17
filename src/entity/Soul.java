@@ -44,8 +44,7 @@ public class Soul extends Monster implements Attackable {
 	/**
 	 * Updates this soul. If this soul already died, remove it from the game. If
 	 * this soul can attack the player, it will randomly attack the player by
-	 * reducing the player's health point to 1. If this soul is near the player, it
-	 * will move.
+	 * reducing the player's health point to 1. 
 	 */
 	@Override
 	public void update() {

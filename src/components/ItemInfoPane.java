@@ -17,9 +17,9 @@ import utils.FontUtil;
 import utils.GameConfig;
 
 /**
- * The ItemInfoPane class is the pane that shows the name and description of an individual
- * {@link Item}. This pane will be shown when the mouse hovers over an item
- * frame.
+ * The ItemInfoPane class is the pane that shows the name and description of an
+ * individual {@link Item}. This pane will be shown when the mouse hovers over
+ * an item frame.
  *
  */
 public class ItemInfoPane extends VBox {
@@ -59,7 +59,7 @@ public class ItemInfoPane extends VBox {
 
 		Text name = new Text(item.getName());
 
-		name.setFont(FontUtil.getFont(18));
+		name.setFont(FontUtil.getFont("medium"));
 		name.setWrappingWidth(90.0 * GameConfig.getScale());
 		name.setFill(Color.rgb(76, 77, 56));
 
@@ -76,7 +76,7 @@ public class ItemInfoPane extends VBox {
 		Text description = new Text(item.getDescription());
 
 		description.setWrappingWidth(90.0 * GameConfig.getScale());
-		description.setFont(FontUtil.getFont(12));
+		description.setFont(FontUtil.getFont("small"));
 		description.setFill(Color.rgb(94, 94, 70));
 
 		this.getChildren().add(description);
