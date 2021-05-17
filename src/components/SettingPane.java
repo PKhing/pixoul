@@ -25,13 +25,36 @@ import utils.FontUtil;
 import utils.GameAudioUtils;
 import utils.GameConfig;
 
+/**
+ * The SettingPane is the pane that contains all the setting 
+ * which available to adjust in this game
+ */
+
 public class SettingPane extends VBox {
+	
+	/**
+	 * Represent the height of the pane
+	 */
 	private final int heightBox = 140;
+	
+	/**
+	 * Represent the width of the pane 
+	 */
 	private final int widthBox = 180;
 
+	/**
+	 * Represent the {@link Slider} that control sound volume
+	 */
 	private Slider volumeSlider;
-	private CheckBox disableCheckBox;
+	
+	/**
+	 * Represent the {@link CheckBox} that disable the animation when entity is moving 
+	 */
+	private CheckBox animationCheckBox;
 
+	/**
+	 * The constructor of the class. Initialize the inside component, event handler and style
+	 */
 	public SettingPane() {
 		styleSetup();
 		addTitle();
@@ -48,11 +71,17 @@ public class SettingPane extends VBox {
 		InterruptController.setSettingOpen(true);
 	}
 
+	/**
+	 * Update value inside setting to current value
+	 */
 	public void updateSetting() {
 		volumeSlider.setValue((int) (GameConfig.getVolume() * 100));
-		disableCheckBox.setSelected(GameConfig.isSkipMoveAnimation());
+		animationCheckBox.setSelected(GameConfig.isSkipMoveAnimation());
 	}
 
+	/**
+	 * Initialize style for pane
+	 */
 	private void styleSetup() {
 		setBackground(new Background(new BackgroundFill(Color.GREY, CornerRadii.EMPTY, Insets.EMPTY)));
 		setBorder(new Border(
@@ -68,6 +97,9 @@ public class SettingPane extends VBox {
 
 	}
 
+	/**
+	 * Initialize new close text which can be clicked to close pane
+	 */
 	private void addCloseText() {
 		HBox closeBox = new HBox();
 		closeBox.setPadding(new Insets(20, 0, 0, 0));
@@ -92,6 +124,9 @@ public class SettingPane extends VBox {
 		this.getChildren().add(closeBox);
 	}
 
+	/**
+	 * Initialize new title text
+	 */
 	private void addTitle() {
 		Text optionTitle = new Text("Option");
 
@@ -101,6 +136,9 @@ public class SettingPane extends VBox {
 		this.getChildren().add(optionTitle);
 	}
 
+	/**
+	 * Initialize new {@link #volumeSlider} and container with current value
+	 */
 	private void addVolumeSlider() {
 		HBox bgmVolumeBox = new HBox();
 		bgmVolumeBox.setPadding(new Insets(10));
@@ -126,6 +164,9 @@ public class SettingPane extends VBox {
 		this.getChildren().add(bgmVolumeBox);
 	}
 
+	/**
+	 * Initialize new {@link #animationCheckBox} and container
+	 */
 	private void addDisableAnimation() {
 		HBox disableAnimationBox = new HBox();
 		disableAnimationBox.setPadding(new Insets(10));
@@ -136,17 +177,17 @@ public class SettingPane extends VBox {
 		disableLabel.setFont(FontUtil.getFont(12));
 		disableLabel.setTextFill(Color.BLACK);
 
-		disableCheckBox = new CheckBox();
-		disableCheckBox.setSelected(GameConfig.isSkipMoveAnimation());
+		animationCheckBox = new CheckBox();
+		animationCheckBox.setSelected(GameConfig.isSkipMoveAnimation());
 
-		disableCheckBox.setOnMouseClicked((event) -> {
+		animationCheckBox.setOnMouseClicked((event) -> {
 			boolean newSkipMove = !GameConfig.isSkipMoveAnimation();
 
 			GameConfig.setSkipMoveAnimation(newSkipMove);
-			disableCheckBox.setSelected(newSkipMove);
+			animationCheckBox.setSelected(newSkipMove);
 		});
 
-		disableAnimationBox.getChildren().addAll(disableLabel, disableCheckBox);
+		disableAnimationBox.getChildren().addAll(disableLabel, animationCheckBox);
 		this.getChildren().add(disableAnimationBox);
 	}
 }
