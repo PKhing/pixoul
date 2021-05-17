@@ -19,14 +19,14 @@ public class HauntedMaid extends Monster implements Moveable, Attackable {
 	/**
 	 * The constructor for this class.
 	 * 
-	 * @param maxHealth         Max amount of health point of this entity
-	 * @param attack            Attack value of this entity
-	 * @param defense           Defense value of this entity
-	 * @param posY              Position of this entity in the Y-axis
-	 * @param posX              Position of this entity in the X-axis
+	 * @param maxHealth         Max amount of health point of this monster
+	 * @param attack            Attack value of this monster
+	 * @param defense           Defense value of this monster
+	 * @param posY              Position of this monster in the Y-axis
+	 * @param posX              Position of this monster in the X-axis
 	 * @param direction         {@link Direction} of this monster
-	 * @param critRate          Critical rate of this entity
-	 * @param critDamagePercent Critical damage percent of this entity
+	 * @param critRate          Critical rate of this monster
+	 * @param critDamagePercent Critical damage percent of this monster
 	 */
 	public HauntedMaid(int maxHealth, int attack, int defense, int posY, int posX, int direction, double critRate,
 			double critDamagePercent) {
@@ -40,8 +40,8 @@ public class HauntedMaid extends Monster implements Moveable, Attackable {
 	}
 
 	/**
-	 * Updates this haunted maid. If this haunted maid already dies, remove it from
-	 * the game. If this haunted maid is can attack the player, it will attack the
+	 * Updates this haunted maid. If this haunted maid already died, remove it from
+	 * the game. If this haunted maid can attack the player, it will attack the
 	 * player. If this haunted maid is near the player, it will move.
 	 */
 	@Override
