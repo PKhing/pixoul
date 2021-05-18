@@ -81,12 +81,12 @@ public class RandomUtil {
 			Potion newPotion = (Potion) (potionPool.get(nowIdx).clone());
 
 			if (!(newPotion instanceof VisionPotion)) {
-				int lowerBound = Math.max(1, (newPotion.getPotionValue() + level) / 2);
-				int upperBound = newPotion.getPotionValue() + level;
+				int lowerBound = Math.max(1, (newPotion.getEffectValue() + level) / 2);
+				int upperBound = newPotion.getEffectValue() + level;
 
-				newPotion.setPotionValue(random(lowerBound, upperBound));
+				newPotion.setEffectValue(random(lowerBound, upperBound));
 			}
-			newPotion.setDescription(newPotion.getDescription() + " [%d]".formatted(newPotion.getPotionValue()));
+			newPotion.setDescription(newPotion.getDescription() + " [%d]".formatted(newPotion.getEffectValue()));
 			potionList.add(newPotion);
 
 			nowIdx += 1;

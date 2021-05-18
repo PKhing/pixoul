@@ -12,12 +12,12 @@ public class ProtectionPotion extends Potion {
 	}
 	
 	public ProtectionPotion clone() {
-		return new ProtectionPotion(getName(), getDescription(), getPotionValue(), getDuration(), isPermanant(), getSpriteIndex());
+		return new ProtectionPotion(getName(), getDescription(), getEffectValue(), getDuration(), isPermanant(), getSpriteIndex());
 	}
 	
 	@Override
 	public void onEquip(Player player) {
-		EntityEffect effect = new Protection(getName(), getPotionValue(), getDuration(), isPermanant());
+		EntityEffect effect = new Protection(getName(), getEffectValue(), getDuration(), isPermanant());
 		effect.onAdd(player);
 	}
 
