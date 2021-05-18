@@ -5,15 +5,23 @@ import controller.SceneController;
 import javafx.scene.Scene;
 
 public class GameOverScene {
+	
+	/**
+	 * Represent the cached scene that it does not need to have a multiple initialize
+	 */
 	private static Scene cachedScene = null;
-	private static GameOverPane gameOverPane;
 
+	/**
+	 * Get the {@link #cachedScene gameOverScene}
+	 * 
+	 * @return the {@link Scene} which used for display when game over
+	 */
 	public static Scene getScene() {
+		// If it already cache then return the cache
 		if (cachedScene != null) {
 			return cachedScene;
 		}
-		gameOverPane = new GameOverPane();
-		cachedScene = SceneController.makeNewScene(gameOverPane);
+		cachedScene = SceneController.makeNewScene(new GameOverPane());
 		return cachedScene;
 	}
 }
