@@ -6,12 +6,8 @@ import controller.InterruptController;
 import entity.base.DispatchAction;
 import entity.base.Entity;
 import entity.base.Monster;
-import items.base.Armor;
 import items.base.Item;
 import items.base.Potion;
-import items.weapon.Knife;
-import items.weapon.Spear;
-import items.weapon.Sword;
 import javafx.scene.Cursor;
 import javafx.scene.ImageCursor;
 import javafx.scene.Node;
@@ -27,7 +23,6 @@ import javafx.scene.paint.Color;
 import logic.Cell;
 import logic.Direction;
 import logic.GameLogic;
-import logic.Sprites;
 import scene.GameScene;
 
 public class DrawUtil {

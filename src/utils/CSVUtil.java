@@ -5,24 +5,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
-import java.text.ParsePosition;
 import java.util.ArrayList;
 
-import exception.UnknownItemTypeException;
-import items.armor.GoldenArmor;
-import items.armor.IronArmor;
-import items.armor.WoodenArmor;
 import items.base.Armor;
 import items.base.Potion;
 import items.base.Weapon;
-import items.potion.InstantHealPotion;
-import items.potion.RegenerationPotion;
-import items.potion.ProtectionPotion;
-import items.potion.StrengthPotion;
-import items.potion.VisionPotion;
-import items.weapon.Knife;
-import items.weapon.Spear;
-import items.weapon.Sword;
 
 public class CSVUtil {
 	private static final String baseUrl = "csv/";
