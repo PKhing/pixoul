@@ -1,15 +1,14 @@
 package items.base;
 
+import entity.Player;
 import exception.UnknownItemTypeException;
-import items.armor.GoldenArmor;
-import items.armor.IronArmor;
-import items.armor.WoodenArmor;
+import logic.Sprites;
 
 /**
  * The armor class is {@link Item} that player can equip to have more defense
  */
-public abstract class Armor extends Item {
-	
+public class Armor extends Item {
+
 	/**
 	 * Represent the defense value of armor
 	 */
@@ -18,14 +17,44 @@ public abstract class Armor extends Item {
 	/**
 	 * The constructor of class
 	 * 
-	 * @param name the name of armor
+	 * @param name        the name of armor
 	 * @param description the description of armor
-	 * @param defense the defense value of armor
+	 * @param defense     the defense value of armor
 	 * @param spriteIndex the index in sprite map of armor
 	 */
-	public Armor(String name, String description, int defense, int spriteIndex) {
+	public Armor(String name, String description, int defense, int spriteIndex, int symbol) {
 		super(name, description, spriteIndex);
 		setDefense(defense);
+	}
+
+	@Override
+	public Armor clone() {
+		return new Armor(getName(), getDescription(), getDefense(), getSpriteIndex(), getSymbol());
+	}
+
+	@Override
+	public int getSymbol() {
+		return Sprites.ARMOR;
+	}
+
+	/**
+	 * Handler method when player equips armor, increase player defense value by
+	 * {@link Armor#defense defense}
+	 */
+	@Override
+	public void onEquip(Player player) {
+		player.setDefense(player.getDefense() + getDefense());
+		player.setEquippedArmor(this);
+	}
+
+	/**
+	 * Handler method when player unequips armor, decrease player defense value by
+	 * {@link Armor#defense defense}
+	 */
+	@Override
+	public void onUnequip(Player player) {
+		player.setDefense(player.getDefense() - getDefense());
+		player.setEquippedArmor(null);
 	}
 
 	/**
@@ -49,26 +78,19 @@ public abstract class Armor extends Item {
 	/**
 	 * The utility method for creating new {@link Armor} by using input parameter
 	 * 
-	 * @param type the type of armor
-	 * @param name the name of armor
+	 * @param type        the type of armor
+	 * @param name        the name of armor
 	 * @param description the description of armor
-	 * @param defense the defense value of armor
+	 * @param defense     the defense value of armor
 	 * @param spriteIndex the index in sprite map of armor
 	 * @return new {@link Armor} instance that match type with input
-	 * @throws UnknownItemTypeException throws when {@link Armor} type is not recognized
+	 * @throws UnknownItemTypeException throws when {@link Armor} type is not
+	 *                                  recognized
 	 */
 	public static Armor parseArmor(String type, String name, String description, int defense, int spriteIndex)
 			throws UnknownItemTypeException {
-		if (type.equals("GoldenArmor")) {
-			return new GoldenArmor(name, description, defense, spriteIndex);
-		}
-
-		if (type.equals("IronArmor")) {
-			return new IronArmor(name, description, defense, spriteIndex);
-		}
-
-		if (type.equals("WoodenArmor")) {
-			return new WoodenArmor(name, description, defense, spriteIndex);
+		if (type.equals("GoldenArmor") || type.equals("IronArmor") || type.equals("WoodenArmor")) {
+			return new Armor(name, description, defense, spriteIndex, Sprites.ARMOR);
 		}
 
 		throw new UnknownItemTypeException("%s armor type is unknown".formatted(type));

@@ -6,10 +6,10 @@ import java.util.List;
 import entity.Player;
 import exception.InvalidFloorException;
 import exception.NullMapException;
-import items.armor.WoodenArmor;
+import items.base.Armor;
 import items.base.Potion;
+import items.base.Weapon;
 import items.potion.InstantHealPotion;
-import items.weapon.Knife;
 import javafx.animation.FadeTransition;
 import javafx.scene.Node;
 import javafx.scene.media.Media;
@@ -18,6 +18,7 @@ import javafx.util.Pair;
 import logic.GameMap;
 import logic.MapGenerator;
 import logic.MapRenderer;
+import logic.Sprites;
 import scene.GameOverScene;
 import scene.GameScene;
 import utils.GameAudioUtils;
@@ -304,8 +305,8 @@ public class GameController {
 		Pair<Integer, Integer> firstRoomPos = GameController.getRoomList().get(0);
 
 		newPlayer.setPositionOnMap(firstRoomPos.getKey(), firstRoomPos.getValue());
-		new Knife("Rusty Knife", "A rusty knife which dungeon guard has given [2]", 2, 1).onEquip(newPlayer);
-		new WoodenArmor("Wooden Armor", "With 100 years salt effect [5]", 5, 0).onEquip(newPlayer);
+		new Weapon("Rusty Knife", "A rusty knife which dungeon guard has given [2]", 2, 1, Sprites.KNIFE).onEquip(newPlayer);
+		new Armor("Wooden Armor", "With 100 years salt effect [5]", 5, 0, Sprites.ARMOR).onEquip(newPlayer);
 
 		Potion maxHealthPotion = new InstantHealPotion("Max Healing Potion",
 				"This potion will heal you to max health (have only one per game) [?]", 0, 0, false, 0);
