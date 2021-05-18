@@ -12,12 +12,12 @@ public class VisionPotion extends Potion {
 	}
 	
 	public VisionPotion clone() {
-		return new VisionPotion(getName(), getDescription(), getEffectValue(), getDuration(), isPermanant(), getSpriteIndex());
+		return new VisionPotion(getName(), getDescription(), getEffectValue(), getDuration(), isPermanent(), getSpriteIndex());
 	}
 
 	@Override
 	public void onEquip(Player player) {
-		EntityEffect effect = new Vision(getName(), getEffectValue(), getDuration(), isPermanant());
+		EntityEffect effect = new Vision(getName(), getEffectValue(), getDuration(), isPermanent());
 		effect.onAdd(player);
 	}
 

@@ -12,7 +12,7 @@ public class RegenerationPotion extends Potion {
 	}
 
 	public RegenerationPotion clone() {
-		return new RegenerationPotion(getName(), getDescription(), getEffectValue(), getDuration(), isPermanant(), getSpriteIndex());
+		return new RegenerationPotion(getName(), getDescription(), getEffectValue(), getDuration(), isPermanent(), getSpriteIndex());
 	}
 	
 	@Override
@@ -23,7 +23,7 @@ public class RegenerationPotion extends Potion {
 
 	@Override
 	public void onEquip(Player player) {
-		EntityEffect effect = new Regeneration(getName(), getEffectValue(), getDuration(), isPermanant());
+		EntityEffect effect = new Regeneration(getName(), getEffectValue(), getDuration(), isPermanent());
 		effect.onAdd(player);
 	}
 

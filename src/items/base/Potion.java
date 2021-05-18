@@ -24,9 +24,9 @@ public abstract class Potion extends Item {
 	/**
 	 * Represent the permanent property of effect that used in {@link EntityEffect}
 	 * 
-	 * @see {@link EntityEffect#isPermanant}
+	 * @see {@link EntityEffect#isPermanent}
 	 */
-	private boolean isPermanant;
+	private boolean isPermanent;
 
 	/**
 	 * Represent the efficient value that used in {@link EntityEffect}
@@ -45,12 +45,12 @@ public abstract class Potion extends Item {
 	 * @param isPermanant the effect property that permanent or not
 	 * @param spriteIndex the index in sprite map of potion
 	 */
-	public Potion(String name, String description, int effectValue, int duration, boolean isPermanant,
+	public Potion(String name, String description, int effectValue, int duration, boolean isPermanent,
 			int spriteIndex) {
 		super(name, description, spriteIndex);
 		setEffectValue(effectValue);
 		setDuration(duration);
-		setPermanant(isPermanant);
+		setPermanent(isPermanent);
 	}
 
 	/**
@@ -72,21 +72,21 @@ public abstract class Potion extends Item {
 	}
 
 	/**
-	 * Getter for {@link #isPermanant}
+	 * Getter for {@link #isPermanent}
 	 * 
-	 * @return {@link #isPermanant}
+	 * @return {@link #isPermanent}
 	 */
-	public boolean isPermanant() {
-		return isPermanant;
+	public boolean isPermanent() {
+		return isPermanent;
 	}
 
 	/**
-	 * Setter for {@link #isPermanant}
+	 * Setter for {@link #isPermanent}
 	 * 
-	 * @param isPermanant the new {@link #isPermanant} value
+	 * @param isPermanant the new {@link #isPermanent} value
 	 */
-	public void setPermanant(boolean isPermanant) {
-		this.isPermanant = isPermanant;
+	public void setPermanent(boolean isPermanent) {
+		this.isPermanent = isPermanent;
 	}
 
 	/**

@@ -21,7 +21,7 @@ public class Strength extends EntityEffect {
 		int newAttack = entity.getAttack() + getValue();
 		entity.setAttack(newAttack);
 
-		if (isPermanant()) {
+		if (isPermanent()) {
 			removeEffect(entity);
 		}
 	}

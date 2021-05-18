@@ -12,7 +12,7 @@ public class InstantHealPotion extends Potion {
 	}
 	
 	public InstantHealPotion clone() {
-		return new InstantHealPotion(getName(), getDescription(), getEffectValue(), getDuration(), isPermanant(), getSpriteIndex());
+		return new InstantHealPotion(getName(), getDescription(), getEffectValue(), getDuration(), isPermanent(), getSpriteIndex());
 	}
 
 	@Override
@@ -20,7 +20,7 @@ public class InstantHealPotion extends Potion {
 		if(getName().contains("Max Healing Potion")) {
 			setEffectValue(player.getMaxHealth() - player.getHealth());
 		}
-		EntityEffect effect = new InstantHealth(getName(), getEffectValue(), getDuration(), isPermanant());
+		EntityEffect effect = new InstantHealth(getName(), getEffectValue(), getDuration(), isPermanent());
 		effect.onAdd(player);
 	}
 

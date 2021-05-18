@@ -14,7 +14,7 @@ public class InstantHealth extends EntityEffect {
 	public void onAdd(Entity entity) {
 		addEffect(entity);
 
-		if (isPermanant()) {
+		if (isPermanent()) {
 			int newMaxHealth = entity.getMaxHealth() + getValue();
 			entity.setMaxHealth(newMaxHealth);
 		}

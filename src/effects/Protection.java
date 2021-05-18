@@ -21,7 +21,7 @@ public class Protection extends EntityEffect {
 		int newDefense = entity.getDefense() + getValue();
 		entity.setDefense(newDefense);
 
-		if (isPermanant()) {
+		if (isPermanent()) {
 			removeEffect(entity);
 		}
 	}

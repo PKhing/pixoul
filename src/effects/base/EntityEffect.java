@@ -21,7 +21,7 @@ public abstract class EntityEffect {
 	/**
 	 * Represent the property of the effect that it is permanent or not when usage
 	 */
-	private boolean isPermanant;
+	private boolean isPermanent;
 
 	/**
 	 * Represent the efficient that effect have. For example Healing Potion which
@@ -36,13 +36,13 @@ public abstract class EntityEffect {
 	 * @param name        The name of the effect
 	 * @param value       The value of the effect
 	 * @param duration    The duration of the effect
-	 * @param isPermanant The effect property that permanent or not
+	 * @param isPermanent The effect property that permanent or not
 	 */
-	public EntityEffect(String name, int value, int duration, boolean isPermanant) {
+	public EntityEffect(String name, int value, int duration, boolean isPermanent) {
 		this.name = name;
 		this.value = value;
 		this.duration = duration;
-		this.isPermanant = isPermanant;
+		this.isPermanent = isPermanent;
 	}
 
 	/**
@@ -106,7 +106,7 @@ public abstract class EntityEffect {
 	/**
 	 * Setter for {@link #name}
 	 * 
-	 * @param new value of {@link #name}
+	 * @param new the new {@link #name}
 	 */
 	public void setName(String name) {
 		this.name = name;
@@ -124,28 +124,28 @@ public abstract class EntityEffect {
 	/**
 	 * Setter for {@link #duration}
 	 * 
-	 * @param duration new value of {@link #duration}r
+	 * @param duration the new {@link #duration}
 	 */
 	public void setDuration(int duration) {
 		this.duration = duration;
 	}
 
 	/**
-	 * Getter for {@link #isPermanant}
+	 * Getter for {@link #isPermanent}
 	 * 
-	 * @return {@link #isPermanant}
+	 * @return {@link #isPermanent}
 	 */
-	public boolean isPermanant() {
-		return isPermanant;
+	public boolean isPermanent() {
+		return isPermanent;
 	}
 
 	/**
-	 * Setter for {@link #isPermanant}
+	 * Setter for {@link #isPermanent}
 	 * 
-	 * @param isPermanant new value of {@link #isPermanant}
+	 * @param isPermanent the new {@link #isPermanent}
 	 */
-	public void setPermanant(boolean isPermanant) {
-		this.isPermanant = isPermanant;
+	public void setPermanent(boolean isPermanent) {
+		this.isPermanent = isPermanent;
 	}
 
 	/**
@@ -160,7 +160,7 @@ public abstract class EntityEffect {
 	/**
 	 * Setter of {@link #value}
 	 * 
-	 * @param value new value of {@link #value}
+	 * @param value the new {@link #value}
 	 */
 	public void setValue(int value) {
 		this.value = value;

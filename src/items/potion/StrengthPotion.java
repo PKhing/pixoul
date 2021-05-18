@@ -12,12 +12,12 @@ public class StrengthPotion extends Potion {
 	}
 
 	public StrengthPotion clone() {
-		return new StrengthPotion(getName(), getDescription(), getEffectValue(), getDuration(), isPermanant(), getSpriteIndex());
+		return new StrengthPotion(getName(), getDescription(), getEffectValue(), getDuration(), isPermanent(), getSpriteIndex());
 	}
 	
 	@Override
 	public void onEquip(Player player) {
-		EntityEffect effect = new Strength(getName(), getEffectValue(), getDuration(), isPermanant());
+		EntityEffect effect = new Strength(getName(), getEffectValue(), getDuration(), isPermanent());
 		effect.onAdd(player);
 	}
 
