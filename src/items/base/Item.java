@@ -47,6 +47,7 @@ public abstract class Item {
 	 * 
 	 * @return new instance of {@link Item}
 	 */
+	@Override
 	public abstract Item clone();
 	
 	/**

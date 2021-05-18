@@ -10,7 +10,8 @@ import items.potion.StrengthPotion;
 import items.potion.VisionPotion;
 
 /**
- *
+ * The potion class is {@link Item} that player can used to get
+ * {@link EntityEffect}
  */
 public abstract class Potion extends Item {
 
