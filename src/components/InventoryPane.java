@@ -29,7 +29,7 @@ import utils.FontUtil;
 import utils.GameConfig;
 
 /**
- * The InventoryPane is the pane that contains component about {@link Item}.
+ * The InventoryPane is the pane that contains components about an {@link Item item}. It displays the item that the player has and the item that the player is equipping.
  *
  */
 public class InventoryPane extends AnchorPane {

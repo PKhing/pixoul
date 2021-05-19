@@ -26,20 +26,66 @@ import logic.MapRenderer;
 import utils.DrawUtil;
 import utils.GameConfig;
 
+/**
+ * The GameScene class provides a method to initialize the game scene and store
+ * the components in the game scene.
+ *
+ */
 public class GameScene {
+	/**
+	 * The game scene.
+	 */
 	private static Scene scene = null;
+	/**
+	 * The {@link StatusPane status pane} on the game scene.
+	 */
 	private static StatusPane statusPane;
+	/**
+	 * The {@link MessagePane message pane} on the game scene.
+	 */
 	private static MessagePane messagePane;
+	/**
+	 * The {@link EffectPane effect pane} on the game scene.
+	 */
 	private static EffectPane effectPane;
+	/**
+	 * The {@link InventoryPane inventory pane} that will display when the player
+	 * click inventory button.
+	 */
 	private static InventoryPane inventoryPane;
+	/**
+	 * The {@link PausePane pause pane} that will display when the player click
+	 * pause button.
+	 */
 	private static PausePane pausePane;
+	/**
+	 * The pane for entity button.
+	 */
 	private static AnchorPane buttonPane;
+	/**
+	 * {@link GraphicsContext graphic context} of the map canvas.
+	 */
 	private static GraphicsContext gc;
+	/**
+	 * Backpack sprite for the inventory button.
+	 */
 	private static WritableImage backpackSprite = DrawUtil.getWritableImage("sprites/backpack.png");
+	/**
+	 * Pause sprite for the pause button.
+	 */
 	private static WritableImage pauseSprite = DrawUtil.getWritableImage("sprites/pause.png");
+	/**
+	 * The pane that contains all of the component in game scene.
+	 */
 	private static StackPane gamePane;
+	/**
+	 * The root pane.
+	 */
 	private static StackPane root;
 
+	/**
+	 * Initialize game scene.
+	 */
 	public static void initScene() {
 		root = new StackPane();
 		root.setPadding(new Insets(0));
@@ -49,7 +95,7 @@ public class GameScene {
 		scene = new Scene(root, GameConfig.getScreenWidth(), GameConfig.getScreenHeight());
 
 		setupGamePane();
-		setupGameOverlay();
+		setupGameUI();
 
 		StackPane.setAlignment(new Group(inventoryPane), Pos.CENTER);
 		StackPane.setAlignment(new Group(pausePane), Pos.CENTER);
@@ -57,6 +103,9 @@ public class GameScene {
 		MapRenderer.render();
 	}
 
+	/**
+	 * Initialize game pane.
+	 */
 	private static void setupGamePane() {
 		gamePane = new StackPane();
 		root.getChildren().add(gamePane);
@@ -70,13 +119,16 @@ public class GameScene {
 		addEventListener();
 	}
 
-	private static void setupGameOverlay() {
-		AnchorPane overlay = new AnchorPane();
-		overlay.setPickOnBounds(false);
-		gamePane.getChildren().add(overlay);
+	/**
+	 * Initialize user interface.
+	 */
+	private static void setupGameUI() {
+		AnchorPane ui = new AnchorPane();
+		ui.setPickOnBounds(false);
+		gamePane.getChildren().add(ui);
 
-		addInventoryButton(overlay);
-		addPauseButton(overlay);
+		addInventoryButton(ui);
+		addPauseButton(ui);
 
 		statusPane = new StatusPane();
 		messagePane = new MessagePane();
@@ -84,12 +136,17 @@ public class GameScene {
 		inventoryPane = new InventoryPane();
 		pausePane = new PausePane();
 
-		overlay.getChildren().addAll(statusPane, messagePane, effectPane);
+		ui.getChildren().addAll(statusPane, messagePane, effectPane);
 	}
 
-	private static void addInventoryButton(AnchorPane overlay) {
+	/**
+	 * Add inventory button to the user interface pane.
+	 * 
+	 * @param ui The user interface pane
+	 */
+	private static void addInventoryButton(AnchorPane ui) {
 		Canvas inventoryBtn = new Canvas(32 * GameConfig.getScale(), 32 * GameConfig.getScale());
-		overlay.getChildren().add(inventoryBtn);
+		ui.getChildren().add(inventoryBtn);
 
 		AnchorPane.setBottomAnchor(inventoryBtn, 5.0 * GameConfig.getScale());
 		AnchorPane.setRightAnchor(inventoryBtn, 5.0 * GameConfig.getScale());
@@ -106,9 +163,14 @@ public class GameScene {
 		});
 	}
 
-	private static void addPauseButton(AnchorPane overlay) {
+	/**
+	 * Add pause button to the user interface pane.
+	 * 
+	 * @param ui The user interface pane.
+	 */
+	private static void addPauseButton(AnchorPane ui) {
 		Canvas pauseBtn = new Canvas(16 * GameConfig.getScale(), 16 * GameConfig.getScale());
-		overlay.getChildren().add(pauseBtn);
+		ui.getChildren().add(pauseBtn);
 
 		AnchorPane.setTopAnchor(pauseBtn, 5.0 * GameConfig.getScale());
 		AnchorPane.setRightAnchor(pauseBtn, 5.0 * GameConfig.getScale());
@@ -129,6 +191,9 @@ public class GameScene {
 		});
 	}
 
+	/**
+	 * Add keyboard listener.
+	 */
 	private static void addEventListener() {
 		scene.setOnKeyPressed((event) -> {
 			if (InterruptController.isInterruptPlayerMovingInput() && !InterruptController.isStillAnimation()) {
@@ -159,6 +224,11 @@ public class GameScene {
 		});
 	}
 
+	/**
+	 * Getter for game scene.
+	 * 
+	 * @return Game scene
+	 */
 	public static Scene getScene() {
 		if (scene == null) {
 			initScene();
@@ -167,6 +237,11 @@ public class GameScene {
 
 	}
 
+	/**
+	 * Getter for status pane.
+	 * 
+	 * @return Status pane
+	 */
 	public static StatusPane getStatusPane() {
 		if (statusPane == null) {
 			initScene();
@@ -174,6 +249,11 @@ public class GameScene {
 		return statusPane;
 	}
 
+	/**
+	 * Getter for message pane.
+	 * 
+	 * @return Message pane
+	 */
 	public static MessagePane getMessagePane() {
 		if (messagePane == null) {
 			initScene();
@@ -181,6 +261,11 @@ public class GameScene {
 		return messagePane;
 	}
 
+	/**
+	 * Getter for effect pane.
+	 * 
+	 * @return Effect pane
+	 */
 	public static EffectPane getEffectPane() {
 		if (effectPane == null) {
 			initScene();
@@ -188,6 +273,11 @@ public class GameScene {
 		return effectPane;
 	}
 
+	/**
+	 * Getter for inventory pane.
+	 * 
+	 * @return Inventory pane
+	 */
 	public static InventoryPane getInventoryPane() {
 		if (inventoryPane == null) {
 			initScene();
@@ -195,6 +285,11 @@ public class GameScene {
 		return inventoryPane;
 	}
 
+	/**
+	 * Getter for pause pane.
+	 * 
+	 * @return Pause pane
+	 */
 	public static PausePane getPausePane() {
 		if (pausePane == null) {
 			initScene();
@@ -202,6 +297,11 @@ public class GameScene {
 		return pausePane;
 	}
 
+	/**
+	 * Getter for button pane.
+	 * 
+	 * @return Button pane
+	 */
 	public static AnchorPane getButtonPane() {
 		if (buttonPane == null) {
 			initScene();
@@ -209,6 +309,11 @@ public class GameScene {
 		return buttonPane;
 	}
 
+	/**
+	 * Getter for graphic context of the map canvas.
+	 * 
+	 * @return Graphic context of the map canvas
+	 */
 	public static GraphicsContext getGraphicsContext() {
 		if (gc == null) {
 			initScene();
@@ -216,6 +321,11 @@ public class GameScene {
 		return gc;
 	}
 
+	/**
+	 * Getter for game pane.
+	 * 
+	 * @return Game pane
+	 */
 	public static StackPane getGamePane() {
 		if (gamePane == null) {
 			initScene();
