@@ -114,7 +114,7 @@ public class GameLogic {
 			break;
 		case STAY_STILL:
 			moveSuccess = true;
-			MessageTextUtil.textWhenStayStill(player);
+			MessageTextUtil.textWhenStayStill();
 			break;
 		default:
 			break;
@@ -368,7 +368,7 @@ public class GameLogic {
 	/**
 	 * Update specified entity's effect.
 	 * 
-	 * @param entity The enitity to be updated
+	 * @param entity The entity to be updated
 	 */
 	private static void updateEntityEffect(Entity entity) {
 		for (EntityEffect each : entity.getEffectList()) {
