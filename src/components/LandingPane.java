@@ -90,7 +90,7 @@ public class LandingPane extends StackPane {
 	/**
 	 * The {@link MediaPlayer} that play the background music while in LandingPane
 	 */
-	private static MediaPlayer bgm = GameAudioUtils.LandingSceneBGM;
+	private static MediaPlayer bgm = GameAudioUtils.getLandingSceneBGM();
 
 	/**
 	 * The constructor of LandingPane. Initialize all field of LandingPane

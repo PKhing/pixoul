@@ -43,7 +43,7 @@ public class GameController {
 	/**
 	 * The {@link MediaPlayer} represent the background music of GameScene 
 	 */
-	private static MediaPlayer bgm = GameAudioUtils.GameSceneBGM;
+	private static MediaPlayer bgm = GameAudioUtils.getGameSceneBGM();
 
 	/**
 	 * Represent the level of current floor 

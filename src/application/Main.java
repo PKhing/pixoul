@@ -37,7 +37,7 @@ public class Main extends Application {
 
 		primaryStage.getIcons().add(new Image(iconPath));
 		primaryStage.setTitle(GameConfig.GAME_TITLE);
-		primaryStage.setResizable(GameConfig.SCREEN_SCALABLE);
+		primaryStage.setResizable(GameConfig.STAGE_SCALABLE);
 
 		SceneController.setMainStage(primaryStage);
 		SceneController.setSceneToStage(LandingScene.getScene());
