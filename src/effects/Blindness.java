@@ -39,8 +39,8 @@ public class Blindness extends EntityEffect {
 	}
 
 	/**
-	 * Increase line of sight of {@link Player} back to normal and remove effect from
-	 * {@link Player}
+	 * Increase line of sight of {@link Player} back to normal and remove effect
+	 * from {@link Player}
 	 */
 	@Override
 	public void onWearOff(Entity entity) {
