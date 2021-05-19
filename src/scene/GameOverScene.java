@@ -17,7 +17,7 @@ public class GameOverScene {
 	 * @return the {@link Scene} which used for display when game over
 	 */
 	public static Scene getScene() {
-		// If it already cache then return the cache
+		// If it have already cached then return the cache
 		if (cachedScene != null) {
 			return cachedScene;
 		}
