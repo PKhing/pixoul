@@ -475,12 +475,15 @@ public class MapGenerator {
 		return true;
 	}
 
+	/**
+	 * Generate new set of {@link Weapon} which will assign to {@link GameMap}
+	 * 
+	 * @param gameMap the {@link GameMap} that assign {@link Weapon} to
+	 */
 	public static void generateWeaponOnMap(GameMap gameMap) {
-		// TODO Generate weapon on map
-		Player player = GameController.getPlayer();
 		int level = GameController.getLevel();
 
-		ArrayList<Weapon> weaponList = RandomUtil.randomWeaponList(player, level);
+		ArrayList<Weapon> weaponList = RandomUtil.randomWeaponList(level);
 
 		for (Weapon each : weaponList) {
 			boolean isAdd = false;
@@ -498,12 +501,15 @@ public class MapGenerator {
 		}
 	}
 
+	/**
+	 * Generate new set of {@link Armor} which will assign to {@link GameMap}
+	 * 
+	 * @param gameMap the {@link GameMap} that assign {@link Armor} to
+	 */
 	public static void generateArmorOnMap(GameMap gameMap) {
-		// TODO Generate armor on map
-		Player player = GameController.getPlayer();
 		int level = GameController.getLevel();
 
-		ArrayList<Armor> armorList = RandomUtil.randomArmorList(player, level);
+		ArrayList<Armor> armorList = RandomUtil.randomArmorList(level);
 
 		for (Armor each : armorList) {
 			boolean isAdd = false;
@@ -513,7 +519,6 @@ public class MapGenerator {
 				Cell currentCell = gameMap.get(randomY, randomX);
 
 				if (currentCell.getType() == Cell.PATH && currentCell.getItem() == null) {
-					System.out.println(each.getName() + " " + randomY + " " + randomX);
 					currentCell.setItem(each);
 					isAdd = true;
 				}
@@ -521,12 +526,15 @@ public class MapGenerator {
 		}
 	}
 
+	/**
+	 * Generate new set of {@link Potion} which will assign to {@link GameMap}
+	 * 
+	 * @param gameMap the {@link GameMap} that assign {@link Potion} to
+	 */
 	public static void generatePotionOnMap(GameMap gameMap) {
-		// TODO Generate item on map
-		Player player = GameController.getPlayer();
 		int level = GameController.getLevel();
 
-		ArrayList<Potion> potionList = RandomUtil.randomPotionList(player, level);
+		ArrayList<Potion> potionList = RandomUtil.randomPotionList(level);
 
 		for (Potion each : potionList) {
 			boolean isAdd = false;
@@ -544,12 +552,15 @@ public class MapGenerator {
 		}
 	}
 
+	/**
+	 * Generate new set of {@link Monster} which will assign to {@link GameMap}
+	 * 
+	 * @param gameMap the {@link GameMap} that assign {@link Monster} to
+	 */
 	public static void generateMonsterOnMap(GameMap gameMap) {
-		// TODO Generate monster on map
-		Player player = GameController.getPlayer();
 		int level = GameController.getLevel();
 
-		ArrayList<Monster> monsterList = RandomUtil.randomMonsterList(player, level);
+		ArrayList<Monster> monsterList = RandomUtil.randomMonsterList(level);
 		gameMap.getMonsterList().addAll(monsterList);
 
 		for (Monster each : monsterList) {
@@ -585,7 +596,6 @@ public class MapGenerator {
 	 * @param ladderX The ladder position in x-axis
 	 * @return True if near ladder otherwise False
 	 */
-
 	private static boolean isNearLadder(int y, int x, int ladderY, int ladderX) {
 		boolean nearX = false;
 		boolean nearY = false;

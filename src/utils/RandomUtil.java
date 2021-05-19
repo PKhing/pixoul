@@ -20,26 +20,89 @@ import items.base.Weapon;
 import items.potion.VisionPotion;
 import logic.Direction;
 
+/**
+ * The RandomUtil is the class that provide the random method and random the
+ * status of {@link Potion}, {@link Armor} and {@link Weapon} from pool
+ *
+ */
 public class RandomUtil {
+
+	/**
+	 * Represent the {@link Random} instance
+	 */
 	private static Random rand = new Random();
+
+	/**
+	 * Represent the pool of {@link Potion} that used for random in each level
+	 */
 	private static ArrayList<Potion> potionPool;
+
+	/**
+	 * Represent the pool of {@link Armor} that used for random in each level
+	 */
 	private static ArrayList<Armor> armorPool;
+
+	/**
+	 * Represent the pool of {@link Weapon} that used for random in each level
+	 */
 	private static ArrayList<Weapon> weaponPool;
+
+	/**
+	 * Represent the list of filter which monster can appear in that floor
+	 * 
+	 * @see {@link MonsterLevelFilter}
+	 */
 	private static ArrayList<MonsterLevelFilter> monsterFilter;
+
+	/**
+	 * Represent the present index of {@link #monsterFilter}
+	 */
 	private static int filterIndex = 0;
 
+	/**
+	 * Represent the minimum of {@link Potion} that generated in each level
+	 */
 	private static final int MIN_POTION = 4;
+
+	/**
+	 * Represent the maximum of {@link Potion} that generated in each level
+	 */
 	private static final int MAX_POTION = 10;
 
+	/**
+	 * Represent the minimum of {@link Monster} that generated in each level
+	 */
 	private static final int MIN_MONSTER = 20;
+
+	/**
+	 * Represent the maximum of {@link Monster} that generated in each level
+	 */
 	private static final int MAX_MONSTER = 40;
 
+	/**
+	 * Represent the minimum of {@link Weapon} that generated in each level
+	 */
 	private static final int MIN_WEAPON = 5;
+
+	/**
+	 * Represent the maximum of {@link Weapon} that generated in each level
+	 */
 	private static final int MAX_WEAPON = 10;
 
+	/**
+	 * Represent the minimum of {@link Armor} that generated in each level
+	 */
 	private static final int MIN_ARMOR = 5;
+
+	/**
+	 * Represent the maximum of {@link Armor} that generated in each level
+	 */
 	private static final int MAX_ARMOR = 10;
 
+	/**
+	 * Read the data of {@link Potion}, {@link Armor}, {@link Weapon} and
+	 * {@link MonsterLevelFilter} from CSV file
+	 */
 	static {
 		potionPool = CSVUtil.readPotionCSV();
 		armorPool = CSVUtil.readArmorCSV();
@@ -47,11 +110,24 @@ public class RandomUtil {
 		monsterFilter = CSVUtil.readMonsterFilterCSV();
 	}
 
+	/**
+	 * Random the integer in range st and ed (inclusive)
+	 * 
+	 * @param st the starting of range
+	 * @param ed the ending of range
+	 * @return the random integer in range
+	 */
 	public static int random(int st, int ed) {
-		if(st > ed) return 0;
+		if (st > ed)
+			return 0;
 		return st + rand.nextInt(ed - st + 1);
 	}
 
+	/**
+	 * The utility method that shuffle the {@link Integer} array
+	 * 
+	 * @param intArray the integer array that will be shuffled
+	 */
 	public static void shuffle(Integer[] intArray) {
 		List<Integer> intList = Arrays.asList(intArray);
 		Collections.shuffle(intList);
@@ -59,13 +135,24 @@ public class RandomUtil {
 		intList.toArray(intArray);
 	}
 
+	/**
+	 * The utility method that shuffle the two-dimensional integer array
+	 * 
+	 * @param intArray the two-dimensional integer array that will be shuffled
+	 */
 	public static void shuffle(int[][] array) {
 		List<int[]> list = Arrays.asList(array);
 		Collections.shuffle(list);
 		list.toArray(array);
 	}
 
-	public static ArrayList<Potion> randomPotionList(Player player, int level) {
+	/**
+	 * The utility method that will generate the potion list that corresponding to level
+	 * 
+	 * @param level
+	 * @return
+	 */
+	public static ArrayList<Potion> randomPotionList(int level) {
 		// TODO PotionList Generator
 		int numberOfPotion = random(MIN_POTION, MAX_POTION);
 		int nowIdx = 0;
@@ -96,8 +183,7 @@ public class RandomUtil {
 		return potionList;
 	}
 
-	public static ArrayList<Monster> randomMonsterList(Player player, int level) {
-		// TODO MonsterList Generator
+	public static ArrayList<Monster> randomMonsterList(int level) {
 		int numberOfAllMonster = random(MIN_MONSTER, MAX_MONSTER);
 
 		ArrayList<Monster> monsterList = new ArrayList<>();
@@ -192,8 +278,7 @@ public class RandomUtil {
 		return monsterList;
 	}
 
-	public static ArrayList<Weapon> randomWeaponList(Player player, int level) {
-		// TODO WeaponList Generator
+	public static ArrayList<Weapon> randomWeaponList(int level) {
 		int numberOfWeapon = random(MIN_WEAPON, MAX_WEAPON);
 		int nowIdx = 0;
 		ArrayList<Weapon> weaponList = new ArrayList<>();
@@ -211,7 +296,7 @@ public class RandomUtil {
 			int upperBound = newWeapon.getAttack() + level;
 
 			newWeapon.setAttack(random(lowerBound, upperBound));
-			
+
 			newWeapon.setDescription(newWeapon.getDescription() + " [%d]".formatted(newWeapon.getAttack()));
 			weaponList.add(newWeapon);
 
@@ -222,8 +307,7 @@ public class RandomUtil {
 		return weaponList;
 	}
 
-	public static ArrayList<Armor> randomArmorList(Player player, int level) {
-		// TODO ArmorList Generator
+	public static ArrayList<Armor> randomArmorList(int level) {
 		int numberOfArmor = random(MIN_ARMOR, MAX_ARMOR);
 		int nowIdx = 0;
 		ArrayList<Armor> armorList = new ArrayList<>();
@@ -241,7 +325,7 @@ public class RandomUtil {
 			int upperBound = newArmor.getDefense() + level;
 
 			newArmor.setDefense(random(lowerBound, upperBound));
-			
+
 			newArmor.setDescription(newArmor.getDescription() + " [%d]".formatted(newArmor.getDefense()));
 			armorList.add(newArmor);
 
