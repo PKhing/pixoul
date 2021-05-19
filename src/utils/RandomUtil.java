@@ -147,10 +147,11 @@ public class RandomUtil {
 	}
 
 	/**
-	 * The utility method that will generate the potion list that corresponding to level
+	 * The utility method that will generate the {@link Potion} list that
+	 * corresponding to level
 	 * 
-	 * @param level
-	 * @return
+	 * @param level the parameter which use as the factor of status
+	 * @return the {@link ArrayList} of {@link Potion}
 	 */
 	public static ArrayList<Potion> randomPotionList(int level) {
 		// TODO PotionList Generator
@@ -183,6 +184,13 @@ public class RandomUtil {
 		return potionList;
 	}
 
+	/**
+	 * The utility method that will generate the {@link Monster} list that
+	 * corresponding to level
+	 * 
+	 * @param level the parameter which use as the factor of status
+	 * @return the {@link ArrayList} of {@link Monster}
+	 */
 	public static ArrayList<Monster> randomMonsterList(int level) {
 		int numberOfAllMonster = random(MIN_MONSTER, MAX_MONSTER);
 
@@ -278,6 +286,13 @@ public class RandomUtil {
 		return monsterList;
 	}
 
+	/**
+	 * The utility method that will generate the {@link Weapon} list that
+	 * corresponding to level
+	 * 
+	 * @param level the parameter which use as the factor of status
+	 * @return the {@link ArrayList} of {@link Weapon}
+	 */
 	public static ArrayList<Weapon> randomWeaponList(int level) {
 		int numberOfWeapon = random(MIN_WEAPON, MAX_WEAPON);
 		int nowIdx = 0;
@@ -307,6 +322,13 @@ public class RandomUtil {
 		return weaponList;
 	}
 
+	/**
+	 * The utility method that will generate the {@link Armor} list that
+	 * corresponding to level
+	 * 
+	 * @param level the parameter which use as the factor of status
+	 * @return the {@link ArrayList} of {@link Armor}
+	 */
 	public static ArrayList<Armor> randomArmorList(int level) {
 		int numberOfArmor = random(MIN_ARMOR, MAX_ARMOR);
 		int nowIdx = 0;
