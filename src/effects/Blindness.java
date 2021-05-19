@@ -5,13 +5,30 @@ import effects.base.EntityEffect;
 import entity.Player;
 import entity.base.Entity;
 
+/**
+ * The Blindness class is the {@link EntityEffect} that will decrease the line
+ * of sight of {@link Player}
+ * 
+ * @implNote This effect will be applied to {@link Player} only
+ */
 public class Blindness extends EntityEffect {
 
-	public Blindness(String name, int value, int duration, boolean isPermanant) {
-		super(name, value, duration, isPermanant);
-		// TODO Auto-generated constructor stub
+	/**
+	 * The constructor of the class
+	 * 
+	 * @param name        The name of the effect
+	 * @param value       The value of the effect
+	 * @param duration    The duration of the effect
+	 * @param isPermanent The effect property that permanent or not
+	 */
+	public Blindness(String name, int value, int duration, boolean isPermanent) {
+		super(name, value, duration, isPermanent);
 	}
 
+	/**
+	 * Decrease line of sight of specific {@link Player} and add effect to
+	 * {@link Player}
+	 */
 	@Override
 	public void onAdd(Entity entity) {
 		if (entity instanceof Player) {
@@ -21,6 +38,10 @@ public class Blindness extends EntityEffect {
 		}
 	}
 
+	/**
+	 * Increase line of sight of {@link Player} back to normal and remove effect from
+	 * {@link Player}
+	 */
 	@Override
 	public void onWearOff(Entity entity) {
 		if (entity instanceof Player) {

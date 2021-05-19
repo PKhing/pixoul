@@ -71,6 +71,13 @@ public abstract class EntityEffect {
 	 */
 	public abstract String getEffectName();
 
+	/**
+	 * Check the {@link Entity#effectList EffectList} if there is a duplicate (Name
+	 * and EffectName is the same) then increase the duration
+	 * 
+	 * @param entity the entity which will add the effect to
+	 * @return true if found the duplicate otherwise false
+	 */
 	public boolean isDuplicate(Entity entity) {
 		for (EntityEffect effect : entity.getEffectList()) {
 			if ((effect.getName() == getName()) && (effect.getEffectName() == getEffectName())) {
@@ -84,7 +91,8 @@ public abstract class EntityEffect {
 	/**
 	 * Update the duration of the effect
 	 * 
-	 * @return true if this effect is still active (duration more than zero) otherwise false
+	 * @return true if this effect is still active (duration more than zero)
+	 *         otherwise false
 	 */
 	public boolean onUpdate() {
 		setDuration(getDuration() - 1);

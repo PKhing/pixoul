@@ -7,11 +7,16 @@ import entity.base.Entity;
 
 public class Immobilize extends EntityEffect {
 
-	public Immobilize(String name, int value, int duration, boolean isPermanant) {
-		super(name, value, duration, isPermanant);
-		// TODO Auto-generated constructor stub
+	public Immobilize(String name, int value, int duration, boolean isPermanent) {
+		super(name, value, duration, isPermanent);
 	}
 
+	/**
+	 * Set the {@link InterruptController#isImmobilize isImmobilize} to true and add
+	 * effect to {@link Entity}
+	 * 
+	 * @see {@link InterruptController#isImmobilize isImmobilize}
+	 */
 	@Override
 	public void onAdd(Entity entity) {
 		if (isDuplicate(entity)) {
@@ -21,6 +26,12 @@ public class Immobilize extends EntityEffect {
 		addEffect(entity);
 	}
 
+	/**
+	 * Set the {@link InterruptController#isImmobilize isImmobilize} back to false
+	 * and remove effect from {@link Entity}
+	 * 
+	 * @see {@link InterruptController#isImmobilize isImmobilize}
+	 */
 	@Override
 	public void onWearOff(Entity entity) {
 		InterruptController.setImmobilize(false);
@@ -29,7 +40,6 @@ public class Immobilize extends EntityEffect {
 
 	@Override
 	public String getEffectName() {
-		// TODO Auto-generated method stub
 		return EffectName.IMMOBILIZED;
 	}
 
