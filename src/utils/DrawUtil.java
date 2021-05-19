@@ -26,28 +26,62 @@ import logic.GameLogic;
 import scene.GameScene;
 
 public class DrawUtil {
-	private static PixelReader wallSprites;
+	/**
+	 * Cell sprites
+	 */
+	private static PixelReader cellSprites;
+	/**
+	 * Item sprites
+	 */
 	private static PixelReader itemSprites;
+	/**
+	 * Ladder sprites
+	 */
 	private static PixelReader ladderSprites;
+	/**
+	 * Entity sprites
+	 */
 	private static PixelReader entitySprites;
+	/**
+	 * Attack mouse icon
+	 */
 	private static Image attackMouseIcon;
 
+	/**
+	 * Loads resources.
+	 */
 	static {
-		wallSprites = getImagePixelReader("sprites/wall.png");
+		cellSprites = getImagePixelReader("sprites/cell.png");
 		entitySprites = getImagePixelReader("sprites/entity.png");
 		itemSprites = getImagePixelReader("sprites/item.png");
 		ladderSprites = getImagePixelReader("sprites/ladder.png");
 		attackMouseIcon = getAttackMouseIcon();
 	}
 
+	/**
+	 * Renders individual {@link Cell cell} sprite at the specified position on the
+	 * game scene.
+	 * 
+	 * @param y    Position in the Y-axis
+	 * @param x    Position in the X-axis
+	 * @param cell The cell to be rendered
+	 */
 	public static void drawCell(int y, int x, Cell cell) {
 		GraphicsContext gc = GameScene.getGraphicsContext();
 		if (cell.getType() != Cell.VOID) {
-			WritableImage img = new WritableImage(wallSprites, cell.getSymbol() * 32, 0, 32, 40);
+			WritableImage img = new WritableImage(cellSprites, cell.getSymbol() * 32, 0, 32, 40);
 			gc.drawImage(scaleUp(img, GameConfig.getScale()), x, y - 8 * GameConfig.getScale());
 		}
 	}
 
+	/**
+	 * Renders the ladder at the specified position on the game scene if the cell
+	 * type is a ladder.
+	 * 
+	 * @param y    Position in the Y-axis
+	 * @param x    Position in the X-axis
+	 * @param cell The cell to be rendered
+	 */
 	public static void drawLadder(int y, int x, Cell cell) {
 		GraphicsContext gc = GameScene.getGraphicsContext();
 		int idx = -1;
@@ -63,6 +97,13 @@ public class DrawUtil {
 
 	}
 
+	/**
+	 * Renders {@link Item item} sprite at the specified position on the game scene.
+	 * 
+	 * @param y    Position in the Y-axis
+	 * @param x    Position in the X-axis
+	 * @param item The item to be rendered
+	 */
 	public static void drawItemOnCell(int y, int x, Item item) {
 		if (item == null) {
 			return;
@@ -79,14 +120,22 @@ public class DrawUtil {
 		}
 	}
 
-	public static void drawEntity(int y, int x, Entity entity, int cnt) {
+	/**
+	 * Renders {@link Entity entity} at the specified position on the game scene.
+	 * 
+	 * @param y      Position in the Y-axis
+	 * @param x      Position in the X-axis
+	 * @param entity The entity to be rendered
+	 * @param frame  The current animation frame
+	 */
+	public static void drawEntity(int y, int x, Entity entity, int frame) {
 		if (entity == null) {
 			return;
 		}
 
 		GraphicsContext gc = GameScene.getGraphicsContext();
 		int directionIndex = Direction.getSpriteIndex(entity.getDirection());
-		int walkIndex = (cnt / 8 + 1) % 4;
+		int walkIndex = (frame / 8 + 1) % 4;
 		if (walkIndex == 3 || !entity.isMoving()) {
 			walkIndex = 1;
 		}
@@ -98,10 +147,17 @@ public class DrawUtil {
 			img = changeColor(img);
 		}
 
-		// Fix later?
-		gc.drawImage(img, x, y /*- 4 * GameConfig.getScale()*/);
+		gc.drawImage(img, x, y);
 	}
 
+	/**
+	 * Renders health point bar of the {@link Entity entity} at the specified
+	 * position on the game scene.
+	 * 
+	 * @param y      Position in the Y-axis
+	 * @param x      Position in the X-axis
+	 * @param entity The entity to be rendered
+	 */
 	public static void drawHPBar(int y, int x, Entity entity) {
 		if (!(entity instanceof Monster)) {
 			return;
@@ -117,6 +173,14 @@ public class DrawUtil {
 				2 * GameConfig.getScale());
 	}
 
+	/**
+	 * Renders {@link Item item} on the graphic context on the specified position
+	 * 
+	 * @param gc   Graphic context to be rendered on
+	 * @param y    Position in the Y-axis
+	 * @param x    Position in the X-axis
+	 * @param item The item to be rendered
+	 */
 	public static void drawItem(GraphicsContext gc, int y, int x, Item item) {
 		if (item == null) {
 			return;
@@ -127,6 +191,14 @@ public class DrawUtil {
 		gc.drawImage(scaleUp(img, GameConfig.getScale()), y, x);
 	}
 
+	/**
+	 * Adds an invisible button on the entity at the specified position so the
+	 * player can click to attack the entity.
+	 * 
+	 * @param y      Position in the Y-axis
+	 * @param x      Position in the X-axis
+	 * @param entity The entity to adds the button on
+	 */
 	public static void addEntityButton(int y, int x, Entity entity) {
 		if (entity == null || !(entity instanceof Monster)) {
 			return;
@@ -145,6 +217,14 @@ public class DrawUtil {
 		GameScene.getButtonPane().getChildren().add(canvas);
 	}
 
+	/**
+	 * Adds mouse hover event to change cursor image to the specified node.
+	 * 
+	 * @param node     The node to add the event
+	 * @param isEntity The type of the node. If this node is an entity, hover on it
+	 *                 will change the cursor to an attack icon. otherwise; change
+	 *                 to a hand icon.
+	 */
 	public static void addCursorHover(Node node, boolean isEntity) {
 		node.setOnMouseEntered((event) -> {
 			if (isEntity) {
@@ -159,45 +239,75 @@ public class DrawUtil {
 		});
 	}
 
+	/**
+	 * Getter for attack icon.
+	 * 
+	 * @return Attack icon
+	 */
 	private static Image getAttackMouseIcon() {
 		return new WritableImage(itemSprites, 0, 0, 32, 32);
 	}
 
+	/**
+	 * Get {@link Image} from the file path.
+	 * 
+	 * @param filePath The file path to image
+	 * @return Image from the file path.
+	 */
 	private static Image getImage(String filePath) {
 		return new Image(ClassLoader.getSystemResource(filePath).toString());
 	}
 
+	/**
+	 * Get {@link ImagePixelReader} from the file path.
+	 * 
+	 * @param filePath The file path to image
+	 * @return Pixel reader of the image.
+	 */
 	public static PixelReader getImagePixelReader(String filePath) {
 		return getImage(filePath).getPixelReader();
 	}
 
+	/**
+	 * Get {@link WritableImage} from the file path.
+	 * 
+	 * @param filePath The file path to image
+	 * @return Writable image from the file path.
+	 */
 	public static WritableImage getWritableImage(String filePath) {
 		Image img = getImage(filePath);
 		PixelReader pixelReader = getImagePixelReader(filePath);
 		return new WritableImage(pixelReader, 0, 0, (int) img.getWidth(), (int) img.getHeight());
 	}
 
-	public static WritableImage scaleUp(WritableImage image, int z) {
+	/**
+	 * Scales up the image.
+	 * 
+	 * @param image The image to be scaled up
+	 * @param scale The scale of the output image.
+	 * @return The scaled-up image.
+	 */
+	public static WritableImage scaleUp(WritableImage image, int scale) {
 		int width = (int) image.getWidth();
 		int height = (int) image.getHeight();
 
 		IntBuffer src = IntBuffer.allocate(width * height);
 		WritablePixelFormat<IntBuffer> pf = PixelFormat.getIntArgbInstance();
 		image.getPixelReader().getPixels(0, 0, width, height, pf, src, width);
-		int newWidth = width * z;
-		int newHeight = height * z;
+		int newWidth = width * scale;
+		int newHeight = height * scale;
 		int[] dst = new int[newWidth * newHeight];
 		int index = 0;
 		for (int y = 0; y < height; y++) {
-			index = y * newWidth * z;
+			index = y * newWidth * scale;
 			for (int x = 0; x < width; x++) {
 				int pixel = src.get();
-				for (int i = 0; i < z; i++) {
-					for (int j = 0; j < z; j++) {
+				for (int i = 0; i < scale; i++) {
+					for (int j = 0; j < scale; j++) {
 						dst[index + i + (newWidth * j)] = pixel;
 					}
 				}
-				index += z;
+				index += scale;
 			}
 		}
 		WritableImage bigImage = new WritableImage(newWidth, newHeight);
@@ -205,6 +315,12 @@ public class DrawUtil {
 		return bigImage;
 	}
 
+	/**
+	 * Change color of the image to be red.
+	 * 
+	 * @param img The image to be changed
+	 * @return Changed color image
+	 */
 	private static WritableImage changeColor(WritableImage img) {
 
 		int width = (int) img.getWidth();
