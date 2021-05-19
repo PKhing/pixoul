@@ -11,9 +11,23 @@ import items.base.Armor;
 import items.base.Potion;
 import items.base.Weapon;
 
+/**
+ * The CSVUtil is the class that provide the method for reading and parsing the
+ * CSV file
+ */
 public class CSVUtil {
+	
+	/**
+	 * Represent the base path URL for CSV file path
+	 */
 	private static final String baseUrl = "csv/";
 
+	/**
+	 * Reading a CSV file by path
+	 * 
+	 * @param filename the CSV filename
+	 * @return the result as array of String
+	 */
 	public static String[][] readCSV(String filename) {
 		try {
 			InputStream inputStream = ClassLoader.getSystemResourceAsStream(filename);
@@ -40,9 +54,12 @@ public class CSVUtil {
 		}
 	}
 
-	// (LEVEL),(DARK_MAGE),(HAUNTED_MAID),(PUMPKIN_HEAD),(REAPER),(SKELETON),(SOUL)
+	/**
+	 * Read the {@link MonsterLevelFilter} CSV data and parsing for each line
+	 * 
+	 * @return the parsing result as {@link ArrayList} of {@link MonsterLevelFilter}
+	 */
 	public static ArrayList<MonsterLevelFilter> readMonsterFilterCSV() {
-		// TODO Read MonsterFloor CSV File
 		String[][] monsterLevelData = readCSV(baseUrl + "MonsterFloor.csv");
 
 		ArrayList<MonsterLevelFilter> filterList = new ArrayList<>();
@@ -68,6 +85,11 @@ public class CSVUtil {
 		return filterList;
 	}
 
+	/**
+	 * Read the {@link Potion} CSV data and parsing for each line
+	 * 
+	 * @return the parsing result as {@link ArrayList} of {@link Potion}
+	 */
 	public static ArrayList<Potion> readPotionCSV() {
 		String[][] potionData = readCSV(baseUrl + "PotionData.csv");
 		ArrayList<Potion> output = new ArrayList<>();
@@ -84,8 +106,9 @@ public class CSVUtil {
 				int duration = Integer.parseInt(potionData[i][4]);
 				boolean isPermanant = Boolean.parseBoolean(potionData[i][5]);
 				int spriteIndex = Integer.parseInt(potionData[i][6]);
-				
-				Potion parsePotionResult = Potion.parsePotion(type, name, description, value, duration, isPermanant, spriteIndex);
+
+				Potion parsePotionResult = Potion.parsePotion(type, name, description, value, duration, isPermanant,
+						spriteIndex);
 				output.add(parsePotionResult);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -95,6 +118,11 @@ public class CSVUtil {
 		return output;
 	}
 
+	/**
+	 * Read the {@link Armor} CSV data and parsing for each line
+	 * 
+	 * @return the parsing result as {@link ArrayList} of {@link Armor}
+	 */
 	public static ArrayList<Armor> readArmorCSV() {
 		String[][] armorData = readCSV(baseUrl + "ArmorData.csv");
 		ArrayList<Armor> output = new ArrayList<>();
@@ -109,7 +137,7 @@ public class CSVUtil {
 
 				int defense = Integer.parseInt(armorData[i][3]);
 				int spriteIndex = Integer.parseInt(armorData[i][4]);
-				
+
 				Armor parseArmorResult = Armor.parseArmor(type, name, description, defense, spriteIndex);
 				output.add(parseArmorResult);
 			} catch (Exception e) {
@@ -120,6 +148,11 @@ public class CSVUtil {
 		return output;
 	}
 
+	/**
+	 * Read the {@link Weapon} CSV data and parsing for each line
+	 * 
+	 * @return the parsing result as {@link ArrayList} of {@link Weapon}
+	 */
 	public static ArrayList<Weapon> readWeaponCSV() {
 		String[][] weaponData = readCSV(baseUrl + "WeaponData.csv");
 		ArrayList<Weapon> output = new ArrayList<>();
@@ -134,7 +167,7 @@ public class CSVUtil {
 
 				int attack = Integer.parseInt(weaponData[i][3]);
 				int spriteIndex = Integer.parseInt(weaponData[i][4]);
-				
+
 				Weapon parseWeaponResult = Weapon.parseWeapon(type, name, description, attack, spriteIndex);
 				output.add(parseWeaponResult);
 			} catch (Exception e) {
