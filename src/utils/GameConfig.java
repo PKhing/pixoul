@@ -3,6 +3,17 @@ package utils;
 import logic.GameMap;
 import scene.GameScene;
 
+/**
+ * The GameConfig class is the class that provide the variable which involved
+ * with game directly such as
+ * 
+ * <ul>
+ * <li>Music volume</li>
+ * <li>Screen Width and Height</li>
+ * <li>{@link GameMap} size</li>
+ * <ul>
+ *
+ */
 public class GameConfig {
 
 	/**
