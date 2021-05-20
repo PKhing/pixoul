@@ -20,12 +20,14 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import logic.GameLogic;
 import scene.GameScene;
 import utils.DrawUtil;
 import utils.FontUtil;
+import utils.GameAudioUtils;
 import utils.GameConfig;
 
 /**
@@ -65,7 +67,7 @@ public class InventoryPane extends AnchorPane {
 	 * The sprite of a bin.
 	 */
 	private static WritableImage binSprite = DrawUtil.getWritableImage("sprites/inventory/bin.png");
-
+	
 	/**
 	 * Creates new InventoryPane.
 	 */
@@ -110,9 +112,13 @@ public class InventoryPane extends AnchorPane {
 	 * Removes this InventoryPane from {@link GameScene}.
 	 */
 	public void remove() {
+		AudioClip closeSFX = GameAudioUtils.getCloseInventorySFX();
 		try {
 			((Pane) getParent()).getChildren().remove(this);
 			InterruptController.setInventoryOpen(false);
+			if(!closeSFX.isPlaying()) {
+				closeSFX.play();
+			}
 		} catch (ClassCastException e) {
 			System.out.println(this.getClass().getName() + " has already closed");
 		} catch (NullPointerException e) {
