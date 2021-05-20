@@ -2,6 +2,7 @@ package utils;
 
 import java.net.URL;
 
+import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
@@ -23,12 +24,20 @@ public class GameAudioUtils {
 	 */
 	private static MediaPlayer LandingSceneBGM;
 
+	private static AudioClip openInventorySFX;
+
+	private static AudioClip closeInventorySFX;
+	
 	/**
 	 * Load music audio
 	 */
 	static {
-		GameSceneBGM = getAudioLoop("bgm/BGMDungeon.mp3", GameConfig.getVolume());
-		LandingSceneBGM = getAudioLoop("bgm/BGMMainScene.mp3", GameConfig.getVolume());
+		GameSceneBGM = getAudioLoop("bgm/BGMDungeon.mp3");
+		LandingSceneBGM = getAudioLoop("bgm/BGMMainScene.mp3");
+		openInventorySFX = getNewSFX("sfx/open_inventory.mp3");
+		closeInventorySFX = getNewSFX("sfx/close_inventory.mp3");
+		
+		updateBGMVolume();
 	}
 
 	/**
@@ -38,7 +47,7 @@ public class GameAudioUtils {
 	 * @param volumes  initial volume of audio
 	 * @return {@link MediaPlayer} instance
 	 */
-	private static MediaPlayer getAudioLoop(String filePath, double volumes) {
+	private static MediaPlayer getAudioLoop(String filePath) {
 		URL resource = ClassLoader.getSystemResource(filePath);
 		MediaPlayer player = new MediaPlayer(new Media(resource.toString()));
 
@@ -50,9 +59,22 @@ public class GameAudioUtils {
 			}
 		});
 
-		player.setVolume(volumes);
 		return player;
 	}
+	
+	/**
+	 * Load sound effect by file path
+	 * 
+	 * @param filePath the path of audio file
+	 * @return {@link AudioClip} instance
+	 */
+	private static AudioClip getNewSFX(String filePath) {
+		URL resource = ClassLoader.getSystemResource(filePath);
+		AudioClip player = new AudioClip(resource.toExternalForm());
+		
+		return player;
+	}
+
 
 	/**
 	 * Update all background volume to current setting
@@ -60,6 +82,8 @@ public class GameAudioUtils {
 	public static void updateBGMVolume() {
 		GameSceneBGM.setVolume(GameConfig.getVolume());
 		LandingSceneBGM.setVolume(GameConfig.getVolume());
+		openInventorySFX.setVolume(GameConfig.getVolume());
+		closeInventorySFX.setVolume(GameConfig.getVolume());
 	}
 
 	/**
@@ -96,6 +120,22 @@ public class GameAudioUtils {
 	 */
 	public static void setLandingSceneBGM(MediaPlayer landingSceneBGM) {
 		LandingSceneBGM = landingSceneBGM;
+	}
+	
+	public static AudioClip getOpenInventorySFX() {
+		return openInventorySFX;
+	}
+
+	public static void setOpenInventorySFX(AudioClip openInventorySFX) {
+		GameAudioUtils.openInventorySFX = openInventorySFX;
+	}
+
+	public static AudioClip getCloseInventorySFX() {
+		return closeInventorySFX;
+	}
+
+	public static void setCloseInventorySFX(AudioClip closeInventorySFX) {
+		GameAudioUtils.closeInventorySFX = closeInventorySFX;
 	}
 	
 	

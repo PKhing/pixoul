@@ -20,10 +20,12 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.StackPane;
+import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 import logic.GameLogic;
 import logic.MapRenderer;
 import utils.DrawUtil;
+import utils.GameAudioUtils;
 import utils.GameConfig;
 
 /**
@@ -169,9 +171,15 @@ public class GameScene {
 			if (InterruptController.isPauseOpen() || InterruptController.isTransition()) {
 				return;
 			}
+			AudioClip openSFX = GameAudioUtils.getOpenInventorySFX();
+			
 			gamePane.getChildren().add(inventoryPane);
 			inventoryPane.requestFocus();
 			InterruptController.setInventoryOpen(true);
+			
+			if(!openSFX.isPlaying()) {
+				openSFX.play();
+			}
 		});
 	}
 
