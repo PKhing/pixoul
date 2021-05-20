@@ -6,8 +6,10 @@ import effects.base.IConsecutiveEffect;
 import entity.base.Entity;
 
 /**
- * The Poison class is {@link EntityEffect} that active for every move, it will
+ * The Regeneration class is {@link EntityEffect} that active for every move, it will
  * increase the {@link Entity} health
+ * 
+ * @implNote This effect can not make it permanent
  */
 public class Regeneration extends EntityEffect implements IConsecutiveEffect {
 
@@ -20,7 +22,7 @@ public class Regeneration extends EntityEffect implements IConsecutiveEffect {
 	 * @param isPermanent The effect property that permanent or not
 	 */
 	public Regeneration(String name, int value, int duration, boolean isPermanent) {
-		super(name, value, duration, true);
+		super(name, value, duration, false);
 	}
 
 	/**

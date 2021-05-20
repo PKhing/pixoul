@@ -22,6 +22,7 @@ import utils.GameConfig;
  * health is less than or equal zero
  */
 public class GameOverScene {
+	
 	/**
 	 * Represent the height of the pane in pixel
 	 */

@@ -26,18 +26,22 @@ import utils.MessageTextUtil;
  *
  */
 public class Player extends Entity implements Moveable, Attackable {
+	
 	/**
 	 * {@link Armor The armor} that the player currently equips.
 	 */
 	private Armor equippedArmor;
+	
 	/**
 	 * {@link Weapon The weapon} that the player currently equips.
 	 */
 	private Weapon equippedWeapon;
+	
 	/**
 	 * {@link Item The items} that the player currently has.
 	 */
 	private ArrayList<Item> itemList = new ArrayList<Item>();
+	
 	/**
 	 * Line of sight of the player.
 	 */

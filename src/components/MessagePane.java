@@ -10,6 +10,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import utils.FontUtil;
 import utils.GameConfig;
+import utils.MessageTextUtil;
 
 /**
  * The MessagePane class is the pane that shows the message of each action that
@@ -19,6 +20,7 @@ import utils.GameConfig;
  *
  */
 public class MessagePane extends VBox {
+	
 	/**
 	 * A constant holding the maximum amount of message in the MessagePane.
 	 */

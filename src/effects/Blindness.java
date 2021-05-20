@@ -35,6 +35,10 @@ public class Blindness extends EntityEffect {
 			addEffect(entity);
 			int newLineOfSight = ((Player) entity).getLineOfSight() - getValue();
 			((Player) entity).setLineOfSight(newLineOfSight);
+			
+			if(isPermanent()) {
+				removeEffect(entity);
+			}
 		}
 	}
 

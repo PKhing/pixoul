@@ -20,7 +20,7 @@ import utils.TransitionUtil;
 
 /**
  * The DarkMage class represents dark mage monsters. They can not attack or move
- * but they can warp the player to a random room on the current floor, inflict
+ * but they can warp the player to a random room on the current map, inflict
  * {@link Poison poison effect} on the player, or summon {@link Skeleton
  * skeleton}.
  */
@@ -31,11 +31,13 @@ public class DarkMage extends Monster {
 	 * player.
 	 */
 	private int poisonDamage;
+	
 	/**
 	 * The duration of the poison effect that the dark mage will inflict on the
 	 * player.
 	 */
 	private int poisonDuration;
+	
 	/**
 	 * The poison effect that the dark mage inflict on the player.
 	 */
@@ -91,7 +93,7 @@ public class DarkMage extends Monster {
 	}
 
 	/**
-	 * Warp target entity to the random room on the current floor.
+	 * Warp target entity to the random room on the current map.
 	 * 
 	 * @param target The target that will be warped
 	 */

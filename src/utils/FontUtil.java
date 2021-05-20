@@ -7,14 +7,17 @@ import javafx.scene.text.Font;
  *
  */
 public class FontUtil {
+	
 	/**
 	 * Small size font.
 	 */
 	private static Font smallFont;
+	
 	/**
 	 * Medium size font.
 	 */
 	private static Font mediumFont;
+	
 	/**
 	 * Large size font.
 	 */

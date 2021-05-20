@@ -6,7 +6,7 @@ import entity.Player;
 import entity.base.Entity;
 
 /**
- * The Blindness class is the {@link EntityEffect} that will increase the line
+ * The Vision class is the {@link EntityEffect} that will increase the line
  * of sight of {@link Player}
  * 
  * @implNote This effect will be applied to {@link Player} only
@@ -35,6 +35,10 @@ public class Vision extends EntityEffect {
 			addEffect(entity);
 			int newLineOfSight = ((Player) entity).getLineOfSight() + getValue();
 			((Player) entity).setLineOfSight(newLineOfSight);
+			
+			if(isPermanent()) {
+				removeEffect(entity);
+			}
 		}
 	}
 

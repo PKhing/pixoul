@@ -38,7 +38,6 @@ public class RegenerationPotion extends Potion {
 
 	@Override
 	public int getSymbol() {
-		// TODO Auto-generated method stub
 		return Sprites.REGENERATION_POTION;
 	}
 

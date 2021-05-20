@@ -15,6 +15,10 @@ import utils.MessageTextUtil;
  * Base class to represent all entities.
  */
 public abstract class Entity {
+	
+	/**
+	 * Default speed of entity
+	 */
 	public final int MOVE_SPEED = 1;
 
 	/*

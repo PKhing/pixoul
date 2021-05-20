@@ -5,10 +5,25 @@ import effects.base.EffectName;
 import effects.base.EntityEffect;
 import entity.base.Entity;
 
+/**
+ * The Immobilize class is {@link EntityEffect} that will make the player can
+ * not move for a duration but player can still attack to monster
+ *
+ * @implNote This effect can not make it permanent
+ */
 public class Immobilize extends EntityEffect {
 
+	/**
+	 * The constructor of the class
+	 * 
+	 * @param name        The name of the effect
+	 * @param value       The value of the effect
+	 * @param duration    The duration of the effect
+	 * @param isPermanent The effect property that permanent or not
+	 */
 	public Immobilize(String name, int value, int duration, boolean isPermanent) {
-		super(name, value, duration, isPermanent);
+		// Force isPermanent parameter to false
+		super(name, value, duration, false);
 	}
 
 	/**

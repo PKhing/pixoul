@@ -32,52 +32,64 @@ import utils.GameConfig;
  *
  */
 public class GameScene {
+	
 	/**
 	 * The game scene.
 	 */
 	private static Scene scene = null;
+	
 	/**
 	 * The {@link StatusPane status pane} on the game scene.
 	 */
 	private static StatusPane statusPane;
+	
 	/**
 	 * The {@link MessagePane message pane} on the game scene.
 	 */
 	private static MessagePane messagePane;
+	
 	/**
 	 * The {@link EffectPane effect pane} on the game scene.
 	 */
 	private static EffectPane effectPane;
+	
 	/**
 	 * The {@link InventoryPane inventory pane} that will display when the player
 	 * click inventory button.
 	 */
 	private static InventoryPane inventoryPane;
+	
 	/**
 	 * The {@link PausePane pause pane} that will display when the player click
 	 * pause button.
 	 */
 	private static PausePane pausePane;
+	
 	/**
 	 * The pane for entity button.
 	 */
 	private static AnchorPane buttonPane;
+	
 	/**
 	 * {@link GraphicsContext graphic context} of the map canvas.
 	 */
 	private static GraphicsContext gc;
+	
 	/**
 	 * Backpack sprite for the inventory button.
 	 */
 	private static WritableImage backpackSprite = DrawUtil.getWritableImage("sprites/backpack.png");
+	
 	/**
 	 * Pause sprite for the pause button.
 	 */
 	private static WritableImage pauseSprite = DrawUtil.getWritableImage("sprites/pause.png");
+	
 	/**
 	 * The pane that contains all of the component in game scene.
 	 */
 	private static StackPane gamePane;
+	
 	/**
 	 * The root pane.
 	 */

@@ -64,13 +64,13 @@ public class MonsterLevelFilter {
 	/**
 	 * The constructor of class
 	 * 
-	 * @param level
-	 * @param isDarkMageAppear
-	 * @param isHauntedMaidAppear
-	 * @param isPumpkinHeadAppear
-	 * @param isReaperAppear
-	 * @param isSkeletonAppear
-	 * @param isSoulAppear
+	 * @param level initial value of {@link #level} 
+	 * @param isDarkMageAppear initial value of {@link #isDarkMageAppear}
+	 * @param isHauntedMaidAppear initial value of {@link #isHauntedMaidAppear}
+	 * @param isPumpkinHeadAppear initial value of {@link #isPumpkinHeadAppear}
+	 * @param isReaperAppear initial value of {@link #isReaperAppear}
+	 * @param isSkeletonAppear initial value of {@link #isSkeletonAppear}
+	 * @param isSoulAppear initial value of {@link #isSoulAppear}
 	 */
 	public MonsterLevelFilter(int level, boolean isDarkMageAppear, boolean isHauntedMaidAppear,
 			boolean isPumpkinHeadAppear, boolean isReaperAppear, boolean isSkeletonAppear, boolean isSoulAppear) {

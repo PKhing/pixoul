@@ -19,14 +19,17 @@ import utils.GameConfig;
  *
  */
 public class StatusPane extends VBox {
+	
 	/**
 	 * The text that shows the current health point of the player.
 	 */
 	private Text hp;
+	
 	/**
 	 * The text that shows the current attack value of the player.
 	 */
 	private Text attack;
+	
 	/**
 	 * The text that shows the current defense value of the player.
 	 */

@@ -26,6 +26,7 @@ import utils.RandomUtil;
  * @see AnimationUtil
  */
 public class GameLogic {
+	
 	/**
 	 * The variable that stores the next action of the player for the purpose of
 	 * delay optimization.

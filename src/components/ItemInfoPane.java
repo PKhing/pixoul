@@ -23,6 +23,7 @@ import utils.GameConfig;
  *
  */
 public class ItemInfoPane extends VBox {
+
 	/**
 	 * Creates new ItemInfoPane.
 	 * 

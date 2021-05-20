@@ -5,7 +5,7 @@ import effects.base.EntityEffect;
 import entity.base.Entity;
 
 /**
- * The Protection class is {@link EntityEffect} that increase the
+ * The Strength class is {@link EntityEffect} that increase the
  * {@link Entity#attack attack}
  */
 public class Strength extends EntityEffect {

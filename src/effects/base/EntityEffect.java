@@ -174,6 +174,9 @@ public abstract class EntityEffect {
 		this.value = value;
 	}
 
+	/**
+	 * Generate string in format "(EffectName) [(Entity or Potion that used)]: (duration)"
+	 */
 	@Override
 	public String toString() {
 		String effectName = MessageTextUtil.shortenWord(getEffectName());

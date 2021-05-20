@@ -31,12 +31,12 @@ import utils.TransitionUtil;
 public class GameController {
 	
 	/**
-	 * The {@link ArrayList} represents the floor of each level
+	 * The {@link ArrayList} represents the map of each level
 	 */
-	private static ArrayList<GameMap> floorList = new ArrayList<>();
+	private static ArrayList<GameMap> levelMapList = new ArrayList<>();
 	
 	/**
-	 * Represent the {@link GameMap} of current floor
+	 * Represent the {@link GameMap} of current level
 	 */
 	private static GameMap gameMap;
 
@@ -60,13 +60,13 @@ public class GameController {
 	 * 
 	 * @param floor the number which want to get map.
 	 * @return {@link GameMap} map of current floor
-	 * @throws InvalidFloorException throw if floor is invalid
+	 * @throws InvalidFloorException throw if level is invalid
 	 */
 	public static GameMap getFloor(int floor) throws InvalidFloorException {
-		if ((floorList.size() < floor) || (floor <= 0)) {
+		if ((levelMapList.size() < floor) || (floor <= 0)) {
 			throw new InvalidFloorException("The floor number is out of range");
 		}
-		return floorList.get(floor - 1);
+		return levelMapList.get(floor - 1);
 	}
 
 	/**
@@ -76,7 +76,7 @@ public class GameController {
 	 */
 	private static GameMap addNewFloor() {
 		GameMap newFloor = MapGenerator.generateMap();
-		floorList.add(newFloor);
+		levelMapList.add(newFloor);
 		return newFloor;
 	}
 
@@ -130,7 +130,7 @@ public class GameController {
 	 * Initialize new game
 	 */
 	public static void start() {
-		floorList.clear();
+		levelMapList.clear();
 		level = 1;
 
 		GameMap newFloor = addNewFloor();
@@ -206,7 +206,7 @@ public class GameController {
 	/**
 	 * Get roomList from {@link #gameMap}
 	 * 
-	 * @return {@link #floorList}
+	 * @return Room list of {@link #gameMap}
 	 */
 	public static List<Pair<Integer, Integer>> getRoomList() {
 		return getGameMap().getRoomList();

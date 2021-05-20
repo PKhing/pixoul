@@ -19,6 +19,7 @@ import utils.GameConfig;
  *
  */
 public class MapRenderer {
+	
 	/**
 	 * The Renderable interface allows an object to be rendered. This interface
 	 * should be implemented to pass render function as a parameter.
@@ -38,18 +39,22 @@ public class MapRenderer {
 	 *
 	 */
 	private static class Node implements Comparable<Node> {
+		
 		/**
 		 * Cell index of this Node in the X-axis.
 		 */
 		public int x;
+		
 		/**
 		 * Cell index of this Node in the Y-axis.
 		 */
 		public int y;
+		
 		/**
 		 * Priority of this Node.
 		 */
 		public int priority;
+		
 		/**
 		 * Object that contains render method.
 		 */

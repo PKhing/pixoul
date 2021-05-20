@@ -19,14 +19,17 @@ public class AnimationUtil {
 	 * A constant holding duration of attack animation in millisecond.
 	 */
 	private static final int ATTACK_ANIMATION_DURATION_MS = 300;
+	
 	/**
 	 * A constant holding duration of move animation frame in millisecond.
 	 */
 	private static final int FRAME_DURATION_MS = 20;
+	
 	/**
 	 * A constant holding max frame number.
 	 */
 	private static final int MAX_FRAME_NUMBER = 31;
+	
 	/**
 	 * A constant holding amount of frame change per loop.
 	 */
