@@ -136,9 +136,8 @@ public class CSVUtil {
 				String description = armorData[i][2];
 
 				int defense = Integer.parseInt(armorData[i][3]);
-				int spriteIndex = Integer.parseInt(armorData[i][4]);
 
-				Armor parseArmorResult = Armor.parseArmor(type, name, description, defense, spriteIndex);
+				Armor parseArmorResult = Armor.parseArmor(type, name, description, defense);
 				output.add(parseArmorResult);
 			} catch (Exception e) {
 				e.printStackTrace();

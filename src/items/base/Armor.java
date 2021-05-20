@@ -82,15 +82,22 @@ public class Armor extends Item {
 	 * @param name        the name of armor
 	 * @param description the description of armor
 	 * @param defense     the defense value of armor
-	 * @param spriteIndex the index in sprite map of armor
 	 * @return new {@link Armor} instance that match type with input
 	 * @throws UnknownItemTypeException throws when {@link Armor} type is not
 	 *                                  recognized
 	 */
-	public static Armor parseArmor(String type, String name, String description, int defense, int spriteIndex)
+	public static Armor parseArmor(String type, String name, String description, int defense)
 			throws UnknownItemTypeException {
-		if (type.equals("GoldenArmor") || type.equals("IronArmor") || type.equals("WoodenArmor")) {
-			return new Armor(name, description, defense, spriteIndex, Sprites.ARMOR);
+		if (type.equals("WoodenArmor")) {
+			return new Armor(name, description, defense, 0, Sprites.ARMOR);
+		}
+		
+		if(type.equals("IronArmor")) {
+			return new Armor(name, description, defense, 1, Sprites.ARMOR);
+		}
+		
+		if(type.equals("GoldenArmor")) {
+			return new Armor(name, description, defense, 2, Sprites.ARMOR);
 		}
 
 		throw new UnknownItemTypeException("%s armor type is unknown".formatted(type));
