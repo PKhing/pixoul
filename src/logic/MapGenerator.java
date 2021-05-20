@@ -507,7 +507,6 @@ public class MapGenerator {
 				Cell currentCell = gameMap.get(randomY, randomX);
 
 				if (currentCell.getType() == Cell.PATH && currentCell.getItem() == null) {
-					System.out.println(each.getName() + " " + randomY + " " + randomX);
 					currentCell.setItem(each);
 					isAdd = true;
 				}
@@ -558,7 +557,6 @@ public class MapGenerator {
 				Cell currentCell = gameMap.get(randomY, randomX);
 
 				if (currentCell.getType() == Cell.PATH && currentCell.getItem() == null) {
-					System.out.println(each.getName() + " " + randomY + " " + randomX);
 					currentCell.setItem(each);
 					isAdd = true;
 				}

@@ -154,7 +154,6 @@ public class RandomUtil {
 	 * @return the {@link ArrayList} of {@link Potion}
 	 */
 	public static ArrayList<Potion> randomPotionList(int level) {
-		// TODO PotionList Generator
 		int numberOfPotion = random(MIN_POTION, MAX_POTION);
 		int nowIdx = 0;
 		ArrayList<Potion> potionList = new ArrayList<>();
@@ -201,11 +200,11 @@ public class RandomUtil {
 
 		MonsterLevelFilter levelFilter = monsterFilter.get(filterIndex);
 
-		int monsterMinHealth = level * 4;
-		int monsterMaxHealth = level * 8;
+		int monsterMinHealth = level * 3;
+		int monsterMaxHealth = level * 6;
 
 		int monsterMinAttack = 1;
-		int monsterMaxAttack = level + 10;
+		int monsterMaxAttack = level + 7;
 
 		int monsterMinDefense = 0;
 		int monsterMaxDefense = level + 3;
@@ -223,7 +222,7 @@ public class RandomUtil {
 			numberOfAllMonster -= darkMageAmount;
 		}
 
-		// Begin to generate soul
+		// Begin to generate Soul
 		int soulAmount = random(1, numberOfAllMonster / 4);
 		if (levelFilter.isSoulAppear()) {
 			for (int i = 0; i < soulAmount; i++) {
@@ -232,7 +231,7 @@ public class RandomUtil {
 			numberOfAllMonster -= soulAmount;
 		}
 
-		// Begin to generate reaper
+		// Begin to generate Reaper
 		int reaperAmount = random(1, numberOfAllMonster / 4);
 		if (levelFilter.isReaperAppear()) {
 			for (int i = 0; i < reaperAmount; i++) {
