@@ -1,15 +1,15 @@
 Knife,Beginner knife,For starter only,2,0
-Knife,Skyward Blade,The knife of a knight that symbolizes the restored honor of Dvalin.,5,1
-Knife,Favonius Knife,A standard knife used by the Knights of Favonius.,5,2
+Knife,Skyward Blade,The knife of a knight that symbolizes the restored honor of Dvalin.,3,1
+Knife,Favonius Knife,A standard knife used by the Knights of Favonius.,4,2
 Knife,Aquila Favonia,The soul of the Knights of Favonius.,5,0
-Knife,Primordial Jade Cutter,A ceremonial knife masterfully carved from pure jade.,5,1
-Spear,Hunter spear,For starter only,4,0
-Spear,Skyward Spine,A spear that symbolizes Dvalin's fire resolve.,5,1
-Spear,Staff of Homa,A firewood staff that was once used in ancient and long-lost rituals.,5,2
+Knife,Primordial Jade Cutter,A ceremonial knife masterfully carved from pure jade.,3,1
+Spear,Hunter spear,For starter only,2,0
+Spear,Skyward Spine,A spear that symbolizes Dvalin's fire resolve.,3,1
+Spear,Staff of Homa,A firewood staff that was once used in ancient and long-lost rituals.,4,2
 Spear,Primordial Jade Winged-Spear,A jade spear capable of slaying ancient beasts.,5,0
-Spear,Favonius Lance,A polearm made in the style of the Knights of Favonius.,5,1
-Sword,Skyward Pride,A sword that symbolizes the pride of Dvalin soaring through the skies.,5,0
-Sword,Wolf's Gravestone,A longsword used by the Wolf Knight.,5,1
-Sword,The Unforged,This edgeless sword seems to possess divine might.,5,2
+Spear,Favonius Lance,A polearm made in the style of the Knights of Favonius.,3,1
+Sword,Skyward Pride,A sword that symbolizes the pride of Dvalin soaring through the skies.,2,0
+Sword,Wolf's Gravestone,A longsword used by the Wolf Knight.,4,1
+Sword,The Unforged,This edgeless sword seems to possess divine might.,3,2
 Sword,Favonius Sword,A heavy ceremonial sword of the Knights of Favonius.,5,0
 (TYPE),(NAME),(DESCRIPTION),(ATTACK),(SPRITE_INDEX)
