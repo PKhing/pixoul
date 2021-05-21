@@ -3,11 +3,14 @@ package utils;
 import components.MessagePane;
 import effects.Immobilize;
 import entity.DarkMage;
+import entity.Player;
 import entity.base.Entity;
+import entity.base.Monster;
 import items.base.Armor;
 import items.base.Item;
 import items.base.Potion;
 import items.base.Weapon;
+import logic.Cell;
 import scene.GameScene;
 
 /**
@@ -83,7 +86,7 @@ public class MessageTextUtil {
 	 * Generate the text when {@link Player} can not unequip {@link Weapon} and add
 	 * to {@link MessagePane}
 	 * 
-	 * @param armor the {@link Weapon} that {@link Player} tries to unequip
+	 * @param weapon the {@link Weapon} that {@link Player} tries to unequip
 	 */
 	public static void textWhenCannotUnequipWeapon(Weapon weapon) {
 		String displayText = "Player cannot unequip %s because of full inventory".formatted(weapon.getName());

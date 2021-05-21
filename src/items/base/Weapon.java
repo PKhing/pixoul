@@ -14,15 +14,19 @@ public class Weapon extends Item {
 	 */
 	private int attack;
 
+	/**
+	 * Represent the sprite symbol for this weapon
+	 */
 	private int spriteSymbol;
 
 	/**
 	 * The constructor of class
 	 * 
-	 * @param name        the name of armor
-	 * @param description the description of armor
-	 * @param defense     the defense value of armor
-	 * @param spriteIndex the index in sprite map of armor
+	 * @param name         the name of weapon
+	 * @param description  the description of weapon
+	 * @param attack       the attack value of weapon
+	 * @param spriteIndex  the index in sprite map of weapon
+	 * @param spriteSymbol the symbol sprite for this weapon
 	 */
 	public Weapon(String name, String description, int attack, int spriteIndex, int spriteSymbol) {
 		super(name, description, spriteIndex);
@@ -84,7 +88,7 @@ public class Weapon extends Item {
 	 * @param type        the type of weapon
 	 * @param name        the name of weapon
 	 * @param description the description of weapon
-	 * @param defense     the defense value of weapon
+	 * @param attack      the attack value of weapon
 	 * @param spriteIndex the index in sprite map of weapon
 	 * @return new {@link Weapon} instance that match type with input
 	 * @throws UnknownItemTypeException throws when {@link Weapon} type is not

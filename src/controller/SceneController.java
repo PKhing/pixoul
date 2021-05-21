@@ -23,7 +23,7 @@ public class SceneController {
 	/**
 	 * Setter for {@link #mainStage}
 	 * 
-	 * @param mainStage
+	 * @param mainStage the new {@link #mainStage}
 	 */
 	public static void setMainStage(Stage mainStage) {
 		if (mainStage == null) {
@@ -59,7 +59,7 @@ public class SceneController {
 	/**
 	 * Handler method that will bring back to main menu when called
 	 * 
-	 * @see {@link LandingScene}
+	 * @see LandingScene
 	 */
 	public static void backToMainMenu() {
 		GameScene.getInventoryPane().remove();

@@ -10,7 +10,7 @@ import logic.Sprites;
  * The StrengthPotion is {@link Potion} that temporary increase player
  * {@link Player#lineOfSight vision} when used
  * 
- * @see {@link Vision}
+ * @see Vision
  */
 public class VisionPotion extends Potion {
 	/**

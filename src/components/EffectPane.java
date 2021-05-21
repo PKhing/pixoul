@@ -18,7 +18,7 @@ import utils.GameConfig;
 
 /**
  * The EffectPane class is the pane that shows information about the current
- * {@link Effect} that the player has.
+ * {@link EntityEffect} that the player has.
  *
  */
 public class EffectPane extends VBox {

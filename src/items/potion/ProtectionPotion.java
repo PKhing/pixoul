@@ -10,7 +10,7 @@ import logic.Sprites;
  * The ProtectionPotion is {@link Potion} that temporary or permanent increase
  * current player defense when used
  * 
- * @see {@link Protection}
+ * @see Protection
  */
 public class ProtectionPotion extends Potion {
 
@@ -21,7 +21,7 @@ public class ProtectionPotion extends Potion {
 	 * @param description the description of potion
 	 * @param shield      the value for {@link Protection} effect
 	 * @param duration    the duration of the effect
-	 * @param isPermanant the effect property that permanent or not
+	 * @param isPermanent the effect property that permanent or not
 	 * @param spriteIndex the index in sprite map of potion
 	 */
 	public ProtectionPotion(String name, String description, int shield, int duration, boolean isPermanent,

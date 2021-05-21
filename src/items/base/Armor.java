@@ -21,6 +21,7 @@ public class Armor extends Item {
 	 * @param description the description of armor
 	 * @param defense     the defense value of armor
 	 * @param spriteIndex the index in sprite map of armor
+	 * @param symbol      the symbol index of armor
 	 */
 	public Armor(String name, String description, int defense, int spriteIndex, int symbol) {
 		super(name, description, spriteIndex);

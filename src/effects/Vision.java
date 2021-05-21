@@ -9,7 +9,7 @@ import entity.base.Entity;
  * The Vision class is the {@link EntityEffect} that will increase the line of
  * sight of {@link Player}
  * 
- * @implNote This effect will be applied to {@link Player} only
+ * <p>Note that this effect will be applied to {@link Player} only</p>
  */
 public class Vision extends EntityEffect {
 
@@ -21,8 +21,8 @@ public class Vision extends EntityEffect {
 	 * @param duration    The duration of the effect
 	 * @param isPermanent The effect property that permanent or not
 	 */
-	public Vision(String name, int value, int duration, boolean isPermanant) {
-		super(name, value, duration, isPermanant);
+	public Vision(String name, int value, int duration, boolean isPermanent) {
+		super(name, value, duration, isPermanent);
 	}
 
 	/**

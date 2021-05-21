@@ -8,7 +8,7 @@ public interface Attackable {
 	/**
 	 * This method is called when this entity attack target
 	 * 
-	 * @param the target which this entity attack to
+	 * @param target the target which this entity attack to
 	 * @return true if attack success otherwise false
 	 */
 	public abstract boolean attack(Entity target);

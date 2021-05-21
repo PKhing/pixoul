@@ -14,7 +14,7 @@ import effects.Vision;
  * The EffectName is the class that contain the name of each effect class that
  * will be used to display in {@link EffectPane}
  * 
- * @see {@link EntityEffect#toString()}
+ * @see EntityEffect#toString()
  */
 public class EffectName {
 

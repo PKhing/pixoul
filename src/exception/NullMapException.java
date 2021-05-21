@@ -1,6 +1,7 @@
 package exception;
 
 import controller.GameController;
+import logic.GameMap;
 
 /**
  * The NullMapException is {@link Exception} that will be thrown when

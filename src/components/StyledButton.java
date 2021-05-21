@@ -10,15 +10,25 @@ import javafx.scene.layout.BorderStrokeStyle;
 import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.Color;
+import scene.LandingScene;
 import utils.FontUtil;
 import utils.GameConfig;
 
 /**
  * The StyledButton is {@link Button} that specifically using in
- * {@link LandingPane} and {@link PausePane}
+ * {@link LandingScene} and {@link PausePane}
  *
  */
 public class StyledButton extends Button {
+	
+	/**
+	 * The constructor of class
+	 * 
+	 * @param widthBox the width of button
+	 * @param text the string that register to button
+	 * @param onHover the color of button outline when hover
+	 * @param bgColor the background color of button
+	 */
 	public StyledButton(int widthBox, String text, Color onHover, Color bgColor) {
 		this.setText(text);
 		this.setPadding(new Insets(-GameConfig.getScale()));

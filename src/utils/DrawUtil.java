@@ -25,6 +25,11 @@ import logic.Direction;
 import logic.GameLogic;
 import scene.GameScene;
 
+/**
+ * The utility class that provide sprite drawing method and PixelReader for
+ * sprite
+ *
+ */
 public class DrawUtil {
 
 	/**
@@ -264,7 +269,7 @@ public class DrawUtil {
 	}
 
 	/**
-	 * Get {@link ImagePixelReader} from the file path.
+	 * Get {@link PixelReader ImagePixelReader} from the file path.
 	 * 
 	 * @param filePath The file path to image
 	 * @return Pixel reader of the image.

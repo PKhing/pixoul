@@ -9,7 +9,7 @@ import entity.base.Entity;
  * The Blindness class is the {@link EntityEffect} that will decrease the line
  * of sight of {@link Player}
  * 
- * @implNote This effect will be applied to {@link Player} only
+ * <p>Note that this effect will be applied to {@link Player} only</p>
  */
 public class Blindness extends EntityEffect {
 

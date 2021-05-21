@@ -1,5 +1,7 @@
 package entity.base;
 
+import entity.Player;
+
 /**
  * The DispatchAction is the list of action that {@link Player} can do
  */

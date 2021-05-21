@@ -12,7 +12,7 @@ public interface Moveable {
 	 * This methods is called when {@link Entity} is moving to specific
 	 * {@link Direction}
 	 * 
-	 * @param the direction which entity will be moving to
+	 * @param direction the direction which entity will be moving to
 	 * @return true if entity can move to that direction otherwise false
 	 */
 	public abstract boolean move(int direction);

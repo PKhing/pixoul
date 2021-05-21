@@ -10,7 +10,7 @@ import logic.Sprites;
  * The InstantHealPotion is {@link Potion} that temporary or permanent increase
  * current player health when used
  * 
- * @see {@link InstantHealth}
+ * @see InstantHealth
  */
 public class InstantHealPotion extends Potion {
 

@@ -137,7 +137,7 @@ public class RandomUtil {
 	/**
 	 * The utility method that shuffle the two-dimensional integer array
 	 * 
-	 * @param intArray the two-dimensional integer array that will be shuffled
+	 * @param array the two-dimensional integer array that will be shuffled
 	 */
 	public static void shuffle(int[][] array) {
 		List<int[]> list = Arrays.asList(array);

@@ -114,7 +114,7 @@ public abstract class EntityEffect {
 	/**
 	 * Setter for {@link #name}
 	 * 
-	 * @param new the new {@link #name}
+	 * @param name the new {@link #name}
 	 */
 	public void setName(String name) {
 		this.name = name;

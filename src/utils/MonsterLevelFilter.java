@@ -2,8 +2,10 @@ package utils;
 
 import entity.DarkMage;
 import entity.HauntedMaid;
+import entity.Player;
 import entity.PumpkinHead;
 import entity.Skeleton;
+import entity.base.Monster;
 
 /**
  * <p>
@@ -131,7 +133,7 @@ public class MonsterLevelFilter {
 	/**
 	 * Setter for {@link #isHauntedMaidAppear}
 	 * 
-	 * @param isDarkMageAppear the new {@link #isHauntedMaidAppear}
+	 * @param isHauntedMaidAppear the new {@link #isHauntedMaidAppear}
 	 */
 	public void setHauntedMaidAppear(boolean isHauntedMaidAppear) {
 		this.isHauntedMaidAppear = isHauntedMaidAppear;
@@ -149,7 +151,7 @@ public class MonsterLevelFilter {
 	/**
 	 * Setter for {@link #isPumpkinHeadAppear}
 	 * 
-	 * @param isDarkMageAppear the new {@link #isPumpkinHeadAppear}
+	 * @param isPumpkinHeadAppear the new {@link #isPumpkinHeadAppear}
 	 */
 	public void setPumpkinHeadAppear(boolean isPumpkinHeadAppear) {
 		this.isPumpkinHeadAppear = isPumpkinHeadAppear;
@@ -167,7 +169,7 @@ public class MonsterLevelFilter {
 	/**
 	 * Setter for {@link #isReaperAppear}
 	 * 
-	 * @param isDarkMageAppear the new {@link #isReaperAppear}
+	 * @param isReaperAppear the new {@link #isReaperAppear}
 	 */
 	public void setReaperAppear(boolean isReaperAppear) {
 		this.isReaperAppear = isReaperAppear;
@@ -185,7 +187,7 @@ public class MonsterLevelFilter {
 	/**
 	 * Setter for {@link #isSkeletonAppear}
 	 * 
-	 * @param isDarkMageAppear the new {@link #isSkeletonAppear}
+	 * @param isSkeletonAppear the new {@link #isSkeletonAppear}
 	 */
 	public void setSkeletonAppear(boolean isSkeletonAppear) {
 		this.isSkeletonAppear = isSkeletonAppear;

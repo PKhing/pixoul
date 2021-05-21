@@ -10,7 +10,7 @@ import logic.Sprites;
  * The StrengthPotion is {@link Potion} that temporary or permanent increase
  * current player attack when used
  * 
- * @see {@link Strength}
+ * @see Strength
  */
 public class StrengthPotion extends Potion {
 

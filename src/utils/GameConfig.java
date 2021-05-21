@@ -1,5 +1,6 @@
 package utils;
 
+import items.base.Item;
 import logic.GameMap;
 import scene.GameScene;
 
@@ -10,8 +11,8 @@ import scene.GameScene;
  * <ul>
  * <li>Music volume</li>
  * <li>Screen Width and Height</li>
- * <li>{@link GameMap} size</li>
- * <ul>
+ * <li>GameMap size</li>
+ * </ul>
  *
  */
 public class GameConfig {
@@ -149,6 +150,11 @@ public class GameConfig {
 		return scale;
 	}
 
+	/**
+	 * Setter for {@link #scale}
+	 * 
+	 * @param scale the new {@link #scale}
+	 */
 	public static void setScale(int scale) {
 		GameConfig.scale = scale;
 	}
@@ -165,7 +171,7 @@ public class GameConfig {
 	/**
 	 * Setter for {@link #bgmVolume}
 	 * 
-	 * @param volume the new {@link #bgmVolume}l
+	 * @param bgmVolume the new {@link #bgmVolume}
 	 */
 	public static void setBgmVolume(double bgmVolume) {
 		GameConfig.bgmVolume = bgmVolume;
@@ -183,7 +189,7 @@ public class GameConfig {
 	/**
 	 * Setter for {@link #isSkipMoveAnimation}
 	 * 
-	 * @param skipMoveAnimation the new {@link #isSkipMoveAnimation}
+	 * @param isSkipMoveAnimation the new {@link #isSkipMoveAnimation}
 	 */
 	public static void setSkipMoveAnimation(boolean isSkipMoveAnimation) {
 		GameConfig.isSkipMoveAnimation = isSkipMoveAnimation;

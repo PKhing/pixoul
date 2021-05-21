@@ -9,7 +9,7 @@ import entity.base.Entity;
  * The Regeneration class is {@link EntityEffect} that active for every move, it
  * will increase the {@link Entity} health
  * 
- * @implNote This effect can not make it permanent
+ * <p>Note that this effect can not make it permanent</p>
  */
 public class Regeneration extends EntityEffect implements IConsecutiveEffect {
 

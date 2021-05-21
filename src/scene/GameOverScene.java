@@ -3,6 +3,7 @@ package scene;
 import components.StyledButton;
 import controller.GameController;
 import controller.SceneController;
+import entity.Player;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;

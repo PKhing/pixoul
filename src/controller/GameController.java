@@ -20,6 +20,7 @@ import logic.MapRenderer;
 import logic.Sprites;
 import scene.GameOverScene;
 import scene.GameScene;
+import scene.LandingScene;
 import utils.GameAudioUtils;
 import utils.TransitionUtil;
 
@@ -198,7 +199,7 @@ public class GameController {
 	/**
 	 * Setter for {@link #gameMap}
 	 * 
-	 * @param {@link GameMap}
+	 * @param gameMap the new {@link #gameMap}
 	 */
 	public static void setGameMap(GameMap gameMap) {
 		GameController.gameMap = gameMap;
@@ -225,7 +226,7 @@ public class GameController {
 	/**
 	 * Setter for {@link #player}
 	 * 
-	 * @param newPlayer
+	 * @param newPlayer the new {@link #player}
 	 */
 	public static void setPlayer(Player newPlayer) {
 		player = newPlayer;

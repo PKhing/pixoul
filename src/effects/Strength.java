@@ -18,8 +18,8 @@ public class Strength extends EntityEffect {
 	 * @param duration    The duration of the effect
 	 * @param isPermanent The effect property that permanent or not
 	 */
-	public Strength(String name, int value, int duration, boolean isPermanant) {
-		super(name, value, duration, isPermanant);
+	public Strength(String name, int value, int duration, boolean isPermanent) {
+		super(name, value, duration, isPermanent);
 	}
 
 	/**

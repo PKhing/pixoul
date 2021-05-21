@@ -1,5 +1,7 @@
 package components;
 
+import entity.Player;
+import entity.base.Monster;
 import javafx.geometry.Insets;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;

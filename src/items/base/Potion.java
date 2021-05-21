@@ -43,7 +43,7 @@ public abstract class Potion extends Item {
 	 * @param description the description of potion
 	 * @param effectValue the value of the effect
 	 * @param duration    the duration of the effect
-	 * @param isPermanant the effect property that permanent or not
+	 * @param isPermanent the effect property that permanent or not
 	 * @param spriteIndex the index in sprite map of potion
 	 */
 	public Potion(String name, String description, int effectValue, int duration, boolean isPermanent,
@@ -84,7 +84,7 @@ public abstract class Potion extends Item {
 	/**
 	 * Setter for {@link #isPermanent}
 	 * 
-	 * @param isPermanant the new {@link #isPermanent} value
+	 * @param isPermanent the new {@link #isPermanent} value
 	 */
 	public void setPermanent(boolean isPermanent) {
 		this.isPermanent = isPermanent;
@@ -109,8 +109,8 @@ public abstract class Potion extends Item {
 	}
 
 	/**
-	 * @implNote This method in {@link Potion} is doing nothing because it do not
-	 *           have unequip action
+	 * This method in {@link Potion} is doing nothing because it do not have unequip
+	 * action
 	 */
 	@Override
 	public void onUnequip(Player player) {
@@ -124,33 +124,33 @@ public abstract class Potion extends Item {
 	 * @param description the description of potion
 	 * @param effectValue the value of the effect
 	 * @param duration    the duration of the effect
-	 * @param isPermanant the effect property that permanent or not
+	 * @param isPermanent the effect property that permanent or not
 	 * @param spriteIndex the index in sprite map of potion
 	 * 
 	 * @return new {@link Potion} instance that match type with input
 	 * @throws UnknownItemTypeException throws when {@link Potion} type is not
 	 *                                  recognized
 	 */
-	public static Potion parsePotion(String type, String name, String description, int value, int duration,
-			boolean isPermanant, int spriteIndex) throws UnknownItemTypeException {
+	public static Potion parsePotion(String type, String name, String description, int effectValue, int duration,
+			boolean isPermanent, int spriteIndex) throws UnknownItemTypeException {
 		if (type.equals("InstantHealPotion")) {
-			return new InstantHealPotion(name, description, value, duration, isPermanant, spriteIndex);
+			return new InstantHealPotion(name, description, effectValue, duration, isPermanent, spriteIndex);
 		}
 
 		if (type.equals("RegenerationPotion")) {
-			return new RegenerationPotion(name, description, value, duration, isPermanant, spriteIndex);
+			return new RegenerationPotion(name, description, effectValue, duration, isPermanent, spriteIndex);
 		}
 
 		if (type.equals("ProtectionPotion")) {
-			return new ProtectionPotion(name, description, value, duration, isPermanant, spriteIndex);
+			return new ProtectionPotion(name, description, effectValue, duration, isPermanent, spriteIndex);
 		}
 
 		if (type.equals("StrengthPotion")) {
-			return new StrengthPotion(name, description, value, duration, isPermanant, spriteIndex);
+			return new StrengthPotion(name, description, effectValue, duration, isPermanent, spriteIndex);
 		}
 
 		if (type.equals("VisionPotion")) {
-			return new VisionPotion(name, description, value, duration, isPermanant, spriteIndex);
+			return new VisionPotion(name, description, effectValue, duration, isPermanent, spriteIndex);
 		}
 
 		throw new UnknownItemTypeException("%s potion type is unknown".formatted(type));

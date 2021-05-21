@@ -231,7 +231,7 @@ public abstract class Entity {
 	/**
 	 * Setter for defense value.
 	 * 
-	 * @param attack The defense value to be set
+	 * @param defense The defense value to be set
 	 */
 	public void setDefense(int defense) {
 		this.defense = Math.max(1, defense);
@@ -249,7 +249,7 @@ public abstract class Entity {
 	/**
 	 * Setter for critical rate.
 	 * 
-	 * @param attack The critical rate to be set
+	 * @param critRate The critical rate to be set
 	 */
 	public void setCritRate(double critRate) {
 		this.critRate = Math.max(1, critRate);
@@ -267,7 +267,7 @@ public abstract class Entity {
 	/**
 	 * Setter for critical damage percent.
 	 * 
-	 * @param attack The critical damage percent to be set
+	 * @param critDamagePercent The critical damage percent to be set
 	 */
 	public void setCritDamagePercent(double critDamagePercent) {
 		this.critDamagePercent = Math.max(Math.min(1, critDamagePercent), 0);
@@ -285,7 +285,7 @@ public abstract class Entity {
 	/**
 	 * Setter for position in X-axis.
 	 * 
-	 * @param attack The position to be set in X-axis
+	 * @param posX The position to be set in X-axis
 	 */
 	public void setPosX(int posX) {
 		this.posX = posX;
@@ -303,7 +303,7 @@ public abstract class Entity {
 	/**
 	 * Setter for position in Y-axis.
 	 * 
-	 * @param attack The position to be set in Y-axis
+	 * @param posY The position to be set in Y-axis
 	 */
 	public void setPosY(int posY) {
 		this.posY = posY;
@@ -336,6 +336,11 @@ public abstract class Entity {
 		return maxHealth;
 	}
 
+	/**
+	 * Setter for {@link #maxHealth}
+	 * 
+	 * @param maxHealth the new {@link #maxHealth}
+	 */
 	public void setMaxHealth(int maxHealth) {
 		this.maxHealth = Math.max(1, maxHealth);
 	}
