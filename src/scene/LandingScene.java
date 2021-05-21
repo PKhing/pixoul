@@ -89,7 +89,7 @@ public class LandingScene {
 	private static Button exitBtn;
 
 	/**
-	 * The {@link SettingPane} that used when click on {@value }
+	 * The {@link SettingPane} that used when click on {@link #optionBtn}
 	 */
 	private static SettingPane settingPane = new SettingPane();
 

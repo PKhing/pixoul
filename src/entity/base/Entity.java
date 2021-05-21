@@ -21,7 +21,7 @@ public abstract class Entity {
 	 */
 	public final int MOVE_SPEED = 1;
 
-	/*
+	/**
 	 * Name of this entity.
 	 */
 	private String name;

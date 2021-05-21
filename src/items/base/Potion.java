@@ -18,21 +18,21 @@ public abstract class Potion extends Item {
 	/**
 	 * Represent the duration of effect that used in {@link EntityEffect}
 	 * 
-	 * @see {@link EntityEffect#duration}
+	 * @see EntityEffect#duration duration
 	 */
 	private int duration;
 
 	/**
 	 * Represent the permanent property of effect that used in {@link EntityEffect}
 	 * 
-	 * @see {@link EntityEffect#isPermanent}
+	 * @see EntityEffect#isPermanent isPermanent
 	 */
 	private boolean isPermanent;
 
 	/**
 	 * Represent the efficient value that used in {@link EntityEffect}
 	 * 
-	 * @see {@link EntityEffect#value}
+	 * @see EntityEffect#value value
 	 */
 	private int effectValue;
 

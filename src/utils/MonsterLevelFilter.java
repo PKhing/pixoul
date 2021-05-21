@@ -4,7 +4,9 @@ import entity.DarkMage;
 import entity.HauntedMaid;
 import entity.Player;
 import entity.PumpkinHead;
+import entity.Reaper;
 import entity.Skeleton;
+import entity.Soul;
 import entity.base.Monster;
 
 /**

@@ -7,6 +7,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 import scene.GameScene;
+import scene.LandingScene;
 
 /**
  * The GameAudioUtils class is the class that provide the {@link MediaPlayer}
@@ -57,7 +58,6 @@ public class GameAudioUtils {
 	 * Load audio by file path and make it loop when play
 	 * 
 	 * @param filePath the path of audio file
-	 * @param volumes  initial volume of audio
 	 * @return {@link MediaPlayer} instance
 	 */
 	private static MediaPlayer loadAudioLoop(String filePath) {

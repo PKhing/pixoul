@@ -126,7 +126,7 @@ public class MapGenerator {
 		/**
 		 * Creates a new state.
 		 * 
-		 * @param x         The position in the Y-axis of this state
+		 * @param y         The position in the Y-axis of this state
 		 * @param x         The position in the X-axis of this state
 		 * @param direction The direction of this state
 		 */

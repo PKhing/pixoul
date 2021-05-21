@@ -49,7 +49,7 @@ public class RandomUtil {
 	/**
 	 * Represent the list of filter which monster can appear in that floor
 	 * 
-	 * @see {@link MonsterLevelFilter}
+	 * @see MonsterLevelFilter
 	 */
 	private static ArrayList<MonsterLevelFilter> monsterFilter;
 

@@ -3,6 +3,7 @@ package controller;
 import components.InventoryPane;
 import components.PausePane;
 import components.SettingPane;
+import effects.Immobilize;
 
 /**
  * The InterruptController is controller which control the user input that
