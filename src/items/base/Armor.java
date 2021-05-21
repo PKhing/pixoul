@@ -21,16 +21,15 @@ public class Armor extends Item {
 	 * @param description the description of armor
 	 * @param defense     the defense value of armor
 	 * @param spriteIndex the index in sprite map of armor
-	 * @param symbol      the symbol index of armor
 	 */
-	public Armor(String name, String description, int defense, int spriteIndex, int symbol) {
+	public Armor(String name, String description, int defense, int spriteIndex) {
 		super(name, description, spriteIndex);
 		setDefense(defense);
 	}
 
 	@Override
 	public Armor clone() {
-		return new Armor(getName(), getDescription(), getDefense(), getSpriteIndex(), getSymbol());
+		return new Armor(getName(), getDescription(), getDefense(), getSpriteIndex());
 	}
 
 	@Override
@@ -90,15 +89,15 @@ public class Armor extends Item {
 	public static Armor parseArmor(String type, String name, String description, int defense)
 			throws UnknownItemTypeException {
 		if (type.equals("WoodenArmor")) {
-			return new Armor(name, description, defense, 0, Sprites.ARMOR);
+			return new Armor(name, description, defense, 0);
 		}
 
 		if (type.equals("IronArmor")) {
-			return new Armor(name, description, defense, 1, Sprites.ARMOR);
+			return new Armor(name, description, defense, 1);
 		}
 
 		if (type.equals("GoldenArmor")) {
-			return new Armor(name, description, defense, 2, Sprites.ARMOR);
+			return new Armor(name, description, defense, 2);
 		}
 
 		throw new UnknownItemTypeException("%s armor type is unknown".formatted(type));

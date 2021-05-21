@@ -311,7 +311,7 @@ public class GameController {
 		newPlayer.setPositionOnMap(firstRoomPos.getKey(), firstRoomPos.getValue());
 		new Weapon("Rusty Knife", "A rusty knife which dungeon guard has given [2]", 2, 1, Sprites.KNIFE)
 				.onEquip(newPlayer);
-		new Armor("Wooden Armor", "An old armor which dungeon guard has given [5]", 5, 0, Sprites.ARMOR).onEquip(newPlayer);
+		new Armor("Wooden Armor", "An old armor which dungeon guard has given [2]", 2, 0).onEquip(newPlayer);
 
 		Potion maxHealthPotion = new InstantHealPotion("Max Healing Potion",
 				"This potion will heal you to max health (have only one per game) [?]", 0, 0, false, 0);
