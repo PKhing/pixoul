@@ -114,6 +114,8 @@ public class InventoryPane extends AnchorPane {
 	public void remove() {
 		AudioClip closeSFX = GameAudioUtils.getCloseInventorySFX();
 		try {
+			isDeleteMode = false;
+			GameScene.getScene().setCursor(Cursor.DEFAULT);
 			((Pane) getParent()).getChildren().remove(this);
 			InterruptController.setInventoryOpen(false);
 			if(!closeSFX.isPlaying()) {

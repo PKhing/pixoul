@@ -26,7 +26,7 @@ import utils.RandomUtil;
  * @see AnimationUtil
  */
 public class GameLogic {
-	
+
 	/**
 	 * The variable that stores the next action of the player for the purpose of
 	 * delay optimization.
@@ -157,7 +157,11 @@ public class GameLogic {
 		Item cellItem = currentCell.getItem();
 
 		// Checks item on the cell
-		if ((cellItem != null) && (player.getItemList().size() != GameConfig.MAX_ITEM)) {
+		if ((cellItem != null)) {
+			if (player.getItemList().size() == GameConfig.MAX_ITEM) {
+				MessageTextUtil.textWhenCannotPickedItem(cellItem);
+				return;
+			}
 			player.getItemList().add(cellItem);
 			currentCell.setItem(null);
 			MessageTextUtil.textWhenPickUpItem(cellItem);
@@ -269,10 +273,18 @@ public class GameLogic {
 	 */
 	private static void unEquipItemHandler(Item item) {
 		Player player = GameController.getPlayer();
-		player.unEquipItem(item);
+		boolean result = player.unEquipItem(item);
 		if (item instanceof Armor) {
+			if(!result) {
+				MessageTextUtil.textWhenCannotUnequipArmor((Armor) item);
+				return;
+			}
 			MessageTextUtil.textWhenUnequipArmor((Armor) item);
 		} else {
+			if(!result) {
+				MessageTextUtil.textWhenCannotUnequipWeapon((Weapon) item);
+				return;
+			}
 			MessageTextUtil.textWhenUnequipWeapon((Weapon) item);
 		}
 	}

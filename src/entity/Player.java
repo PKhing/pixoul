@@ -26,22 +26,22 @@ import utils.MessageTextUtil;
  *
  */
 public class Player extends Entity implements Moveable, Attackable {
-	
+
 	/**
 	 * {@link Armor The armor} that the player currently equips.
 	 */
 	private Armor equippedArmor;
-	
+
 	/**
 	 * {@link Weapon The weapon} that the player currently equips.
 	 */
 	private Weapon equippedWeapon;
-	
+
 	/**
 	 * {@link Item The items} that the player currently has.
 	 */
 	private ArrayList<Item> itemList = new ArrayList<Item>();
-	
+
 	/**
 	 * Line of sight of the player.
 	 */
@@ -89,10 +89,15 @@ public class Player extends Entity implements Moveable, Attackable {
 	 * Unequips the specified {@link Item item}.
 	 * 
 	 * @param item {@link Item The item} to be unequipped
+	 * @return true if success to unequip item otherwise false
 	 */
-	public void unEquipItem(Item item) {
+	public boolean unEquipItem(Item item) {
+		if (getItemList().size() == GameConfig.MAX_ITEM) {
+			return false;
+		}
 		item.onUnequip(this);
 		getItemList().add(item);
+		return true;
 	}
 
 	/**

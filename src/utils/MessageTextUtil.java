@@ -25,8 +25,8 @@ public class MessageTextUtil {
 	 * Generate the text when {@link Entity} has attacked to another {@link Entity}
 	 * and add to {@link MessagePane}
 	 * 
-	 * @param from the attacker {@link Entity}
-	 * @param to the attacked {@link Entity}
+	 * @param from        the attacker {@link Entity}
+	 * @param to          the attacked {@link Entity}
 	 * @param attackValue the attack value which will appear in text
 	 */
 	public static void textWhenAttack(Entity from, Entity to, int attackValue) {
@@ -78,6 +78,17 @@ public class MessageTextUtil {
 		String displayText = "Player has not used weapon now.".formatted(shortenWord(weapon.getName()));
 		writeMessage(displayText);
 	}
+	
+	/**
+	 * Generate the text when {@link Player} can not unequip {@link Weapon} and add to
+	 * {@link MessagePane}
+	 * 
+	 * @param armor the {@link Weapon} that {@link Player} tries to unequip
+	 */
+	public static void textWhenCannotUnequipWeapon(Weapon weapon) {
+		String displayText = "Player cannot unequip %s because of full inventory".formatted(weapon.getName());
+		writeMessage(displayText);
+	}
 
 	/**
 	 * Generate the text when {@link Player} has switched the {@link Weapon} and add
@@ -119,7 +130,18 @@ public class MessageTextUtil {
 	 * @param armor the {@link Armor} that {@link Player} has unequipped
 	 */
 	public static void textWhenUnequipArmor(Armor armor) {
-		String displayText = "Player has taken off armor";
+		String displayText = "Player has unequipped %s".formatted(armor.getName());
+		writeMessage(displayText);
+	}
+	
+	/**
+	 * Generate the text when {@link Player} can not unequip {@link Armor} and add to
+	 * {@link MessagePane}
+	 * 
+	 * @param armor the {@link Armor} that {@link Player} tries to unequip
+	 */
+	public static void textWhenCannotUnequipArmor(Armor armor) {
+		String displayText = "Player cannot unequip %s because of full inventory".formatted(armor.getName());
 		writeMessage(displayText);
 	}
 
@@ -131,6 +153,17 @@ public class MessageTextUtil {
 	 */
 	public static void textWhenPickUpItem(Item item) {
 		String displayText = "Player has picked up %s".formatted(shortenWord(item.getName()));
+		writeMessage(displayText);
+	}
+
+	/**
+	 * Generate the text when {@link Player} can not picked up {@link Item} from
+	 * {@link Cell} and add to {@link MessagePane}
+	 * 
+	 * @param item the {@link Item} that {@link Player} tries to picked up
+	 */
+	public static void textWhenCannotPickedItem(Item item) {
+		String displayText = "Player can not picked up %s because of full inventory".formatted(shortenWord(item.getName()));
 		writeMessage(displayText);
 	}
 
