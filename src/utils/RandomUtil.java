@@ -210,7 +210,7 @@ public class RandomUtil {
 		int monsterMaxDefense = level + 3;
 
 		// Begin to generate Dark Mage
-		int darkMageAmount = random(1, numberOfAllMonster / 4);
+		int darkMageAmount = random(3, numberOfAllMonster / 4);
 		if (levelFilter.isDarkMageAppear()) {
 			for (int i = 0; i < darkMageAmount; i++) {
 				int randomHealth = random(monsterMinHealth, monsterMaxHealth);
@@ -223,7 +223,7 @@ public class RandomUtil {
 		}
 
 		// Begin to generate Soul
-		int soulAmount = random(1, numberOfAllMonster / 4);
+		int soulAmount = random(3, numberOfAllMonster / 4);
 		if (levelFilter.isSoulAppear()) {
 			for (int i = 0; i < soulAmount; i++) {
 				monsterList.add(new Soul(0, 0));
@@ -232,7 +232,7 @@ public class RandomUtil {
 		}
 
 		// Begin to generate Reaper
-		int reaperAmount = random(1, numberOfAllMonster / 4);
+		int reaperAmount = random(3, numberOfAllMonster / 4);
 		if (levelFilter.isReaperAppear()) {
 			for (int i = 0; i < reaperAmount; i++) {
 				int randomHealth = random(monsterMinHealth, monsterMaxHealth);
@@ -244,7 +244,7 @@ public class RandomUtil {
 		}
 
 		// Begin to generate Haunted Maid
-		int hauntedMaidAmount = random(1, numberOfAllMonster / 2);
+		int hauntedMaidAmount = random(5, numberOfAllMonster / 2);
 		if (levelFilter.isHauntedMaidAppear()) {
 			for (int i = 0; i < hauntedMaidAmount; i++) {
 				int randomHealth = random(monsterMinHealth, monsterMaxHealth);
@@ -257,7 +257,7 @@ public class RandomUtil {
 		}
 
 		// Begin to generate Pumpkin Head
-		int pumpkinHeadAmount = random(1, numberOfAllMonster / 2);
+		int pumpkinHeadAmount = random(5, numberOfAllMonster / 2);
 		if (levelFilter.isPumpkinHeadAppear()) {
 			for (int i = 0; i < pumpkinHeadAmount; i++) {
 				int randomHealth = random(monsterMinHealth, monsterMaxHealth);
@@ -270,7 +270,7 @@ public class RandomUtil {
 		}
 
 		// Begin to generate Skeleton
-		int skeletonAmount = random(1, numberOfAllMonster);
+		int skeletonAmount = random(5, numberOfAllMonster);
 		if (levelFilter.isSkeletonAppear()) {
 			for (int i = 0; i < skeletonAmount; i++) {
 				int randomHealth = random(monsterMinHealth, monsterMaxHealth);
