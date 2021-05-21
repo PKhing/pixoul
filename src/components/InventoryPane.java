@@ -236,7 +236,7 @@ public class InventoryPane extends AnchorPane {
 			// If player clicks on the blank item frame in delete mode, the mode will be
 			// switch to normal.
 			canvas.setOnMouseClicked((event) -> {
-				if (isDeleteMode == true) {
+				if (isDeleteMode) {
 					isDeleteMode = false;
 					GameScene.getScene().setCursor(Cursor.DEFAULT);
 				}
