@@ -1,1 +1,13 @@
+WoodenArmor,Adventurer's Suit,A light and comfortable suit made just for young adventurers.,5
+WoodenArmor,Mantle, An armor that is simple yet elegant.,6
+WoodenArmor,Wooden Mail,A simple set of armor carved out of solid wood.,6
+IronArmor,Assaulter Plate,Designed for brave warrior who faces against enemies at the forefront.,6
+IronArmor,Chain Mail,Heavy mail made entirely of polished metal chain links.,7
+IronArmor,Meteo Plate Armor,A plate armor made of a meteoric stone that consists of unkown substances.,8
+IronArmor,Spiritual Tunic,A Tunic that has been granted additional tolerance against certain properties.,7
+IronArmor,Padded Armor,Armor constructed of solid metal plates that have been padded on the inside for comfort.,7
+GoldenArmor,Elite Engineer Armor,Designed to be used by outstanding warrior who has a remarkable attack skill.,10
+GoldenArmor,Full Plate,	Heavy solid armor made of durable plates of impenetrable metal.,8
+GoldenArmor,Goibne's Armor,An armor that was accidentally enchanted by Goibne the blacksmith.,8
+GoldenArmor,Life Link,A powerful holy armor bestowed to those who pledge themselves to the Goddess.,10
 (TYPE),(NAME),(DESCRIPTION),(DEFENSE)
