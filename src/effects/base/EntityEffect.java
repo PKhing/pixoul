@@ -175,7 +175,8 @@ public abstract class EntityEffect {
 	}
 
 	/**
-	 * Generate string in format "(EffectName) [(Entity or Potion that used)]: (duration)"
+	 * Generate string in format "(EffectName) [(Entity or Potion that used)]:
+	 * (duration)"
 	 */
 	@Override
 	public String toString() {

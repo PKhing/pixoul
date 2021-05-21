@@ -31,13 +31,13 @@ public class DarkMage extends Monster {
 	 * player.
 	 */
 	private int poisonDamage;
-	
+
 	/**
 	 * The duration of the poison effect that the dark mage will inflict on the
 	 * player.
 	 */
 	private int poisonDuration;
-	
+
 	/**
 	 * The poison effect that the dark mage inflict on the player.
 	 */

@@ -31,43 +31,45 @@ import utils.GameAudioUtils;
 import utils.GameConfig;
 
 /**
- * The InventoryPane is the pane that contains components about an {@link Item item}. It displays the item that the player has and the item that the player is equipping.
+ * The InventoryPane is the pane that contains components about an {@link Item
+ * item}. It displays the item that the player has and the item that the player
+ * is equipping.
  *
  */
 public class InventoryPane extends AnchorPane {
-	
+
 	/**
 	 * The pane that contains all items that the player currently has.
 	 */
 	private FlowPane itemPane;
-	
+
 	/**
 	 * The pane that contains items that the player is equipping.
 	 */
 	private VBox equipmentPane;
-	
+
 	/**
 	 * Specifies whether this pane is in delete mode or not. If the pane is in
 	 * delete mode, left-click on an item will delete it permanently. Right-click on
 	 * an item will switch back to normal mode.
 	 */
 	private boolean isDeleteMode = false;
-	
+
 	/**
 	 * The sprite of an item frame.
 	 */
 	private static WritableImage itemFrameSprite = DrawUtil.getWritableImage("sprites/inventory/itemFrame.png");
-	
+
 	/**
 	 * The background of this pane header.
 	 */
 	private static WritableImage headerBackground = DrawUtil.getWritableImage("sprites/inventory/header.png");
-	
+
 	/**
 	 * The sprite of a bin.
 	 */
 	private static WritableImage binSprite = DrawUtil.getWritableImage("sprites/inventory/bin.png");
-	
+
 	/**
 	 * Creates new InventoryPane.
 	 */
@@ -118,7 +120,7 @@ public class InventoryPane extends AnchorPane {
 			GameScene.getScene().setCursor(Cursor.DEFAULT);
 			((Pane) getParent()).getChildren().remove(this);
 			InterruptController.setInventoryOpen(false);
-			if(!closeSFX.isPlaying()) {
+			if (!closeSFX.isPlaying()) {
 				closeSFX.play();
 			}
 		} catch (ClassCastException e) {

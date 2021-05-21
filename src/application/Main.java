@@ -15,13 +15,13 @@ import utils.GameConfig;
  */
 public class Main extends Application {
 
-	
 	/**
-	 * Initialize primary stage and set application size scale. 
+	 * Initialize primary stage and set application size scale.
+	 * 
 	 * @param primaryStage Application's main stage
 	 */
 	@Override
-	public void start(Stage primaryStage){
+	public void start(Stage primaryStage) {
 
 		String iconPath = ClassLoader.getSystemResource(GameConfig.ICON_NAME).toString();
 		Rectangle2D screenBound = Screen.getPrimary().getBounds();
@@ -47,6 +47,7 @@ public class Main extends Application {
 
 	/**
 	 * Launches JavaFX application.
+	 * 
 	 * @param args Arguments
 	 */
 	public static void main(String[] args) {

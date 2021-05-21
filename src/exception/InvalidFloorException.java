@@ -3,8 +3,8 @@ package exception;
 import controller.GameController;
 
 /**
- * The InvalidFloorException is {@link Exception} that will be used to throw when
- * input floor number is invalid such as decimal or negative value
+ * The InvalidFloorException is {@link Exception} that will be used to throw
+ * when input floor number is invalid such as decimal or negative value
  * 
  * @see GameController#getFloor(int floor)
  */

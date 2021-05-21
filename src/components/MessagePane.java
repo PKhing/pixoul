@@ -20,7 +20,7 @@ import utils.MessageTextUtil;
  *
  */
 public class MessagePane extends VBox {
-	
+
 	/**
 	 * A constant holding the maximum amount of message in the MessagePane.
 	 */

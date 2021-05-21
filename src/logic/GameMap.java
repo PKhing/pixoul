@@ -13,12 +13,12 @@ import utils.GameConfig;
  *
  */
 public class GameMap {
-	
+
 	/**
 	 * The Array of {@link Cell} on this level.
 	 */
 	private Cell gameMap[][];
-	
+
 	/**
 	 * The List of room position on this level.
 	 */

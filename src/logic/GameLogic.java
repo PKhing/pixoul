@@ -207,6 +207,7 @@ public class GameLogic {
 
 		// Plays attack animation
 		new Thread() {
+			@Override
 			public void run() {
 				try {
 					AnimationUtil.playAnimation(2).join();
@@ -275,13 +276,13 @@ public class GameLogic {
 		Player player = GameController.getPlayer();
 		boolean result = player.unEquipItem(item);
 		if (item instanceof Armor) {
-			if(!result) {
+			if (!result) {
 				MessageTextUtil.textWhenCannotUnequipArmor((Armor) item);
 				return;
 			}
 			MessageTextUtil.textWhenUnequipArmor((Armor) item);
 		} else {
-			if(!result) {
+			if (!result) {
 				MessageTextUtil.textWhenCannotUnequipWeapon((Weapon) item);
 				return;
 			}

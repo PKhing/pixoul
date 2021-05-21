@@ -7,8 +7,8 @@ import items.base.Potion;
 import logic.Sprites;
 
 /**
- * The InstantHealPotion is {@link Potion} that temporary or
- * permanent increase current  player health when used
+ * The InstantHealPotion is {@link Potion} that temporary or permanent increase
+ * current player health when used
  * 
  * @see {@link InstantHealth}
  */
@@ -44,7 +44,7 @@ public class InstantHealPotion extends Potion {
 		if (getName().contains("Max Healing Potion")) {
 			setEffectValue(player.getMaxHealth() - player.getHealth());
 		}
-		
+
 		EntityEffect effect = new InstantHealth(getName(), getEffectValue(), getDuration(), isPermanent());
 		effect.onAdd(player);
 	}

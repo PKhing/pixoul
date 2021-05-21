@@ -78,10 +78,10 @@ public class MessageTextUtil {
 		String displayText = "Player has not used weapon now.".formatted(shortenWord(weapon.getName()));
 		writeMessage(displayText);
 	}
-	
+
 	/**
-	 * Generate the text when {@link Player} can not unequip {@link Weapon} and add to
-	 * {@link MessagePane}
+	 * Generate the text when {@link Player} can not unequip {@link Weapon} and add
+	 * to {@link MessagePane}
 	 * 
 	 * @param armor the {@link Weapon} that {@link Player} tries to unequip
 	 */
@@ -133,10 +133,10 @@ public class MessageTextUtil {
 		String displayText = "Player has unequipped %s".formatted(armor.getName());
 		writeMessage(displayText);
 	}
-	
+
 	/**
-	 * Generate the text when {@link Player} can not unequip {@link Armor} and add to
-	 * {@link MessagePane}
+	 * Generate the text when {@link Player} can not unequip {@link Armor} and add
+	 * to {@link MessagePane}
 	 * 
 	 * @param armor the {@link Armor} that {@link Player} tries to unequip
 	 */
@@ -163,7 +163,8 @@ public class MessageTextUtil {
 	 * @param item the {@link Item} that {@link Player} tries to picked up
 	 */
 	public static void textWhenCannotPickedItem(Item item) {
-		String displayText = "Player can not picked up %s because of full inventory".formatted(shortenWord(item.getName()));
+		String displayText = "Player can not picked up %s because of full inventory"
+				.formatted(shortenWord(item.getName()));
 		writeMessage(displayText);
 	}
 

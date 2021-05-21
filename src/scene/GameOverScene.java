@@ -18,11 +18,11 @@ import utils.FontUtil;
 import utils.GameConfig;
 
 /**
- * The GameOverScene class represent the {@link Scene} that show when {@link Player}
- * health is less than or equal zero
+ * The GameOverScene class represent the {@link Scene} that show when
+ * {@link Player} health is less than or equal zero
  */
 public class GameOverScene {
-	
+
 	/**
 	 * Represent the height of the pane in pixel
 	 */

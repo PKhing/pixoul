@@ -33,7 +33,7 @@ public class GameAudioUtils {
 	 * The close inventory sound effect
 	 */
 	private static AudioClip closeInventorySFX;
-	
+
 	/**
 	 * The attack sound effect
 	 */
@@ -48,7 +48,7 @@ public class GameAudioUtils {
 		openInventorySFX = loadSFX("sfx/open_inventory.mp3");
 		closeInventorySFX = loadSFX("sfx/close_inventory.mp3");
 		attackSFX = loadSFX("sfx/attack.mp3");
-		
+
 		updateBGMVolume();
 		updateEffectVolume();
 	}
@@ -74,7 +74,7 @@ public class GameAudioUtils {
 
 		return player;
 	}
-	
+
 	/**
 	 * Load sound effect by file path
 	 * 
@@ -84,7 +84,7 @@ public class GameAudioUtils {
 	private static AudioClip loadSFX(String filePath) {
 		URL resource = ClassLoader.getSystemResource(filePath);
 		AudioClip player = new AudioClip(resource.toExternalForm());
-		
+
 		return player;
 	}
 
@@ -95,7 +95,7 @@ public class GameAudioUtils {
 		gameSceneBGM.setVolume(GameConfig.getBgmVolume());
 		landingSceneBGM.setVolume(GameConfig.getBgmVolume());
 	}
-	
+
 	/**
 	 * Update all effect volume to current setting
 	 */
@@ -140,7 +140,7 @@ public class GameAudioUtils {
 	public static void setLandingSceneBGM(MediaPlayer landingSceneBGM) {
 		GameAudioUtils.landingSceneBGM = landingSceneBGM;
 	}
-	
+
 	/**
 	 * Getter for {@link #openInventorySFX}
 	 * 
@@ -176,8 +176,7 @@ public class GameAudioUtils {
 	public static void setCloseInventorySFX(AudioClip closeInventorySFX) {
 		GameAudioUtils.closeInventorySFX = closeInventorySFX;
 	}
-	
-	
+
 	/**
 	 * Getter for {@link #attackSFX}
 	 * 

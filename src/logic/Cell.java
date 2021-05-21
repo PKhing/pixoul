@@ -10,42 +10,42 @@ import utils.RandomUtil;
  *
  */
 public class Cell {
-	
+
 	/**
 	 * Represents path.
 	 */
 	public static final int PATH = 0;
-	
+
 	/**
 	 * Represents wall.
 	 */
 	public static final int WALL = 1;
-	
+
 	/**
 	 * Represents void.
 	 */
 	public static final int VOID = 2;
-	
+
 	/**
 	 * Represents path with ladder to the upper floor.
 	 */
 	public static final int LADDER_UP = 3;
-	
+
 	/**
 	 * Represents path with ladder to the lower floor.
 	 */
 	public static final int LADDER_DOWN = 4;
-	
+
 	/**
 	 * A constant holding the maximum type of path sprite.
 	 */
 	private static final int TILE_SPRITE_TYPE = 6;
-	
+
 	/**
 	 * The type of this cell.
 	 */
 	private int type;
-	
+
 	/**
 	 * The symbol of this cell. (for rendering)
 	 */

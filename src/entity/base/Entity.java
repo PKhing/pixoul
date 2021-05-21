@@ -15,7 +15,7 @@ import utils.MessageTextUtil;
  * Base class to represent all entities.
  */
 public abstract class Entity {
-	
+
 	/**
 	 * Default speed of entity
 	 */

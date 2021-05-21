@@ -6,8 +6,8 @@ import effects.base.IConsecutiveEffect;
 import entity.base.Entity;
 
 /**
- * The Regeneration class is {@link EntityEffect} that active for every move, it will
- * increase the {@link Entity} health
+ * The Regeneration class is {@link EntityEffect} that active for every move, it
+ * will increase the {@link Entity} health
  * 
  * @implNote This effect can not make it permanent
  */

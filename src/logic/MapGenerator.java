@@ -5,7 +5,6 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 import controller.GameController;
-import entity.Player;
 import entity.base.Monster;
 import items.base.Armor;
 import items.base.Potion;
@@ -24,57 +23,57 @@ public class MapGenerator {
 	 * A constant holding the maximum amount of room.
 	 */
 	private static final int MAX_ROOM = 10;
-	
+
 	/**
 	 * A constant holding the maximum amount of path.
 	 */
 	private static final int MAX_PATH = 25;
-	
+
 	/**
 	 * A constant holding the maximum length of path.
 	 */
 	private static final int MAX_LENGTH = 15;
-	
+
 	/**
 	 * A constant holding the minimum length of path.
 	 */
 	private static final int MIN_LENGTH = 4;
-	
+
 	/**
 	 * Represents void.
 	 */
 	private static final int VOID = 0;
-	
+
 	/**
 	 * Represents path.
 	 */
 	private static final int PATH = -1;
-	
+
 	/**
 	 * Represents room.
 	 */
 	private static final int ROOM = -2;
-	
+
 	/**
 	 * Represents processing.
 	 */
 	private static final int PROCESSING = -3;
-	
+
 	/**
 	 * Represents walking straight action.
 	 */
 	private static final int STRAIGHT = 1;
-	
+
 	/**
 	 * Represents turning left action.
 	 */
 	private static final int TURN_LEFT = 2;
-	
+
 	/**
 	 * Represents turning right action.
 	 */
 	private static final int TURN_RIGHT = 3;
-	
+
 	/**
 	 * The Array of integer that represents a type of each cell.
 	 */
@@ -98,7 +97,7 @@ public class MapGenerator {
 		generateArmorOnMap(gameMap);
 		generatePotionOnMap(gameMap);
 		generateWeaponOnMap(gameMap);
-		
+
 		return gameMap;
 	}
 
@@ -108,17 +107,17 @@ public class MapGenerator {
 	 *
 	 */
 	static class State {
-		
+
 		/**
 		 * Position in the Y-axis of this state.
 		 */
 		private int y;
-		
+
 		/**
 		 * Position in the X-axis of this state.
 		 */
 		private int x;
-		
+
 		/**
 		 * The {@link Direction} of this state.
 		 */

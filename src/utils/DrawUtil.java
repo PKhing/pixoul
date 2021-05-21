@@ -26,27 +26,27 @@ import logic.GameLogic;
 import scene.GameScene;
 
 public class DrawUtil {
-	
+
 	/**
 	 * Cell sprites
 	 */
 	private static PixelReader cellSprites;
-	
+
 	/**
 	 * Item sprites
 	 */
 	private static PixelReader itemSprites;
-	
+
 	/**
 	 * Ladder sprites
 	 */
 	private static PixelReader ladderSprites;
-	
+
 	/**
 	 * Entity sprites
 	 */
 	private static PixelReader entitySprites;
-	
+
 	/**
 	 * Attack mouse icon
 	 */

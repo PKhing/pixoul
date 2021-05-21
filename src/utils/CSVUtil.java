@@ -16,7 +16,7 @@ import items.base.Weapon;
  * CSV file
  */
 public class CSVUtil {
-	
+
 	/**
 	 * Represent the base path URL for CSV file path
 	 */

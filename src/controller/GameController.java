@@ -12,7 +12,6 @@ import items.base.Weapon;
 import items.potion.InstantHealPotion;
 import javafx.animation.FadeTransition;
 import javafx.scene.Node;
-import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Pair;
 import logic.GameMap;
@@ -29,29 +28,29 @@ import utils.TransitionUtil;
  * which currently render and the changing of {@link #level} inside the game
  */
 public class GameController {
-	
+
 	/**
 	 * The {@link ArrayList} represents the map of each level
 	 */
 	private static ArrayList<GameMap> levelMapList = new ArrayList<>();
-	
+
 	/**
 	 * Represent the {@link GameMap} of current level
 	 */
 	private static GameMap gameMap;
 
 	/**
-	 * The {@link MediaPlayer} represent the background music of GameScene 
+	 * The {@link MediaPlayer} represent the background music of GameScene
 	 */
 	private static MediaPlayer bgm = GameAudioUtils.getGameSceneBGM();
 
 	/**
-	 * Represent the level of current floor 
+	 * Represent the level of current floor
 	 */
 	private static int level;
-	
+
 	/**
-	 * Represent the current {@link Player} instance 
+	 * Represent the current {@link Player} instance
 	 */
 	private static Player player;
 
@@ -81,7 +80,8 @@ public class GameController {
 	}
 
 	/**
-	 * Change {@link #gameMap} to lower level and making fade transition if able to do
+	 * Change {@link #gameMap} to lower level and making fade transition if able to
+	 * do
 	 * 
 	 * @return return true if {@link #player} can go to lower level otherwise false
 	 */
@@ -103,9 +103,9 @@ public class GameController {
 		return true;
 	}
 
-
 	/**
-	 * Change {@link #gameMap} to upper level and making {@link FadeTransition} if able to do
+	 * Change {@link #gameMap} to upper level and making {@link FadeTransition} if
+	 * able to do
 	 * 
 	 * @return return true if {@link #player} can go to upper level otherwise false
 	 */
@@ -125,7 +125,7 @@ public class GameController {
 
 		return true;
 	}
-	
+
 	/**
 	 * Initialize new game
 	 */
@@ -143,8 +143,8 @@ public class GameController {
 	}
 
 	/**
-	 * Stop the game background music then 
-	 * making fade transition to {@link LandingScene}
+	 * Stop the game background music then making fade transition to
+	 * {@link LandingScene}
 	 */
 	public static void exitToMainMenu() {
 		FadeTransition fadeOut = TransitionUtil.makeFadingNode(GameScene.getGamePane(), 1.0, 0.0);
@@ -157,10 +157,11 @@ public class GameController {
 	}
 
 	/**
-	 * Checking condition that {@link #player} is currently 
-	 * Game over or not by checking {@link #player} health
+	 * Checking condition that {@link #player} is currently Game over or not by
+	 * checking {@link #player} health
 	 * 
-	 * @return true if {@link #player} health is less than or equals 0 otherwise false
+	 * @return true if {@link #player} health is less than or equals 0 otherwise
+	 *         false
 	 */
 	public static boolean isGameOver() {
 		if (player.getHealth() <= 0) {
@@ -220,7 +221,7 @@ public class GameController {
 	public static Player getPlayer() {
 		return player;
 	}
-	
+
 	/**
 	 * Setter for {@link #player}
 	 * 
@@ -242,12 +243,14 @@ public class GameController {
 	/**
 	 * Utility method that creating {@link FadeTransition} for switching floor
 	 * 
-	 * @param node the target node that we want to make a fade
-	 * @param from starting opacity 
-	 * @param to ending opacity
-	 * @param newMap the map that we want to render
-	 * @param isAscending true if the type of switching floor is ascending otherwise false
-	 * @return {@link FadeTransition} instance which used for making transition between floor
+	 * @param node        the target node that we want to make a fade
+	 * @param from        starting opacity
+	 * @param to          ending opacity
+	 * @param newMap      the map that we want to render
+	 * @param isAscending true if the type of switching floor is ascending otherwise
+	 *                    false
+	 * @return {@link FadeTransition} instance which used for making transition
+	 *         between floor
 	 */
 	private static FadeTransition makeFadingScene(Node node, double from, double to, GameMap newMap,
 			boolean isAscending) {
@@ -305,19 +308,21 @@ public class GameController {
 		Pair<Integer, Integer> firstRoomPos = GameController.getRoomList().get(0);
 
 		newPlayer.setPositionOnMap(firstRoomPos.getKey(), firstRoomPos.getValue());
-		new Weapon("Rusty Knife", "A rusty knife which dungeon guard has given [2]", 2, 1, Sprites.KNIFE).onEquip(newPlayer);
+		new Weapon("Rusty Knife", "A rusty knife which dungeon guard has given [2]", 2, 1, Sprites.KNIFE)
+				.onEquip(newPlayer);
 		new Armor("Wooden Armor", "With 100 years salt effect [5]", 5, 0, Sprites.ARMOR).onEquip(newPlayer);
 
 		Potion maxHealthPotion = new InstantHealPotion("Max Healing Potion",
 				"This potion will heal you to max health (have only one per game) [?]", 0, 0, false, 0);
-		
+
 		newPlayer.getItemList().add(maxHealthPotion);
 
 		return newPlayer;
 	}
 
 	/**
-	 * Create new {@link FadeTransition} then play transition along with background music
+	 * Create new {@link FadeTransition} then play transition along with background
+	 * music
 	 */
 	private static void initialTransition() {
 		GameScene.getGamePane().setOpacity(0.0);

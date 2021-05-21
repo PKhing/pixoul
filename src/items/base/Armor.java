@@ -91,12 +91,12 @@ public class Armor extends Item {
 		if (type.equals("WoodenArmor")) {
 			return new Armor(name, description, defense, 0, Sprites.ARMOR);
 		}
-		
-		if(type.equals("IronArmor")) {
+
+		if (type.equals("IronArmor")) {
 			return new Armor(name, description, defense, 1, Sprites.ARMOR);
 		}
-		
-		if(type.equals("GoldenArmor")) {
+
+		if (type.equals("GoldenArmor")) {
 			return new Armor(name, description, defense, 2, Sprites.ARMOR);
 		}
 

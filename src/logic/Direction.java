@@ -6,22 +6,22 @@ package logic;
  *
  */
 public class Direction {
-	
+
 	/**
 	 * Represents up direction.
 	 */
 	public static final int UP = 0;
-	
+
 	/**
 	 * Represents right direction.
 	 */
 	public static final int RIGHT = 1;
-	
+
 	/**
 	 * Represents down direction.
 	 */
 	public static final int DOWN = 2;
-	
+
 	/**
 	 * Represents left direction.
 	 */

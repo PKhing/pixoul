@@ -85,7 +85,8 @@ public class PausePane extends VBox {
 	}
 
 	/**
-	 * Initialize new {@link StyledButton} which used for reset game and add to the pane
+	 * Initialize new {@link StyledButton} which used for reset game and add to the
+	 * pane
 	 */
 	private void addStartNewGameBtn() {
 		Button startNewGameBtn = new StyledButton(widthBox, "Start New Game", colorOnHover, colorBg);
@@ -97,9 +98,10 @@ public class PausePane extends VBox {
 
 		getChildren().add(startNewGameBtn);
 	}
-	
+
 	/**
-	 * Initialize new {@link StyledButton} which used for resume game and add to the pane
+	 * Initialize new {@link StyledButton} which used for resume game and add to the
+	 * pane
 	 */
 	private void addResumeBtn() {
 		Button resumeBtn = new StyledButton(widthBox, "Resume", colorOnHover, colorBg);
@@ -112,7 +114,8 @@ public class PausePane extends VBox {
 	}
 
 	/**
-	 * Initialize new {@link StyledButton} which used for open the {@link #settingPane} and add to the pane
+	 * Initialize new {@link StyledButton} which used for open the
+	 * {@link #settingPane} and add to the pane
 	 */
 	private void addSettingBtn() {
 		Button settingBtn = new StyledButton(widthBox, "Setting", colorOnHover, colorBg);
@@ -128,7 +131,8 @@ public class PausePane extends VBox {
 	}
 
 	/**
-	 *  Initialize new {@link StyledButton} which used for back to main menu and add to the pane
+	 * Initialize new {@link StyledButton} which used for back to main menu and add
+	 * to the pane
 	 */
 	private void addToMainMenuBtn() {
 		Button toMainMenuBtn = new StyledButton(widthBox, "Back to main menu", colorOnHover, colorBg);
@@ -142,7 +146,8 @@ public class PausePane extends VBox {
 	}
 
 	/**
-	 * Initialize new {@link StyledButton} which used for exit the game and add to the pane
+	 * Initialize new {@link StyledButton} which used for exit the game and add to
+	 * the pane
 	 */
 	private void addExitBtn() {
 		Button exitBtn = new StyledButton(widthBox, "Exit", colorOnHover, colorBg);
@@ -155,7 +160,7 @@ public class PausePane extends VBox {
 	}
 
 	/**
-	 * Handle when component is removed from the scene. 
+	 * Handle when component is removed from the scene.
 	 */
 	public void remove() {
 		try {

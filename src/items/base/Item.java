@@ -6,26 +6,26 @@ import entity.Player;
  * The abstract base class for all items
  */
 public abstract class Item {
-	
+
 	/**
 	 * Represent name of item
 	 */
 	private String name;
-	
+
 	/**
-	 * Represent description of item 
+	 * Represent description of item
 	 */
 	private String description;
-	
+
 	/**
 	 * Represent index in sprite map of item
 	 */
 	private int spriteIndex;
-	
+
 	/**
 	 * The constructor of this class
 	 * 
-	 * @param name the name of this item
+	 * @param name        the name of this item
 	 * @param description the description of this item
 	 * @param spriteIndex the index in sprite map of item
 	 */
@@ -49,7 +49,7 @@ public abstract class Item {
 	 */
 	@Override
 	public abstract Item clone();
-	
+
 	/**
 	 * Handler method when {@link Player} equip item
 	 * 

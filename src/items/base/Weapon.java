@@ -15,7 +15,7 @@ public class Weapon extends Item {
 	private int attack;
 
 	private int spriteSymbol;
-	
+
 	/**
 	 * The constructor of class
 	 * 
@@ -52,7 +52,7 @@ public class Weapon extends Item {
 	public Weapon clone() {
 		return new Weapon(getName(), getDescription(), getAttack(), getSpriteIndex(), getSymbol());
 	}
-	
+
 	/**
 	 * Handler method when player equips weapon, increase player attack value by
 	 * {@link Weapon#attack attack}
@@ -77,7 +77,7 @@ public class Weapon extends Item {
 	public int getSymbol() {
 		return spriteSymbol;
 	}
-	
+
 	/**
 	 * The utility method for creating new {@link Weapon} by using input parameter
 	 * 
@@ -93,7 +93,7 @@ public class Weapon extends Item {
 	public static Weapon parseWeapon(String type, String name, String description, int attack, int spriteIndex)
 			throws UnknownItemTypeException {
 		int symbol = -1;
-		
+
 		if (type.equals("Knife")) {
 			symbol = Sprites.KNIFE;
 		}
@@ -105,8 +105,8 @@ public class Weapon extends Item {
 		if (type.equals("Sword")) {
 			symbol = Sprites.SWORD;
 		}
-		
-		if(symbol != -1) {
+
+		if (symbol != -1) {
 			return new Weapon(name, description, attack, spriteIndex, symbol);
 		}
 

@@ -8,7 +8,6 @@ import java.util.Random;
 
 import entity.DarkMage;
 import entity.HauntedMaid;
-import entity.Player;
 import entity.PumpkinHead;
 import entity.Reaper;
 import entity.Skeleton;
@@ -169,7 +168,7 @@ public class RandomUtil {
 
 			if (!(newPotion instanceof VisionPotion)) {
 				int newValue = newPotion.getEffectValue();
-				if(!newPotion.isPermanent()) {
+				if (!newPotion.isPermanent()) {
 					newValue += level;
 				}
 				newPotion.setEffectValue(newValue);
@@ -305,7 +304,7 @@ public class RandomUtil {
 				nowIdx -= weaponPool.size();
 			}
 
-			Weapon newWeapon = (Weapon) (weaponPool.get(nowIdx).clone());
+			Weapon newWeapon = (weaponPool.get(nowIdx).clone());
 
 			newWeapon.setAttack(newWeapon.getAttack() + level);
 
@@ -338,7 +337,7 @@ public class RandomUtil {
 				nowIdx -= armorPool.size();
 			}
 
-			Armor newArmor = (Armor) (armorPool.get(nowIdx).clone());
+			Armor newArmor = (armorPool.get(nowIdx).clone());
 
 			newArmor.setDefense(newArmor.getDefense() + level);
 

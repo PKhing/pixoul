@@ -36,7 +36,7 @@ public class GameConfig {
 	 * Represent the volume of music audio
 	 */
 	private static double bgmVolume = 0.1;
-	
+
 	/**
 	 * Represent the volume of effect
 	 */

@@ -14,12 +14,12 @@ import utils.RandomUtil;
  * randomly attack the player by reducing the player's health point to 1.
  */
 public class Soul extends Monster implements Attackable {
-	
+
 	/**
 	 * Percent that this soul will attack the player.
 	 */
 	private final int attackPercent = 20;
-	
+
 	/**
 	 * Determine that this soul attacked the player in the last turn or not.
 	 */
@@ -46,7 +46,7 @@ public class Soul extends Monster implements Attackable {
 	/**
 	 * Updates this soul. If this soul already died, remove it from the game. If
 	 * this soul can attack the player, it will randomly attack the player by
-	 * reducing the player's health point to 1. 
+	 * reducing the player's health point to 1.
 	 */
 	@Override
 	public void update() {

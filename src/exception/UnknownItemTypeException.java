@@ -5,8 +5,8 @@ import items.base.Potion;
 import items.base.Weapon;
 
 /**
- * The UnknownItemTypeException is {@link Exception} that will be thrown
- * when Item CSV contains invalid item type 
+ * The UnknownItemTypeException is {@link Exception} that will be thrown when
+ * Item CSV contains invalid item type
  * 
  * @see Armor#parseArmor(String, String, String, int, int)
  * @see Weapon#parseWeapon(String, String, String, int, int)
