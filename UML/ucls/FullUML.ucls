@@ -1,0 +1,805 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.4" icons="true" automaticImage="PNG" always-add-relationships="false" generalizations="true" 
+  realizations="true" associations="false" dependencies="false" nesting-relationships="true" router="FAN">  
+  <class id="1" language="java" name="application.Main" project="Pixoul" file="/Pixoul/src/application/Main.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="117" width="113" x="2517" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="components.EffectPane" project="Pixoul" 
+    file="/Pixoul/src/components/EffectPane.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="90" x="244" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="components.ItemInfoPane" project="Pixoul" 
+    file="/Pixoul/src/components/ItemInfoPane.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="117" width="167" x="2670" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="components.StatusPane" project="Pixoul" 
+    file="/Pixoul/src/components/StatusPane.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="225" width="156" x="5744" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="components.MessagePane" project="Pixoul" 
+    file="/Pixoul/src/components/MessagePane.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="135" width="147" x="3095" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="components.PausePane" project="Pixoul" 
+    file="/Pixoul/src/components/PausePane.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="279" width="165" x="5326" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="components.SettingPane" project="Pixoul" 
+    file="/Pixoul/src/components/SettingPane.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="333" width="175" x="4740" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="components.StyledButton" project="Pixoul" 
+    file="/Pixoul/src/components/StyledButton.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="81" width="192" x="8571" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="components.InventoryPane" project="Pixoul" 
+    file="/Pixoul/src/components/InventoryPane.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="369" width="208" x="8803" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="controller.InterruptController" project="Pixoul" 
+    file="/Pixoul/src/controller/InterruptController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="441" width="210" x="8321" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="controller.SceneController" project="Pixoul" 
+    file="/Pixoul/src/controller/SceneController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="207" width="178" x="2877" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="controller.GameController" project="Pixoul" 
+    file="/Pixoul/src/controller/GameController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="477" width="383" x="998" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="13" language="java" name="effects.base.EntityEffect" project="Pixoul" 
+    file="/Pixoul/src/effects/base/EntityEffect.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="441" width="186" x="11431" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="14" language="java" name="effects.base.EffectName" project="Pixoul" 
+    file="/Pixoul/src/effects/base/EffectName.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="225" width="147" x="374" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="15" language="java" name="effects.base.IConsecutiveEffect" project="Pixoul" 
+    file="/Pixoul/src/effects/base/IConsecutiveEffect.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="10943" y="1285"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="16" language="java" name="effects.InstantHealth" project="Pixoul" 
+    file="/Pixoul/src/effects/InstantHealth.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="135" width="193" x="11752" y="986"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="17" language="java" name="effects.Strength" project="Pixoul" file="/Pixoul/src/effects/Strength.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="135" width="172" x="12203" y="986"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="18" language="java" name="effects.Protection" project="Pixoul" file="/Pixoul/src/effects/Protection.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="135" width="179" x="11533" y="986"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="19" language="java" name="effects.Poison" project="Pixoul" file="/Pixoul/src/effects/Poison.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="163" x="10675" y="986"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="20" language="java" name="effects.Blindness" project="Pixoul" file="/Pixoul/src/effects/Blindness.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="135" width="178" x="11985" y="986"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="21" language="java" name="effects.Immobilize" project="Pixoul" file="/Pixoul/src/effects/Immobilize.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="135" width="179" x="11314" y="986"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="22" language="java" name="effects.Regeneration" project="Pixoul" 
+    file="/Pixoul/src/effects/Regeneration.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="195" x="10878" y="986"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="23" language="java" name="effects.Vision" project="Pixoul" file="/Pixoul/src/effects/Vision.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="135" width="161" x="11113" y="986"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="24" language="java" name="entity.base.Attackable" project="Pixoul" 
+    file="/Pixoul/src/entity/base/Attackable.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="81" width="130" x="8460" y="1750"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <enumeration id="25" language="java" name="entity.base.DispatchAction" project="Pixoul" 
+    file="/Pixoul/src/entity/base/DispatchAction.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="261" width="179" x="1879" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <interface id="26" language="java" name="entity.base.Moveable" project="Pixoul" 
+    file="/Pixoul/src/entity/base/Moveable.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="81" width="112" x="8308" y="1750"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="27" language="java" name="entity.base.Monster" project="Pixoul" file="/Pixoul/src/entity/base/Monster.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="171" width="255" x="8308" y="986"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="28" language="java" name="entity.base.Entity" project="Pixoul" file="/Pixoul/src/entity/base/Entity.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="909" width="242" x="9051" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="29" language="java" name="entity.Skeleton" project="Pixoul" file="/Pixoul/src/entity/Skeleton.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="135" width="226" x="8308" y="1323"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="30" language="java" name="entity.HauntedMaid" project="Pixoul" file="/Pixoul/src/entity/HauntedMaid.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="135" width="247" x="8021" y="1323"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="31" language="java" name="entity.PumpkinHead" project="Pixoul" file="/Pixoul/src/entity/PumpkinHead.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="135" width="249" x="8574" y="1323"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="32" language="java" name="entity.Soul" project="Pixoul" file="/Pixoul/src/entity/Soul.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="8949" y="1345"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="33" language="java" name="entity.Reaper" project="Pixoul" file="/Pixoul/src/entity/Reaper.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="135" width="220" x="7761" y="1323"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="34" language="java" name="entity.Player" project="Pixoul" file="/Pixoul/src/entity/Player.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="387" width="326" x="9051" y="1323"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="35" language="java" name="exception.InvalidFloorException" project="Pixoul" 
+    file="/Pixoul/src/exception/InvalidFloorException.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="163" x="5123" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="36" language="java" name="exception.UnknownItemTypeException" project="Pixoul" 
+    file="/Pixoul/src/exception/UnknownItemTypeException.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="197" x="7759" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="37" language="java" name="exception.NullMapException" project="Pixoul" 
+    file="/Pixoul/src/exception/NullMapException.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="146" x="3282" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="38" language="java" name="items.base.Armor" project="Pixoul" file="/Pixoul/src/items/base/Armor.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="225" width="229" x="10344" y="986"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="39" language="java" name="items.base.Weapon" project="Pixoul" file="/Pixoul/src/items/base/Weapon.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="243" width="263" x="9705" y="986"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="40" language="java" name="items.base.Potion" project="Pixoul" file="/Pixoul/src/items/base/Potion.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="279" width="296" x="10008" y="986"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="41" language="java" name="items.base.Item" project="Pixoul" file="/Pixoul/src/items/base/Item.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="315" width="154" x="10008" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="42" language="java" name="items.potion.VisionPotion" project="Pixoul" 
+    file="/Pixoul/src/items/potion/VisionPotion.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="10844" y="1500"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="43" language="java" name="items.potion.ProtectionPotion" project="Pixoul" 
+    file="/Pixoul/src/items/potion/ProtectionPotion.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="9903" y="1490"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="44" language="java" name="items.potion.StrengthPotion" project="Pixoul" 
+    file="/Pixoul/src/items/potion/StrengthPotion.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="10538" y="1490"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="45" language="java" name="items.potion.RegenerationPotion" project="Pixoul" 
+    file="/Pixoul/src/items/potion/RegenerationPotion.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="10206" y="1488"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="46" language="java" name="items.potion.InstantHealPotion" project="Pixoul" 
+    file="/Pixoul/src/items/potion/InstantHealPotion.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="9610" y="1494"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="47" language="java" name="logic.Sprites" project="Pixoul" file="/Pixoul/src/logic/Sprites.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="387" width="173" x="5531" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="48" language="java" name="logic.MapRenderer.Node" project="Pixoul" 
+    file="/Pixoul/src/logic/MapRenderer.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="171" width="156" x="4342" y="986"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="49" language="java" name="logic.MapRenderer.Renderable" project="Pixoul" 
+    file="/Pixoul/src/logic/MapRenderer.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="81" width="103" x="4199" y="986"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="50" language="java" name="logic.GameLogic" project="Pixoul" file="/Pixoul/src/logic/GameLogic.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="369" width="232" x="1421" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="51" language="java" name="logic.MapGenerator" project="Pixoul" file="/Pixoul/src/logic/MapGenerator.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="513" width="222" x="736" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="52" language="java" name="logic.MapGenerator.State" project="Pixoul" 
+    file="/Pixoul/src/logic/MapGenerator.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="297" width="145" x="736" y="986"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="53" language="java" name="logic.Cell" project="Pixoul" file="/Pixoul/src/logic/Cell.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="423" width="135" x="561" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="54" language="java" name="logic.Direction" project="Pixoul" file="/Pixoul/src/logic/Direction.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="207" width="128" x="4955" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="55" language="java" name="logic.MapRenderer" project="Pixoul" file="/Pixoul/src/logic/MapRenderer.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="135" width="430" x="4270" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="56" language="java" name="logic.GameMap" project="Pixoul" file="/Pixoul/src/logic/GameMap.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="225" width="223" x="3711" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="57" language="java" name="scene.LandingScene" project="Pixoul" file="/Pixoul/src/scene/LandingScene.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="459" width="163" x="41" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="58" language="java" name="scene.GameScene" project="Pixoul" file="/Pixoul/src/scene/GameScene.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="567" width="214" x="6981" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="59" language="java" name="scene.GameOverScene" project="Pixoul" file="/Pixoul/src/scene/GameOverScene.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="279" width="146" x="1693" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="60" language="java" name="utils.MessageTextUtil" project="Pixoul" 
+    file="/Pixoul/src/utils/MessageTextUtil.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="513" width="256" x="3974" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="61" language="java" name="utils.CSVUtil" project="Pixoul" file="/Pixoul/src/utils/CSVUtil.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="189" width="288" x="6653" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="62" language="java" name="utils.DrawUtil" project="Pixoul" file="/Pixoul/src/utils/DrawUtil.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="423" width="233" x="6218" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="63" language="java" name="utils.GameConfig" project="Pixoul" file="/Pixoul/src/utils/GameConfig.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="603" width="203" x="3468" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="64" language="java" name="utils.GameAudioUtils" project="Pixoul" 
+    file="/Pixoul/src/utils/GameAudioUtils.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="423" width="222" x="7235" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="65" language="java" name="utils.TransitionUtil" project="Pixoul" 
+    file="/Pixoul/src/utils/TransitionUtil.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="285" x="7996" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="66" language="java" name="utils.AnimationUtil" project="Pixoul" file="/Pixoul/src/utils/AnimationUtil.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="207" width="222" x="7497" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="67" language="java" name="utils.FontUtil" project="Pixoul" file="/Pixoul/src/utils/FontUtil.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="122" x="6491" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="68" language="java" name="utils.MonsterLevelFilter" project="Pixoul" 
+    file="/Pixoul/src/utils/MonsterLevelFilter.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="459" width="379" x="2098" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="69" language="java" name="utils.RandomUtil" project="Pixoul" file="/Pixoul/src/utils/RandomUtil.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="459" width="238" x="5940" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="70" language="java" name="entity.DarkMage" project="Pixoul" file="/Pixoul/src/entity/DarkMage.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="315" width="177" x="7481" y="1199"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <generalization id="71">    
+    <end type="SOURCE" refId="46"/>    
+    <end type="TARGET" refId="40"/>  
+  </generalization>  
+  <realization id="72">    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="26"/>  
+  </realization>  
+  <generalization id="73">    
+    <end type="SOURCE" refId="20"/>    
+    <end type="TARGET" refId="13"/>  
+  </generalization>  
+  <generalization id="74">    
+    <end type="SOURCE" refId="43"/>    
+    <end type="TARGET" refId="40"/>  
+  </generalization>  
+  <nesting id="75">    
+    <end type="SOURCE" refId="55"/>    
+    <end type="TARGET" refId="49"/>  
+  </nesting>  
+  <nesting id="76">    
+    <end type="SOURCE" refId="51"/>    
+    <end type="TARGET" refId="52"/>  
+  </nesting>  
+  <realization id="77">    
+    <end type="SOURCE" refId="30"/>    
+    <end type="TARGET" refId="24"/>  
+  </realization>  
+  <generalization id="78">    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="13"/>  
+  </generalization>  
+  <realization id="79">    
+    <end type="SOURCE" refId="34"/>    
+    <end type="TARGET" refId="24"/>  
+  </realization>  
+  <generalization id="80">    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="13"/>  
+  </generalization>  
+  <realization id="81">    
+    <end type="SOURCE" refId="30"/>    
+    <end type="TARGET" refId="26"/>  
+  </realization>  
+  <generalization id="82">    
+    <end type="SOURCE" refId="17"/>    
+    <end type="TARGET" refId="13"/>  
+  </generalization>  
+  <realization id="83">    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="24"/>  
+  </realization>  
+  <generalization id="84">    
+    <end type="SOURCE" refId="18"/>    
+    <end type="TARGET" refId="13"/>  
+  </generalization>  
+  <realization id="85">    
+    <end type="SOURCE" refId="34"/>    
+    <end type="TARGET" refId="26"/>  
+  </realization>  
+  <generalization id="86">    
+    <end type="SOURCE" refId="33"/>    
+    <end type="TARGET" refId="27"/>  
+  </generalization>  
+  <realization id="87">    
+    <end type="SOURCE" refId="33"/>    
+    <end type="TARGET" refId="24"/>  
+  </realization>  
+  <realization id="88">    
+    <end type="SOURCE" refId="29"/>    
+    <end type="TARGET" refId="26"/>  
+  </realization>  
+  <generalization id="89">    
+    <end type="SOURCE" refId="27"/>    
+    <end type="TARGET" refId="28"/>  
+  </generalization>  
+  <generalization id="90">    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="27"/>  
+  </generalization>  
+  <generalization id="91">    
+    <end type="SOURCE" refId="44"/>    
+    <end type="TARGET" refId="40"/>  
+  </generalization>  
+  <generalization id="92">    
+    <end type="SOURCE" refId="39"/>    
+    <end type="TARGET" refId="41"/>  
+  </generalization>  
+  <nesting id="93">    
+    <end type="SOURCE" refId="55"/>    
+    <end type="TARGET" refId="48"/>  
+  </nesting>  
+  <generalization id="94">    
+    <end type="SOURCE" refId="70"/>    
+    <end type="TARGET" refId="27"/>  
+  </generalization>  
+  <generalization id="95">    
+    <end type="SOURCE" refId="45"/>    
+    <end type="TARGET" refId="40"/>  
+  </generalization>  
+  <generalization id="96">    
+    <end type="SOURCE" refId="42"/>    
+    <end type="TARGET" refId="40"/>  
+  </generalization>  
+  <generalization id="97">    
+    <end type="SOURCE" refId="29"/>    
+    <end type="TARGET" refId="27"/>  
+  </generalization>  
+  <generalization id="98">    
+    <end type="SOURCE" refId="23"/>    
+    <end type="TARGET" refId="13"/>  
+  </generalization>  
+  <realization id="99">    
+    <end type="SOURCE" refId="70"/>    
+    <end type="TARGET" refId="24"/>  
+  </realization>  
+  <generalization id="100">    
+    <end type="SOURCE" refId="38"/>    
+    <end type="TARGET" refId="41"/>  
+  </generalization>  
+  <generalization id="101">    
+    <end type="SOURCE" refId="22"/>    
+    <end type="TARGET" refId="13"/>  
+  </generalization>  
+  <generalization id="102">    
+    <end type="SOURCE" refId="32"/>    
+    <end type="TARGET" refId="27"/>  
+  </generalization>  
+  <realization id="103">    
+    <end type="SOURCE" refId="32"/>    
+    <end type="TARGET" refId="24"/>  
+  </realization>  
+  <realization id="104">    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="15"/>  
+  </realization>  
+  <generalization id="105">    
+    <bendpoint x="9071" y="991"/>    
+    <end type="SOURCE" refId="34"/>    
+    <end type="TARGET" refId="28"/>  
+  </generalization>  
+  <generalization id="106">    
+    <end type="SOURCE" refId="40"/>    
+    <end type="TARGET" refId="41"/>  
+  </generalization>  
+  <realization id="107">    
+    <end type="SOURCE" refId="29"/>    
+    <end type="TARGET" refId="24"/>  
+  </realization>  
+  <realization id="108">    
+    <end type="SOURCE" refId="33"/>    
+    <end type="TARGET" refId="26"/>  
+  </realization>  
+  <realization id="109">    
+    <end type="SOURCE" refId="22"/>    
+    <end type="TARGET" refId="15"/>  
+  </realization>  
+  <generalization id="110">    
+    <end type="SOURCE" refId="21"/>    
+    <end type="TARGET" refId="13"/>  
+  </generalization>  
+  <generalization id="111">    
+    <end type="SOURCE" refId="30"/>    
+    <end type="TARGET" refId="27"/>  
+  </generalization>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>
