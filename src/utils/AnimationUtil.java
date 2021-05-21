@@ -6,6 +6,7 @@ import controller.GameController;
 import entity.Player;
 import entity.base.Monster;
 import javafx.application.Platform;
+import javafx.scene.media.AudioClip;
 import logic.Direction;
 import logic.MapRenderer;
 
@@ -108,11 +109,13 @@ public class AnimationUtil {
 	public static Thread playAttackAnimation() {
 		Thread attackAnimation = new Thread(() -> {
 			try {
+				GameAudioUtils.getAttackSFX().play();
 				Thread.sleep(ATTACK_ANIMATION_DURATION_MS);
 			} catch (InterruptedException e) {
 				System.out.println("Attack animation interrupted");
 			}
 		});
+		
 		attackAnimation.start();
 		return attackAnimation;
 	}
