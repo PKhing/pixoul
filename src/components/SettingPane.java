@@ -16,6 +16,7 @@ import javafx.scene.layout.BorderStroke;
 import javafx.scene.layout.BorderStrokeStyle;
 import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -40,12 +41,22 @@ public class SettingPane extends VBox {
 	/**
 	 * Represent the width of the pane
 	 */
-	private final int widthBox = 180;
+	private final int widthBox = 200;
 
 	/**
-	 * Represent the {@link Slider} that control sound volume
+	 * The container for all option components
 	 */
-	private Slider volumeSlider;
+	private GridPane optionContainer;
+
+	/**
+	 * Represent the {@link Slider} that control music volume
+	 */
+	private Slider bgmVolumeSlider;
+
+	/**
+	 * Represent the {@link Slider} that control effect volume
+	 */
+	private Slider effectVolumeSlider;
 
 	/**
 	 * Represent the {@link CheckBox} that disable the animation when entity is
@@ -60,8 +71,10 @@ public class SettingPane extends VBox {
 	public SettingPane() {
 		styleSetup();
 		addTitle();
-		addVolumeSlider();
+		addBgmVolumeSlider();
+		addEffectVolumeSlider();
 		addDisableAnimation();
+		addOptionContainer();
 		addCloseText();
 
 		setOnKeyPressed((event) -> {
@@ -77,7 +90,8 @@ public class SettingPane extends VBox {
 	 * Update value inside setting to current value
 	 */
 	public void updateSetting() {
-		volumeSlider.setValue((int) (GameConfig.getVolume() * 100));
+		effectVolumeSlider.setValue((int) (GameConfig.getEffectVolume() * 100));
+		bgmVolumeSlider.setValue((int) (GameConfig.getBgmVolume() * 100));
 		animationCheckBox.setSelected(GameConfig.isSkipMoveAnimation());
 	}
 
@@ -85,7 +99,7 @@ public class SettingPane extends VBox {
 	 * Initialize style for pane
 	 */
 	private void styleSetup() {
-		setBackground(new Background(new BackgroundFill(Color.GREY, CornerRadii.EMPTY, Insets.EMPTY)));
+		setBackground(new Background(new BackgroundFill(Color.rgb(245, 246, 231), null, null)));
 		setBorder(new Border(
 				new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 		setPadding(new Insets(20));
@@ -100,11 +114,59 @@ public class SettingPane extends VBox {
 	}
 
 	/**
+	 * Initialize new {@link #optionContainer} and add component to container
+	 */
+	public void addOptionContainer() {
+		optionContainer = new GridPane();
+		optionContainer.setPadding(new Insets(10));
+		optionContainer.setVgap(20);
+
+		Label effectVolumeLabel = new Label("Effect Volume");
+		effectVolumeLabel.setFont(FontUtil.getFont("small"));
+		effectVolumeLabel.setTextFill(Color.BLACK);
+
+		Label bgmVolumeLabel = new Label("Music Volume");
+		bgmVolumeLabel.setFont(FontUtil.getFont("small"));
+		bgmVolumeLabel.setTextFill(Color.BLACK);
+
+		Label disableLabel = new Label("Disable Animation ");
+		disableLabel.setFont(FontUtil.getFont("small"));
+		disableLabel.setTextFill(Color.BLACK);
+
+		optionContainer.add(bgmVolumeLabel, 0, 0);
+		optionContainer.add(bgmVolumeSlider, 1, 0);
+
+		optionContainer.add(effectVolumeLabel, 0, 1);
+		optionContainer.add(effectVolumeSlider, 1, 1);
+
+		optionContainer.add(disableLabel, 0, 2);
+		optionContainer.add(animationCheckBox, 1, 2);
+
+		getChildren().add(optionContainer);
+	}
+
+	/**
+	 * Initialize new {@link #effectVolumeSlider}
+	 */
+	public void addEffectVolumeSlider() {
+		effectVolumeSlider = new Slider(0, 100, (int) (GameConfig.getEffectVolume() * 100));
+		effectVolumeSlider.valueProperty().addListener(new ChangeListener<Number>() {
+
+			@Override
+			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+				GameConfig.setEffectVolume((double) newValue / 100);
+				GameAudioUtils.updateEffectVolume();
+			}
+
+		});
+	}
+
+	/**
 	 * Initialize new close text which can be clicked to close pane
 	 */
 	private void addCloseText() {
 		HBox closeBox = new HBox();
-		closeBox.setPadding(new Insets(20, 0, 0, 0));
+		closeBox.setPadding(new Insets(10, 0, 0, 0));
 		closeBox.setAlignment(Pos.CENTER);
 
 		Text closeText = new Text("OK");
@@ -139,46 +201,25 @@ public class SettingPane extends VBox {
 	}
 
 	/**
-	 * Initialize new {@link #volumeSlider} and container with current value
+	 * Initialize new {@link #bgmVolumeSlider} with current value
 	 */
-	private void addVolumeSlider() {
-		HBox bgmVolumeBox = new HBox();
-		bgmVolumeBox.setPadding(new Insets(10));
-		bgmVolumeBox.setSpacing(10);
-		bgmVolumeBox.setAlignment(Pos.CENTER_LEFT);
-
-		Label volumeLabel = new Label("BGM Volume");
-		volumeLabel.setFont(FontUtil.getFont("small"));
-		volumeLabel.setTextFill(Color.BLACK);
-
-		volumeSlider = new Slider(0, 100, (int) (GameConfig.getVolume() * 100));
-		volumeSlider.valueProperty().addListener(new ChangeListener<Number>() {
+	private void addBgmVolumeSlider() {
+		bgmVolumeSlider = new Slider(0, 100, (int) (GameConfig.getBgmVolume() * 100));
+		bgmVolumeSlider.valueProperty().addListener(new ChangeListener<Number>() {
 
 			@Override
 			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-				GameConfig.setVolume((double) newValue / 100);
+				GameConfig.setBgmVolume((double) newValue / 100);
 				GameAudioUtils.updateBGMVolume();
 			}
 
 		});
-
-		bgmVolumeBox.getChildren().addAll(volumeLabel, volumeSlider);
-		this.getChildren().add(bgmVolumeBox);
 	}
 
 	/**
-	 * Initialize new {@link #animationCheckBox} and container
+	 * Initialize new {@link #animationCheckBox}
 	 */
 	private void addDisableAnimation() {
-		HBox disableAnimationBox = new HBox();
-		disableAnimationBox.setPadding(new Insets(10));
-		disableAnimationBox.setSpacing(7);
-		disableAnimationBox.setAlignment(Pos.CENTER_LEFT);
-
-		Label disableLabel = new Label("Disable Animation ");
-		disableLabel.setFont(FontUtil.getFont("small"));
-		disableLabel.setTextFill(Color.BLACK);
-
 		animationCheckBox = new CheckBox();
 		animationCheckBox.setSelected(GameConfig.isSkipMoveAnimation());
 
@@ -188,8 +229,5 @@ public class SettingPane extends VBox {
 			GameConfig.setSkipMoveAnimation(newSkipMove);
 			animationCheckBox.setSelected(newSkipMove);
 		});
-
-		disableAnimationBox.getChildren().addAll(disableLabel, animationCheckBox);
-		this.getChildren().add(disableAnimationBox);
 	}
 }

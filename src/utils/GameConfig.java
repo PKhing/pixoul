@@ -35,7 +35,12 @@ public class GameConfig {
 	/**
 	 * Represent the volume of music audio
 	 */
-	private static double volume = 0.1;
+	private static double bgmVolume = 0.1;
+	
+	/**
+	 * Represent the volume of effect
+	 */
+	private static double effectVolume = 0.1;
 
 	/**
 	 * Represent that the game system will ignore moving animation or not
@@ -149,21 +154,21 @@ public class GameConfig {
 	}
 
 	/**
-	 * Getter for {@link #volume}u
+	 * Getter for {@link #bgmVolume}
 	 * 
-	 * @return {@link #volume}
+	 * @return {@link #bgmVolume}
 	 */
-	public static double getVolume() {
-		return volume;
+	public static double getBgmVolume() {
+		return bgmVolume;
 	}
 
 	/**
-	 * Setter for {@link #volume}
+	 * Setter for {@link #bgmVolume}
 	 * 
-	 * @param volume the new {@link #volume}l
+	 * @param volume the new {@link #bgmVolume}l
 	 */
-	public static void setVolume(double volume) {
-		GameConfig.volume = volume;
+	public static void setBgmVolume(double bgmVolume) {
+		GameConfig.bgmVolume = bgmVolume;
 	}
 
 	/**
@@ -182,5 +187,23 @@ public class GameConfig {
 	 */
 	public static void setSkipMoveAnimation(boolean isSkipMoveAnimation) {
 		GameConfig.isSkipMoveAnimation = isSkipMoveAnimation;
+	}
+
+	/**
+	 * Getter for {@link #effectVolume}
+	 * 
+	 * @return {@link #effectVolume}
+	 */
+	public static double getEffectVolume() {
+		return effectVolume;
+	}
+
+	/**
+	 * Setter for {@link #effectVolume}
+	 * 
+	 * @param effectVolume the new {@link #effectVolume}
+	 */
+	public static void setEffectVolume(double effectVolume) {
+		GameConfig.effectVolume = effectVolume;
 	}
 }
