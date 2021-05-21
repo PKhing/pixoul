@@ -35,6 +35,11 @@ public class GameAudioUtils {
 	private static AudioClip closeInventorySFX;
 	
 	/**
+	 * The attack sound effect
+	 */
+	private static AudioClip attackSFX;
+
+	/**
 	 * Load music audio
 	 */
 	static {
@@ -42,6 +47,7 @@ public class GameAudioUtils {
 		landingSceneBGM = loadAudioLoop("bgm/BGMMainScene.mp3");
 		openInventorySFX = loadSFX("sfx/open_inventory.mp3");
 		closeInventorySFX = loadSFX("sfx/close_inventory.mp3");
+		attackSFX = loadSFX("sfx/attack.mp3");
 		
 		updateBGMVolume();
 		updateEffectVolume();
@@ -96,6 +102,7 @@ public class GameAudioUtils {
 	public static void updateEffectVolume() {
 		openInventorySFX.setVolume(GameConfig.getEffectVolume());
 		closeInventorySFX.setVolume(GameConfig.getEffectVolume());
+		attackSFX.setVolume(GameConfig.getEffectVolume());
 	}
 
 	/**
@@ -171,4 +178,21 @@ public class GameAudioUtils {
 	}
 	
 	
+	/**
+	 * Getter for {@link #attackSFX}
+	 * 
+	 * @return {@link #attackSFX}
+	 */
+	public static AudioClip getAttackSFX() {
+		return attackSFX;
+	}
+
+	/**
+	 * Setter for {@link #attackSFX}
+	 * 
+	 * @param attackSFX the new {@link #attackSFX}
+	 */
+	public static void setAttackSFX(AudioClip attackSFX) {
+		GameAudioUtils.attackSFX = attackSFX;
+	}
 }

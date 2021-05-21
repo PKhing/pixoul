@@ -40,7 +40,7 @@ public class GameConfig {
 	/**
 	 * Represent the volume of effect
 	 */
-	private static double effectVolume = 0.1;
+	private static double effectVolume = 0.4;
 
 	/**
 	 * Represent that the game system will ignore moving animation or not
