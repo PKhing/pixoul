@@ -7,7 +7,7 @@ IronArmor,Meteo Plate Armor,A plate armor made of a meteoric stone that consists
 IronArmor,Spiritual Tunic,A Tunic that has been granted additional tolerance against certain properties.,5
 IronArmor,Padded Armor,Armor constructed of solid metal plates that have been padded on the inside for comfort.,3
 GoldenArmor,Elite Engineer Armor,Designed to be used by outstanding warrior who has a remarkable attack skill.,5
-GoldenArmor,Full Plate,	Heavy solid armor made of durable plates of impenetrable metal.,4
+GoldenArmor,Full Plate,Heavy solid armor made of durable plates of impenetrable metal.,4
 GoldenArmor,Goibne's Armor,An armor that was accidentally enchanted by Goibne the blacksmith.,3
 GoldenArmor,Life Link,A powerful holy armor bestowed to those who pledge themselves to the Goddess.,5
 (TYPE),(NAME),(DESCRIPTION),(DEFENSE)

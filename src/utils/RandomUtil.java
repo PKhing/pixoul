@@ -168,10 +168,11 @@ public class RandomUtil {
 			Potion newPotion = (Potion) (potionPool.get(nowIdx).clone());
 
 			if (!(newPotion instanceof VisionPotion)) {
-				int lowerBound = Math.max(1, (newPotion.getEffectValue() + level) / 2);
-				int upperBound = newPotion.getEffectValue() + level;
-
-				newPotion.setEffectValue(random(lowerBound, upperBound));
+				int newValue = newPotion.getEffectValue();
+				if(!newPotion.isPermanent()) {
+					newValue += level;
+				}
+				newPotion.setEffectValue(newValue);
 			}
 			newPotion.setDescription(newPotion.getDescription() + " [%d]".formatted(newPotion.getEffectValue()));
 			potionList.add(newPotion);
@@ -306,10 +307,7 @@ public class RandomUtil {
 
 			Weapon newWeapon = (Weapon) (weaponPool.get(nowIdx).clone());
 
-			int lowerBound = Math.max(1, (newWeapon.getAttack() + level) / 2);
-			int upperBound = newWeapon.getAttack() + level;
-
-			newWeapon.setAttack(random(lowerBound, upperBound));
+			newWeapon.setAttack(newWeapon.getAttack() + level);
 
 			newWeapon.setDescription(newWeapon.getDescription() + " [%d]".formatted(newWeapon.getAttack()));
 			weaponList.add(newWeapon);
@@ -342,10 +340,7 @@ public class RandomUtil {
 
 			Armor newArmor = (Armor) (armorPool.get(nowIdx).clone());
 
-			int lowerBound = Math.max(1, (newArmor.getDefense() + level) / 2);
-			int upperBound = newArmor.getDefense() + level;
-
-			newArmor.setDefense(random(lowerBound, upperBound));
+			newArmor.setDefense(newArmor.getDefense() + level);
 
 			newArmor.setDescription(newArmor.getDescription() + " [%d]".formatted(newArmor.getDefense()));
 			armorList.add(newArmor);
