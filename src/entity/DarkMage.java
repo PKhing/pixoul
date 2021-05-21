@@ -3,6 +3,7 @@ package entity;
 import controller.GameController;
 import controller.InterruptController;
 import effects.Poison;
+import entity.base.Attackable;
 import entity.base.Entity;
 import entity.base.Monster;
 import javafx.animation.FadeTransition;
@@ -19,12 +20,12 @@ import utils.RandomUtil;
 import utils.TransitionUtil;
 
 /**
- * The DarkMage class represents dark mage monsters. They can not attack or move
- * but they can warp the player to a random room on the current map, inflict
+ * The DarkMage class represents dark mage monsters. They can not move but can
+ * attack by warp the player to a random room on the current map, inflict
  * {@link Poison poison effect} on the player, or summon {@link Skeleton
  * skeleton}.
  */
-public class DarkMage extends Monster {
+public class DarkMage extends Monster implements Attackable {
 
 	/**
 	 * The damage of the poison effect that the dark mage will inflict on the
@@ -83,13 +84,21 @@ public class DarkMage extends Monster {
 		}
 		Player gamePlayer = GameController.getPlayer();
 		if (isAttackable(gamePlayer)) {
-			int action = RandomUtil.random(1, 100);
-			if (action <= 20) {
-				poison(gamePlayer);
-			} else if (action <= 50) {
-				warp(gamePlayer);
-			}
+			attack(gamePlayer);
 		}
+	}
+
+	@Override
+	public boolean attack(Entity target) {
+		int action = RandomUtil.random(1, 100);
+		if (action <= 20) {
+			poison(target);
+		} else if (action <= 50) {
+			warp(target);
+		} else {
+			return false;
+		}
+		return true;
 	}
 
 	/**
