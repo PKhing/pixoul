@@ -15,29 +15,36 @@ import scene.GameScene;
 public class GameAudioUtils {
 
 	/**
-	 * Represent {@link GameScene} background music
+	 * The {@link GameScene} background music
 	 */
-	private static MediaPlayer GameSceneBGM;
+	private static MediaPlayer gameSceneBGM;
 
 	/**
-	 * Represent {@link LandingScene} background music
+	 * The {@link LandingScene} background music
 	 */
-	private static MediaPlayer LandingSceneBGM;
+	private static MediaPlayer landingSceneBGM;
 
+	/**
+	 * The open inventory sound effect
+	 */
 	private static AudioClip openInventorySFX;
 
+	/**
+	 * The close inventory sound effect
+	 */
 	private static AudioClip closeInventorySFX;
 	
 	/**
 	 * Load music audio
 	 */
 	static {
-		GameSceneBGM = getAudioLoop("bgm/BGMDungeon.mp3");
-		LandingSceneBGM = getAudioLoop("bgm/BGMMainScene.mp3");
-		openInventorySFX = getNewSFX("sfx/open_inventory.mp3");
-		closeInventorySFX = getNewSFX("sfx/close_inventory.mp3");
+		gameSceneBGM = loadAudioLoop("bgm/BGMDungeon.mp3");
+		landingSceneBGM = loadAudioLoop("bgm/BGMMainScene.mp3");
+		openInventorySFX = loadSFX("sfx/open_inventory.mp3");
+		closeInventorySFX = loadSFX("sfx/close_inventory.mp3");
 		
 		updateBGMVolume();
+		updateEffectVolume();
 	}
 
 	/**
@@ -47,7 +54,7 @@ public class GameAudioUtils {
 	 * @param volumes  initial volume of audio
 	 * @return {@link MediaPlayer} instance
 	 */
-	private static MediaPlayer getAudioLoop(String filePath) {
+	private static MediaPlayer loadAudioLoop(String filePath) {
 		URL resource = ClassLoader.getSystemResource(filePath);
 		MediaPlayer player = new MediaPlayer(new Media(resource.toString()));
 
@@ -68,72 +75,97 @@ public class GameAudioUtils {
 	 * @param filePath the path of audio file
 	 * @return {@link AudioClip} instance
 	 */
-	private static AudioClip getNewSFX(String filePath) {
+	private static AudioClip loadSFX(String filePath) {
 		URL resource = ClassLoader.getSystemResource(filePath);
 		AudioClip player = new AudioClip(resource.toExternalForm());
 		
 		return player;
 	}
 
-
 	/**
-	 * Update all background volume to current setting
+	 * Update all background music volume to current setting
 	 */
 	public static void updateBGMVolume() {
-		GameSceneBGM.setVolume(GameConfig.getVolume());
-		LandingSceneBGM.setVolume(GameConfig.getVolume());
-		openInventorySFX.setVolume(GameConfig.getVolume());
-		closeInventorySFX.setVolume(GameConfig.getVolume());
-	}
-
-	/**
-	 * Getter for {@link #GameSceneBGM}
-	 * 
-	 * @return {@link #GameSceneBGM}
-	 */
-	public static MediaPlayer getGameSceneBGM() {
-		return GameSceneBGM;
-	}
-
-	/**
-	 * Setter for {@link #GameSceneBGM}
-	 * 
-	 * @param gameSceneBGM new instance of {@link #GameSceneBGM}
-	 */
-	public static void setGameSceneBGM(MediaPlayer gameSceneBGM) {
-		GameSceneBGM = gameSceneBGM;
-	}
-
-	/**
-	 * Getter for {@link #LandingSceneBGM}
-	 * 
-	 * @return {@link #LandingSceneBGM}
-	 */
-	public static MediaPlayer getLandingSceneBGM() {
-		return LandingSceneBGM;
-	}
-
-	/**
-	 * Setter for {@link #LandingSceneBGM}
-	 * 
-	 * @param landingSceneBGM new instance of {@link #LandingSceneBGM}
-	 */
-	public static void setLandingSceneBGM(MediaPlayer landingSceneBGM) {
-		LandingSceneBGM = landingSceneBGM;
+		gameSceneBGM.setVolume(GameConfig.getBgmVolume());
+		landingSceneBGM.setVolume(GameConfig.getBgmVolume());
 	}
 	
+	/**
+	 * Update all effect volume to current setting
+	 */
+	public static void updateEffectVolume() {
+		openInventorySFX.setVolume(GameConfig.getEffectVolume());
+		closeInventorySFX.setVolume(GameConfig.getEffectVolume());
+	}
+
+	/**
+	 * Getter for {@link #gameSceneBGM}
+	 * 
+	 * @return {@link #gameSceneBGM}
+	 */
+	public static MediaPlayer getGameSceneBGM() {
+		return gameSceneBGM;
+	}
+
+	/**
+	 * Setter for {@link #gameSceneBGM}
+	 * 
+	 * @param gameSceneBGM new instance of {@link #gameSceneBGM}
+	 */
+	public static void setGameSceneBGM(MediaPlayer gameSceneBGM) {
+		GameAudioUtils.gameSceneBGM = gameSceneBGM;
+	}
+
+	/**
+	 * Getter for {@link #landingSceneBGM}
+	 * 
+	 * @return {@link #landingSceneBGM}
+	 */
+	public static MediaPlayer getLandingSceneBGM() {
+		return landingSceneBGM;
+	}
+
+	/**
+	 * Setter for {@link #landingSceneBGM}
+	 * 
+	 * @param landingSceneBGM new instance of {@link #landingSceneBGM}
+	 */
+	public static void setLandingSceneBGM(MediaPlayer landingSceneBGM) {
+		GameAudioUtils.landingSceneBGM = landingSceneBGM;
+	}
+	
+	/**
+	 * Getter for {@link #openInventorySFX}
+	 * 
+	 * @return {@link #openInventorySFX}
+	 */
 	public static AudioClip getOpenInventorySFX() {
 		return openInventorySFX;
 	}
 
+	/**
+	 * Setter for {@link #openInventorySFX}
+	 * 
+	 * @param openInventorySFX the new {@link #openInventorySFX}
+	 */
 	public static void setOpenInventorySFX(AudioClip openInventorySFX) {
 		GameAudioUtils.openInventorySFX = openInventorySFX;
 	}
 
+	/**
+	 * Getter for {@link #closeInventorySFX}
+	 * 
+	 * @return {@link #closeInventorySFX}
+	 */
 	public static AudioClip getCloseInventorySFX() {
 		return closeInventorySFX;
 	}
 
+	/**
+	 * Setter for {@link #closeInventorySFX}
+	 * 
+	 * @param closeInventorySFX the new {@link #closeInventorySFX}
+	 */
 	public static void setCloseInventorySFX(AudioClip closeInventorySFX) {
 		GameAudioUtils.closeInventorySFX = closeInventorySFX;
 	}
