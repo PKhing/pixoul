@@ -2,6 +2,7 @@ package utils;
 
 import items.base.Item;
 import logic.GameMap;
+import scene.CongratulationScene;
 import scene.GameScene;
 
 /**
@@ -47,6 +48,12 @@ public class GameConfig {
 	 * Represent that the game system will ignore moving animation or not
 	 */
 	private static boolean isSkipMoveAnimation = false;
+
+	/**
+	 * Represent that the game system will ignore to show {@link CongratulationScene}
+	 * and go on to next level or not
+	 */
+	private static boolean isEndlessMode = false;
 
 	/**
 	 * Represent the lower bound of window width that it need to scale scene up to
@@ -104,6 +111,12 @@ public class GameConfig {
 	 * Represent the monster field of view
 	 */
 	public static final int MONSTER_LINE_OF_SIGHT = 3;
+	
+	/**
+	 * Represent the maximum level that player can reach when disable endless mode
+	 */
+	public static final int LEVEL_BOUND = 2;
+
 
 	/**
 	 * Getter for {@link #screenWidth}
@@ -211,5 +224,23 @@ public class GameConfig {
 	 */
 	public static void setEffectVolume(double effectVolume) {
 		GameConfig.effectVolume = effectVolume;
+	}
+
+	/**
+	 * Getter for {@link #isEndlessMode}
+	 * 
+	 * @return {@link #isEndlessMode}
+	 */
+	public static boolean isEndlessMode() {
+		return isEndlessMode;
+	}
+
+	/**
+	 * Setter for {@link #isEndlessMode}
+	 * 
+	 * @param isEndlessMode the new {@link #isEndlessMode}
+	 */
+	public static void setEndlessMode(boolean isEndlessMode) {
+		GameConfig.isEndlessMode = isEndlessMode;
 	}
 }

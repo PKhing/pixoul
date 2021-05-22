@@ -213,7 +213,7 @@ public class LandingScene {
 	 * Initialize {@link StyledButton} which used for setting button
 	 */
 	private static void setupSettingButton() {
-		optionBtn = new StyledButton(widthBox, "Option", Color.WHITE, Color.BLACK);
+		optionBtn = new StyledButton(widthBox, "Setting", Color.WHITE, Color.BLACK);
 		optionBtn.setTextFill(Color.WHITE);
 		optionBtn.setOnMouseClicked((event) -> {
 			settingPane.updateSetting();

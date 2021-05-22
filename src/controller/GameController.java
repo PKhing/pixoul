@@ -18,10 +18,12 @@ import logic.GameMap;
 import logic.MapGenerator;
 import logic.MapRenderer;
 import logic.Sprites;
+import scene.CongratulationScene;
 import scene.GameOverScene;
 import scene.GameScene;
 import scene.LandingScene;
 import utils.GameAudioUtils;
+import utils.GameConfig;
 import utils.TransitionUtil;
 
 /**
@@ -81,14 +83,30 @@ public class GameController {
 	}
 
 	/**
-	 * Change {@link #gameMap} to lower level and making fade transition if able to
-	 * do
+	 * If level reaches {@link GameConfig#LEVEL_BOUND level_bound} and disable the
+	 * endless mode then change to the {@link CongratulationScene} otherwise change
+	 * {@link #gameMap} to lower level and making fade transition if able to do
 	 * 
 	 * @return return true if {@link #player} can go to lower level otherwise false
 	 */
 	public static boolean descending() {
 		level += 1;
 		GameMap newMap = null;
+
+		if (level == GameConfig.LEVEL_BOUND && !GameConfig.isEndlessMode()) {
+			bgm.stop();
+			FadeTransition fadeOut = TransitionUtil.makeFadingNode(GameScene.getGamePane(), 1.0, 0.0);
+			
+			InterruptController.setTransition(true);
+			fadeOut.play();
+
+			fadeOut.setOnFinished((event) -> {
+				InterruptController.setTransition(false);
+				SceneController.setSceneToStage(CongratulationScene.getScene());
+			});
+
+			return false;
+		}
 
 		try {
 			newMap = getFloor(level);
