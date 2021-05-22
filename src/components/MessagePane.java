@@ -26,7 +26,7 @@ public class MessagePane extends VBox {
 	/**
 	 * A constant holding the maximum amount of message in the MessagePane.
 	 */
-	private final int MAX_MESSAGE = 8;
+	private final int MAX_MESSAGE = 4;
 
 	/**
 	 * Creates new MessagePane.
