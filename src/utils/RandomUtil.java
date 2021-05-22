@@ -194,8 +194,11 @@ public class RandomUtil {
 		int numberOfAllMonster = random(MIN_MONSTER, MAX_MONSTER);
 
 		ArrayList<Monster> monsterList = new ArrayList<>();
-		if (level > monsterFilter.get(filterIndex).getLevel()) {
-			filterIndex = Math.min(filterIndex + 1, monsterFilter.size() - 1);
+		
+		int newIndex = Math.min(filterIndex + 1, monsterFilter.size() - 1);
+		
+		if (level >= monsterFilter.get(newIndex).getLevel()) {
+			filterIndex = newIndex;
 		}
 
 		MonsterLevelFilter levelFilter = monsterFilter.get(filterIndex);
@@ -224,6 +227,7 @@ public class RandomUtil {
 
 		// Begin to generate Soul
 		int soulAmount = random(3, numberOfAllMonster / 4);
+		System.out.println(levelFilter.isSoulAppear());
 		if (levelFilter.isSoulAppear()) {
 			for (int i = 0; i < soulAmount; i++) {
 				monsterList.add(new Soul(0, 0));
