@@ -3,7 +3,7 @@
   realizations="true" associations="false" dependencies="false" nesting-relationships="true" router="FAN">  
   <class id="1" language="java" name="scene.LandingScene" project="Pixoul" file="/Pixoul/src/scene/LandingScene.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="459" width="163" x="41" y="37"/>    
+    <position height="459" width="163" x="227" y="37"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -12,7 +12,7 @@
   </class>  
   <class id="2" language="java" name="scene.GameScene" project="Pixoul" file="/Pixoul/src/scene/GameScene.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="567" width="214" x="244" y="37"/>    
+    <position height="567" width="214" x="430" y="37"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -21,7 +21,16 @@
   </class>  
   <class id="3" language="java" name="scene.GameOverScene" project="Pixoul" file="/Pixoul/src/scene/GameOverScene.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="279" width="146" x="498" y="37"/>    
+    <position height="279" width="146" x="41" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="scene.CongratulationScene" project="Pixoul" 
+    file="/Pixoul/src/scene/CongratulationScene.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="297" width="149" x="684" y="37"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
