@@ -65,12 +65,6 @@ public class SettingPane extends VBox {
 	private CheckBox animationCheckBox;
 	
 	/**
-	 * Represent the {@link CheckBox} that disable the animation when entity is
-	 * moving
-	 */
-	private CheckBox infinityCheckBox;
-
-	/**
 	 * The constructor of the class. Initialize the inside component, event handler
 	 * and style
 	 */
@@ -80,7 +74,6 @@ public class SettingPane extends VBox {
 		addBgmVolumeSlider();
 		addEffectVolumeSlider();
 		addDisableAnimation();
-		addInfinityCheckBox();
 		addOptionContainer();
 		addCloseText();
 
@@ -100,7 +93,6 @@ public class SettingPane extends VBox {
 		effectVolumeSlider.setValue((int) (GameConfig.getEffectVolume() * 100));
 		bgmVolumeSlider.setValue((int) (GameConfig.getBgmVolume() * 100));
 		animationCheckBox.setSelected(GameConfig.isSkipMoveAnimation());
-		infinityCheckBox.setSelected(GameConfig.isEndlessMode());
 	}
 
 	/**
@@ -153,9 +145,6 @@ public class SettingPane extends VBox {
 
 		optionContainer.add(disableLabel, 0, 2);
 		optionContainer.add(animationCheckBox, 1, 2);
-
-		optionContainer.add(endlessLabel, 0, 3);
-		optionContainer.add(infinityCheckBox, 1, 3);
 		
 		getChildren().add(optionContainer);
 	}
@@ -243,21 +232,6 @@ public class SettingPane extends VBox {
 
 			GameConfig.setSkipMoveAnimation(newSkipMove);
 			animationCheckBox.setSelected(newSkipMove);
-		});
-	}
-	
-	/**
-	 * Initialize new {@link #infinityCheckBox}
-	 */
-	private void addInfinityCheckBox() {
-		infinityCheckBox = new CheckBox();
-		infinityCheckBox.setSelected(GameConfig.isEndlessMode());
-
-		infinityCheckBox.setOnMouseClicked((event) -> {
-			boolean newSkipMove = !GameConfig.isEndlessMode();
-
-			GameConfig.setEndlessMode(newSkipMove);
-			infinityCheckBox.setSelected(newSkipMove);
 		});
 	}
 }

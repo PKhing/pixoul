@@ -93,7 +93,7 @@ public class GameController {
 		level += 1;
 		GameMap newMap = null;
 
-		if (level == GameConfig.LEVEL_BOUND && !GameConfig.isEndlessMode()) {
+		if (level == GameConfig.LEVEL_BOUND) {
 			bgm.stop();
 			FadeTransition fadeOut = TransitionUtil.makeFadingNode(GameScene.getGamePane(), 1.0, 0.0);
 			
