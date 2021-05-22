@@ -106,7 +106,7 @@ public class GameConfig {
 	public static final int MONSTER_LINE_OF_SIGHT = 3;
 	
 	/**
-	 * Represent the maximum level that player can reach when disable endless mode
+	 * Represent the maximum level that player can reach
 	 */
 	public static final int LEVEL_BOUND = 11;
 
