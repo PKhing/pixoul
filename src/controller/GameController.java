@@ -2,7 +2,6 @@ package controller;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import entity.Player;
 import exception.InvalidFloorException;
