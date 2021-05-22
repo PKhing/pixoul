@@ -350,4 +350,11 @@ public class RandomUtil {
 
 		return armorList;
 	}
+
+	/**
+	 * Reset {@link #filterIndex} when starting a new game.
+	 */
+	public static void resetFilterIndex() {
+		RandomUtil.filterIndex = 0;
+	}
 }

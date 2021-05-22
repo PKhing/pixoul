@@ -2,6 +2,7 @@ package controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import entity.Player;
 import exception.InvalidFloorException;
@@ -24,6 +25,7 @@ import scene.GameScene;
 import scene.LandingScene;
 import utils.GameAudioUtils;
 import utils.GameConfig;
+import utils.RandomUtil;
 import utils.TransitionUtil;
 
 /**
@@ -149,6 +151,7 @@ public class GameController {
 	 * Initialize new game.
 	 */
 	public static void start() {
+		RandomUtil.resetFilterIndex();
 		levelMapList.clear();
 		level = 1;
 
