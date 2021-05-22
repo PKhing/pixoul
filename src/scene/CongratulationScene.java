@@ -71,7 +71,7 @@ public class CongratulationScene {
 		}
 
 		styleSetup();
-		addGameOverTitle();
+		addCongratsDetail();
 		addButtonBox();
 		addButtontoBox();
 
@@ -94,16 +94,15 @@ public class CongratulationScene {
 	}
 
 	/**
-	 * Initialize the congratsTitle
+	 * Initialize the {@link #congratsTitle} and {@link #congratsDescription}
 	 */
-	private static void addGameOverTitle() {
+	private static void addCongratsDetail() {
 		congratsTitle = new Text("Congratulation");
 		congratsTitle.setFont(FontUtil.getFont("large"));
 		congratsTitle.setFill(Color.BURLYWOOD);
 		congratsTitle.setTextAlignment(TextAlignment.CENTER);
 
-		congratsDescription = new Text(
-				"You have reached the bottom of the dungeon (for now) \n But this game has endless mode You can enable it in setting");
+		congratsDescription = new Text("You have reached the bottom of the dungeon (for now)");
 		congratsDescription.setFont(FontUtil.getFont("small"));
 		congratsDescription.setFill(Color.BURLYWOOD);
 		congratsDescription.setTextAlignment(TextAlignment.CENTER);
