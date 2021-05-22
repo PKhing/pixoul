@@ -28,45 +28,45 @@ import utils.GameConfig;
 
 /**
  * The SettingPane is the pane that contains all the setting which available to
- * adjust in this game
+ * adjust in this game.
  */
 
 public class SettingPane extends VBox {
 
 	/**
-	 * Represent the height of the pane
+	 * Represent the height of the pane.
 	 */
 	private final int heightBox = 140;
 
 	/**
-	 * Represent the width of the pane
+	 * Represent the width of the pane.
 	 */
 	private final int widthBox = 200;
 
 	/**
-	 * The container for all option components
+	 * The container for all option components.
 	 */
 	private GridPane optionContainer;
 
 	/**
-	 * Represent the {@link Slider} that control music volume
+	 * Represent the {@link Slider} that control music volume.
 	 */
 	private Slider bgmVolumeSlider;
 
 	/**
-	 * Represent the {@link Slider} that control effect volume
+	 * Represent the {@link Slider} that control effect volume.
 	 */
 	private Slider effectVolumeSlider;
 
 	/**
 	 * Represent the {@link CheckBox} that disable the animation when entity is
-	 * moving
+	 * moving.
 	 */
 	private CheckBox animationCheckBox;
 	
 	/**
 	 * The constructor of the class. Initialize the inside component, event handler
-	 * and style
+	 * and style.
 	 */
 	public SettingPane() {
 		styleSetup();
@@ -87,7 +87,7 @@ public class SettingPane extends VBox {
 	}
 
 	/**
-	 * Update value inside setting to current value
+	 * Update value inside setting to current value.
 	 */
 	public void updateSetting() {
 		effectVolumeSlider.setValue((int) (GameConfig.getEffectVolume() * 100));
@@ -96,7 +96,7 @@ public class SettingPane extends VBox {
 	}
 
 	/**
-	 * Initialize style for pane
+	 * Initialize style for pane.
 	 */
 	private void styleSetup() {
 		setBackground(new Background(new BackgroundFill(Color.rgb(245, 246, 231), null, null)));
@@ -114,7 +114,7 @@ public class SettingPane extends VBox {
 	}
 
 	/**
-	 * Initialize new {@link #optionContainer} and add component to container
+	 * Initialize new {@link #optionContainer} and add component to container.
 	 */
 	public void addOptionContainer() {
 		optionContainer = new GridPane();
@@ -150,7 +150,7 @@ public class SettingPane extends VBox {
 	}
 
 	/**
-	 * Initialize new {@link #effectVolumeSlider}
+	 * Initialize new {@link #effectVolumeSlider}.
 	 */
 	public void addEffectVolumeSlider() {
 		effectVolumeSlider = new Slider(0, 100, (int) (GameConfig.getEffectVolume() * 100));
@@ -166,7 +166,7 @@ public class SettingPane extends VBox {
 	}
 
 	/**
-	 * Initialize new close text which can be clicked to close pane
+	 * Initialize new close text which can be clicked to close pane.
 	 */
 	private void addCloseText() {
 		HBox closeBox = new HBox();
@@ -193,7 +193,7 @@ public class SettingPane extends VBox {
 	}
 
 	/**
-	 * Initialize new title text
+	 * Initialize new title text.
 	 */
 	private void addTitle() {
 		Text optionTitle = new Text("Setting");
@@ -205,7 +205,7 @@ public class SettingPane extends VBox {
 	}
 
 	/**
-	 * Initialize new {@link #bgmVolumeSlider} with current value
+	 * Initialize new {@link #bgmVolumeSlider} with current value.
 	 */
 	private void addBgmVolumeSlider() {
 		bgmVolumeSlider = new Slider(0, 100, (int) (GameConfig.getBgmVolume() * 100));
@@ -221,7 +221,7 @@ public class SettingPane extends VBox {
 	}
 
 	/**
-	 * Initialize new {@link #animationCheckBox}
+	 * Initialize new {@link #animationCheckBox}.
 	 */
 	private void addDisableAnimation() {
 		animationCheckBox = new CheckBox();

@@ -20,43 +20,43 @@ import utils.GameConfig;
 
 /**
  * The GameOverScene class represent the {@link Scene} that show when
- * {@link Player} health is less than or equal zero
+ * {@link Player} health is less than or equal zero.
  */
 public class GameOverScene {
 
 	/**
-	 * Represent the height of the pane in pixel
+	 * Represent the height of the pane in pixel.
 	 */
 	private static int heightBox = 40;
 
 	/**
-	 * Represent the width of the pane in pixel
+	 * Represent the width of the pane in pixel.
 	 */
 	private static int widthBox = 80;
 
 	/**
-	 * Represent {@link VBox} which is the root container for containing components
+	 * Represent {@link VBox} which is the root container for containing components.
 	 */
 	private static VBox root;
 
 	/**
-	 * Represent {@link Text} which is the title text in this pane
+	 * Represent {@link Text} which is the title text in this pane.
 	 */
 	private static Text gameOverTitle;
 
 	/**
-	 * Represent {@link VBox} which contains all buttons in this pane
+	 * Represent {@link VBox} which contains all buttons in this pane.
 	 */
 	private static VBox buttonBox;
 
 	/**
 	 * Represent the cached scene that it does not need to have a multiple
-	 * initialize
+	 * initialize.
 	 */
 	private static Scene cachedScene = null;
 
 	/**
-	 * Get the {@link #cachedScene gameOverScene}
+	 * Get the {@link #cachedScene gameOverScene}.
 	 * 
 	 * @return the {@link Scene} which used for display when game over
 	 */
@@ -78,7 +78,7 @@ public class GameOverScene {
 	}
 
 	/**
-	 * Setup the pane style
+	 * Setup the pane style.
 	 */
 	private static void styleSetup() {
 		root = new VBox();
@@ -90,7 +90,7 @@ public class GameOverScene {
 	}
 
 	/**
-	 * Initialize the gameOverTitle
+	 * Initialize the gameOverTitle.
 	 */
 	private static void addGameOverTitle() {
 		gameOverTitle = new Text("Game Over");
@@ -100,7 +100,7 @@ public class GameOverScene {
 	}
 
 	/**
-	 * Initialize the buttonBox
+	 * Initialize the buttonBox.
 	 */
 	private static void addButtonBox() {
 		buttonBox = new VBox();
@@ -110,7 +110,7 @@ public class GameOverScene {
 
 	/**
 	 * Initialize all {@link Button} that register text, add event handler to each
-	 * button and adding to buttonBox
+	 * button and adding to buttonBox.
 	 */
 	private static void addButtontoBox() {
 		Button startNewGameBtn = new StyledButton(widthBox * GameConfig.getScale(), "Start New Game", Color.WHITE,

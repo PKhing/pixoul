@@ -9,7 +9,7 @@ import utils.GameConfig;
 
 /**
  * The GameMap class represents a level of the game. It stores data of each
- * {@link Cell}, room position, and {@link Monster} on this level
+ * {@link Cell}, room position, and {@link Monster} on this level.
  *
  */
 public class GameMap {

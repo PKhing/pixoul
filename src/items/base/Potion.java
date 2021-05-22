@@ -11,33 +11,33 @@ import items.potion.VisionPotion;
 
 /**
  * The potion class is {@link Item} that player can used to get
- * {@link EntityEffect}
+ * {@link EntityEffect}.
  */
 public abstract class Potion extends Item {
 
 	/**
-	 * Represent the duration of effect that used in {@link EntityEffect}
+	 * Represent the duration of effect that used in {@link EntityEffect}.
 	 * 
 	 * @see EntityEffect#duration duration
 	 */
 	private int duration;
 
 	/**
-	 * Represent the permanent property of effect that used in {@link EntityEffect}
+	 * Represent the permanent property of effect that used in {@link EntityEffect}.
 	 * 
 	 * @see EntityEffect#isPermanent isPermanent
 	 */
 	private boolean isPermanent;
 
 	/**
-	 * Represent the efficient value that used in {@link EntityEffect}
+	 * Represent the efficient value that used in {@link EntityEffect}.
 	 * 
 	 * @see EntityEffect#value value
 	 */
 	private int effectValue;
 
 	/**
-	 * The constructor of class
+	 * The constructor of class.
 	 * 
 	 * @param name        the name of the potion
 	 * @param description the description of potion
@@ -55,7 +55,7 @@ public abstract class Potion extends Item {
 	}
 
 	/**
-	 * Getter for {@link #duration}
+	 * Getter for {@link #duration}.
 	 * 
 	 * @return {@link #duration}
 	 */
@@ -64,7 +64,7 @@ public abstract class Potion extends Item {
 	}
 
 	/**
-	 * Setter for {@link #duration}
+	 * Setter for {@link #duration}.
 	 * 
 	 * @param duration the new {@link #duration} value
 	 */
@@ -73,7 +73,7 @@ public abstract class Potion extends Item {
 	}
 
 	/**
-	 * Getter for {@link #isPermanent}
+	 * Getter for {@link #isPermanent}.
 	 * 
 	 * @return {@link #isPermanent}
 	 */
@@ -82,7 +82,7 @@ public abstract class Potion extends Item {
 	}
 
 	/**
-	 * Setter for {@link #isPermanent}
+	 * Setter for {@link #isPermanent}.
 	 * 
 	 * @param isPermanent the new {@link #isPermanent} value
 	 */
@@ -91,7 +91,7 @@ public abstract class Potion extends Item {
 	}
 
 	/**
-	 * Getter for {@link #effectValue}
+	 * Getter for {@link #effectValue}.
 	 * 
 	 * @return {@link #effectValue}
 	 */
@@ -100,7 +100,7 @@ public abstract class Potion extends Item {
 	}
 
 	/**
-	 * Setter for {@link #effectValue}
+	 * Setter for {@link #effectValue}.
 	 * 
 	 * @param effectValue the new {@link #effectValue} value
 	 */
@@ -110,14 +110,14 @@ public abstract class Potion extends Item {
 
 	/**
 	 * This method in {@link Potion} is doing nothing because it do not have unequip
-	 * action
+	 * action.
 	 */
 	@Override
 	public void onUnequip(Player player) {
 	}
 
 	/**
-	 * The utility method for creating new {@link Potion} by using input parameter
+	 * The utility method for creating new {@link Potion} by using input parameter.
 	 * 
 	 * @param type        the type of potion
 	 * @param name        The name of the potion

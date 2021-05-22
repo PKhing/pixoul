@@ -5,22 +5,22 @@ import exception.UnknownItemTypeException;
 import logic.Sprites;
 
 /**
- * The weapon class is {@link Item} that player can equip to have more attack
+ * The weapon class is {@link Item} that player can equip to have more attack.
  */
 public class Weapon extends Item {
 
 	/**
-	 * Represent the attack value of weapon
+	 * Represent the attack value of weapon.
 	 */
 	private int attack;
 
 	/**
-	 * Represent the sprite symbol for this weapon
+	 * Represent the sprite symbol for this weapon.
 	 */
 	private int spriteSymbol;
 
 	/**
-	 * The constructor of class
+	 * The constructor of class.
 	 * 
 	 * @param name         the name of weapon
 	 * @param description  the description of weapon
@@ -35,7 +35,7 @@ public class Weapon extends Item {
 	}
 
 	/**
-	 * Getter for {@link #attack}
+	 * Getter for {@link #attack}.
 	 * 
 	 * @return {@link #attack}
 	 */
@@ -44,7 +44,7 @@ public class Weapon extends Item {
 	}
 
 	/**
-	 * Setter for {@link #attack}
+	 * Setter for {@link #attack}.
 	 * 
 	 * @param attack the new {@link #attack} value
 	 */
@@ -59,7 +59,7 @@ public class Weapon extends Item {
 
 	/**
 	 * Handler method when player equips weapon, increase player attack value by
-	 * {@link Weapon#attack attack}
+	 * {@link Weapon#attack attack}.
 	 */
 	@Override
 	public void onEquip(Player player) {
@@ -69,7 +69,7 @@ public class Weapon extends Item {
 
 	/**
 	 * Handler method when player unequips weapon, decrease player attack value by
-	 * {@link Weapon#attack attack}
+	 * {@link Weapon#attack attack}.
 	 */
 	@Override
 	public void onUnequip(Player player) {
@@ -83,7 +83,7 @@ public class Weapon extends Item {
 	}
 
 	/**
-	 * The utility method for creating new {@link Weapon} by using input parameter
+	 * The utility method for creating new {@link Weapon} by using input parameter.
 	 * 
 	 * @param type        the type of weapon
 	 * @param name        the name of weapon

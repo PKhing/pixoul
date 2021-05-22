@@ -7,42 +7,42 @@ import effects.Immobilize;
 
 /**
  * The InterruptController is controller which control the user input that
- * currently interrupted by specific condition or not
+ * currently interrupted by specific condition or not.
  */
 public class InterruptController {
 
 	/**
-	 * Represent that {@link PausePane} is currently opened or not
+	 * Represent that {@link PausePane} is currently opened or not.
 	 */
 	private static boolean isPauseOpen;
 
 	/**
-	 * Represent that {@link InventoryPane} is currently opened or not
+	 * Represent that {@link InventoryPane} is currently opened or not.
 	 */
 	private static boolean isInventoryOpen;
 
 	/**
-	 * Represent that {@link SettingPane} is currently opened or not
+	 * Represent that {@link SettingPane} is currently opened or not.
 	 */
 	private static boolean isSettingOpen;
 
 	/**
-	 * Represent that the scene is currently transition or not
+	 * Represent that the scene is currently transition or not.
 	 */
 	private static boolean isTransition;
 
 	/**
-	 * Represent that player currently has {@link Immobilize} effect or not
+	 * Represent that player currently has {@link Immobilize} effect or not.
 	 */
 	private static boolean isImmobilize;
 
 	/**
-	 * Represent that the scene is still animating or not
+	 * Represent that the scene is still animating or not.
 	 */
 	private static boolean isStillAnimation;
 
 	/**
-	 * Reset all interrupted state
+	 * Reset all interrupted state.
 	 */
 	public static void resetInterruptState() {
 		isPauseOpen = false;
@@ -55,7 +55,7 @@ public class InterruptController {
 
 	/**
 	 * Checking condition that currently is interrupting input which involving with
-	 * moving or not
+	 * moving or not.
 	 * 
 	 * <p>
 	 * <b>The field which will be checked in condition</b>
@@ -75,7 +75,7 @@ public class InterruptController {
 	}
 
 	/**
-	 * Getter for {@link #isPauseOpen}
+	 * Getter for {@link #isPauseOpen}.
 	 * 
 	 * @return {@link #isPauseOpen}
 	 */
@@ -84,7 +84,7 @@ public class InterruptController {
 	}
 
 	/**
-	 * Setter for {@link #isPauseOpen}
+	 * Setter for {@link #isPauseOpen}.
 	 * 
 	 * @param isPauseOpen new state of {@link #isPauseOpen}
 	 */
@@ -93,7 +93,7 @@ public class InterruptController {
 	}
 
 	/**
-	 * Getter for {@link #isInventoryOpen}
+	 * Getter for {@link #isInventoryOpen}.
 	 * 
 	 * @return {@link #isInventoryOpen}
 	 */
@@ -102,7 +102,7 @@ public class InterruptController {
 	}
 
 	/**
-	 * Setter for {@link #isInventoryOpen}
+	 * Setter for {@link #isInventoryOpen}.
 	 * 
 	 * @param isInventoryOpen new state of {@link #isInventoryOpen}
 	 */
@@ -111,7 +111,7 @@ public class InterruptController {
 	}
 
 	/**
-	 * Getter for {@link #isSettingOpen}
+	 * Getter for {@link #isSettingOpen}.
 	 * 
 	 * @return {@link #isSettingOpen}
 	 */
@@ -120,7 +120,7 @@ public class InterruptController {
 	}
 
 	/**
-	 * Setter for {@link #isSettingOpen}
+	 * Setter for {@link #isSettingOpen}.
 	 * 
 	 * @param isSettingOpen new state of {@link #isSettingOpen}
 	 */
@@ -129,7 +129,7 @@ public class InterruptController {
 	}
 
 	/**
-	 * Getter for {@link #isTransition}
+	 * Getter for {@link #isTransition}.
 	 * 
 	 * @return {@link #isTransition}
 	 */
@@ -138,7 +138,7 @@ public class InterruptController {
 	}
 
 	/**
-	 * Setter for {@link #isTransition}
+	 * Setter for {@link #isTransition}.
 	 * 
 	 * @param isTransition new state of {@link #isTransition}
 	 */
@@ -147,7 +147,7 @@ public class InterruptController {
 	}
 
 	/**
-	 * Getter for {@link #isImmobilize}
+	 * Getter for {@link #isImmobilize}.
 	 * 
 	 * @return {@link #isImmobilize}
 	 */
@@ -156,7 +156,7 @@ public class InterruptController {
 	}
 
 	/**
-	 * Setter for {@link #isImmobilize}
+	 * Setter for {@link #isImmobilize}.
 	 * 
 	 * @param isImmobilize new state of {@link #isImmobilize}
 	 */
@@ -165,7 +165,7 @@ public class InterruptController {
 	}
 
 	/**
-	 * Getter for {@link #isStillAnimation}
+	 * Getter for {@link #isStillAnimation}.
 	 * 
 	 * @return {@link #isStillAnimation}
 	 */
@@ -174,7 +174,7 @@ public class InterruptController {
 	}
 
 	/**
-	 * Setter for {@link #isStillAnimation}
+	 * Setter for {@link #isStillAnimation}.
 	 * 
 	 * @param isStillAnimation new state of {@link #isStillAnimation}
 	 */

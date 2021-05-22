@@ -11,37 +11,37 @@ import scene.LandingScene;
 
 /**
  * The GameAudioUtils class is the class that provide the {@link MediaPlayer}
- * for audio and update volume method
+ * for audio and update volume method.
  */
 public class GameAudioUtils {
 
 	/**
-	 * The {@link GameScene} background music
+	 * The {@link GameScene} background music.
 	 */
 	private static MediaPlayer gameSceneBGM;
 
 	/**
-	 * The {@link LandingScene} background music
+	 * The {@link LandingScene} background music.
 	 */
 	private static MediaPlayer landingSceneBGM;
 
 	/**
-	 * The open inventory sound effect
+	 * The open inventory sound effect.
 	 */
 	private static AudioClip openInventorySFX;
 
 	/**
-	 * The close inventory sound effect
+	 * The close inventory sound effect.
 	 */
 	private static AudioClip closeInventorySFX;
 
 	/**
-	 * The attack sound effect
+	 * The attack sound effect.
 	 */
 	private static AudioClip attackSFX;
 
 	/**
-	 * Load music audio
+	 * Load music audio.
 	 */
 	static {
 		gameSceneBGM = loadAudioLoop("bgm/BGMDungeon.mp3");
@@ -55,7 +55,7 @@ public class GameAudioUtils {
 	}
 
 	/**
-	 * Load audio by file path and make it loop when play
+	 * Load audio by file path and make it loop when play.
 	 * 
 	 * @param filePath the path of audio file
 	 * @return {@link MediaPlayer} instance
@@ -76,7 +76,7 @@ public class GameAudioUtils {
 	}
 
 	/**
-	 * Load sound effect by file path
+	 * Load sound effect by file path.
 	 * 
 	 * @param filePath the path of audio file
 	 * @return {@link AudioClip} instance
@@ -89,7 +89,7 @@ public class GameAudioUtils {
 	}
 
 	/**
-	 * Update all background music volume to current setting
+	 * Update all background music volume to current setting.
 	 */
 	public static void updateBGMVolume() {
 		gameSceneBGM.setVolume(GameConfig.getBgmVolume());
@@ -97,7 +97,7 @@ public class GameAudioUtils {
 	}
 
 	/**
-	 * Update all effect volume to current setting
+	 * Update all effect volume to current setting.
 	 */
 	public static void updateEffectVolume() {
 		openInventorySFX.setVolume(GameConfig.getEffectVolume());
@@ -106,7 +106,7 @@ public class GameAudioUtils {
 	}
 
 	/**
-	 * Getter for {@link #gameSceneBGM}
+	 * Getter for {@link #gameSceneBGM}.
 	 * 
 	 * @return {@link #gameSceneBGM}
 	 */
@@ -115,7 +115,7 @@ public class GameAudioUtils {
 	}
 
 	/**
-	 * Setter for {@link #gameSceneBGM}
+	 * Setter for {@link #gameSceneBGM}.
 	 * 
 	 * @param gameSceneBGM new instance of {@link #gameSceneBGM}
 	 */
@@ -124,7 +124,7 @@ public class GameAudioUtils {
 	}
 
 	/**
-	 * Getter for {@link #landingSceneBGM}
+	 * Getter for {@link #landingSceneBGM}.
 	 * 
 	 * @return {@link #landingSceneBGM}
 	 */
@@ -133,7 +133,7 @@ public class GameAudioUtils {
 	}
 
 	/**
-	 * Setter for {@link #landingSceneBGM}
+	 * Setter for {@link #landingSceneBGM}.
 	 * 
 	 * @param landingSceneBGM new instance of {@link #landingSceneBGM}
 	 */
@@ -142,7 +142,7 @@ public class GameAudioUtils {
 	}
 
 	/**
-	 * Getter for {@link #openInventorySFX}
+	 * Getter for {@link #openInventorySFX}.
 	 * 
 	 * @return {@link #openInventorySFX}
 	 */
@@ -151,7 +151,7 @@ public class GameAudioUtils {
 	}
 
 	/**
-	 * Setter for {@link #openInventorySFX}
+	 * Setter for {@link #openInventorySFX}.
 	 * 
 	 * @param openInventorySFX the new {@link #openInventorySFX}
 	 */
@@ -160,7 +160,7 @@ public class GameAudioUtils {
 	}
 
 	/**
-	 * Getter for {@link #closeInventorySFX}
+	 * Getter for {@link #closeInventorySFX}.
 	 * 
 	 * @return {@link #closeInventorySFX}
 	 */
@@ -169,7 +169,7 @@ public class GameAudioUtils {
 	}
 
 	/**
-	 * Setter for {@link #closeInventorySFX}
+	 * Setter for {@link #closeInventorySFX}.
 	 * 
 	 * @param closeInventorySFX the new {@link #closeInventorySFX}
 	 */
@@ -178,7 +178,7 @@ public class GameAudioUtils {
 	}
 
 	/**
-	 * Getter for {@link #attackSFX}
+	 * Getter for {@link #attackSFX}.
 	 * 
 	 * @return {@link #attackSFX}
 	 */
@@ -187,7 +187,7 @@ public class GameAudioUtils {
 	}
 
 	/**
-	 * Setter for {@link #attackSFX}
+	 * Setter for {@link #attackSFX}.
 	 * 
 	 * @param attackSFX the new {@link #attackSFX}
 	 */

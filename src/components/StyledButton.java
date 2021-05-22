@@ -16,13 +16,13 @@ import utils.GameConfig;
 
 /**
  * The StyledButton is {@link Button} that specifically using in
- * {@link LandingScene} and {@link PausePane}
+ * {@link LandingScene} and {@link PausePane}.
  *
  */
 public class StyledButton extends Button {
 	
 	/**
-	 * The constructor of class
+	 * The constructor of class.
 	 * 
 	 * @param widthBox the width of button
 	 * @param text the string that register to button

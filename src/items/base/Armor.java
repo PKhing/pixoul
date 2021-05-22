@@ -5,17 +5,17 @@ import exception.UnknownItemTypeException;
 import logic.Sprites;
 
 /**
- * The armor class is {@link Item} that player can equip to have more defense
+ * The armor class is {@link Item} that player can equip to have more defense.
  */
 public class Armor extends Item {
 
 	/**
-	 * Represent the defense value of armor
+	 * Represent the defense value of armor.
 	 */
 	private int defense;
 
 	/**
-	 * The constructor of class
+	 * The constructor of class.
 	 * 
 	 * @param name        the name of armor
 	 * @param description the description of armor
@@ -39,7 +39,7 @@ public class Armor extends Item {
 
 	/**
 	 * Handler method when player equips armor, increase player defense value by
-	 * {@link Armor#defense defense}
+	 * {@link Armor#defense defense}.
 	 */
 	@Override
 	public void onEquip(Player player) {
@@ -49,7 +49,7 @@ public class Armor extends Item {
 
 	/**
 	 * Handler method when player unequips armor, decrease player defense value by
-	 * {@link Armor#defense defense}
+	 * {@link Armor#defense defense}.
 	 */
 	@Override
 	public void onUnequip(Player player) {
@@ -58,7 +58,7 @@ public class Armor extends Item {
 	}
 
 	/**
-	 * Getter for {@link #defense}
+	 * Getter for {@link #defense}.
 	 * 
 	 * @return {@link #defense}
 	 */
@@ -67,7 +67,7 @@ public class Armor extends Item {
 	}
 
 	/**
-	 * Setter for {@link #defense}
+	 * Setter for {@link #defense}.
 	 * 
 	 * @param defense the new {@link #defense} value
 	 */
@@ -76,7 +76,7 @@ public class Armor extends Item {
 	}
 
 	/**
-	 * The utility method for creating new {@link Armor} by using input parameter
+	 * The utility method for creating new {@link Armor} by using input parameter.
 	 * 
 	 * @param type        the type of armor
 	 * @param name        the name of armor

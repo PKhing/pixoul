@@ -6,13 +6,13 @@ import entity.base.Entity;
 
 /**
  * The InstantHealth class is {@link EntityEffect} that will instantly increase
- * the {@link Entity} health
+ * the {@link Entity} health.
  *
  */
 public class InstantHealth extends EntityEffect {
 
 	/**
-	 * The constructor of the class
+	 * The constructor of the class.
 	 * 
 	 * @param name        The name of the effect
 	 * @param value       The value of the effect
@@ -26,7 +26,7 @@ public class InstantHealth extends EntityEffect {
 	/**
 	 * If isPermanent is true then increase both {@link Entity#health currentHealth}
 	 * and {@link Entity#maxHealth maxHealth} of entity otherwise increase only
-	 * {@link Entity#health currentHealth}
+	 * {@link Entity#health currentHealth}.
 	 */
 	@Override
 	public void onAdd(Entity entity) {
@@ -40,7 +40,7 @@ public class InstantHealth extends EntityEffect {
 	}
 
 	/**
-	 * Remove effect from entity
+	 * Remove effect from entity.
 	 */
 	@Override
 	public void onWearOff(Entity entity) {

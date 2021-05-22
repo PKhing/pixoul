@@ -8,14 +8,14 @@ import logic.Sprites;
 
 /**
  * The StrengthPotion is {@link Potion} that temporary or permanent increase
- * current player attack when used
+ * current player attack when used.
  * 
  * @see Strength
  */
 public class StrengthPotion extends Potion {
 
 	/**
-	 * The constructor of class
+	 * The constructor of class.
 	 * 
 	 * @param name        the name of the potion
 	 * @param description the description of potion
@@ -36,7 +36,7 @@ public class StrengthPotion extends Potion {
 	}
 
 	/**
-	 * Add {@link Strength} effect to {@link Player}
+	 * Add {@link Strength} effect to {@link Player}.
 	 */
 	@Override
 	public void onEquip(Player player) {

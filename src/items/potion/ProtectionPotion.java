@@ -8,14 +8,14 @@ import logic.Sprites;
 
 /**
  * The ProtectionPotion is {@link Potion} that temporary or permanent increase
- * current player defense when used
+ * current player defense when used.
  * 
  * @see Protection
  */
 public class ProtectionPotion extends Potion {
 
 	/**
-	 * The constructor of class
+	 * The constructor of class.
 	 * 
 	 * @param name        the name of the potion
 	 * @param description the description of potion
@@ -36,7 +36,7 @@ public class ProtectionPotion extends Potion {
 	}
 
 	/**
-	 * Add {@link Protection} effect to {@link Player}
+	 * Add {@link Protection} effect to {@link Player}.
 	 */
 	@Override
 	public void onEquip(Player player) {

@@ -5,12 +5,12 @@ import logic.Direction;
 
 /**
  * This interface defines methods for {@link Entity} that can move to another
- * {@link Cell}
+ * {@link Cell}.
  */
 public interface Moveable {
 	/**
 	 * This methods is called when {@link Entity} is moving to specific
-	 * {@link Direction}
+	 * {@link Direction}.
 	 * 
 	 * @param direction the direction which entity will be moving to
 	 * @return true if entity can move to that direction otherwise false

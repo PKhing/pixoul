@@ -3,27 +3,27 @@ package items.base;
 import entity.Player;
 
 /**
- * The abstract base class for all items
+ * The abstract base class for all items.
  */
 public abstract class Item {
 
 	/**
-	 * Represent name of item
+	 * Represent name of item.
 	 */
 	private String name;
 
 	/**
-	 * Represent description of item
+	 * Represent description of item.
 	 */
 	private String description;
 
 	/**
-	 * Represent index in sprite map of item
+	 * Represent index in sprite map of item.
 	 */
 	private int spriteIndex;
 
 	/**
-	 * The constructor of this class
+	 * The constructor of this class.
 	 * 
 	 * @param name        the name of this item
 	 * @param description the description of this item
@@ -36,14 +36,14 @@ public abstract class Item {
 	}
 
 	/**
-	 * Getter for sprite symbol of this item
+	 * Getter for sprite symbol of this item.
 	 * 
 	 * @return This item's sprite symbol
 	 */
 	public abstract int getSymbol();
 
 	/**
-	 * Clone method for making a new {@link Item} instance with same property
+	 * Clone method for making a new {@link Item} instance with same property.
 	 * 
 	 * @return new instance of {@link Item}
 	 */
@@ -51,21 +51,21 @@ public abstract class Item {
 	public abstract Item clone();
 
 	/**
-	 * Handler method when {@link Player} equip item
+	 * Handler method when {@link Player} equip item.
 	 * 
 	 * @param player the {@link Player} who equip item
 	 */
 	public abstract void onEquip(Player player);
 
 	/**
-	 * Handler method when {@link Player} unequips item
+	 * Handler method when {@link Player} unequips item.
 	 * 
 	 * @param player the {@link Player} who unequips item
 	 */
 	public abstract void onUnequip(Player player);
 
 	/**
-	 * Getter for {@link #description}
+	 * Getter for {@link #description}.
 	 * 
 	 * @return {@link #description}
 	 */

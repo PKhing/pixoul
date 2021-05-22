@@ -7,14 +7,14 @@ import entity.base.Entity;
 
 /**
  * The Immobilize class is {@link EntityEffect} that will make the player can
- * not move for a duration but player can still attack to monster
+ * not move for a duration but player can still attack to monster.
  *
  * <p>Note that This effect can not make it permanent</p>
  */
 public class Immobilize extends EntityEffect {
 
 	/**
-	 * The constructor of the class
+	 * The constructor of the class.
 	 * 
 	 * @param name        The name of the effect
 	 * @param value       The value of the effect
@@ -28,7 +28,7 @@ public class Immobilize extends EntityEffect {
 
 	/**
 	 * Set the {@link InterruptController#isImmobilize isImmobilize} to true and add
-	 * effect to {@link Entity}
+	 * effect to {@link Entity}.
 	 * 
 	 * @see InterruptController#isImmobilize isImmobilize
 	 */
@@ -43,7 +43,7 @@ public class Immobilize extends EntityEffect {
 
 	/**
 	 * Set the {@link InterruptController#isImmobilize isImmobilize} back to false
-	 * and remove effect from {@link Entity}
+	 * and remove effect from {@link Entity}.
 	 * 
 	 * @see InterruptController#isImmobilize isImmobilize
 	 */

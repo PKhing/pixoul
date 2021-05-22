@@ -7,14 +7,14 @@ import entity.base.Entity;
 
 /**
  * The Regeneration class is {@link EntityEffect} that active for every move, it
- * will increase the {@link Entity} health
+ * will increase the {@link Entity} health.
  * 
  * <p>Note that this effect can not make it permanent</p>
  */
 public class Regeneration extends EntityEffect implements IConsecutiveEffect {
 
 	/**
-	 * The constructor of the class
+	 * The constructor of the class.
 	 * 
 	 * @param name        The name of the effect
 	 * @param value       The value of the effect
@@ -26,7 +26,7 @@ public class Regeneration extends EntityEffect implements IConsecutiveEffect {
 	}
 
 	/**
-	 * Add effect to entity
+	 * Add effect to entity.
 	 */
 	@Override
 	public void onAdd(Entity entity) {
@@ -37,7 +37,7 @@ public class Regeneration extends EntityEffect implements IConsecutiveEffect {
 	}
 
 	/**
-	 * Increase entity health for each move if this effect is still active
+	 * Increase entity health for each move if this effect is still active.
 	 */
 	@Override
 	public void effect(Entity entity) {
@@ -46,7 +46,7 @@ public class Regeneration extends EntityEffect implements IConsecutiveEffect {
 	}
 
 	/**
-	 * Remove effect from entity
+	 * Remove effect from entity.
 	 */
 	@Override
 	public void onWearOff(Entity entity) {

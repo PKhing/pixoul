@@ -13,17 +13,17 @@ import items.base.Weapon;
 
 /**
  * The CSVUtil is the class that provide the method for reading and parsing the
- * CSV file
+ * CSV file.
  */
 public class CSVUtil {
 
 	/**
-	 * Represent the base path URL for CSV file path
+	 * Represent the base path URL for CSV file path.
 	 */
 	private static final String baseUrl = "csv/";
 
 	/**
-	 * Reading a CSV file by path
+	 * Reading a CSV file by path.
 	 * 
 	 * @param filename the CSV filename
 	 * @return the result as array of String
@@ -55,7 +55,7 @@ public class CSVUtil {
 	}
 
 	/**
-	 * Read the {@link MonsterLevelFilter} CSV data and parsing for each line
+	 * Read the {@link MonsterLevelFilter} CSV data and parsing for each line.
 	 * 
 	 * @return the parsing result as {@link ArrayList} of {@link MonsterLevelFilter}
 	 */
@@ -86,7 +86,7 @@ public class CSVUtil {
 	}
 
 	/**
-	 * Read the {@link Potion} CSV data and parsing for each line
+	 * Read the {@link Potion} CSV data and parsing for each line.
 	 * 
 	 * @return the parsing result as {@link ArrayList} of {@link Potion}
 	 */
@@ -119,7 +119,7 @@ public class CSVUtil {
 	}
 
 	/**
-	 * Read the {@link Armor} CSV data and parsing for each line
+	 * Read the {@link Armor} CSV data and parsing for each line.
 	 * 
 	 * @return the parsing result as {@link ArrayList} of {@link Armor}
 	 */
@@ -148,7 +148,7 @@ public class CSVUtil {
 	}
 
 	/**
-	 * Read the {@link Weapon} CSV data and parsing for each line
+	 * Read the {@link Weapon} CSV data and parsing for each line.
 	 * 
 	 * @return the parsing result as {@link ArrayList} of {@link Weapon}
 	 */

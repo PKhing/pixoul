@@ -8,14 +8,14 @@ import logic.Sprites;
 
 /**
  * The RegenerationPotion is {@link Potion} that consecutively increasing player
- * health for specific duration
+ * health for specific duration.
  * 
  * @see Regeneration
  */
 public class RegenerationPotion extends Potion {
 
 	/**
-	 * The constructor of class
+	 * The constructor of class.
 	 * 
 	 * @param name        the name of the potion
 	 * @param description the description of potion
@@ -42,7 +42,7 @@ public class RegenerationPotion extends Potion {
 	}
 
 	/**
-	 * Add {@link Regeneration} effect to {@link Player}
+	 * Add {@link Regeneration} effect to {@link Player}.
 	 */
 	@Override
 	public void onEquip(Player player) {

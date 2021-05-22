@@ -7,14 +7,14 @@ import entity.base.Entity;
 
 /**
  * The Vision class is the {@link EntityEffect} that will increase the line of
- * sight of {@link Player}
+ * sight of {@link Player}.
  * 
  * <p>Note that this effect will be applied to {@link Player} only</p>
  */
 public class Vision extends EntityEffect {
 
 	/**
-	 * The constructor of the class
+	 * The constructor of the class.
 	 * 
 	 * @param name        The name of the effect
 	 * @param value       The value of the effect
@@ -27,7 +27,7 @@ public class Vision extends EntityEffect {
 
 	/**
 	 * Increase line of sight of specific {@link Player} and add effect to
-	 * {@link Player}
+	 * {@link Player}.
 	 */
 	@Override
 	public void onAdd(Entity entity) {
@@ -44,7 +44,7 @@ public class Vision extends EntityEffect {
 
 	/**
 	 * Decrease line of sight of {@link Player} back to normal and remove effect
-	 * from {@link Player}
+	 * from {@link Player}.
 	 */
 	@Override
 	public void onWearOff(Entity entity) {

@@ -6,12 +6,12 @@ import entity.base.Entity;
 
 /**
  * The Protection class is {@link EntityEffect} that increase the
- * {@link Entity#defense defense}
+ * {@link Entity#defense defense}.
  */
 public class Protection extends EntityEffect {
 
 	/**
-	 * The constructor of the class
+	 * The constructor of the class.
 	 * 
 	 * @param name        The name of the effect
 	 * @param value       The value of the effect
@@ -24,7 +24,7 @@ public class Protection extends EntityEffect {
 
 	/**
 	 * If isPermanent is true then increase the {@link Entity#defense} and remove
-	 * effect from {@link Entity} entity otherwise only increase
+	 * effect from {@link Entity} entity otherwise only increase.
 	 * {@link Entity#defense}
 	 */
 	@Override
@@ -45,7 +45,7 @@ public class Protection extends EntityEffect {
 
 	/**
 	 * Decrease the {@link Entity#defense defense} and remove effect from
-	 * {@link Entity}
+	 * {@link Entity}.
 	 */
 	@Override
 	public void onWearOff(Entity entity) {

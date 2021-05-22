@@ -28,39 +28,39 @@ import utils.TransitionUtil;
 
 /**
  * The GameController class is the class that control about the {@link #gameMap}
- * which currently render and the changing of {@link #level} inside the game
+ * which currently render and the changing of {@link #level} inside the game.
  */
 public class GameController {
 
 	/**
-	 * The {@link ArrayList} represents the map of each level
+	 * The {@link ArrayList} represents the map of each level.
 	 */
 	private static ArrayList<GameMap> levelMapList = new ArrayList<>();
 
 	/**
-	 * Represent the {@link GameMap} of current level
+	 * Represent the {@link GameMap} of current level.
 	 */
 	private static GameMap gameMap;
 
 	/**
-	 * The {@link MediaPlayer} represent the background music of GameScene
+	 * The {@link MediaPlayer} represent the background music of GameScene.
 	 */
 	private static MediaPlayer bgm = GameAudioUtils.getGameSceneBGM();
 
 	/**
-	 * Represent the level of current floor
+	 * Represent the level of current floor.
 	 */
 	private static int level;
 
 	/**
-	 * Represent the current {@link Player} instance
+	 * Represent the current {@link Player} instance.
 	 */
 	private static Player player;
 
 	/**
-	 * Getter {@link GameMap} by floor level number method
+	 * Getter {@link GameMap} by floor level number method.
 	 * 
-	 * @param floor the number which want to get map.
+	 * @param floor the number which want to get map
 	 * @return {@link GameMap} map of current floor
 	 * @throws InvalidFloorException throw if level is invalid
 	 */
@@ -72,9 +72,9 @@ public class GameController {
 	}
 
 	/**
-	 * Create new {@link GameMap} and add to floorList
+	 * Create new {@link GameMap} and add to {@link #levelMapList}.
 	 * 
-	 * @return {@link GameMap} new floor which added to floorList
+	 * @return {@link GameMap} new floor which added to {@link #levelMapList}
 	 */
 	private static GameMap addNewFloor() {
 		GameMap newFloor = MapGenerator.generateMap();
@@ -85,7 +85,7 @@ public class GameController {
 	/**
 	 * If level reaches {@link GameConfig#LEVEL_BOUND level_bound} and disable the
 	 * endless mode then change to the {@link CongratulationScene} otherwise change
-	 * {@link #gameMap} to lower level and making fade transition if able to do
+	 * {@link #gameMap} to lower level and making fade transition if able to do.
 	 * 
 	 * @return return true if {@link #player} can go to lower level otherwise false
 	 */
@@ -124,7 +124,7 @@ public class GameController {
 
 	/**
 	 * Change {@link #gameMap} to upper level and making {@link FadeTransition} if
-	 * able to do
+	 * able to do.
 	 * 
 	 * @return return true if {@link #player} can go to upper level otherwise false
 	 */
@@ -146,7 +146,7 @@ public class GameController {
 	}
 
 	/**
-	 * Initialize new game
+	 * Initialize new game.
 	 */
 	public static void start() {
 		levelMapList.clear();
@@ -163,7 +163,7 @@ public class GameController {
 
 	/**
 	 * Stop the game background music then making fade transition to
-	 * {@link LandingScene}
+	 * {@link LandingScene}.
 	 */
 	public static void exitToMainMenu() {
 		FadeTransition fadeOut = TransitionUtil.makeFadingNode(GameScene.getGamePane(), 1.0, 0.0);
@@ -177,7 +177,7 @@ public class GameController {
 
 	/**
 	 * Checking condition that {@link #player} is currently Game over or not by
-	 * checking {@link #player} health
+	 * checking {@link #player} health.
 	 * 
 	 * @return true if {@link #player} health is less than or equals 0 otherwise
 	 *         false
@@ -199,7 +199,7 @@ public class GameController {
 	}
 
 	/**
-	 * Getter for {@link #gameMap}
+	 * Getter for {@link #gameMap}.
 	 * 
 	 * @return {@link #gameMap}
 	 */
@@ -215,7 +215,7 @@ public class GameController {
 	}
 
 	/**
-	 * Setter for {@link #gameMap}
+	 * Setter for {@link #gameMap}.
 	 * 
 	 * @param gameMap the new {@link #gameMap}
 	 */
@@ -224,7 +224,7 @@ public class GameController {
 	}
 
 	/**
-	 * Get roomList from {@link #gameMap}
+	 * Get roomList from {@link #gameMap}.
 	 * 
 	 * @return Room list of {@link #gameMap}
 	 */
@@ -233,7 +233,7 @@ public class GameController {
 	}
 
 	/**
-	 * Getter for {@link #player}
+	 * Getter for {@link #player}.
 	 * 
 	 * @return {@link #player}
 	 */
@@ -242,7 +242,7 @@ public class GameController {
 	}
 
 	/**
-	 * Setter for {@link #player}
+	 * Setter for {@link #player}.
 	 * 
 	 * @param newPlayer the new {@link #player}
 	 */
@@ -251,7 +251,7 @@ public class GameController {
 	}
 
 	/**
-	 * Getter for {@link #level}
+	 * Getter for {@link #level}.
 	 * 
 	 * @return {@link #level}
 	 */
@@ -260,7 +260,7 @@ public class GameController {
 	}
 
 	/**
-	 * Utility method that creating {@link FadeTransition} for switching floor
+	 * Utility method that creating {@link FadeTransition} for switching floor.
 	 * 
 	 * @param node        the target node that we want to make a fade
 	 * @param from        starting opacity
@@ -306,7 +306,7 @@ public class GameController {
 	}
 
 	/**
-	 * Setup {@link GameScene} when start or restart game
+	 * Setup {@link GameScene} when start or restart game.
 	 */
 	private static void sceneSetup() {
 		InterruptController.resetInterruptState();
@@ -318,7 +318,7 @@ public class GameController {
 	}
 
 	/**
-	 * Create new {@link Player} instance and register to the {@link GameMap}
+	 * Create new {@link Player} instance and register to the {@link GameMap}.
 	 * 
 	 * @return {@link Player} new player instance
 	 */
@@ -341,7 +341,7 @@ public class GameController {
 
 	/**
 	 * Create new {@link FadeTransition} then play transition along with background
-	 * music
+	 * music.
 	 */
 	private static void initialTransition() {
 		GameScene.getGamePane().setOpacity(0.0);

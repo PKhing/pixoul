@@ -17,56 +17,56 @@ import entity.base.Monster;
  * 
  * <p>
  * The filter is active when the present level is at least the level which
- * specify in {@link #level} and it will ignore the previous active filter
+ * specify in {@link #level} and it will ignore the previous active filter.
  * </p>
  * 
  * <p>
  * For example, the "A" filter instance have level 4 and the "B" filter instance
  * have level 5 if {@link Player} is in level 6 then Game will pick "B" as the
- * filter
+ * filter.
  * </p>
  */
 public class MonsterLevelFilter {
 
 	/**
-	 * Represent the minimum level that the filter is active
+	 * Represent the minimum level that the filter is active.
 	 */
 	private int level;
 
 	/**
-	 * Represent at least {@link #level} will generate the {@link DarkMage} or not
+	 * Represent at least {@link #level} will generate the {@link DarkMage} or not.
 	 */
 	private boolean isDarkMageAppear;
 
 	/**
 	 * Represent at least {@link #level} will generate the {@link HauntedMaid} or
-	 * not
+	 * not.
 	 */
 	private boolean isHauntedMaidAppear;
 
 	/**
 	 * Represent at least {@link #level} will generate the {@link PumpkinHead} or
-	 * not
+	 * not.
 	 */
 	private boolean isPumpkinHeadAppear;
 
 	/**
-	 * Represent at least {@link #level} will generate the {@link Reaper} or not
+	 * Represent at least {@link #level} will generate the {@link Reaper} or not.
 	 */
 	private boolean isReaperAppear;
 
 	/**
-	 * Represent at least {@link #level} will generate the {@link Skeleton} or not
+	 * Represent at least {@link #level} will generate the {@link Skeleton} or not.
 	 */
 	private boolean isSkeletonAppear;
 
 	/**
-	 * Represent at least {@link #level} will generate the {@link Soul} or not
+	 * Represent at least {@link #level} will generate the {@link Soul} or not.
 	 */
 	private boolean isSoulAppear;
 
 	/**
-	 * The constructor of class
+	 * The constructor of class.
 	 * 
 	 * @param level               initial value of {@link #level}
 	 * @param isDarkMageAppear    initial value of {@link #isDarkMageAppear}
@@ -88,7 +88,7 @@ public class MonsterLevelFilter {
 	}
 
 	/**
-	 * Getter for {@link #level}
+	 * Getter for {@link #level}.
 	 * 
 	 * @return {@link #level}
 	 */
@@ -97,7 +97,7 @@ public class MonsterLevelFilter {
 	}
 
 	/**
-	 * Setter for {@link #level}
+	 * Setter for {@link #level}.
 	 * 
 	 * @param level the new {@link #level}
 	 */
@@ -106,7 +106,7 @@ public class MonsterLevelFilter {
 	}
 
 	/**
-	 * Getter for {@link #isDarkMageAppear}
+	 * Getter for {@link #isDarkMageAppear}.
 	 * 
 	 * @return {@link #isDarkMageAppear}
 	 */
@@ -115,7 +115,7 @@ public class MonsterLevelFilter {
 	}
 
 	/**
-	 * Setter for {@link #isDarkMageAppear}
+	 * Setter for {@link #isDarkMageAppear}.
 	 * 
 	 * @param isDarkMageAppear the new {@link #isDarkMageAppear}
 	 */
@@ -124,7 +124,7 @@ public class MonsterLevelFilter {
 	}
 
 	/**
-	 * Getter for {@link #isHauntedMaidAppear}
+	 * Getter for {@link #isHauntedMaidAppear}.
 	 * 
 	 * @return {@link #isHauntedMaidAppear}
 	 */
@@ -133,7 +133,7 @@ public class MonsterLevelFilter {
 	}
 
 	/**
-	 * Setter for {@link #isHauntedMaidAppear}
+	 * Setter for {@link #isHauntedMaidAppear}.
 	 * 
 	 * @param isHauntedMaidAppear the new {@link #isHauntedMaidAppear}
 	 */
@@ -142,7 +142,7 @@ public class MonsterLevelFilter {
 	}
 
 	/**
-	 * Getter for {@link #isPumpkinHeadAppear}
+	 * Getter for {@link #isPumpkinHeadAppear}.
 	 * 
 	 * @return {@link #isPumpkinHeadAppear}
 	 */
@@ -151,7 +151,7 @@ public class MonsterLevelFilter {
 	}
 
 	/**
-	 * Setter for {@link #isPumpkinHeadAppear}
+	 * Setter for {@link #isPumpkinHeadAppear}.
 	 * 
 	 * @param isPumpkinHeadAppear the new {@link #isPumpkinHeadAppear}
 	 */
@@ -160,7 +160,7 @@ public class MonsterLevelFilter {
 	}
 
 	/**
-	 * Getter for {@link #isReaperAppear}
+	 * Getter for {@link #isReaperAppear}.
 	 * 
 	 * @return {@link #isReaperAppear}
 	 */
@@ -169,7 +169,7 @@ public class MonsterLevelFilter {
 	}
 
 	/**
-	 * Setter for {@link #isReaperAppear}
+	 * Setter for {@link #isReaperAppear}.
 	 * 
 	 * @param isReaperAppear the new {@link #isReaperAppear}
 	 */
@@ -178,7 +178,7 @@ public class MonsterLevelFilter {
 	}
 
 	/**
-	 * Getter for {@link #isSkeletonAppear}
+	 * Getter for {@link #isSkeletonAppear}.
 	 * 
 	 * @return {@link #isSkeletonAppear}
 	 */
@@ -187,7 +187,7 @@ public class MonsterLevelFilter {
 	}
 
 	/**
-	 * Setter for {@link #isSkeletonAppear}
+	 * Setter for {@link #isSkeletonAppear}.
 	 * 
 	 * @param isSkeletonAppear the new {@link #isSkeletonAppear}
 	 */
@@ -196,7 +196,7 @@ public class MonsterLevelFilter {
 	}
 
 	/**
-	 * Getter for {@link #isSoulAppear}
+	 * Getter for {@link #isSoulAppear}.
 	 * 
 	 * @return {@link #isSoulAppear}
 	 */
@@ -205,7 +205,7 @@ public class MonsterLevelFilter {
 	}
 
 	/**
-	 * Setter for {@link #isSoulAppear}
+	 * Setter for {@link #isSoulAppear}.
 	 * 
 	 * @param isSoulAppear the new {@link #isSoulAppear}
 	 */

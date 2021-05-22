@@ -21,33 +21,33 @@ import logic.Direction;
 
 /**
  * The RandomUtil is the class that provide the random method and random the
- * status of {@link Potion}, {@link Armor} and {@link Weapon} from pool
+ * status of {@link Potion}, {@link Armor} and {@link Weapon} from pool.
  *
  */
 public class RandomUtil {
 
 	/**
-	 * Represent the {@link Random} instance
+	 * Represent the {@link Random} instance.
 	 */
 	private static Random rand = new Random();
 
 	/**
-	 * Represent the pool of {@link Potion} that used for random in each level
+	 * Represent the pool of {@link Potion} that used for random in each level.
 	 */
 	private static ArrayList<Potion> potionPool;
 
 	/**
-	 * Represent the pool of {@link Armor} that used for random in each level
+	 * Represent the pool of {@link Armor} that used for random in each level.
 	 */
 	private static ArrayList<Armor> armorPool;
 
 	/**
-	 * Represent the pool of {@link Weapon} that used for random in each level
+	 * Represent the pool of {@link Weapon} that used for random in each level.
 	 */
 	private static ArrayList<Weapon> weaponPool;
 
 	/**
-	 * Represent the list of filter which monster can appear in that floor
+	 * Represent the list of filter which monster can appear in that level.
 	 * 
 	 * @see MonsterLevelFilter
 	 */
@@ -59,48 +59,48 @@ public class RandomUtil {
 	private static int filterIndex = 0;
 
 	/**
-	 * Represent the minimum of {@link Potion} that generated in each level
+	 * Represent the minimum of {@link Potion} that generated in each level.
 	 */
 	private static final int MIN_POTION = 4;
 
 	/**
-	 * Represent the maximum of {@link Potion} that generated in each level
+	 * Represent the maximum of {@link Potion} that generated in each level.
 	 */
 	private static final int MAX_POTION = 10;
 
 	/**
-	 * Represent the minimum of {@link Monster} that generated in each level
+	 * Represent the minimum of {@link Monster} that generated in each level.
 	 */
 	private static final int MIN_MONSTER = 20;
 
 	/**
-	 * Represent the maximum of {@link Monster} that generated in each level
+	 * Represent the maximum of {@link Monster} that generated in each level.
 	 */
 	private static final int MAX_MONSTER = 40;
 
 	/**
-	 * Represent the minimum of {@link Weapon} that generated in each level
+	 * Represent the minimum of {@link Weapon} that generated in each level.
 	 */
 	private static final int MIN_WEAPON = 5;
 
 	/**
-	 * Represent the maximum of {@link Weapon} that generated in each level
+	 * Represent the maximum of {@link Weapon} that generated in each level.
 	 */
 	private static final int MAX_WEAPON = 10;
 
 	/**
-	 * Represent the minimum of {@link Armor} that generated in each level
+	 * Represent the minimum of {@link Armor} that generated in each level.
 	 */
 	private static final int MIN_ARMOR = 5;
 
 	/**
-	 * Represent the maximum of {@link Armor} that generated in each level
+	 * Represent the maximum of {@link Armor} that generated in each level.
 	 */
 	private static final int MAX_ARMOR = 10;
 
 	/**
 	 * Read the data of {@link Potion}, {@link Armor}, {@link Weapon} and
-	 * {@link MonsterLevelFilter} from CSV file
+	 * {@link MonsterLevelFilter} from CSV file.
 	 */
 	static {
 		potionPool = CSVUtil.readPotionCSV();
@@ -110,7 +110,7 @@ public class RandomUtil {
 	}
 
 	/**
-	 * Random the integer in range st and ed (inclusive)
+	 * Random the integer in range st and ed (inclusive).
 	 * 
 	 * @param st the starting of range
 	 * @param ed the ending of range
@@ -123,7 +123,7 @@ public class RandomUtil {
 	}
 
 	/**
-	 * The utility method that shuffle the {@link Integer} array
+	 * The utility method that shuffle the {@link Integer} array.
 	 * 
 	 * @param intArray the integer array that will be shuffled
 	 */
@@ -135,7 +135,7 @@ public class RandomUtil {
 	}
 
 	/**
-	 * The utility method that shuffle the two-dimensional integer array
+	 * The utility method that shuffle the two-dimensional integer array.
 	 * 
 	 * @param array the two-dimensional integer array that will be shuffled
 	 */
@@ -147,7 +147,7 @@ public class RandomUtil {
 
 	/**
 	 * The utility method that will generate the {@link Potion} list that
-	 * corresponding to level
+	 * corresponding to level.
 	 * 
 	 * @param level the parameter which use as the factor of status
 	 * @return the {@link ArrayList} of {@link Potion}
@@ -185,7 +185,7 @@ public class RandomUtil {
 
 	/**
 	 * The utility method that will generate the {@link Monster} list that
-	 * corresponding to level
+	 * corresponding to level.
 	 * 
 	 * @param level the parameter which use as the factor of status
 	 * @return the {@link ArrayList} of {@link Monster}
@@ -287,7 +287,7 @@ public class RandomUtil {
 
 	/**
 	 * The utility method that will generate the {@link Weapon} list that
-	 * corresponding to level
+	 * corresponding to level.
 	 * 
 	 * @param level the parameter which use as the factor of status
 	 * @return the {@link ArrayList} of {@link Weapon}
@@ -320,7 +320,7 @@ public class RandomUtil {
 
 	/**
 	 * The utility method that will generate the {@link Armor} list that
-	 * corresponding to level
+	 * corresponding to level.
 	 * 
 	 * @param level the parameter which use as the factor of status
 	 * @return the {@link ArrayList} of {@link Armor}

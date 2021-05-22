@@ -19,48 +19,48 @@ import utils.GameConfig;
 
 /**
  * The CongratulationScene class represent the {@link Scene} that show when
- * {@link Player} reaches {@link GameConfig#LEVEL_BOUND level bound}
+ * {@link Player} reaches {@link GameConfig#LEVEL_BOUND level bound}.
  */
 public class CongratulationScene {
 
 	/**
-	 * Represent the height of the pane in pixel
+	 * Represent the height of the pane.
 	 */
 	private static int heightBox = 40;
 
 	/**
-	 * Represent the width of the pane in pixel
+	 * Represent the width of the pane.
 	 */
 	private static int widthBox = 80;
 
 	/**
-	 * Represent {@link VBox} which is the root container for containing components
+	 * Represent {@link VBox} which is the root container for containing components.
 	 */
 	private static VBox root;
 
 	/**
-	 * Represent {@link Text} which is the title text in this pane
+	 * Represent {@link Text} which is the title text in this pane.
 	 */
 	private static Text congratsTitle;
 
 	/**
-	 * Represent {@link Text} which is the description text in this pane
+	 * Represent {@link Text} which is the description text in this pane.
 	 */
 	private static Text congratsDescription;
 
 	/**
-	 * Represent {@link VBox} which contains all buttons in this pane
+	 * Represent {@link VBox} which contains all buttons in this pane.
 	 */
 	private static VBox buttonBox;
 
 	/**
 	 * Represent the cached scene that it does not need to have a multiple
-	 * initialize
+	 * initialize.
 	 */
 	private static Scene cachedScene = null;
 
 	/**
-	 * Get the {@link #cachedScene gameOverScene}
+	 * Get the {@link #cachedScene gameOverScene}.
 	 * 
 	 * @return the {@link Scene} which used for display when game over
 	 */
@@ -82,7 +82,7 @@ public class CongratulationScene {
 	}
 
 	/**
-	 * Setup the pane style
+	 * Setup the pane style.
 	 */
 	private static void styleSetup() {
 		root = new VBox();
@@ -94,7 +94,7 @@ public class CongratulationScene {
 	}
 
 	/**
-	 * Initialize the {@link #congratsTitle} and {@link #congratsDescription}
+	 * Initialize the {@link #congratsTitle} and {@link #congratsDescription}.
 	 */
 	private static void addCongratsDetail() {
 		congratsTitle = new Text("Congratulation");
@@ -109,7 +109,7 @@ public class CongratulationScene {
 	}
 
 	/**
-	 * Initialize the buttonBox
+	 * Initialize the buttonBox.
 	 */
 	private static void addButtonBox() {
 		buttonBox = new VBox();
@@ -119,7 +119,7 @@ public class CongratulationScene {
 
 	/**
 	 * Initialize all {@link Button} that register text, add event handler to each
-	 * button and adding to buttonBox
+	 * button and adding to buttonBox.
 	 */
 	private static void addButtontoBox() {
 		Button backToMenuBtn = new StyledButton(widthBox * GameConfig.getScale(), "Back To Menu", Color.WHITE,

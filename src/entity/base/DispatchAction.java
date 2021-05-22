@@ -3,57 +3,57 @@ package entity.base;
 import entity.Player;
 
 /**
- * The DispatchAction is the list of action that {@link Player} can do
+ * The DispatchAction is the list of action that {@link Player} can do.
  */
 public enum DispatchAction {
 
 	/**
-	 * Represent the use or equip item action
+	 * Represent the use or equip item action.
 	 */
 	USE_ITEM,
 
 	/**
-	 * Represent the unequip item action
+	 * Represent the unequip item action.
 	 */
 	UNEQUIP,
 
 	/**
-	 * Represent the switch equipment item action
+	 * Represent the switch equipment item action.
 	 */
 	SWITCH_EQUIP,
 
 	/**
-	 * Represent the entity attack action
+	 * Represent the entity attack action.
 	 */
 	ATTACK,
 
 	/**
-	 * Represent the entity moving to left direction
+	 * Represent the entity moving to left direction.
 	 */
 	MOVE_LEFT,
 
 	/**
-	 * Represent the entity moving to right direction
+	 * Represent the entity moving to right direction.
 	 */
 	MOVE_RIGHT,
 
 	/**
-	 * Represent the entity moving to up direction
+	 * Represent the entity moving to up direction.
 	 */
 	MOVE_UP,
 
 	/**
-	 * Represent the entity moving to down direction
+	 * Represent the entity moving to down direction.
 	 */
 	MOVE_DOWN,
 
 	/**
-	 * Represent the entity staying still action
+	 * Represent the entity staying still action.
 	 */
 	STAY_STILL,
 
 	/**
-	 * Represent the item removing from inventory action
+	 * Represent the item removing from inventory action.
 	 */
 	DELETE_ITEM,
 }

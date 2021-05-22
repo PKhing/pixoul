@@ -33,79 +33,79 @@ import utils.GameConfig;
 import utils.TransitionUtil;
 
 /**
- * The LandingPane class represent the {@link Scene} which display for the first
+ * The LandingPane class represent the {@link Scene} which display for the first.
  */
 public class LandingScene {
 
 	/**
-	 * Represent the width of the pane
+	 * Represent the width of the pane.
 	 */
 	private static int widthBox = 100;
 
 	/**
-	 * Represent the height of the pane
+	 * Represent the height of the pane.
 	 */
 	private static int heightBox = 60;
 
 	/**
-	 * Represent {@link VBox} which is the root container for containing components
+	 * Represent {@link VBox} which is the root container for containing components.
 	 */
 	private static StackPane root;
 
 	/**
-	 * The {@link VBox} that contain titleText and buttonBox
+	 * The {@link VBox} that contain titleText and buttonBox.
 	 */
 	private static VBox container;
 
 	/**
-	 * The {@link Text} that display as a title
+	 * The {@link Text} that display as a title.
 	 */
 	private static Text titleText;
 
 	/**
-	 * The {@link VBox} that contain the start, option and exit button
+	 * The {@link VBox} that contain the start, option and exit button.
 	 */
 	private static VBox buttonBox;
 
 	/**
 	 * The {@link FadeTransition} which is using for making the fade transition
-	 * while switch to {@link GameScene}
+	 * while switch to {@link GameScene}.
 	 */
 	private static FadeTransition fading;
 
 	/**
-	 * The {@link Button} that used to start the game
+	 * The {@link Button} that used to start the game.
 	 */
 	private static Button startBtn;
 
 	/**
-	 * The {@link Button} that used to open {@link SettingPane}
+	 * The {@link Button} that used to open {@link SettingPane}.
 	 */
 	private static Button optionBtn;
 
 	/**
-	 * The {@link Button} that used for exit the game
+	 * The {@link Button} that used for exit the game.
 	 */
 	private static Button exitBtn;
 
 	/**
-	 * The {@link SettingPane} that used when click on {@link #optionBtn}
+	 * The {@link SettingPane} that used when click on {@link #optionBtn}.
 	 */
 	private static SettingPane settingPane = new SettingPane();
 
 	/**
 	 * Represent the cached scene so that it does not need to have a multiple
-	 * initialize
+	 * initialize.
 	 */
 	private static Scene cachedScene = null;
 
 	/**
-	 * Represent the background music of main page / landing page
+	 * Represent the background music of main page / landing page.
 	 */
 	private static MediaPlayer bgm = GameAudioUtils.getLandingSceneBGM();
 
 	/**
-	 * Get the {@link #cachedScene landingScene}
+	 * Get the {@link #cachedScene landingScene}.
 	 * 
 	 * @return the {@link Scene} which used for display in first page
 	 */
@@ -137,7 +137,7 @@ public class LandingScene {
 	}
 
 	/**
-	 * Initialize the {@link VBox} that contain buttonBox and titleText
+	 * Initialize the {@link VBox} that contain buttonBox and titleText.
 	 */
 	private static void setupContainer() {
 		container = new VBox();
@@ -152,7 +152,7 @@ public class LandingScene {
 	}
 
 	/**
-	 * Initialize the {@link VBox} that contain only button
+	 * Initialize the {@link VBox} that contain only button.
 	 */
 	private static void setupButtonBox() {
 		buttonBox = new VBox();
@@ -172,7 +172,7 @@ public class LandingScene {
 	}
 
 	/**
-	 * Initialize the title text
+	 * Initialize the title text.
 	 */
 	private static void setupTitleText() {
 		titleText = new Text("Pixoul");
@@ -184,7 +184,7 @@ public class LandingScene {
 
 	/**
 	 * Initialize Fade Animation by using makeFadingNode and setup event when fading
-	 * finish
+	 * finish.
 	 * 
 	 * @see utils.TransitionUtil#makeFadingNode(Node, double, double) makeFadingNode
 	 */
@@ -200,7 +200,7 @@ public class LandingScene {
 	}
 
 	/**
-	 * Initialize {@link StyledButton} which used for start button
+	 * Initialize {@link StyledButton} which used for start button.
 	 */
 	private static void setupStartButton() {
 		startBtn = new StyledButton(widthBox, "Start", Color.WHITE, Color.BLACK);
@@ -210,7 +210,7 @@ public class LandingScene {
 	}
 
 	/**
-	 * Initialize {@link StyledButton} which used for setting button
+	 * Initialize {@link StyledButton} which used for setting button.
 	 */
 	private static void setupSettingButton() {
 		optionBtn = new StyledButton(widthBox, "Setting", Color.WHITE, Color.BLACK);
@@ -223,7 +223,7 @@ public class LandingScene {
 	}
 
 	/**
-	 * Initialize {@link StyledButton} which used for exit button
+	 * Initialize {@link StyledButton} which used for exit button.
 	 */
 	private static void setupExitButton() {
 		exitBtn = new StyledButton(widthBox, "Exit", Color.WHITE, Color.BLACK);

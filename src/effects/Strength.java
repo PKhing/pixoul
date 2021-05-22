@@ -6,12 +6,12 @@ import entity.base.Entity;
 
 /**
  * The Strength class is {@link EntityEffect} that increase the
- * {@link Entity#attack attack}
+ * {@link Entity#attack attack}.
  */
 public class Strength extends EntityEffect {
 
 	/**
-	 * The constructor of the class
+	 * The constructor of the class.
 	 * 
 	 * @param name        The name of the effect
 	 * @param value       The value of the effect
@@ -25,7 +25,7 @@ public class Strength extends EntityEffect {
 	/**
 	 * If isPermanent is true then increase the {@link Entity#attack} and remove
 	 * effect from {@link Entity} entity otherwise only increase
-	 * {@link Entity#attack}
+	 * {@link Entity#attack}.
 	 */
 	@Override
 	public void onAdd(Entity entity) {
@@ -45,7 +45,7 @@ public class Strength extends EntityEffect {
 
 	/**
 	 * Decrease the {@link Entity#attack attack} and remove effect from
-	 * {@link Entity}
+	 * {@link Entity}.
 	 */
 	@Override
 	public void onWearOff(Entity entity) {

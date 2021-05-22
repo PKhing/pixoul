@@ -27,33 +27,33 @@ import scene.GameScene;
 
 /**
  * The utility class that provide sprite drawing method and PixelReader for
- * sprite
+ * sprite.
  *
  */
 public class DrawUtil {
 
 	/**
-	 * Cell sprites
+	 * Cell sprites.
 	 */
 	private static PixelReader cellSprites;
 
 	/**
-	 * Item sprites
+	 * Item sprites.
 	 */
 	private static PixelReader itemSprites;
 
 	/**
-	 * Ladder sprites
+	 * Ladder sprites.
 	 */
 	private static PixelReader ladderSprites;
 
 	/**
-	 * Entity sprites
+	 * Entity sprites.
 	 */
 	private static PixelReader entitySprites;
 
 	/**
-	 * Attack mouse icon
+	 * Attack mouse icon.
 	 */
 	private static Image attackMouseIcon;
 

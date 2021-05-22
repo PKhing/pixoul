@@ -15,18 +15,18 @@ import scene.GameScene;
 
 /**
  * The utility class that used for generating text which display in
- * {@link MessagePane}
+ * {@link MessagePane}.
  */
 public class MessageTextUtil {
 
 	/**
-	 * The maximum character of word
+	 * The maximum character of word.
 	 */
 	private static int wordMaxSize = 30;
 
 	/**
 	 * Generate the text when {@link Entity} has attacked to another {@link Entity}
-	 * and add to {@link MessagePane}
+	 * and add to {@link MessagePane}.
 	 * 
 	 * @param from        the attacker {@link Entity}
 	 * @param to          the attacked {@link Entity}
@@ -40,7 +40,7 @@ public class MessageTextUtil {
 
 	/**
 	 * Generate the text when {@link Entity} has been slain and add to
-	 * {@link MessagePane}
+	 * {@link MessagePane}.
 	 * 
 	 * @param entity the {@link Entity} that has been slain
 	 */
@@ -51,7 +51,7 @@ public class MessageTextUtil {
 
 	/**
 	 * Generate the text when {@link Player} has used the {@link Potion} and add to
-	 * {@link MessagePane}
+	 * {@link MessagePane}.
 	 * 
 	 * @param potion the {@link Potion} that {@link Player} has used
 	 */
@@ -62,7 +62,7 @@ public class MessageTextUtil {
 
 	/**
 	 * Generate the text when {@link Player} has equipped the {@link Weapon} and add
-	 * to {@link MessagePane}
+	 * to {@link MessagePane}.
 	 * 
 	 * @param weapon the {@link Weapon} that {@link Player} has equipped
 	 */
@@ -73,7 +73,7 @@ public class MessageTextUtil {
 
 	/**
 	 * Generate the text when {@link Player} has unequipped the {@link Weapon} and
-	 * add to {@link MessagePane}
+	 * add to {@link MessagePane}.
 	 * 
 	 * @param weapon the {@link Weapon} that {@link Player} has unequipped
 	 */
@@ -84,7 +84,7 @@ public class MessageTextUtil {
 
 	/**
 	 * Generate the text when {@link Player} can not unequip {@link Weapon} and add
-	 * to {@link MessagePane}
+	 * to {@link MessagePane}.
 	 * 
 	 * @param weapon the {@link Weapon} that {@link Player} tries to unequip
 	 */
@@ -95,7 +95,7 @@ public class MessageTextUtil {
 
 	/**
 	 * Generate the text when {@link Player} has switched the {@link Weapon} and add
-	 * to {@link MessagePane}
+	 * to {@link MessagePane}.
 	 * 
 	 * @param weapon the {@link Weapon} that {@link Player} has switched to
 	 */
@@ -106,7 +106,7 @@ public class MessageTextUtil {
 
 	/**
 	 * Generate the text when {@link Player} has equipped the {@link Armor} and add
-	 * to {@link MessagePane}
+	 * to {@link MessagePane}.
 	 * 
 	 * @param armor the {@link Armor} that {@link Player} has equipped
 	 */
@@ -117,7 +117,7 @@ public class MessageTextUtil {
 
 	/**
 	 * Generate the text when {@link Player} has switched the {@link Armor} and add
-	 * to {@link MessagePane}
+	 * to {@link MessagePane}.
 	 * 
 	 * @param armor the {@link Armor} that {@link Player} has switched to
 	 */
@@ -128,7 +128,7 @@ public class MessageTextUtil {
 
 	/**
 	 * Generate the text when {@link Player} has unequipped {@link Armor} and add to
-	 * {@link MessagePane}
+	 * {@link MessagePane}.
 	 * 
 	 * @param armor the {@link Armor} that {@link Player} has unequipped
 	 */
@@ -139,7 +139,7 @@ public class MessageTextUtil {
 
 	/**
 	 * Generate the text when {@link Player} can not unequip {@link Armor} and add
-	 * to {@link MessagePane}
+	 * to {@link MessagePane}.
 	 * 
 	 * @param armor the {@link Armor} that {@link Player} tries to unequip
 	 */
@@ -150,7 +150,7 @@ public class MessageTextUtil {
 
 	/**
 	 * Generate the text when {@link Player} has picked up {@link Item} and add to
-	 * {@link MessagePane}
+	 * {@link MessagePane}.
 	 * 
 	 * @param item the {@link Item} that {@link Player} has picked up
 	 */
@@ -161,7 +161,7 @@ public class MessageTextUtil {
 
 	/**
 	 * Generate the text when {@link Player} can not picked up {@link Item} from
-	 * {@link Cell} and add to {@link MessagePane}
+	 * {@link Cell} and add to {@link MessagePane}.
 	 * 
 	 * @param item the {@link Item} that {@link Player} tries to picked up
 	 */
@@ -173,7 +173,7 @@ public class MessageTextUtil {
 
 	/**
 	 * Generate the text when {@link Player} has dropped {@link Item} and add to
-	 * {@link MessagePane}
+	 * {@link MessagePane}.
 	 * 
 	 * @param item the {@link Item} that {@link Player} has dropped
 	 */
@@ -184,7 +184,7 @@ public class MessageTextUtil {
 
 	/**
 	 * Generate the text when {@link Player} has gone to upper level and add to
-	 * {@link MessagePane}
+	 * {@link MessagePane}.
 	 * 
 	 * @param level the level which {@link Player} has gone to
 	 */
@@ -200,7 +200,7 @@ public class MessageTextUtil {
 
 	/**
 	 * Generate the text when {@link Player} has gone to lower level and add to
-	 * {@link MessagePane}
+	 * {@link MessagePane}.
 	 * 
 	 * @param level the level which {@link Player} has gone to
 	 */
@@ -211,7 +211,7 @@ public class MessageTextUtil {
 
 	/**
 	 * Generate the text when {@link Player} has {@link Immobilize} status and add
-	 * to {@link MessagePane}
+	 * to {@link MessagePane}.
 	 */
 	public static void textWhenImmobilized() {
 		String displayText = "You can not move because you are immobilize now (but still can attack).";
@@ -220,7 +220,7 @@ public class MessageTextUtil {
 
 	/**
 	 * Generate the text when {@link Player} has stayed still in that move and add
-	 * to {@link MessagePane}
+	 * to {@link MessagePane}.
 	 */
 	public static void textWhenStayStill() {
 		String displayText = "Player does nothing.";
@@ -229,7 +229,7 @@ public class MessageTextUtil {
 
 	/**
 	 * Generate the text when {@link Player} tries to attack {@link Monster} but it
-	 * is out of range and add to {@link MessagePane}
+	 * is out of range and add to {@link MessagePane}.
 	 */
 	public static void textWhenPlayerCannotAttack() {
 		String displayText = "You can't attack this monster.";
@@ -238,7 +238,7 @@ public class MessageTextUtil {
 
 	/**
 	 * Generate the text when {@link DarkMage} is using warp to entity and add to
-	 * {@link MessagePane}
+	 * {@link MessagePane}.
 	 * 
 	 * @param entity the target {@link Entity}
 	 */
@@ -249,7 +249,7 @@ public class MessageTextUtil {
 
 	/**
 	 * Generate the text when {@link DarkMage} is using poison to entity and add to
-	 * {@link MessagePane}
+	 * {@link MessagePane}.
 	 * 
 	 * @param entity the target {@link Entity}
 	 */
@@ -260,7 +260,7 @@ public class MessageTextUtil {
 
 	/**
 	 * Utility method that check the word length is longer than {@link #wordMaxSize}
-	 * or not if true then slice only first {@link #wordMaxSize} and append "..."
+	 * or not if true then slice only first {@link #wordMaxSize} and append "...".
 	 * 
 	 * @param text the word that will make it shorten
 	 * @return the result after shorten
@@ -277,7 +277,7 @@ public class MessageTextUtil {
 	}
 
 	/**
-	 * Append text to {@link MessagePane}
+	 * Append text to {@link MessagePane}.
 	 * 
 	 * @param text the text that will append to {@link MessagePane}
 	 */

@@ -7,12 +7,12 @@ import javafx.util.Duration;
 
 /**
  * The utility class that provide about initialize the {@link Transition}
- * instance
+ * instance.
  */
 public class TransitionUtil {
 
 	/**
-	 * The utility method that initialize new {@link FadeTransition} for node
+	 * The utility method that initialize new {@link FadeTransition} for node.
 	 * 
 	 * @param node the {@link Node} which used in transition
 	 * @param from the beginning opacity of node
