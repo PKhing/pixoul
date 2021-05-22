@@ -6,14 +6,14 @@ StrengthPotion,Potion of permanent strength II,Add large amount of permanent att
 ProtectionPotion,Potion of protection I,Add small amount of defense stat,1,10,FALSE,0
 ProtectionPotion,Potion of protection II,Add medium amount of defense stat,2,10,FALSE,0
 ProtectionPotion,Potion of protection III,Add large amount of defense stat,3,10,FALSE,0
-ProtectionPotion,Potion of permanent defense I,Add small amount of permanent defense stat,2,0,TRUE,0
-ProtectionPotion,Potion of permanent defense II,Add medium amount of permanent defense stat,3,0,TRUE,0
+ProtectionPotion,Potion of permanent protection I,Add small amount of permanent defense stat,2,0,TRUE,0
+ProtectionPotion,Potion of permanent protection II,Add medium amount of permanent defense stat,3,0,TRUE,0
 InstantHealPotion,Potion of instant healing I,Heal small amount of health,5,12,FALSE,0
 InstantHealPotion,Potion of instant healing II,Heal medium amount of health,10,6,FALSE,0
 InstantHealPotion,Potion of instant healing III,Heal large amount of health,20,3,FALSE,0
-InstantHealPotion,Potion of permanent health stat I,Heal and increase max health (Small),3,0,TRUE,0
-InstantHealPotion,Potion of permanent health stat II,Heal and increase max health (Medium),5,0,TRUE,0
-InstantHealPotion,Potion of permanent health stat III,Heal and increase max health (Large),7,0,TRUE,0
+InstantHealPotion,Potion of permanent health I,Heal and increase max health (Small),3,0,TRUE,0
+InstantHealPotion,Potion of permanent health II,Heal and increase max health (Medium),5,0,TRUE,0
+InstantHealPotion,Potion of permanent health III,Heal and increase max health (Large),7,0,TRUE,0
 RegenerationPotion,Potion of regeneration I,Provide small health generation,2,5,FALSE,0
 RegenerationPotion,Potion of regeneration II,Provide medium health generation,4,5,FALSE,0
 RegenerationPotion,Potion of regeneration III,Provide large health generation,6,5,FALSE,0
