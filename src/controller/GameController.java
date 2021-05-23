@@ -5,7 +5,6 @@ import java.util.List;
 
 import entity.Player;
 import exception.InvalidFloorException;
-import exception.NullMapException;
 import items.base.Armor;
 import items.base.Potion;
 import items.base.Weapon;
@@ -206,14 +205,7 @@ public class GameController {
 	 * @return {@link #gameMap}
 	 */
 	public static GameMap getGameMap() {
-		try {
-			if (gameMap == null) {
-				throw new NullMapException("GameMap is not initiated yet");
-			}
-			return gameMap;
-		} catch (NullMapException err) {
-			return null;
-		}
+		return gameMap;
 	}
 
 	/**
