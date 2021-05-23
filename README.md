@@ -14,5 +14,5 @@ Pixoul is a pixel roguelike game inspired by Pixel Dungeon and Soul Knight. In t
 
 ``` java -jar --module-path <YOUR_JAVAFX_PATH> --add-modules javafx.base,javafx.controls,javafx.media Pixoul.jar ```
 
-# Documentation
-View the full guide and Javadoc in: https://drive.google.com/file/d/10BAhTWtnv3miIaTsVZk9A_GhixDk9qkN/view?usp=sharing
+# Usage and documentation
+View the full guide and Javadoc for this project at https://drive.google.com/file/d/10BAhTWtnv3miIaTsVZk9A_GhixDk9qkN/view?usp=sharing
