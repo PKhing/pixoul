@@ -3,7 +3,7 @@
   realizations="true" associations="false" dependencies="false" nesting-relationships="true" router="FAN">  
   <class id="1" language="java" name="exception.InvalidFloorException" project="Pixoul" 
     file="/Pixoul/src/exception/InvalidFloorException.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="99" width="163" x="227" y="37"/>    
+    <position height="99" width="163" x="41" y="37"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -12,16 +12,7 @@
   </class>  
   <class id="2" language="java" name="exception.UnknownItemTypeException" project="Pixoul" 
     file="/Pixoul/src/exception/UnknownItemTypeException.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="99" width="197" x="430" y="37"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="3" language="java" name="exception.NullMapException" project="Pixoul" 
-    file="/Pixoul/src/exception/NullMapException.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="99" width="146" x="41" y="37"/>    
+    <position height="99" width="197" x="244" y="37"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
