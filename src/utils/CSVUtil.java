@@ -48,8 +48,8 @@ public class CSVUtil {
 			in.close();
 			output.remove(output.size() - 1);
 			return output.toArray(new String[output.size()][]);
-		} catch (IOException e) {
-			e.printStackTrace();
+		} catch (Exception e) {
+			System.out.println("Failed to read %s".formatted(filename));
 			return new String[0][0];
 		}
 	}
@@ -78,7 +78,7 @@ public class CSVUtil {
 				filterList
 						.add(new MonsterLevelFilter(level, darkMage, hauntedMaid, pumpkinHead, reaper, skeleton, soul));
 			} catch (Exception e) {
-				e.printStackTrace();
+				System.out.println("Failed to parse MonsterFilter data in line %d".formatted(i + 1));
 			}
 		}
 
@@ -111,7 +111,7 @@ public class CSVUtil {
 						spriteIndex);
 				output.add(parsePotionResult);
 			} catch (Exception e) {
-				e.printStackTrace();
+				System.out.println("Failed to parse Potion data in line %d".formatted(i + 1));
 			}
 		}
 
@@ -140,7 +140,7 @@ public class CSVUtil {
 				Armor parseArmorResult = Armor.parseArmor(type, name, description, defense);
 				output.add(parseArmorResult);
 			} catch (Exception e) {
-				e.printStackTrace();
+				System.out.println("Failed to parse Armor data in line %d".formatted(i + 1));
 			}
 		}
 
@@ -170,7 +170,7 @@ public class CSVUtil {
 				Weapon parseWeaponResult = Weapon.parseWeapon(type, name, description, attack, spriteIndex);
 				output.add(parseWeaponResult);
 			} catch (Exception e) {
-				e.printStackTrace();
+				System.out.println("Failed to parse Weapon data in line %d".formatted(i + 1));
 			}
 
 		}

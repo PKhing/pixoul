@@ -213,7 +213,6 @@ public class GameLogic {
 					AnimationUtil.playAnimation(2).join();
 				} catch (InterruptedException e) {
 					System.out.println("Attack animation interrupted");
-					e.printStackTrace();
 				}
 				Platform.runLater(() -> {
 					postGameUpdate();
@@ -346,7 +345,6 @@ public class GameLogic {
 				AnimationUtil.playAnimation(0).join();
 			} catch (InterruptedException e) {
 				System.out.println("Post game animation interrupted");
-				e.printStackTrace();
 			}
 			Platform.runLater(() -> {
 				if (GameController.isGameOver()) {
