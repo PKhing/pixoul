@@ -227,7 +227,6 @@ public class RandomUtil {
 
 		// Begin to generate Soul
 		int soulAmount = random(3, numberOfAllMonster / 4);
-		System.out.println(levelFilter.isSoulAppear());
 		if (levelFilter.isSoulAppear()) {
 			for (int i = 0; i < soulAmount; i++) {
 				monsterList.add(new Soul(0, 0));
